@@ -1,6 +1,9 @@
 name: TerraNova Notion -> GitHub Export
 
-on:
+on:permissions:
+  contents: write
+  issues: write
+
   workflow_dispatch:
   schedule:
     # every 10 minutes
@@ -28,9 +31,8 @@ jobs:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID_CHANGES: ${{ secrets.NOTION_DATABASE_ID_CHANGES }}
           NOTION_VERSION: "2022-06-28"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_TNV }}
-          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
-          PROJECTV2_ID: ${{ secrets.PROJECTV2_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPO: ${{ github.repository }}
           PROJECT_STATUS_FIELD_NAME: "Status"
           PROJECT_STATUS_OPTION_NAME: "Todo"
         run: |
