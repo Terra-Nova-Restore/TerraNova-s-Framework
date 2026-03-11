@@ -37,12 +37,7 @@ jobs:
           NOTION_TOKEN: $ secrets.NOTION_TOKEN 
           NOTION_DATABASE_ID_CHANGES: $ secrets.NOTION_DATABASE_ID_CHANGES 
           NOTION_VERSION: "2022-06-28"
-
-          # Wichtig: Repo direkt setzen, nicht via Secret
           GITHUB_REPO: "q9yx7n64w7-creator/TerraNova-s-Framework"
-
-          # PAT (rotiert 11.03.2026)
           GH_PAT: $ secrets.GH_PAT 
-
         run: |
           python scripts/notion_to_github.py
