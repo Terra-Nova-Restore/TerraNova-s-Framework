@@ -34,18 +34,15 @@ jobs:
 
       - name: Run export
         env:
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_DATABASE_ID_CHANGES: ${{ secrets.NOTION_DATABASE_ID_CHANGES }}
+          NOTION_TOKEN: $ secrets.NOTION_TOKEN 
+          NOTION_DATABASE_ID_CHANGES: $ secrets.NOTION_DATABASE_ID_CHANGES 
           NOTION_VERSION: "2022-06-28"
 
           # Wichtig: Repo direkt setzen, nicht via Secret
           GITHUB_REPO: "q9yx7n64w7-creator/TerraNova-s-Framework"
 
-          # PAT falls vorhanden, sonst Actions Token
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_TNV != '' && secrets.GITHUB_TOKEN_TNV || github.token }}
+          # PAT (rotiert 11.03.2026)
+          GH_PAT: $ secrets.GH_PAT 
 
-          PROJECTV2_ID: ${{ secrets.PROJECTV2_ID }}
-          PROJECT_STATUS_FIELD_NAME: "Status"
-          PROJECT_STATUS_OPTION_NAME: "Todo"
         run: |
           python scripts/notion_to_github.py
