@@ -32,12 +32,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Export secrets to env
+        run: |
+          echo "NOTION_TOKEN=$ secrets.NOTION_TOKEN " >> $GITHUB_ENV
+          echo "NOTION_DATABASE_ID_CHANGES=$ secrets.NOTION_DATABASE_ID_CHANGES " >> $GITHUB_ENV
+          echo "GITHUB_TOKEN=$ secrets.GH_PAT " >> $GITHUB_ENV
+
       - name: Run export
         env:
-          NOTION_TOKEN: $ secrets.NOTION_TOKEN 
-          NOTION_DATABASE_ID_CHANGES: $ secrets.NOTION_DATABASE_ID_CHANGES 
           NOTION_VERSION: "2022-06-28"
           GITHUB_REPO: "q9yx7n64w7-creator/TerraNova-s-Framework"
-          GITHUB_TOKEN: $ secrets.GH_PAT 
         run: |
           python scripts/notion_to_github.py
