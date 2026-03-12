@@ -1,46 +1,62 @@
-name: TerraNova Notion -> GitHub Export
+name: TNV – Notion → GitHub Sync
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
   schedule:
     - cron: "*/10 * * * *"
 
-concurrency:
-  group: tnv-notion-to-github
-  cancel-in-progress: false
-
 permissions:
   contents: write
-  issues: write
 
 jobs:
-  export:
+  sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install deps
+      - name: Install dependencies (deterministic)
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install --require-hashes -r requirements.txt
 
-      - name: Export secrets to env
+      - name: Export secrets
         run: |
-          echo "NOTION_TOKEN=$ secrets.NOTION_TOKEN " >> $GITHUB_ENV
-          echo "NOTION_DATABASE_ID_CHANGES=$ secrets.NOTION_DATABASE_ID_CHANGES " >> $GITHUB_ENV
-          echo "GITHUB_TOKEN=$ secrets.GH_PAT " >> $GITHUB_ENV
+          echo "NOTION_TOKEN=${{ secrets.NOTION_TOKEN }}" >> $GITHUB_ENV
+          echo "NOTION_DATABASE_ID_CHANGES=${{ secrets.NOTION_DATABASE_ID_CHANGES }}" >> $GITHUB_ENV
+          echo "GH_PAT=${{ secrets.GH_PAT }}" >> $GITHUB_ENV
 
-      - name: Run export
-        env:
-          NOTION_VERSION: "2022-06-28"
-          GITHUB_REPO: "q9yx7n64w7-creator/TerraNova-s-Framework"
+      - name: Run Notion → GitHub sync
+        id: sync
         run: |
-          python scripts/notion_to_github.py
+          python scripts/notion_to_github.py \
+            --mode full \
+            --shadow shadow/ \
+            --log logs/ \
+            --hash-out .tnv_hash \
+            --config config/notion_map.json
+
+      - name: Detect changes
+        id: changes
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit & push changes
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          HASH=$(cat .tnv_hash)
+          git config user.name "TNV-Automaton"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "TNV-AUTO: Notion Sync (hash: $HASH)"
+          git push
