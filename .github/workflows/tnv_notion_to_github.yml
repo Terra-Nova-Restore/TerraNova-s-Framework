@@ -24,8 +24,7 @@ jobs:
       - name: Install dependencies (deterministic)
         run: |
           python -m pip install --upgrade pip
-          pip install --require-hashes -r requirements.txt
-
+          pip install -r requirements.txt
       - name: Export secrets
         run: |
           echo "NOTION_TOKEN=${{ secrets.NOTION_TOKEN }}" >> $GITHUB_ENV
