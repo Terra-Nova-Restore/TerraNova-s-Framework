@@ -34,3 +34,6 @@ python scripts/notion_to_github.py
 ## GitHub Project (Projects v2) – optional
 - Add repo secret `PROJECTV2_ID` (ProjectV2 node id, e.g. `PVT_...`).
 - Exported issues will be added to the project and set `Status=Todo`.
+
+## Business brief
+- See `BIZ.md` for a concise `/biz` business-facing overview, KPI suggestions, and operating cadence.
