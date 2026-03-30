@@ -61,9 +61,11 @@ jobs:
       - name: Commit & push changes
         if: steps.changes.outputs.changed == 'true'
         run: |
+          BRANCH="${GITHUB_REF_NAME}"
           HASH=$(cat .tnv_hash)
           git config user.name "TNV-Automaton"
           git config user.email "actions@github.com"
           git add .
-          git commit -m "TNV-AUTO: Notion Sync (hash: $HASH)"
-          git push
+          git commit -m "TNV-AUTO: Notion Sync (hash: $HASH)" || { echo "No changes to commit"; exit 0; }
+          git pull --rebase origin "$BRANCH"
+          git push origin "HEAD:$BRANCH"
