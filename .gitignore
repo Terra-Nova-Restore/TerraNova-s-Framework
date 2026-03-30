@@ -1,0 +1,5 @@
+# Local runtime/debug artifacts
+__pycache__/
+*.pyc
+validation-output.txt
+Untitled-*.txt
