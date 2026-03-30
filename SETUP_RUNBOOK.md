@@ -52,22 +52,21 @@ Nachdem dies einmal gemacht ist, läuft alles automatisch – keine lokalen Secr
   - Notion öffnen → Database öffnen → URL kopieren
   - ID ist dieser lange String: `https://www.notion.so/workspace/[ID]?v=xyz`
   - Nur die `[ID]` Teil (32 Zeichen)
-- **GITHUB_REPO**: Dein Repo im Format `owner/repo`
-  - z.B. `silvan/terranova`
 
 **In GitHub:**
 1. Repository öffnen
 2. **Settings** → **Secrets and variables** → **Actions**
-3. Click **New repository secret** (4x)
+3. Click **New repository secret** (3x)
 
-Erstelle diese 4 Secrets:
+Erstelle diese 3 Secrets:
 
 | Name | Value | Beispiel |
 |------|-------|----------|
 | `NOTION_TOKEN` | Dein Notion Integration Token | `ntn_abc123...` |
 | `NOTION_DATABASE_ID_CHANGES` | Database ID | `abc123def456...` (32 Zeichen) |
 | `GH_PAT` | Dein GitHub Token | `ghp_abc123...` |
-| `GITHUB_REPO` | owner/repo Format | `silvan/terranova` |
+
+`GITHUB_REPO` wird im Workflow automatisch aus `${{ github.repository }}` gesetzt.
 
 **Wichtig:** 
 - ⚠️ Secrets sind nach Erstellung **unsichtbar** – kopier den Wert BEVOR du speicherst!

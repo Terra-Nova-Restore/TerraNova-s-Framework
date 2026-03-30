@@ -15,9 +15,10 @@
    - `NOTION_TOKEN` (Notion integration token)
    - `NOTION_DATABASE_ID_CHANGES` (Notion database ID)
    - `GH_PAT` (GitHub Personal Access Token with `repo` + `issues` scopes)
-   - `GITHUB_REPO` (owner/repo format)
 2. Share Notion database with integration (in Notion UI)
 3. Workflow runs automatically every 10 minutes
+
+The workflow resolves `GITHUB_REPO` automatically from `${{ github.repository }}`.
 
 **Trigger manually:**
 ```bash

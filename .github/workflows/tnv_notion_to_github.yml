@@ -16,6 +16,8 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_REPO: ${{ github.repository }}
 
     steps:
       - name: Checkout repository
@@ -35,7 +37,6 @@ jobs:
           echo "NOTION_TOKEN=${{ secrets.NOTION_TOKEN }}" >> $GITHUB_ENV
           echo "NOTION_DATABASE_ID_CHANGES=${{ secrets.NOTION_DATABASE_ID_CHANGES }}" >> $GITHUB_ENV
           echo "GH_PAT=${{ secrets.GH_PAT }}" >> $GITHUB_ENV
-          echo "GITHUB_REPO=${{ secrets.GITHUB_REPO || secrets.GH_REPO }}" >> $GITHUB_ENV
 
       - name: Run Notion → GitHub sync
         id: sync
