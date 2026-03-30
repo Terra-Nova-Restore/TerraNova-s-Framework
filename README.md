@@ -6,6 +6,12 @@
   - Creates a GitHub Issue
   - Writes the Issue URL + timestamp back to Notion
 
+## Repo layers
+- `Notion -> GitHub sync`: the existing production path for `AI_Incidents_and_Changes`.
+- `Atlas layer`: a canonical workspace-atlas seed in [`atlas/README.md`](atlas/README.md) and [`atlas/atlas.manifest.v1.json`](atlas/atlas.manifest.v1.json).
+
+The atlas does not change the production sync workflow. It is a separate, machine-readable workspace inventory seeded from a user-provided TerraNova workspace export so future exporters or visualizers have a stable contract to build on.
+
 ## Setup (GitHub Actions – RECOMMENDED)
 
 **See [SETUP_RUNBOOK.md](SETUP_RUNBOOK.md) for complete step-by-step guide.**
@@ -50,3 +56,10 @@ python scripts/notion_to_github.py
 
 ## Business brief
 - See `BIZ.md` for a concise `/biz` business-facing overview, KPI suggestions, and operating cadence.
+
+## Atlas validation
+Validate the atlas manifest from the repo root:
+
+```bash
+python scripts/validate_atlas.py atlas/atlas.manifest.v1.json
+```

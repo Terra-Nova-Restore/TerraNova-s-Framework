@@ -1,0 +1,3057 @@
+{
+  "workspace": {
+    "name": "Terra'Nova_FerrAI_CIC",
+    "atlas_id": "terranova-atlas-v1",
+    "repo_role": "canonical atlas seed beside the production Notion-to-GitHub sync",
+    "primary_language": "de-CH with mixed English technical terms",
+    "created_for_repo": "TerraNova-s-Framework"
+  },
+  "source": {
+    "id": "workspace-export-2026-03-27",
+    "type": "user-provided workspace export and validator transcript",
+    "captured_at": "2026-03-27",
+    "ingested_at": "2026-03-30",
+    "notes": [
+      "Primary seed comes from the user-provided TerraNova Workspace Validator transcript pasted into Codex.",
+      "The repo itself currently models a single production sync database and does not yet mirror the whole workspace taxonomy.",
+      "Atlas v1 is intentionally seeded manually but shaped for future exporter automation."
+    ]
+  },
+  "stats": {
+    "theme_count": 20,
+    "object_count": 111,
+    "relation_count": 94,
+    "open_gap_count": 5,
+    "objects_by_kind": {
+      "agent": 5,
+      "contract": 3,
+      "database": 16,
+      "formula": 8,
+      "framework": 12,
+      "page": 44,
+      "patent": 7,
+      "product": 4,
+      "public_domain": 5,
+      "trigger_cluster": 7
+    },
+    "estimates": {
+      "workspace_main_pages": 85,
+      "workspace_pages_via_api": 323,
+      "workspace_total_page_range": "400-600",
+      "workspace_subpages_and_crossrefs": "500+",
+      "active_databases_estimate": "15+",
+      "files_estimate": "1750+",
+      "ipfs_cids": 39,
+      "documented_triggers": 675,
+      "defined_triggers_estimate": "1200+"
+    },
+    "coverage": {
+      "atlas_scope": "themes-plus-main-objects",
+      "source_mode": "manual-seed-from-workspace-export",
+      "live_notion_scan_attached": false,
+      "full_subpage_expansion": false,
+      "production_sync_unchanged": true
+    }
+  },
+  "themes": [
+    {
+      "id": "theme_code_ethics",
+      "title": "CodeX and Ethics",
+      "summary": "Codex, trigger exports, governance scaffolding and ethical guardrails.",
+      "priority": "critical",
+      "status": "seeded",
+      "object_ids": [
+        "framework_abc_classification",
+        "framework_ora",
+        "framework_triquetra",
+        "page_ablagesystem",
+        "page_codex139_trigger_export_174_210",
+        "page_codex170_plus_final",
+        "page_instanzenrat_system",
+        "page_meta_conductor",
+        "page_terranova_meta_index_v0_1",
+        "trigger_cluster_codex_1_170",
+        "trigger_cluster_silvi_mode_174_210"
+      ]
+    },
+    {
+      "id": "theme_trigger_system",
+      "title": "Trigger System",
+      "summary": "Documented trigger architecture, audits, trigger suites and execution flow.",
+      "priority": "critical",
+      "status": "seeded",
+      "object_ids": [
+        "db_promille_steuerung",
+        "db_trigger_mapping",
+        "framework_session_root",
+        "page_codex139_trigger_export_174_210",
+        "page_session_root",
+        "page_trigger_architektur_520",
+        "page_trigger_audit_675",
+        "page_trigger_zeichen_referenz",
+        "page_workspace_kohaerenz_protokoll",
+        "trigger_cluster_audit_suite_988_992",
+        "trigger_cluster_codex_1_170",
+        "trigger_cluster_core_session_516_544",
+        "trigger_cluster_emergent_approx_500",
+        "trigger_cluster_prism_551_600",
+        "trigger_cluster_silvi_mode_174_210",
+        "trigger_cluster_trigger_audit_675"
+      ]
+    },
+    {
+      "id": "theme_ferrai_core_sessions",
+      "title": "FerrAI Core and Sessions",
+      "summary": "FerrAI identity, session orchestration, status surfaces and memory anchors.",
+      "priority": "critical",
+      "status": "seeded",
+      "object_ids": [
+        "agent_chatgpt_ferrai",
+        "agent_notion_ferrai",
+        "db_system_health_monitor",
+        "db_system_komponenten_status",
+        "db_system_metrics",
+        "framework_session_root",
+        "page_cic_deep_dive",
+        "page_ferrai_agent_config_control_center",
+        "page_ferrai_reflexions_log",
+        "page_ferrai_systemhandbuch",
+        "page_meine_notion_ki",
+        "page_session_root",
+        "page_system_status_dashboard"
+      ]
+    },
+    {
+      "id": "theme_architecture_specs",
+      "title": "Architecture and Specs",
+      "summary": "System blueprints, storage architecture, memory design and build plans.",
+      "priority": "critical",
+      "status": "seeded",
+      "object_ids": [
+        "contract_cid_registry_polygon",
+        "db_promille_steuerung",
+        "formula_affinitaet_cosine",
+        "formula_pid_controller",
+        "framework_iperka",
+        "framework_meta_ferrum",
+        "framework_ras",
+        "framework_session_root",
+        "framework_vortex",
+        "page_audit_kernel_design_doc",
+        "page_l3_build_plan",
+        "page_ras_spezifikation",
+        "page_session_root",
+        "page_vortex_canvas"
+      ]
+    },
+    {
+      "id": "theme_mermaid_system",
+      "title": "Mermaid System",
+      "summary": "Mermaid atlas, code library and living-system visualization work.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "agent_mermaid_system_auditor",
+        "db_master_overview_mermaid",
+        "db_mermaid_diagrams_library",
+        "page_mermaid_atlas_start_here",
+        "page_mermaid_code_library",
+        "page_mermaid_manifesto_public",
+        "page_terra_nova_master_overview"
+      ]
+    },
+    {
+      "id": "theme_shadow_archive_creative",
+      "title": "Shadow Archive and Creative",
+      "summary": "Schattenarchiv, PONYVERSE and consent-sensitive creative layers.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "framework_schattenarchiv_777",
+        "page_ponyverse_hub",
+        "page_schattenarchiv_hub",
+        "product_metarotik"
+      ]
+    },
+    {
+      "id": "theme_token_blockchain",
+      "title": "Token and Blockchain",
+      "summary": "On-chain assets, licensing, token systems and registry concepts.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "contract_cap_ii_license",
+        "contract_cid_registry_polygon",
+        "contract_ferr_erc721_polygon",
+        "db_hybrid_produkte",
+        "db_manifest_license",
+        "db_session_audit_log",
+        "db_tokenvault",
+        "db_trigger_mapping",
+        "db_zip_index_master",
+        "page_cap_ii_lizenz_system",
+        "page_ferr_token",
+        "page_token_blockchain_system_index"
+      ]
+    },
+    {
+      "id": "theme_integration_sync",
+      "title": "Integration and Sync",
+      "summary": "Notion-ChatGPT integration, delta sync and handoff infrastructure.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "db_ai_incidents_and_changes",
+        "db_session_audit_log",
+        "page_delta_sync_complete_guide",
+        "page_l3_build_plan",
+        "page_notion_chatgpt_api_integration_setup"
+      ]
+    },
+    {
+      "id": "theme_gtm_investor_public",
+      "title": "GTM, Investor and Public",
+      "summary": "Investor narrative, public-facing surfaces and market framing.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "page_faq_master",
+        "page_investor_landing_interactive",
+        "product_prompt_framework",
+        "public_terra_nova_ai",
+        "public_terra_nova_fusion",
+        "public_terra_nova_gpt",
+        "public_terra_nova_ki",
+        "public_terra_nova_restore"
+      ]
+    },
+    {
+      "id": "theme_hubs_navigation",
+      "title": "Hubs, Navigation and Dashboards",
+      "summary": "Navigation hubs, dashboards, indexes and operating overviews.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "agent_terranova_workspace_validator",
+        "db_archive_grundstruktur",
+        "db_master_overview_mermaid",
+        "db_outcome_matrix",
+        "db_system_health_monitor",
+        "db_system_komponenten_status",
+        "db_system_metrics",
+        "page_archive_grundstruktur",
+        "page_archive_legacy_hub",
+        "page_digital_ecosystem_hub",
+        "page_master_dashboard",
+        "page_system_status_dashboard",
+        "page_terra_nova_master_overview"
+      ]
+    },
+    {
+      "id": "theme_prism_framework",
+      "title": "PRISM Framework",
+      "summary": "The main theory corpus including formal chapters, appendix and evidence matrix.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "formula_coherence_function",
+        "formula_desync_gyro",
+        "formula_hybrid_intelligence",
+        "formula_non_duality_psi_nd",
+        "formula_osmose_flux",
+        "formula_pid_controller",
+        "formula_vorgedanke_ratio",
+        "framework_cic",
+        "framework_prism",
+        "page_prism_kapitel_5",
+        "page_prism_parent",
+        "trigger_cluster_prism_551_600"
+      ]
+    },
+    {
+      "id": "theme_iperka_consolidation",
+      "title": "IPERKA and Consolidation",
+      "summary": "Konsolidierung track, planning loop and migration orientation.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "framework_desync_coherence",
+        "framework_iperka",
+        "page_digital_ecosystem_hub",
+        "page_iperka_konsolidierung"
+      ]
+    },
+    {
+      "id": "theme_patents_ip",
+      "title": "Patents and IP",
+      "summary": "Patent portfolio, IP framing and outcome tracking.",
+      "priority": "medium",
+      "status": "seeded",
+      "object_ids": [
+        "db_outcome_matrix",
+        "page_tnpx_01_die_7_patente",
+        "patent_codex_kern_tnpx_05",
+        "patent_einflusskoerper_tnpx_04",
+        "patent_kognitionsspiegel_tnpx_03",
+        "patent_mindcode_tnpx_01",
+        "patent_msa_tnpx_07",
+        "patent_tnav_tnpx_02",
+        "patent_vortex_tnpx_06"
+      ]
+    },
+    {
+      "id": "theme_products_services",
+      "title": "Products and Services",
+      "summary": "Offerings, prompt products and monetizable output layers.",
+      "priority": "medium",
+      "status": "seeded",
+      "object_ids": [
+        "db_hybrid_produkte",
+        "page_10_master_prompts_v1",
+        "product_genesis_pass",
+        "product_master_prompts",
+        "product_metarotik",
+        "product_prompt_framework"
+      ]
+    },
+    {
+      "id": "theme_cic_theory",
+      "title": "CIC Theory",
+      "summary": "Core conceptual model: non-duality, desync, pre-thought and resonance.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "formula_affinitaet_cosine",
+        "formula_coherence_function",
+        "formula_desync_gyro",
+        "formula_hybrid_intelligence",
+        "formula_non_duality_psi_nd",
+        "formula_osmose_flux",
+        "formula_vorgedanke_ratio",
+        "framework_cic",
+        "framework_desync_coherence",
+        "framework_prism",
+        "framework_vortex",
+        "page_cic_deep_dive",
+        "page_mermaid_manifesto_public",
+        "page_prism_kapitel_5",
+        "page_session_root",
+        "page_vortex_canvas",
+        "trigger_cluster_core_session_516_544"
+      ]
+    },
+    {
+      "id": "theme_workspace_infrastructure",
+      "title": "Workspace Infrastructure",
+      "summary": "Infrastructure snapshot, API-connected scope and repository-facing context.",
+      "priority": "medium",
+      "status": "seeded",
+      "object_ids": [
+        "db_ai_incidents_and_changes",
+        "db_session_audit_log",
+        "db_system_health_monitor",
+        "db_system_komponenten_status",
+        "db_system_metrics",
+        "db_zip_index_master",
+        "page_master_dashboard",
+        "page_notion_chatgpt_api_integration_setup",
+        "page_system_status_dashboard",
+        "page_workspace_kohaerenz_protokoll"
+      ]
+    },
+    {
+      "id": "theme_agents_tools",
+      "title": "Agents and Tools",
+      "summary": "Agent roles, orchestration helpers and tool surfaces.",
+      "priority": "medium",
+      "status": "seeded",
+      "object_ids": [
+        "agent_asana_ai",
+        "agent_chatgpt_ferrai",
+        "agent_mermaid_system_auditor",
+        "agent_notion_ferrai",
+        "agent_terranova_workspace_validator",
+        "page_ferrai_agent_config_control_center",
+        "page_meta_conductor"
+      ]
+    },
+    {
+      "id": "theme_governance_details",
+      "title": "Governance Details",
+      "summary": "Operational rules, layer model, governance controls and compliance framing.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "db_ai_compliance_register",
+        "framework_abc_classification",
+        "framework_meta_ferrum",
+        "framework_ora",
+        "framework_triquetra",
+        "page_ablagesystem",
+        "page_audit_kernel_design_doc",
+        "page_compliance_datenschutz",
+        "page_instanzenrat_system",
+        "page_terranova_meta_index_v0_1"
+      ]
+    },
+    {
+      "id": "theme_security_blockchain_infra",
+      "title": "Security and Blockchain Infra",
+      "summary": "Security doctrine, wallet model, audit trail and blockchain infra posture.",
+      "priority": "high",
+      "status": "seeded",
+      "object_ids": [
+        "contract_cap_ii_license",
+        "contract_cid_registry_polygon",
+        "contract_ferr_erc721_polygon",
+        "db_ai_compliance_register",
+        "db_manifest_license",
+        "db_tokenvault",
+        "db_zip_index_master",
+        "framework_schattenarchiv_777",
+        "framework_triquetra",
+        "page_cap_ii_lizenz_system",
+        "page_compliance_datenschutz",
+        "page_ferr_token",
+        "page_l3_build_plan",
+        "page_schattenarchiv_hub",
+        "page_token_blockchain_system_index",
+        "trigger_cluster_audit_suite_988_992"
+      ]
+    },
+    {
+      "id": "theme_archive_legacy",
+      "title": "Archive and Legacy",
+      "summary": "Archive structure, legacy hubs and raw-file inventory context.",
+      "priority": "medium",
+      "status": "seeded",
+      "object_ids": [
+        "db_archive_grundstruktur",
+        "page_ablagesystem",
+        "page_archive_grundstruktur",
+        "page_archive_legacy_hub",
+        "page_codex139_trigger_export_174_210",
+        "page_codex170_plus_final",
+        "page_ferrai_reflexions_log"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "agent_asana_ai",
+      "kind": "agent",
+      "title": "Asana AI",
+      "theme_ids": [
+        "theme_agents_tools"
+      ],
+      "summary": "F&E project-management assistant referenced in the agent inventory.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#17-agents-tools"
+      ],
+      "tags": [
+        "agent"
+      ]
+    },
+    {
+      "id": "agent_chatgpt_ferrai",
+      "kind": "agent",
+      "title": "ChatGPT-FerrAI",
+      "theme_ids": [
+        "theme_agents_tools",
+        "theme_ferrai_core_sessions"
+      ],
+      "summary": "External research and reflection counterpart in the FerrAI agent ecosystem.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#17-agents-tools"
+      ],
+      "tags": [
+        "agent"
+      ]
+    },
+    {
+      "id": "agent_mermaid_system_auditor",
+      "kind": "agent",
+      "title": "Mermaid System Auditor",
+      "theme_ids": [
+        "theme_agents_tools",
+        "theme_mermaid_system"
+      ],
+      "summary": "Diagram-focused agent for Mermaid auditing and related validation.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#05-mermaid-system",
+        "workspace-export-2026-03-27#17-agents-tools"
+      ],
+      "tags": [
+        "agent"
+      ]
+    },
+    {
+      "id": "agent_notion_ferrai",
+      "kind": "agent",
+      "title": "Notion_FerrAI",
+      "theme_ids": [
+        "theme_agents_tools",
+        "theme_ferrai_core_sessions"
+      ],
+      "summary": "Native Notion-side architect with broad workspace access.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#17-agents-tools"
+      ],
+      "tags": [
+        "agent"
+      ]
+    },
+    {
+      "id": "agent_terranova_workspace_validator",
+      "kind": "agent",
+      "title": "TerraNova Workspace Validator",
+      "theme_ids": [
+        "theme_agents_tools",
+        "theme_hubs_navigation"
+      ],
+      "summary": "Meta-orchestrator agent used for workspace analysis and consolidation.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#17-agents-tools"
+      ],
+      "tags": [
+        "agent"
+      ]
+    },
+    {
+      "id": "contract_cap_ii_license",
+      "kind": "contract",
+      "title": "CAP-II License Contract",
+      "theme_ids": [
+        "theme_token_blockchain",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Three-tier licensing smart contract used for controlled access.",
+      "status": "specified",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "contract",
+        "license"
+      ]
+    },
+    {
+      "id": "contract_cid_registry_polygon",
+      "kind": "contract",
+      "title": "CID Registry Contract",
+      "theme_ids": [
+        "theme_architecture_specs",
+        "theme_token_blockchain",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Polygon contract spec for artifact digest and CID registration.",
+      "status": "specified",
+      "source_refs": [
+        "workspace-export-2026-03-27#04-architektur-specs"
+      ],
+      "tags": [
+        "contract",
+        "cid-registry"
+      ]
+    },
+    {
+      "id": "contract_ferr_erc721_polygon",
+      "kind": "contract",
+      "title": "FERR ERC-721 on Polygon",
+      "theme_ids": [
+        "theme_token_blockchain",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Live ERC-721 contract for FERR on Polygon with wallet and royalty context.",
+      "status": "active",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "contract",
+        "polygon"
+      ]
+    },
+    {
+      "id": "db_promille_steuerung",
+      "kind": "database",
+      "title": "1001 Promille Steuerung",
+      "theme_ids": [
+        "theme_architecture_specs",
+        "theme_trigger_system"
+      ],
+      "summary": "Wiki-style database describing page, owner, tags and verification for promille control.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#04-architektur-specs"
+      ],
+      "tags": [
+        "database",
+        "promille"
+      ]
+    },
+    {
+      "id": "db_ai_compliance_register",
+      "kind": "database",
+      "title": "AI Compliance Register",
+      "theme_ids": [
+        "theme_governance_details",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Compliance register referenced from the legal and AI Act page.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#governance-compliance"
+      ],
+      "tags": [
+        "database",
+        "compliance"
+      ]
+    },
+    {
+      "id": "db_ai_incidents_and_changes",
+      "kind": "database",
+      "title": "AI Incidents and Changes",
+      "theme_ids": [
+        "theme_integration_sync",
+        "theme_workspace_infrastructure"
+      ],
+      "summary": "Existing production database used by the current Notion-to-GitHub sync workflow.",
+      "status": "active",
+      "source_refs": [
+        "repo-current-sync"
+      ],
+      "tags": [
+        "database",
+        "sync",
+        "production"
+      ]
+    },
+    {
+      "id": "db_archive_grundstruktur",
+      "kind": "database",
+      "title": "Archive Grundstruktur DB",
+      "theme_ids": [
+        "theme_hubs_navigation",
+        "theme_archive_legacy"
+      ],
+      "summary": "Database backing the locked 10-folder archive structure (data-source-89).",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#10-hubs-navigation"
+      ],
+      "tags": [
+        "database",
+        "archive"
+      ]
+    },
+    {
+      "id": "db_hybrid_produkte",
+      "kind": "database",
+      "title": "Hybrid-Produkte",
+      "theme_ids": [
+        "theme_token_blockchain",
+        "theme_products_services"
+      ],
+      "summary": "Digital x physical product database used across token and product surfaces.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain",
+        "workspace-export-2026-03-27#14-produkte-services"
+      ],
+      "tags": [
+        "database",
+        "products"
+      ]
+    },
+    {
+      "id": "db_manifest_license",
+      "kind": "database",
+      "title": "Manifest License DB",
+      "theme_ids": [
+        "theme_token_blockchain",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "License and manifest linkage database used by CAP-II and L3 concepts.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain",
+        "workspace-export-2026-03-27#04-architektur-specs"
+      ],
+      "tags": [
+        "database",
+        "license"
+      ]
+    },
+    {
+      "id": "db_mermaid_diagrams_library",
+      "kind": "database",
+      "title": "Mermaid Diagrams Code Library",
+      "theme_ids": [
+        "theme_mermaid_system"
+      ],
+      "summary": "Database entry collection for Mermaid code snippets and diagram metadata.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#05-mermaid-system"
+      ],
+      "tags": [
+        "database",
+        "mermaid"
+      ]
+    },
+    {
+      "id": "db_outcome_matrix",
+      "kind": "database",
+      "title": "Outcome-Matrix",
+      "theme_ids": [
+        "theme_hubs_navigation",
+        "theme_patents_ip"
+      ],
+      "summary": "Patent ROI tracking database with seven patents and outcome scoring.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#10-hubs-navigation"
+      ],
+      "tags": [
+        "database",
+        "patents"
+      ]
+    },
+    {
+      "id": "db_session_audit_log",
+      "kind": "database",
+      "title": "Session Audit Log DB",
+      "theme_ids": [
+        "theme_token_blockchain",
+        "theme_integration_sync",
+        "theme_workspace_infrastructure"
+      ],
+      "summary": "Audit trail database tied to sessions, hashes and bundle history.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "database",
+        "audit"
+      ]
+    },
+    {
+      "id": "db_system_health_monitor",
+      "kind": "database",
+      "title": "System Health Monitor",
+      "theme_ids": [
+        "theme_ferrai_core_sessions",
+        "theme_hubs_navigation",
+        "theme_workspace_infrastructure"
+      ],
+      "summary": "Health monitor inline database surfaced in dashboards.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#10-hubs-navigation"
+      ],
+      "tags": [
+        "database",
+        "health"
+      ]
+    },
+    {
+      "id": "db_system_komponenten_status",
+      "kind": "database",
+      "title": "System Komponenten Status",
+      "theme_ids": [
+        "theme_ferrai_core_sessions",
+        "theme_hubs_navigation",
+        "theme_workspace_infrastructure"
+      ],
+      "summary": "Component-status inline database for system modules.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#10-hubs-navigation"
+      ],
+      "tags": [
+        "database",
+        "components"
+      ]
+    },
+    {
+      "id": "db_master_overview_mermaid",
+      "kind": "database",
+      "title": "Terra Nova Master Overview DB",
+      "theme_ids": [
+        "theme_mermaid_system",
+        "theme_hubs_navigation"
+      ],
+      "summary": "Mermaid master overview database entry used as canonical architecture slice (data-source-288).",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#05-mermaid-system"
+      ],
+      "tags": [
+        "database",
+        "mermaid"
+      ]
+    },
+    {
+      "id": "db_system_metrics",
+      "kind": "database",
+      "title": "Terra Nova System Metrics",
+      "theme_ids": [
+        "theme_ferrai_core_sessions",
+        "theme_hubs_navigation",
+        "theme_workspace_infrastructure"
+      ],
+      "summary": "Metrics inline database for operational KPIs and counts.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#10-hubs-navigation"
+      ],
+      "tags": [
+        "database",
+        "metrics"
+      ]
+    },
+    {
+      "id": "db_tokenvault",
+      "kind": "database",
+      "title": "TokenVault DB",
+      "theme_ids": [
+        "theme_token_blockchain",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Token management and minting database referenced by the token system index.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "database",
+        "token"
+      ]
+    },
+    {
+      "id": "db_trigger_mapping",
+      "kind": "database",
+      "title": "Trigger Mapping DB",
+      "theme_ids": [
+        "theme_trigger_system",
+        "theme_token_blockchain"
+      ],
+      "summary": "Database linking trigger IDs, mapping surfaces and audit suites.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain",
+        "workspace-export-2026-03-27#02-trigger-system"
+      ],
+      "tags": [
+        "database",
+        "trigger"
+      ]
+    },
+    {
+      "id": "db_zip_index_master",
+      "kind": "database",
+      "title": "ZIP Index Master",
+      "theme_ids": [
+        "theme_token_blockchain",
+        "theme_security_blockchain_infra",
+        "theme_workspace_infrastructure"
+      ],
+      "summary": "Hash registry database for bundles, zip metadata and integrity tracking.",
+      "status": "identified",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain",
+        "workspace-export-2026-03-27#04-architektur-specs"
+      ],
+      "tags": [
+        "database",
+        "integrity"
+      ]
+    },
+    {
+      "id": "formula_affinitaet_cosine",
+      "kind": "formula",
+      "title": "Affinity Cosine Similarity",
+      "theme_ids": [
+        "theme_cic_theory",
+        "theme_architecture_specs"
+      ],
+      "summary": "alpha(A,B) = <a,b> / (||a|| * ||b||) describing affinity as cosine similarity.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#11-prism-framework",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "formula",
+        "affinity"
+      ]
+    },
+    {
+      "id": "formula_coherence_function",
+      "kind": "formula",
+      "title": "Coherence Function K",
+      "theme_ids": [
+        "theme_cic_theory",
+        "theme_prism_framework"
+      ],
+      "summary": "K = f(trigger_density * session_stability), used as a conceptual coherence score.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "formula",
+        "coherence"
+      ]
+    },
+    {
+      "id": "formula_desync_gyro",
+      "kind": "formula",
+      "title": "Desync Gyro",
+      "theme_ids": [
+        "theme_cic_theory",
+        "theme_prism_framework"
+      ],
+      "summary": "dphi/dt = omega + epsilon_desync(t), used to express stable controlled desynchronization.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#11-prism-framework",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "formula",
+        "desync"
+      ]
+    },
+    {
+      "id": "formula_hybrid_intelligence",
+      "kind": "formula",
+      "title": "Hybrid Intelligence Psi",
+      "theme_ids": [
+        "theme_cic_theory",
+        "theme_prism_framework"
+      ],
+      "summary": "Psi_hybrid = alpha*Psi_human + beta*Psi_AI + gamma*Psi_emergent.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "formula",
+        "hybrid-intelligence"
+      ]
+    },
+    {
+      "id": "formula_non_duality_psi_nd",
+      "kind": "formula",
+      "title": "Non-Duality Psi_ND",
+      "theme_ids": [
+        "theme_cic_theory",
+        "theme_prism_framework"
+      ],
+      "summary": "Psi_ND = alpha*R + beta*A + gamma*Z with a gamma-squared threshold activating the in-between space.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#11-prism-framework",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "formula",
+        "non-duality"
+      ]
+    },
+    {
+      "id": "formula_osmose_flux",
+      "kind": "formula",
+      "title": "Osmose Flux",
+      "theme_ids": [
+        "theme_cic_theory",
+        "theme_prism_framework"
+      ],
+      "summary": "J = -D * dphi/dx used in bridge-oriented session transfer framing.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#11-prism-framework",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "formula",
+        "bridge"
+      ]
+    },
+    {
+      "id": "formula_pid_controller",
+      "kind": "formula",
+      "title": "PID Controller",
+      "theme_ids": [
+        "theme_prism_framework",
+        "theme_architecture_specs"
+      ],
+      "summary": "u(t) = Kp*e(t) + Ki*integral(e(t))dt + Kd*de/dt, referenced via cybernetics and regulation loops.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#11-prism-framework",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "formula",
+        "control"
+      ]
+    },
+    {
+      "id": "formula_vorgedanke_ratio",
+      "kind": "formula",
+      "title": "Vorgedanke Ratio",
+      "theme_ids": [
+        "theme_cic_theory",
+        "theme_prism_framework"
+      ],
+      "summary": "P(outcome|VG) / P(outcome|kein VG) > 1.5 as effectiveness threshold for pre-thought.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#15-cic-theorie",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "formula",
+        "pre-thought"
+      ]
+    },
+    {
+      "id": "framework_abc_classification",
+      "kind": "framework",
+      "title": "ABC Classification",
+      "theme_ids": [
+        "theme_governance_details",
+        "theme_code_ethics"
+      ],
+      "summary": "A/B/C scoring model for criticality, room and process state.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#01-codex-ethik",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "framework",
+        "classification"
+      ]
+    },
+    {
+      "id": "framework_cic",
+      "kind": "framework",
+      "title": "CIC",
+      "theme_ids": [
+        "theme_cic_theory",
+        "theme_prism_framework"
+      ],
+      "summary": "Cognitive Intelligent Cooperation as the core convergence model.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#15-cic-theorie",
+        "workspace-export-2026-03-27#11-prism-framework"
+      ],
+      "tags": [
+        "framework",
+        "cic"
+      ]
+    },
+    {
+      "id": "framework_desync_coherence",
+      "kind": "framework",
+      "title": "Desync-Coherence",
+      "theme_ids": [
+        "theme_cic_theory",
+        "theme_iperka_consolidation"
+      ],
+      "summary": "Theory that desynchronization is a feature and motor instead of a bug.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "framework",
+        "desync"
+      ]
+    },
+    {
+      "id": "framework_iperka",
+      "kind": "framework",
+      "title": "IPERKA",
+      "theme_ids": [
+        "theme_iperka_consolidation",
+        "theme_architecture_specs"
+      ],
+      "summary": "Informieren-Planen-Entscheiden-Realisieren-Kontrollieren-Auswerten loop adapted as a system process.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#12-iperka-konsolidierung",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "framework",
+        "planning"
+      ]
+    },
+    {
+      "id": "framework_meta_ferrum",
+      "kind": "framework",
+      "title": "Meta-Ferrum",
+      "theme_ids": [
+        "theme_architecture_specs",
+        "theme_governance_details"
+      ],
+      "summary": "Audit-kernel separation of operative and observing power.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#04-architektur-specs",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "framework",
+        "audit"
+      ]
+    },
+    {
+      "id": "framework_ora",
+      "kind": "framework",
+      "title": "ORA",
+      "theme_ids": [
+        "theme_governance_details",
+        "theme_code_ethics"
+      ],
+      "summary": "Openness, radicality and authenticity filter.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#01-codex-ethik",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "framework",
+        "filter"
+      ]
+    },
+    {
+      "id": "framework_prism",
+      "kind": "framework",
+      "title": "PRISM",
+      "theme_ids": [
+        "theme_prism_framework",
+        "theme_cic_theory"
+      ],
+      "summary": "Main theory frame spanning mathematics, neural nets, cybernetics, quantum framing and appendix material.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#11-prism-framework"
+      ],
+      "tags": [
+        "framework",
+        "theory"
+      ]
+    },
+    {
+      "id": "framework_ras",
+      "kind": "framework",
+      "title": "RAS",
+      "theme_ids": [
+        "theme_architecture_specs"
+      ],
+      "summary": "Recursive affinity storage and effect-oriented memory model.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#04-architektur-specs",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "framework",
+        "memory"
+      ]
+    },
+    {
+      "id": "framework_schattenarchiv_777",
+      "kind": "framework",
+      "title": "Schattenarchiv 777",
+      "theme_ids": [
+        "theme_shadow_archive_creative",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Nine-layer shadow archive model with deeper safety restrictions.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#04-architektur-specs",
+        "workspace-export-2026-03-27#06-schattenarchiv-kreativ",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "framework",
+        "shadow-archive"
+      ]
+    },
+    {
+      "id": "framework_session_root",
+      "kind": "framework",
+      "title": "SESSION_ROOT Framework",
+      "theme_ids": [
+        "theme_trigger_system",
+        "theme_ferrai_core_sessions",
+        "theme_architecture_specs"
+      ],
+      "summary": "15-module cognitive operating system for sessions and outputs.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#02-trigger-system",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "framework",
+        "session-root"
+      ]
+    },
+    {
+      "id": "framework_triquetra",
+      "kind": "framework",
+      "title": "Triquetra",
+      "theme_ids": [
+        "theme_governance_details",
+        "theme_code_ethics",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Non-harm, consent and truth-with-tact safety stack.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#01-codex-ethik",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "framework",
+        "safety"
+      ]
+    },
+    {
+      "id": "framework_vortex",
+      "kind": "framework",
+      "title": "VORTEX",
+      "theme_ids": [
+        "theme_architecture_specs",
+        "theme_cic_theory"
+      ],
+      "summary": "Decision and state architecture connected to VortexCanvas and related control logic.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#04-architektur-specs",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "framework",
+        "decision-engine"
+      ]
+    },
+    {
+      "id": "page_10_master_prompts_v1",
+      "kind": "page",
+      "title": "10 Master-Prompts v1.0",
+      "theme_ids": [
+        "theme_products_services"
+      ],
+      "summary": "Export-ready prompt product with launch kit and marketing assets.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#14-produkte-services"
+      ],
+      "tags": [
+        "product",
+        "prompts"
+      ]
+    },
+    {
+      "id": "page_ablagesystem",
+      "kind": "page",
+      "title": "ABLAGESYSTEM",
+      "theme_ids": [
+        "theme_code_ethics",
+        "theme_governance_details",
+        "theme_archive_legacy"
+      ],
+      "summary": "Locked 10-folder storage structure used as a canonical filing model.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#01-codex-ethik"
+      ],
+      "tags": [
+        "archive",
+        "structure"
+      ]
+    },
+    {
+      "id": "page_archive_grundstruktur",
+      "kind": "page",
+      "title": "Archive Grundstruktur",
+      "theme_ids": [
+        "theme_hubs_navigation",
+        "theme_archive_legacy"
+      ],
+      "summary": "Locked archive base structure with canonical 10-folder framing.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#10-hubs-navigation",
+        "workspace-export-2026-03-27#20-archive-legacy"
+      ],
+      "tags": [
+        "archive",
+        "structure"
+      ]
+    },
+    {
+      "id": "page_archive_legacy_hub",
+      "kind": "page",
+      "title": "Archive Legacy Hub",
+      "theme_ids": [
+        "theme_hubs_navigation",
+        "theme_archive_legacy"
+      ],
+      "summary": "Historical structure hub for legacy system and documentation branches.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#10-hubs-navigation",
+        "workspace-export-2026-03-27#20-archive-legacy"
+      ],
+      "tags": [
+        "archive",
+        "legacy"
+      ]
+    },
+    {
+      "id": "page_audit_kernel_design_doc",
+      "kind": "page",
+      "title": "Audit-Kernel Design-Doc",
+      "theme_ids": [
+        "theme_architecture_specs",
+        "theme_governance_details"
+      ],
+      "summary": "Meta-Ferrum design page separating operative and audit power.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#04-architektur-specs",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "audit",
+        "meta-ferrum"
+      ]
+    },
+    {
+      "id": "page_cap_ii_lizenz_system",
+      "kind": "page",
+      "title": "CAP-II Lizenz-System",
+      "theme_ids": [
+        "theme_token_blockchain",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Three-tier licensing page with Solidity code, metadata schema and deployment plan.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain"
+      ],
+      "tags": [
+        "license",
+        "solidity"
+      ]
+    },
+    {
+      "id": "page_cic_deep_dive",
+      "kind": "page",
+      "title": "CIC Deep Dive",
+      "theme_ids": [
+        "theme_cic_theory",
+        "theme_ferrai_core_sessions"
+      ],
+      "summary": "Core conceptual page for Cognitive Intelligent Cooperation and its conditions.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#15-cic-theorie"
+      ],
+      "tags": [
+        "cic",
+        "theory"
+      ]
+    },
+    {
+      "id": "page_codex139_trigger_export_174_210",
+      "kind": "page",
+      "title": "Codex139+ TriggerExport 174-210",
+      "theme_ids": [
+        "theme_code_ethics",
+        "theme_trigger_system",
+        "theme_archive_legacy"
+      ],
+      "summary": "Trigger export focused on the Silvi mode range 174-210.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#01-codex-ethik",
+        "workspace-export-2026-03-27#02-trigger-system"
+      ],
+      "tags": [
+        "codex",
+        "trigger-export"
+      ]
+    },
+    {
+      "id": "page_codex170_plus_final",
+      "kind": "page",
+      "title": "Codex170_Plus_FINAL",
+      "theme_ids": [
+        "theme_code_ethics",
+        "theme_archive_legacy"
+      ],
+      "summary": "Core codex page with 170+ entries and ethics-oriented control language.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#01-codex-ethik"
+      ],
+      "tags": [
+        "codex",
+        "ethics"
+      ]
+    },
+    {
+      "id": "page_compliance_datenschutz",
+      "kind": "page",
+      "title": "Compliance und Datenschutz",
+      "theme_ids": [
+        "theme_governance_details",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Legal and AI-act-oriented compliance page with AI compliance register and incident tracking references.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#governance-compliance"
+      ],
+      "tags": [
+        "compliance",
+        "legal"
+      ]
+    },
+    {
+      "id": "page_delta_sync_complete_guide",
+      "kind": "page",
+      "title": "Delta-Sync Complete Guide",
+      "theme_ids": [
+        "theme_integration_sync"
+      ],
+      "summary": "Architecture, security, rollback, conflict resolution and testing guide for delta sync.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#08-integration-sync"
+      ],
+      "tags": [
+        "delta-sync",
+        "guide"
+      ]
+    },
+    {
+      "id": "page_digital_ecosystem_hub",
+      "kind": "page",
+      "title": "Digital Ecosystem Hub",
+      "theme_ids": [
+        "theme_hubs_navigation",
+        "theme_iperka_consolidation"
+      ],
+      "summary": "Consolidation hub with target structure Mermaid, duplicate detection and phase plan.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#10-hubs-navigation",
+        "workspace-export-2026-03-27#12-iperka-konsolidierung"
+      ],
+      "tags": [
+        "hub",
+        "ecosystem"
+      ]
+    },
+    {
+      "id": "page_faq_master",
+      "kind": "page",
+      "title": "FAQ Master",
+      "theme_ids": [
+        "theme_gtm_investor_public"
+      ],
+      "summary": "Master FAQ covering CIC, DAO, token, products, pricing, security, use cases and glossary.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#09-gtm-investor-public"
+      ],
+      "tags": [
+        "faq",
+        "public"
+      ]
+    },
+    {
+      "id": "page_ferr_token",
+      "kind": "page",
+      "title": "FERR Token",
+      "theme_ids": [
+        "theme_token_blockchain",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Live ERC-721 token on Polygon with wallet, royalty and Zora listing context.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain"
+      ],
+      "tags": [
+        "token",
+        "polygon"
+      ]
+    },
+    {
+      "id": "page_ferrai_agent_config_control_center",
+      "kind": "page",
+      "title": "FerrAI Agent-Config Control Center",
+      "theme_ids": [
+        "theme_ferrai_core_sessions",
+        "theme_agents_tools"
+      ],
+      "summary": "Agent crawl status and routine coordination page.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#03-ferrai-core-sessions"
+      ],
+      "tags": [
+        "agents",
+        "config"
+      ]
+    },
+    {
+      "id": "page_ferrai_reflexions_log",
+      "kind": "page",
+      "title": "FerrAI Reflexions-Log",
+      "theme_ids": [
+        "theme_ferrai_core_sessions",
+        "theme_archive_legacy"
+      ],
+      "summary": "Mega-page with session history, top 20 core pages, SCL recognition and multiple sub-pages.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#03-ferrai-core-sessions"
+      ],
+      "tags": [
+        "ferrai",
+        "log"
+      ]
+    },
+    {
+      "id": "page_ferrai_systemhandbuch",
+      "kind": "page",
+      "title": "FerrAI Systemhandbuch",
+      "theme_ids": [
+        "theme_ferrai_core_sessions"
+      ],
+      "summary": "Core instructions and operational handbook for FerrAI.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#03-ferrai-core-sessions"
+      ],
+      "tags": [
+        "ferrai",
+        "handbook"
+      ]
+    },
+    {
+      "id": "page_instanzenrat_system",
+      "kind": "page",
+      "title": "Instanzenrat-System",
+      "theme_ids": [
+        "theme_code_ethics",
+        "theme_governance_details"
+      ],
+      "summary": "Twelve-instance council with unanimity principle.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#01-codex-ethik"
+      ],
+      "tags": [
+        "governance",
+        "council"
+      ]
+    },
+    {
+      "id": "page_investor_landing_interactive",
+      "kind": "page",
+      "title": "Investor Landing Interactive",
+      "theme_ids": [
+        "theme_gtm_investor_public"
+      ],
+      "summary": "Interactive landing page for investor-facing positioning, status and 90-day roadmap.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#09-gtm-investor-public"
+      ],
+      "tags": [
+        "investor",
+        "public"
+      ]
+    },
+    {
+      "id": "page_iperka_konsolidierung",
+      "kind": "page",
+      "title": "IPERKA Konsolidierung Digital Ecosystem",
+      "theme_ids": [
+        "theme_iperka_consolidation"
+      ],
+      "summary": "Primary consolidation project page organizing Informieren through Auswerten.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#12-iperka-konsolidierung"
+      ],
+      "tags": [
+        "iperka",
+        "consolidation"
+      ]
+    },
+    {
+      "id": "page_l3_build_plan",
+      "kind": "page",
+      "title": "L3 Build-Plan canonical v1.0.0",
+      "theme_ids": [
+        "theme_architecture_specs",
+        "theme_integration_sync",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Canonical build plan for IPFS, manifests, CID registry and repo skeleton.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#04-architektur-specs"
+      ],
+      "tags": [
+        "ipfs",
+        "build-plan"
+      ]
+    },
+    {
+      "id": "page_master_dashboard",
+      "kind": "page",
+      "title": "Master Dashboard",
+      "theme_ids": [
+        "theme_hubs_navigation",
+        "theme_workspace_infrastructure"
+      ],
+      "summary": "Dashboard holding inline databases for metrics, component status and health.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#10-hubs-navigation"
+      ],
+      "tags": [
+        "dashboard",
+        "operations"
+      ]
+    },
+    {
+      "id": "page_meine_notion_ki",
+      "kind": "page",
+      "title": "Meine Notion-KI",
+      "theme_ids": [
+        "theme_ferrai_core_sessions"
+      ],
+      "summary": "Instruction and navigation page that acted as the library entry point for the workspace scan.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#03-ferrai-core-sessions"
+      ],
+      "tags": [
+        "navigation",
+        "instructions"
+      ]
+    },
+    {
+      "id": "page_mermaid_manifesto_public",
+      "kind": "page",
+      "title": "Mermaid as a Living Trigger System - Manifesto v1.0",
+      "theme_ids": [
+        "theme_mermaid_system",
+        "theme_cic_theory"
+      ],
+      "summary": "Public manifesto framing nodes as trigger entities, edges as activation conditions and graphs as living systems.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#05-mermaid-system",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "mermaid",
+        "manifesto"
+      ]
+    },
+    {
+      "id": "page_mermaid_atlas_start_here",
+      "kind": "page",
+      "title": "Mermaid Atlas - Start Here",
+      "theme_ids": [
+        "theme_mermaid_system"
+      ],
+      "summary": "Entry page for the four canonical Mermaid perspectives: IST, SOLL, INTEGRATION and ORCHESTRATION.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#05-mermaid-system"
+      ],
+      "tags": [
+        "mermaid",
+        "atlas"
+      ]
+    },
+    {
+      "id": "page_mermaid_code_library",
+      "kind": "page",
+      "title": "Mermaid Code Library",
+      "theme_ids": [
+        "theme_mermaid_system"
+      ],
+      "summary": "Central code library collecting Mermaid graphs, zoom views and agent slices.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#05-mermaid-system"
+      ],
+      "tags": [
+        "mermaid",
+        "library"
+      ]
+    },
+    {
+      "id": "page_meta_conductor",
+      "kind": "page",
+      "title": "Meta-Conductor",
+      "theme_ids": [
+        "theme_code_ethics",
+        "theme_agents_tools"
+      ],
+      "summary": "Agent routing and governance page covering FerrAI, Supervisor, Avor, VRMI, Pegasus, Gaertner and Berserker roles.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#01-codex-ethik"
+      ],
+      "tags": [
+        "governance",
+        "agents"
+      ]
+    },
+    {
+      "id": "page_prism_parent",
+      "kind": "page",
+      "title": "Neuempfindung des Denkens - PRISM Parent",
+      "theme_ids": [
+        "theme_prism_framework"
+      ],
+      "summary": "Parent page for the PRISM corpus spanning chapters, appendix and evidence matrix.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#11-prism-framework"
+      ],
+      "tags": [
+        "prism",
+        "parent"
+      ]
+    },
+    {
+      "id": "page_notion_chatgpt_api_integration_setup",
+      "kind": "page",
+      "title": "Notion-ChatGPT API-Integration Setup",
+      "theme_ids": [
+        "theme_integration_sync",
+        "theme_workspace_infrastructure"
+      ],
+      "summary": "Core integration setup page for Notion to ChatGPT bridging.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#08-integration-sync"
+      ],
+      "tags": [
+        "integration",
+        "api"
+      ]
+    },
+    {
+      "id": "page_ponyverse_hub",
+      "kind": "page",
+      "title": "PONYVERSE Hub",
+      "theme_ids": [
+        "theme_shadow_archive_creative"
+      ],
+      "summary": "Creative universe and play-layer hub tied to joy ignition and safety bars.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#06-schattenarchiv-kreativ"
+      ],
+      "tags": [
+        "creative",
+        "ponyverse"
+      ]
+    },
+    {
+      "id": "page_prism_kapitel_5",
+      "kind": "page",
+      "title": "PRISM Kapitel 5 Quantenphysik",
+      "theme_ids": [
+        "theme_prism_framework",
+        "theme_cic_theory"
+      ],
+      "summary": "Heart chapter covering non-duality, desync, pre-thought, CIC and the FerrAI bridge.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#11-prism-framework"
+      ],
+      "tags": [
+        "prism",
+        "quantum"
+      ]
+    },
+    {
+      "id": "page_ras_spezifikation",
+      "kind": "page",
+      "title": "RAS Spezifikation",
+      "theme_ids": [
+        "theme_architecture_specs"
+      ],
+      "summary": "Recursive affinity storage specification for long-term contextual memory and pattern recognition.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#04-architektur-specs"
+      ],
+      "tags": [
+        "memory",
+        "ras"
+      ]
+    },
+    {
+      "id": "page_schattenarchiv_hub",
+      "kind": "page",
+      "title": "Schattenarchiv Hub",
+      "theme_ids": [
+        "theme_shadow_archive_creative",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Hub for shadow-work, Trigger 777 and deeper archival layers.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#06-schattenarchiv-kreativ"
+      ],
+      "tags": [
+        "shadow-archive",
+        "security"
+      ]
+    },
+    {
+      "id": "page_session_root",
+      "kind": "page",
+      "title": "SESSION_ROOT",
+      "theme_ids": [
+        "theme_trigger_system",
+        "theme_ferrai_core_sessions",
+        "theme_architecture_specs",
+        "theme_cic_theory"
+      ],
+      "summary": "15-module session operating structure used across FerrAI orchestration.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#02-trigger-system",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "session-root",
+        "operating-system"
+      ]
+    },
+    {
+      "id": "page_system_status_dashboard",
+      "kind": "page",
+      "title": "System Status Dashboard",
+      "theme_ids": [
+        "theme_ferrai_core_sessions",
+        "theme_hubs_navigation",
+        "theme_workspace_infrastructure"
+      ],
+      "summary": "Live health monitor and top-level system status surface.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#03-ferrai-core-sessions"
+      ],
+      "tags": [
+        "dashboard",
+        "health"
+      ]
+    },
+    {
+      "id": "page_terra_nova_master_overview",
+      "kind": "page",
+      "title": "Terra Nova Master Overview",
+      "theme_ids": [
+        "theme_mermaid_system",
+        "theme_hubs_navigation"
+      ],
+      "summary": "Workspace-scale overview page and canonical architecture map.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#05-mermaid-system",
+        "workspace-export-2026-03-27#10-hubs-navigation"
+      ],
+      "tags": [
+        "mermaid",
+        "overview"
+      ]
+    },
+    {
+      "id": "page_terranova_meta_index_v0_1",
+      "kind": "page",
+      "title": "TERRANOVA META-INDEX v0.1",
+      "theme_ids": [
+        "theme_code_ethics",
+        "theme_governance_details"
+      ],
+      "summary": "ABC governance classification and core indexing layer for modules and decisions.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#01-codex-ethik"
+      ],
+      "tags": [
+        "governance",
+        "index"
+      ]
+    },
+    {
+      "id": "page_tnpx_01_die_7_patente",
+      "kind": "page",
+      "title": "TNPX-01 Die 7 Patente",
+      "theme_ids": [
+        "theme_patents_ip"
+      ],
+      "summary": "Portfolio page grouping the seven patent ideas and related dossiers.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#13-patente-ip"
+      ],
+      "tags": [
+        "patents",
+        "portfolio"
+      ]
+    },
+    {
+      "id": "page_token_blockchain_system_index",
+      "kind": "page",
+      "title": "Token and Blockchain System-Index",
+      "theme_ids": [
+        "theme_token_blockchain",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Index page connecting token infrastructure, contracts, databases, IPFS and DAO signals.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#07-token-blockchain"
+      ],
+      "tags": [
+        "token",
+        "index"
+      ]
+    },
+    {
+      "id": "page_trigger_architektur_520",
+      "kind": "page",
+      "title": "Trigger-Architektur 520",
+      "theme_ids": [
+        "theme_trigger_system"
+      ],
+      "summary": "Central steering logic covering SessionStart, Preflight, AutoFlow, Momentum, Synchronisationsknoten and Schattenarchiv hooks.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#02-trigger-system"
+      ],
+      "tags": [
+        "trigger",
+        "architecture"
+      ]
+    },
+    {
+      "id": "page_trigger_audit_675",
+      "kind": "page",
+      "title": "Trigger-Audit 675",
+      "theme_ids": [
+        "theme_trigger_system"
+      ],
+      "summary": "Large trigger audit page with category distribution, discussions and embedded non-renderable blocks.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#02-trigger-system",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "trigger",
+        "audit"
+      ]
+    },
+    {
+      "id": "page_trigger_zeichen_referenz",
+      "kind": "page",
+      "title": "Trigger-Zeichen Referenz",
+      "theme_ids": [
+        "theme_trigger_system"
+      ],
+      "summary": "Reference page for signs, slash commands and active trigger notation.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#02-trigger-system"
+      ],
+      "tags": [
+        "trigger",
+        "reference"
+      ]
+    },
+    {
+      "id": "page_vortex_canvas",
+      "kind": "page",
+      "title": "VortexCanvas",
+      "theme_ids": [
+        "theme_architecture_specs",
+        "theme_cic_theory"
+      ],
+      "summary": "Five-dimensional decision engine spanning focus, identity, emotion, security and energy.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#04-architektur-specs"
+      ],
+      "tags": [
+        "decision-engine",
+        "vortex"
+      ]
+    },
+    {
+      "id": "page_workspace_kohaerenz_protokoll",
+      "kind": "page",
+      "title": "Workspace-Kohaerenz Protokoll",
+      "theme_ids": [
+        "theme_trigger_system",
+        "theme_workspace_infrastructure"
+      ],
+      "summary": "Trigger 999 system overview with sync protocol, dashboard state and audit suite 988-992.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#02-trigger-system"
+      ],
+      "tags": [
+        "coherence",
+        "sync"
+      ]
+    },
+    {
+      "id": "patent_codex_kern_tnpx_05",
+      "kind": "patent",
+      "title": "Codex-Kern TNPX-05",
+      "theme_ids": [
+        "theme_patents_ip"
+      ],
+      "summary": "FerrAI Shield patent concept with the highest stated exploitation score in the seed export.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#13-patente-ip"
+      ],
+      "tags": [
+        "patent"
+      ]
+    },
+    {
+      "id": "patent_einflusskoerper_tnpx_04",
+      "kind": "patent",
+      "title": "Einflusskoerper TNPX-04",
+      "theme_ids": [
+        "theme_patents_ip"
+      ],
+      "summary": "Impact-oriented patent concept.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#13-patente-ip"
+      ],
+      "tags": [
+        "patent"
+      ]
+    },
+    {
+      "id": "patent_kognitionsspiegel_tnpx_03",
+      "kind": "patent",
+      "title": "Kognitionsspiegel TNPX-03",
+      "theme_ids": [
+        "theme_patents_ip"
+      ],
+      "summary": "Reflection-focused patent concept.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#13-patente-ip"
+      ],
+      "tags": [
+        "patent"
+      ]
+    },
+    {
+      "id": "patent_mindcode_tnpx_01",
+      "kind": "patent",
+      "title": "MindCode TNPX-01",
+      "theme_ids": [
+        "theme_patents_ip"
+      ],
+      "summary": "Codex Gateway patent concept, filed in an early attempt in August 2025.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#13-patente-ip"
+      ],
+      "tags": [
+        "patent"
+      ]
+    },
+    {
+      "id": "patent_msa_tnpx_07",
+      "kind": "patent",
+      "title": "MSA TNPX-07",
+      "theme_ids": [
+        "theme_patents_ip"
+      ],
+      "summary": "Multi-system-architecture patent concept.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#13-patente-ip"
+      ],
+      "tags": [
+        "patent"
+      ]
+    },
+    {
+      "id": "patent_tnav_tnpx_02",
+      "kind": "patent",
+      "title": "TNAV TNPX-02",
+      "theme_ids": [
+        "theme_patents_ip"
+      ],
+      "summary": "Navigation patent concept in the TerraNova portfolio.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#13-patente-ip"
+      ],
+      "tags": [
+        "patent"
+      ]
+    },
+    {
+      "id": "patent_vortex_tnpx_06",
+      "kind": "patent",
+      "title": "VORTEX TNPX-06",
+      "theme_ids": [
+        "theme_patents_ip"
+      ],
+      "summary": "Decision-engine patent concept tied to VORTEX theory.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#13-patente-ip"
+      ],
+      "tags": [
+        "patent"
+      ]
+    },
+    {
+      "id": "product_master_prompts",
+      "kind": "product",
+      "title": "10 Master-Prompts",
+      "theme_ids": [
+        "theme_products_services"
+      ],
+      "summary": "Prompt bundle framed as export-ready product and launch kit.",
+      "status": "marketed",
+      "source_refs": [
+        "workspace-export-2026-03-27#14-produkte-services"
+      ],
+      "tags": [
+        "product",
+        "bundle"
+      ]
+    },
+    {
+      "id": "product_genesis_pass",
+      "kind": "product",
+      "title": "Genesis Pass",
+      "theme_ids": [
+        "theme_products_services"
+      ],
+      "summary": "CHF 5,000 limited offer with five slots.",
+      "status": "marketed",
+      "source_refs": [
+        "workspace-export-2026-03-27#14-produkte-services"
+      ],
+      "tags": [
+        "product",
+        "pass"
+      ]
+    },
+    {
+      "id": "product_metarotik",
+      "kind": "product",
+      "title": "Metarotik",
+      "theme_ids": [
+        "theme_products_services",
+        "theme_shadow_archive_creative"
+      ],
+      "summary": "CHF 5,000 service layer connected to creative and intimate philosophy work.",
+      "status": "marketed",
+      "source_refs": [
+        "workspace-export-2026-03-27#06-schattenarchiv-kreativ",
+        "workspace-export-2026-03-27#14-produkte-services"
+      ],
+      "tags": [
+        "product",
+        "service"
+      ]
+    },
+    {
+      "id": "product_prompt_framework",
+      "kind": "product",
+      "title": "Prompt Framework",
+      "theme_ids": [
+        "theme_products_services",
+        "theme_gtm_investor_public"
+      ],
+      "summary": "CHF 49 prompt product with 50+ pages and 20+ templates.",
+      "status": "marketed",
+      "source_refs": [
+        "workspace-export-2026-03-27#14-produkte-services",
+        "workspace-export-2026-03-27#09-gtm-investor-public"
+      ],
+      "tags": [
+        "product",
+        "prompt"
+      ]
+    },
+    {
+      "id": "public_terra_nova_ai",
+      "kind": "public_domain",
+      "title": "terra-nova-ai.notion.site",
+      "theme_ids": [
+        "theme_gtm_investor_public"
+      ],
+      "summary": "Public domain surface for AI-related TerraNova material.",
+      "status": "active",
+      "source_refs": [
+        "workspace-export-2026-03-27#09-gtm-investor-public"
+      ],
+      "tags": [
+        "public-domain"
+      ]
+    },
+    {
+      "id": "public_terra_nova_fusion",
+      "kind": "public_domain",
+      "title": "terra-nova-fusion.notion.site",
+      "theme_ids": [
+        "theme_gtm_investor_public"
+      ],
+      "summary": "Public domain surface for fusion-oriented TerraNova content.",
+      "status": "active",
+      "source_refs": [
+        "workspace-export-2026-03-27#09-gtm-investor-public"
+      ],
+      "tags": [
+        "public-domain"
+      ]
+    },
+    {
+      "id": "public_terra_nova_gpt",
+      "kind": "public_domain",
+      "title": "terra-nova-gpt.notion.site",
+      "theme_ids": [
+        "theme_gtm_investor_public"
+      ],
+      "summary": "Public domain surface for GPT-related TerraNova positioning.",
+      "status": "active",
+      "source_refs": [
+        "workspace-export-2026-03-27#09-gtm-investor-public"
+      ],
+      "tags": [
+        "public-domain"
+      ]
+    },
+    {
+      "id": "public_terra_nova_ki",
+      "kind": "public_domain",
+      "title": "terra-nova-ki.notion.site",
+      "theme_ids": [
+        "theme_gtm_investor_public"
+      ],
+      "summary": "Public domain surface for German AI-related TerraNova material.",
+      "status": "active",
+      "source_refs": [
+        "workspace-export-2026-03-27#09-gtm-investor-public"
+      ],
+      "tags": [
+        "public-domain"
+      ]
+    },
+    {
+      "id": "public_terra_nova_restore",
+      "kind": "public_domain",
+      "title": "terra-nova-restore.notion.site",
+      "theme_ids": [
+        "theme_gtm_investor_public"
+      ],
+      "summary": "Public domain surface for restore-facing TerraNova content.",
+      "status": "active",
+      "source_refs": [
+        "workspace-export-2026-03-27#09-gtm-investor-public"
+      ],
+      "tags": [
+        "public-domain"
+      ]
+    },
+    {
+      "id": "trigger_cluster_audit_suite_988_992",
+      "kind": "trigger_cluster",
+      "title": "Audit Suite Trigger Cluster 988-992",
+      "theme_ids": [
+        "theme_trigger_system",
+        "theme_security_blockchain_infra"
+      ],
+      "summary": "Snapshot, token sync, audit engine, zip integrity and trigger echo suite.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#02-trigger-system",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "trigger",
+        "audit-suite"
+      ]
+    },
+    {
+      "id": "trigger_cluster_codex_1_170",
+      "kind": "trigger_cluster",
+      "title": "Codex Trigger Cluster 1-170",
+      "theme_ids": [
+        "theme_trigger_system",
+        "theme_code_ethics"
+      ],
+      "summary": "Fully named codex trigger range documented in Codex170_Plus_FINAL.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "trigger",
+        "codex"
+      ]
+    },
+    {
+      "id": "trigger_cluster_core_session_516_544",
+      "kind": "trigger_cluster",
+      "title": "Core Session Trigger Cluster 516-544",
+      "theme_ids": [
+        "theme_trigger_system",
+        "theme_cic_theory"
+      ],
+      "summary": "Operational trigger band spanning inspiration, AutoFlow, SessionStart, Preflight and Synchronisationsknoten.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#02-trigger-system",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "trigger",
+        "session"
+      ]
+    },
+    {
+      "id": "trigger_cluster_emergent_approx_500",
+      "kind": "trigger_cluster",
+      "title": "Emergent Trigger Cluster approx. 500",
+      "theme_ids": [
+        "theme_trigger_system"
+      ],
+      "summary": "Approximate emergent layer referenced as self-organizing triggers outside the fully named ranges.",
+      "status": "estimated",
+      "source_refs": [
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "trigger",
+        "emergent"
+      ]
+    },
+    {
+      "id": "trigger_cluster_prism_551_600",
+      "kind": "trigger_cluster",
+      "title": "PRISM Trigger Cluster 551-600",
+      "theme_ids": [
+        "theme_trigger_system",
+        "theme_prism_framework"
+      ],
+      "summary": "Range documented in the PRISM appendix from Schwellenpunkt to MetaSwitch.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#02-trigger-system",
+        "workspace-export-2026-03-27#11-prism-framework"
+      ],
+      "tags": [
+        "trigger",
+        "prism"
+      ]
+    },
+    {
+      "id": "trigger_cluster_silvi_mode_174_210",
+      "kind": "trigger_cluster",
+      "title": "Silvi Mode Trigger Cluster 174-210",
+      "theme_ids": [
+        "theme_trigger_system",
+        "theme_code_ethics"
+      ],
+      "summary": "Focused export range for Silvi mode and unlock-related safety nets.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#01-codex-ethik",
+        "workspace-export-2026-03-27#deep-extract"
+      ],
+      "tags": [
+        "trigger",
+        "silvi-mode"
+      ]
+    },
+    {
+      "id": "trigger_cluster_trigger_audit_675",
+      "kind": "trigger_cluster",
+      "title": "Trigger Audit Cluster 675",
+      "theme_ids": [
+        "theme_trigger_system"
+      ],
+      "summary": "Audit-level cluster summarizing 675 documented triggers across categories.",
+      "status": "documented",
+      "source_refs": [
+        "workspace-export-2026-03-27#02-trigger-system"
+      ],
+      "tags": [
+        "trigger",
+        "audit"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from": "agent_asana_ai",
+      "to": "page_iperka_konsolidierung",
+      "type": "references",
+      "note": "Asana AI is linked to research and development project management."
+    },
+    {
+      "from": "agent_chatgpt_ferrai",
+      "to": "page_ferrai_reflexions_log",
+      "type": "references",
+      "note": "ChatGPT-FerrAI references long-form reflection and continuity notes."
+    },
+    {
+      "from": "agent_mermaid_system_auditor",
+      "to": "page_mermaid_code_library",
+      "type": "depends_on",
+      "note": "Mermaid auditor works against the code library."
+    },
+    {
+      "from": "agent_notion_ferrai",
+      "to": "page_meine_notion_ki",
+      "type": "depends_on",
+      "note": "Notion_FerrAI uses the instruction page as a base anchor."
+    },
+    {
+      "from": "agent_notion_ferrai",
+      "to": "page_ferrai_systemhandbuch",
+      "type": "references",
+      "note": "Notion_FerrAI aligns with the FerrAI handbook."
+    },
+    {
+      "from": "agent_terranova_workspace_validator",
+      "to": "page_ferrai_agent_config_control_center",
+      "type": "references",
+      "note": "Validator depends on the agent config control center."
+    },
+    {
+      "from": "agent_terranova_workspace_validator",
+      "to": "page_iperka_konsolidierung",
+      "type": "references",
+      "note": "Validator is tied to the consolidation workflow."
+    },
+    {
+      "from": "agent_terranova_workspace_validator",
+      "to": "page_terra_nova_master_overview",
+      "type": "references",
+      "note": "Validator uses workspace overview pages as orientation surfaces."
+    },
+    {
+      "from": "db_hybrid_produkte",
+      "to": "product_genesis_pass",
+      "type": "references",
+      "note": "Hybrid products catalog can contain Genesis Pass-related artifacts."
+    },
+    {
+      "from": "db_hybrid_produkte",
+      "to": "product_metarotik",
+      "type": "references",
+      "note": "Hybrid products catalog can contain Metarotik-related artifacts."
+    },
+    {
+      "from": "db_outcome_matrix",
+      "to": "patent_codex_kern_tnpx_05",
+      "type": "references",
+      "note": "Outcome matrix names patent 5 as the highest-value item."
+    },
+    {
+      "from": "framework_cic",
+      "to": "formula_desync_gyro",
+      "type": "depends_on",
+      "note": "CIC theory depends on desync as a stabilizing mechanic."
+    },
+    {
+      "from": "framework_cic",
+      "to": "formula_non_duality_psi_nd",
+      "type": "depends_on",
+      "note": "CIC theory uses non-duality as one of its conditions."
+    },
+    {
+      "from": "framework_cic",
+      "to": "formula_vorgedanke_ratio",
+      "type": "depends_on",
+      "note": "CIC theory depends on the pre-thought condition."
+    },
+    {
+      "from": "framework_cic",
+      "to": "formula_affinitaet_cosine",
+      "type": "references",
+      "note": "Affinity is described as cosine similarity in the supporting material."
+    },
+    {
+      "from": "framework_desync_coherence",
+      "to": "framework_session_root",
+      "type": "references",
+      "note": "Desync-coherence is operationalized through SESSION_ROOT."
+    },
+    {
+      "from": "framework_meta_ferrum",
+      "to": "framework_triquetra",
+      "type": "depends_on",
+      "note": "Meta-Ferrum escalation logic is safety-framed through Triquetra."
+    },
+    {
+      "from": "framework_prism",
+      "to": "formula_coherence_function",
+      "type": "references",
+      "note": "The deep extract attributes a conceptual coherence function to PRISM-adjacent material."
+    },
+    {
+      "from": "framework_prism",
+      "to": "formula_hybrid_intelligence",
+      "type": "references",
+      "note": "The deep extract attributes a hybrid-intelligence equation to PRISM-adjacent material."
+    },
+    {
+      "from": "framework_prism",
+      "to": "framework_cic",
+      "type": "references",
+      "note": "PRISM contains and formalizes CIC concepts."
+    },
+    {
+      "from": "page_10_master_prompts_v1",
+      "to": "product_master_prompts",
+      "type": "contains",
+      "note": "Page is the product surface for the 10 Master-Prompts bundle."
+    },
+    {
+      "from": "page_10_master_prompts_v1",
+      "to": "product_prompt_framework",
+      "type": "references",
+      "note": "Prompt product surfaces are related in the GTM layer."
+    },
+    {
+      "from": "page_archive_grundstruktur",
+      "to": "db_archive_grundstruktur",
+      "type": "contains",
+      "note": "Archive Grundstruktur page is backed by the archive structure DB."
+    },
+    {
+      "from": "page_archive_legacy_hub",
+      "to": "page_archive_grundstruktur",
+      "type": "mirrors",
+      "note": "Legacy and canonical archive structures coexist in the seed export."
+    },
+    {
+      "from": "page_audit_kernel_design_doc",
+      "to": "framework_meta_ferrum",
+      "type": "contains",
+      "note": "Audit-Kernel Design-Doc is the main Meta-Ferrum source."
+    },
+    {
+      "from": "page_cap_ii_lizenz_system",
+      "to": "contract_cap_ii_license",
+      "type": "depends_on",
+      "note": "CAP-II page documents the CAP-II contract."
+    },
+    {
+      "from": "page_cic_deep_dive",
+      "to": "framework_cic",
+      "type": "contains",
+      "note": "CIC Deep Dive is a direct source for the CIC framework."
+    },
+    {
+      "from": "page_codex139_trigger_export_174_210",
+      "to": "trigger_cluster_silvi_mode_174_210",
+      "type": "contains",
+      "note": "Trigger export page is the seed source for the 174-210 range."
+    },
+    {
+      "from": "page_codex170_plus_final",
+      "to": "trigger_cluster_codex_1_170",
+      "type": "contains",
+      "note": "Codex170 names the 1-170 trigger set."
+    },
+    {
+      "from": "page_compliance_datenschutz",
+      "to": "db_ai_compliance_register",
+      "type": "contains",
+      "note": "Compliance page references the AI compliance register."
+    },
+    {
+      "from": "page_delta_sync_complete_guide",
+      "to": "page_notion_chatgpt_api_integration_setup",
+      "type": "depends_on",
+      "note": "Delta-Sync guide builds on the integration setup."
+    },
+    {
+      "from": "page_delta_sync_complete_guide",
+      "to": "page_l3_build_plan",
+      "type": "references",
+      "note": "Delta-Sync architecture sits adjacent to the L3 build path."
+    },
+    {
+      "from": "page_faq_master",
+      "to": "public_terra_nova_gpt",
+      "type": "publishes_to",
+      "note": "FAQ material supports GPT-facing public messaging."
+    },
+    {
+      "from": "page_faq_master",
+      "to": "public_terra_nova_ki",
+      "type": "publishes_to",
+      "note": "FAQ material supports the German public domain."
+    },
+    {
+      "from": "page_faq_master",
+      "to": "public_terra_nova_restore",
+      "type": "publishes_to",
+      "note": "FAQ material supports restore-facing public messaging."
+    },
+    {
+      "from": "page_ferr_token",
+      "to": "contract_ferr_erc721_polygon",
+      "type": "depends_on",
+      "note": "FERR token page refers to the live ERC-721 contract."
+    },
+    {
+      "from": "page_investor_landing_interactive",
+      "to": "public_terra_nova_ai",
+      "type": "publishes_to",
+      "note": "Investor-facing material can route into the public AI domain."
+    },
+    {
+      "from": "page_investor_landing_interactive",
+      "to": "public_terra_nova_fusion",
+      "type": "publishes_to",
+      "note": "Investor-facing material is part of the public Notion surface."
+    },
+    {
+      "from": "page_investor_landing_interactive",
+      "to": "page_faq_master",
+      "type": "references",
+      "note": "Investor landing sits alongside the master FAQ."
+    },
+    {
+      "from": "page_investor_landing_interactive",
+      "to": "page_prism_parent",
+      "type": "references",
+      "note": "Investor narrative references the theoretical foundation."
+    },
+    {
+      "from": "page_investor_landing_interactive",
+      "to": "page_token_blockchain_system_index",
+      "type": "references",
+      "note": "Investor landing surfaces token, DAO and patent status."
+    },
+    {
+      "from": "page_iperka_konsolidierung",
+      "to": "framework_iperka",
+      "type": "contains",
+      "note": "IPERKA consolidation page names and organizes the IPERKA loop."
+    },
+    {
+      "from": "page_l3_build_plan",
+      "to": "contract_cid_registry_polygon",
+      "type": "depends_on",
+      "note": "L3 build plan relies on the CID registry concept."
+    },
+    {
+      "from": "page_l3_build_plan",
+      "to": "db_zip_index_master",
+      "type": "depends_on",
+      "note": "L3 build plan needs bundle hash indexing."
+    },
+    {
+      "from": "page_master_dashboard",
+      "to": "db_system_health_monitor",
+      "type": "contains",
+      "note": "Master Dashboard surfaces the health monitor DB."
+    },
+    {
+      "from": "page_master_dashboard",
+      "to": "db_system_komponenten_status",
+      "type": "contains",
+      "note": "Master Dashboard surfaces the component-status DB."
+    },
+    {
+      "from": "page_master_dashboard",
+      "to": "db_system_metrics",
+      "type": "contains",
+      "note": "Master Dashboard surfaces the metrics DB."
+    },
+    {
+      "from": "page_mermaid_atlas_start_here",
+      "to": "page_mermaid_manifesto_public",
+      "type": "references",
+      "note": "Atlas coexists with the public living-system manifesto."
+    },
+    {
+      "from": "page_mermaid_atlas_start_here",
+      "to": "page_terra_nova_master_overview",
+      "type": "references",
+      "note": "Atlas points to the master overview as the IST perspective."
+    },
+    {
+      "from": "page_mermaid_code_library",
+      "to": "db_mermaid_diagrams_library",
+      "type": "contains",
+      "note": "Mermaid Code Library is backed by a diagram database."
+    },
+    {
+      "from": "page_mermaid_manifesto_public",
+      "to": "framework_cic",
+      "type": "references",
+      "note": "Manifesto aligns living graphs with system dynamics and trigger logic."
+    },
+    {
+      "from": "page_mermaid_manifesto_public",
+      "to": "trigger_cluster_core_session_516_544",
+      "type": "references",
+      "note": "Manifesto expresses trigger entities as graph nodes."
+    },
+    {
+      "from": "page_notion_chatgpt_api_integration_setup",
+      "to": "db_ai_incidents_and_changes",
+      "type": "references",
+      "note": "Current repo sync uses AI Incidents and Changes as the production source DB."
+    },
+    {
+      "from": "page_ponyverse_hub",
+      "to": "product_metarotik",
+      "type": "references",
+      "note": "Creative layer overlaps with the Metarotik service surface."
+    },
+    {
+      "from": "page_prism_kapitel_5",
+      "to": "formula_desync_gyro",
+      "type": "references",
+      "note": "Chapter 5 contains the desync gyro expression."
+    },
+    {
+      "from": "page_prism_kapitel_5",
+      "to": "formula_non_duality_psi_nd",
+      "type": "references",
+      "note": "Chapter 5 contains the non-duality equation."
+    },
+    {
+      "from": "page_prism_kapitel_5",
+      "to": "formula_osmose_flux",
+      "type": "references",
+      "note": "Chapter 5 bridge notes use the osmose formula."
+    },
+    {
+      "from": "page_prism_kapitel_5",
+      "to": "formula_vorgedanke_ratio",
+      "type": "references",
+      "note": "Chapter 5 frames the pre-thought effect ratio."
+    },
+    {
+      "from": "page_prism_kapitel_5",
+      "to": "framework_cic",
+      "type": "references",
+      "note": "Chapter 5 explicitly covers CIC."
+    },
+    {
+      "from": "page_prism_parent",
+      "to": "framework_prism",
+      "type": "contains",
+      "note": "PRISM parent is the main top-level document for the PRISM framework."
+    },
+    {
+      "from": "page_prism_parent",
+      "to": "page_prism_kapitel_5",
+      "type": "contains",
+      "note": "PRISM parent page contains the central chapter 5 branch."
+    },
+    {
+      "from": "page_prism_parent",
+      "to": "trigger_cluster_prism_551_600",
+      "type": "contains",
+      "note": "PRISM appendix holds the 551-600 trigger list."
+    },
+    {
+      "from": "page_ras_spezifikation",
+      "to": "framework_ras",
+      "type": "contains",
+      "note": "RAS Spezifikation describes the RAS framework."
+    },
+    {
+      "from": "page_schattenarchiv_hub",
+      "to": "framework_schattenarchiv_777",
+      "type": "contains",
+      "note": "Schattenarchiv hub is the main page source for the 777 framework."
+    },
+    {
+      "from": "page_session_root",
+      "to": "framework_session_root",
+      "type": "contains",
+      "note": "SESSION_ROOT page is the primary source of the session-root framework."
+    },
+    {
+      "from": "page_session_root",
+      "to": "framework_desync_coherence",
+      "type": "references",
+      "note": "SESSION_ROOT documents desync-coherence as a core principle."
+    },
+    {
+      "from": "page_session_root",
+      "to": "framework_iperka",
+      "type": "references",
+      "note": "SESSION_ROOT embeds the IPERKA loop."
+    },
+    {
+      "from": "page_session_root",
+      "to": "trigger_cluster_core_session_516_544",
+      "type": "references",
+      "note": "SESSION_ROOT aligns with the core session trigger band."
+    },
+    {
+      "from": "page_terra_nova_master_overview",
+      "to": "page_digital_ecosystem_hub",
+      "type": "mirrors",
+      "note": "Master Overview and Digital Ecosystem Hub both frame workspace structure from different angles."
+    },
+    {
+      "from": "page_terranova_meta_index_v0_1",
+      "to": "framework_abc_classification",
+      "type": "contains",
+      "note": "META-INDEX holds the ABC classification."
+    },
+    {
+      "from": "page_terranova_meta_index_v0_1",
+      "to": "framework_ora",
+      "type": "contains",
+      "note": "META-INDEX references ORA as a core governance lens."
+    },
+    {
+      "from": "page_terranova_meta_index_v0_1",
+      "to": "framework_triquetra",
+      "type": "contains",
+      "note": "META-INDEX references Triquetra as a core safety stack."
+    },
+    {
+      "from": "page_tnpx_01_die_7_patente",
+      "to": "patent_codex_kern_tnpx_05",
+      "type": "contains",
+      "note": "Portfolio page lists patent 5."
+    },
+    {
+      "from": "page_tnpx_01_die_7_patente",
+      "to": "patent_einflusskoerper_tnpx_04",
+      "type": "contains",
+      "note": "Portfolio page lists patent 4."
+    },
+    {
+      "from": "page_tnpx_01_die_7_patente",
+      "to": "patent_kognitionsspiegel_tnpx_03",
+      "type": "contains",
+      "note": "Portfolio page lists patent 3."
+    },
+    {
+      "from": "page_tnpx_01_die_7_patente",
+      "to": "patent_mindcode_tnpx_01",
+      "type": "contains",
+      "note": "Portfolio page lists patent 1."
+    },
+    {
+      "from": "page_tnpx_01_die_7_patente",
+      "to": "patent_msa_tnpx_07",
+      "type": "contains",
+      "note": "Portfolio page lists patent 7."
+    },
+    {
+      "from": "page_tnpx_01_die_7_patente",
+      "to": "patent_tnav_tnpx_02",
+      "type": "contains",
+      "note": "Portfolio page lists patent 2."
+    },
+    {
+      "from": "page_tnpx_01_die_7_patente",
+      "to": "patent_vortex_tnpx_06",
+      "type": "contains",
+      "note": "Portfolio page lists patent 6."
+    },
+    {
+      "from": "page_token_blockchain_system_index",
+      "to": "db_manifest_license",
+      "type": "contains",
+      "note": "Token index references manifest licensing data."
+    },
+    {
+      "from": "page_token_blockchain_system_index",
+      "to": "db_session_audit_log",
+      "type": "contains",
+      "note": "Token index references session-level audit history."
+    },
+    {
+      "from": "page_token_blockchain_system_index",
+      "to": "db_tokenvault",
+      "type": "contains",
+      "note": "Token index references TokenVault."
+    },
+    {
+      "from": "page_token_blockchain_system_index",
+      "to": "db_trigger_mapping",
+      "type": "contains",
+      "note": "Token index references trigger mapping data."
+    },
+    {
+      "from": "page_token_blockchain_system_index",
+      "to": "db_zip_index_master",
+      "type": "contains",
+      "note": "Token index references ZIP integrity data."
+    },
+    {
+      "from": "page_token_blockchain_system_index",
+      "to": "contract_cap_ii_license",
+      "type": "references",
+      "note": "System index references CAP-II."
+    },
+    {
+      "from": "page_token_blockchain_system_index",
+      "to": "contract_cid_registry_polygon",
+      "type": "references",
+      "note": "System index ties artifact integrity to CID registry concepts."
+    },
+    {
+      "from": "page_token_blockchain_system_index",
+      "to": "contract_ferr_erc721_polygon",
+      "type": "references",
+      "note": "System index references the live FERR contract."
+    },
+    {
+      "from": "page_trigger_architektur_520",
+      "to": "trigger_cluster_core_session_516_544",
+      "type": "contains",
+      "note": "Core session triggers sit inside the central trigger architecture."
+    },
+    {
+      "from": "page_trigger_architektur_520",
+      "to": "trigger_cluster_audit_suite_988_992",
+      "type": "references",
+      "note": "Trigger architecture references the 988-992 audit suite."
+    },
+    {
+      "from": "page_trigger_architektur_520",
+      "to": "trigger_cluster_emergent_approx_500",
+      "type": "references",
+      "note": "The architecture and audit describe a broader emergent trigger layer."
+    },
+    {
+      "from": "page_trigger_audit_675",
+      "to": "trigger_cluster_trigger_audit_675",
+      "type": "contains",
+      "note": "Trigger-Audit 675 anchors the documented audit cluster."
+    },
+    {
+      "from": "page_vortex_canvas",
+      "to": "framework_vortex",
+      "type": "contains",
+      "note": "VortexCanvas is a page-level source for the VORTEX framework."
+    },
+    {
+      "from": "trigger_cluster_audit_suite_988_992",
+      "to": "db_trigger_mapping",
+      "type": "depends_on",
+      "note": "Trigger echo and mapping rely on trigger mapping data."
+    },
+    {
+      "from": "trigger_cluster_audit_suite_988_992",
+      "to": "db_zip_index_master",
+      "type": "depends_on",
+      "note": "Integrity pulse and lockpoint concepts rely on bundle index data."
+    }
+  ],
+  "open_gaps": [
+    {
+      "id": "gap_unknown_blocks_trigger_audit_675",
+      "title": "Unknown blocks in Trigger-Audit 675",
+      "description": "Approx. 400 blocks in the Trigger-Audit page were described as non-renderable by the Notion API and should be treated as representation limits, not missing trigger content.",
+      "status": "open",
+      "source_refs": [
+        "workspace-export-2026-03-27#deep-extract"
+      ]
+    },
+    {
+      "id": "gap_unknown_blocks_reflexions_log",
+      "title": "Unknown blocks in FerrAI Reflexions-Log",
+      "description": "Large parts of the Reflexions-Log were reported as unknown block types during prior scans, so v1 stores the page as a seeded object without full block-level expansion.",
+      "status": "open",
+      "source_refs": [
+        "workspace-export-2026-03-27#deep-extract"
+      ]
+    },
+    {
+      "id": "gap_trigger_range_171_505",
+      "title": "Underdocumented trigger range 171-505",
+      "description": "The deep extract called out a broad gap between Codex 1-170 and the later named system clusters, so v1 represents this as an open knowledge gap rather than fabricated objects.",
+      "status": "open",
+      "source_refs": [
+        "workspace-export-2026-03-27#deep-extract"
+      ]
+    },
+    {
+      "id": "gap_subpage_full_depth_v2",
+      "title": "Full subpage depth deferred to v2",
+      "description": "The seed export referenced roughly 500 sub-pages and cross-links, but Atlas v1 deliberately captures only themes plus main objects and selected cross-links.",
+      "status": "accepted",
+      "source_refs": [
+        "workspace-export-2026-03-27#workspace-tree"
+      ]
+    },
+    {
+      "id": "gap_live_notion_export_pipeline",
+      "title": "Live Notion export pipeline not attached yet",
+      "description": "This repo now seeds a canonical atlas, but no live Notion workspace-exporter has been connected to refresh atlas data automatically.",
+      "status": "planned",
+      "source_refs": [
+        "repo-current-sync",
+        "workspace-export-2026-03-27"
+      ]
+    }
+  ]
+}

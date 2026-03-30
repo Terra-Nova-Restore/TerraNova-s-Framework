@@ -1,0 +1,7 @@
+interface:
+  display_name: "TerraNova FerrAI"
+  short_description: "TerraNova multi-connector execution partner"
+  default_prompt: "Use $terranova-ferrai to work across TerraNova canon, Notion, GitHub, Google Drive, Slack, Linear, and Stripe with a read-first posture."
+
+policy:
+  allow_implicit_invocation: true
