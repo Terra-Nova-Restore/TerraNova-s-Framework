@@ -6,26 +6,34 @@
   - Creates a GitHub Issue
   - Writes the Issue URL + timestamp back to Notion
 
-## Setup (GitHub Actions)
-1) Copy this folder into your GitHub repo (or merge the contents).
-2) Create these GitHub repo secrets:
-   - `NOTION_TOKEN`                     (Notion integration token)
-   - `NOTION_DATABASE_ID_CHANGES`       (DB id for AI_Incidents_and_Changes)
-   - `GITHUB_TOKEN_TNV`                 (fine-grained PAT or GitHub App token)
-   - `GITHUB_REPO`                      ("owner/repo")
-3) Ensure the Notion DB has required properties (see `NOTION_PROPERTIES.md`).
-4) Run the workflow manually once, then let the schedule run.
+## Setup (GitHub Actions – RECOMMENDED)
+
+**See [SETUP_RUNBOOK.md](SETUP_RUNBOOK.md) for complete step-by-step guide.**
+
+**TL;DR:**
+1. Create GitHub repo secrets:
+   - `NOTION_TOKEN` (Notion integration token)
+   - `NOTION_DATABASE_ID_CHANGES` (Notion database ID)
+   - `GH_PAT` (GitHub Personal Access Token with `repo` + `issues` scopes)
+   - `GITHUB_REPO` (owner/repo format)
+2. Share Notion database with integration (in Notion UI)
+3. Workflow runs automatically every 10 minutes
+
+**Trigger manually:**
+```bash
+gh workflow run tnv_notion_to_github.yml --repo owner/repo
+```
 
 ## Safety defaults
 - The script only exports rows you explicitly mark (`Export_to_GitHub`).
 - No automatic mutation of compliance risk fields.
-- Tokens are never stored in Notion or in the repo.
+- Tokens are never stored in Notion or in the repo – only GitHub encrypted secrets.
 
-## Local run
+## Local run (not recommended – use workflow instead)
 ```bash
 export NOTION_TOKEN="..."
 export NOTION_DATABASE_ID_CHANGES="..."
-export GITHUB_TOKEN="..."
+export GH_PAT="..."
 export GITHUB_REPO="owner/repo"
 python scripts/notion_to_github.py
 ```
