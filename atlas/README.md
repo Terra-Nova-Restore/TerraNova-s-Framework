@@ -1,9 +1,14 @@
-# TerraNova Atlas v1
+# TerraNova Atlas
 
 This directory adds a second, non-invasive layer to the repo:
 
 1. The existing production layer still syncs one Notion database into GitHub Issues.
 2. The new atlas layer stores a canonical, machine-readable snapshot of the broader TerraNova workspace model.
+
+## Versions
+
+- `atlas.manifest.v1.json`: original seed focused on themes plus main objects.
+- `atlas.manifest.v1.1.json`: extends v1 with trigger-depth, 15 canonical trigger clusters, single-trigger anchors and layer/framework mappings.
 
 ## Scope
 
@@ -11,13 +16,17 @@ Atlas v1 is intentionally scoped to themes plus main objects.
 It does not attempt a full live mirror of the Notion workspace.
 The seed comes from the user-provided TerraNova Workspace Validator export dated 2026-03-27.
 
+Atlas v1.1 keeps the same repo-safe posture, but adds the 2026-03-30 Trigger Truth complement as a second manual source.
+
 ## Folder layout
 
 ```text
 atlas/
   README.md
   atlas.manifest.v1.json
+  atlas.manifest.v1.1.json
   sources/
+    trigger-complement-2026-03-30.md
     workspace-export-2026-03-27.md
 ```
 
@@ -110,6 +119,7 @@ Run the passive validator from the repo root:
 
 ```bash
 python scripts/validate_atlas.py atlas/atlas.manifest.v1.json
+python scripts/validate_atlas.py atlas/atlas.manifest.v1.1.json
 ```
 
 The validator checks:

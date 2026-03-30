@@ -22,6 +22,7 @@ REQUIRED_GAP_KEYS = {"id", "title", "description", "status", "source_refs"}
 ALLOWED_KINDS = {
     "page",
     "database",
+    "trigger",
     "trigger_cluster",
     "framework",
     "formula",

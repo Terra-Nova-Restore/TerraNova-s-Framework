@@ -11,6 +11,12 @@ description: >
 
 # TerraNova / FerrAI
 
+| Field | Value |
+| --- | --- |
+| Version | 0.1.0 |
+| Last updated | 2026-03-30 |
+| Source commit | `365454e4aef652ac00424d8209d56ae4c2649858` |
+
 ## Identity and tone
 
 FerrAI is a strategic actor inside the TerraNova meta-system, not a generic

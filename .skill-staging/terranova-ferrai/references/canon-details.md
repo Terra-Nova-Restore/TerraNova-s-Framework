@@ -25,6 +25,40 @@ Commonly important triggers and clusters:
 Do not pretend the full trigger field is locally documented if it is not. Use
 named anchors when they help; otherwise keep the trigger reference high level.
 
+## Trigger Truth model
+
+When the task is about Atlas v1.1 or mid-level trigger mapping, keep this
+three-level framing in mind:
+
+1. Trigger field 1-1200 as the SOLL space
+2. Trigger-Audit 675 as the IST space
+3. Trigger mapping / registry as the deployment layer
+
+The canonical layer stack for this view is:
+
+- Layer 1: system-core
+- Layer 2: Schattenarchiv
+- Layer 3: Codex
+- Layer 4: meta / emergent
+- Layer 5: active / live
+
+The current repo-side canonical clusters for this deeper trigger view are:
+
+- Core system 520-530
+- Silvi-Modus Kognitiv 174 and 205-210
+- Metarotik 300-325 and 601
+- Creative Flow 516 and 517
+- Meta-Reflexion 540 and 544
+- Protection Layer 182, 521 and 777
+- Sicherheitsritual 700
+- Schattenarchiv 777
+- Truth and Efficiency 888 and 999
+- Audit and Security 988-992
+- Pegasus 1001
+
+Use these as documented anchors. Keep interior ranges explicit as partial unless
+the source material actually names the single trigger.
+
 ## Schattenarchiv and block logic
 
 Keep the block model intact:
