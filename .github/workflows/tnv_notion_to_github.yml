@@ -52,7 +52,7 @@ jobs:
       - name: Detect changes
         id: changes
         run: |
-          if [[ -n "$(git status --porcelain)" ]]; then
+          if [[ -n "$(git status --porcelain -- shadow/)" ]]; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
             echo "changed=false" >> $GITHUB_OUTPUT
@@ -65,7 +65,10 @@ jobs:
           HASH=$(cat .tnv_hash)
           git config user.name "TNV-Automaton"
           git config user.email "actions@github.com"
-          git add .
-          git commit -m "TNV-AUTO: Notion Sync (hash: $HASH)" || { echo "No changes to commit"; exit 0; }
-          git pull --rebase origin "$BRANCH"
-          git push origin "HEAD:$BRANCH"
+          git add shadow/
+          git diff --cached --quiet && { echo "No shadow changes to commit"; exit 0; }
+          git commit -m "TNV-AUTO: Notion Sync (hash: $HASH)"
+          if ! git push origin "HEAD:$BRANCH"; then
+            git pull --rebase origin "$BRANCH"
+            git push origin "HEAD:$BRANCH"
+          fi

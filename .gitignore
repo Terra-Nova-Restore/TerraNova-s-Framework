@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 validation-output.txt
 Untitled-*.txt
+.tnv_hash
+.tnv_sync.lock
+logs/
