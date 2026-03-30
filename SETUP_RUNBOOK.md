@@ -67,6 +67,7 @@ Erstelle diese 3 Secrets:
 | `GH_PAT` | Dein GitHub Token | `ghp_abc123...` |
 
 `GITHUB_REPO` wird im Workflow automatisch aus `${{ github.repository }}` gesetzt.
+Optionaler Override für Cross-Repo-Sync: `TARGET_GITHUB_REPO` als Secret oder Variable im Format `owner/repo`.
 
 **Wichtig:** 
 - ⚠️ Secrets sind nach Erstellung **unsichtbar** – kopier den Wert BEVOR du speicherst!

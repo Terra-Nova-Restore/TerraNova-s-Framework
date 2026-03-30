@@ -17,6 +17,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     env:
+      TARGET_GITHUB_REPO: ${{ secrets.TARGET_GITHUB_REPO || vars.TARGET_GITHUB_REPO }}
       GITHUB_REPO: ${{ github.repository }}
 
     steps:

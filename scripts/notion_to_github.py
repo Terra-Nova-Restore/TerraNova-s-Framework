@@ -74,7 +74,11 @@ def main(args):
         # Get secrets (workflow sends NOTION_TOKEN, GH_PAT; also accept NOTION_API_KEY for flexibility)
         nt = os.environ.get('NOTION_TOKEN') or os.environ.get('NOTION_API_KEY','')
         gt = os.environ.get('GH_PAT') or os.environ.get('GITHUB_TOKEN','')
-        gr = os.environ.get('GITHUB_REPO') or cfg.get('github_repo','')
+        gr = (
+            os.environ.get('TARGET_GITHUB_REPO')
+            or os.environ.get('GITHUB_REPO')
+            or cfg.get('github_repo','')
+        )
 
         nc=NC(nt);gh=GH(gt,gr)
         ef=cfg.get('export_flag_property','Export_to_GitHub');up=cfg.get('url_property','GitHub_Issue_URL')

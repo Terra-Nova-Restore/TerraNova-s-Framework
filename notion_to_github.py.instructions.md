@@ -22,7 +22,7 @@ The script orchestrates:
 - [ ] Read NOTION_PROPERTIES.md to understand current field mappings
 - [ ] Review GITHUB_PROJECT_HELP.md to understand GitHub integration points
 - [ ] Check requirements.txt for current dependency versions
-- [ ] Verify all environment variables: `NOTION_TOKEN`, `NOTION_DATABASE_ID_CHANGES`, `GH_PAT`, `GITHUB_REPO`
+- [ ] Verify all environment variables: `NOTION_TOKEN`, `NOTION_DATABASE_ID_CHANGES`, `GH_PAT`, optional `TARGET_GITHUB_REPO`, fallback `GITHUB_REPO`
 - [ ] Test locally with a **test database** (not production)
 
 ## Critical Patterns
@@ -95,6 +95,7 @@ def preflight_check():
         "NOTION_TOKEN": os.getenv("NOTION_TOKEN"),
         "GH_PAT": os.getenv("GH_PAT"),
         "NOTION_DATABASE_ID_CHANGES": os.getenv("NOTION_DATABASE_ID_CHANGES"),
+        "TARGET_GITHUB_REPO": os.getenv("TARGET_GITHUB_REPO"),
         "GITHUB_REPO": os.getenv("GITHUB_REPO"),
     }
     for key, value in checks.items():

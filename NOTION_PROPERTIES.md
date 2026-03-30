@@ -10,11 +10,12 @@ Before running sync, ensure these are configured:
 NOTION_TOKEN=ntn_xxxx...                # Notion Integration API key
 NOTION_DATABASE_ID_CHANGES=abc123...    # Database ID to sync from
 GH_PAT=ghp_xxxx...                      # GitHub Personal Access Token
-GITHUB_REPO=owner/repo                  # Target GitHub repository
+TARGET_GITHUB_REPO=owner/repo           # Optional cross-repo override (highest priority)
+GITHUB_REPO=owner/repo                  # Optional fallback target repository
 ```
 
 **See `.env.example` for template and detailed documentation.**
-**Note:** These match the variable names used in `.github/workflows/tnv_notion_to_github.yml`
+**Note:** In workflow runs, `GITHUB_REPO` defaults to `${{ github.repository }}`.
 
 ## Required Notion Properties
 

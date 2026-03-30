@@ -87,8 +87,12 @@ Another sync process is running.
 | `NOTION_API_KEY` | Notion | Alternative | ⚠️ Flexible fallback |
 | `GH_PAT` | GitHub | Workflow | ✓ Currently used |
 | `GITHUB_TOKEN` | GitHub | Alternative | ⚠️ Flexible fallback |
+| `TARGET_GITHUB_REPO` | GitHub Repo | Secret/Variable/Local env | ✓ Optional override |
+| `GITHUB_REPO` | GitHub Repo | Workflow/local env | ✓ Default/fallback |
 
 **Current Practice**: Workflow sends `NOTION_TOKEN` and `GH_PAT`. Script accepts both the current names and alternatives for flexibility, but expects the workflow names.
+
+**Repository resolution order**: `TARGET_GITHUB_REPO` → `GITHUB_REPO` → `config/notion_map.json (github_repo)`.
 
 **Future Migration**: If renaming to `NOTION_API_KEY` is decided, update workflow secrets and this documentation consistently across all jobs.
 

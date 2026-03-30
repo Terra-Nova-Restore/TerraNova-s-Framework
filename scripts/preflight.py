@@ -340,9 +340,15 @@ class PreflightChecker:
         # Check 4: GitHub repository access
         self.log.info("Preflight: Testing GitHub repository access...")
         try:
-            repo = os.environ.get('GITHUB_REPO') or config.get('github_repo', '')
+            repo = (
+                os.environ.get('TARGET_GITHUB_REPO')
+                or os.environ.get('GITHUB_REPO')
+                or config.get('github_repo', '')
+            )
             if not repo:
-                raise PreflightError("Missing GitHub repository: set GITHUB_REPO or github_repo in config")
+                raise PreflightError(
+                    "Missing GitHub repository: set TARGET_GITHUB_REPO, GITHUB_REPO, or github_repo in config"
+                )
             github = GitHubValidator(github_token)
             repo_info = github.test_repo_access(repo)
             results['checks']['github_access'] = {'status': 'pass', 'repository': repo_info.get('repository')}

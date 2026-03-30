@@ -19,6 +19,7 @@
 3. Workflow runs automatically every 10 minutes
 
 The workflow resolves `GITHUB_REPO` automatically from `${{ github.repository }}`.
+Optional override for cross-repo sync: set `TARGET_GITHUB_REPO` (secret or variable) to `owner/repo`.
 
 **Trigger manually:**
 ```bash
@@ -35,6 +36,9 @@ gh workflow run tnv_notion_to_github.yml --repo owner/repo
 export NOTION_TOKEN="..."
 export NOTION_DATABASE_ID_CHANGES="..."
 export GH_PAT="..."
+# Optional: override target repo (cross-repo)
+export TARGET_GITHUB_REPO="owner/other-repo"
+# Optional fallback if TARGET_GITHUB_REPO is not set
 export GITHUB_REPO="owner/repo"
 python scripts/notion_to_github.py
 ```
