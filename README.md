@@ -49,10 +49,10 @@ export GITHUB_REPO="owner/repo"
 python scripts/notion_to_github.py
 ```
 
-
-## GitHub Project (Projects v2) – optional
-- Add repo secret `PROJECTV2_ID` (ProjectV2 node id, e.g. `PVT_...`).
-- Exported issues will be added to the project and set `Status=Todo`.
+## GitHub Projects v2
+The controller does not mutate GitHub Projects v2. It creates Issues and writes
+the Issue URL back to Notion. Add exported Issues to a project manually or with
+a separate automation if project backlog state is required.
 
 ## Business brief
 - See `BIZ.md` for a concise `/biz` business-facing overview, KPI suggestions, and operating cadence.
