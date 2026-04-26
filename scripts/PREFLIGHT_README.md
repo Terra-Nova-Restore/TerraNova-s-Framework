@@ -211,3 +211,24 @@ cat .tnv_sync.lock  # Shows PID of running process
 - [`notion_to_github.py`](./notion_to_github.py) – Main sync script
 - [`NOTION_PROPERTIES.md`](../NOTION_PROPERTIES.md) – Property mappings
 - [`.github/instructions/notion_to_github.py.instructions.md`](../.github/instructions/notion_to_github.py.instructions.md) – Development guidelines
+
+## Quick Fix: `NameError: name 'argparse' is not defined`
+
+If a script fails with `NameError: name 'argparse' is not defined`, run:
+
+```bash
+python scripts/quick_script_sanity.py scripts/notion_to_github.py
+```
+
+For any target file, replace the path with the failing script path.
+
+The checker reports:
+
+- `USES_ARGPARSE True` + `IMPORTS_ARGPARSE False` → add `import argparse` at the top.
+- `HAS_LITERAL_N True` with unusual formatting results → script likely got damaged by copy/paste rendering.
+
+You can also run a direct Python smoke check:
+
+```bash
+python -c "import argparse; print('argparse ok')"
+```
