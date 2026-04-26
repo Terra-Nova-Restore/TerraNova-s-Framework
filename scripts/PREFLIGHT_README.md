@@ -222,9 +222,16 @@ python scripts/quick_script_sanity.py scripts/notion_to_github.py
 
 For any target file, replace the path with the failing script path.
 
+To apply the fastest auto-fix for that exact error:
+
+```bash
+python scripts/quick_script_sanity.py scripts/notion_to_github.py --fix-missing-argparse
+```
+
 The checker reports:
 
-- `USES_ARGPARSE True` + `IMPORTS_ARGPARSE False` → add `import argparse` at the top.
+- `USES_ARGPARSE True` + `IMPORTS_ARGPARSE False` → missing import detected.
+- `--fix-missing-argparse` inserts `import argparse` near the top automatically.
 - `HAS_LITERAL_N True` with unusual formatting results → script likely got damaged by copy/paste rendering.
 
 You can also run a direct Python smoke check:
