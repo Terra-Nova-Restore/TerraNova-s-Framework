@@ -1,10 +1,12 @@
 name: Validate Notion Map
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'config/notion_map*.json'
       - 'scripts/validate_notion_map.py'
+      - '.github/workflows/notion-map-validate.yml'
 
 jobs:
   validate:
