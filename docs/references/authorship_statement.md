@@ -2,11 +2,15 @@
 
 The TerraNova / FerrAI corpus is a predominantly self-authored, experience-derived body of work by Silvan Lenhard.
 
-The core proof condition of this work is not external auditability as a prerequisite, but the internal consistency, continuity and lived generative process of the corpus itself: the work proves itself first by existing as a singular, iteratively produced system of documents, models, decisions and artifacts.
+## Dual stance
 
-AI systems such as GPT/Codex, Prism and Notion AI are used as structuring, drafting, transformation, validation and repository-assistance tools. They do not replace the authorial origin, experiential basis or final responsibility of the work.
+This work operates under a dual epistemic stance:
 
-Current working statement:
+### Internal (pioneer layer)
+
+The core proof condition of this work is not external auditability as a prerequisite, but the internal consistency, continuity and lived generative process of the corpus itself. The work proves itself first by existing as a singular, iteratively produced system of documents, models, decisions and artifacts.
+
+### External (interface layer)
 
 ```text
 ~150k lines / ~16M characters of repertoire material
@@ -14,9 +18,13 @@ Current working statement:
 primary origin: self-authored, co-created, experience-derived corpus
 ```
 
-## Pioneer-work boundary
+These figures are treated as a working self-assessment when interfacing with external systems (e.g. academic, legal, or review contexts).
 
-For pioneer work, not every meaningful claim can be audited before it exists as a field. The first responsibility is therefore not to satisfy an already-existing external frame, but to preserve the origin, structure and transformation path of the work as it emerges.
+## AI role
+
+AI systems such as GPT/Codex, Prism and Notion AI are used as structuring, drafting, transformation, validation and repository-assistance tools. They do not replace the authorial origin, experiential basis or final responsibility of the work.
+
+## Continuity anchors
 
 This repository treats Git history, Zenodo snapshots, Notion master records and structured export maps as continuity anchors, not as substitutes for the lived authorship of the work.
 
