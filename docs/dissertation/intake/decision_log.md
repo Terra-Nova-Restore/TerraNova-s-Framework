@@ -256,3 +256,34 @@
 - [x] Batch-SHA256 erzeugt
 - [x] Intake aktualisiert
 - [x] Bereit für Batch 02
+
+## Entry 2026-05-01-I
+
+- Datum (UTC): 2026-05-01
+- Charge-ID: RC01-BATCH-01-490P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 01 (490p Frontmatter+Abstract+TOC+Kapitel 1) | neu | `B_EVIDENCE` | B | Neue Fassung mit erweitertem TOC/Appendix-Korridor und 500er-Nähe wurde als eigener Rohbatch gesichert. | TOC-Checkpoint gegen 490p-Version prüfen, dann Batch 02 aufnehmen. |
+
+### Konflikte / Doppelstatus
+
+- Parallelität zu früherem Batch-01-Stand (455p) vorhanden; beide Versionen bewusst getrennt archiviert.
+
+### Datierung / Namensstufe
+
+- Erlebnisdatum geprüft: n/a
+- Schreibdatum geprüft: ja
+- Publikationsdatum geprüft: ja
+- Verra/FerrAI-Stufe gesetzt: n/a
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] Bereit für Batch 02
