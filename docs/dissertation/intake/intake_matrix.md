@@ -17,3 +17,4 @@
 | RC01-BATCH-04-K8K10-500P | `raw/exports/incoming/batch_04_kap8_bis_kap10_500p_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert) | B | teilklar | nein | n/a | Kapitel-Cluster 8-10 | aktiv |
 | RC01-BATCH-05A-K11K12-500P | `raw/exports/incoming/batch_05a_kap11_bis_kap12_appendixI_500p_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert, Teilupload) | B | teilklar | nein | n/a | Kapitel-Cluster 11-12 + Appendix-I-Übergang | aktiv |
 | RC01-BATCH-05B-K11K12-500P | `raw/exports/incoming/batch_05b_kap11_bis_kap12_appendixI_500p_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert, Teilupload) | B | teilklar | nein | n/a | Kapitel-Cluster 11-12 + Appendix-I-Übergang | aktiv |
+| RC01-BATCH-06A-APP-I-AH-500P | `raw/exports/incoming/batch_06a_appendixI_a_bis_h_500p_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert, Teilupload) | B | teilklar | nein | n/a | Appendix Teil I (A-H), Teil 1 | aktiv |

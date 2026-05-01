@@ -478,3 +478,28 @@
 - [x] Snapshot dokumentiert
 - [x] Kontextanker abgelegt
 - [x] Decision-Log aktualisiert
+
+
+## Entry 2026-05-01-Q
+
+- Datum (UTC): 2026-05-01
+- Charge-ID: RC01-BATCH-06A-APP-I-AH-500P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 06a (Appendix I A-H, Teil 1) | neu | `B_EVIDENCE` | B | Korrigierter Startpunkt (Übergang Kapitel→Appendix) als eigener Teilupload sauber übernommen. | Batch 06b ergänzen, danach Batch 07 vorbereiten. |
+
+### Konflikte / Doppelstatus
+
+- Kein Konflikt; zweigeteilte Batch-Logik (06a/06b) explizit dokumentiert.
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] Bereit für Batch 06b
