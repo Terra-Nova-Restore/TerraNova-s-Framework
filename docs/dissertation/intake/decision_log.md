@@ -287,3 +287,33 @@
 - [x] Batch-SHA256 erzeugt
 - [x] Intake aktualisiert
 - [x] Bereit für Batch 02
+
+## Entry 2026-05-01-J
+
+- Datum (UTC): 2026-05-01
+- Charge-ID: RC01-BATCH-TEMPLATE-500P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Standardisierte 10er-Batchvorlage | neu | `C_COMPANION` | C | Fehlerreduktion und konsistente Einspeisung durch fixe Struktur und Kapitelgrenzen. | Batch 02 gemäß Vorlage einspeisen. |
+
+### Konflikte / Doppelstatus
+
+- Keine; reine Prozessstabilisierung.
+
+### Datierung / Namensstufe
+
+- Erlebnisdatum geprüft: n/a
+- Schreibdatum geprüft: ja
+- Publikationsdatum geprüft: ja
+- Verra/FerrAI-Stufe gesetzt: n/a
+
+### Freigabe für nächsten Schritt
+
+- [x] 10er-Plan fixiert
+- [x] Batch-02-Vorlage bereitgestellt
+- [x] Auto-Flow-Regel dokumentiert

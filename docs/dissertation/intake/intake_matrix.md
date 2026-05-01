@@ -11,3 +11,4 @@
 | RC01-PLAN-UPDATE-500 | `notes/rc01_milestone_500_plan_update_2026-05-01.md` | 1 Datei | Plan/Governance | C | klar | ja | n/a | Milestone-Steuerraum | aktiv |
 | RC01-BATCH-01-TOC-ABS-K1K2 | `raw/exports/incoming/batch_01_toc_abstract_kap1_2_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert) | B | teilklar | nein | n/a | TOC/Abstract/Kapitel-Checkpoint | aktiv |
 | RC01-BATCH-01-490P | `raw/exports/incoming/batch_01_frontmatter_abstract_toc_kap1_490p_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert) | B | teilklar | nein | n/a | TOC/Abstract/Kapitel-1-Checkpoint | aktiv |
+| RC01-BATCH-TEMPLATE-500P | `docs/dissertation/intake/batch_templates_500p_plan.md` | 1 Datei | Plan/Template | C | klar | ja | n/a | Intake-Automationsraum | aktiv |
