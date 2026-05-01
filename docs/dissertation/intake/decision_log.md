@@ -348,3 +348,34 @@
 - [x] Batch-SHA256 erzeugt
 - [x] Intake aktualisiert
 - [x] Bereit für Batch 03
+
+## Entry 2026-05-01-L
+
+- Datum (UTC): 2026-05-01
+- Charge-ID: RC01-BATCH-03-K5K7-490P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 03 (Kapitel 5–7) | neu | `B_EVIDENCE` | B | Operativer Prozess-, Claim/Evidence- und Patentcluster als nächster Kernblock für 500p-Lauf gesichert. | Batch 04 (Kapitel 8–10) einspeisen. |
+
+### Konflikte / Doppelstatus
+
+- Keine neuen Konflikte; Batchfolge konsistent mit 10er-Plan.
+
+### Datierung / Namensstufe
+
+- Erlebnisdatum geprüft: n/a
+- Schreibdatum geprüft: ja
+- Publikationsdatum geprüft: ja
+- Verra/FerrAI-Stufe gesetzt: n/a
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] Bereit für Batch 04
