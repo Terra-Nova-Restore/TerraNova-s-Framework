@@ -454,3 +454,27 @@
 - [x] Batch-SHA256 erzeugt
 - [x] Intake aktualisiert
 - [x] Bereit für Batch 06
+
+
+## Entry 2026-05-01-P
+
+- Datum (UTC): 2026-05-01
+- Charge-ID: RC01-METRICS-ZENODO-V6
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Zenodo Snapshot (v6) | neu | `C_CONTEXT` | C | Öffentliche Resonanzmetrik als datierter Kontextanker erfasst (81 Views / 43 Downloads). | Bei neuem Versionssprung erneut datiert sichern. |
+
+### Konflikte / Doppelstatus
+
+- Snapshot-Metrik ist zeitabhängig und nicht als kanonischer Endstand zu lesen.
+
+### Freigabe für nächsten Schritt
+
+- [x] Snapshot dokumentiert
+- [x] Kontextanker abgelegt
+- [x] Decision-Log aktualisiert
