@@ -195,3 +195,33 @@
 - [x] 500er-Plan dokumentiert
 - [x] Gate-Label auf 500 umgestellt
 - [x] Delta-Upload vorbereitet
+
+## Entry 2026-05-01-G
+
+- Datum (UTC): 2026-05-01
+- Charge-ID: RC01-TOC-REVIEW-CHECKPOINT
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| TOC/Abstract/Kapitel-1 Review-Checkpoint | neu | `C_COMPANION` | C | Struktursicherung vor weiterer Batch-Ingestion reduziert spätere Korrekturlast. | Übergabepaket (TOC+Abstract+Kap1) prüfen und Checkliste ausfüllen. |
+
+### Konflikte / Doppelstatus
+
+- Keine; reiner Struktur-Checkpoint.
+
+### Datierung / Namensstufe
+
+- Erlebnisdatum geprüft: n/a
+- Schreibdatum geprüft: ja
+- Publikationsdatum geprüft: ja
+- Verra/FerrAI-Stufe gesetzt: n/a
+
+### Freigabe für nächsten Schritt
+
+- [x] TOC-Checkpoint angelegt
+- [x] Review-Output definiert
+- [x] Delta-Upload vorbereitet
