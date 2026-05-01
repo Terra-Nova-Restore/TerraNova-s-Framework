@@ -503,3 +503,28 @@
 - [x] Batch-SHA256 erzeugt
 - [x] Intake aktualisiert
 - [x] Bereit für Batch 06b
+
+
+## Entry 2026-05-01-R
+
+- Datum (UTC): 2026-05-01
+- Charge-ID: RC01-BATCH-06B-APP-I-AH-500P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 06b (Appendix I A-H, Teil 2) | neu | `B_EVIDENCE` | B | Zweiter Teil der Appendix-I-Inventarspur vollständig als 06b ergänzt. | Batch 07 (Appendix Teil II I-Q) einspeisen. |
+
+### Konflikte / Doppelstatus
+
+- Kein Konflikt; 06a/06b als zusammengehöriger Appendix-I-Block dokumentiert.
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] Bereit für Batch 07
