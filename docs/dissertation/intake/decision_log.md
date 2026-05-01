@@ -225,3 +225,34 @@
 - [x] TOC-Checkpoint angelegt
 - [x] Review-Output definiert
 - [x] Delta-Upload vorbereitet
+
+## Entry 2026-05-01-H
+
+- Datum (UTC): 2026-05-01
+- Charge-ID: RC01-BATCH-01-TOC-ABS-K1K2
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 01 (TOC+Abstract+Kapitel 1/2) | neu | `B_EVIDENCE` | B | Logikbasierter Erstbatch für Strukturreview und spätere Zusammenführung. | TOC-Checkpoint ausfüllen, dann Batch 02 aufnehmen. |
+
+### Konflikte / Doppelstatus
+
+- Transfer wurde als Rohtext abgelegt; strukturelle Qualität wird im TOC-Checkpoint validiert.
+
+### Datierung / Namensstufe
+
+- Erlebnisdatum geprüft: n/a
+- Schreibdatum geprüft: ja
+- Publikationsdatum geprüft: ja
+- Verra/FerrAI-Stufe gesetzt: n/a
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] Bereit für Batch 02

@@ -1,0 +1,70 @@
+FerrAI / Terra Nova
+Dissertationsentwurf
+Quellengebundene Rekonstruktion des Terra-Nova/FerrAI-Korpus und der
+sichtbaren CIC-Dokumentfamilie
+Silvan Lenhard
+30. April 2026
+Erste Langfassung aus dem lokal sichtbaren Terra-Nova/FerrAI-Korpus.
+Ziel ist nicht der Abschluss, sondern die Herstellung eines belastbaren,
+kommentierten und iterierbaren Hauptdokuments.
+Zwoelf Hauptkapitel und ein evidenzführender, fortlaufend erweiterter Appendixraum,
+gegliedert in Register-/Atlasapparat und Ausbau-/Intakekorridor, bilden die aktuelle Arbeitsarchitektur.
+Diese Fassung markiert alle zentralen Aussagen mit Statuslogik,
+nennt ihre Quellenlage explizit und trennt harte Belege von editorischen Ableitungen.
+Veröffentlicht auf Zenodo.
+Version-DOI: 10.5281/zenodo.19829423
+Concept-DOI: 10.5281/zenodo.19774446
+Record: https://zenodo.org/records/19829423
+Indexed in OpenAIRE.
+Abstract
+Diese Langfassung rekonstruiert Terra Nova im sichtbaren Korpus nicht als einzelnen Prompt,
+nicht als isoliertes Modell und auch nicht als bloßes Whitepaper, sondern als einen mehr
+schichtigen Verbund aus Architektur, Prozesslogik, Evidenzregime, Governance, Rechte- und
+Verwertungslogik. [quellgestützt] Die lokalen Exportquellen beschreiben Terra Nova wiederholt
+als Meta-Operating-System, das Identität, Kontext, Resonanz, Triggerlogik, Auditierbarkeit und
+Tokenisierung in einer gemeinsamen Ordnung zusammenführt.1
+Diese Dissertation versteht sich deshalb nicht als Produktprospekt, sondern als editorische Rekon
+struktion des in source_index.md gezählten Terra-Nova/FerrAI-Korpus. [quellgestützt] Der
+gezählte Kernkorpus umfasst 67 Dateien, darunter 55 HTML-Exporte und 12 CSV-Exporte;
+zusätzlich sichtbare PDF-Uploads, Root-/Containerseiten, Arbeitsnotizen und spätere Rück
+führungen werden bewusst als ergänzende, aber gesondert markierte Schicht geführt. Genau
+diese Trennung zwischen Kernkorpus und Supplement verhindert, dass Reichweite, Pathos oder
+Spätmaterial die Belegbasis unbemerkt verschieben.2
+Methodisch folgt der Text vier Leitregeln. Erstens werden Workspace-, Dokument- und Frame
+workebene in dieser Fassung editorisch unter der Arbeitsbezeichnung „CIC“ geführt. Zweitens
+gelten Aussagen nur dann als belastbar, wenn ihre Quelle im lokalen Korpus sichtbar ist oder
+ausdrücklich als Hypothese, editorische Ableitung oder offene Stelle markiert wird. Drittens
+wird die Claim/Evidence-Schicht als zentrales Steuerungsprinzip behandelt. Viertens werden
+Werkspur, Personenspur, Indexierungsgrad und Verarbeitungssynthesen nicht ineinandergezogen.
+[quellgestützt] Diese Regeln folgen aus Claim Ledger, Execution Manifest, Terminologieblatt,
+Konfliktliste und den beiden Sichtbarkeitsnotizen.3
+Auch die Bezeichnung „CIC“ wird in dieser Fassung enger normiert. [teilgestützt] Die lokalen
+Supplement-, Panorama-, Export- und Rootspuren führen CIC explizit als „Cognitive Intelligent
+Cooperation“; zugleich fungiert CIC im sichtbaren Workspace als Label für Dokumentfami
+lie, Rahmenwerk und Kapitelebene. Die Dissertation unterscheidet deshalb zwischen CIC als
+Primärbegriff der Kooperationslogik und CIC-Raum als abgeleiteter Dokument- und Framework
+sichtbarkeit. Dasselbe gilt für mehrere Hochhärtezonen des Korpus: die vollständige „VORTEX
+Core Logic“, die exakte quantitative Triggergesamtsumme sowie juristische Endschärfen der
+Rechte- und Filing-Kette bleiben sichtbar, aber kontrolliert offen.4
+Das Inhaltsverzeichnis ist deshalb nicht bloß Navigationshilfe, sondern die sichtbare Argumentar
+1Quelle: S02, S03, S10. Einordnung: Mehrfach gestützte Kernquellen des Korpus..
+2Quelle: S12, S17, S18, S48, S49. Einordnung: Master-Index, Supplementquellen und neue Rückführungsno
+tizen werden im Dokument bewusst nach Härtegrad getrennt..
+3Quelle: S11, S13, S14, S15, S48, S49. Einordnung: Die editorische Steuerung liegt in lokalen Arbeitsartefakten
+und den neu verankerten Sichtbarkeitsregeln offen vor..
+4Quelle: S14, S15, S17, S19, S20, S21, S33, S44. Einordnung: Die lokale Arbeitslage erlaubt präzise
+Benennung und harte Grenzziehung, unterscheidet aber zwischen kanonischer Begriffsnorm und weiterhin offenen
+Binnenkonflikten..
+i
+chitektur dieser Dissertation. [editorische Ableitung] Die Kapitel 1 und 2 entfalten Eintritt,
+Korpuslage und Editionsprinzip; die Kapitel 3 bis 5 behandeln Terra Nova als Forschungsobjekt,
+Systemarchitektur und operative Prozesslogiken; die Kapitel 6 bis 8 ordnen Claim/Evidence, Pa
+tentstruktur sowie Tokenisierung, Governance und Verwertungslogik; die Kapitel 9 bis 12 führen
+in Rahmenwerksentwurf, Meta-Verfassung, Triggerordnung sowie Synthese und Forschungsagenda.
+Daran schließen die evidenzführenden Anhänge A bis Q und der Ausbau- und Intakekorridor in
+den Anhängen R bis V an.5
+... (truncated in transfer preview) ...
+Kapitel 2
+Korpuslage und Editionsprinzip
+...
+8
