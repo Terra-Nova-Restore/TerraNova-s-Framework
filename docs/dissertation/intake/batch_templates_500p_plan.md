@@ -35,19 +35,19 @@ source_state: RC01
 ===BATCH_XX_END===
 ```
 
-## Sofortvorlage für dich jetzt (Batch 02)
+## Sofortvorlage für dich jetzt (Batch 04)
 
 ```text
-===BATCH_02_START===
+===BATCH_04_START===
 META:
-title: Kapitel 2 bis Kapitel 4
+title: Kapitel 8 bis Kapitel 10
 doc_version_hint: 500p_pre-release
-section_range: Kapitel 2 -> Kapitel 4
+section_range: Kapitel 8 -> Kapitel 10
 source_state: RC01
 
 <RAW CONTENT 1:1>
 
-===BATCH_02_END===
+===BATCH_04_END===
 ```
 
 ## Regel nach jedem Batch
