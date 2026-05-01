@@ -317,3 +317,34 @@
 - [x] 10er-Plan fixiert
 - [x] Batch-02-Vorlage bereitgestellt
 - [x] Auto-Flow-Regel dokumentiert
+
+## Entry 2026-05-01-K
+
+- Datum (UTC): 2026-05-01
+- Charge-ID: RC01-BATCH-02-K2K4-490P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 02 (Kapitel 2–4) | neu | `B_EVIDENCE` | B | Kapitelcluster für Korpuslage, Forschungsobjekt und Systemarchitektur als logikbasierter Folgebatch gesichert. | Batch 03 (Kapitel 5–7) einspeisen. |
+
+### Konflikte / Doppelstatus
+
+- Keine neuen Konflikte; Folgebatch im erwarteten 500p-Flow.
+
+### Datierung / Namensstufe
+
+- Erlebnisdatum geprüft: n/a
+- Schreibdatum geprüft: ja
+- Publikationsdatum geprüft: ja
+- Verra/FerrAI-Stufe gesetzt: n/a
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] Bereit für Batch 03

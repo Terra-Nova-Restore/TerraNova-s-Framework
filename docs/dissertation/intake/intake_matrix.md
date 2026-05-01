@@ -12,3 +12,4 @@
 | RC01-BATCH-01-TOC-ABS-K1K2 | `raw/exports/incoming/batch_01_toc_abstract_kap1_2_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert) | B | teilklar | nein | n/a | TOC/Abstract/Kapitel-Checkpoint | aktiv |
 | RC01-BATCH-01-490P | `raw/exports/incoming/batch_01_frontmatter_abstract_toc_kap1_490p_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert) | B | teilklar | nein | n/a | TOC/Abstract/Kapitel-1-Checkpoint | aktiv |
 | RC01-BATCH-TEMPLATE-500P | `docs/dissertation/intake/batch_templates_500p_plan.md` | 1 Datei | Plan/Template | C | klar | ja | n/a | Intake-Automationsraum | aktiv |
+| RC01-BATCH-02-K2K4-490P | `raw/exports/incoming/batch_02_kap2_bis_kap4_490p_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert) | B | teilklar | nein | n/a | Kapitel-Cluster 2-4 | aktiv |
