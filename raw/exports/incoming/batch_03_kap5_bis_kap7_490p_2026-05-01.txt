@@ -1,0 +1,16 @@
+===BATCH_03_START===
+META:
+title: Kapitel 5 bis Kapitel 7
+doc_version_hint: 490p_pre-release
+section_range: Kapitel 5 -> Kapitel 7
+source_state: RC01
+
+Kapitel 5
+Operative Prozesslogiken: CIC, ORA,
+Triquetra und VORTEX-Funktionslagen
+...
+Kapitel 7
+Patentstruktur, Rechtekette und
+IP-Architektur
+...
+===BATCH_03_END===

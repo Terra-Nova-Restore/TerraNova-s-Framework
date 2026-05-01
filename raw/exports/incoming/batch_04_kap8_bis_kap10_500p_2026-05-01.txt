@@ -1,0 +1,16 @@
+===BATCH_04_START===
+META:
+title: Kapitel 8 bis Kapitel 10
+doc_version_hint: 500p_pre-release
+section_range: Kapitel 8 -> Kapitel 10
+source_state: RC01
+
+Kapitel 8
+Tokenisierung, Governance und
+Verwertungslogik
+[...]
+Kapitel 10
+Meta-Verfassung und Konsensordnung
+[...]
+
+===BATCH_04_END===
