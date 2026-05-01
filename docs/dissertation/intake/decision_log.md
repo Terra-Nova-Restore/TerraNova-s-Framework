@@ -429,3 +429,28 @@
 - [x] Batch-SHA256 erzeugt
 - [x] Intake aktualisiert
 - [x] Bereit für Batch 05b
+
+
+## Entry 2026-05-01-O
+
+- Datum (UTC): 2026-05-01
+- Charge-ID: RC01-BATCH-05B-K11K12-500P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 05b (Kapitel 11–12 + Appendix-I-Übergang) | neu | `B_EVIDENCE` | B | Zweiter Teilupload des Blocks als ergänzende Intake-Einheit gesichert (05a/05b). | Batch 06 (Appendix Teil I A-H) einspeisen. |
+
+### Konflikte / Doppelstatus
+
+- Kein Konflikt; 05a/05b als geteilter Vollblock dokumentiert.
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] Bereit für Batch 06
