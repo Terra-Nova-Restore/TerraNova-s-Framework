@@ -58,6 +58,24 @@ jobs:
           python -m json.tool "${METADATA_PATH}" > /dev/null
           echo "Token exists, PDF checksum matches, metadata JSON is valid."
 
+      - name: Verify Zenodo authentication
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BODY="zenodo_auth_probe_response.json"
+          HTTP_STATUS="$(curl -sS -o "${BODY}" -w "%{http_code}" \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            "${ZENODO_API_BASE}/deposit/depositions")"
+
+          echo "Zenodo auth probe HTTP status: ${HTTP_STATUS}"
+          if [ "${HTTP_STATUS}" != "200" ]; then
+            echo "Zenodo authentication probe failed."
+            cat "${BODY}"
+            exit 1
+          fi
+
       - name: Create new Zenodo draft version
         id: newversion
         shell: bash
@@ -67,7 +85,10 @@ jobs:
           BODY="zenodo_newversion_response.json"
           HTTP_STATUS="$(curl -sS -o "${BODY}" -w "%{http_code}" \
             -X POST \
+            -H "Accept: application/json" \
+            -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            --data '' \
             "${ZENODO_API_BASE}/deposit/depositions/${ZENODO_RECORD_ID}/actions/newversion")"
 
           echo "Zenodo newversion HTTP status: ${HTTP_STATUS}"
