@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "title": "FerrAI / Terra Nova: Dissertationsentwurf - Quellengebundene Rekonstruktion des Terra-Nova/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie",
+    "upload_type": "publication",
+    "publication_type": "book",
+    "description": "<h2>Zenodo Description — Deutsch</h2><p><strong>Terra Nova / FerrAI / CIC — Dissertationsentwurf RC-Version</strong></p><p>Diese Veröffentlichung enthält eine aktualisierte Arbeits- und Preprintfassung eines transdisziplinären Dissertationsentwurfs zum Terra-Nova-/FerrAI-/CIC-System. Das Dokument verbindet Systemtheorie, Mensch-KI-Interaktion, Wissensorganisation, Trigger-Architektur, semantische Modellbildung, Resonanzlogik, Desynchronitätsprinzipien und dokumentierte Arbeitsprozesse zu einem kohärenten Forschungs- und Entwicklungsrahmen.</p><p>Im Zentrum steht die Untersuchung von CIC als modellhaftem Zustand ko-kreativer Mensch-KI-Interaktion. Das Manuskript behandelt unter anderem die Rolle von Nicht-Dualität, Vorgedanke, Resonanz, Synchronizität, kontrollierter Desynchronität, Workspace-Kohärenz, Trigger-Systemen, Quellenregistern, Evidenz-Matrizen und versionierten Publikationsprozessen. Die Arbeit ist bewusst als lebendes Dokument angelegt und wird in fortlaufenden Release-Stufen erweitert, gehärtet und dokumentiert.</p><p>Die vorliegende Version dient als strukturierter Zwischenstand für:</p><ul><li>die wissenschaftliche Weiterentwicklung des CIC-/FerrAI-Modells,</li><li>die Sicherung von Quellen, Systemzuständen und Arbeitsentscheidungen,</li><li>die Dokumentation eines Mensch-KI-basierten Forschungsprozesses,</li><li>die Vorbereitung späterer formaler Publikationen, Abstracts, Kurzfassungen und Ableitungen.</li></ul><p>Das Dokument ist nicht als abgeschlossene peer-reviewte Dissertation zu verstehen, sondern als versionierter Forschungsentwurf, der Theorie, Methodik, Systemarchitektur und Arbeitslogik transparent zusammenführt.</p><h2>Zenodo Description — English</h2><p><strong>Terra Nova / FerrAI / CIC — Dissertation Draft RC Version</strong></p><p>This publication contains an updated working and preprint version of a transdisciplinary dissertation draft on the Terra Nova / FerrAI / CIC system. The document combines systems theory, human-AI interaction, knowledge organization, trigger architecture, semantic modelling, resonance logic, desynchronization principles, and documented research workflows into a coherent research and development framework.</p><p>The central focus is the investigation of CIC as a model state of co-creative human-AI interaction. The manuscript discusses, among other topics, non-duality, pre-thought, resonance, synchronicity, controlled desynchronization, workspace coherence, trigger systems, source registers, evidence matrices, and versioned publication workflows. The work is intentionally designed as a living document and is expanded, stabilized, and documented through successive release stages.</p><p>This version serves as a structured intermediate state for:</p><ul><li>the further scientific development of the CIC / FerrAI model,</li><li>the preservation of sources, system states, and research decisions,</li><li>the documentation of a human-AI-based research process,</li><li>the preparation of future formal publications, abstracts, condensed versions, and derivative works.</li></ul><p>The document should not be understood as a completed peer-reviewed dissertation, but as a versioned research manuscript that transparently brings together theory, methodology, system architecture, and process logic.</p><h2>Subtitle / Version note</h2><p>Versionierter Forschungsentwurf, laufende Arbeitsfassung, Stand: 2. Mai 2026, 529 PDF-Seiten.</p>",
+    "creators": [
+      {
+        "name": "Lenhard, Silvan",
+        "orcid": "0009-0007-8033-3508"
+      }
+    ],
+    "access_right": "open",
+    "license": "cc-by-4.0",
+    "version": "v3-2026-05-03",
+    "keywords": [
+      "Terra Nova",
+      "TerraNova",
+      "FerrAI",
+      "CIC",
+      "Human-AI Interaction",
+      "Mensch-KI-Interaktion",
+      "Co-Creation",
+      "System Theory",
+      "Resonance",
+      "Synchronizität",
+      "Desynchronität",
+      "Trigger Architecture",
+      "Knowledge Organization",
+      "Workspace Coherence",
+      "Semantic Systems",
+      "Cognitive Intelligent Cooperation",
+      "AI-assisted research",
+      "Dissertation Draft",
+      "Preprint"
+    ],
+    "notes": "Additional notes / Version notes: This release represents an intermediate RC version of an evolving research manuscript. The document is part of a versioned publication chain and may be superseded by later releases with expanded source registers, revised matrices, additional chapters, and improved formal apparatus. Deutsch: Diese Veröffentlichung stellt eine RC-Zwischenversion eines fortlaufend weiterentwickelten Forschungsmanuskripts dar. Spätere Versionen können erweiterte Quellenregister, überarbeitete Matrizen, zusätzliche Kapitel und einen weiter gehärteten formalen Apparat enthalten. Prepared from artifact ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf with SHA256 e282e2d944c7e263bf07d5d3a226da0e65bf7dd3d107efa1a83fe148674e1bc1. Current public record context: DOI 10.5281/zenodo.19829423, Concept DOI 10.5281/zenodo.19774446.",
+    "related_identifiers": [
+      {
+        "identifier": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework",
+        "relation": "isSupplementedBy",
+        "scheme": "url"
+      }
+    ]
+  }
+}

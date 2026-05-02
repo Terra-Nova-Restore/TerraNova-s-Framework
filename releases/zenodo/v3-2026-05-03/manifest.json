@@ -1,0 +1,28 @@
+{
+  "release_id": "v3-2026-05-03",
+  "created_at_utc": "2026-05-02T22:30:37Z",
+  "source_pdf": "C:\\Users\\Silvan\\Downloads\\main (22).pdf",
+  "artifact": {
+    "path": "releases/zenodo/v3-2026-05-03/ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf",
+    "filename": "ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf",
+    "size_bytes": 2554266,
+    "sha256": "e282e2d944c7e263bf07d5d3a226da0e65bf7dd3d107efa1a83fe148674e1bc1",
+    "mime_type": "application/pdf"
+  },
+  "metadata": {
+    "path": "releases/zenodo/v3-2026-05-03/zenodo_api_metadata.json",
+    "title": "FerrAI / Terra Nova: Dissertationsentwurf - Quellengebundene Rekonstruktion des Terra-Nova/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie",
+    "version": "v3-2026-05-03",
+    "subtitle_version_note": "Versionierter Forschungsentwurf, laufende Arbeitsfassung, Stand: 2. Mai 2026, 529 PDF-Seiten.",
+    "license": "cc-by-4.0",
+    "creator_orcid": "0009-0007-8033-3508",
+    "current_record_id": "19829423",
+    "current_doi": "10.5281/zenodo.19829423",
+    "concept_doi": "10.5281/zenodo.19774446"
+  },
+  "workflow": {
+    "path": ".github/workflows/zenodo-draft-v3-main22.yml",
+    "secret_name": "Zenodo_API",
+    "behavior": "creates a new Zenodo draft version, uploads the PDF, applies metadata, and stops before publish"
+  }
+}
