@@ -1,17 +1,17 @@
 cff-version: 1.2.0
 title: "Quellengebundene Rekonstruktion des Terra-Nova/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie"
-message: "If you use this repository or the associated TerraNova / FerrAI materials, please cite the Zenodo v2 record for the current version and the Concept DOI for all-version reference."
+message: "If you use this repository or the associated TerraNova / FerrAI materials, please cite the Zenodo Concept DOI for all-version reference. Use the latest version-specific DOI once the current release has been published by Zenodo."
 type: book
 authors:
   - family-names: Lenhard
     given-names: Silvan
     orcid: "https://orcid.org/0009-0007-8033-3508"
 repository-code: "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework"
-url: "https://zenodo.org/records/19829423"
-doi: "10.5281/zenodo.19829423"
-version: "2"
-date-released: "2026-04-27"
-abstract: "Quellengebundene Rekonstruktion des Terra-Nova/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie."
+url: "https://zenodo.org/records/19961351"
+doi: "10.5281/zenodo.19774446"
+version: "v3-2026-05-03"
+date-released: "2026-05-03"
+abstract: "Versionierter Forschungsentwurf und laufende Arbeitsfassung zur quellengebundenen Rekonstruktion des Terra-Nova/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie; Stand 2. Mai 2026, 529 PDF-Seiten."
 keywords:
   - TerraNova
   - FerrAI
@@ -28,6 +28,6 @@ preferred-citation:
     - family-names: Lenhard
       given-names: Silvan
       orcid: "https://orcid.org/0009-0007-8033-3508"
-  doi: "10.5281/zenodo.19829423"
-  date-released: "2026-04-27"
-  version: "2"
+  doi: "10.5281/zenodo.19774446"
+  date-released: "2026-05-03"
+  version: "v3-2026-05-03"

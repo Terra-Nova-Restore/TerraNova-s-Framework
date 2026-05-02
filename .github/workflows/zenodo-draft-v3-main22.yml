@@ -7,12 +7,6 @@ on:
         description: "Latest published Zenodo record/deposition ID"
         required: true
         default: "19961351"
-  push:
-    branches:
-      - codex/zenodo-v3-main22
-    paths:
-      - .github/workflows/zenodo-draft-v3-main22.yml
-      - releases/zenodo/v3-2026-05-03/**
 
 permissions:
   contents: read

@@ -1,0 +1,186 @@
+name: GitHub Draft Release - Zenodo v3 main 22
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex/zenodo-v3-main22
+    paths:
+      - .zenodo.json
+      - CITATION.cff
+      - GITHUB_RELEASE_BODY_v3_main22.md
+      - .github/workflows/github-draft-release-v3-main22.yml
+      - releases/zenodo/v3-2026-05-03/ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
+
+permissions:
+  contents: write
+
+jobs:
+  prepare-draft-release:
+    runs-on: ubuntu-latest
+
+    env:
+      TAG_NAME: v3-2026-05-03-main22
+      RELEASE_NAME: FerrAI / Terra Nova: Dissertationsentwurf v3 - main 22
+      RELEASE_BODY_PATH: GITHUB_RELEASE_BODY_v3_main22.md
+      ASSET_PATH: releases/zenodo/v3-2026-05-03/ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
+      ASSET_NAME: ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
+      EXPECTED_SHA256: e282e2d944c7e263bf07d5d3a226da0e65bf7dd3d107efa1a83fe148674e1bc1
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate release inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -f ".zenodo.json"
+          test -f "${RELEASE_BODY_PATH}"
+          test -f "${ASSET_PATH}"
+
+          python -m json.tool .zenodo.json > /dev/null
+
+          ACTUAL_SHA256="$(sha256sum "${ASSET_PATH}" | awk '{print $1}')"
+          if [ "${ACTUAL_SHA256}" != "${EXPECTED_SHA256}" ]; then
+            echo "PDF SHA256 mismatch."
+            echo "Expected: ${EXPECTED_SHA256}"
+            echo "Actual:   ${ACTUAL_SHA256}"
+            exit 1
+          fi
+
+      - name: Create or update GitHub draft release
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python <<'PY'
+          import json
+          import os
+          import pathlib
+          import sys
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          token = os.environ["GH_TOKEN"]
+          api_base = f"https://api.github.com/repos/{repo}"
+          tag_name = os.environ["TAG_NAME"]
+          release_name = os.environ["RELEASE_NAME"]
+          release_body = pathlib.Path(os.environ["RELEASE_BODY_PATH"]).read_text(encoding="utf-8")
+          asset_path = pathlib.Path(os.environ["ASSET_PATH"])
+          asset_name = os.environ["ASSET_NAME"]
+
+          base_headers = {
+              "Accept": "application/vnd.github+json",
+              "Authorization": f"Bearer {token}",
+              "X-GitHub-Api-Version": "2022-11-28",
+              "User-Agent": "codex-zenodo-draft-release",
+          }
+
+          def request_json(method, url, payload=None, extra_headers=None, ok=(200, 201, 204)):
+              headers = dict(base_headers)
+              if extra_headers:
+                  headers.update(extra_headers)
+
+              data = None
+              if payload is not None:
+                  data = json.dumps(payload).encode("utf-8")
+                  headers["Content-Type"] = "application/json"
+
+              req = urllib.request.Request(url, data=data, headers=headers, method=method)
+              try:
+                  with urllib.request.urlopen(req) as resp:
+                      raw = resp.read()
+                      status = resp.status
+              except urllib.error.HTTPError as exc:
+                  raw = exc.read()
+                  status = exc.code
+
+              text = raw.decode("utf-8", errors="replace") if raw else ""
+              if status not in ok:
+                  print(f"{method} {url} failed with HTTP {status}", file=sys.stderr)
+                  print(text, file=sys.stderr)
+                  raise SystemExit(1)
+
+              if not text:
+                  return {}
+              return json.loads(text)
+
+          releases = request_json("GET", f"{api_base}/releases?per_page=100")
+          existing = next((item for item in releases if item.get("tag_name") == tag_name), None)
+
+          payload = {
+              "tag_name": tag_name,
+              "target_commitish": os.environ["GITHUB_SHA"],
+              "name": release_name,
+              "body": release_body,
+              "draft": True,
+              "prerelease": False,
+          }
+
+          if existing:
+              if not existing.get("draft"):
+                  raise SystemExit(f"Release {tag_name} already exists and is not a draft. Refusing to modify a published release.")
+              release = request_json("PATCH", f"{api_base}/releases/{existing['id']}", payload)
+          else:
+              release = request_json("POST", f"{api_base}/releases", payload)
+
+          release_id = release["id"]
+          upload_url = release["upload_url"].split("{", 1)[0]
+
+          assets = request_json("GET", f"{api_base}/releases/{release_id}/assets?per_page=100")
+          for asset in assets:
+              if asset.get("name") == asset_name:
+                  request_json("DELETE", f"{api_base}/releases/assets/{asset['id']}", ok=(204,))
+
+          binary = asset_path.read_bytes()
+          upload_headers = dict(base_headers)
+          upload_headers["Content-Type"] = "application/pdf"
+          upload_endpoint = f"{upload_url}?name={urllib.parse.quote(asset_name)}"
+          req = urllib.request.Request(upload_endpoint, data=binary, headers=upload_headers, method="POST")
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  upload_raw = resp.read()
+                  upload_status = resp.status
+          except urllib.error.HTTPError as exc:
+              upload_raw = exc.read()
+              upload_status = exc.code
+
+          upload_text = upload_raw.decode("utf-8", errors="replace") if upload_raw else ""
+          if upload_status != 201:
+              print(f"Asset upload failed with HTTP {upload_status}", file=sys.stderr)
+              print(upload_text, file=sys.stderr)
+              raise SystemExit(1)
+
+          uploaded_asset = json.loads(upload_text)
+          handoff = pathlib.Path("github_release_handoff.md")
+          handoff.write_text(
+              "\n".join(
+                  [
+                      "# GitHub Draft Release Handoff",
+                      "",
+                      f"- Draft release: {release['html_url']}",
+                      f"- Tag: {tag_name}",
+                      f"- Target commit: {os.environ['GITHUB_SHA']}",
+                      f"- Uploaded asset: {uploaded_asset.get('browser_download_url', '')}",
+                      "",
+                      "Next human action: open the draft release and click Publish release.",
+                      "Zenodo GitHub Connect should then archive the release if the repository is enabled there.",
+                      "",
+                  ]
+              ),
+              encoding="utf-8",
+          )
+
+          print(handoff.read_text(encoding="utf-8"))
+          PY
+
+      - name: Upload release handoff
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-draft-release-v3-main22-handoff
+          path: github_release_handoff.md
