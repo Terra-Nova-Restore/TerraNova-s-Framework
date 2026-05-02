@@ -7,6 +7,12 @@ on:
         description: "Latest published Zenodo record/deposition ID"
         required: true
         default: "19829423"
+  push:
+    branches:
+      - codex/zenodo-v3-main22
+    paths:
+      - .github/workflows/zenodo-draft-v3-main22.yml
+      - releases/zenodo/v3-2026-05-03/**
 
 permissions:
   contents: read
@@ -18,7 +24,7 @@ jobs:
     env:
       ZENODO_ACCESS_TOKEN: ${{ secrets.Zenodo_API }}
       ZENODO_API_BASE: https://zenodo.org/api
-      ZENODO_RECORD_ID: ${{ inputs.record_id }}
+      ZENODO_RECORD_ID: ${{ inputs.record_id || '19829423' }}
       ARTIFACT_PATH: releases/zenodo/v3-2026-05-03/ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
       ARTIFACT_NAME: ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
       EXPECTED_SHA256: e282e2d944c7e263bf07d5d3a226da0e65bf7dd3d107efa1a83fe148674e1bc1
@@ -129,6 +135,50 @@ jobs:
           echo "draft_id=${DRAFT_ID}" >> "${GITHUB_OUTPUT}"
           echo "draft_html_url=${HTML_URL}" >> "${GITHUB_OUTPUT}"
 
+      - name: Remove inherited files from draft
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BODY="zenodo_existing_files_response.json"
+          HTTP_STATUS="$(curl -sS -o "${BODY}" -w "%{http_code}" \
+            -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            "${ZENODO_API_BASE}/deposit/depositions/${{ steps.draft.outputs.draft_id }}/files")"
+
+          echo "Zenodo list draft files HTTP status: ${HTTP_STATUS}"
+          if [ "${HTTP_STATUS}" != "200" ]; then
+            cat "${BODY}"
+            exit 1
+          fi
+
+          python - "${BODY}" <<'PY' > zenodo_existing_file_ids.txt
+          import json
+          import sys
+          files = json.load(open(sys.argv[1], encoding="utf-8"))
+          for item in files:
+              file_id = item.get("id")
+              if file_id:
+                  print(file_id)
+          PY
+
+          while IFS= read -r FILE_ID; do
+            if [ -z "${FILE_ID}" ]; then
+              continue
+            fi
+
+            DELETE_BODY="zenodo_delete_file_${FILE_ID}.json"
+            DELETE_STATUS="$(curl -sS -o "${DELETE_BODY}" -w "%{http_code}" \
+              -X DELETE \
+              -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+              "${ZENODO_API_BASE}/deposit/depositions/${{ steps.draft.outputs.draft_id }}/files/${FILE_ID}")"
+
+            echo "Deleted inherited draft file ${FILE_ID}: HTTP ${DELETE_STATUS}"
+            if [ "${DELETE_STATUS}" != "204" ]; then
+              cat "${DELETE_BODY}"
+              exit 1
+            fi
+          done < zenodo_existing_file_ids.txt
+
       - name: Upload PDF to draft
         shell: bash
         run: |
@@ -194,5 +244,6 @@ jobs:
           name: zenodo-draft-main22-responses
           path: |
             zenodo_*_response.json
+            zenodo_existing_file_ids.txt
             zenodo_draft_handoff.md
           if-no-files-found: warn
