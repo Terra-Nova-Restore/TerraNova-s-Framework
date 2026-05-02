@@ -111,7 +111,24 @@ jobs:
               return json.loads(text)
 
           releases = request_json("GET", f"{api_base}/releases?per_page=100")
-          existing = next((item for item in releases if item.get("tag_name") == tag_name), None)
+          published_conflict = next(
+              (
+                  item
+                  for item in releases
+                  if not item.get("draft")
+                  and (item.get("tag_name") == tag_name or item.get("name") == release_name)
+              ),
+              None,
+          )
+          if published_conflict:
+              raise SystemExit(
+                  f"Release conflict: {published_conflict.get('html_url')} is already published. "
+                  "Refusing to modify a published release."
+              )
+
+          for item in releases:
+              if item.get("draft") and item.get("name") == release_name:
+                  request_json("DELETE", f"{api_base}/releases/{item['id']}", ok=(204,))
 
           payload = {
               "tag_name": tag_name,
@@ -122,12 +139,7 @@ jobs:
               "prerelease": False,
           }
 
-          if existing:
-              if not existing.get("draft"):
-                  raise SystemExit(f"Release {tag_name} already exists and is not a draft. Refusing to modify a published release.")
-              release = request_json("PATCH", f"{api_base}/releases/{existing['id']}", payload)
-          else:
-              release = request_json("POST", f"{api_base}/releases", payload)
+          release = request_json("POST", f"{api_base}/releases", payload)
 
           release_id = release["id"]
           upload_url = release["upload_url"].split("{", 1)[0]
