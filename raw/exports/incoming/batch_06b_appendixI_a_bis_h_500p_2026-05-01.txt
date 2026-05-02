@@ -1,0 +1,13 @@
+===BATCH_06b_START===
+META:
+title: Appendix Teil I (Übergang von Kapitel zu Appendix bis H)
+doc_version_hint: 500p_pre-release
+section_range: Appendix Teil I (A -> H)
+source_state: RC01
+
+Anhang H: Dokumentinventar und Verarbeitungsplan …
+H.1–H.8 Inventarlogik, Familien-Steckbriefe, Verarbeitungsmodus und RC-Prioritätsregel …
+
+(Teilupload empfangen; Vollinhalt im Chat-Transfer)
+
+===BATCH_06b_END===

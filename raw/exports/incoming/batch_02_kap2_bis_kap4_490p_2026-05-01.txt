@@ -1,0 +1,18 @@
+===BATCH_02_START===
+META:
+title: Kapitel 2 - Kapitel 4
+doc_version_hint: 490p 
+section_range: Kapitel 2 -> end Kapitel 4
+source_state: RC01
+
+Kapitel 2
+Korpuslage und Editionsprinzip
+2.1 Lokaler Materialbestand
+Der im Master-Index gezählte Kernkorpus umfasst 67 Dateien und ist damit groß genug,
+um eine Langfassung zu tragen, aber klein genug, um noch editorisch übersehbar zu blei
+ben. [quellgestützt] Die Dateien verteilen sich auf 55 HTML-Exporte und 12 CSV-Exporte.
+Im in source_index.md erfassten Kernkorpus liegen nur HTML- und CSV-Exporte; zusätzlich
+sichtbare PDF-Uploads gehören nicht zu dieser Zählung.1
+[...batch content received in chat...]
+18
+===BATCH_02_END===

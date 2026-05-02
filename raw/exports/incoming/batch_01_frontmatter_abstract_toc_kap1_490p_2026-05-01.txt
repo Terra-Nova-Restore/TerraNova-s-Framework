@@ -1,0 +1,32 @@
+===BATCH_01_START===
+META:
+title: Frontmatter + Abstract + TOC + Kapitel 1
+doc_version_hint: 490p
+section_range: start -> end Kapitel 1
+
+FerrAI / Terra Nova
+Dissertationsentwurf
+Quellengebundene Rekonstruktion des Terra-Nova/FerrAI-Korpus und der
+sichtbaren CIC-Dokumentfamilie
+Silvan Lenhard
+30. April 2026
+Erste Langfassung aus dem lokal sichtbaren Terra-Nova/FerrAI-Korpus.
+Ziel ist nicht der Abschluss, sondern die Herstellung eines belastbaren,
+kommentierten und iterierbaren Hauptdokuments.
+Zwoelf Hauptkapitel sowie ein evidenzführender, fortlaufend erweiterter Appendixraum,
+gegliedert in Register-/Atlasapparat sowie Ausbau-/Intakekorridor, bilden die aktuelle Arbeitsarchitektur.
+Diese Fassung markiert alle zentralen Aussagen mit Statuslogik,
+nennt ihre Quellenlage explizit und trennt harte Belege von editorischen Ableitungen.
+Qualitaetsmarker dieser Fassung. Der PDF-Satz liegt nun knapp unter der
+500-Seiten-Marke. Diese Version markiert den erreichten Verdichtungs- und Qualitaetsstand
+im Schlusslauf zur 500-Seiten-Fassung. Mit dem vollstaendigen 500-Seiten-Stand soll der
+naechste Freigabe- und Uebergabepunkt erreicht werden; der weitere Arbeitskreislauf fuehrt
+danach ueber GPT Codex, GitHub und die Notion-Rueckbindung.
+Veröffentlicht auf Zenodo.
+Version-DOI: 10.5281/zenodo.19829423
+Concept-DOI: 10.5281/zenodo.19774446
+Record: https://zenodo.org/records/19829423
+Indexed in OpenAIRE.
+Abstract
+[...batch content received in chat...]
+===BATCH_01_END===

@@ -1,0 +1,11 @@
+===BATCH_05b_START===
+META:
+title: Kapitel 11 bis Kapitel 12 + Übergang zu Teil I Appendix
+doc_version_hint: 500p_pre-release
+section_range: Kapitel 11 -> Kapitel 12 + Übergang Appendix Teil I
+source_state: RC01
+
+ID S66-S84, Anhang A-F Ausbaupfad und Quellenapparat (Teil 2)
+(Teilupload empfangen; Vollinhalt im Chat-Transfer)
+
+===BATCH_05b_END===

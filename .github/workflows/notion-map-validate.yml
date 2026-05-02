@@ -1,0 +1,25 @@
+name: Validate Notion Map
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/notion_map*.json'
+      - 'scripts/validate_notion_map.py'
+      - '.github/workflows/notion-map-validate.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate map
+        run: |
+          python scripts/validate_notion_map.py config/notion_map.science.v1.json
