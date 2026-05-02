@@ -9,6 +9,7 @@
 ## Repo layers
 - `Notion -> GitHub sync`: the existing production path for `AI_Incidents_and_Changes`.
 - `Atlas layer`: a canonical workspace-atlas seed in [`atlas/README.md`](atlas/README.md) and [`atlas/atlas.manifest.v1.json`](atlas/atlas.manifest.v1.json).
+- `Prism atlas layer`: reviewed local docs generated from Prism/Notion exports in [`docs/atlas/README.md`](docs/atlas/README.md), with trigger gaps tracked in [`docs/triggers/gap_ledger.md`](docs/triggers/gap_ledger.md).
 
 The atlas does not change the production sync workflow. It is a separate, machine-readable workspace inventory seeded from a user-provided TerraNova workspace export so future exporters or visualizers have a stable contract to build on.
 
@@ -63,3 +64,13 @@ Validate the atlas manifest from the repo root:
 ```bash
 python scripts/validate_atlas.py atlas/atlas.manifest.v1.json
 ```
+
+## Prism atlas renderer
+Render the current Prism source pack into reviewed local docs:
+
+```bash
+python scripts/render_prism_atlas.py
+```
+
+The renderer writes `docs/atlas/` and `docs/triggers/gap_ledger.md` from the
+latest dated source pack under `raw/exports/prism/source-pack/`.

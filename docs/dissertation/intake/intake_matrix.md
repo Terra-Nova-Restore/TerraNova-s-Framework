@@ -6,7 +6,7 @@
 | RC01-BOOTSTRAP-B | `docs/dissertation/intake/*.md` Runbook/Template | 5 Dateien | Protokoll/Steuerung | C | klar | ja | n/a | Companion-Prozessraum | aktiv |
 | RC01-BOOTSTRAP-C | `notes/rc01_lockpoint_2026-04-30_codex_gpt_347_seiten.*` | 2 Dateien | Evidenzanker | B | klar | ja | n/a | Reproduzierbarkeits-/Auditspur | aktiv |
 | RC01-BOOTSTRAP-D | `docs/dissertation/intake/iperka_run_2026-04-30_rc01.md` + `rc01_four_step_execution_plan.md` | 2 Dateien | Steuerung/Methodik | C | klar | ja | n/a | Intake-Governance-Raum | aktiv |
-| RC01-BOOTSTRAP-E | `raw/exports/2026-04-30_batch_850k_raw.txt` | 1 Datei | Rohdump/Archiv | B | offen (Container vorbereitet) | nein | n/a | Raw-Export-Archivraum | vorbereitet |
+| RC01-BOOTSTRAP-E | `raw/exports/2026-04-30_batch_850k_raw.txt` | 1 Datei | Legacy-Rohdump/Archiv | B | offen (Container vorbereitet; `850k` nur historisches Label) | nein | n/a | Raw-Export-Archivraum | vorbereitet |
 | RC01-PLAN-UPDATE-450 | `notes/rc01_milestone_450_plan_update_2026-05-01.md` | 1 Datei | Plan/Governance | C | klar | ja | n/a | Milestone-Steuerraum | aktiv |
 | RC01-PLAN-UPDATE-500 | `notes/rc01_milestone_500_plan_update_2026-05-01.md` | 1 Datei | Plan/Governance | C | klar | ja | n/a | Milestone-Steuerraum | aktiv |
 | RC01-BATCH-01-TOC-ABS-K1K2 | `raw/exports/incoming/batch_01_toc_abstract_kap1_2_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert) | B | teilklar | nein | n/a | TOC/Abstract/Kapitel-Checkpoint | aktiv |
