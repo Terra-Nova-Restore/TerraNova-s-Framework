@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ZENODO_ACCESS_TOKEN: ${{ secrets.Zenodo_API }}
+      ZENODO_ACCESS_TOKEN_RAW: ${{ secrets.Zenodo_API }}
       ZENODO_API_BASE: https://zenodo.org/api
       ZENODO_RECORD_ID: ${{ inputs.record_id || '19961351' }}
       ARTIFACT_PATH: releases/zenodo/v3-2026-05-03/ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
@@ -33,6 +33,35 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Normalize Zenodo token
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python <<'PY'
+          import os
+
+          raw = os.environ.get("ZENODO_ACCESS_TOKEN_RAW", "")
+          token = raw.strip()
+
+          if token.lower().startswith("authorization:"):
+              token = token.split(":", 1)[1].strip()
+
+          if token.lower().startswith("bearer"):
+              parts = token.split(None, 1)
+              token = parts[1].strip() if len(parts) == 2 else ""
+
+          token = "".join(token.split())
+          if not token:
+              raise SystemExit("GitHub secret Zenodo_API is empty after normalization.")
+
+          print(f"::add-mask::{token}")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env_file:
+              env_file.write(f"ZENODO_ACCESS_TOKEN={token}\n")
+
+          print("Zenodo token normalized for API header.")
+          PY
 
       - name: Validate token, artifact, and metadata
         shell: bash
