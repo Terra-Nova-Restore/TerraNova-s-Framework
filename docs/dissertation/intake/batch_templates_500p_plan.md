@@ -8,14 +8,14 @@ Nach jedem Batch wird direkt der nächste Batch nach dieser Liste gesendet.
 ## Fester Batch-Plan (10 Batches)
 
 1. **Batch 01** — Frontmatter + Abstract + TOC + Kapitel 1  ✅ (eingegangen)
-2. **Batch 02** — Kapitel 2 bis Kapitel 4
-3. **Batch 03** — Kapitel 5 bis Kapitel 7
-4. **Batch 04** — Kapitel 8 bis Kapitel 10
-5. **Batch 05** — Kapitel 11 bis Kapitel 12 + Übergang zu Teil I Appendix
-6. **Batch 06** — Appendix Teil I (A bis H)
-7. **Batch 07** — Appendix Teil II (I bis Q)
-8. **Batch 08** — Ausbau/Intake-Korridor (R bis V)
-9. **Batch 09** — Erweiterungsblöcke (W bis AF)
+2. **Batch 02** — Kapitel 2 bis Kapitel 4  ✅ (eingegangen)
+3. **Batch 03** — Kapitel 5 bis Kapitel 7  ✅ (eingegangen)
+4. **Batch 04** — Kapitel 8 bis Kapitel 10  ✅ (eingegangen)
+5. **Batch 05** — Kapitel 11 bis Kapitel 12 + Übergang zu Teil I Appendix  ✅ (eingegangen)
+6. **Batch 06** — Appendix Teil I (A bis H)  ✅ (eingegangen)
+7. **Batch 07** — Appendix Teil II (I bis Q)  ✅ (eingegangen)
+8. **Batch 08** — Ausbau/Intake-Korridor (R bis V)  ✅ (eingegangen)
+9. **Batch 09** — Erweiterungsblöcke (W bis AF)  ✅ (eingegangen)
 10. **Batch 10** — Erweiterungsblöcke (AG bis Ende) + Schluss-/Release-Notizen
 
 ---
@@ -35,19 +35,19 @@ source_state: RC01
 ===BATCH_XX_END===
 ```
 
-## Sofortvorlage für dich jetzt (Batch 04)
+## Sofortvorlage für dich jetzt (Batch 10)
 
 ```text
-===BATCH_04_START===
+===BATCH_10_START===
 META:
-title: Kapitel 8 bis Kapitel 10
+title: Erweiterungsblöcke (AG bis Ende) + Schluss-/Release-Notizen
 doc_version_hint: 500p_pre-release
-section_range: Kapitel 8 -> Kapitel 10
+section_range: AG -> Ende
 source_state: RC01
 
 <RAW CONTENT 1:1>
 
-===BATCH_04_END===
+===BATCH_10_END===
 ```
 
 ## Regel nach jedem Batch

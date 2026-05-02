@@ -528,3 +528,81 @@
 - [x] Batch-SHA256 erzeugt
 - [x] Intake aktualisiert
 - [x] Bereit für Batch 07
+
+
+## Entry 2026-05-02-S
+
+- Datum (UTC): 2026-05-02
+- Charge-ID: RC01-BATCH-07-APP-II-IQ-500P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 07 (Appendix Teil II I-Q) | neu | `B_EVIDENCE` | B | Appendix-II-Quellkorpus-/Familienmatrix als einteiliger Batch übernommen; die optionale 07a/07b/07c-Teilung war nicht erforderlich. | Batch 08 (Ausbau/Intake-Korridor R-V) vorbereiten. |
+
+### Konflikte / Doppelstatus
+
+- Kein Konflikt; Batch 07 wurde als ein logischer Batch übernommen.
+- Marker geprüft: `===BATCH_07_START===` bis `===BATCH_07_END===`.
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] Bereit für Batch 08
+
+
+## Entry 2026-05-02-T
+
+- Datum (UTC): 2026-05-02
+- Charge-ID: RC01-BATCH-08-AUSBAU-RV-500P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 08 (Ausbau/Intake-Korridor R-V) | neu | `B_EVIDENCE` | B | Ausbau- und Intake-Korridor R-V als einteiliger Rohtextbatch übernommen. | Batch 09 (Erweiterungsblöcke W-AF) vorbereiten. |
+
+### Konflikte / Doppelstatus
+
+- Kein Konflikt; Batch 08 wurde als ein logischer Batch übernommen.
+- Marker geprüft: `===BATCH_08_START===` bis `===BATCH_08_END===`.
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] Bereit für Batch 09
+
+
+## Entry 2026-05-02-U
+
+- Datum (UTC): 2026-05-02
+- Charge-ID: RC01-BATCH-09-ERW-WAF-500P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 09 (Erweiterungsblöcke W-AF) | neu | `B_EVIDENCE` | B | Erweiterungsblöcke W-AF als einteiliger Rohtextbatch übernommen. | Batch 10 (Erweiterungsblöcke AG bis Ende + Schluss-/Release-Notizen) vorbereiten. |
+
+### Konflikte / Doppelstatus
+
+- Kein Konflikt; Batch 09 wurde als ein logischer Batch übernommen.
+- Marker geprüft: `===BATCH_09_START===` bis `===BATCH_09_END===`.
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] Bereit für Batch 10

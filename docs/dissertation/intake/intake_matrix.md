@@ -19,3 +19,6 @@
 | RC01-BATCH-05B-K11K12-500P | `raw/exports/incoming/batch_05b_kap11_bis_kap12_appendixI_500p_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert, Teilupload) | B | teilklar | nein | n/a | Kapitel-Cluster 11-12 + Appendix-I-Übergang | aktiv |
 | RC01-BATCH-06A-APP-I-AH-500P | `raw/exports/incoming/batch_06a_appendixI_a_bis_h_500p_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert, Teilupload) | B | teilklar | nein | n/a | Appendix Teil I (A-H), Teil 1 | aktiv |
 | RC01-BATCH-06B-APP-I-AH-500P | `raw/exports/incoming/batch_06b_appendixI_a_bis_h_500p_2026-05-01.txt` | 1 Datei | Rohtext (logikbasiert, Teilupload) | B | teilklar | nein | n/a | Appendix Teil I (A-H), Teil 2 | aktiv |
+| RC01-BATCH-07-APP-II-IQ-500P | `raw/exports/incoming/batch_07_appendixII_i_bis_q_500p_2026-05-02.md` | 1 Datei | Rohtext (logikbasiert) | B | teilklar | nein | n/a | Appendix Teil II (I-Q) | aktiv |
+| RC01-BATCH-08-AUSBAU-RV-500P | `raw/exports/incoming/batch_08_ausbau_intake_korridor_r_bis_v_500p_2026-05-02.md` | 1 Datei | Rohtext (logikbasiert) | B | teilklar | nein | n/a | Ausbau-/Intake-Korridor (R-V) | aktiv |
+| RC01-BATCH-09-ERW-WAF-500P | `raw/exports/incoming/batch_09_erweiterungsbloecke_w_bis_af_500p_2026-05-02.md` | 1 Datei | Rohtext (logikbasiert) | B | teilklar | nein | n/a | Erweiterungsblöcke (W-AF) | aktiv |
