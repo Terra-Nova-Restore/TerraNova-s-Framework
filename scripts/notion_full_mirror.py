@@ -13,6 +13,7 @@ Hard boundaries:
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -90,6 +91,26 @@ class NotionClient:
     def _sleep(self, seconds: float) -> None:
         time.sleep(seconds)
 
+    def _safe_url(self, url: str) -> str:
+        return re.sub(r"/(databases|blocks|pages)/[^/?]+", r"/\1/<redacted>", url)
+
+    def _redact_error_text(self, text: str) -> str:
+        text = re.sub(r"\b[0-9a-fA-F]{32}\b", "<redacted-id>", text)
+        text = re.sub(
+            r"\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b",
+            "<redacted-id>",
+            text,
+        )
+        return text
+
+    def _response_error_detail(self, response: requests.Response) -> str:
+        try:
+            data = response.json()
+            detail = data.get("message") or data.get("code") or str(data)
+        except ValueError:
+            detail = response.text[:300]
+        return self._redact_error_text(detail)
+
     def request(self, method: str, url: str, *, params: dict | None = None, json_body: dict | None = None) -> dict:
         """HTTP request wrapper.
 
@@ -101,6 +122,7 @@ class NotionClient:
 
         attempt = 0
         last_exc: Exception | None = None
+        last_error: str | None = None
 
         while attempt < self.retry.max_attempts:
             attempt += 1
@@ -121,45 +143,81 @@ class NotionClient:
                     if wait_s is None:
                         wait_s = min(self.retry.max_backoff_s, self.retry.base_backoff_s * (2 ** (attempt - 1)))
 
+                    last_error = f"HTTP 429: {self._response_error_detail(r)}"
+                    if attempt >= self.retry.max_attempts:
+                        break
                     self._sleep(wait_s)
                     continue
 
                 # 5xx backoff
                 if 500 <= r.status_code <= 599:
                     wait_s = min(self.retry.max_backoff_s, self.retry.base_backoff_s * (2 ** (attempt - 1)))
+                    last_error = f"HTTP {r.status_code}: {self._response_error_detail(r)}"
+                    if attempt >= self.retry.max_attempts:
+                        break
                     self._sleep(wait_s)
                     continue
+
+                if 400 <= r.status_code <= 499:
+                    detail = self._response_error_detail(r)
+                    raise RuntimeError(
+                        f"Notion API returned HTTP {r.status_code} for {method} {self._safe_url(url)}: {detail}"
+                    )
 
                 r.raise_for_status()
                 return r.json()
 
             except requests.RequestException as e:
                 last_exc = e
+                last_error = str(e)
+                if attempt >= self.retry.max_attempts:
+                    break
                 wait_s = min(self.retry.max_backoff_s, self.retry.base_backoff_s * (2 ** (attempt - 1)))
                 self._sleep(wait_s)
 
-        raise RuntimeError(f"Notion API request failed after {self.retry.max_attempts} attempts: {method} {url}") from last_exc
+        detail = f": {self._redact_error_text(last_error)}" if last_error else ""
+        raise RuntimeError(
+            f"Notion API request failed after {self.retry.max_attempts} attempts: {method} {self._safe_url(url)}{detail}"
+        ) from last_exc
 
     # ----------------------------
     # Pagination helpers
     # ----------------------------
 
-    def query_database_all_pages(self, database_id: str, page_size: int = 100) -> List[dict]:
+    def query_database_pages(
+        self, database_id: str, page_size: int = 100, max_pages: int | None = None
+    ) -> Tuple[List[dict], bool]:
+        if max_pages is not None and max_pages < 1:
+            raise ValueError("max_pages must be a positive integer")
+
         results: List[dict] = []
         cursor: Optional[str] = None
+        source_has_more = False
 
         while True:
             body: Dict[str, Any] = {"page_size": page_size}
+            if max_pages is not None:
+                remaining = max_pages - len(results)
+                if remaining <= 0:
+                    break
+                body["page_size"] = min(page_size, remaining)
             if cursor:
                 body["start_cursor"] = cursor
 
             data = self.request("POST", f"{NOTION_API}/databases/{database_id}/query", json_body=body)
             results.extend(data.get("results", []))
 
-            if not data.get("has_more"):
+            source_has_more = bool(data.get("has_more"))
+            if not source_has_more:
                 break
             cursor = data.get("next_cursor")
+            if max_pages is not None and len(results) >= max_pages:
+                break
 
+        return results, source_has_more
+
+    def query_database_all_pages(self, database_id: str, page_size: int = 100) -> List[dict]:
+        results, _ = self.query_database_pages(database_id, page_size=page_size)
         return results
 
     def get_block_children_all(self, block_id: str, page_size: int = 100) -> List[dict]:
@@ -354,8 +412,8 @@ def fetch_block_tree(client: NotionClient, block_id: str) -> List[dict]:
             try:
                 b["children"] = fetch_block_tree(client, b["id"])
             except Exception as e:
-                b["children_error"] = str(e)
-                b["children"] = []
+                child_id = b.get("id", "<unknown>")
+                raise RuntimeError(f"Failed to fetch children for block {child_id}") from e
     return blocks
 
 
@@ -387,20 +445,19 @@ def export_database_phase1(client: NotionClient, database_id: str, max_pages: in
     safe_mkdir(OUT_MANIFEST_PATH.parent)
     safe_mkdir(LOG_DIR)
 
-    pages = client.query_database_all_pages(database_id)
-    total_pages = len(pages)
+    pages, source_has_more = client.query_database_pages(database_id, max_pages=max_pages)
+    queried_page_count = len(pages)
 
     exported_files: List[str] = []
     failed_pages: List[dict] = []
+    skipped_pages: List[dict] = []
 
     export_count = 0
 
-    for idx, page in enumerate(pages):
-        if export_count >= max_pages:
-            break
-
+    for page in pages:
         page_id = page.get("id")
         if not page_id:
+            skipped_pages.append({"reason": "missing page id"})
             continue
 
         try:
@@ -447,16 +504,21 @@ def export_database_phase1(client: NotionClient, database_id: str, max_pages: in
         except FileNotFoundError:
             pass
 
-    remaining_pages = max(0, total_pages - export_count)
+    processed_page_count = export_count + len(failed_pages) + len(skipped_pages)
+    remaining_pages = max(0, queried_page_count - processed_page_count)
 
     manifest = {
         "exported_page_count": export_count,
+        "queried_page_count": queried_page_count,
+        "processed_page_count": processed_page_count,
         "total_mirror_size_bytes": total_size,
         "generated_at": utc_now_iso(),
         "source_database_env_name": DB_ENV_NAME,
         "files_written": exported_files,
         "failed_pages": failed_pages,
+        "skipped_pages": skipped_pages,
         "max_pages": max_pages,
+        "source_has_more": source_has_more,
         "remaining_pages": remaining_pages,
     }
 
@@ -465,7 +527,14 @@ def export_database_phase1(client: NotionClient, database_id: str, max_pages: in
     return manifest
 
 
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(description="Export a bounded Notion database mirror.")
+    p.add_argument("--max-pages", type=int, default=None)
+    return p.parse_args()
+
+
 def main() -> int:
+    args = parse_args()
     # Print only env name, never secrets.
     print(f"Database ID source env: {DB_ENV_NAME}")
 
@@ -474,7 +543,9 @@ def main() -> int:
     if not database_id:
         raise ValueError(f"Missing required env var: {DB_ENV_NAME}")
 
-    max_pages = int(os.environ.get("PHASE1_MAX_PAGES", str(MAX_PAGES_DEFAULT)))
+    max_pages = args.max_pages
+    if max_pages is None:
+        max_pages = int(os.environ.get("PHASE1_MAX_PAGES", str(MAX_PAGES_DEFAULT)))
 
     client = NotionClient(token)
 
@@ -482,21 +553,11 @@ def main() -> int:
 
     # After run, report summary without leaking secrets
     print(f"Exported pages: {manifest['exported_page_count']}")
+    print(f"Failed pages: {len(manifest['failed_pages'])}")
+    print(f"Queried pages: {manifest['queried_page_count']}")
+    print(f"Source has more pages: {manifest['source_has_more']}")
     print(f"Total mirror size (bytes): {manifest['total_mirror_size_bytes']}")
     print(f"Manifest path: {OUT_MANIFEST_PATH}")
-
-    # sample of one .md file
-    md_files = [p for p in manifest.get('files_written', []) if p.endswith('.md')]
-    if md_files:
-        sample_path = Path(md_files[0])
-        try:
-            sample = sample_path.read_text(encoding='utf-8')
-            sample_lines = sample.splitlines()[:40]
-            print("--- SAMPLE MD (first 40 lines) ---")
-            print("\n".join(sample_lines))
-            print("--- END SAMPLE ---")
-        except Exception:
-            pass
 
     # exact retry/429 handling code location
     print("Retry/429 handling location: NotionClient.request (scripts/notion_full_mirror.py)")
