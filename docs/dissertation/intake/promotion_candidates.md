@@ -14,3 +14,8 @@
 - Datierung stabil,
 - Konfliktlage explizit,
 - Entscheidung im Decision Log begründet.
+
+## Charge B Review-Notiz
+
+- Kein neuer Direkt-Promotionskandidat in den Kerntext freigegeben.
+- Priorität bleibt: Prozesskonsistenz sichern, bevor zusätzliche inhaltliche Prompts in Track A überführt werden.
