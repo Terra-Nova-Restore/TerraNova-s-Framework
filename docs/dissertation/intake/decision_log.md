@@ -606,3 +606,29 @@
 - [x] Batch-SHA256 erzeugt
 - [x] Intake aktualisiert
 - [x] Bereit für Batch 10
+
+
+## Entry 2026-05-02-V
+
+- Datum (UTC): 2026-05-02
+- Charge-ID: RC01-BATCH-10-ERW-AGEND-500P
+- Lockpoint-Bezug: RC01-LP-2026-04-30-CODEXGPT347
+- Bearbeiter: Codex
+
+### Segment-Entscheide
+
+| Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
+|---|---|---|---|---|---|
+| Batch 10 (Erweiterungsblöcke AG bis Ende + Schluss-/Release-Notizen) | neu | `B_EVIDENCE` | B | Letzter Rohtextbatch der 490p-Intake-Serie übernommen und als Abschlusssegment dokumentiert. | Gesamtabgleich / Abschlussmanifest der 490p-Intake-Spur vorbereiten; weitere Vorgehensentscheidung nach Silvans nächstem Vorschlag. |
+
+### Konflikte / Doppelstatus
+
+- Kein Konflikt; Batch 10 wurde als ein logischer Abschlussbatch übernommen.
+- Marker geprüft: `===BATCH_10_START===` bis `===BATCH_10_END===`.
+
+### Freigabe für nächsten Schritt
+
+- [x] Batch einzeln abgelegt
+- [x] Batch-SHA256 erzeugt
+- [x] Intake aktualisiert
+- [x] 490p-Batchserie abgeschlossen

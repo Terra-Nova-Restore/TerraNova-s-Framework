@@ -16,7 +16,7 @@ Nach jedem Batch wird direkt der nächste Batch nach dieser Liste gesendet.
 7. **Batch 07** — Appendix Teil II (I bis Q)  ✅ (eingegangen)
 8. **Batch 08** — Ausbau/Intake-Korridor (R bis V)  ✅ (eingegangen)
 9. **Batch 09** — Erweiterungsblöcke (W bis AF)  ✅ (eingegangen)
-10. **Batch 10** — Erweiterungsblöcke (AG bis Ende) + Schluss-/Release-Notizen
+10. **Batch 10** — Erweiterungsblöcke (AG bis Ende) + Schluss-/Release-Notizen  ✅ (eingegangen)
 
 ---
 
@@ -35,20 +35,14 @@ source_state: RC01
 ===BATCH_XX_END===
 ```
 
-## Sofortvorlage für dich jetzt (Batch 10)
+## Abschlussstatus nach Batch 10
 
-```text
-===BATCH_10_START===
-META:
-title: Erweiterungsblöcke (AG bis Ende) + Schluss-/Release-Notizen
-doc_version_hint: 500p_pre-release
-section_range: AG -> Ende
-source_state: RC01
+Die feste 10-Batch-Serie ist vollständig eingegangen.
 
-<RAW CONTENT 1:1>
+Nächste Aktion:
 
-===BATCH_10_END===
-```
+- Gesamtabgleich / Abschlussmanifest der 490p-Intake-Spur vorbereiten.
+- Danach Weiterführung nach Silvans nächstem Vorschlag.
 
 ## Regel nach jedem Batch
 
