@@ -21,7 +21,7 @@ jobs:
 
     env:
       TAG_NAME: v3-2026-05-03-main22
-      RELEASE_NAME: FerrAI / Terra Nova: Dissertationsentwurf v3 - main 22
+      RELEASE_NAME: "FerrAI / Terra Nova: Dissertationsentwurf v3 - main 22"
       RELEASE_BODY_PATH: GITHUB_RELEASE_BODY_v3_main22.md
       ASSET_PATH: releases/zenodo/v3-2026-05-03/ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
       ASSET_NAME: ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
