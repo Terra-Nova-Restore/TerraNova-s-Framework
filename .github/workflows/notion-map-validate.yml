@@ -2,15 +2,29 @@ name: Validate Notion Map
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'config/notion_map*.json'
+      - 'scripts/validate_notion_map.py'
+      - '.github/workflows/notion-map-validate.yml'
   push:
     paths:
       - 'config/notion_map*.json'
       - 'scripts/validate_notion_map.py'
       - '.github/workflows/notion-map-validate.yml'
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config_path:
+          - config/notion_map.json
+          - config/notion_map.science.v1.json
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,5 +35,4 @@ jobs:
           python-version: '3.11'
 
       - name: Validate map
-        run: |
-          python scripts/validate_notion_map.py config/notion_map.science.v1.json
+        run: python scripts/validate_notion_map.py ${{ matrix.config_path }}

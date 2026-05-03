@@ -1,0 +1,80 @@
+name: Validate Prism Atlas
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/render_prism_atlas.py'
+      - 'scripts/quick_script_sanity.py'
+      - 'docs/atlas/**'
+      - 'docs/triggers/gap_ledger.md'
+      - 'raw/exports/2026-04-30_batch_850k_raw.sha256'
+      - 'raw/exports/2026-04-30_batch_850k_raw.txt'
+      - 'raw/exports/2026-04-30_batch_850k_raw_fuellversion.md'
+      - 'raw/exports/fill_850k_raw.sh'
+      - 'raw/exports/prism/source-pack/**'
+      - '.github/workflows/prism-atlas-validate.yml'
+  push:
+    paths:
+      - 'scripts/render_prism_atlas.py'
+      - 'scripts/quick_script_sanity.py'
+      - 'docs/atlas/**'
+      - 'docs/triggers/gap_ledger.md'
+      - 'raw/exports/2026-04-30_batch_850k_raw.sha256'
+      - 'raw/exports/2026-04-30_batch_850k_raw.txt'
+      - 'raw/exports/2026-04-30_batch_850k_raw_fuellversion.md'
+      - 'raw/exports/fill_850k_raw.sh'
+      - 'raw/exports/prism/source-pack/**'
+      - '.github/workflows/prism-atlas-validate.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Python syntax check
+        run: python -m py_compile scripts/render_prism_atlas.py
+
+      - name: Quick sanity check
+        run: python scripts/quick_script_sanity.py scripts/render_prism_atlas.py
+
+      - name: Regenerate atlas docs
+        run: python scripts/render_prism_atlas.py
+
+      - name: Verify generated docs are committed
+        run: git diff --exit-code -- docs/atlas docs/triggers/gap_ledger.md
+
+      - name: Validate fill script syntax
+        run: bash -n raw/exports/fill_850k_raw.sh
+
+      - name: Validate fill script guard from repo root
+        run: |
+          log_file="$(mktemp)"
+          if bash raw/exports/fill_850k_raw.sh >"$log_file" 2>&1; then
+            cat "$log_file"
+            echo "fill_850k_raw.sh unexpectedly succeeded from repo root" >&2
+            exit 1
+          fi
+          grep -q "Template placeholder still present" "$log_file"
+
+      - name: Validate fill script guard from raw/exports
+        run: |
+          log_file="$(mktemp)"
+          if (
+            cd raw/exports
+            bash ./fill_850k_raw.sh >"$log_file" 2>&1
+          ); then
+            cat "$log_file"
+            echo "fill_850k_raw.sh unexpectedly succeeded from raw/exports" >&2
+            exit 1
+          fi
+          grep -q "Template placeholder still present" "$log_file"

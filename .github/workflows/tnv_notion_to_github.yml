@@ -2,6 +2,16 @@ name: TNV – Notion → GitHub Sync
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Sync mode
+        required: false
+        default: validate
+        type: choice
+        options:
+          - validate
+          - dry-run
+          - full
   schedule:
     - cron: "*/10 * * * *"
 
@@ -19,6 +29,7 @@ jobs:
     env:
       TARGET_GITHUB_REPO: ${{ secrets.TARGET_GITHUB_REPO || vars.TARGET_GITHUB_REPO }}
       GITHUB_REPO: ${{ github.repository }}
+      SYNC_MODE: ${{ inputs.mode || 'full' }}
 
     steps:
       - name: Checkout repository
@@ -43,7 +54,7 @@ jobs:
         id: sync
         run: |
           python scripts/notion_to_github.py \
-            --mode full \
+            --mode "${SYNC_MODE}" \
             --shadow shadow/ \
             --log logs/ \
             --hash-out .tnv_hash \
@@ -59,7 +70,7 @@ jobs:
           fi
 
       - name: Commit & push changes
-        if: steps.changes.outputs.changed == 'true'
+        if: env.SYNC_MODE == 'full' && steps.changes.outputs.changed == 'true'
         run: |
           BRANCH="${GITHUB_REF_NAME}"
           HASH=$(cat .tnv_hash)

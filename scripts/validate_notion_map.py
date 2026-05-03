@@ -13,6 +13,15 @@ import sys
 from pathlib import Path
 
 REQUIRED_TOP_LEVEL = {"version", "name", "created", "target_repository", "source_index", "policy", "targets"}
+REQUIRED_SYNC_TOP_LEVEL = {
+    "github_repo",
+    "export_flag_property",
+    "url_property",
+    "date_property",
+    "title_field",
+    "default_labels",
+    "body_fields",
+}
 REQUIRED_TARGET_FIELDS = {
     "notion_title",
     "github_path",
@@ -26,6 +35,7 @@ ALLOWED_CONTENT_TYPES = {"markdown", "latex", "mermaid"}
 ALLOWED_VISIBILITY = {"public_candidate", "redacted_candidate", "private_or_redacted_only"}
 ALLOWED_STATUS = {"canonical_candidate", "restricted_candidate", "public_ready_candidate", "cleanup_required"}
 PATH_RE = re.compile(r"^[A-Za-z0-9_./+@=,:()\-]+$")
+REPO_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 
 
 def fail(message: str) -> None:
@@ -33,9 +43,7 @@ def fail(message: str) -> None:
     raise SystemExit(1)
 
 
-def validate(path: Path) -> None:
-    data = json.loads(path.read_text(encoding="utf-8"))
-
+def validate_science_map(data: dict, path: Path) -> None:
     missing = REQUIRED_TOP_LEVEL - set(data)
     if missing:
         fail(f"missing top-level fields: {sorted(missing)}")
@@ -85,7 +93,56 @@ def validate(path: Path) -> None:
         if not isinstance(priority, int) or priority < 1 or priority > 5:
             fail(f"priority must be integer 1..5 for {title}: {priority}")
 
-    print(f"[notion-map] OK: {path} ({len(targets)} targets)")
+    print(f"[notion-map] OK science map: {path} ({len(targets)} targets)")
+
+
+def validate_sync_map(data: dict, path: Path) -> None:
+    missing = REQUIRED_SYNC_TOP_LEVEL - set(data)
+    if missing:
+        fail(f"missing sync config fields: {sorted(missing)}")
+
+    github_repo = str(data["github_repo"]).strip()
+    if not REPO_RE.match(github_repo):
+        fail(f"invalid github_repo: {github_repo}")
+
+    for key in ("export_flag_property", "url_property", "date_property", "title_field"):
+        value = str(data[key]).strip()
+        if not value:
+            fail(f"sync config field must be non-empty: {key}")
+
+    default_labels = data["default_labels"]
+    if not isinstance(default_labels, list) or not default_labels:
+        fail("default_labels must be a non-empty list")
+    for label in default_labels:
+        if not isinstance(label, str) or not label.strip():
+            fail(f"invalid default label: {label!r}")
+
+    body_fields = data["body_fields"]
+    if not isinstance(body_fields, list) or not body_fields:
+        fail("body_fields must be a non-empty list")
+
+    for idx, field in enumerate(body_fields, start=1):
+        if not isinstance(field, dict):
+            fail(f"body_fields entry #{idx} is not an object")
+        notion_key = str(field.get("notion_key", "")).strip()
+        label = str(field.get("label", "")).strip()
+        if not notion_key:
+            fail(f"body_fields entry #{idx} missing notion_key")
+        if not label:
+            fail(f"body_fields entry #{idx} missing label")
+
+    print(f"[notion-map] OK sync map: {path}")
+
+
+def validate(path: Path) -> None:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if "targets" in data and "target_repository" in data:
+        validate_science_map(data, path)
+        return
+    if "github_repo" in data and "body_fields" in data:
+        validate_sync_map(data, path)
+        return
+    fail(f"unknown map schema: {path}")
 
 
 def main(argv: list[str]) -> int:
