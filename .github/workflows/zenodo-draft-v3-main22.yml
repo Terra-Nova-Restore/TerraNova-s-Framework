@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ZENODO_ACCESS_TOKEN: ${{ secrets.Zenodo_API }}
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_API }}
       ZENODO_API_BASE: https://zenodo.org/api
       ZENODO_RECORD_ID: ${{ github.event.inputs.record_id || '19961351' }}
       ARTIFACT_PATH: releases/zenodo/v3-2026-05-03/ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
@@ -40,7 +40,7 @@ jobs:
           set -euo pipefail
 
           if [ -z "${ZENODO_ACCESS_TOKEN}" ]; then
-            echo "GitHub secret Zenodo_API is empty or missing."
+            echo "GitHub secret ZENODO_API is empty or missing."
             exit 1
           fi
 
@@ -49,7 +49,7 @@ jobs:
           TOKEN="$(printf '%s' "${TOKEN}" | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//; s/^[Bb][Ee][Aa][Rr][Ee][Rr][[:space:]]+//')"
 
           if [ -z "${TOKEN}" ]; then
-            echo "GitHub secret Zenodo_API is empty after normalization."
+            echo "GitHub secret ZENODO_API is empty after normalization."
             exit 1
           fi
 
@@ -86,7 +86,7 @@ jobs:
 
           echo "Zenodo auth probe HTTP status: ${HTTP_STATUS}"
           if [ "${HTTP_STATUS}" != "200" ]; then
-            echo "Zenodo_API exists, but Zenodo did not accept it for deposit access."
+            echo "ZENODO_API exists, but Zenodo did not accept it for deposit access."
             cat "${BODY}"
             exit 1
           fi
