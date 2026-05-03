@@ -80,6 +80,7 @@
 
 | Segment | Vorstatus | Entscheidung | Ziel-Track | Begründung | Nächste Aktion |
 |---|---|---|---|---|---|
+| Full-Dump Container (`raw/exports/2026-04-30_batch_850k_raw.txt`) | neu | `B_EVIDENCE` | B | Rohmassenspeicher für spätere Auswertung, noch ohne finalen Payload. | Finalen 850k-Rawtext einfügen und SHA256 neu berechnen. |
 | Full-Dump Container (`raw/exports/2026-04-30_batch_850k_raw.txt`) | neu | `B_EVIDENCE` | B | Rohmassenspeicher für spätere Auswertung, noch ohne finalen Payload; `850k` ist nur ein historisches Dateilabel. | Finalen Raw-/Full-Pack-Payload einfügen und SHA256 neu berechnen. |
 | Raw-Export Readme + SHA256 | neu | `B_EVIDENCE` | B | Archiv- und Integritätslogik dokumentiert, keine Kerntext-Promotion. | Bei jeder Dump-Aktualisierung Prüfsumme aktualisieren. |
 
@@ -118,6 +119,7 @@
 
 ### Konflikte / Doppelstatus
 
+- Finaler 850k-Payload liegt noch nicht im Repository vor.
 - Finaler Raw-/Full-Pack-Payload liegt in diesem Legacy-Container noch nicht vor; der aktuelle Prism-Full-Pack-Snapshot überschreitet das alte 850k-Planungslabel.
 - Promotion bleibt gesperrt bis `filled=true` und SHA-Update erfolgt.
 
