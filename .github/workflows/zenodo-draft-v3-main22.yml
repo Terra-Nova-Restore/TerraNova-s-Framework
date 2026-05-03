@@ -1,0 +1,249 @@
+name: Zenodo Draft Upload - v3 main 22
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/zenodo-draft-v3-main22.yml"
+      - "releases/zenodo/v3-2026-05-03/**"
+  workflow_dispatch:
+    inputs:
+      record_id:
+        description: "Latest published Zenodo record/deposition ID"
+        required: true
+        default: "19961351"
+
+permissions:
+  contents: read
+
+jobs:
+  upload-draft:
+    runs-on: ubuntu-latest
+
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.Zenodo_API }}
+      ZENODO_API_BASE: https://zenodo.org/api
+      ZENODO_RECORD_ID: ${{ github.event.inputs.record_id || '19961351' }}
+      ARTIFACT_PATH: releases/zenodo/v3-2026-05-03/ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
+      ARTIFACT_NAME: ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf
+      EXPECTED_SHA256: e282e2d944c7e263bf07d5d3a226da0e65bf7dd3d107efa1a83fe148674e1bc1
+      METADATA_PATH: releases/zenodo/v3-2026-05-03/zenodo_api_metadata.json
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate token, artifact, and metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -z "${ZENODO_ACCESS_TOKEN}" ]; then
+            echo "GitHub secret Zenodo_API is empty or missing."
+            exit 1
+          fi
+
+          test -f "${ARTIFACT_PATH}"
+          test -f "${METADATA_PATH}"
+
+          ACTUAL_SHA256="$(sha256sum "${ARTIFACT_PATH}" | awk '{print $1}')"
+          if [ "${ACTUAL_SHA256}" != "${EXPECTED_SHA256}" ]; then
+            echo "PDF SHA256 mismatch."
+            echo "Expected: ${EXPECTED_SHA256}"
+            echo "Actual:   ${ACTUAL_SHA256}"
+            exit 1
+          fi
+
+          python -m json.tool "${METADATA_PATH}" > /dev/null
+          echo "Token exists, PDF checksum matches, metadata JSON is valid."
+
+      - name: Create new Zenodo draft version
+        id: newversion
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BODY="zenodo_newversion_response.json"
+          HTTP_STATUS="$(curl -sS -o "${BODY}" -w "%{http_code}" \
+            -X POST \
+            -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            "${ZENODO_API_BASE}/deposit/depositions/${ZENODO_RECORD_ID}/actions/newversion")"
+
+          echo "Zenodo newversion HTTP status: ${HTTP_STATUS}"
+          if [ "${HTTP_STATUS}" != "201" ] && [ "${HTTP_STATUS}" != "200" ]; then
+            echo "Could not create a new Zenodo version draft."
+            cat "${BODY}"
+            exit 1
+          fi
+
+          LATEST_DRAFT_URL="$(python - "${BODY}" <<'PY'
+          import json
+          import sys
+          body = json.load(open(sys.argv[1], encoding="utf-8"))
+          print(body.get("links", {}).get("latest_draft", ""))
+          PY
+          )"
+
+          if [ -z "${LATEST_DRAFT_URL}" ]; then
+            echo "Zenodo response did not include links.latest_draft."
+            cat "${BODY}"
+            exit 1
+          fi
+
+          echo "latest_draft_url=${LATEST_DRAFT_URL}" >> "${GITHUB_OUTPUT}"
+
+      - name: Retrieve draft metadata
+        id: draft
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BODY="zenodo_draft_response.json"
+          HTTP_STATUS="$(curl -sS -o "${BODY}" -w "%{http_code}" \
+            -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            "${{ steps.newversion.outputs.latest_draft_url }}")"
+
+          echo "Zenodo draft retrieve HTTP status: ${HTTP_STATUS}"
+          if [ "${HTTP_STATUS}" != "200" ]; then
+            cat "${BODY}"
+            exit 1
+          fi
+
+          DRAFT_ID="$(python - "${BODY}" <<'PY'
+          import json
+          import sys
+          body = json.load(open(sys.argv[1], encoding="utf-8"))
+          print(body.get("id", ""))
+          PY
+          )"
+
+          HTML_URL="$(python - "${BODY}" <<'PY'
+          import json
+          import sys
+          body = json.load(open(sys.argv[1], encoding="utf-8"))
+          print(body.get("links", {}).get("html", ""))
+          PY
+          )"
+
+          if [ -z "${DRAFT_ID}" ]; then
+            echo "Draft response did not include id."
+            cat "${BODY}"
+            exit 1
+          fi
+
+          echo "draft_id=${DRAFT_ID}" >> "${GITHUB_OUTPUT}"
+          echo "draft_html_url=${HTML_URL}" >> "${GITHUB_OUTPUT}"
+
+      - name: Remove inherited draft files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BODY="zenodo_draft_files_before_upload.json"
+          HTTP_STATUS="$(curl -sS -o "${BODY}" -w "%{http_code}" \
+            -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            "${ZENODO_API_BASE}/deposit/depositions/${{ steps.draft.outputs.draft_id }}/files")"
+
+          echo "Zenodo draft file list HTTP status: ${HTTP_STATUS}"
+          if [ "${HTTP_STATUS}" != "200" ]; then
+            cat "${BODY}"
+            exit 1
+          fi
+
+          python - "${BODY}" <<'PY' > zenodo_draft_file_ids.txt
+          import json
+          import sys
+
+          for item in json.load(open(sys.argv[1], encoding="utf-8")):
+              file_id = item.get("id")
+              if file_id:
+                  print(file_id)
+          PY
+
+          if [ ! -s zenodo_draft_file_ids.txt ]; then
+            echo "Draft has no inherited files to remove."
+            exit 0
+          fi
+
+          while IFS= read -r FILE_ID; do
+            BODY="zenodo_delete_file_${FILE_ID}.json"
+            HTTP_STATUS="$(curl -sS -o "${BODY}" -w "%{http_code}" \
+              -X DELETE \
+              -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+              "${ZENODO_API_BASE}/deposit/depositions/${{ steps.draft.outputs.draft_id }}/files/${FILE_ID}")"
+
+            echo "Zenodo delete file ${FILE_ID} HTTP status: ${HTTP_STATUS}"
+            if [ "${HTTP_STATUS}" != "204" ]; then
+              cat "${BODY}"
+              exit 1
+            fi
+          done < zenodo_draft_file_ids.txt
+
+      - name: Upload PDF to draft
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BODY="zenodo_file_upload_response.json"
+          HTTP_STATUS="$(curl -sS -o "${BODY}" -w "%{http_code}" \
+            -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            -F "name=${ARTIFACT_NAME}" \
+            -F "file=@${ARTIFACT_PATH}" \
+            "${ZENODO_API_BASE}/deposit/depositions/${{ steps.draft.outputs.draft_id }}/files")"
+
+          echo "Zenodo file upload HTTP status: ${HTTP_STATUS}"
+          if [ "${HTTP_STATUS}" != "201" ]; then
+            cat "${BODY}"
+            exit 1
+          fi
+
+      - name: Apply Zenodo metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BODY="zenodo_metadata_update_response.json"
+          HTTP_STATUS="$(curl -sS -o "${BODY}" -w "%{http_code}" \
+            -X PUT \
+            -H "Authorization: Bearer ${ZENODO_ACCESS_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data @"${METADATA_PATH}" \
+            "${ZENODO_API_BASE}/deposit/depositions/${{ steps.draft.outputs.draft_id }}")"
+
+          echo "Zenodo metadata update HTTP status: ${HTTP_STATUS}"
+          if [ "${HTTP_STATUS}" != "200" ]; then
+            cat "${BODY}"
+            exit 1
+          fi
+
+      - name: Write draft handoff summary
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cat > zenodo_draft_handoff.md <<EOF
+          # Zenodo Draft Handoff
+
+          A Zenodo draft version was created and updated.
+
+          - Source record/deposition ID: ${ZENODO_RECORD_ID}
+          - Draft deposition ID: ${{ steps.draft.outputs.draft_id }}
+          - Draft preview URL: ${{ steps.draft.outputs.draft_html_url }}
+          - Uploaded file: ${ARTIFACT_NAME}
+          - SHA256: ${EXPECTED_SHA256}
+
+          Review the Zenodo draft preview manually. Publish only after human OK.
+          EOF
+
+          cat zenodo_draft_handoff.md
+
+      - name: Upload Zenodo response artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenodo-draft-main22-responses
+          path: |
+            zenodo_*_response.json
+            zenodo_draft_handoff.md
+          if-no-files-found: warn
