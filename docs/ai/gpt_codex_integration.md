@@ -53,6 +53,8 @@ docs/evidence/
 - text cleaning scripts
 - science-core routing
 - repository documentation
+- MCP/Notion sync sequence architecture in [`full_sync_terra_nova_mcp_sequence.md`](full_sync_terra_nova_mcp_sequence.md)
+- Prism atlas routing and source-pack usage in [`prism_atlas_usage.md`](prism_atlas_usage.md)
 
 ## Citation / acknowledgement pattern
 

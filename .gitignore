@@ -6,3 +6,8 @@ Untitled-*.txt
 .tnv_hash
 .tnv_sync.lock
 logs/
+mirror/
+
+# Archival Prism/Notion source packs can contain private, token, wallet, raw-chat,
+# or patent-sensitive material. Commit curated docs under docs/atlas instead.
+raw/exports/prism/source-pack/*/

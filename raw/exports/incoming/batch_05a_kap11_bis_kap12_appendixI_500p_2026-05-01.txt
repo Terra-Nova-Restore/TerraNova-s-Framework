@@ -1,0 +1,17 @@
+===BATCH_05a_START===
+META:
+title: Kapitel 11 bis Kapitel 12 + Übergang zu Teil I Appendix
+doc_version_hint: 500p_pre-release
+section_range: Kapitel 11 -> Kapitel 12 + Übergang Appendix Teil I
+source_state: RC01
+
+Kapitel 11
+Triggerordnung, Codex und
+Systemresilienz
+
+Kapitel 12
+Synthese und Forschungsagenda
+
+(Teilupload empfangen; Vollinhalt im Chat-Transfer)
+
+===BATCH_05a_END===
