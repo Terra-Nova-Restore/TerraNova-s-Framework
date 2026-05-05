@@ -1,33 +1,52 @@
 cff-version: 1.2.0
-title: "Quellengebundene Rekonstruktion des Terra-Nova/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie"
-message: "If you use this repository or the associated TerraNova / FerrAI materials, please cite the Zenodo v2 record for the current version and the Concept DOI for all-version reference."
+title: "FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat"
+message: "If you use this repository or the associated TerraNova / FerrAI / CIC materials, please cite the current Zenodo RC01-v11 record and optionally the Concept DOI for all-version reference."
 type: book
 authors:
   - family-names: Lenhard
     given-names: Silvan
+    affiliation: "Terra'Nova'Restore"
     orcid: "https://orcid.org/0009-0007-8033-3508"
 repository-code: "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework"
-url: "https://zenodo.org/records/19829423"
-doi: "10.5281/zenodo.19829423"
-version: "2"
-date-released: "2026-04-27"
-abstract: "Quellengebundene Rekonstruktion des Terra-Nova/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie."
+url: "https://zenodo.org/records/20044763"
+doi: "10.5281/zenodo.20044763"
+version: "RC01-v11"
+date-released: "2026-05-05"
+abstract: "Citable release candidate of a work monograph with evidence apparatus on the FerrAI / Terra Nova / CIC complex. The manuscript reconstructs system architecture, operational process logic, claim/evidence governance, trigger order, and rights, patent, and utilization layers from a delimited local corpus while distinguishing primary evidence, editorial inference, and open questions."
 keywords:
-  - TerraNova
   - FerrAI
-  - Cognitive Intelligent Cooperation
+  - Terra Nova
+  - TerraNova
   - CIC
+  - Cognitive Intelligent Cooperation
+  - Human-AI Collaboration
+  - Mensch-KI-Interaktion
+  - Claim/Evidence
+  - Evidence Apparatus
+  - Editorial Reconstruction
+  - Source-Critical Edition
+  - System Architecture
+  - Process Logic
+  - Trigger Logic
+  - Knowledge Organization
+  - Governance
+  - Versioned Research Manuscript
+  - Dissertation Draft
+  - Workspace Documentation
   - AI-assisted research
-  - knowledge systems
-  - system architecture
 license: "CC-BY-4.0"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.19774446"
+    description: "Zenodo Concept DOI for all versions"
 preferred-citation:
   type: book
-  title: "Quellengebundene Rekonstruktion des Terra-Nova/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie"
+  title: "FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat"
   authors:
     - family-names: Lenhard
       given-names: Silvan
+      affiliation: "Terra'Nova'Restore"
       orcid: "https://orcid.org/0009-0007-8033-3508"
-  doi: "10.5281/zenodo.19829423"
-  date-released: "2026-04-27"
-  version: "2"
+  doi: "10.5281/zenodo.20044763"
+  date-released: "2026-05-05"
+  version: "RC01-v11"
