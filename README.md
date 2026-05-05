@@ -13,6 +13,13 @@
 
 The atlas does not change the production sync workflow. It is a separate, machine-readable workspace inventory seeded from a user-provided TerraNova workspace export so future exporters or visualizers have a stable contract to build on.
 
+## Governance
+Review the repository governance notes before adding new exports, release artifacts or cross-repo material:
+
+- [`docs/governance/public_boundary.md`](docs/governance/public_boundary.md)
+- [`raw/exports/REVIEW_GATE.md`](raw/exports/REVIEW_GATE.md)
+- [`docs/governance/repo_roles.md`](docs/governance/repo_roles.md)
+
 ## Setup (GitHub Actions – RECOMMENDED)
 
 **See [SETUP_RUNBOOK.md](SETUP_RUNBOOK.md) for complete step-by-step guide.**
