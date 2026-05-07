@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a reviewed TerraNova atlas from Prism/Notion source exports."""
+"""Render a reviewed TerraNova CIC atlas from historical Prism/Notion exports."""
 
 from __future__ import annotations
 
@@ -147,6 +147,10 @@ def collect_sources(source_dir: Path) -> list[SourceArtifact]:
     return artifacts
 
 
+def has_dated_child_dirs(source_dir: Path) -> bool:
+    return any(path.is_dir() and DATE_DIR_PATTERN.match(path.name) for path in source_dir.iterdir())
+
+
 def resolve_source_dir(source_dir: Path) -> Path:
     source_dir = source_dir.resolve()
     if not source_dir.exists():
@@ -168,6 +172,75 @@ def source_stamp(source_dir: Path) -> str:
     if DATE_DIR_PATTERN.match(source_dir.name):
         return source_dir.name
     return datetime.now().astimezone().isoformat(timespec="seconds")
+
+
+def manifest_source_dir(source_dir_value: str) -> Path:
+    source_dir = Path(source_dir_value)
+    if not source_dir.is_absolute():
+        source_dir = ROOT / source_dir
+    return source_dir
+
+
+def load_manifest_snapshot(
+    manifest_path: Path,
+) -> tuple[list[SourceArtifact], list[dict[str, str]], Path, str]:
+    data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    source_dir = manifest_source_dir(str(data.get("source_dir", DEFAULT_SOURCE_DIR)))
+    generated_at = str(data.get("generated_at", source_stamp(source_dir)))
+
+    artifacts: list[SourceArtifact] = []
+    for entry in data.get("source_files", []):
+        rel_path = str(entry["source"])
+        artifacts.append(
+            SourceArtifact(
+                path=ROOT / rel_path,
+                rel_path=rel_path,
+                title=str(entry["title"]),
+                suffix=str(entry["type"]),
+                size=int(entry["size_bytes"]),
+                sha256=str(entry["sha256"]),
+                category=str(entry["category"]),
+                sensitivity=[str(flag) for flag in entry.get("sensitivity", [])],
+                headings=[str(heading) for heading in entry.get("headings", [])],
+            )
+        )
+
+    diagram_rows = [
+        {str(key): str(value) for key, value in row.items()}
+        for row in data.get("diagrams", [])
+    ]
+    return artifacts, deduplicate_diagrams(diagram_rows), source_dir, generated_at
+
+
+def should_use_manifest_snapshot(source_dir: Path, artifacts: list[SourceArtifact]) -> bool:
+    if not artifacts:
+        return True
+    if has_dated_child_dirs(source_dir):
+        return False
+    return len(artifacts) == 1 and artifacts[0].rel_path.casefold() == "readme.md"
+
+
+def resolve_render_inputs(
+    source_dir: Path,
+    output_dir: Path,
+) -> tuple[list[SourceArtifact], list[dict[str, str]], Path, str]:
+    manifest_path = output_dir / "source_manifest.json"
+    try:
+        resolved_source_dir = resolve_source_dir(source_dir)
+        artifacts = collect_sources(resolved_source_dir)
+    except SystemExit:
+        if manifest_path.exists():
+            return load_manifest_snapshot(manifest_path)
+        raise
+
+    # CI does not receive private dated source-pack exports. Re-render from the
+    # committed manifest when only the archival README is present.
+    if manifest_path.exists() and should_use_manifest_snapshot(resolved_source_dir, artifacts):
+        return load_manifest_snapshot(manifest_path)
+
+    if not artifacts:
+        raise SystemExit(f"No supported source files found in: {resolved_source_dir}")
+    return artifacts, deduplicate_diagrams(parse_diagram_registry(artifacts)), resolved_source_dir, source_stamp(resolved_source_dir)
 
 
 def parse_diagram_registry(artifacts: list[SourceArtifact]) -> list[dict[str, str]]:
@@ -278,9 +351,6 @@ def render_index(
     for artifact in artifacts:
         hash_groups[artifact.sha256].append(artifact)
     duplicates = [items for items in hash_groups.values() if len(items) > 1]
-    category_counts = Counter(artifact.category for artifact in artifacts)
-    sensitivity_counts = Counter(flag for artifact in artifacts for flag in artifact.sensitivity)
-
     active_count = sum(1 for row in diagram_rows if row["status"].upper() == "ACTIVE")
     legacy_count = sum(1 for row in diagram_rows if row["status"].upper() == "LEGACY")
     unknown_count = sum(1 for row in diagram_rows if row["status"].upper() == "UNKNOWN")
@@ -296,7 +366,7 @@ def render_index(
     chat_source = find_artifact(artifacts, "chat provenance")
 
     lines = [
-        "# TerraNova Prism Atlas",
+        "# TerraNova CIC Atlas",
         "",
         "Status: generated local atlas start page",
         "",
@@ -305,9 +375,14 @@ def render_index(
         "",
         "## Purpose",
         "",
-        "This page is the reviewed navigation layer for the Prism source pack.",
-        "Raw exports stay in `raw/exports/prism/source-pack/`; curated working",
-        "surfaces live here in `docs/atlas/`.",
+        "This page is the reviewed navigation layer for the CIC source pack.",
+        "Raw exports stay in `raw/exports/prism/source-pack/` for provenance; curated working surfaces live here in `docs/atlas/`.",
+        "",
+        "## Naming boundary",
+        "",
+        "- **CIC** is the TerraNova framework, consistency and atlas layer.",
+        "- **OpenAI Prism** is an external/editor source context only where explicitly meant.",
+        "- Historical paths containing `prism` are not automatically renamed when they serve as raw provenance.",
         "",
         "## Snapshot",
         "",
@@ -369,40 +444,12 @@ def render_index(
             ["Bucket", "Use", "Review rule"],
             [
                 ["Public candidate", "Mermaid manifesto, high-level atlas, selected ACTIVE diagrams.", "Redact private, wallet/token and patent-sensitive material first."],
-                ["Internal operating map", "All source categories, source manifest and trigger reference.", "Allowed for Codex/Prism work under reviewed-source discipline."],
+                ["Internal operating map", "All source categories, source manifest and trigger reference.", "Allowed for Codex/CIC work under reviewed-source discipline."],
                 ["Archive only", "Raw chat provenance and All-in-One payload.", "Do not promote as canonical truth without extracted review notes."],
                 ["Decision required", "Token/blockchain, patent/IP and deep trigger material.", "Needs explicit human review before external use."],
             ],
         )
     )
-
-    lines.extend(["", "## Category Counts", ""])
-    lines.extend(md_table(["Category", "Files"], [[category, str(count)] for category, count in category_counts.most_common()]))
-
-    lines.extend(["", "## Sensitivity Flags", ""])
-    if sensitivity_counts:
-        lines.extend(md_table(["Flag", "Files"], [[flag, str(count)] for flag, count in sensitivity_counts.most_common()]))
-    else:
-        lines.append("No sensitivity flags detected.")
-
-    lines.extend(["", "## High-Value Sources", ""])
-    high_value = [payload, landing, trigger_ref, diagram_registry, manifesto, chat_source]
-    seen_sources: set[str] = set()
-    high_value_rows = []
-    for artifact in high_value:
-        if not artifact or artifact.rel_path in seen_sources:
-            continue
-        seen_sources.add(artifact.rel_path)
-        high_value_rows.append(
-            [
-                artifact.title,
-                artifact.category,
-                human_size(artifact.size),
-                ", ".join(artifact.sensitivity) if artifact.sensitivity else "-",
-                artifact.rel_path,
-            ]
-        )
-    lines.extend(md_table(["Title", "Category", "Size", "Flags", "Source"], high_value_rows))
 
     lines.extend(["", "## Full Inventory", ""])
     lines.extend(
@@ -412,13 +459,6 @@ def render_index(
             "- Diagram selection and replacement view: `diagrams.md`.",
         ]
     )
-
-    lines.extend(["", "## Duplicate Payloads", ""])
-    if duplicates:
-        for group in duplicates:
-            lines.append(f"- `{group[0].sha256[:12]}`: " + ", ".join(f"`{item.rel_path}`" for item in group))
-    else:
-        lines.append("No duplicate payloads detected.")
 
     lines.extend(["", "## Operating Rule", ""])
     lines.extend(
@@ -757,7 +797,7 @@ def render_trigger_gap_ledger(artifacts: list[SourceArtifact], generated_at: str
 
 def write_inventory_csv(artifacts: list[SourceArtifact], output_path: Path) -> None:
     with output_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(["title", "category", "type", "size_bytes", "sha256", "sensitivity", "source"])
         for artifact in sorted(artifacts, key=lambda item: item.rel_path.casefold()):
             writer.writerow(
@@ -802,17 +842,10 @@ def write_manifest(
 
 
 def render(source_dir: Path, output_dir: Path) -> None:
-    source_dir = resolve_source_dir(source_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     trigger_dir = output_dir.parent / "triggers"
     trigger_dir.mkdir(parents=True, exist_ok=True)
-    generated_at = source_stamp(source_dir)
-
-    artifacts = collect_sources(source_dir)
-    if not artifacts:
-        raise SystemExit(f"No supported source files found in: {source_dir}")
-
-    diagrams = deduplicate_diagrams(parse_diagram_registry(artifacts))
+    artifacts, diagrams, source_dir, generated_at = resolve_render_inputs(source_dir, output_dir)
 
     (output_dir / "index.md").write_text(
         render_index(artifacts, diagrams, source_dir, generated_at),
@@ -842,12 +875,12 @@ def render(source_dir: Path, output_dir: Path) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Render TerraNova atlas docs from Prism source exports.")
+    parser = argparse.ArgumentParser(description="Render TerraNova CIC atlas docs from historical Prism source exports.")
     parser.add_argument(
         "--source-dir",
         type=Path,
         default=DEFAULT_SOURCE_DIR,
-        help="Directory containing Prism/Notion Markdown and CSV source exports.",
+        help="Directory containing historical Prism/Notion Markdown and CSV source exports.",
     )
     parser.add_argument(
         "--output-dir",
