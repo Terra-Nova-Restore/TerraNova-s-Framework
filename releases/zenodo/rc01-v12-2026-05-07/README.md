@@ -25,3 +25,13 @@ the Terra Nova / FerrAI / CIC work monograph.
 
 The MD5 matches the checksum reported by the Zenodo record API for record
 `20073579`.
+
+## API snapshot
+
+- File: `zenodo_record_20073579.json`
+- Source: https://zenodo.org/api/records/20073579
+- Fetched at: `2026-05-07T17:52:18.0640616Z`
+- SHA256: `c7f35f4371103a6e9ce47e79262848457621b54e8aca1a5bcfc47a29af9aefc9`
+
+The API snapshot is stored for auditability. Zenodo view/download statistics
+inside the snapshot are dynamic and only describe the fetch moment.

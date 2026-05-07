@@ -1,0 +1,152 @@
+{
+  "created": "2026-05-07T19:39:34.352179+02:00",
+  "modified": "2026-05-07T19:40:35.164647+02:00",
+  "id": 20073579,
+  "conceptrecid": "19774446",
+  "doi": "10.5281/zenodo.20073579",
+  "conceptdoi": "10.5281/zenodo.19774446",
+  "doi_url": "https://doi.org/10.5281/zenodo.20073579",
+  "metadata": {
+    "title": "FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat",
+    "doi": "10.5281/zenodo.20073579",
+    "publication_date": "2026-05-07",
+    "description": "<div class=\"notion-selectable notion-text-block\">\n<div>\n<div>\n<div>\n<div class=\"x78zum5\">&nbsp;</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"notion-selectable notion-code-block\">\n<div class=\"line-numbers notion-code-block\">\n<div class=\"content-editable-leaf-rtl\">\n<div class=\"markdown-block\">\n<ul>\n<li>\n<h1>Zenodo-Description -- Deutsch</h1>\n<h2>Title</h2>\n<p><strong>FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat</strong></p>\n<h2>Subtitle</h2>\n<p><strong>Quellengebundene Rekonstruktion der Architektur, Governance und sichtbaren CIC-Dokumentfamilie des FerrAI-/Terra-Nova-Korpus</strong></p>\n<h2>Description &mdash; Deutsch</h2>\n<p>Diese Ver&ouml;ffentlichung dokumentiert einen zitierf&auml;higen Release Candidate (<code>RC 0.1</code>) einer Werkmonographie mit Evidenzapparat zum FerrAI-/Terra-Nova-/CIC-Komplex. Die Schrift rekonstruiert Terra Nova im sichtbaren lokalen Korpus weder als einzelnen Prompt noch als isoliertes Modell oder blo&szlig;es Whitepaper, sondern als mehrschichtigen Verbund aus Systemarchitektur, operativer Prozesslogik, Claim/Evidence-Governance, Triggerordnung, dokumentierten Patent- und Rechtsspuren sowie Tokenisierungs- und Verwertungslogik.</p>\n<p>Im Zentrum steht eine quellengebundene editorische Rekonstruktion des gez&auml;hlten Terra-Nova-/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie. Der gez&auml;hlte Kernkorpus umfasst in dieser Fassung 67 HTML- und CSV-Exporte; Supplemente, Workspace-Spuren, Uploads, Arbeitsnotizen und sp&auml;tere R&uuml;ckf&uuml;hrungen werden ausdr&uuml;cklich mitgef&uuml;hrt, aber nicht unmarkiert mit dem Kernkorpus vermischt. Dadurch bleiben Belegbasis, editorische Ableitung und offene Stellen nachvollziehbar getrennt.</p>\n<p>CIC wird in dieser Fassung als <code>Cognitive Intelligent Cooperation</code> normiert, zugleich aber als sichtbare Dokument- und Frameworkschicht vom engeren Prim&auml;rbegriff der Kooperationslogik unterschieden. Methodisch arbeitet das Manuskript mit expliziten Statusmarkern und einer textbasierten Claim/Evidence-Logik. Die Arbeit ist bewusst als textorientierte Hauptschrift angelegt; ein gr&ouml;&szlig;erer visueller Diagramm-, Tabellen- und Bildk&ouml;rper wird methodisch zur&uuml;ckgestellt, bis Begriffe, Mapping-Schichten und Evidenzgrenzen weiter geh&auml;rtet sind.</p>\n<p>Die vorliegende Version dient als zitierf&auml;higer Arbeits- und Freigabestand f&uuml;r die wissenschaftliche Weiterentwicklung des FerrAI-/Terra-Nova-/CIC-Rahmens, die Sicherung von Quellen, Snapshot-Logik und editorischen Entscheidungen, die Dokumentation eines Mensch-KI-basierten Forschungs- und Schreibprozesses sowie die Vorbereitung sp&auml;terer Releases, Kurzfassungen, Abstracts und abgeleiteter Publikationen.</p>\n<p>Das Dokument ist keine abgeschlossene peer-reviewte Dissertation. Es ist ein versioniertes Forschungsmanuskript, eine Werkmonographie mit Evidenzapparat und ein bewusst offen gehaltener Release Candidate, der Haupttext, Appendix, Registerr&auml;ume und Ausbaukorridor transparent zusammenf&uuml;hrt.</p>\n<h2>Description &mdash; English</h2>\n<p>This release presents a citable release candidate (<code>RC 0.1</code>) of a work monograph with evidence apparatus on the FerrAI / Terra Nova / CIC complex. Rather than treating Terra Nova as a single prompt, an isolated model, or a standalone white paper, the manuscript reconstructs it from the visible local corpus as a layered assemblage of system architecture, operational process logic, claim/evidence governance, trigger order, documented patent and rights traces, and tokenization and utilization logic.</p>\n<p>At its core, the work offers a source-bound editorial reconstruction of the counted Terra Nova / FerrAI corpus and the visible CIC document family. In this version, the counted core corpus comprises 67 HTML and CSV exports; supplementary workspace traces, uploads, working notes, and later reintegrations are explicitly retained, but not silently merged with the core corpus. This keeps primary evidence, editorial inference, and open questions clearly distinct.</p>\n<p>In this edition, CIC is normalized as <code>Cognitive Intelligent Cooperation</code> while also being distinguished, as a visible document and framework layer, from the narrower primary term of cooperative logic. Methodologically, the manuscript relies on explicit status markers and a text-based claim/evidence regime. The work is intentionally designed as a text-first main edition; a larger visual body of diagrams, tables, and rendered graphics is deliberately postponed until terminology, mapping layers, and evidence boundaries have been further stabilized.</p>\n<p>This version serves as a citable working and release state for the continued scientific development of the FerrAI / Terra Nova / CIC framework, the preservation of sources, snapshot logic, and editorial decisions, the documentation of a human-AI-based research and writing process, and the preparation of later releases, abstracts, condensed versions, and derivative publications.</p>\n<p>This document is not a completed peer-reviewed dissertation. It is a versioned research manuscript, a work monograph with evidence apparatus, and a deliberately open release candidate that transparently brings together the main text, appendices, registers, and an expansion corridor.</p>\n<h2>Version Note</h2>\n<p>Versionierter Forschungsstand / zitierf&auml;higer Release Candidate <code>RC 0.1</code>.</p>\n<p>Lokaler Arbeitsstand: <code>5. Mai 2026</code>, ca. <code>660 Seiten</code>.</p>\n<p>Referenzsnapshot: Zenodo <code>v7</code> vom <code>3. Mai 2026</code>.</p>\n<h2>Keywords</h2>\n<ul>\n<li>FerrAI</li>\n<li>Terra Nova</li>\n<li>CIC</li>\n<li>Cognitive Intelligent Cooperation</li>\n<li>Human-AI Collaboration</li>\n<li>Mensch-KI-Interaktion</li>\n<li>Claim/Evidence</li>\n<li>Evidence Apparatus</li>\n<li>Editorial Reconstruction</li>\n<li>Source-Critical Edition</li>\n<li>System Architecture</li>\n<li>Process Logic</li>\n<li>Trigger Logic</li>\n<li>Knowledge Organization</li>\n<li>Governance</li>\n<li>Versioned Research Manuscript</li>\n<li>Dissertation Draft</li>\n<li>Workspace Documentation</li>\n</ul>\n<h2>Additional Notes</h2>\n<p><strong>English:</strong> This release represents a citable RC state within a versioned publication chain. Later releases may include expanded source registers, revised matrices, additional chapters, a broadened visual apparatus, and further hardened terminology and evidence boundaries.</p>\n<p><strong>Deutsch:</strong> Diese Ver&ouml;ffentlichung markiert einen zitierf&auml;higen RC-Stand innerhalb einer versionierten Publikationskette. Sp&auml;tere Releases k&ouml;nnen erweiterte Quellenregister, &uuml;berarbeitete Matrizen, zus&auml;tzliche Kapitel, einen ausgebauten visuellen Apparat sowie weiter geh&auml;rtete Terminologie- und Evidenzgrenzen enthalten.</p>\n<p>&nbsp;</p>\n</li>\n</ul>\n</div>\n</div>\n</div>\n</div>\n<div class=\"notion-selectable notion-divider-block\">\n<div class=\"x78zum5 x6s0dn4 xl56j7k x1c4vz4f x2lah0s xdl72j9 x67bb7w xh8yej3 notion-cursor-default\">\n<div class=\"markdown-block\">\n<h2>Kurzfassung</h2>\n</div>\n<div class=\"markdown-block\">\n<ul>\n<li>\n<p><strong>Deutsch</strong>:<br>Diese Ver&ouml;ffentlichung dokumentiert einen zitierf&auml;higen Release Candidate (<code>RC 0.1</code>) einer Werkmonographie mit Evidenzapparat zum FerrAI-/Terra-Nova-/CIC-Komplex. Rekonstruiert werden Systemarchitektur, operative Prozesslogik, Claim/Evidence-Governance, Triggerordnung sowie Rechte-, Patent- und Verwertungslogik auf Basis eines klar abgegrenzten lokalen Korpus. Die Fassung ist bewusst nicht als Endversion, sondern als versionierter, quellengebundener Arbeits- und Freigabestand angelegt, der Haupttext, Registerr&auml;ume und Ausbaukorridor transparent zusammenf&uuml;hrt.</p>\n</li>\n<li>\n<p><strong>English</strong>:<br>This release presents a citable release candidate (<code>RC 0.1</code>) of a work monograph with evidence apparatus on the FerrAI / Terra Nova / CIC complex. It reconstructs system architecture, operational process logic, claim/evidence governance, trigger order, and rights, patent, and valorization layers from a clearly delimited local corpus. The document is intentionally not framed as a final version, but as a versioned, source-bound working and release state that transparently brings together main text, registers, and an expansion corridor.</p>\n</li>\n</ul>\n</div>\n<div class=\"markdown-block\">&nbsp;</div>\n</div>\n</div>\n<div class=\"notion-selectable notion-sub_header-block\">\n<div>\n<div>\n<div>&nbsp;</div>\n</div>\n</div>\n</div>",
+    "access_right": "open",
+    "creators": [
+      {
+        "name": "Lenhard, Silvan",
+        "affiliation": "Terra'Nova'Restore",
+        "orcid": "0009-0007-8033-3508"
+      }
+    ],
+    "keywords": [
+      "CIC",
+      "Zenodo",
+      "Github",
+      "Notion",
+      "audit trail",
+      "complex systems",
+      "AI ethics",
+      "FerrAI",
+      "Terra'Nova'Restore",
+      "human-AI interaction"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "10.5281/zenodo.19774446",
+        "relation": "isVersionOf",
+        "resource_type": "publication-other",
+        "scheme": "doi"
+      }
+    ],
+    "dates": [
+      {
+        "type": "issued"
+      }
+    ],
+    "version": "RC01-v12",
+    "references": [
+      "Lenhard, S. (2026). FerrAI / Terra Nova: Dissertationsentwurf. Zenodo. https://doi.org/10.5281/zenodo.19774446"
+    ],
+    "language": "deu",
+    "custom": {
+      "code:codeRepository": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework"
+    },
+    "resource_type": {
+      "title": "Book",
+      "type": "publication",
+      "subtype": "book"
+    },
+    "license": {
+      "id": "cc-by-4.0"
+    },
+    "relations": {
+      "version": [
+        {
+          "index": 11,
+          "is_last": true,
+          "parent": {
+            "pid_type": "recid",
+            "pid_value": "19774446"
+          }
+        }
+      ]
+    }
+  },
+  "title": "FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat",
+  "links": {
+    "self": "https://zenodo.org/api/records/20073579",
+    "self_html": "https://zenodo.org/records/20073579",
+    "preview_html": "https://zenodo.org/records/20073579?preview=1",
+    "doi": "https://doi.org/10.5281/zenodo.20073579",
+    "self_doi": "https://doi.org/10.5281/zenodo.20073579",
+    "self_doi_html": "https://zenodo.org/doi/10.5281/zenodo.20073579",
+    "reserve_doi": "https://zenodo.org/api/records/20073579/draft/pids/doi",
+    "parent": "https://zenodo.org/api/records/19774446",
+    "parent_html": "https://zenodo.org/records/19774446",
+    "parent_doi": "https://doi.org/10.5281/zenodo.19774446",
+    "parent_doi_html": "https://zenodo.org/doi/10.5281/zenodo.19774446",
+    "self_iiif_manifest": "https://zenodo.org/api/iiif/record:20073579/manifest",
+    "self_iiif_sequence": "https://zenodo.org/api/iiif/record:20073579/sequence/default",
+    "files": "https://zenodo.org/api/records/20073579/files",
+    "media_files": "https://zenodo.org/api/records/20073579/media-files",
+    "thumbnails": {
+      "10": "https://zenodo.org/api/iiif/record:20073579:main%20(44).pdf/full/%5E10,/0/default.jpg",
+      "50": "https://zenodo.org/api/iiif/record:20073579:main%20(44).pdf/full/%5E50,/0/default.jpg",
+      "100": "https://zenodo.org/api/iiif/record:20073579:main%20(44).pdf/full/%5E100,/0/default.jpg",
+      "250": "https://zenodo.org/api/iiif/record:20073579:main%20(44).pdf/full/%5E250,/0/default.jpg",
+      "750": "https://zenodo.org/api/iiif/record:20073579:main%20(44).pdf/full/%5E750,/0/default.jpg",
+      "1200": "https://zenodo.org/api/iiif/record:20073579:main%20(44).pdf/full/%5E1200,/0/default.jpg"
+    },
+    "archive": "https://zenodo.org/api/records/20073579/files-archive",
+    "archive_media": "https://zenodo.org/api/records/20073579/media-files-archive",
+    "latest": "https://zenodo.org/api/records/20073579/versions/latest",
+    "latest_html": "https://zenodo.org/records/20073579/latest",
+    "versions": "https://zenodo.org/api/records/20073579/versions",
+    "draft": "https://zenodo.org/api/records/20073579/draft",
+    "access_links": "https://zenodo.org/api/records/20073579/access/links",
+    "access_grants": "https://zenodo.org/api/records/20073579/access/grants",
+    "access_users": "https://zenodo.org/api/records/20073579/access/users",
+    "access_request": "https://zenodo.org/api/records/20073579/access/request",
+    "access": "https://zenodo.org/api/records/20073579/access",
+    "communities": "https://zenodo.org/api/records/20073579/communities",
+    "communities-suggestions": "https://zenodo.org/api/records/20073579/communities-suggestions",
+    "request_deletion": "https://zenodo.org/api/records/20073579/request-deletion",
+    "file_modification": "https://zenodo.org/api/records/20073579/file-modification",
+    "quota_increase": "https://zenodo.org/api/records/20073579/quota-increase",
+    "requests": "https://zenodo.org/api/records/20073579/requests"
+  },
+  "updated": "2026-05-07T19:40:35.164647+02:00",
+  "recid": "20073579",
+  "revision": 4,
+  "files": [
+    {
+      "id": "19fd6eaa-873f-44fc-a6c7-78d9123a8834",
+      "key": "main (44).pdf",
+      "size": 2943457,
+      "checksum": "md5:d791d480e75f3d89f9a103a28a5c5001",
+      "links": {
+        "self": "https://zenodo.org/api/records/20073579/files/main%20(44).pdf/content"
+      }
+    }
+  ],
+  "swh": {},
+  "owners": [
+    {
+      "id": "1625122"
+    }
+  ],
+  "status": "published",
+  "stats": {
+    "downloads": 168,
+    "unique_downloads": 93,
+    "views": 207,
+    "unique_views": 133,
+    "version_downloads": 0,
+    "version_unique_downloads": 0,
+    "version_unique_views": 0,
+    "version_views": 0
+  },
+  "state": "done",
+  "submitted": true
+}

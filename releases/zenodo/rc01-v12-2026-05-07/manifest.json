@@ -25,6 +25,13 @@
     "md5": "d791d480e75f3d89f9a103a28a5c5001",
     "sha256": "1e9ce2f810b0af8c245887bb3a01ebcb01ca8f90c971bd5cf39da47a6b8dda40"
   },
+  "api_snapshot": {
+    "path": "releases/zenodo/rc01-v12-2026-05-07/zenodo_record_20073579.json",
+    "source_url": "https://zenodo.org/api/records/20073579",
+    "fetched_at_utc": "2026-05-07T17:52:18.0640616Z",
+    "sha256": "c7f35f4371103a6e9ce47e79262848457621b54e8aca1a5bcfc47a29af9aefc9",
+    "note": "Snapshot includes dynamic Zenodo stats as observed at fetch time."
+  },
   "provenance": {
     "local_source_path": "C:\\Users\\Silvan\\Downloads\\main (44).pdf",
     "verification": "Local MD5 matches Zenodo API file checksum for record 20073579."
