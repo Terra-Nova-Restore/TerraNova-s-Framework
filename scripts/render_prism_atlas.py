@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a reviewed TerraNova atlas from Prism/Notion source exports."""
+"""Render a reviewed TerraNova CIC atlas from historical Prism/Notion exports."""
 
 from __future__ import annotations
 
@@ -278,9 +278,6 @@ def render_index(
     for artifact in artifacts:
         hash_groups[artifact.sha256].append(artifact)
     duplicates = [items for items in hash_groups.values() if len(items) > 1]
-    category_counts = Counter(artifact.category for artifact in artifacts)
-    sensitivity_counts = Counter(flag for artifact in artifacts for flag in artifact.sensitivity)
-
     active_count = sum(1 for row in diagram_rows if row["status"].upper() == "ACTIVE")
     legacy_count = sum(1 for row in diagram_rows if row["status"].upper() == "LEGACY")
     unknown_count = sum(1 for row in diagram_rows if row["status"].upper() == "UNKNOWN")
@@ -296,7 +293,7 @@ def render_index(
     chat_source = find_artifact(artifacts, "chat provenance")
 
     lines = [
-        "# TerraNova Prism Atlas",
+        "# TerraNova CIC Atlas",
         "",
         "Status: generated local atlas start page",
         "",
@@ -305,9 +302,14 @@ def render_index(
         "",
         "## Purpose",
         "",
-        "This page is the reviewed navigation layer for the Prism source pack.",
-        "Raw exports stay in `raw/exports/prism/source-pack/`; curated working",
-        "surfaces live here in `docs/atlas/`.",
+        "This page is the reviewed navigation layer for the CIC source pack.",
+        "Raw exports stay in `raw/exports/prism/source-pack/` for provenance; curated working surfaces live here in `docs/atlas/`.",
+        "",
+        "## Naming boundary",
+        "",
+        "- **CIC** is the TerraNova framework, consistency and atlas layer.",
+        "- **OpenAI Prism** is an external/editor source context only where explicitly meant.",
+        "- Historical paths containing `prism` are not automatically renamed when they serve as raw provenance.",
         "",
         "## Snapshot",
         "",
@@ -369,40 +371,12 @@ def render_index(
             ["Bucket", "Use", "Review rule"],
             [
                 ["Public candidate", "Mermaid manifesto, high-level atlas, selected ACTIVE diagrams.", "Redact private, wallet/token and patent-sensitive material first."],
-                ["Internal operating map", "All source categories, source manifest and trigger reference.", "Allowed for Codex/Prism work under reviewed-source discipline."],
+                ["Internal operating map", "All source categories, source manifest and trigger reference.", "Allowed for Codex/CIC work under reviewed-source discipline."],
                 ["Archive only", "Raw chat provenance and All-in-One payload.", "Do not promote as canonical truth without extracted review notes."],
                 ["Decision required", "Token/blockchain, patent/IP and deep trigger material.", "Needs explicit human review before external use."],
             ],
         )
     )
-
-    lines.extend(["", "## Category Counts", ""])
-    lines.extend(md_table(["Category", "Files"], [[category, str(count)] for category, count in category_counts.most_common()]))
-
-    lines.extend(["", "## Sensitivity Flags", ""])
-    if sensitivity_counts:
-        lines.extend(md_table(["Flag", "Files"], [[flag, str(count)] for flag, count in sensitivity_counts.most_common()]))
-    else:
-        lines.append("No sensitivity flags detected.")
-
-    lines.extend(["", "## High-Value Sources", ""])
-    high_value = [payload, landing, trigger_ref, diagram_registry, manifesto, chat_source]
-    seen_sources: set[str] = set()
-    high_value_rows = []
-    for artifact in high_value:
-        if not artifact or artifact.rel_path in seen_sources:
-            continue
-        seen_sources.add(artifact.rel_path)
-        high_value_rows.append(
-            [
-                artifact.title,
-                artifact.category,
-                human_size(artifact.size),
-                ", ".join(artifact.sensitivity) if artifact.sensitivity else "-",
-                artifact.rel_path,
-            ]
-        )
-    lines.extend(md_table(["Title", "Category", "Size", "Flags", "Source"], high_value_rows))
 
     lines.extend(["", "## Full Inventory", ""])
     lines.extend(
@@ -412,13 +386,6 @@ def render_index(
             "- Diagram selection and replacement view: `diagrams.md`.",
         ]
     )
-
-    lines.extend(["", "## Duplicate Payloads", ""])
-    if duplicates:
-        for group in duplicates:
-            lines.append(f"- `{group[0].sha256[:12]}`: " + ", ".join(f"`{item.rel_path}`" for item in group))
-    else:
-        lines.append("No duplicate payloads detected.")
 
     lines.extend(["", "## Operating Rule", ""])
     lines.extend(
@@ -842,12 +809,12 @@ def render(source_dir: Path, output_dir: Path) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Render TerraNova atlas docs from Prism source exports.")
+    parser = argparse.ArgumentParser(description="Render TerraNova CIC atlas docs from historical Prism source exports.")
     parser.add_argument(
         "--source-dir",
         type=Path,
         default=DEFAULT_SOURCE_DIR,
-        help="Directory containing Prism/Notion Markdown and CSV source exports.",
+        help="Directory containing historical Prism/Notion Markdown and CSV source exports.",
     )
     parser.add_argument(
         "--output-dir",
