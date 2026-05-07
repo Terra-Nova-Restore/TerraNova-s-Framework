@@ -797,7 +797,7 @@ def render_trigger_gap_ledger(artifacts: list[SourceArtifact], generated_at: str
 
 def write_inventory_csv(artifacts: list[SourceArtifact], output_path: Path) -> None:
     with output_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(["title", "category", "type", "size_bytes", "sha256", "sensitivity", "source"])
         for artifact in sorted(artifacts, key=lambda item: item.rel_path.casefold()):
             writer.writerow(
