@@ -147,6 +147,10 @@ def collect_sources(source_dir: Path) -> list[SourceArtifact]:
     return artifacts
 
 
+def has_dated_child_dirs(source_dir: Path) -> bool:
+    return any(path.is_dir() and DATE_DIR_PATTERN.match(path.name) for path in source_dir.iterdir())
+
+
 def resolve_source_dir(source_dir: Path) -> Path:
     source_dir = source_dir.resolve()
     if not source_dir.exists():
@@ -168,6 +172,75 @@ def source_stamp(source_dir: Path) -> str:
     if DATE_DIR_PATTERN.match(source_dir.name):
         return source_dir.name
     return datetime.now().astimezone().isoformat(timespec="seconds")
+
+
+def manifest_source_dir(source_dir_value: str) -> Path:
+    source_dir = Path(source_dir_value)
+    if not source_dir.is_absolute():
+        source_dir = ROOT / source_dir
+    return source_dir
+
+
+def load_manifest_snapshot(
+    manifest_path: Path,
+) -> tuple[list[SourceArtifact], list[dict[str, str]], Path, str]:
+    data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    source_dir = manifest_source_dir(str(data.get("source_dir", DEFAULT_SOURCE_DIR)))
+    generated_at = str(data.get("generated_at", source_stamp(source_dir)))
+
+    artifacts: list[SourceArtifact] = []
+    for entry in data.get("source_files", []):
+        rel_path = str(entry["source"])
+        artifacts.append(
+            SourceArtifact(
+                path=ROOT / rel_path,
+                rel_path=rel_path,
+                title=str(entry["title"]),
+                suffix=str(entry["type"]),
+                size=int(entry["size_bytes"]),
+                sha256=str(entry["sha256"]),
+                category=str(entry["category"]),
+                sensitivity=[str(flag) for flag in entry.get("sensitivity", [])],
+                headings=[str(heading) for heading in entry.get("headings", [])],
+            )
+        )
+
+    diagram_rows = [
+        {str(key): str(value) for key, value in row.items()}
+        for row in data.get("diagrams", [])
+    ]
+    return artifacts, deduplicate_diagrams(diagram_rows), source_dir, generated_at
+
+
+def should_use_manifest_snapshot(source_dir: Path, artifacts: list[SourceArtifact]) -> bool:
+    if not artifacts:
+        return True
+    if has_dated_child_dirs(source_dir):
+        return False
+    return len(artifacts) == 1 and artifacts[0].rel_path.casefold() == "readme.md"
+
+
+def resolve_render_inputs(
+    source_dir: Path,
+    output_dir: Path,
+) -> tuple[list[SourceArtifact], list[dict[str, str]], Path, str]:
+    manifest_path = output_dir / "source_manifest.json"
+    try:
+        resolved_source_dir = resolve_source_dir(source_dir)
+        artifacts = collect_sources(resolved_source_dir)
+    except SystemExit:
+        if manifest_path.exists():
+            return load_manifest_snapshot(manifest_path)
+        raise
+
+    # CI does not receive private dated source-pack exports. Re-render from the
+    # committed manifest when only the archival README is present.
+    if manifest_path.exists() and should_use_manifest_snapshot(resolved_source_dir, artifacts):
+        return load_manifest_snapshot(manifest_path)
+
+    if not artifacts:
+        raise SystemExit(f"No supported source files found in: {resolved_source_dir}")
+    return artifacts, deduplicate_diagrams(parse_diagram_registry(artifacts)), resolved_source_dir, source_stamp(resolved_source_dir)
 
 
 def parse_diagram_registry(artifacts: list[SourceArtifact]) -> list[dict[str, str]]:
@@ -769,17 +842,10 @@ def write_manifest(
 
 
 def render(source_dir: Path, output_dir: Path) -> None:
-    source_dir = resolve_source_dir(source_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     trigger_dir = output_dir.parent / "triggers"
     trigger_dir.mkdir(parents=True, exist_ok=True)
-    generated_at = source_stamp(source_dir)
-
-    artifacts = collect_sources(source_dir)
-    if not artifacts:
-        raise SystemExit(f"No supported source files found in: {source_dir}")
-
-    diagrams = deduplicate_diagrams(parse_diagram_registry(artifacts))
+    artifacts, diagrams, source_dir, generated_at = resolve_render_inputs(source_dir, output_dir)
 
     (output_dir / "index.md").write_text(
         render_index(artifacts, diagrams, source_dir, generated_at),
