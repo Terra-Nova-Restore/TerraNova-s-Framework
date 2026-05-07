@@ -18,19 +18,19 @@ ORCID:
 https://orcid.org/0009-0007-8033-3508
 
 Version:
-RC01-v11
+RC01-v12
 
 Publication date:
-2026-05-05
+2026-05-07
 
 Published timestamp:
-2026-05-05T21:57:29Z / ca. 23:57 Europe/Zurich
+2026-05-07T17:39:34Z / ca. 19:39 Europe/Zurich
 
 DOI:
-https://doi.org/10.5281/zenodo.20044763
+https://doi.org/10.5281/zenodo.20073579
 
 Record URL:
-https://zenodo.org/records/20044763
+https://zenodo.org/records/20073579
 
 Concept DOI (all versions):
 https://doi.org/10.5281/zenodo.19774446
@@ -53,7 +53,7 @@ https://github.com/Terra-Nova-Restore/TerraNova-s-Framework
 ## File anchor
 
 Primary file:
-`main (42).pdf`
+`main (44).pdf`
 
 Size:
 2,943,457 bytes
@@ -62,7 +62,7 @@ Checksum:
 `md5:d791d480e75f3d89f9a103a28a5c5001`
 
 Local working note:
-ca. 660 pages, 5 May 2026 working state.
+published RC01-v12 working state, 7 May 2026.
 
 ## Version relationship
 
@@ -70,12 +70,15 @@ This record is a published version within the Zenodo concept record:
 
 ```text
 Concept DOI: 10.5281/zenodo.19774446
-Current citable DOI: 10.5281/zenodo.20044763
-Version: RC01-v11
-Publication date: 2026-05-05
+Current citable DOI: 10.5281/zenodo.20073579
+Version: RC01-v12
+Publication date: 2026-05-07
 ```
 
-The previous repository references to v2 / 2026-04-27 / `10.5281/zenodo.19829423` and older `main(16)` review notes are historical, not the current citation target.
+The previous repository references to RC01-v11 / 2026-05-05 /
+`10.5281/zenodo.20044763`, v2 / 2026-04-27 /
+`10.5281/zenodo.19829423`, and older `main(16)` review notes are
+historical, not the current citation target.
 
 ## Role in this repository
 
@@ -102,9 +105,9 @@ Parts of structuring, drafting and repository integration were supported by GPT/
 
 ## Citation instruction
 
-When citing the current published release, prefer the RC01-v11 Zenodo DOI:
+When citing the current published release, prefer the RC01-v12 Zenodo DOI:
 
-Lenhard, S. (2026). *FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat* (RC01-v11). Zenodo. https://doi.org/10.5281/zenodo.20044763
+Lenhard, S. (2026). *FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat* (RC01-v12). Zenodo. https://doi.org/10.5281/zenodo.20073579
 
 For all-version reference, use the Concept DOI:
 

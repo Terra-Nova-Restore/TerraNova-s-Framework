@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: "FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat"
-message: "If you use this repository or the associated TerraNova / FerrAI / CIC materials, please cite the current Zenodo RC01-v11 record and optionally the Concept DOI for all-version reference."
+message: "If you use this repository or the associated TerraNova / FerrAI / CIC materials, please cite the current Zenodo RC01-v12 record and optionally the Concept DOI for all-version reference."
 type: book
 authors:
   - family-names: Lenhard
@@ -8,10 +8,10 @@ authors:
     affiliation: "Terra'Nova'Restore"
     orcid: "https://orcid.org/0009-0007-8033-3508"
 repository-code: "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework"
-url: "https://zenodo.org/records/20044763"
-doi: "10.5281/zenodo.20044763"
-version: "RC01-v11"
-date-released: "2026-05-05"
+url: "https://zenodo.org/records/20073579"
+doi: "10.5281/zenodo.20073579"
+version: "RC01-v12"
+date-released: "2026-05-07"
 abstract: "Citable release candidate of a work monograph with evidence apparatus on the FerrAI / Terra Nova / CIC complex. The manuscript reconstructs system architecture, operational process logic, claim/evidence governance, trigger order, and rights, patent, and utilization layers from a delimited local corpus while distinguishing primary evidence, editorial inference, and open questions."
 keywords:
   - FerrAI
@@ -47,6 +47,6 @@ preferred-citation:
       given-names: Silvan
       affiliation: "Terra'Nova'Restore"
       orcid: "https://orcid.org/0009-0007-8033-3508"
-  doi: "10.5281/zenodo.20044763"
-  date-released: "2026-05-05"
-  version: "RC01-v11"
+  doi: "10.5281/zenodo.20073579"
+  date-released: "2026-05-07"
+  version: "RC01-v12"

@@ -58,6 +58,14 @@ a separate automation if project backlog state is required.
 ## Business brief
 - See `BIZ.md` for a concise `/biz` business-facing overview, KPI suggestions, and operating cadence.
 
+## Current published release
+
+The current citable Zenodo release is RC01-v12:
+
+- DOI: https://doi.org/10.5281/zenodo.20073579
+- Record: https://zenodo.org/records/20073579
+- GitHub mirror artifact: `releases/zenodo/rc01-v12-2026-05-07/`
+
 ## Atlas validation
 Validate the atlas manifest from the repo root:
 
