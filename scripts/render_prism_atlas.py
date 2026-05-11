@@ -220,6 +220,10 @@ def should_use_manifest_snapshot(source_dir: Path, artifacts: list[SourceArtifac
     return len(artifacts) == 1 and artifacts[0].rel_path.casefold() == "readme.md"
 
 
+def should_fallback_to_manifest_snapshot(requested_source_dir: Path) -> bool:
+    return requested_source_dir.resolve() == DEFAULT_SOURCE_DIR.resolve()
+
+
 def resolve_render_inputs(
     source_dir: Path,
     output_dir: Path,
@@ -229,7 +233,7 @@ def resolve_render_inputs(
         resolved_source_dir = resolve_source_dir(source_dir)
         artifacts = collect_sources(resolved_source_dir)
     except SystemExit:
-        if manifest_path.exists():
+        if manifest_path.exists() and should_fallback_to_manifest_snapshot(source_dir):
             return load_manifest_snapshot(manifest_path)
         raise
 

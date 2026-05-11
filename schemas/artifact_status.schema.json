@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/TerraNova/Framework/schemas/artifact_status.schema.json",
+  "title": "TerraNova Artifact Status Marker",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "source",
+    "trace",
+    "boundary",
+    "mode"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace": {
+      "type": "string",
+      "minLength": 1
+    },
+    "boundary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["PLAY", "STUDIO", "BIZ"]
+    },
+    "github_sync_state": {
+      "type": "string"
+    },
+    "notion_source_awareness": {
+      "type": "string"
+    }
+  }
+}

@@ -12,6 +12,7 @@ on:
       - 'raw/exports/2026-04-30_batch_850k_raw_fuellversion.md'
       - 'raw/exports/fill_850k_raw.sh'
       - 'raw/exports/prism/source-pack/**'
+      - 'tests/test_render_prism_atlas.py'
       - '.github/workflows/prism-atlas-validate.yml'
   push:
     paths:
@@ -24,6 +25,7 @@ on:
       - 'raw/exports/2026-04-30_batch_850k_raw_fuellversion.md'
       - 'raw/exports/fill_850k_raw.sh'
       - 'raw/exports/prism/source-pack/**'
+      - 'tests/test_render_prism_atlas.py'
       - '.github/workflows/prism-atlas-validate.yml'
 
 permissions:
@@ -46,6 +48,9 @@ jobs:
 
       - name: Quick sanity check
         run: python scripts/quick_script_sanity.py scripts/render_prism_atlas.py
+
+      - name: Run atlas unit tests
+        run: python -m unittest tests.test_render_prism_atlas
 
       - name: Regenerate atlas docs
         run: python scripts/render_prism_atlas.py

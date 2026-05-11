@@ -1,5 +1,13 @@
 # TerraNova `/biz` Brief
 
+Status: BIZ / Business Brief
+Source: GitHub technical mirror for the Notion-driven operations workflow.
+Trace: `scripts/notion_to_github.py`, `NOTION_PROPERTIES.md`, `.github/workflows/tnv_notion_to_github.yml`
+Boundary: Business-facing summary only; not a living rulebook or source-of-record replacement.
+Mode: BIZ
+GitHub sync state: tracked in this repository.
+Notion source awareness: required for operational database schema or rule changes.
+
 ## Business purpose
 TerraNova automates a controlled handoff from a Notion operations database into GitHub Issues.
 This supports auditability, clearer ownership, and consistent incident/change tracking without
