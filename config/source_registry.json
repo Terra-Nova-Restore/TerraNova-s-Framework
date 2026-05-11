@@ -1,0 +1,14 @@
+{
+  "equilibrium": {
+    "source": "notion",
+    "title": "EQUILIBRIUM - Offizielles Regelbuch",
+    "role": "source_of_record",
+    "github_mirror": "docs/architecture/ferrAI_operating_kernel_v0.1.md"
+  },
+  "ferrai_operating_kernel_v0_1": {
+    "source": "github",
+    "title": "FerrAI Operating Kernel v0.1",
+    "role": "technical_mirror",
+    "github_mirror": "docs/architecture/ferrAI_operating_kernel_v0.1.md"
+  }
+}

@@ -1,5 +1,13 @@
 # Public Boundary
 
+Status: BIZ / Governance
+Source: Repository-side governance policy for public-safe publication boundaries.
+Trace: Issue `#25`, `docs/governance/source_of_record_policy.md`, `raw/exports/REVIEW_GATE.md`
+Boundary: Public repository boundary definition only; not a raw storage or canon surface.
+Mode: BIZ
+GitHub sync state: tracked in this repository as a publish-safety contract.
+Notion source awareness: required if this boundary is later mirrored into living governance canon.
+
 ## Purpose
 
 This document defines what may be published in the public TerraNova repository and what must remain private, local, redacted, or patent-sensitive.

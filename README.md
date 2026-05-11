@@ -58,6 +58,13 @@ a separate automation if project backlog state is required.
 ## Business brief
 - See `BIZ.md` for a concise `/biz` business-facing overview, KPI suggestions, and operating cadence.
 
+## Governance and public boundary
+- Public repository boundary: [`docs/governance/public_boundary.md`](docs/governance/public_boundary.md)
+- Repository role vocabulary: [`docs/governance/repo_roles.md`](docs/governance/repo_roles.md)
+- Source-of-record policy: [`docs/governance/source_of_record_policy.md`](docs/governance/source_of_record_policy.md)
+- Repository maturity note: [`docs/governance/repository_maturity.md`](docs/governance/repository_maturity.md)
+- Raw export review gate: [`raw/exports/REVIEW_GATE.md`](raw/exports/REVIEW_GATE.md)
+
 ## Current published release
 
 The current citable Zenodo release is RC01-v12:

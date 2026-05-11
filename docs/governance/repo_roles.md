@@ -1,5 +1,13 @@
 # Repository Roles
 
+Status: BIZ / Governance
+Source: Repository-side governance role vocabulary for TerraNova repository surfaces.
+Trace: Issue `#25`, `docs/governance/source_of_record_policy.md`, `docs/governance/public_boundary.md`
+Boundary: Repository role contract only; not a release claim or source-of-record override.
+Mode: BIZ
+GitHub sync state: tracked in this repository as an operational classification guide.
+Notion source awareness: required if repository roles are later aligned with living governance canon.
+
 ## Purpose
 
 This document defines the intended roles of repositories and repository areas in the TerraNova / FerrAI / CIC stack.
