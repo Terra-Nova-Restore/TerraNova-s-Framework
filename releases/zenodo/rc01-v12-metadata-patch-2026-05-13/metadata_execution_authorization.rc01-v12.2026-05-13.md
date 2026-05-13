@@ -20,6 +20,13 @@ Execution route:
 - workflow `.github/workflows/zenodo-rc01-v12-metadata-update.yml`;
 - one-shot merge-commit gate `execute-zenodo-z2-metadata-update`.
 
+Implementation note:
+
+- Attempt 1 used the legacy `/api/deposit/depositions/{id}` path and failed
+  before opening an edit because Zenodo returned `403 Permission denied`.
+- Attempt 2 uses the current record draft path `/api/records/{id}/draft` for
+  metadata-only edit/publish.
+
 ## Authorized Scope
 
 - update published record metadata only;
