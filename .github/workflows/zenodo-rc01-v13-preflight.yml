@@ -1,0 +1,163 @@
+name: Zenodo RC01-v13 Preflight
+
+on:
+  workflow_dispatch:
+    inputs:
+      record_id:
+        description: "Current published Zenodo record ID used as future version parent"
+        required: true
+        default: "20073579"
+      artifact_path:
+        description: "Optional future RC01-v13 PDF path to validate if present"
+        required: true
+        default: "releases/zenodo/rc01-v13-preflight-2026-05-13/PENDING_ARTIFACT.pdf"
+      expected_sha256:
+        description: "Optional expected SHA-256 for artifact_path"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+
+    env:
+      ZENODO_API_BASE: https://zenodo.org/api
+      ZENODO_RECORD_ID: ${{ github.event.inputs.record_id || '20073579' }}
+      MANIFEST_PATH: releases/zenodo/rc01-v13-preflight-2026-05-13/manifest.json
+      METADATA_PATH: releases/zenodo/rc01-v13-preflight-2026-05-13/zenodo_api_metadata.rc01-v13.draft.json
+      ARTIFACT_PATH: ${{ github.event.inputs.artifact_path }}
+      EXPECTED_SHA256: ${{ github.event.inputs.expected_sha256 }}
+      CURRENT_RC01_V12_SHA256: 1e9ce2f810b0af8c245887bb3a01ebcb01ca8f90c971bd5cf39da47a6b8dda40
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate preflight files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -f "${MANIFEST_PATH}"
+          test -f "${METADATA_PATH}"
+
+          python -m json.tool "${MANIFEST_PATH}" > /dev/null
+          python -m json.tool "${METADATA_PATH}" > /dev/null
+
+          python - "${MANIFEST_PATH}" "${METADATA_PATH}" <<'PY'
+          import json
+          import sys
+
+          manifest = json.load(open(sys.argv[1], encoding="utf-8"))
+          metadata = json.load(open(sys.argv[2], encoding="utf-8"))
+
+          assert manifest["target"]["record_id"] == "20073579"
+          assert manifest["target"]["candidate_version"] == "RC01-v13"
+          assert manifest["workflow"]["writes_to_zenodo"] is False
+          assert manifest["workflow"]["publishes_to_zenodo"] is False
+          assert manifest["hard_locks"]["zenodo_draft"] is False
+          assert manifest["hard_locks"]["zenodo_upload"] is False
+          assert manifest["hard_locks"]["zenodo_publish"] is False
+          assert manifest["candidate_artifact"]["upload_allowed"] is False
+
+          md = metadata["metadata"]
+          assert md["version"] == "RC01-v13"
+          assert md["license"] == "cc-by-4.0"
+          assert md["creators"][0]["orcid"] == "0009-0007-8033-3508"
+
+          print("Preflight manifest and metadata gates OK.")
+          PY
+
+      - name: Read current Zenodo record
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BODY="zenodo_record_${ZENODO_RECORD_ID}_preflight.json"
+          HTTP_STATUS="$(curl -sS -o "${BODY}" -w "%{http_code}" \
+            -H "Accept: application/json" \
+            "${ZENODO_API_BASE}/records/${ZENODO_RECORD_ID}")"
+
+          echo "Zenodo public record read HTTP status: ${HTTP_STATUS}"
+          if [ "${HTTP_STATUS}" != "200" ]; then
+            cat "${BODY}"
+            exit 1
+          fi
+
+          python - "${BODY}" <<'PY'
+          import json
+          import sys
+
+          body = json.load(open(sys.argv[1], encoding="utf-8"))
+          assert str(body["id"]) == "20073579"
+          assert body["doi"] == "10.5281/zenodo.20073579"
+          assert body["conceptdoi"] == "10.5281/zenodo.19774446"
+          assert body["metadata"]["version"] == "RC01-v12"
+          assert body["metadata"]["creators"][0]["orcid"] == "0009-0007-8033-3508"
+          print("Zenodo public record read gates OK.")
+          PY
+
+      - name: Validate optional future artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ ! -f "${ARTIFACT_PATH}" ]; then
+            echo "No future RC01-v13 artifact staged at ${ARTIFACT_PATH}."
+            echo "This is expected for Z1. No upload is attempted."
+            exit 0
+          fi
+
+          ACTUAL_SHA256="$(sha256sum "${ARTIFACT_PATH}" | awk '{print $1}')"
+          echo "Artifact SHA256: ${ACTUAL_SHA256}"
+
+          if [ -n "${EXPECTED_SHA256}" ] && [ "${ACTUAL_SHA256}" != "${EXPECTED_SHA256}" ]; then
+            echo "Artifact SHA256 mismatch."
+            echo "Expected: ${EXPECTED_SHA256}"
+            echo "Actual:   ${ACTUAL_SHA256}"
+            exit 1
+          fi
+
+          if [ "${ACTUAL_SHA256}" = "${CURRENT_RC01_V12_SHA256}" ]; then
+            echo "Artifact is byte-identical to RC01-v12. Refusing to treat it as RC01-v13."
+            exit 1
+          fi
+
+          echo "Future artifact exists and differs from RC01-v12."
+
+      - name: Write preflight handoff
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cat > zenodo_rc01_v13_preflight_handoff.md <<EOF
+          # Zenodo RC01-v13 Preflight Handoff
+
+          Preflight completed without Zenodo mutation.
+
+          - Target record ID: ${ZENODO_RECORD_ID}
+          - Target DOI: 10.5281/zenodo.20073579
+          - Concept DOI: 10.5281/zenodo.19774446
+          - Candidate version: RC01-v13
+          - Manifest: ${MANIFEST_PATH}
+          - Metadata: ${METADATA_PATH}
+          - Artifact path checked: ${ARTIFACT_PATH}
+
+          No Zenodo draft, upload, DOI reservation, or publish action was
+          attempted by this workflow.
+          EOF
+
+          cat zenodo_rc01_v13_preflight_handoff.md
+
+      - name: Upload preflight artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenodo-rc01-v13-preflight
+          path: |
+            zenodo_record_*_preflight.json
+            zenodo_rc01_v13_preflight_handoff.md
+          if-no-files-found: warn
