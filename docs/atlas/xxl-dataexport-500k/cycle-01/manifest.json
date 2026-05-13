@@ -1,0 +1,56 @@
+{
+  "artifact_id": "zip-analysis-continuation-01",
+  "status": "CODEX_LOCAL_SAFE_ARTIFACT",
+  "cycle": 1,
+  "date": "2026-05-13",
+  "source": {
+    "private_corpus_zip_name": "XXL_DatenExport_500_000Zeilen.zip",
+    "private_corpus_text_name": "XXL_DatenExport_500_000Zeilen.txt",
+    "notion_page_title": "ZIP_ANALYSIS_CONTINUATION_01 -- Hash-Anchored Korpus-Metrics",
+    "local_export_block_zip": "C:/Users/Silvan/Downloads/235369c0-7156-4e4a-aae1-44cb5cedab68_ExportBlock-b55cb645-b3d9-4fbf-8008-c2699d85fabd.zip",
+    "nested_export_zip": "ExportBlock-b55cb645-b3d9-4fbf-8008-c2699d85fabd-Part-1.zip"
+  },
+  "hashes": {
+    "private_corpus_zip_sha256": "4e804d279535d273b9363e0171200ca6462fee52fbb75bd5b3ed070d7fb42f81",
+    "private_corpus_text_sha256": "06bc44cfda1226db6324e5261449b095b0be2bf124e9a5a416af5f3f1fc6df5d",
+    "local_export_block_zip_sha256": "e70fba06ffce86d1b5a6c7292215a032fe6921cfc1fd7e0f9ae1e7ee347c38f3",
+    "nested_export_zip_sha256": "19ac9002ee52457d89e4ed0f0a859aaff1470464fa15573f76cda8f4b949cfd5"
+  },
+  "hard_metrics": {
+    "txt_bytes": 30957838,
+    "txt_size_mb": 30.96,
+    "characters": 30065300,
+    "lines": 553000,
+    "empty_lines": 132078,
+    "max_line_length": 20251,
+    "mean_line_length": 52.37,
+    "median_line_length": 28
+  },
+  "publication_boundary": {
+    "raw_dump_in_repository": false,
+    "raw_dump_inline_in_notion": false,
+    "raw_dump_in_zenodo": false,
+    "allowed_repository_artifacts": [
+      "summaries",
+      "manifests",
+      "hash files",
+      "safe indexes",
+      "data-note drafts",
+      "redaction policy",
+      "metrics tables"
+    ]
+  },
+  "notion_routing": {
+    "parent": "XXL DatenExport 500k -- Top-5 Quellenfund / Snapshotanalyse",
+    "corpus_review_layer": "CEI-00 plus CEI-04 / CEI-04A / CEI-04B / CEI-04C",
+    "not_workspace_index_layer": "CEI-DATA-05"
+  },
+  "next_gpt_layer": [
+    "Top terms and clusters",
+    "Trigger ID patterns",
+    "Date and time windows",
+    "User / ChatGPT role structure",
+    "Risk tokens without raw lines",
+    "CEI-DATA-04 / CEI-DATA-05 connection logic"
+  ]
+}
