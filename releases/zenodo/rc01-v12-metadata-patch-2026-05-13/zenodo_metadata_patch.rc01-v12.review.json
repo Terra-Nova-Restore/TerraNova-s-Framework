@@ -1,0 +1,84 @@
+{
+  "review_package": {
+    "id": "rc01-v12-metadata-patch-2026-05-13",
+    "status": "REVIEW_ONLY_NO_MUTATION",
+    "created_date": "2026-05-13",
+    "target_record_id": "20073579",
+    "target_record_url": "https://zenodo.org/records/20073579",
+    "specific_doi": "10.5281/zenodo.20073579",
+    "concept_doi": "10.5281/zenodo.19774446",
+    "current_version": "RC01-v12",
+    "patch_type": "metadata-only review candidate",
+    "file_update": false,
+    "new_version": false,
+    "doi_reservation": false,
+    "zenodo_mutation_authorized": false
+  },
+  "current_record_facts": {
+    "title": "FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat",
+    "publication_date": "2026-05-07",
+    "status": "published",
+    "resource_type": "Book",
+    "access_right": "open",
+    "license": "cc-by-4.0",
+    "language": "deu",
+    "creator": "Lenhard, Silvan",
+    "orcid": "0009-0007-8033-3508",
+    "repository": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework",
+    "file_name": "main (44).pdf",
+    "file_size_bytes": 2943457,
+    "file_md5": "d791d480e75f3d89f9a103a28a5c5001",
+    "file_sha256": "1e9ce2f810b0af8c245887bb3a01ebcb01ca8f90c971bd5cf39da47a6b8dda40"
+  },
+  "review_findings": [
+    "The current public Zenodo metadata already has the correct DOI, concept DOI, version, ORCID, custom code repository link, license, and file checksum.",
+    "The current description contains exported Notion wrapper markup and an older reference-snapshot wording that should be reviewed before any metadata edit.",
+    "main (45).pdf is byte-identical to main (44).pdf and must not be used as a new file update or RC01-v13 payload."
+  ],
+  "proposed_api_payload_candidate": {
+    "metadata": {
+      "title": "FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat",
+      "upload_type": "publication",
+      "publication_type": "book",
+      "description": "<h2>Zenodo Description -- Deutsch</h2><p><strong>FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat</strong></p><p>Diese Veröffentlichung dokumentiert den zitierfähigen Release Candidate <code>RC01-v12</code> einer Werkmonographie mit Evidenzapparat zum FerrAI-/Terra-Nova-/CIC-Komplex. Die Schrift rekonstruiert Terra Nova im sichtbaren lokalen Korpus nicht als einzelnen Prompt, isoliertes Modell oder bloßes Whitepaper, sondern als mehrschichtigen Verbund aus Systemarchitektur, operativer Prozesslogik, Claim/Evidence-Governance, Triggerordnung, dokumentierten Patent- und Rechtsspuren sowie Tokenisierungs- und Verwertungslogik.</p><p>Im Zentrum steht eine quellengebundene editorische Rekonstruktion des gezählten Terra-Nova-/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie. Der gezählte Kernkorpus umfasst in dieser Fassung 67 HTML- und CSV-Exporte; Supplemente, Workspace-Spuren, Uploads, Arbeitsnotizen und spätere Rückführungen werden ausdrücklich mitgeführt, aber nicht unmarkiert mit dem Kernkorpus vermischt. Dadurch bleiben Belegbasis, editorische Ableitung und offene Stellen nachvollziehbar getrennt.</p><p>CIC wird in dieser Fassung als <code>Cognitive Intelligent Cooperation</code> normiert, zugleich aber als sichtbare Dokument- und Frameworkschicht vom engeren Primärbegriff der Kooperationslogik unterschieden. Methodisch arbeitet das Manuskript mit expliziten Statusmarkern und einer textbasierten Claim/Evidence-Logik. Die Arbeit ist bewusst als textorientierte Hauptschrift angelegt; ein größerer visueller Diagramm-, Tabellen- und Bildkörper wird methodisch zurückgestellt, bis Begriffe, Mapping-Schichten und Evidenzgrenzen weiter gehärtet sind.</p><p>Das Dokument ist keine abgeschlossene peer-reviewte Dissertation. Es ist ein versioniertes Forschungsmanuskript, eine Werkmonographie mit Evidenzapparat und ein bewusst offen gehaltener Release Candidate, der Haupttext, Appendix, Registerräume und Ausbaukorridor transparent zusammenführt.</p><h2>Zenodo Description -- English</h2><p>This release documents the citable release candidate <code>RC01-v12</code> of a work monograph with evidence apparatus on the FerrAI / Terra Nova / CIC complex. Rather than treating Terra Nova as a single prompt, an isolated model, or a standalone white paper, the manuscript reconstructs it from the visible local corpus as a layered assemblage of system architecture, operational process logic, claim/evidence governance, trigger order, documented patent and rights traces, and tokenization and utilization logic.</p><p>At its core, the work offers a source-bound editorial reconstruction of the counted Terra Nova / FerrAI corpus and the visible CIC document family. In this version, the counted core corpus comprises 67 HTML and CSV exports; supplementary workspace traces, uploads, working notes, and later reintegrations are explicitly retained, but not silently merged with the core corpus. This keeps primary evidence, editorial inference, and open questions clearly distinct.</p><p>In this edition, CIC is normalized as <code>Cognitive Intelligent Cooperation</code> while also being distinguished, as a visible document and framework layer, from the narrower primary term of cooperative logic. Methodologically, the manuscript relies on explicit status markers and a text-based claim/evidence regime. The work is intentionally designed as a text-first main edition; a larger visual body of diagrams, tables, and rendered graphics is deliberately postponed until terminology, mapping layers, and evidence boundaries have been further stabilized.</p><p>This document is not a completed peer-reviewed dissertation. It is a versioned research manuscript, a work monograph with evidence apparatus, and a deliberately open release candidate that transparently brings together the main text, appendices, registers, and an expansion corridor.</p><h2>Version Note</h2><p>Versionierter Forschungsstand / zitierfähiger Release Candidate <code>RC01-v12</code>.</p><p>Publication date: <code>2026-05-07</code>. Current record DOI: <code>10.5281/zenodo.20073579</code>. Concept DOI: <code>10.5281/zenodo.19774446</code>.</p><h2>Additional Notes</h2><p><strong>English:</strong> This release represents a citable RC state within a versioned publication chain. Later releases may include expanded source registers, revised matrices, additional chapters, a broadened visual apparatus, and further hardened terminology and evidence boundaries.</p><p><strong>Deutsch:</strong> Diese Veröffentlichung markiert einen zitierfähigen RC-Stand innerhalb einer versionierten Publikationskette. Spätere Releases können erweiterte Quellenregister, überarbeitete Matrizen, zusätzliche Kapitel, einen ausgebauten visuellen Apparat sowie weiter gehärtete Terminologie- und Evidenzgrenzen enthalten.</p>",
+      "creators": [
+        {
+          "name": "Lenhard, Silvan",
+          "affiliation": "Terra'Nova'Restore",
+          "orcid": "0009-0007-8033-3508"
+        }
+      ],
+      "access_right": "open",
+      "license": "cc-by-4.0",
+      "version": "RC01-v12",
+      "language": "deu",
+      "keywords": [
+        "CIC",
+        "Zenodo",
+        "Github",
+        "Notion",
+        "audit trail",
+        "complex systems",
+        "AI ethics",
+        "FerrAI",
+        "Terra'Nova'Restore",
+        "human-AI interaction"
+      ],
+      "related_identifiers": [
+        {
+          "identifier": "10.5281/zenodo.19774446",
+          "relation": "isVersionOf",
+          "scheme": "doi",
+          "resource_type": "publication-other"
+        }
+      ],
+      "custom": {
+        "code:codeRepository": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework"
+      },
+      "references": [
+        "Lenhard, S. (2026). FerrAI / Terra Nova: Dissertationsentwurf. Zenodo. https://doi.org/10.5281/zenodo.19774446"
+      ],
+      "notes": "Metadata-only v0.2 review candidate for the existing RC01-v12 record. It preserves the current custom code repository field, current keywords, current concept DOI reference, and current isVersionOf relation. No file update, new version, DOI reservation, upload, or publish action is authorized by this file."
+    }
+  }
+}
