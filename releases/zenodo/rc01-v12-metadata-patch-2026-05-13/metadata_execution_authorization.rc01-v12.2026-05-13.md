@@ -34,6 +34,13 @@ Implementation note:
   it preserves metadata, access, and custom fields, reduces the `files` object
   to its writable `enabled` switch, and omits PID state. This keeps the existing
   file in place without resubmitting read-only file rows.
+- Attempt 3 still failed on `PUT /api/records/{id}/draft` with Zenodo HTTP 500.
+  The workflow attempted to discard the draft and no public-record change was
+  recorded.
+- Attempt 4 keeps the same records draft path and further normalizes `access`
+  to only the writable `record` and `files` visibility fields shown in the
+  InvenioRDM draft update API. It also emits a sanitized update-body shape in
+  the workflow log without printing the replacement description or token.
 
 ## Authorized Scope
 

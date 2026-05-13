@@ -181,9 +181,21 @@ jobs:
                   raise SystemExit(f"Could not open metadata draft edit: HTTP {status}\n{text}")
 
           update_body = {}
-          for key in ("metadata", "access", "custom_fields"):
+          for key in ("metadata", "custom_fields"):
               if isinstance(draft, dict) and key in draft:
                   update_body[key] = draft[key]
+
+          if isinstance(draft, dict) and "access" in draft:
+              draft_access = draft["access"]
+              if not isinstance(draft_access, dict):
+                  raise SystemExit("Draft access field is not an object.")
+              access = {}
+              for key in ("record", "files"):
+                  if key in draft_access:
+                      access[key] = draft_access[key]
+              if set(access) != {"record", "files"}:
+                  raise SystemExit("Draft access field did not include record/files visibility.")
+              update_body["access"] = access
 
           # Zenodo's RDM draft response includes read-only file entries and PID
           # state. For a metadata-only edit, keep only the writable files switch
@@ -200,6 +212,17 @@ jobs:
 
           update_body["metadata"] = dict(update_body["metadata"])
           update_body["metadata"]["description"] = candidate["description"]
+
+          print(json.dumps({
+              "zenodo_update_body_shape": {
+                  "top_level_keys": sorted(update_body),
+                  "access": update_body.get("access"),
+                  "files": update_body.get("files"),
+                  "metadata_keys": sorted(update_body["metadata"]),
+                  "custom_field_keys": sorted(update_body.get("custom_fields", {})),
+                  "pids_included": "pids" in update_body,
+              }
+          }, ensure_ascii=False, indent=2))
 
           status, text, update_response = request(
               "PUT",
