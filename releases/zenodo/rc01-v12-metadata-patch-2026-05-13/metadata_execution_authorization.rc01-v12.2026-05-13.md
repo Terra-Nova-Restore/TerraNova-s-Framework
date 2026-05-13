@@ -41,6 +41,13 @@ Implementation note:
   to only the writable `record` and `files` visibility fields shown in the
   InvenioRDM draft update API. It also emits a sanitized update-body shape in
   the workflow log without printing the replacement description or token.
+- Attempt 4 still failed on `PUT /api/records/{id}/draft` with Zenodo HTTP 500.
+  The sanitized shape showed that Zenodo returned legacy deposit-style metadata
+  through the records draft route, making that route unstable for this record.
+- Attempt 5 returns to the classic deposit edit flow
+  `/api/deposit/depositions/{id}/actions/edit` with the updated owner token.
+  This path matches the metadata schema in the patch package and still sends no
+  file payload, no new-version action, and no DOI action.
 
 ## Authorized Scope
 
