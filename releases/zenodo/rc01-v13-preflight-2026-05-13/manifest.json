@@ -1,0 +1,67 @@
+{
+  "preflight_id": "rc01-v13-preflight-2026-05-13",
+  "status": "PREPARED_NO_ZENODO_MUTATION",
+  "created_date": "2026-05-13",
+  "target": {
+    "record_id": "20073579",
+    "record_url": "https://zenodo.org/records/20073579",
+    "doi": "10.5281/zenodo.20073579",
+    "doi_url": "https://doi.org/10.5281/zenodo.20073579",
+    "concept_record_id": "19774446",
+    "concept_doi": "10.5281/zenodo.19774446",
+    "concept_doi_url": "https://doi.org/10.5281/zenodo.19774446",
+    "current_version": "RC01-v12",
+    "candidate_version": "RC01-v13",
+    "current_status": "published"
+  },
+  "current_artifact": {
+    "repo_path": "releases/zenodo/rc01-v12-2026-05-07/ferrai-terra-nova-cic-werkmonographie-rc01-v12.pdf",
+    "source_download_name": "main (44).pdf",
+    "size_bytes": 2943457,
+    "md5": "d791d480e75f3d89f9a103a28a5c5001",
+    "sha256": "1e9ce2f810b0af8c245887bb3a01ebcb01ca8f90c971bd5cf39da47a6b8dda40"
+  },
+  "candidate_artifact": {
+    "status": "missing_distinct_v13_artifact",
+    "observed_local_candidate": "C:/Users/Silvan/Downloads/main (45).pdf",
+    "observed_local_candidate_sha256": "1e9ce2f810b0af8c245887bb3a01ebcb01ca8f90c971bd5cf39da47a6b8dda40",
+    "observed_local_candidate_md5": "d791d480e75f3d89f9a103a28a5c5001",
+    "byte_identical_to_current_artifact": true,
+    "upload_allowed": false
+  },
+  "identity": {
+    "creator": "Lenhard, Silvan",
+    "affiliation": "Terra'Nova'Restore",
+    "orcid": "0009-0007-8033-3508",
+    "repository": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework"
+  },
+  "workflow": {
+    "path": ".github/workflows/zenodo-rc01-v13-preflight.yml",
+    "default_mode": "preflight-only",
+    "target_record_id": "20073579",
+    "writes_to_zenodo": false,
+    "publishes_to_zenodo": false
+  },
+  "hard_locks": {
+    "zenodo_draft": false,
+    "zenodo_upload": false,
+    "zenodo_publish": false,
+    "doi_reservation": false,
+    "raw_dump": false,
+    "private_excerpts": false,
+    "use_identical_pdf_as_new_version": false
+  },
+  "required_for_z2": [
+    "distinct public-safe RC01-v13 PDF artifact",
+    "artifact SHA-256 and MD5",
+    "reviewed metadata payload",
+    "public-boundary review",
+    "explicit Silvi-Go for draft creation",
+    "manual Zenodo preview review before publish"
+  ],
+  "notes": [
+    "The old v3 workflow targets record 19961351 and main (22).pdf; it is not the RC01-v13 lane.",
+    "RC01-v13 must target the current published record 20073579 as the parent version.",
+    "OpenAIRE and ORCID are treated as downstream identity/indexing context, not as mutable targets in Z1."
+  ]
+}
