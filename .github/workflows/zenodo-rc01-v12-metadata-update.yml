@@ -172,56 +172,45 @@ jobs:
               raise SystemExit(f"Could not read public record before update: HTTP {status}\n{text}")
           require_public_record_unchanged(public_before)
 
-          status, text, deposition_before = request("GET", f"{base}/deposit/depositions/{record_id}", auth=True, ok=(200,))
-          if status != 200:
-              raise SystemExit(f"Could not read authenticated deposition before update: HTTP {status}\n{text}")
+          draft_url = f"{base}/records/{record_id}/draft"
+          status, text, draft = request("POST", draft_url, auth=True, ok=(200, 201))
+          if status not in (200, 201):
+              if status in (400, 409):
+                  status, text, draft = request("GET", draft_url, auth=True, ok=(200,))
+              if status != 200:
+                  raise SystemExit(f"Could not open metadata draft edit: HTTP {status}\n{text}")
 
-          status, text, edit_body = request(
-              "POST",
-              f"{base}/deposit/depositions/{record_id}/actions/edit",
-              auth=True,
-              ok=(200, 201, 202),
-          )
-          if status not in (200, 201, 202):
-              raise SystemExit(f"Could not open metadata edit: HTTP {status}\n{text}")
+          update_body = {}
+          for key in ("metadata", "access", "files", "pids", "custom_fields"):
+              if isinstance(draft, dict) and key in draft:
+                  update_body[key] = draft[key]
 
-          edit_id = str((edit_body or {}).get("id") or record_id)
-          metadata_payload = dict(candidate)
-          update_body = {"metadata": metadata_payload}
+          if "metadata" not in update_body:
+              raise SystemExit("Draft response did not include metadata.")
+
+          update_body["metadata"] = dict(update_body["metadata"])
+          update_body["metadata"]["description"] = candidate["description"]
 
           status, text, update_response = request(
               "PUT",
-              f"{base}/deposit/depositions/{edit_id}",
+              draft_url,
               data=update_body,
               auth=True,
               ok=(200,),
           )
-
-          if status != 200 and "notes" in metadata_payload:
-              metadata_payload = dict(metadata_payload)
-              metadata_payload.pop("notes", None)
-              update_body = {"metadata": metadata_payload}
-              status, text, update_response = request(
-                  "PUT",
-                  f"{base}/deposit/depositions/{edit_id}",
-                  data=update_body,
-                  auth=True,
-                  ok=(200,),
-              )
-
           if status != 200:
-              request("POST", f"{base}/deposit/depositions/{edit_id}/actions/discard", auth=True, ok=(200, 201, 202, 204))
-              raise SystemExit(f"Metadata PUT failed; edit was discarded. HTTP {status}\n{text}")
+              request("DELETE", draft_url, auth=True, ok=(200, 202, 204))
+              raise SystemExit(f"Metadata PUT failed; draft discard attempted. HTTP {status}\n{text}")
 
           status, text, publish_response = request(
               "POST",
-              f"{base}/deposit/depositions/{edit_id}/actions/publish",
+              f"{draft_url}/actions/publish",
               auth=True,
               ok=(200, 202),
           )
           if status not in (200, 202):
-              request("POST", f"{base}/deposit/depositions/{edit_id}/actions/discard", auth=True, ok=(200, 201, 202, 204))
-              raise SystemExit(f"Metadata publish failed; edit discard attempted. HTTP {status}\n{text}")
+              request("DELETE", draft_url, auth=True, ok=(200, 202, 204))
+              raise SystemExit(f"Metadata publish failed; draft discard attempted. HTTP {status}\n{text}")
 
           public_after = None
           for _ in range(12):
