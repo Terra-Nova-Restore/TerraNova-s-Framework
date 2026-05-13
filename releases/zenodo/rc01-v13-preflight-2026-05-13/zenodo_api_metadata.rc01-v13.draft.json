@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "title": "FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat",
+    "upload_type": "publication",
+    "publication_type": "book",
+    "description": "<h2>Zenodo Description -- Deutsch</h2><p>Diese Metadaten sind ein RC01-v13-Draft-Kandidat fuer die spaetere Zenodo-Versionierung des bereits publizierten RC01-v12-Records <code>10.5281/zenodo.20073579</code>. Sie duerfen erst fuer eine Zenodo-Draft-Erstellung verwendet werden, wenn ein eigenstaendiges, oeffentlich freigegebenes RC01-v13-PDF vorliegt und Silvi die Draft-Erstellung explizit freigibt.</p><p>RC01-v13 ist als spaeterer Arbeits- und Freigabestand der Werkmonographie mit Evidenzapparat zum FerrAI-/Terra-Nova-/CIC-Komplex vorgesehen. Die Fassung bleibt quellengebunden, unterscheidet primaere Evidenz, editorische Ableitung und offene Stellen und darf keine privaten Rohdaten oder nicht freigegebenen Korpusauszuege enthalten.</p><h2>Zenodo Description -- English</h2><p>These metadata are an RC01-v13 draft candidate for a later Zenodo version of the already published RC01-v12 record <code>10.5281/zenodo.20073579</code>. They may only be used for Zenodo draft creation once a distinct, public-safe RC01-v13 PDF exists and Silvi explicitly authorizes draft creation.</p><p>RC01-v13 is intended as a later working and release state of the work monograph with evidence apparatus on the FerrAI / Terra Nova / CIC complex. The version remains source-bound, separates primary evidence from editorial inference and open questions, and must not contain private raw data or unreleased corpus excerpts.</p><h2>Version Note</h2><p>Draft metadata only. No Zenodo draft, upload, DOI reservation, or publish action is authorized by this file.</p>",
+    "creators": [
+      {
+        "name": "Lenhard, Silvan",
+        "affiliation": "Terra'Nova'Restore",
+        "orcid": "0009-0007-8033-3508"
+      }
+    ],
+    "access_right": "open",
+    "license": "cc-by-4.0",
+    "version": "RC01-v13",
+    "keywords": [
+      "FerrAI",
+      "Terra Nova",
+      "CIC",
+      "Cognitive Intelligent Cooperation",
+      "Human-AI Collaboration",
+      "Mensch-KI-Interaktion",
+      "Claim/Evidence",
+      "Evidence Apparatus",
+      "Editorial Reconstruction",
+      "Source-Critical Edition",
+      "System Architecture",
+      "Process Logic",
+      "Trigger Logic",
+      "Knowledge Organization",
+      "Governance",
+      "Versioned Research Manuscript",
+      "Dissertation Draft",
+      "Workspace Documentation",
+      "AI-assisted research"
+    ],
+    "notes": "RC01-v13 draft metadata candidate only. Current published record: 10.5281/zenodo.20073579. Concept DOI: 10.5281/zenodo.19774446. No Zenodo draft, upload, DOI reservation, or publish action is authorized by this repository preflight package.",
+    "related_identifiers": [
+      {
+        "identifier": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework",
+        "relation": "isSupplementedBy",
+        "scheme": "url"
+      },
+      {
+        "identifier": "10.5281/zenodo.19774446",
+        "relation": "isVersionOf",
+        "scheme": "doi"
+      }
+    ],
+    "references": [
+      "Lenhard, S. (2026). FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat (RC01-v12). Zenodo. https://doi.org/10.5281/zenodo.20073579"
+    ]
+  }
+}
