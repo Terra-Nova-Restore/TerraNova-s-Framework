@@ -181,9 +181,19 @@ jobs:
                   raise SystemExit(f"Could not open metadata draft edit: HTTP {status}\n{text}")
 
           update_body = {}
-          for key in ("metadata", "access", "files", "pids", "custom_fields"):
+          for key in ("metadata", "access", "custom_fields"):
               if isinstance(draft, dict) and key in draft:
                   update_body[key] = draft[key]
+
+          # Zenodo's RDM draft response includes read-only file entries and PID
+          # state. For a metadata-only edit, keep only the writable files switch
+          # so the existing file remains enabled without resubmitting file rows.
+          if isinstance(draft, dict) and "files" in draft:
+              draft_files = draft["files"]
+              files_enabled = True
+              if isinstance(draft_files, dict) and "enabled" in draft_files:
+                  files_enabled = bool(draft_files["enabled"])
+              update_body["files"] = {"enabled": files_enabled}
 
           if "metadata" not in update_body:
               raise SystemExit("Draft response did not include metadata.")

@@ -26,6 +26,14 @@ Implementation note:
   before opening an edit because Zenodo returned `403 Permission denied`.
 - Attempt 2 uses the current record draft path `/api/records/{id}/draft` for
   metadata-only edit/publish.
+- Attempt 2 opened the record draft after the `ZENODO_API` secret was updated,
+  then failed on `PUT /api/records/{id}/draft` with Zenodo HTTP 500. The
+  workflow attempted to discard the draft and the public record was verified as
+  unchanged.
+- Attempt 3 keeps the same records draft path but normalizes the update payload:
+  it preserves metadata, access, and custom fields, reduces the `files` object
+  to its writable `enabled` switch, and omits PID state. This keeps the existing
+  file in place without resubmitting read-only file rows.
 
 ## Authorized Scope
 
