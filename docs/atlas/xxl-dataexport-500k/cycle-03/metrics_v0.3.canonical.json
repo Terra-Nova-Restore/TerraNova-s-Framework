@@ -1,0 +1,138 @@
+{
+  "schema_version": "0.3",
+  "artifact_id": "cei-data-04-cycle-03-canonical-metrics",
+  "status": "accepted_pending_review",
+  "cycle": 3,
+  "boundary": "aggregate-only / no raw dump",
+  "zenodo_target": "HOLD / no push",
+  "source_sequence": [
+    "GPT",
+    "Notion/FerrAI",
+    "Codex"
+  ],
+  "notion_ack": {
+    "verdict": "ACCEPTED",
+    "drift": "none",
+    "cross_check": "18/18 verified",
+    "v0_3_state": "ACCEPTED_PENDING_CODEX_DISPATCH"
+  },
+  "layers": [
+    {
+      "layer": "Token",
+      "phase": "P1",
+      "values": [
+        {
+          "id": "p1_token_01",
+          "value": 144
+        },
+        {
+          "id": "p1_token_02",
+          "value": 72
+        }
+      ]
+    },
+    {
+      "layer": "Family",
+      "phase": "P2",
+      "values": [
+        {
+          "id": "p2_family_01",
+          "value": 6392
+        },
+        {
+          "id": "p2_family_02",
+          "value": 6174
+        },
+        {
+          "id": "p2_family_03",
+          "value": 449
+        },
+        {
+          "id": "p2_family_04",
+          "value": 0
+        },
+        {
+          "id": "p2_family_05",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "layer": "Risk",
+      "phase": "P3",
+      "values": [
+        {
+          "id": "p3_risk_01",
+          "value": 3495
+        },
+        {
+          "id": "p3_risk_02",
+          "value": 497
+        },
+        {
+          "id": "p3_risk_03",
+          "value": 11
+        },
+        {
+          "id": "p3_risk_04",
+          "value": 459
+        },
+        {
+          "id": "p3_risk_05",
+          "value": 692
+        }
+      ]
+    },
+    {
+      "layer": "Cluster",
+      "phase": "P4",
+      "values": [
+        {
+          "id": "p4_cluster_01",
+          "value": 28477
+        },
+        {
+          "id": "p4_cluster_02",
+          "value": 7174
+        },
+        {
+          "id": "p4_cluster_03",
+          "value": 2942
+        },
+        {
+          "id": "p4_cluster_04",
+          "value": 2672
+        },
+        {
+          "id": "p4_cluster_05",
+          "value": 1411
+        },
+        {
+          "id": "p4_cluster_06",
+          "value": 1355
+        }
+      ]
+    }
+  ],
+  "demoted_non_canonical_counts": [
+    "45",
+    "56-62",
+    "77",
+    "~880",
+    "808"
+  ],
+  "locks": {
+    "raw_dump": false,
+    "raw_excerpts": false,
+    "context_windows": false,
+    "private_material": false,
+    "zenodo_action": false,
+    "safe_index_mutation": false,
+    "merge_authorized": false
+  },
+  "follow_up_backlog": [
+    "phase_c_pipeline_hardening",
+    "unicode_aware_safe_index",
+    "cei_data_04_v0_3_narrative_after_p3_p5"
+  ]
+}
