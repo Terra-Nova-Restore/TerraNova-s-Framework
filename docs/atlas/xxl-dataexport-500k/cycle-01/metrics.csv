@@ -1,0 +1,25 @@
+section,metric,value,unit_or_note
+hard_metrics,txt_bytes,30957838,bytes
+hard_metrics,txt_size,30.96,MB
+hard_metrics,characters,30065300,count
+hard_metrics,lines,553000,count
+hard_metrics,empty_lines,132078,count
+hard_metrics,max_line_length,20251,characters
+hard_metrics,mean_line_length,52.37,characters approximate
+hard_metrics,median_line_length,28,characters
+term_frequency,trigger,20137,literal case-insensitive
+term_frequency,codex,11978,literal case-insensitive
+term_frequency,Terra,8456,literal case-insensitive
+term_frequency,FerrAI,7289,literal case-insensitive
+term_frequency,Schattenarchiv,4506,literal case-insensitive
+term_frequency,Patent,3937,literal case-insensitive
+term_frequency,Token,3493,literal case-insensitive
+term_frequency,VORTEX,2005,literal case-insensitive
+term_frequency,GitHub,246,literal case-insensitive
+term_frequency,Notion,178,literal case-insensitive
+term_frequency,DAO,84,literal case-insensitive
+term_frequency,IPFS,18,literal case-insensitive
+term_frequency,Equilibrium,10,literal case-insensitive
+term_frequency,CIC,1,literal case-insensitive
+term_frequency,Zenodo,0,literal case-insensitive
+term_frequency,Metarotik,0,literal case-insensitive
