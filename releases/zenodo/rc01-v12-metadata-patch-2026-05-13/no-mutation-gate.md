@@ -1,22 +1,29 @@
 # No-Mutation Gate Statement
 
-Status: ACTIVE
+Status: SUPERSEDED_FOR_METADATA_EXECUTION
 Scope: RC01-v12 Zenodo metadata patch review package
 
 ## Gate
 
-This package does not authorize any Zenodo mutation.
+This package originally did not authorize any Zenodo mutation. That review gate
+was superseded by explicit Silvi authorization on 2026-05-13 to execute the
+metadata-only update for record `20073579`.
+
+The remaining gate is still active for every non-metadata action.
+
+Authorized now:
+
+- metadata-only update on Zenodo record `20073579`;
+- no file, DOI, version, release, or tag action.
 
 ## Explicitly Not Authorized
 
-- Zenodo API write request
-- metadata update on Zenodo
 - file upload
 - file deletion
 - file modification
 - new version creation
 - DOI reservation
-- publish action
+- publish action for a new record or new version
 - GitHub release
 - Git tag
 
@@ -26,6 +33,8 @@ This package does not authorize any Zenodo mutation.
 - local documentation review
 - public read-only Zenodo record checks
 - GitHub draft PR review
+- GitHub Actions execution using repository secret `ZENODO_API`, restricted to
+  the metadata-only update described in v0.2
 
 ## Current Artifact Boundary
 
@@ -36,4 +45,6 @@ artifact and is not part of this metadata-only patch path.
 
 ## Next Authorization Required
 
-A later explicit Silvi-Go is required before any metadata write is attempted.
+The explicit Silvi-Go for metadata execution has been received. A separate
+explicit Silvi-Go is still required for any future file, version, DOI, release,
+or tag action.
