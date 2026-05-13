@@ -1,0 +1,59 @@
+{
+  "$schema": "./metadata.schema.json",
+  "schema_version": "0.1-draft",
+  "artifact_id": "cei-data-04-data-note",
+  "title": "CEI-DATA-04 -- Data Note for XXL DatenExport 500k",
+  "status": "draft",
+  "layer": "data-note",
+  "boundary": "aggregate-only / no raw dump",
+  "zenodo_target": "HOLD / no push",
+  "cycle": 2,
+  "corpus_anchor": {
+    "zip_name": "XXL_DatenExport_500_000Zeilen.zip",
+    "txt_name": "XXL_DatenExport_500_000Zeilen.txt",
+    "zip_sha256": "4e804d279535d273b9363e0171200ca6462fee52fbb75bd5b3ed070d7fb42f81",
+    "txt_sha256": "06bc44cfda1226db6324e5261449b095b0be2bf124e9a5a416af5f3f1fc6df5d",
+    "line_count": 553000,
+    "byte_size_bytes": 30957838,
+    "byte_size_label": "30.96 MB",
+    "char_count": 30065300,
+    "safe_index_path": "docs/atlas/xxl-dataexport-500k/cycle-01/",
+    "cycle_1_pr_number": 38,
+    "cycle_1_merge_sha": "3d61a6f27ce08573c71b39f979853535793dad9f",
+    "cycle_1_merged_at": "2026-05-13T00:56:16Z"
+  },
+  "identity_anchor": {
+    "orcid": "0009-0007-8033-3508",
+    "note": "Zenodo-audit-consistent identity anchor only; this draft does not authorize a Zenodo push."
+  },
+  "notion_routing": {
+    "target_page_title": "CEI-DATA-04 -- Data Note",
+    "target_parent": "XXL DatenExport 500k -- Top-5 Quellenfund / Snapshotanalyse",
+    "cei_data_05_role": "Companion workspace index, trigger matrix, and reference layer; not the corpus home.",
+    "cei_04_family_role": "Sensitive-review and public-gate lane; separate from this data-note lane."
+  },
+  "allowed_repository_material": [
+    "summaries",
+    "manifests",
+    "hash files",
+    "safe indexes",
+    "data-note drafts",
+    "redaction policy",
+    "metrics tables",
+    "schemas",
+    "notion skeletons"
+  ],
+  "non_claims": [
+    "This draft does not publish the raw corpus.",
+    "This draft does not include raw corpus excerpts.",
+    "This draft is not a Zenodo release decision.",
+    "This draft is not CEI-04 Sensitive Review & Public Gate.",
+    "This draft does not assert public reusability beyond aggregate metadata."
+  ],
+  "phase_gate": {
+    "silvi_go_required": true,
+    "current_step": "B / Codex draft PR",
+    "next_step": "C / FerrAI Notion CEI-DATA-04 skeleton",
+    "merge_allowed": false
+  }
+}
