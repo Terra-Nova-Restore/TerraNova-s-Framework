@@ -1,6 +1,6 @@
 # RC01-v12 Zenodo Metadata Patch Notes
 
-Status: REVIEW_ONLY_NO_MUTATION
+Status: REVIEW_ONLY_NO_MUTATION v0.2
 Target record: `20073579`
 Specific DOI: `10.5281/zenodo.20073579`
 Concept DOI: `10.5281/zenodo.19774446`
@@ -37,6 +37,19 @@ MD5:    d791d480e75f3d89f9a103a28a5c5001
 
 Therefore there is no v13 artifact and no file update path in this package.
 
+## v0.2 Review Decision
+
+Codex review and GPT semantic review found that the v0.1 package was a valid
+review surface but not write-ready. The v0.2 package keeps the metadata update
+strictly conservative:
+
+- preserve `custom.code:codeRepository`;
+- preserve the current keyword list exactly;
+- preserve the current concept DOI reference;
+- preserve the concept DOI `isVersionOf` related identifier;
+- do not add a GitHub related identifier unless it is separately validated and
+  approved later.
+
 ## Proposed Metadata Behavior
 
 - Keep the record title unchanged.
@@ -45,7 +58,9 @@ Therefore there is no v13 artifact and no file update path in this package.
 - Keep ORCID `0009-0007-8033-3508`.
 - Keep license `cc-by-4.0`.
 - Keep language `deu`.
-- Keep repository relationship to `Terra-Nova-Restore/TerraNova-s-Framework`.
+- Keep repository relationship via `custom.code:codeRepository`.
+- Keep current keywords unchanged.
+- Keep current concept DOI reference unchanged.
 - Replace only the review-targeted metadata text with cleaner HTML if later
   approved.
 

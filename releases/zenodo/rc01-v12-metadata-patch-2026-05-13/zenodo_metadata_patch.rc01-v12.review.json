@@ -31,7 +31,7 @@
     "file_sha256": "1e9ce2f810b0af8c245887bb3a01ebcb01ca8f90c971bd5cf39da47a6b8dda40"
   },
   "review_findings": [
-    "The current public Zenodo metadata already has the correct DOI, concept DOI, version, ORCID, repository link, license, and file checksum.",
+    "The current public Zenodo metadata already has the correct DOI, concept DOI, version, ORCID, custom code repository link, license, and file checksum.",
     "The current description contains exported Notion wrapper markup and an older reference-snapshot wording that should be reviewed before any metadata edit.",
     "main (45).pdf is byte-identical to main (44).pdf and must not be used as a new file update or RC01-v13 payload."
   ],
@@ -53,26 +53,16 @@
       "version": "RC01-v12",
       "language": "deu",
       "keywords": [
-        "FerrAI",
-        "Terra Nova",
-        "TerraNova",
         "CIC",
-        "Cognitive Intelligent Cooperation",
-        "Human-AI Collaboration",
-        "Mensch-KI-Interaktion",
-        "Claim/Evidence",
-        "Evidence Apparatus",
-        "Editorial Reconstruction",
-        "Source-Critical Edition",
-        "System Architecture",
-        "Process Logic",
-        "Trigger Logic",
-        "Knowledge Organization",
-        "Governance",
-        "Versioned Research Manuscript",
-        "Dissertation Draft",
-        "Workspace Documentation",
-        "AI-assisted research"
+        "Zenodo",
+        "Github",
+        "Notion",
+        "audit trail",
+        "complex systems",
+        "AI ethics",
+        "FerrAI",
+        "Terra'Nova'Restore",
+        "human-AI interaction"
       ],
       "related_identifiers": [
         {
@@ -80,18 +70,15 @@
           "relation": "isVersionOf",
           "scheme": "doi",
           "resource_type": "publication-other"
-        },
-        {
-          "identifier": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework",
-          "relation": "isSupplementedBy",
-          "scheme": "url"
         }
       ],
+      "custom": {
+        "code:codeRepository": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework"
+      },
       "references": [
-        "Lenhard, S. (2026). FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat (RC01-v12). Zenodo. https://doi.org/10.5281/zenodo.20073579",
-        "Lenhard, S. (2026). TerraNova-s-Framework. GitHub. https://github.com/Terra-Nova-Restore/TerraNova-s-Framework"
+        "Lenhard, S. (2026). FerrAI / Terra Nova: Dissertationsentwurf. Zenodo. https://doi.org/10.5281/zenodo.19774446"
       ],
-      "notes": "Metadata-only review candidate for the existing RC01-v12 record. No file update, new version, DOI reservation, upload, or publish action is authorized by this file."
+      "notes": "Metadata-only v0.2 review candidate for the existing RC01-v12 record. It preserves the current custom code repository field, current keywords, current concept DOI reference, and current isVersionOf relation. No file update, new version, DOI reservation, upload, or publish action is authorized by this file."
     }
   }
 }

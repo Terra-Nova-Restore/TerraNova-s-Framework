@@ -13,7 +13,11 @@ Status: REVIEW_ONLY_NO_MUTATION
 - [x] File MD5 is `d791d480e75f3d89f9a103a28a5c5001`.
 - [x] File SHA-256 is `1e9ce2f810b0af8c245887bb3a01ebcb01ca8f90c971bd5cf39da47a6b8dda40`.
 - [x] ORCID is present: `0009-0007-8033-3508`.
-- [x] GitHub repository link is present in current metadata.
+- [x] GitHub repository link is present in current metadata as
+  `custom.code:codeRepository`.
+- [x] Current keywords are recorded as the conservative v0.2 baseline.
+- [x] Current concept DOI reference is recorded as the conservative v0.2
+  baseline.
 - [x] Current description includes exported Notion wrapper markup.
 - [x] Current description includes older reference-snapshot wording.
 
@@ -31,6 +35,12 @@ Status: REVIEW_ONLY_NO_MUTATION
 - [ ] Description is cleaned of Notion wrapper markup.
 - [ ] Description explicitly names `RC01-v12`.
 - [ ] Repository relationship is preserved.
+- [ ] `custom.code:codeRepository` is preserved.
+- [ ] Current keywords are preserved without broad expansion.
+- [ ] Current concept DOI reference is preserved.
+- [ ] No self-DOI reference is added as a normal reference.
+- [ ] No GitHub related identifier is added without separate Zenodo relation
+  validation.
 - [ ] ORCID is preserved.
 - [ ] License remains `cc-by-4.0`.
 - [ ] Language remains `deu`.
@@ -41,7 +51,8 @@ Status: REVIEW_ONLY_NO_MUTATION
 - [ ] Is the cleaned English description faithful to the published record?
 - [ ] Should the older `Referenzsnapshot: Zenodo v7 vom 3. Mai 2026` wording be removed, replaced, or retained?
 - [ ] Should the GitHub repository be represented as a related identifier, custom repository field, or both?
-- [ ] Should keywords be expanded to match `CITATION.cff`, or kept closer to the current Zenodo record?
+- [x] v0.2 decision: keep GitHub primarily in `custom.code:codeRepository`.
+- [x] v0.2 decision: keep keywords close to the current Zenodo record.
 
 ## Decision Gate
 
