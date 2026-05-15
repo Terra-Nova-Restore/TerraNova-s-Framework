@@ -1,0 +1,339 @@
+name: Zenodo Metadata Refresh - RC01 v12 Z3
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/zenodo-rc01-v12-z3-metadata-refresh.yml"
+      - "releases/zenodo/rc01-v12-z3-metadata-refresh-2026-05-15/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  refresh-metadata:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'execute-zenodo-z3-metadata-refresh')
+    runs-on: ubuntu-latest
+
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_API }}
+      ZENODO_API_BASE: https://zenodo.org/api
+      ZENODO_RECORD_ID: "20073579"
+      METADATA_PATCH_PATH: releases/zenodo/rc01-v12-z3-metadata-refresh-2026-05-15/zenodo_metadata_refresh.rc01-v12.z3.review.json
+      EXPECTED_DOI: 10.5281/zenodo.20073579
+      EXPECTED_CONCEPT_DOI: 10.5281/zenodo.19774446
+      EXPECTED_VERSION: RC01-v12
+      EXPECTED_PUBLICATION_DATE: "2026-05-13"
+      EXPECTED_FILE_NAME: main (44).pdf
+      EXPECTED_FILE_SIZE: "2943457"
+      EXPECTED_FILE_MD5: md5:d791d480e75f3d89f9a103a28a5c5001
+      EXPECTED_REPOSITORY: https://github.com/Terra-Nova-Restore/TerraNova-s-Framework
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Normalize Zenodo token
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -z "${ZENODO_ACCESS_TOKEN}" ]; then
+            echo "GitHub secret ZENODO_API is empty or missing."
+            exit 1
+          fi
+
+          TOKEN="${ZENODO_ACCESS_TOKEN//$'\r'/}"
+          TOKEN="${TOKEN//$'\n'/}"
+          TOKEN="$(printf '%s' "${TOKEN}" | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//; s/^[Bb][Ee][Aa][Rr][Ee][Rr][[:space:]]+//')"
+
+          if [ -z "${TOKEN}" ]; then
+            echo "GitHub secret ZENODO_API is empty after normalization."
+            exit 1
+          fi
+
+          echo "::add-mask::${TOKEN}"
+          {
+            echo "ZENODO_BEARER_TOKEN<<EOF"
+            printf '%s\n' "${TOKEN}"
+            echo "EOF"
+          } >> "${GITHUB_ENV}"
+
+      - name: Apply Z3 metadata-only refresh
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python - <<'PY'
+          import json
+          import os
+          import sys
+          import time
+          import urllib.error
+          import urllib.request
+
+          base = os.environ["ZENODO_API_BASE"].rstrip("/")
+          record_id = os.environ["ZENODO_RECORD_ID"]
+          token = os.environ["ZENODO_BEARER_TOKEN"]
+          patch_path = os.environ["METADATA_PATCH_PATH"]
+          expected_repo = os.environ["EXPECTED_REPOSITORY"]
+
+          expected_title = "FerrAI–TerraNova CIC Framework — System Architecture, State Logic and Governance Boundaries"
+          expected_keywords = [
+              "Human-AI Cooperation",
+              "Cognitive Architecture",
+              "Systems Engineering",
+              "AI Governance",
+              "Codex Framework",
+              "Co-Creation",
+              "Interaction Design",
+              "Knowledge Architecture",
+              "Resonance Systems",
+              "TerraNova",
+              "FerrAI",
+          ]
+          expected_related = [
+              {
+                  "identifier": "10.5281/zenodo.19774446",
+                  "relation": "isVersionOf",
+                  "scheme": "doi",
+                  "resource_type": "publication-other",
+              }
+          ]
+          expected_references = [
+              "Lenhard, S. (2026). FerrAI / Terra Nova: Dissertationsentwurf. Zenodo. https://doi.org/10.5281/zenodo.19774446"
+          ]
+          required_description_fragments = [
+              "This document describes a conceptual and operational framework; it does not claim machine consciousness, legal personhood, or autonomous agency.",
+              "Dieses Dokument beschreibt ein konzeptionelles und operatives Framework; es beansprucht keine Maschinen-Bewusstheit, keine juristische Personalität und keine autonome Handlungsfähigkeit.",
+              "Zenodo = Reference Anchor",
+              "GitHub = Working State",
+              "Notion = Internal Index",
+          ]
+
+          with open(patch_path, encoding="utf-8") as f:
+              patch = json.load(f)
+
+          candidate = patch["proposed_api_payload_candidate"]["metadata"]
+          if candidate.get("title") != expected_title:
+              raise SystemExit("Candidate title drifted.")
+          if candidate.get("keywords") != expected_keywords:
+              raise SystemExit("Candidate keywords drifted.")
+          if candidate.get("related_identifiers") != expected_related:
+              raise SystemExit("Candidate related_identifiers drifted.")
+          if candidate.get("references") != expected_references:
+              raise SystemExit("Candidate references drifted.")
+          if candidate.get("custom", {}).get("code:codeRepository") != expected_repo:
+              raise SystemExit("Candidate repository custom field missing.")
+          if candidate.get("version") != os.environ["EXPECTED_VERSION"]:
+              raise SystemExit("Candidate version drifted.")
+          if candidate.get("publication_date") != os.environ["EXPECTED_PUBLICATION_DATE"]:
+              raise SystemExit("Candidate publication_date drifted.")
+          if candidate.get("license") != "cc-by-4.0":
+              raise SystemExit("Candidate license drifted.")
+          if candidate.get("upload_type") != "publication":
+              raise SystemExit("Candidate upload_type drifted.")
+          description = candidate.get("description", "")
+          for fragment in required_description_fragments:
+              if fragment not in description:
+                  raise SystemExit(f"Candidate description missing required fragment: {fragment}")
+
+          def request(method, url, data=None, auth=False, ok=(200,)):
+              headers = {"Accept": "application/json"}
+              body = None
+              if data is not None:
+                  body = json.dumps(data, ensure_ascii=False).encode("utf-8")
+                  headers["Content-Type"] = "application/json"
+              if auth:
+                  headers["Authorization"] = f"Bearer {token}"
+              req = urllib.request.Request(url, data=body, headers=headers, method=method)
+              try:
+                  with urllib.request.urlopen(req, timeout=60) as resp:
+                      text = resp.read().decode("utf-8")
+                      status = resp.status
+              except urllib.error.HTTPError as exc:
+                  text = exc.read().decode("utf-8", errors="replace")
+                  return exc.code, text, None
+
+              parsed = json.loads(text) if text else None
+              if status not in ok:
+                  return status, text, parsed
+              return status, text, parsed
+
+          def require_record_guardrails(record, after=False):
+              if str(record.get("id")) != record_id:
+                  raise SystemExit("Unexpected record id.")
+              if record.get("doi") != os.environ["EXPECTED_DOI"]:
+                  raise SystemExit("Unexpected DOI.")
+              if record.get("conceptdoi") != os.environ["EXPECTED_CONCEPT_DOI"]:
+                  raise SystemExit("Unexpected concept DOI.")
+              metadata = record.get("metadata", {})
+              if metadata.get("version") != os.environ["EXPECTED_VERSION"]:
+                  raise SystemExit("Unexpected version.")
+              if metadata.get("publication_date") != os.environ["EXPECTED_PUBLICATION_DATE"]:
+                  raise SystemExit("Unexpected publication date.")
+              if metadata.get("custom", {}).get("code:codeRepository") != expected_repo:
+                  raise SystemExit("Repository custom field missing on public record.")
+              if metadata.get("related_identifiers") != expected_related:
+                  raise SystemExit("Public related_identifiers drifted.")
+              if metadata.get("references") != expected_references:
+                  raise SystemExit("Public references drifted.")
+              license_field = metadata.get("license")
+              license_id = license_field.get("id") if isinstance(license_field, dict) else license_field
+              if license_id != "cc-by-4.0":
+                  raise SystemExit("Public license drifted.")
+              resource_type = metadata.get("resource_type", {})
+              if resource_type.get("type") != "publication" or resource_type.get("subtype") != "book":
+                  raise SystemExit("Public upload/publication type drifted.")
+              files = record.get("files", [])
+              if len(files) != 1:
+                  raise SystemExit("Unexpected file count.")
+              file0 = files[0]
+              if file0.get("key") != os.environ["EXPECTED_FILE_NAME"]:
+                  raise SystemExit("Unexpected file name.")
+              if str(file0.get("size")) != os.environ["EXPECTED_FILE_SIZE"]:
+                  raise SystemExit("Unexpected file size.")
+              if file0.get("checksum") != os.environ["EXPECTED_FILE_MD5"]:
+                  raise SystemExit("Unexpected file checksum.")
+              if after:
+                  if metadata.get("title") != expected_title:
+                      raise SystemExit("Public title did not refresh.")
+                  if metadata.get("keywords") != expected_keywords:
+                      raise SystemExit("Public keywords did not refresh.")
+                  desc = metadata.get("description", "")
+                  for fragment in required_description_fragments:
+                      if fragment not in desc:
+                          raise SystemExit(f"Public description missing required fragment: {fragment}")
+
+          status, text, public_before = request("GET", f"{base}/records/{record_id}", ok=(200,))
+          if status != 200:
+              raise SystemExit(f"Could not read public record before update: HTTP {status}\n{text}")
+          require_record_guardrails(public_before)
+
+          status, text, deposition_before = request("GET", f"{base}/deposit/depositions/{record_id}", auth=True, ok=(200,))
+          if status != 200:
+              raise SystemExit(f"Could not read authenticated deposition before update: HTTP {status}\n{text}")
+
+          status, text, edit_body = request(
+              "POST",
+              f"{base}/deposit/depositions/{record_id}/actions/edit",
+              auth=True,
+              ok=(200, 201, 202),
+          )
+          if status not in (200, 201, 202):
+              raise SystemExit(f"Could not open metadata edit: HTTP {status}\n{text}")
+
+          edit_id = str((edit_body or {}).get("id") or record_id)
+          metadata_payload = dict(candidate)
+          update_body = {"metadata": metadata_payload}
+
+          print(json.dumps({
+              "zenodo_z3_legacy_deposit_edit_shape": {
+                  "edit_id": edit_id,
+                  "metadata_keys": sorted(metadata_payload),
+                  "file_payload_included": False,
+                  "new_version_requested": False,
+                  "doi_mutation_requested": False,
+                  "related_identifier_mutation_requested": False,
+              }
+          }, ensure_ascii=False, indent=2))
+
+          status, text, update_response = request(
+              "PUT",
+              f"{base}/deposit/depositions/{edit_id}",
+              data=update_body,
+              auth=True,
+              ok=(200,),
+          )
+
+          if status != 200 and "notes" in metadata_payload:
+              metadata_payload = dict(metadata_payload)
+              metadata_payload.pop("notes", None)
+              update_body = {"metadata": metadata_payload}
+              status, text, update_response = request(
+                  "PUT",
+                  f"{base}/deposit/depositions/{edit_id}",
+                  data=update_body,
+                  auth=True,
+                  ok=(200,),
+              )
+
+          if status != 200:
+              request("POST", f"{base}/deposit/depositions/{edit_id}/actions/discard", auth=True, ok=(200, 201, 202, 204))
+              raise SystemExit(f"Metadata PUT failed; edit was discarded. HTTP {status}\n{text}")
+
+          status, text, publish_response = request(
+              "POST",
+              f"{base}/deposit/depositions/{edit_id}/actions/publish",
+              auth=True,
+              ok=(200, 202),
+          )
+          if status not in (200, 202):
+              request("POST", f"{base}/deposit/depositions/{edit_id}/actions/discard", auth=True, ok=(200, 201, 202, 204))
+              raise SystemExit(f"Metadata publish failed; edit discard attempted. HTTP {status}\n{text}")
+
+          public_after = None
+          for _ in range(12):
+              time.sleep(5)
+              status, text, public_after = request("GET", f"{base}/records/{record_id}", ok=(200,))
+              if status == 200 and public_after.get("metadata", {}).get("title") == expected_title:
+                  break
+          if status != 200:
+              raise SystemExit(f"Could not read public record after update: HTTP {status}\n{text}")
+
+          require_record_guardrails(public_after, after=True)
+
+          summary = {
+              "status": "ZENODO_Z3_METADATA_REFRESHED",
+              "record_id": record_id,
+              "doi": public_after.get("doi"),
+              "conceptdoi": public_after.get("conceptdoi"),
+              "version": public_after.get("metadata", {}).get("version"),
+              "publication_date": public_after.get("metadata", {}).get("publication_date"),
+              "file_count": len(public_after.get("files", [])),
+              "file": public_after.get("files", [{}])[0],
+              "title": public_after.get("metadata", {}).get("title"),
+              "keywords": public_after.get("metadata", {}).get("keywords"),
+              "custom": public_after.get("metadata", {}).get("custom"),
+              "related_identifiers": public_after.get("metadata", {}).get("related_identifiers"),
+              "references": public_after.get("metadata", {}).get("references"),
+              "new_version": False,
+              "file_update": False,
+              "doi_mutation": False,
+              "concept_doi_mutation": False,
+              "related_identifier_mutation": False,
+          }
+
+          with open("zenodo_rc01_v12_z3_metadata_refresh_result.json", "w", encoding="utf-8") as f:
+              json.dump(summary, f, ensure_ascii=False, indent=2)
+
+          with open("zenodo_rc01_v12_z3_metadata_refresh_result.md", "w", encoding="utf-8") as f:
+              f.write("# Zenodo RC01-v12 Z3 Metadata Refresh Result\n\n")
+              f.write("Status: ZENODO_Z3_METADATA_REFRESHED\n\n")
+              f.write(f"- Record ID: {summary['record_id']}\n")
+              f.write(f"- DOI: {summary['doi']}\n")
+              f.write(f"- Concept DOI: {summary['conceptdoi']}\n")
+              f.write(f"- Version: {summary['version']}\n")
+              f.write(f"- Publication date: {summary['publication_date']}\n")
+              f.write(f"- File count: {summary['file_count']}\n")
+              f.write("- File update: none\n")
+              f.write("- New version: none\n")
+              f.write("- DOI mutation: none\n")
+              f.write("- Related identifier mutation: none\n")
+              f.write("- GitHub release/tag: none\n")
+              f.write("- Repository custom field preserved: yes\n")
+
+          print(json.dumps(summary, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Upload execution evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenodo-rc01-v12-z3-metadata-refresh-result
+          path: |
+            zenodo_rc01_v12_z3_metadata_refresh_result.json
+            zenodo_rc01_v12_z3_metadata_refresh_result.md
+          if-no-files-found: warn
