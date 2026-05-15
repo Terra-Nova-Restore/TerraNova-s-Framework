@@ -1,0 +1,123 @@
+{
+  "review_package": {
+    "id": "rc01-v12-z3-metadata-refresh-2026-05-15",
+    "status": "REVIEW_ONLY_NO_MUTATION",
+    "created_date": "2026-05-15",
+    "target_record_id": "20073579",
+    "target_record_url": "https://zenodo.org/records/20073579",
+    "specific_doi": "10.5281/zenodo.20073579",
+    "concept_doi": "10.5281/zenodo.19774446",
+    "current_version": "RC01-v12",
+    "patch_type": "metadata-only refresh candidate",
+    "file_update": false,
+    "new_version": false,
+    "doi_reservation": false,
+    "zenodo_mutation_authorized": false,
+    "notion_anchor": "Zenodo-Z3 -- Routing-State Anchor (Metadata Refresh, RC01-v12)",
+    "upstream_source": "External independent triage 2026-05-15 04:06 CEST",
+    "authority": "Silvi lane-opening 2026-05-15 04:08-04:15 CEST"
+  },
+  "current_record_facts_live_before": {
+    "read_at_utc": "2026-05-15T02:25:00Z",
+    "title": "FerrAI / Terra Nova / CIC: Werkmonographie mit Evidenzapparat",
+    "publication_date": "2026-05-13",
+    "modified": "2026-05-13T05:40:26.668723+00:00",
+    "status": "published",
+    "resource_type": "Book",
+    "access_right": "open",
+    "license": "cc-by-4.0",
+    "language": "deu",
+    "creator": "Lenhard, Silvan",
+    "orcid": "0009-0007-8033-3508",
+    "repository": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework",
+    "file_name": "main (44).pdf",
+    "file_size_bytes": 2943457,
+    "file_md5": "d791d480e75f3d89f9a103a28a5c5001",
+    "file_sha256": "1e9ce2f810b0af8c245887bb3a01ebcb01ca8f90c971bd5cf39da47a6b8dda40",
+    "version": "RC01-v12",
+    "keywords": [
+      "CIC",
+      "Zenodo",
+      "Github",
+      "Notion",
+      "audit trail",
+      "complex systems",
+      "AI ethics",
+      "FerrAI",
+      "Terra'Nova'Restore",
+      "human-AI interaction"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "10.5281/zenodo.19774446",
+        "relation": "isVersionOf",
+        "resource_type": "publication-other",
+        "scheme": "doi"
+      }
+    ],
+    "references": [
+      "Lenhard, S. (2026). FerrAI / Terra Nova: Dissertationsentwurf. Zenodo. https://doi.org/10.5281/zenodo.19774446"
+    ]
+  },
+  "scope_lock": {
+    "metadata_only": true,
+    "new_version": false,
+    "file_upload": false,
+    "file_mutation": false,
+    "doi_mutation": false,
+    "concept_doi_touch": false,
+    "publish_event_new_version": false,
+    "related_identifiers_touch": false,
+    "license_change": false,
+    "upload_type_change": false,
+    "substance_drift": false
+  },
+  "proposed_api_payload_candidate": {
+    "metadata": {
+      "title": "FerrAI–TerraNova CIC Framework — System Architecture, State Logic and Governance Boundaries",
+      "upload_type": "publication",
+      "publication_type": "book",
+      "publication_date": "2026-05-13",
+      "description": "<h2>Beschreibung -- Deutsch</h2><p>Das FerrAI–TerraNova CIC Framework ist eine systems-engineering-orientierte Dokumentation eines ko-kreativen Mensch–KI-Kooperationsmodells, entwickelt in einer länger andauernden dialogischen Interaktion zwischen einem menschlichen Operator und einem Large-Language-Model-System.</p><p>Ziel ist, die daraus entstandene kognitive Architektur, State-Logik und Governance-Grenzen über getrennte Persistenz-Schichten (Notion, GitHub, Zenodo) reproduzierbar, prüfbar und zitierbar zu machen.</p><p>Das Framework beschreibt ein geroutetes Operating-Model: eine Schicht dokumentiert (System-of-Record), eine Schicht beweist Zustände (GitHub PR-State), eine Schicht verankert Evidenz (Zenodo) — mit expliziten Phasen-Gates, Anti-Goal-Frames und Reconciliation-Regeln zwischen den Schichten.</p><p>Der vorliegende Eintrag repräsentiert einen stabilisierten v0.1-Korpus-Stand (Cycle 3 abgeschlossen, Second-Verification bestanden) und ist als zitierbarer Referenz-Anker für nachfolgende Versionen gedacht.</p><p>Dieses Dokument beschreibt ein konzeptionelles und operatives Framework; es beansprucht keine Maschinen-Bewusstheit, keine juristische Personalität und keine autonome Handlungsfähigkeit.</p><h2>Description -- English</h2><p>The FerrAI–TerraNova CIC Framework is a systems-engineering documentation of a co-creative human–AI cooperation model developed through extended dialogic interaction between a human operator and a large-language-model system.</p><p>Its purpose is to make the resulting cognitive architecture, state logic, and governance boundaries reproducible, auditable, and citable across separate persistence layers (Notion, GitHub, Zenodo).</p><p>The framework specifies a routed operating model in which one layer documents (System-of-Record), one layer proves state (GitHub PR-State), and one layer anchors evidence (Zenodo), with explicit phase gates, anti-goal frames, and reconciliation rules between them.</p><p>The present record represents a stabilized v0.1 corpus state (Cycle 3 closed, second verification passed) and is intended as the citable reference anchor for subsequent versions.</p><p>This document describes a conceptual and operational framework; it does not claim machine consciousness, legal personhood, or autonomous agency.</p><h2>Persistence layers</h2><ul><li>Zenodo = Reference Anchor (citable proof state)</li><li>GitHub = Working State (PR-proven implementation)</li><li>Notion = Internal Index (System-of-Record)</li><li>Website = Public Narrative</li><li>PDF = Citable Document</li></ul>",
+      "creators": [
+        {
+          "name": "Lenhard, Silvan",
+          "affiliation": "Terra'Nova'Restore",
+          "orcid": "0009-0007-8033-3508"
+        }
+      ],
+      "access_right": "open",
+      "license": "cc-by-4.0",
+      "version": "RC01-v12",
+      "language": "deu",
+      "keywords": [
+        "Human-AI Cooperation",
+        "Cognitive Architecture",
+        "Systems Engineering",
+        "AI Governance",
+        "Codex Framework",
+        "Co-Creation",
+        "Interaction Design",
+        "Knowledge Architecture",
+        "Resonance Systems",
+        "TerraNova",
+        "FerrAI"
+      ],
+      "related_identifiers": [
+        {
+          "identifier": "10.5281/zenodo.19774446",
+          "relation": "isVersionOf",
+          "scheme": "doi",
+          "resource_type": "publication-other"
+        }
+      ],
+      "custom": {
+        "code:codeRepository": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework"
+      },
+      "references": [
+        "Lenhard, S. (2026). FerrAI / Terra Nova: Dissertationsentwurf. Zenodo. https://doi.org/10.5281/zenodo.19774446"
+      ],
+      "notes": "Z3 metadata-only refresh candidate for the existing RC01-v12 record. Refresh, not republish. It preserves record ID, DOI, concept DOI, version label, file, license, upload type, custom code repository field, references, and related identifiers. No file upload, new version, DOI reservation, related-identifier edit, license change, upload-type change, or publish event is authorized by this file."
+    }
+  }
+}
