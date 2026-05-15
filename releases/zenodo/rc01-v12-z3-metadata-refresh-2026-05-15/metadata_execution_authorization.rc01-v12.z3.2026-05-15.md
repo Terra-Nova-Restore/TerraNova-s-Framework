@@ -62,3 +62,21 @@ parallel DE/EN abstract, mandatory non-claim disclaimer, persistence-layer map,
 and new keyword list while file, DOI, concept DOI, version label, repository
 link, references, related identifier, license, upload type, and publication date
 remain unchanged.
+
+## Execution Go
+
+Status: AUTHORIZED_FOR_ZENODO_EXECUTION
+Authorized by: Silvi
+Authorization timestamp: 2026-05-15 ~05:22 CEST
+Trigger route: GitHub Actions push gate
+Required commit marker: `execute-zenodo-z3-metadata-refresh`
+
+Post-run verification required:
+
+- live Zenodo title equals
+  `FerrAI–TerraNova CIC Framework — System Architecture, State Logic and Governance Boundaries`;
+- DE/EN abstract includes the mandatory anti-claim disclaimer;
+- keywords are replaced by the 11-entry Z3 list;
+- DOI, concept DOI, version label, publication date, file, license, upload type,
+  related identifiers, references, and repository custom field remain unchanged;
+- modified timestamp updates while publication date remains `2026-05-13`.
