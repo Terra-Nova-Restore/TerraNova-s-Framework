@@ -1,0 +1,5 @@
+Graph ID,Gap Type,Detail,Severity,Next Action
+terra-nova-master-overview-complete-workspace,registry_code_type_mismatch,Registry type 'flowchart' differs from extracted code declaration 'graph TB'.,Low,"Prefer graph content for extraction, but review active Notion page if render behavior matters."
+digital-ecosystem-ziel-struktur-v2-0,registry_code_type_mismatch,Registry type 'flowchart' differs from extracted code declaration 'graph TB'.,Low,"Prefer graph content for extraction, but review active Notion page if render behavior matters."
+notion-chatgpt-system-architektur,registry_code_type_mismatch,Registry type 'graph LR' differs from extracted code declaration 'graph TB'.,Low,"Prefer graph content for extraction, but review active Notion page if render behavior matters."
+meta-conductor-agent-routing,registry_code_type_mismatch,Registry type 'flowchart' differs from extracted code declaration 'flowchart LR'.,Low,"Prefer graph content for extraction, but review active Notion page if render behavior matters."

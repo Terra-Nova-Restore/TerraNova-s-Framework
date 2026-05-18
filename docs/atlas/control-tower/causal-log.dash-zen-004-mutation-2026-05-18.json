@@ -1,0 +1,46 @@
+{
+  "log_id": "DASH-ZEN-004-MUTATION-2026-05-18",
+  "event_type": "notion_mutation",
+  "created_at": "2026-05-18T10:52:00+02:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "DASH-ZEN-004",
+  "mode": "BIZ gated external mutation",
+  "source_trace": [
+    "Zenodo API: record 20073579 live read via AUTO-001 --live-zenodo",
+    "Notion: Zenodo root dashboard",
+    "Notion: Zenodo-Z1 routing-state anchor",
+    "Notion: Zenodo-Z2 routing-state anchor",
+    "Notion: Zenodo-Z3 routing-state anchor",
+    "docs/atlas/control-tower/dash-zen-004.release-state-matrix.csv"
+  ],
+  "deterministic_boundary": [
+    "Explicit user activation present",
+    "Only one new CAP registry row targeted",
+    "One CAP 0.1.0 checkpoint appended",
+    "No deletion",
+    "No page movement",
+    "No schema change",
+    "No GitHub PR advance",
+    "No workflow execution",
+    "No Zenodo draft, upload, DOI mutation, new version or publish event",
+    "No raw private Notion IDs in GitHub trace",
+    "No L3/L4 elevation",
+    "No Notion AI credit use"
+  ],
+  "probabilistic_hypothesis": "A release-state matrix will prevent future drift between live Zenodo state, internal dashboard state and historical Z-anchor lanes.",
+  "selected_action": "Created one L2 registry row for the DASH-ZEN-004 release-state matrix and appended the CAP checkpoint.",
+  "notion_updates": [
+    "DASH-ZEN-004 - Zenodo Release-State Matrix created",
+    "CAP 0.1.0 page checkpoint appended"
+  ],
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "feedback_target": [
+    "CAP registry",
+    "Prism / Zenodo",
+    "GitHub Atlas",
+    "future Zenodo wording checks"
+  ],
+  "status": "completed"
+}

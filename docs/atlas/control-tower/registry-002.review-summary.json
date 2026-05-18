@@ -1,0 +1,19 @@
+{
+  "review_id": "REGISTRY-002",
+  "created_at": "2026-05-17T20:18:00+00:00",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "target": "CAP Workspace Object Registry",
+  "prepared_fields": 9,
+  "prepared_row_updates": 5,
+  "planned_mutations": 4,
+  "live_apply_required_command": "GO Notion REGISTRY-002 anwenden",
+  "canon_levels": {
+    "CAP-MOD-DRAFT-516": "L2-ROUTING-MARKER",
+    "CAP-MOD-DRAFT-520": "L2-ROUTING-MARKER",
+    "CAP-MOD-DRAFT-521": "L1-NAME-CLUSTER",
+    "CAP-MOD-DRAFT-540": "L2-ROUTING-MARKER",
+    "CAP-MOD-DRAFT-544": "L2-ROUTING-MARKER"
+  },
+  "boundary": "Prepared only; no live Notion schema or row mutation."
+}

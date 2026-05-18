@@ -1,0 +1,45 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-MMD003-BRIDGE",
+  "event_id": "MMD-003",
+  "created_at": "2026-05-17T00:00:00+02:00",
+  "activation": "MMD-003 - Visual Trigger Bridge / go",
+  "mode": "repo-local synthesis",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "observation": "MMD-002 extracted Mermaid graphs into nodes, edges and guard conditions. The next coherent move is to identify visual trigger/module candidates without assigning canonical TRG IDs.",
+  "selected_action": "Built visual trigger candidates, guard bridge rows and sensitivity review rows from MMD-002 tables.",
+  "source_refs": [
+    "scripts/build_visual_trigger_bridge.py",
+    "docs/atlas/control-tower/mmd-002.graphs.csv",
+    "docs/atlas/control-tower/mmd-002.nodes.csv",
+    "docs/atlas/control-tower/mmd-002.edges.csv",
+    "docs/atlas/control-tower/mmd-002.guard-conditions.csv"
+  ],
+  "deterministic_boundary": "Local files only; no Notion mutation; no Notion AI; no SCL depth work; no canonical TRG assignment from visual evidence alone.",
+  "probabilistic_hypothesis": "A visual trigger bridge will make the next review step tractable by separating safe internal candidates from restricted/sensitive rows.",
+  "bridge_counts": {
+    "visual_trigger_candidates": 53,
+    "guard_bridge_rows": 140,
+    "sensitivity_review_rows": 20,
+    "unique_trigger_references": 14
+  },
+  "visible_trigger_references": [
+    "174-210",
+    "516",
+    "517",
+    "520",
+    "521",
+    "540",
+    "544",
+    "600",
+    "777",
+    "988",
+    "989",
+    "990",
+    "991",
+    "992"
+  ],
+  "backpropagation_target": "CAP Control Tower, Mermaid registry, future trigger module registry",
+  "backpropagation_result": "Mermaid-derived trigger candidates are now separated from canon and sensitivity-gated before any stable module record is created.",
+  "next_recommended_action": "MMD-004 - Candidate Review and Canon Gate"
+}

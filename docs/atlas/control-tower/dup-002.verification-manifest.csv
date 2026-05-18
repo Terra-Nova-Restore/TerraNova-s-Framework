@@ -1,0 +1,9 @@
+Lane ID,Source Queue,Queue Class,Group Count,Occurrences,Sensitivity,Decision,Allowed Now,Blocked Action,Recommended Output,Needs Notion Mutation
+DUP-002-A,DUP-001-A,Untitled placeholders,2,104,Internal,Proceed first,"Current verification; rename proposal; inbox/workbench naming","Deletion; raw URL/ID export","Rename candidate list grouped by active/source/remnant/unknown",No
+DUP-002-B,DUP-001-B,Prompt/action templates,5,24,Internal,Proceed second,"Canonical prompt/template family comparison","Deletion; collapsing useful templates","Prompt Library naming proposal",No
+DUP-002-C,DUP-001-C,Patent/IP dossier titles,11,30,Sensitive,Blocked by SENS-001,"Boundary classification only","Rename/merge/archive; public detail expansion","SENS/IP review queue only",No
+DUP-002-D,DUP-001-D,Trigger/session/deep-system exports,8,20,Internal/Restricted,Gated by SENS-001,"Internal canon routing only","Public reuse; raw export; deletion","Trigger Map routing proposal",No
+DUP-002-E,DUP-001-E,Navigation/working surfaces,5,12,Internal,Proceed third,"Active hub verification; stale-copy proposal","Deletion; moving active dashboards without review","Dashboard/hub role map",No
+DUP-002-F,DUP-001-F,Generic low-signal titles,8,16,Internal,Proceed fourth,"Rename/archive candidate classification after source check","Deletion; bulk archive","Generic-title cleanup package",No
+DUP-002-G,DUP-001-G,Chat/person/export remnants,4,10,Private,Blocked by SENS-001,"Private classification only","Public summary; rename/archive without owner decision","Private remnant review queue",No
+DUP-002-H,DUP-001-H,Capability/governance concepts,3,10,Internal,Proceed fifth,"Canon comparison against support pages","Deletion; canon overwrite","Governance concept comparison table",No

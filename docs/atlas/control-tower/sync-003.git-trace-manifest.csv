@@ -1,0 +1,9 @@
+Trace ID,Path,Role,Included In Commit,Boundary
+SYNC3-T001,docs/atlas/control-tower/batch-sync-003.md,SYNC-003 batch record,Yes,Control Tower only
+SYNC3-T002,docs/atlas/control-tower/sync-003.git-trace-manifest.csv,SYNC-003 inclusion manifest,Yes,Control Tower only
+SYNC3-T003,docs/atlas/control-tower/causal-log.sync-003-github-trace-closure-2026-05-18.json,SYNC-003 causal log,Yes,No external mutation
+SYNC3-T004,docs/atlas/control-tower/source-521.registry-updates.csv,SOURCE-521 applied Notion mutation trace,Yes,No raw private inventory
+SYNC3-T005,docs/atlas/control-tower/causal-log.source-521-mutation-2026-05-18.json,SOURCE-521 applied mutation causal log,Yes,No L3/L4 elevation
+SYNC3-T006,docs/atlas/control-tower/auto-001.test-results-2026-05-18.json,AUTO-001 live validation result,Yes,No writes to Notion or Zenodo
+SYNC3-T007,scripts/cap_control_checks.py,AUTO-001 validation harness,Yes,No external mutation
+SYNC3-T008,unrelated dirty files outside Control Tower,Out of scope,No,Do not stage or revert

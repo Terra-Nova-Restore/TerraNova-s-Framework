@@ -1,0 +1,7 @@
+Mutation ID,Target,Mutation Type,Exact Intent,Requires GO,External Mutation Risk,Blocked Content,Expected Result
+NINF-001-A,CAP page,Update content,"Replace stale CAP 0.2 next-action text with CAP 0.3 operational status",Yes,Low,"raw private IDs; deletion; restricted content","CAP page reflects CAP 0.3 as active operational layer"
+NINF-001-B,CAP page,Append content,"Add CAP 0.3 workstreams and no-credit boundary",Yes,Low,"raw private IDs; credit-consuming automation claim","CAP page shows CAP3-BOOT-001, DUP-002, PRISM-002, DASH-001, AUTO-001, TRIGGER-001, CAP3-CLOSE-001"
+NINF-001-C,Registry database,Create view,"Add CAP 0.3 Operations view filtered/sorted for CAP 0.3 operational rows",Yes,Low,"schema change; broad workspace crawl","Operations dashboard becomes visible in Notion"
+NINF-001-D,Registry database,Create view,"Add Duplicate Review view for DUP/SENS queue handling",Yes,Low,"sensitive/private duplicate cleanup; deletion","DUP-002 has a visible review surface"
+NINF-001-E,Registry data source,Create row,"Add CAP 0.3 - Operational Control IPERKA row",Yes,Low,"schema change; raw private inventory","CAP 0.3 is represented in the live registry"
+NINF-001-F,Registry data source,Create row,"Add NINF-001 Notion Infiltration Package row",Yes,Low,"schema change; raw private inventory","This package is traceable from the live registry"

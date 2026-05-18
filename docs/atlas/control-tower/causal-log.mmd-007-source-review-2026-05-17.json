@@ -1,0 +1,32 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-MMD-007",
+  "created_at": "2026-05-17T19:48:37.206021+00:00",
+  "operator": "Codex",
+  "mode": "STUDIO",
+  "activation": "manual",
+  "source_trace": [
+    "docs/triggers/gap_ledger.md",
+    "atlas/sources/trigger-complement-2026-03-30.md",
+    "atlas/atlas.manifest.v1.1.json",
+    "docs/atlas/control-tower/mmd-005.module-evidence.csv",
+    "docs/atlas/control-tower/mmd-006.registry-updates.csv"
+  ],
+  "observation": "Five CAP module draft rows are live in Notion but still marked Candidate / Needs sync.",
+  "trigger_band": "401+",
+  "trigger_ids": [
+    "516",
+    "520",
+    "521",
+    "540",
+    "544"
+  ],
+  "probabilistic_hypothesis": "The draft modules can safely enter canon only at metadata/routing levels until direct primary definitions are curated.",
+  "probability_note": "High confidence for L1/L2 internal admission; low confidence for full module semantics without more source review.",
+  "deterministic_boundary": "No canonical TRG assignment, no execution permission, no Notion mutation, no expansion of held sensitive ranges.",
+  "selected_action": "Created MMD-007 source review, canon ladder, per-module decisions and source-action queue.",
+  "feedback_target": "trigger_map",
+  "backpropagation_result": "CAP now distinguishes ID/name/cluster canon from routing markers and full trigger semantics.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": ""
+}

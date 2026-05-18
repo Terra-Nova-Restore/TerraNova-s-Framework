@@ -1,0 +1,47 @@
+{
+  "log_id": "DASH-ZEN-003-MUTATION-2026-05-18",
+  "event_type": "notion_mutation",
+  "created_at": "2026-05-18T10:39:00+02:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "DASH-ZEN-003",
+  "mode": "BIZ gated external mutation",
+  "source_trace": [
+    "Notion: Zenodo-Z1 routing-state anchor",
+    "Notion: Zenodo-Z2 routing-state anchor",
+    "Notion: Zenodo-Z3 routing-state anchor",
+    "Notion: CAP 0.1.0 Workspace Object Registry data source",
+    "docs/atlas/control-tower/dash-zen-003.notion-mutation-package.csv"
+  ],
+  "deterministic_boundary": [
+    "Explicit user activation present",
+    "Only three new CAP registry rows targeted",
+    "One CAP 0.1.0 checkpoint appended",
+    "No deletion",
+    "No page movement",
+    "No schema change",
+    "No GitHub PR advance",
+    "No workflow execution",
+    "No Zenodo draft, upload, DOI mutation, new version or publish event",
+    "No raw private Notion IDs in GitHub trace",
+    "No L3/L4 elevation",
+    "No Notion AI credit use"
+  ],
+  "probabilistic_hypothesis": "Explicit Z-anchor registry rows reduce routing drift between historical Zenodo lanes and current live Zenodo state.",
+  "selected_action": "Created three L2 routing-marker rows for Z1, Z2 and Z3, while preserving parked/closed boundaries.",
+  "notion_updates": [
+    "DASH-ZEN-003 - Zenodo Z1 Routing Anchor created",
+    "DASH-ZEN-003 - Zenodo Z2 Routing Anchor created",
+    "DASH-ZEN-003 - Zenodo Z3 Routing Anchor created",
+    "CAP 0.1.0 page checkpoint appended"
+  ],
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "feedback_target": [
+    "CAP registry",
+    "Prism / Zenodo",
+    "GitHub Atlas",
+    "DASH-ZEN-004 release-state matrix"
+  ],
+  "status": "completed"
+}

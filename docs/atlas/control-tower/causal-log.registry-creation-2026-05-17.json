@@ -1,0 +1,48 @@
+{
+  "id": "cap-0.1.0-registry-creation-2026-05-17",
+  "timestamp": "2026-05-17T06:53:21+02:00",
+  "actor": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "trigger_or_cluster": "GO Notion CAP Registry erstellen; /fff",
+  "source_trace": [
+    "CAP 0.1.0 - Cognitive Ability Point: notion://redacted-internal-object",
+    "Workspace Object Registry database: notion://redacted-internal-object",
+    "Registry data source: notion-ds://redacted-internal-source",
+    "Home-Ansichten snapshot: <local-sensitive-home-ansichten-snapshot>",
+    "docs/atlas/control-tower/workspace-object-registry.seed.csv"
+  ],
+  "probabilistic_hypothesis": "A small but structurally rich registry can control the workspace faster than a raw 880-page inventory.",
+  "deterministic_boundary": "External Notion mutation was explicitly authorized for registry creation only; no Notion Custom Agents, no credit-consuming automation, no raw private page publication.",
+  "selected_action": "Created the CAP 0.1.0 Workspace Object Registry database, populated 21 initial rows, created control views, added linked dashboard views to the CAP page, and registered the 2026-05-11 Home-Ansichten snapshot as a sensitive reference source.",
+  "feedback_target": "Registry",
+  "backpropagation_target": "Prism / Zenodo and GitHub Atlas",
+  "observed_result": {
+    "registry_database_url": "notion://redacted-internal-object",
+    "registry_data_source": "notion-ds://redacted-internal-source",
+    "seed_rows_created": 21,
+    "views_created": [
+      "By Status",
+      "By Object Type",
+      "By Sensitivity",
+      "Canonical Sources",
+      "Prism / Zenodo Feedback"
+    ],
+    "linked_dashboard_views_created": [
+      "CAP Registry - By Status",
+      "CAP Registry - Canonical Sources",
+      "CAP Registry - Sync Needed"
+    ],
+    "snapshot_notion_urls": 808,
+    "snapshot_unique_notion_ids": 808,
+    "snapshot_duplicate_id_groups": 0,
+    "snapshot_duplicate_title_groups": 46
+  },
+  "equilibrium_check": {
+    "status": "pass",
+    "trace": "Notion fetch/search and local snapshot measurement recorded.",
+    "boundary": "Registry and metadata only; no mass page content import.",
+    "mode": "STUDIO",
+    "github_sync": "Repo-local control-tower artifacts updated."
+  },
+  "next_review": "Compare current Notion connector search results against the snapshot in batches, starting with databases, wikis and duplicate-title groups."
+}

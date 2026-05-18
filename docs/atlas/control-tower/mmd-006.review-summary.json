@@ -1,0 +1,19 @@
+{
+  "review_id": "MMD-006",
+  "created_at": "2026-05-17T19:34:45.878381+00:00",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "registry_rows": 5,
+  "field_map_rows": 27,
+  "view_package_rows": 2,
+  "mutation_package_rows": 4,
+  "visible_references": [
+    "516",
+    "520",
+    "521",
+    "540",
+    "544"
+  ],
+  "required_apply_phrase": "GO Notion MMD-006 anwenden",
+  "boundary": "Registry package only; no live Notion mutation and no canonical TRG assignment."
+}

@@ -1,0 +1,364 @@
+Graph ID,Edge ID,Guard Condition,Guard Type,Trigger References,VORTEX Signal,Boundary
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E001,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E002,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E003,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E004,,unlabeled_transition,516,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E005,,unlabeled_transition,520,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E006,,unlabeled_transition,540,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E007,,unlabeled_transition,544,yes,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E008,,unlabeled_transition,777,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E009,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E010,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E011,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E012,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E013,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E014,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E015,,unlabeled_transition,174;210,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E016,,unlabeled_transition,600,no,Extracted relation only; not an execution permission.
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E017,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E001,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E002,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E003,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E004,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E005,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E006,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E007,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E008,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E009,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E010,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E011,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E012,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E013,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E014,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E015,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E016,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E017,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E018,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E019,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E020,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E021,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E022,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E001,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E002,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E003,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E004,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E005,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E006,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E007,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E008,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E009,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E010,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E011,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E012,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E013,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E014,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E015,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E016,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E017,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E018,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E019,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E020,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E021,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E022,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E023,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E024,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E025,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E026,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E001,Hash,explicit_guard,,no,Extracted relation only; not an execution permission.
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E002,CID,explicit_guard,,yes,Extracted relation only; not an execution permission.
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E003,Check,explicit_guard,,no,Extracted relation only; not an execution permission.
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E004,SHA256,explicit_guard,,no,Extracted relation only; not an execution permission.
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E005,Mirror,explicit_guard,,yes,Extracted relation only; not an execution permission.
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E006,Relation,explicit_guard,,no,Extracted relation only; not an execution permission.
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E007,Relation,explicit_guard,,no,Extracted relation only; not an execution permission.
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E008,Relation,explicit_guard,,yes,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E001,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E002,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E003,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E004,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E005,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E006,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E007,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E008,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E009,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E010,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E011,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E012,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E013,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E014,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E015,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E016,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E017,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E018,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E019,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E020,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E021,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E022,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E023,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E024,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E025,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E026,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E027,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E028,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E029,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E030,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E031,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E032,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E033,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E034,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E035,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E036,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E037,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E038,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E039,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E040,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E041,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E042,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E043,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E044,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E045,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E046,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E047,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E048,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E049,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E050,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E051,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E052,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E053,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E054,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E055,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E056,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E057,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E058,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E059,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E060,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E061,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E062,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E063,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E064,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E065,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E066,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E067,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E068,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E069,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E070,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E071,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E072,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E073,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E074,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E075,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E076,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E077,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E078,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E079,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E080,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E081,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E082,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E083,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E084,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E085,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E086,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E087,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E001,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E002,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E003,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E004,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E005,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E006,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E007,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E008,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E009,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E010,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E011,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E012,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E013,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E014,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E015,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E016,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E017,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E018,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E019,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E020,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E021,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E022,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E023,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E024,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E025,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E026,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E027,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E028,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E029,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E030,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E031,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E032,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E033,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E034,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E035,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E036,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E037,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E038,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E039,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E040,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E041,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E042,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E043,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E044,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E001,Erstellt & Bearbeitet,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E002,Fragt & Instruiert,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E003,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E004,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E005,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E006,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E007,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E008,Batch Sync<br/>Cron Jobs,explicit_guard,,yes,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E009,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E010,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E011,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E012,Liest,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E013,Liest,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E014,Liest & Schreibt,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E015,Evaluiert,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E016,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E017,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E018,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E019,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E020,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E021,Schreibt zurück,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E022,Triggert Updates,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E023,Dokumentiert,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E024,Generiert,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E025,Analysiert,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E026,Triggert,explicit_guard,,no,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E027,sync_enabled<br/>Property,explicit_guard,,yes,Extracted relation only; not an execution permission.
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E028,last_modified_by<br/>timestamps,explicit_guard,,no,Extracted relation only; not an execution permission.
+meta-conductor-agent-routing,meta-conductor-agent-routing-E001,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+meta-conductor-agent-routing,meta-conductor-agent-routing-E002,Strategie,explicit_guard,,no,Extracted relation only; not an execution permission.
+meta-conductor-agent-routing,meta-conductor-agent-routing-E003,Struktur,explicit_guard,,no,Extracted relation only; not an execution permission.
+meta-conductor-agent-routing,meta-conductor-agent-routing-E004,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+meta-conductor-agent-routing,meta-conductor-agent-routing-E005,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+meta-conductor-agent-routing,meta-conductor-agent-routing-E006,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+meta-conductor-agent-routing,meta-conductor-agent-routing-E007,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+meta-conductor-agent-routing,meta-conductor-agent-routing-E008,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E001,session_opened,explicit_guard,520;521,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E002,preflight_ok,explicit_guard,521,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E003,context_loaded,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E004,system_healthy,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E005,mode_requested,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E006,instance_called,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E007,event_detected,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E008,rule_invoked,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E009,decision_pending,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E010,memory_accessed,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E011,output_required,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E012,symbol_parsed,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E013,session_ongoing,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E014,error_detected,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E015,meta_cycle,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E016,agent_active,explicit_guard,,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E017,delta_observed,explicit_guard,,yes,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E018,audit_kernel,explicit_guard,777,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E019,autoflow_on,explicit_guard,517,no,Extracted relation only; not an execution permission.
+session-root-living-trigger-organism,session-root-living-trigger-organism-E020,delta_confirmed,explicit_guard,544,yes,Extracted relation only; not an execution permission.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E001,/full_sync_terra_nova_lovable_ferrai,sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E002,Benutzereingabe,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E003,Validieren (Policy/Scope/Rate),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E004,Toolcall sync.status(),sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E005,POST /tools/sync.status (via SSE session),sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E006,status(workspace/user),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E007,read sync_state,sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E008,"state (tokens?, cursor?, readOnly?)",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E009,status payload,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E010,tool result,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E011,status data,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E012,Antwort entwerfe (keine Writes),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E013,Status anzeige,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E014,"""Ready / Needs OAuth / Cursor...""",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E015,Toolcall auth.start(),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E016,auth.start(),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E017,Redirect URL erstellen,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E018,auth_url + state,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E019,auth_url,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E020,Link anzeigen,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E021,Öffne OAuth Link,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E022,Consent (Notion Workspace),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E023,"auth.callback(code,state)",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E024,exchangeCode(code),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E025,Token exchange,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E026,access_token + refresh_token,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E027,store(encrypted tokens + workspace_id),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E028,"log(""OAuth connected"")",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E029,ok,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E030,ok,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E031,auth.ok,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E032,auth.ok,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E033,Toolcall sync.bootstrap(readOnly=true),sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E034,sync.bootstrap,sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E035,bootstrap(readOnly=true),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E036,List DBs / Query changes (initial),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E037,Pages/DB schema + content,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E038,mapSchema -> Canonical Model + content_hash,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E039,upsert canonical records + cursor,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E040,"savepoint(""bootstrap snapshot"")",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E041,savepoint_id,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E042,"bootstrap_done(cursor, savepoint_id)",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E043,result,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E044,bootstrap_done,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E045,Summary + next steps,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E046,Toolcall sync.pull(cursor),sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E047,sync.pull,sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E048,pull(cursor),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E049,Search changes since cursor,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E050,changed objects,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E051,diff -> patches,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E052,apply patches (idempotent),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E053,"log(""pull"", counts, cursor_new)",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E054,ok,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E055,"pull_done(cursor_new, stats)",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E056,result,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E057,pull_done,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E058,Update anzeige,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E059,Toolcall sync.plan_push(changeset),sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E060,sync.plan_push,sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E061,plan_push(changeset),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E062,validate scopes + policy + conflict check,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E063,plan_id + preview + risk_flags,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E064,plan result,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E065,Plan anzeigen (Preview),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E066,"""Bestätige?""",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E067,confirm(plan_id),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E068,confirm input,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E069,ok,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E070,Toolcall sync.commit_push(plan_id),sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E071,sync.commit_push,sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E072,commit_push(plan_id),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E073,Write updates (patches),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E074,write ok / errors,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E075,"savepoint(""post-write snapshot"")",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E076,"log(""commit"", results)",sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E077,ok,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E078,commit_done,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E079,commit_done,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E080,commit_done,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E081,Ergebnis + Konflikte (falls),sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E082,"Toolcall sync.reconcile(strategy=""deterministic"")",sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E083,sync.reconcile,sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E084,reconcile(strategy),sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E085,resolve conflicts + record decisions,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E086,persist resolutions,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E087,"log(""reconcile"", decisions)",sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E088,reconcile_done,sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E089,result,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E090,reconcile_done,sequence_message,,yes,Message extracted from sequence diagram; not an action authorization.
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E091,Konfliktbericht,sequence_message,,no,Message extracted from sequence diagram; not an action authorization.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E001,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E002,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E003,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E004,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E005,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E006,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E007,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E008,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E009,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E010,,unlabeled_transition,,yes,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E011,,unlabeled_transition,,no,Extracted relation only; not an execution permission.
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E012,feedback / backpropagation,explicit_guard,,no,Extracted relation only; not an execution permission.

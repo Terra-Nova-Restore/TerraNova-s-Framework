@@ -1,0 +1,30 @@
+{
+  "review_id": "SENS-002",
+  "title": "Protected Canon Lane Review",
+  "created": "2026-05-17",
+  "status": "complete",
+  "mode": "STUDIO repo-local sensitivity gate",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "inputs": [
+    "docs/atlas/control-tower/mmd-007.source-review.csv",
+    "docs/atlas/control-tower/canon-elevation-queue.csv",
+    "docs/atlas/control-tower/sync-002.registry-updates.csv",
+    "docs/atlas/control-tower/sens-001.boundary-map.csv"
+  ],
+  "outputs": {
+    "protected_lane_rows": 7,
+    "elevation_gate_rows": 5,
+    "notion_mutation_package_rows": 3
+  },
+  "primary_decision": "CAP-MOD-DRAFT-521 remains L1 protected until a direct Preflight/protection source separates it from 777-depth behavior.",
+  "blocked_claims": [
+    "canonical TRG assignment",
+    "preflight automation",
+    "protection execution behavior",
+    "Schattenarchiv-depth expansion",
+    "token/integrity execution claims",
+    "raw private workspace export"
+  ],
+  "next_best_action": "SOURCE-521 - curate and review the direct Preflight/protection source before any canon elevation."
+}

@@ -1,0 +1,40 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-AUTO001-PLAN",
+  "event_id": "auto-001-plan-2026-05-17",
+  "created_at": "2026-05-17T16:55:00+02:00",
+  "date": "2026-05-17",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "TerraNova skill read before action",
+    "User report and screenshot: Zenodo metadata refreshed on 2026-05-17",
+    "Public Zenodo API read: https://zenodo.org/api/records/20073579",
+    "docs/atlas/control-tower/prism-002.release-readiness-gate.csv",
+    "docs/atlas/control-tower/dup-002.verification-manifest.csv",
+    "docs/atlas/control-tower/ninf-001.registry-updates.csv"
+  ],
+  "observation": "Zenodo live metadata now reports publication_date 2026-05-17, updated timestamp 2026-05-17T07:20:40.751823+02:00 and title FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries. DOI, concept DOI, version label and file checksum remain stable.",
+  "trigger_band": "301-400",
+  "trigger_ids": [
+    "/fff",
+    "AUTO-001"
+  ],
+  "freedom_mode": "/fff enabled for repo-local validation automation",
+  "probabilistic_hypothesis": "The next coherent control move is a repeatable no-credit validation harness before any further dashboard or publication mutation.",
+  "probability_note": "High confidence because CAP 0.3 now has multiple generated artifacts and the Zenodo metadata changed after PRISM-002.",
+  "deterministic_boundary": "No Notion Custom Agents, no scheduled Notion AI, no Notion mutation, no Zenodo mutation, no credential use and no raw private inventory export.",
+  "selected_action": "Create AUTO-001 runbook, check matrix, live Zenodo delta and local validation script.",
+  "feedback_target": "github_atlas",
+  "backpropagation_target": "CAP 0.3",
+  "backpropagation_result": "AUTO-001 makes CAP 0.3 repeatably testable without Notion credits or external writes.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": "",
+  "result": {
+    "script": "scripts/cap_control_checks.py",
+    "live_zenodo_delta_recorded": true,
+    "notion_ai_credits_used": 0,
+    "external_mutations": 0
+  }
+}

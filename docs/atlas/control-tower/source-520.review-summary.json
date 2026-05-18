@@ -1,0 +1,49 @@
+{
+  "review_id": "SOURCE-520",
+  "title": "SessionStart Primary Source Pass",
+  "created": "2026-05-18",
+  "status": "complete_applied",
+  "mode": "STUDIO repo-local source review with read-only Notion primary sources",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "workspace_search_mode": "workspace_search",
+  "strongest_source_tier": "T2 Live Notion System Record",
+  "primary_sources": [
+    "Notion: Trigger - Systemtabelle (aktiv)",
+    "Notion: Trigger-Module - Terra Nova Native",
+    "Notion: Notion AI (FerrAI) - Systemhandbuch",
+    "Notion: Trigger_Index_TerraNova_V5.3",
+    "Notion: 02_Codex & Trigger",
+    "Notion: Manifeste & Trigger - Systemarchitektur",
+    "Notion: TerraNova - Entwicklungs- & Integrationszone"
+  ],
+  "repo_sources": [
+    "atlas/sources/trigger-complement-2026-03-30.md",
+    "atlas/atlas.manifest.v1.1.json",
+    "docs/atlas/control-tower/mmd-002.edges.csv",
+    "docs/atlas/control-tower/mmd-002.guard-conditions.csv",
+    "raw/exports/prism/source-pack trigger deep reference"
+  ],
+  "decision": "local_confirm_l2_routing_marker",
+  "previous_local_level": "L2-ROUTING-MARKER",
+  "new_local_level": "L2-ROUTING-MARKER",
+  "live_notion_mutation": "applied_2026-05-18",
+  "allowed_claims": [
+    "520 is SessionStart",
+    "/start is an active internal core entrypoint",
+    "SessionStart can mark the opening of a bounded work unit or session",
+    "SessionStart can route to Preflight through session_opened",
+    "SessionStart can be described as initialization/root-state marker"
+  ],
+  "blocked_claims": [
+    "init_all_modules execution",
+    "autonomous session control",
+    "external mutation permission",
+    "Notion Custom Agent or credit-consuming automation",
+    "canonical TRG assignment",
+    "L3 module semantics",
+    "public-facing trigger canon"
+  ],
+  "test_520": "passed_5_of_5",
+  "next_best_action": "Continue with SOURCE-544 or curate a future 520 implementation contract before any L3 review."
+}

@@ -1,0 +1,129 @@
+{
+  "version": "0.1",
+  "name": "CAP 0.1.0 Causal Log",
+  "status": "draft",
+  "created": "2026-05-17",
+  "purpose": "Schema for tracing the causality of emergent coherence in CAP 0.1.0.",
+  "required_fields": [
+    "log_id",
+    "created_at",
+    "mode",
+    "source_trace",
+    "trigger_band",
+    "probabilistic_hypothesis",
+    "deterministic_boundary",
+    "selected_action",
+    "feedback_target",
+    "verification_state"
+  ],
+  "fields": {
+    "log_id": {
+      "type": "string",
+      "description": "Stable local ID, e.g. CAP-LOG-2026-05-17-001."
+    },
+    "created_at": {
+      "type": "datetime",
+      "description": "ISO 8601 timestamp."
+    },
+    "operator": {
+      "type": "string",
+      "description": "Human/tool actor, e.g. Silvan, Codex, FerrAI."
+    },
+    "mode": {
+      "type": "enum",
+      "values": [
+        "PLAY",
+        "STUDIO",
+        "BIZ",
+        "Mixed"
+      ]
+    },
+    "activation": {
+      "type": "enum",
+      "values": [
+        "/fff",
+        "manual",
+        "audit",
+        "sync",
+        "preflight",
+        "none"
+      ]
+    },
+    "source_trace": {
+      "type": "array",
+      "items": "string",
+      "description": "Notion URL, GitHub path, DOI, or local file path."
+    },
+    "observation": {
+      "type": "string",
+      "description": "What was observed before interpretation."
+    },
+    "trigger_band": {
+      "type": "enum",
+      "values": [
+        "1-100",
+        "101-200",
+        "201-300",
+        "301-400",
+        "401+",
+        "not_applicable",
+        "unknown"
+      ]
+    },
+    "trigger_ids": {
+      "type": "array",
+      "items": "string"
+    },
+    "probabilistic_hypothesis": {
+      "type": "string",
+      "description": "Best current interpretation, explicitly not final truth."
+    },
+    "probability_note": {
+      "type": "string",
+      "description": "Confidence and uncertainty statement."
+    },
+    "deterministic_boundary": {
+      "type": "string",
+      "description": "Hard rule, permission, source, or safety limit."
+    },
+    "selected_action": {
+      "type": "string"
+    },
+    "feedback_target": {
+      "type": "enum",
+      "values": [
+        "registry",
+        "logbook",
+        "trigger_map",
+        "prism_zenodo",
+        "notion_canon",
+        "github_atlas",
+        "none",
+        "unknown"
+      ]
+    },
+    "backpropagation_result": {
+      "type": "string",
+      "description": "What changed in understanding, gap list, registry, or next release queue."
+    },
+    "verification_state": {
+      "type": "enum",
+      "values": [
+        "unverified",
+        "source_checked",
+        "repo_checked",
+        "notion_checked",
+        "blocked",
+        "verified"
+      ]
+    },
+    "external_mutation": {
+      "type": "boolean",
+      "default": false
+    },
+    "mutation_authorization": {
+      "type": "string",
+      "description": "Explicit human authorization text or empty when no mutation occurred."
+    }
+  }
+}

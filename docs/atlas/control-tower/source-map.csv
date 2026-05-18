@@ -1,0 +1,23 @@
+anchor,type,notion_id_or_source,role,control_tower_decision,sensitivity
+CAP 0.1.0 - Cognitive Ability Point,page,notion-id://redacted,Created Notion CAP control surface,Use as active CAP dashboard seed,internal
+EQUILIBRIUM - Offizielles Regelbuch,page,notion-id://redacted,Hard governance rulebook,Link as mandatory gate source,internal
+TerraNova - Entwicklungs- & Integrationszone,page,notion-id://redacted,Development and intake zone,Recommended initial parent for Control Tower page,internal
+CIC - Cognitive Intelligent Cooperation,page,notion-id://redacted,Reference-over-copy conceptual source,Link as conceptual canon,internal
+Cognition Sync Hub,page,notion-id://redacted,Semantic sync concept,Link as existing sync logic,internal
+TNV-CAP-000 - All-in-One Light,page,notion-id://redacted,Prior CAP 0.0.0 ORA truthmode anchor,Use as predecessor for CAP 0.1.0,internal
+CEI-DATA-05 - Workspace Index & Page Census Note,page,notion-id://redacted,Count model and hard-gate source,Use count_basis fields; do not publish raw page list,internal
+Cognitive Terranova System,database,notion-id://redacted,Existing system registry candidate,Reuse or link before creating new registry,internal
+Cognitive Terranova System main data source,data_source,notion-ds://redacted-internal-source,Main system entries,Map fields before updates,internal
+Restricted wiki data source,wiki_data_source,notion-ds://redacted-internal-source,Sensitive wiki under Cognitive Terranova System,Index as restricted without raw titles,restricted
+Mermaid Diagrams - Code Library,data_source,notion-ds://redacted-internal-source,Diagram registry,Link into visual/control views,internal
+Meine Notion-KI,database,notion-id://redacted,Workspace wiki and ownership surface,Use for page ownership and verification logic,internal
+Meine Notion-KI wiki data source,wiki_data_source,notion-ds://redacted-internal-source,Wiki page index,Do not duplicate; link and reconcile,internal
+Library Sync - 100 Batches,database,notion-id://redacted,Batch execution and sync-control database,Use for future staged inventory passes,internal
+Local CIC Atlas,github_path,docs/atlas/,Repo-local curated atlas,Use as GitHub audit/version trace,internal
+Phase 1 Notion mirror script,github_path,scripts/notion_full_mirror.py,Existing exporter limited to one configured database,Extend only after explicit implementation decision,internal
+Zenodo RC01-v12 reference,github_path,docs/references/zenodo.md,Published Prism/AI LaTeX monograph anchor,Use as foreground and backpropagation target,public
+Zenodo RC01-v12 release mirror,github_path,releases/zenodo/rc01-v12-2026-05-07/,Local audit mirror for published snapshot,Use for trace and citation checks,public
+CAP 0.1.0 - Workspace Object Registry,database,notion://redacted-internal-object,Live CAP registry database,Use as primary workspace object control surface,internal
+CAP 0.1.0 Registry data source,data_source,notion-ds://redacted-internal-source,Operational data source for CAP registry rows,Use data_source_id for row creation and view queries,internal
+Home-Ansichten Snapshot 2026-05-11,local_snapshot,<local-sensitive-home-ansichten-snapshot>,Local 808-URL export support snapshot,Use as sensitive reference only; do not publish raw list,sensitive
+Library Sync - 100 Batches data source,data_source,notion-ds://redacted-internal-source,Operational data source for Library Sync batch rows,Use for future staged inventory passes,internal

@@ -1,0 +1,29 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-MMD001-READPASS",
+  "event_id": "MMD-001",
+  "created_at": "2026-05-17T00:00:00+02:00",
+  "activation": "GO MMD-001",
+  "mode": "read-only Notion research plus repo-local synthesis",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "content_search_mode": "workspace_search",
+  "observation": "The trigger field is too broad to reconstruct linearly now. The Notion Mermaid universe already provides an operational visual ontology with IST, SOLL, INTEGRATION, ORCHESTRATION, ZOOM, APPENDIX and DEPOT roles.",
+  "selected_action": "Pause direct trigger reconstruction and create a Mermaid-first CAP understanding layer.",
+  "source_refs": [
+    "Notion: Mermaid Atlas - Start Here",
+    "Notion: Mermaid Diagrams - Code Library",
+    "Notion: Mermaid als lebendiger Trigger-Organismus",
+    "Notion: Mermaid-Diagramme als lebende Systeme",
+    "Notion: VortexCanvas - Systemuebersicht",
+    "Notion: VortexCanvas - Entscheidungsraeume",
+    "docs/atlas/diagrams.md",
+    "docs/ai/cic_atlas_usage.md",
+    "docs/ai/full_sync_terra_nova_mcp_sequence.md",
+    "raw/exports/prism/source-pack/2026-05-02"
+  ],
+  "deterministic_boundary": "No Notion mutation, no Notion Custom Agent, no AI search mode, no raw trigger expansion, no SCL/deep decoder work in this pass.",
+  "probabilistic_hypothesis": "Using the Mermaid universe first will improve shared understanding because it exposes relation, activation and VORTEX coherence before requiring per-trigger histories.",
+  "backpropagation_target": "CAP Control Tower, Mermaid registry, later trigger registry",
+  "backpropagation_result": "MMD-001 establishes Mermaid as the visual control layer before trigger hashing or SCL depth work.",
+  "next_recommended_action": "MMD-002 - Mermaid Graph Extraction"
+}

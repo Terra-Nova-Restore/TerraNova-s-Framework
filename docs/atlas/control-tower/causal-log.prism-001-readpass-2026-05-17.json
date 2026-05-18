@@ -1,0 +1,26 @@
+{
+  "event_id": "prism-001-readpass-2026-05-17",
+  "date": "2026-05-17",
+  "mode": "BIZ",
+  "trigger_band": "301-400",
+  "freedom_mode": "/fff bounded by explicit PRISM-001 GO",
+  "source_trace": [
+    "TerraNova skill read before action",
+    "docs/references/zenodo.md",
+    "releases/zenodo/rc01-v12-2026-05-07/manifest.json",
+    "releases/zenodo/rc01-v12-2026-05-07/zenodo_record_20073579.json",
+    "PDF metadata/text orientation via local pypdf read",
+    "CAP 0.2 registry stabilization IPERKA"
+  ],
+  "probabilistic_hypothesis": "RC01-v12 is a strong publication anchor, but CAP 0.1/0.2 creates post-publication governance structures that should become next-release feedback items.",
+  "deterministic_boundary": "No Zenodo mutation, no raw private inventory, no restricted content, no publication claim beyond the existing RC01-v12 snapshot.",
+  "selected_action": "Create a seven-item PRISM-001 backpropagation queue from RC01-v12 into CAP.",
+  "feedback_target": "Prism / Zenodo",
+  "backpropagation_target": "CAP 0.3",
+  "result": {
+    "pdf_pages_observed": 661,
+    "backpropagation_queue_rows": 7,
+    "zenodo_mutations": 0,
+    "raw_private_inventory_exports": 0
+  }
+}

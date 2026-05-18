@@ -1,0 +1,69 @@
+{
+  "extract_id": "MMD-002",
+  "created_at": "2026-05-17T15:35:01.967623+00:00",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "source_count": 11,
+  "graph_count": 11,
+  "node_count": 277,
+  "edge_count": 363,
+  "guard_count": 363,
+  "gap_count": 4,
+  "graphs": {
+    "ordner-02-codex-trigger-detail": {
+      "nodes": "18",
+      "edges": "17",
+      "status": "parsed"
+    },
+    "ordner-05-produkte-services-detail": {
+      "nodes": "23",
+      "edges": "22",
+      "status": "parsed"
+    },
+    "ordner-06-technische-dokumentation-detail": {
+      "nodes": "27",
+      "edges": "26",
+      "status": "parsed"
+    },
+    "tokenaccess-triggermap-988-992": {
+      "nodes": "9",
+      "edges": "8",
+      "status": "parsed"
+    },
+    "terra-nova-master-overview-complete-workspace": {
+      "nodes": "88",
+      "edges": "87",
+      "status": "parsed"
+    },
+    "digital-ecosystem-ziel-struktur-v2-0": {
+      "nodes": "45",
+      "edges": "44",
+      "status": "parsed"
+    },
+    "notion-chatgpt-system-architektur": {
+      "nodes": "17",
+      "edges": "28",
+      "status": "parsed"
+    },
+    "meta-conductor-agent-routing": {
+      "nodes": "8",
+      "edges": "8",
+      "status": "parsed"
+    },
+    "session-root-living-trigger-organism": {
+      "nodes": "21",
+      "edges": "20",
+      "status": "parsed"
+    },
+    "full-sync-terra-nova-mcp-sequence": {
+      "nodes": "12",
+      "edges": "91",
+      "status": "parsed"
+    },
+    "mmd-001-cap-visual-control-model": {
+      "nodes": "9",
+      "edges": "12",
+      "status": "parsed"
+    }
+  }
+}

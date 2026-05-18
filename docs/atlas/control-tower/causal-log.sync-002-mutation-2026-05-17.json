@@ -1,0 +1,52 @@
+{
+  "log_id": "SYNC-002-MUTATION-2026-05-17",
+  "event_type": "notion_metadata_sync_closure",
+  "created_at": "2026-05-17T20:31:00+00:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "SYNC-002 - Canon Field Sync Closure. GO",
+  "mode": "STUDIO live Notion metadata sync",
+  "source_trace": [
+    "docs/atlas/control-tower/registry-002.registry-updates.csv",
+    "docs/atlas/control-tower/causal-log.registry-002-mutation-2026-05-17.json",
+    "docs/atlas/control-tower/mmd-007.source-review.csv"
+  ],
+  "deterministic_boundary": [
+    "Explicit GO was present",
+    "Only five CAP module draft rows were updated",
+    "Only Sync Status and Equilibrium Notes were changed",
+    "No schema change",
+    "No row creation or deletion",
+    "No canonical TRG assignment",
+    "No L3/L4 elevation",
+    "No Notion AI credit use"
+  ],
+  "probabilistic_hypothesis": "After REGISTRY-002 live verification, leaving the five module rows as Needs sync would create dashboard drift.",
+  "selected_action": "Close the canon-field sync state for the five CAP module draft rows.",
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "live_outputs": [
+    "Five CAP module draft rows set to Sync Status = In sync",
+    "Equilibrium Notes updated with REGISTRY-002 sync closure boundary"
+  ],
+  "verification": {
+    "method": "direct Notion row fetch fallback",
+    "sql_query_tool": "not used; previously unavailable",
+    "rows_verified": 5,
+    "all_rows_in_sync": true,
+    "preflight_521_review": "Sensitivity Review Required"
+  },
+  "feedback_target": [
+    "CAP Module Drafts",
+    "CAP Canon Admission Queue",
+    "SENS-002 protected-lane review"
+  ],
+  "blocked_claims": [
+    "Full historical trigger definitions",
+    "Canonical TRG assignment",
+    "Execution permission",
+    "Public-facing canon",
+    "L3/L4 admission"
+  ],
+  "status": "completed"
+}

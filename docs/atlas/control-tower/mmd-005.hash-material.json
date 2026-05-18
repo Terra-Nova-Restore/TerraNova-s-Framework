@@ -1,0 +1,255 @@
+{
+  "package_id": "MMD-005-HASH-MATERIAL",
+  "created_at": "2026-05-17T19:23:43.066320+00:00",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "hash_rule": "SHA-256 over sorted compact JSON material; draft fingerprint only.",
+  "source_files": [
+    "mmd-004.module-record-candidates.csv",
+    "mmd-004.candidate-review.csv",
+    "mmd-004.guard-review.csv",
+    "atlas\\atlas.manifest.v1.1.json",
+    "atlas\\sources\\trigger-complement-2026-03-30.md"
+  ],
+  "modules": {
+    "516": {
+      "hash_handle": "CAP-DRAFT-516-e74f17cc9e64",
+      "sha256": "e74f17cc9e6409207dfd3e5858dd092484cf7c442ccd0ff07f6ad808243bce8b",
+      "material": {
+        "material_version": "MMD-005:v1",
+        "draft_module_id": "CAP-MOD-DRAFT-516",
+        "visible_reference": "516",
+        "working_name": "Inspiration",
+        "source_state": "visible Mermaid evidence plus Atlas v1.1 documented anchor",
+        "canon_status": "draft_only_no_canonical_trg_assignment",
+        "primary_runtime_role": "creative-flow intake",
+        "cap_function": "Route a live inspiration signal into bounded CAP work without turning it into execution by itself.",
+        "activation_surface": "Creative Flow / inspiration queue",
+        "feedback_target": "trigger_map",
+        "clusters": [
+          "Creative Flow Trigger Cluster 516-517"
+        ],
+        "architecture_layers": [
+          "Trigger Layer 4: Meta-Emergent"
+        ],
+        "candidate_evidence": [
+          {
+            "review_id": "MMD4-C004",
+            "graph_id": "ordner-02-codex-trigger-detail",
+            "node_id": "T516",
+            "label": "Trigger 516: Inspiration"
+          }
+        ],
+        "guard_evidence": [
+          {
+            "review_id": "MMD4-G004",
+            "source_node": "TRIGGER_ARCH",
+            "target_node": "T516",
+            "guard_condition": "",
+            "lane": "STRUCTURAL-RELATION"
+          }
+        ],
+        "atlas_trigger_summary": "Inspiration anchor in the Creative Flow band.",
+        "boundary": "Draft module only; AutoFlow sibling 517 remains a caution lane and is not normalized."
+      }
+    },
+    "520": {
+      "hash_handle": "CAP-DRAFT-520-fb3f4d48c686",
+      "sha256": "fb3f4d48c686999081d6e801c9a483bff45adc20ace7dc5f530ca41054cde1e9",
+      "material": {
+        "material_version": "MMD-005:v1",
+        "draft_module_id": "CAP-MOD-DRAFT-520",
+        "visible_reference": "520",
+        "working_name": "SessionStart",
+        "source_state": "visible Mermaid evidence plus Atlas v1.1 documented anchor",
+        "canon_status": "draft_only_no_canonical_trg_assignment",
+        "primary_runtime_role": "session initialization",
+        "cap_function": "Mark the start of a working session and bind it to a visible root state before deeper routing.",
+        "activation_surface": "SESSION_ROOT / ferro:state=init",
+        "feedback_target": "logbook",
+        "clusters": [
+          "Core System Trigger Cluster 520-530"
+        ],
+        "architecture_layers": [
+          "Trigger Layer 1: System-Core"
+        ],
+        "candidate_evidence": [
+          {
+            "review_id": "MMD4-C005",
+            "graph_id": "ordner-02-codex-trigger-detail",
+            "node_id": "T520",
+            "label": "Trigger 520: SessionStart"
+          },
+          {
+            "review_id": "MMD4-C044",
+            "graph_id": "session-root-living-trigger-organism",
+            "node_id": "T520",
+            "label": "🚀 T-520: SESSION_START | ferro:state=init"
+          }
+        ],
+        "guard_evidence": [
+          {
+            "review_id": "MMD4-G005",
+            "source_node": "TRIGGER_ARCH",
+            "target_node": "T520",
+            "guard_condition": "",
+            "lane": "STRUCTURAL-RELATION"
+          },
+          {
+            "review_id": "MMD4-G030",
+            "source_node": "T520",
+            "target_node": "T521",
+            "guard_condition": "session_opened",
+            "lane": "GUARD-CANDIDATE"
+          }
+        ],
+        "atlas_trigger_summary": "SessionStart anchor in the core system band.",
+        "boundary": "Draft module only; session start does not authorize external mutation."
+      }
+    },
+    "521": {
+      "hash_handle": "CAP-DRAFT-521-a090313e8a6e",
+      "sha256": "a090313e8a6ecb802871969e9dfad44ed5df790f7a9c33e7121d947df37b79b0",
+      "material": {
+        "material_version": "MMD-005:v1",
+        "draft_module_id": "CAP-MOD-DRAFT-521",
+        "visible_reference": "521",
+        "working_name": "Preflight",
+        "source_state": "visible Mermaid evidence plus Atlas v1.1 documented anchor",
+        "canon_status": "draft_only_no_canonical_trg_assignment",
+        "primary_runtime_role": "pre-action gate",
+        "cap_function": "Check source, mode, boundary and protection state before execution or sync movement.",
+        "activation_surface": "preflight_ok guard",
+        "feedback_target": "logbook",
+        "clusters": [
+          "Core System Trigger Cluster 520-530",
+          "Protection Layer Trigger Cluster 182 / 521 / 777"
+        ],
+        "architecture_layers": [
+          "Trigger Layer 2: Schattenarchiv"
+        ],
+        "candidate_evidence": [
+          {
+            "review_id": "MMD4-C045",
+            "graph_id": "session-root-living-trigger-organism",
+            "node_id": "T521",
+            "label": "T521"
+          }
+        ],
+        "guard_evidence": [
+          {
+            "review_id": "MMD4-G030",
+            "source_node": "T520",
+            "target_node": "T521",
+            "guard_condition": "session_opened",
+            "lane": "GUARD-CANDIDATE"
+          },
+          {
+            "review_id": "MMD4-G031",
+            "source_node": "T521",
+            "target_node": "ROOT",
+            "guard_condition": "preflight_ok",
+            "lane": "GUARD-CANDIDATE"
+          }
+        ],
+        "atlas_trigger_summary": "Preflight anchor that appears in both the core system and the protection layer.",
+        "boundary": "Draft module only; protection-layer overlap does not open Schattenarchiv depth."
+      }
+    },
+    "540": {
+      "hash_handle": "CAP-DRAFT-540-cddc9821aabd",
+      "sha256": "cddc9821aabd3fe9107f75856f26862d0b1ef465590068d55f564fbf6c209d8b",
+      "material": {
+        "material_version": "MMD-005:v1",
+        "draft_module_id": "CAP-MOD-DRAFT-540",
+        "visible_reference": "540",
+        "working_name": "Observable Momentum",
+        "source_state": "visible Mermaid evidence plus Atlas v1.1 documented anchor",
+        "canon_status": "draft_only_no_canonical_trg_assignment",
+        "primary_runtime_role": "progress visibility",
+        "cap_function": "Make movement measurable so CAP can distinguish real progress from narrative drift.",
+        "activation_surface": "Meta-Reflexion / validation and momentum",
+        "feedback_target": "prism_zenodo",
+        "clusters": [
+          "Meta-Reflexion Trigger Cluster 540 / 544"
+        ],
+        "architecture_layers": [
+          "Trigger Layer 4: Meta-Emergent"
+        ],
+        "candidate_evidence": [
+          {
+            "review_id": "MMD4-C006",
+            "graph_id": "ordner-02-codex-trigger-detail",
+            "node_id": "T540",
+            "label": "Trigger 540: Beobachtbares Momentum"
+          }
+        ],
+        "guard_evidence": [
+          {
+            "review_id": "MMD4-G006",
+            "source_node": "TRIGGER_ARCH",
+            "target_node": "T540",
+            "guard_condition": "",
+            "lane": "STRUCTURAL-RELATION"
+          }
+        ],
+        "atlas_trigger_summary": "Validation and momentum anchor in the Meta-Reflexion band.",
+        "boundary": "Draft module only; observable momentum is a control signal, not proof of correctness."
+      }
+    },
+    "544": {
+      "hash_handle": "CAP-DRAFT-544-9c3ea89dd965",
+      "sha256": "9c3ea89dd96582534fcc4d8511972faaab10c84b353d92d52142b900419fbf8c",
+      "material": {
+        "material_version": "MMD-005:v1",
+        "draft_module_id": "CAP-MOD-DRAFT-544",
+        "visible_reference": "544",
+        "working_name": "Synchronization Node",
+        "source_state": "visible Mermaid evidence plus Atlas v1.1 documented anchor",
+        "canon_status": "draft_only_no_canonical_trg_assignment",
+        "primary_runtime_role": "state reconciliation",
+        "cap_function": "Confirm and route a state delta into sync, decision or feedback handling.",
+        "activation_surface": "delta_confirmed guard",
+        "feedback_target": "registry",
+        "clusters": [
+          "Meta-Reflexion Trigger Cluster 540 / 544"
+        ],
+        "architecture_layers": [
+          "Trigger Layer 4: Meta-Emergent"
+        ],
+        "candidate_evidence": [
+          {
+            "review_id": "MMD4-C007",
+            "graph_id": "ordner-02-codex-trigger-detail",
+            "node_id": "T544",
+            "label": "Trigger 544: Synchronisationsknoten"
+          },
+          {
+            "review_id": "MMD4-C048",
+            "graph_id": "session-root-living-trigger-organism",
+            "node_id": "T544",
+            "label": "T544"
+          }
+        ],
+        "guard_evidence": [
+          {
+            "review_id": "MMD4-G007",
+            "source_node": "TRIGGER_ARCH",
+            "target_node": "T544",
+            "guard_condition": "",
+            "lane": "STRUCTURAL-RELATION"
+          },
+          {
+            "review_id": "MMD4-G049",
+            "source_node": "T15",
+            "target_node": "T544",
+            "guard_condition": "delta_confirmed",
+            "lane": "GUARD-CANDIDATE"
+          }
+        ],
+        "atlas_trigger_summary": "Synchronization and decision-point anchor in the Meta-Reflexion band.",
+        "boundary": "Draft module only; synchronization requires explicit scope and does not imply full workspace sync."
+      }
+    }
+  }
+}

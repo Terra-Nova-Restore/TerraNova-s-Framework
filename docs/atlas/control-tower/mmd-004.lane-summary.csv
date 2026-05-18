@@ -1,0 +1,9 @@
+Lane,Candidate Rows,Guard Rows,Gate Meaning
+CANON-SOURCE-NEEDED,2,0,Visible reference exists but source review is required.
+CAP-MODULE-CANDIDATE,7,0,Safe visible numeric anchor can become a CAP module candidate.
+CAUTION-AUTOFLOW,1,1,Autoflow-related material requires observer framing.
+CONTEXT-SURFACE,17,0,"Useful context, not a trigger module."
+CONTROL-SURFACE,17,0,Useful CAP routing/control surface.
+GUARD-CANDIDATE,0,109,Guard relation can support route understanding.
+SENS-HELD,9,14,Blocked behind SENS-001.
+STRUCTURAL-RELATION,0,16,Unlabeled structural relation.

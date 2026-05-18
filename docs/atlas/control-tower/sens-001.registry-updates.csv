@@ -1,0 +1,5 @@
+Name,Notion Page ID,Update Type,Status,Sensitivity,Sync Status,Equilibrium Notes
+SENS-001 Sensitivity Boundary Queue,notion-id://redacted,created,Reviewed,Sensitive,In sync,SENS-001 defines five protected boundary classes; no raw titles/content; no deletion; no public expansion.
+Restricted wiki data source,notion-id://redacted,updated,Reviewed,Restricted,Not applicable,SENS-001 confirms restricted existence-only marker; no child titles/content are exported or inferred.
+Home-Ansichten Snapshot 2026-05-11,notion-id://redacted,updated,Reviewed,Sensitive,In sync,SENS-001 confirms aggregate-only use: counts and queues only; raw private inventory remains local.
+DUP-001 Duplicate Title Review Queue,notion-id://redacted,updated,Reviewed,Sensitive,In sync,SENS-001 marks DUP-001 as mixed-sensitivity governance queue; patent/IP private and deep-trigger classes are blocked from automated cleanup.

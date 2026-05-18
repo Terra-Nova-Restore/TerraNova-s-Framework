@@ -1,0 +1,10 @@
+Field,Notion Type,Required,Values or Format,Backfill Source,Use,Stop Rule
+Canon Level,select,True,"L0-ID-ANCHOR; L1-NAME-CLUSTER; L2-ROUTING-MARKER; L3-MODULE-SEMANTICS; L4-EXECUTION-OR-PUBLIC",MMD-007 source review and CAP 0.4 canon ladder,Stores highest admitted canon level now,Do not set L3/L4 without primary definition tests SENS and publication boundary
+Source Tier,select,True,"T0 Published Reference Anchor; T1 Reviewed Repo Governance; T2 Live Notion System Record; T3 Extracted Mermaid or Atlas Graph; T4 Trigger Ledger or Source Complement; T5 Raw Export or Snapshot; T6 Session Directive; T7 Assistant Inference",canon-source-tier-map.csv,Stores strongest source tier supporting the claim,Do not treat T6 or T7 as factual source truth
+Canon Decision,select,True,"Admit; Hold at L2; Sensitivity hold; Queue; Block; Downgrade",canon-elevation-queue.csv,Stores current canon admission decision,Do not use Admit for unsupported or sensitivity-held claims
+Allowed Claims,rich_text,False,Allowed claims from MMD-007/CAP 0.4,Shows what may be stated now,Do not include public/execution language unless L4 is passed
+Blocked Claims,rich_text,True,Blocked claims from MMD-007/CAP 0.4,Shows what must remain outside canon,Do not leave blank for Candidate or L1/L2 rows
+Next Source Action,rich_text,False,Next source action from elevation queue,Shows exact requirement before elevation,Do not elevate without closing this action
+Downgrade Rule,rich_text,False,Rulebook downgrade conditions,Shows what reverses or lowers the claim,Do not admit a claim that cannot be downgraded
+Admission Review,select,True,"Pending Review; Source Review Passed; Sensitivity Review Required; Ready for Elevation; Blocked",MMD-007 and CAP 0.4 review state,Controls review queue visibility,Do not mark Ready for Elevation without source action closure
+Canon Updated,date,False,YYYY-MM-DD,REGISTRY-002 apply date,Records when live registry canon fields changed,Only set during explicit Notion apply

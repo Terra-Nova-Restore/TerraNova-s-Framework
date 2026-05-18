@@ -1,0 +1,11 @@
+Gate ID,Gate,Required State,Current State,Status,Owner,Blocks
+PRISM-GATE-001,Distinct RC01-v13 artifact,"New public-safe PDF differs from RC01-v12","Missing; main (45).pdf is byte-identical to RC01-v12",Blocked,GitHub / Silvan,"Zenodo draft, upload, publish"
+PRISM-GATE-002,Artifact checksums,"SHA-256 and MD5 recorded for distinct artifact","Only RC01-v12 checksums available",Blocked,GitHub / Codex,"Zenodo upload"
+PRISM-GATE-003,Metadata alignment,"Version, DOI lineage, concept DOI, ORCID, repository link, title, publication date and license reviewed","Live RC01-v12 metadata refreshed on 2026-05-17; RC01-v13 draft metadata must be reconciled against this",Partial,GitHub / Silvan,"Zenodo draft"
+PRISM-GATE-004,Public-boundary review,"No raw private inventory, restricted wiki detail, private chat/export, token/wallet/credential or sensitive IP expansion","SENS-001 exists; public boundary not yet run on new artifact",Blocked,SENS-001 / Silvan,"Zenodo draft, publish"
+PRISM-GATE-005,CAP companion separation,"CAP 0.1-0.3 material separated into companion/appendix/internal lanes","PRISM-002 checklist created",Partial,CAP / GitHub,"Public-facing companion material"
+PRISM-GATE-006,R16 governance delta,"R16 marked as post-snapshot update, not retroactively inserted as original RC01-v12 fact","R16 mirrored in CAP and operating kernel",Partial,Equilibrium / CAP,"RC01-v13 governance note"
+PRISM-GATE-007,Dry-run validation,"Repository preflight workflow passes without Zenodo writes","Workflow exists; not run in this turn",Pending,GitHub Actions,"Zenodo draft"
+PRISM-GATE-008,Explicit draft GO,"Silvan explicitly authorizes Zenodo draft creation","Not granted",Blocked,Silvan,"Zenodo draft"
+PRISM-GATE-009,Manual preview review,"Zenodo draft preview manually reviewed before publish","No draft exists",Blocked,Silvan,"Zenodo publish"
+PRISM-GATE-010,Explicit publish GO,"Silvan explicitly authorizes Zenodo publish","Not granted",Blocked,Silvan,"Zenodo publish"

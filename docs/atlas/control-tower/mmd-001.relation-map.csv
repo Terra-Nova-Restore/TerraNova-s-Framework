@@ -1,0 +1,15 @@
+Relation ID,From,To,Relation,Source,Status,Boundary
+MMD-R001,Mermaid Atlas - Start Here,IST Chef Diagram,defines entrypoint,Notion fetch,Confirmed,Navigation only
+MMD-R002,Mermaid Atlas - Start Here,SOLL Chef Diagram,defines entrypoint,Notion fetch,Confirmed,Navigation only
+MMD-R003,Mermaid Atlas - Start Here,INTEGRATION Chef Diagram,defines entrypoint,Notion fetch,Confirmed,Navigation only
+MMD-R004,Mermaid Atlas - Start Here,ORCHESTRATION Chef Diagram,defines entrypoint,Notion fetch,Confirmed,Navigation only
+MMD-R005,IST Chef Diagram,Ordner 02: Codex & Trigger Detail,has zoom lens,Notion fetch + docs/atlas/diagrams.md,Confirmed,Do not infer full trigger canon
+MMD-R006,IST Chef Diagram,Ordner 06: Technische Dokumentation Detail,has zoom lens,Notion fetch + docs/atlas/diagrams.md,Confirmed,Patent/IP boundary applies
+MMD-R007,Mermaid Manifest,Trigger System,formalizes node/edge/graph ontology,Notion fetch,Confirmed,No raw trigger expansion
+MMD-R008,VortexCanvas,System Decision Field,defines resonance map,Notion fetch,Confirmed,Not a timeline
+MMD-R009,VortexCanvas,Mermaid Universe,provides coherence interpretation,MMD-001 synthesis,Selected,Bridge layer only
+MMD-R010,Mermaid Universe,CAP Control Tower,feeds routing and backpropagation,MMD-001 synthesis,Selected,No external mutation
+MMD-R011,CAP Control Tower,Trigger Registry,precedes hashing and module registry,MMD-001 synthesis,Selected,Trigger IDs remain unverified unless sourced
+MMD-R012,docs/atlas/diagrams.md,Mermaid Registry,confirms active/legacy/orphan status,GitHub local,Confirmed,GitHub-safe derived registry
+MMD-R013,raw source pack,Mermaid Registry,provides provenance exports,GitHub local,Confirmed,Raw export stays archival
+MMD-R014,Notion workspace_search,MMD-001,provided read-only current source check,Notion connector,Confirmed,No AI search mode; no writes

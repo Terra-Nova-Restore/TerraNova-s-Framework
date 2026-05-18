@@ -1,0 +1,9 @@
+Object,Notion URL,Action,Status,Boundary
+CAP-MOD-DRAFT-516 - Inspiration,notion://redacted-internal-object,"Created registry row",Applied,"Internal Candidate row; no canonical TRG assignment; no restricted expansion"
+CAP-MOD-DRAFT-520 - SessionStart,notion://redacted-internal-object,"Created registry row",Applied,"Internal Candidate row; no canonical TRG assignment; no external mutation permission"
+CAP-MOD-DRAFT-521 - Preflight,notion://redacted-internal-object,"Created registry row",Applied,"Internal Candidate row; protection-layer overlap does not open Schattenarchiv depth"
+CAP-MOD-DRAFT-540 - Observable Momentum,notion://redacted-internal-object,"Created registry row",Applied,"Internal Candidate row; observable momentum is a control signal, not proof"
+CAP-MOD-DRAFT-544 - Synchronization Node,notion://redacted-internal-object,"Created registry row",Applied,"Internal Candidate row; sync requires explicit scope"
+CAP Module Drafts,view://notion-id://redacted,"Created registry database view",Applied,"View only; no schema change"
+CAP Module Sync Needed,view://notion-id://redacted,"Created registry database view",Applied,"View only; no schema change"
+CAP page,notion://redacted-internal-object,"Appended MMD-006 Live Registry Application checkpoint",Applied,"No deletion; no raw private inventory; no restricted trigger expansion"

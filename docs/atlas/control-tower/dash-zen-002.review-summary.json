@@ -1,0 +1,51 @@
+{
+  "review_id": "DASH-ZEN-002",
+  "created_at": "2026-05-18T10:18:00+02:00",
+  "status": "complete",
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "objects_reviewed": [
+    "Zenodo root",
+    "Monographie Teil I",
+    "Monographie Teil II",
+    "Monographie Teil III",
+    "Zenodo-Z1 routing anchor",
+    "Zenodo-Z2 routing anchor",
+    "Zenodo-Z3 routing anchor"
+  ],
+  "registry_rows_updated": 4,
+  "cap_checkpoints_appended": 1,
+  "related_anchor_rows_created": 0,
+  "canon_decision": {
+    "zenodo_root": "Hold at L2",
+    "monographie_teil_i": "Hold at L2",
+    "monographie_teil_ii": "Sensitivity hold",
+    "monographie_teil_iii": "Sensitivity hold",
+    "zenodo_z1": "Queue for DASH-ZEN-003",
+    "zenodo_z2": "Queue for DASH-ZEN-003",
+    "zenodo_z3": "Queue for DASH-ZEN-003"
+  },
+  "sensitivity": {
+    "zenodo_root": "Internal",
+    "monographie_teil_i": "Internal",
+    "monographie_teil_ii": "Sensitive",
+    "monographie_teil_iii": "Sensitive",
+    "zenodo_z1": "Internal",
+    "zenodo_z2": "Internal",
+    "zenodo_z3": "Internal"
+  },
+  "allowed_claims": [
+    "The Zenodo root is an internal dashboard mirror for the current RC01-v12 reference surface.",
+    "Monographie Teil I is a source-reviewed internal reference entry point.",
+    "Monographie Teil II and Teil III are reviewed but remain sensitivity-bound.",
+    "Z1, Z2 and Z3 are reachable routing-state anchors and should be packaged separately."
+  ],
+  "blocked_claims": [
+    "The monographie child pages are final public canon.",
+    "DASH-ZEN-002 authorizes Zenodo republish, DOI mutation, concept DOI mutation, file upload, new version or publish event.",
+    "Sensitive manuscript, patent, token, return-path or Track-C passages may be copied into public GitHub artifacts.",
+    "Z1, Z2 or Z3 registry rows were created in DASH-ZEN-002.",
+    "The pass consumes Notion AI credits or uses a Notion Custom Agent."
+  ],
+  "next_source_action": "Run DASH-ZEN-003 to package Zenodo-Z1/Z2/Z3 routing anchors as explicit registry rows, then decide whether any Z-anchor is L2."
+}

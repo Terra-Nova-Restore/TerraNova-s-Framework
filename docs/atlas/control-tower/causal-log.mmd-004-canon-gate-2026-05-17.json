@@ -1,0 +1,46 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-MMD004-CANONGATE",
+  "event_id": "MMD-004",
+  "created_at": "2026-05-17T00:00:00+02:00",
+  "activation": "MMD-004 go",
+  "mode": "repo-local review and canon gate",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "observation": "MMD-003 produced visual trigger candidates, but visual evidence must not become canonical TRG identity without a gate.",
+  "selected_action": "Reviewed candidates and guard rows into CAP module, control, context, source-needed, caution and SENS-held lanes.",
+  "source_refs": [
+    "scripts/review_visual_trigger_candidates.py",
+    "docs/atlas/control-tower/mmd-003.visual-trigger-candidates.csv",
+    "docs/atlas/control-tower/mmd-003.guard-bridge.csv",
+    "C:/Users/Silvan/.codex/skills/terranova-ferrai/references/canon-details.md"
+  ],
+  "deterministic_boundary": "Local files only; no Notion mutation; no Notion AI; no canonical TRG assignment; AutoFlow, Schattenarchiv and token/integrity surfaces remain gated.",
+  "probabilistic_hypothesis": "A candidate review gate will prevent visual graph evidence from being overpromoted while preserving the most useful safe module candidates.",
+  "review_counts": {
+    "candidate_review_rows": 53,
+    "guard_review_rows": 140,
+    "module_record_candidates": 14,
+    "lane_summary_rows": 8
+  },
+  "eligible_module_candidates": [
+    "516",
+    "520",
+    "521",
+    "540",
+    "544"
+  ],
+  "held_references": [
+    "174-210",
+    "517",
+    "600",
+    "777",
+    "988",
+    "989",
+    "990",
+    "991",
+    "992"
+  ],
+  "backpropagation_target": "CAP Control Tower, future trigger module registry",
+  "backpropagation_result": "Only five safe visible references are eligible for CAP module draft work. All sensitive, autoflow and source-needed references remain held or deferred.",
+  "next_recommended_action": "MMD-005 - CAP Module Drafts"
+}

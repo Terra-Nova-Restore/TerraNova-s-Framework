@@ -1,0 +1,31 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-MMD002-EXTRACTION",
+  "event_id": "MMD-002",
+  "created_at": "2026-05-17T00:00:00+02:00",
+  "activation": "MMD-002 - Mermaid Graph Extraction / Go",
+  "mode": "repo-local extraction",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "observation": "MMD-001 established Mermaid as the first visual understanding layer. The exported Mermaid code depot and active registry can now be transformed into machine-readable graph tables.",
+  "selected_action": "Created a repeatable extractor and generated graph, node, edge, guard and gap tables.",
+  "source_refs": [
+    "scripts/extract_mermaid_graphs.py",
+    "raw/exports/prism/source-pack/2026-05-02/Mermaid Code Library - Complete Collection",
+    "raw/exports/prism/source-pack/2026-05-02/Mermaid Diagrams - Code Library _all CSV",
+    "raw/exports/prism/source-pack/2026-05-02/Mermaid als lebendiger Trigger-Organismus",
+    "docs/ai/full_sync_terra_nova_mcp_sequence.md",
+    "docs/atlas/control-tower/mmd-001.mermaid-universe-readpass.md"
+  ],
+  "deterministic_boundary": "Local files only; no Notion mutation; no Notion AI; no SCL depth work; Mermaid edges are extracted relations, not execution authorization.",
+  "probabilistic_hypothesis": "Graph extraction will make trigger comprehension tractable by routing from visual relation structures before attempting trigger canon reconstruction.",
+  "extraction_counts": {
+    "graphs": 11,
+    "nodes": 277,
+    "edges": 363,
+    "guards": 363,
+    "gaps": 4
+  },
+  "backpropagation_target": "CAP Control Tower, Mermaid registry, future trigger module registry",
+  "backpropagation_result": "Mermaid graphs now have normalized nodes, edges and guard conditions that can feed a safe visual-trigger bridge.",
+  "next_recommended_action": "MMD-003 - Visual Trigger Bridge"
+}

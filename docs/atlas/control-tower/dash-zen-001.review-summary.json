@@ -1,0 +1,33 @@
+{
+  "review_id": "DASH-ZEN-001",
+  "created_at": "2026-05-18T09:55:00+00:00",
+  "status": "complete",
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "objects_reviewed": [
+    "Zenodo root",
+    "Monographie Teil I",
+    "Monographie Teil II",
+    "Monographie Teil III"
+  ],
+  "registry_rows_created": 4,
+  "canon_decision": {
+    "zenodo_root": "Hold at L2",
+    "monographie_teil_i": "Queue",
+    "monographie_teil_ii": "Sensitivity hold",
+    "monographie_teil_iii": "Sensitivity hold"
+  },
+  "sensitivity": {
+    "zenodo_root": "Internal",
+    "monographie_teil_i": "Internal",
+    "monographie_teil_ii": "Sensitive",
+    "monographie_teil_iii": "Sensitive"
+  },
+  "blocked_claims": [
+    "The new Notion monographie pages are final public canon.",
+    "The Notion Zenodo page authorizes a Zenodo republish, DOI change or metadata mutation.",
+    "Sensitive manuscript, patent, token or private passages may be copied into public GitHub artifacts.",
+    "The registry sync consumes Notion AI credits or uses a Notion Custom Agent."
+  ],
+  "next_source_action": "Run DASH-ZEN-002 only after the three monographie pages receive a bounded source/sensitivity pass."
+}

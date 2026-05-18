@@ -1,0 +1,33 @@
+{
+  "id": "cap-0.2-registry-stabilization-iperka-2026-05-17",
+  "timestamp": "2026-05-17T10:46:10+02:00",
+  "actor": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "trigger_or_cluster": "IPERKA weiter; /fff bounded continuation",
+  "source_trace": [
+    "docs/atlas/control-tower/README.md",
+    "docs/atlas/control-tower/workspace-object-registry.seed.csv",
+    "docs/atlas/control-tower/home-ansichten.snapshot.summary.json",
+    "CAP registry: notion://redacted-internal-object"
+  ],
+  "probabilistic_hypothesis": "The workspace will become controllable faster by stabilizing object state, canon and sync before deep content analysis.",
+  "deterministic_boundary": "No Notion mutation was performed in this step; external systems require explicit GO. Silvan is recovery anchor, not the operating model.",
+  "selected_action": "Created repo-local CAP 0.2 Registry Stabilization IPERKA and defined the first six workstreams.",
+  "feedback_target": "GitHub Atlas",
+  "backpropagation_target": "CAP Registry and Prism / Zenodo",
+  "observed_result": {
+    "new_iperka_file": "docs/atlas/control-tower/cap-0.2-registry-stabilization-iperka.md",
+    "registry_rows": 21,
+    "snapshot_unique_notion_ids": 808,
+    "snapshot_duplicate_title_groups": 46,
+    "first_batch": "DB-WIKI-001"
+  },
+  "equilibrium_check": {
+    "status": "pass",
+    "trace": "Local files and registry seed were read before the plan was written.",
+    "boundary": "Repo-local documentation only.",
+    "mode": "STUDIO",
+    "github_sync": "GitHub trace updated locally."
+  },
+  "next_review": "Start DB-WIKI-001 and prepare a Notion mutation package only after explicit GO."
+}

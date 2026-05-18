@@ -1,0 +1,6 @@
+Package ID,Target,Proposed Action,Apply Condition,Boundary
+DASHZEN-N001,Zenodo root page,"Create CAP registry row as DASH-ZEN-001 - Zenodo Root with L2 routing status and Prism / Zenodo foreground relevance","After explicit approval: genauso mache mers","No page movement, deletion, publication action or raw private ID export"
+DASHZEN-N002,Monographie Teil I,"Create CAP registry row as DASH-ZEN-001 - Monographie Teil I with L1 source-review placeholder and Prism / Zenodo backpropagation relevance","After explicit approval: genauso mache mers","No L2/L3 elevation before deeper source and sensitivity pass"
+DASHZEN-N003,Monographie Teil II,"Create CAP registry row as DASH-ZEN-001 - Monographie Teil II with sensitivity hold","After explicit approval: genauso mache mers","No public-canon claim; no raw manuscript import"
+DASHZEN-N004,Monographie Teil III,"Create CAP registry row as DASH-ZEN-001 - Monographie Teil III with sensitivity hold","After explicit approval: genauso mache mers","No public-canon claim; no raw appendix or return-path import"
+DASHZEN-N005,CAP page checkpoint,"Append DASH-ZEN-001 checkpoint to CAP page if a stable append point is available","After explicit approval: genauso mache mers","Checkpoint only; no schema change and no Notion AI credit use"

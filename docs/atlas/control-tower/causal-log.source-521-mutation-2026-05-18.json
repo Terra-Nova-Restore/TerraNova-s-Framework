@@ -1,0 +1,62 @@
+{
+  "log_id": "SOURCE-521-MUTATION-2026-05-18",
+  "event_type": "notion_registry_canon_update",
+  "created_at": "2026-05-18T04:12:00+00:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "GO Notion SOURCE-521 anwenden",
+  "mode": "STUDIO live Notion metadata sync",
+  "source_trace": [
+    "docs/atlas/control-tower/source-521.primary-source-pass.md",
+    "docs/atlas/control-tower/source-521.source-ledger.csv",
+    "docs/atlas/control-tower/source-521.claim-review.csv",
+    "docs/atlas/control-tower/source-521.elevation-decision.csv",
+    "docs/atlas/control-tower/source-521.notion-mutation-package.csv"
+  ],
+  "deterministic_boundary": [
+    "Explicit GO was present",
+    "Only one CAP module draft row was updated",
+    "One CAP page checkpoint was appended",
+    "No schema change",
+    "No row creation or deletion",
+    "No raw private inventory export",
+    "No canonical TRG assignment",
+    "No L3/L4 elevation",
+    "No preflight automation",
+    "No protection execution behavior",
+    "No 777-depth import",
+    "No Notion AI credit use"
+  ],
+  "probabilistic_hypothesis": "After SOURCE-521 local source pass, leaving the live registry at L1 would create canon drift between GitHub and Notion.",
+  "selected_action": "Apply the prepared SOURCE-521 Notion mutation package to the live registry and CAP page.",
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "live_outputs": [
+    "CAP-MOD-DRAFT-521 - Preflight updated to L2-ROUTING-MARKER",
+    "Source Tier updated to T2 Live Notion System Record",
+    "Canon Decision set to Hold at L2",
+    "Admission Review set to Source Review Passed",
+    "CAP page SOURCE-521 checkpoint appended"
+  ],
+  "verification": {
+    "method": "direct Notion row and CAP page fetch",
+    "rows_verified": 1,
+    "preflight_521_level": "L2-ROUTING-MARKER",
+    "preflight_521_admission_review": "Source Review Passed",
+    "cap_page_checkpoint": true
+  },
+  "feedback_target": [
+    "CAP Canon Admission Queue",
+    "AUTO-001",
+    "future SOURCE-520 or SOURCE-544"
+  ],
+  "blocked_claims": [
+    "Canonical TRG assignment",
+    "L3 module semantics",
+    "Preflight automation",
+    "Protection execution behavior",
+    "Schattenarchiv-depth behavior",
+    "Public trigger canon"
+  ],
+  "status": "completed"
+}

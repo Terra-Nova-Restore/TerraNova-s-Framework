@@ -1,0 +1,4 @@
+Name,Notion Page ID,Update Type,Status,Prism / Zenodo Relevance,Understanding State,Sync Status,Equilibrium Notes
+PRISM-001 Backpropagation Queue,notion-id://redacted,created,Reviewed,Next-release candidate,operationalized,In sync,PRISM-001 creates seven backpropagation queue rows from RC01-v12 into the living CAP registry; no Zenodo mutation.
+Zenodo RC01-v12 reference,notion-id://redacted,updated,Reviewed,Foreground,operationalized,In sync,PRISM-001 confirms RC01-v12 DOI 10.5281/zenodo.20073579 as citable snapshot and foreground anchor, not live workspace truth.
+Zenodo RC01-v12 release mirror,notion-id://redacted,updated,Reviewed,Citation,understood,In sync,PRISM-001 verifies local PDF/API mirror and records metadata alignment items as next-release candidates.

@@ -1,0 +1,6 @@
+Object,Notion URL,Action,Status,Boundary
+CAP page,notion://redacted-internal-object,"Updated Current Dashboard State and Next Internal Work Queue for CAP 0.3 / NINF-001",Applied,"No deletion; no child content removal; no raw private inventory"
+CAP 0.3 - Operational Control IPERKA,notion://redacted-internal-object,"Created registry row",Applied,"Internal GitHub artifact only"
+NINF-001 Notion Infiltration Package,notion://redacted-internal-object,"Created registry row",Applied,"Internal GitHub artifact only"
+CAP 0.3 Operations,view://notion-id://redacted,"Created registry database view",Applied,"View only; no schema change"
+Duplicate Review,view://notion-id://redacted,"Created registry database view",Applied,"View only; no schema change"

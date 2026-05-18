@@ -1,0 +1,25 @@
+{
+  "review_id": "MMD-005",
+  "created_at": "2026-05-17T19:23:43.068060+00:00",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "draft_modules": 5,
+  "module_evidence_rows": 33,
+  "module_relation_rows": 21,
+  "hash_rows": 5,
+  "eligible_references": [
+    "516",
+    "520",
+    "521",
+    "540",
+    "544"
+  ],
+  "hash_handles": {
+    "516": "CAP-DRAFT-516-e74f17cc9e64",
+    "520": "CAP-DRAFT-520-fb3f4d48c686",
+    "521": "CAP-DRAFT-521-a090313e8a6e",
+    "540": "CAP-DRAFT-540-cddc9821aabd",
+    "544": "CAP-DRAFT-544-9c3ea89dd965"
+  },
+  "boundary": "CAP module drafts only; no canonical TRG assignment."
+}

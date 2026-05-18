@@ -1,0 +1,43 @@
+{
+  "review_id": "SOURCE-521",
+  "title": "Preflight Primary Source Pass",
+  "created": "2026-05-17",
+  "status": "complete",
+  "mode": "STUDIO repo-local source review",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "workspace_search_mode": "workspace_search",
+  "strongest_source_tier": "T2 Live Notion System Record",
+  "primary_sources": [
+    "Notion: Trigger - Systemtabelle (aktiv)",
+    "Notion: Trigger-Module - Terra Nova Native",
+    "Notion: Trigger_Index_TerraNova_V5.3",
+    "Notion: 02_Codex & Trigger",
+    "Notion: Manifeste & Trigger - Systemarchitektur",
+    "Notion: Trigger 521 - Preflight Quickcheck"
+  ],
+  "repo_sources": [
+    "atlas/sources/trigger-complement-2026-03-30.md",
+    "raw/exports/incoming/batch_07_appendixII_i_bis_q_500p_2026-05-02.md",
+    "raw/exports/incoming/batch_08_ausbau_intake_korridor_r_bis_v_500p_2026-05-02.md"
+  ],
+  "decision": "local_admit_l2_routing_marker",
+  "previous_local_level": "L1-NAME-CLUSTER",
+  "new_local_level": "L2-ROUTING-MARKER",
+  "live_notion_mutation": "applied_2026-05-18",
+  "allowed_claims": [
+    "521 is Preflight",
+    "/preflight is an active internal safety entrypoint",
+    "Preflight can route pre-action risk and boundary checks",
+    "Preflight is separated from 777-depth behavior for normal CAP routing"
+  ],
+  "blocked_claims": [
+    "canonical TRG assignment",
+    "L3 module semantics",
+    "preflight automation",
+    "protection execution behavior",
+    "Schattenarchiv-depth behavior",
+    "public-facing trigger canon"
+  ],
+  "next_best_action": "Continue with SOURCE-544 or a future 520 implementation contract."
+}

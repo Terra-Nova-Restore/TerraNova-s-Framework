@@ -1,0 +1,278 @@
+Graph ID,Node ID,Label,Node Type,Source Line,In Degree,Out Degree,Trigger Signal,VORTEX Signal,Sensitivity Signal
+ordner-02-codex-trigger-detail,G02,📖 02_Codex & Trigger,node,2,0,4,yes,no,no
+ordner-02-codex-trigger-detail,CODEX170,📖 Codex170_Plus_FINAL,node,4,1,1,no,no,no
+ordner-02-codex-trigger-detail,CODEX139,📋 Codex139+_TriggerExport,node,5,1,0,yes,no,no
+ordner-02-codex-trigger-detail,TRIGGER_ARCH,🌀 Trigger-Architektur,node,6,1,5,yes,no,no
+ordner-02-codex-trigger-detail,T516,Trigger 516: Inspiration,node,8,1,0,yes,no,no
+ordner-02-codex-trigger-detail,T520,Trigger 520: SessionStart,node,9,1,0,yes,no,no
+ordner-02-codex-trigger-detail,T540,Trigger 540: Beobachtbares Momentum,node,10,1,0,yes,no,no
+ordner-02-codex-trigger-detail,T544,Trigger 544: Synchronisationsknoten,node,11,1,0,yes,no,no
+ordner-02-codex-trigger-detail,T777,Trigger 777: Schattenarchiv,node,12,1,0,yes,no,yes
+ordner-02-codex-trigger-detail,PRINZIPIEN,Codex-Prinzipien,node,14,1,4,no,no,no
+ordner-02-codex-trigger-detail,ORA,ORA: Offenheit-Radikalität-Authentizität,node,15,1,0,yes,no,no
+ordner-02-codex-trigger-detail,TRIQUETRA,Triquetra,node,16,1,0,no,no,no
+ordner-02-codex-trigger-detail,EIS,EIS,node,17,1,0,no,no,no
+ordner-02-codex-trigger-detail,FDAS,FDAS,node,18,1,0,no,no,no
+ordner-02-codex-trigger-detail,TRIGGER_LISTEN,📋 Trigger-Listen,node,20,1,3,yes,no,no
+ordner-02-codex-trigger-detail,T174_210,Trigger 174-210: 37 neue,node,21,1,0,yes,no,no
+ordner-02-codex-trigger-detail,T600,Triggerliste_600,node,22,1,0,yes,no,no
+ordner-02-codex-trigger-detail,EMERGENT,500 emergente Trigger,node,23,1,0,yes,no,no
+ordner-05-produkte-services-detail,G05,🎯 05_Produkte & Services,node,2,0,4,no,no,no
+ordner-05-produkte-services-detail,PROMPTS,💫 10 Master-Prompts v1.0,node,4,1,4,no,no,no
+ordner-05-produkte-services-detail,METAROTIK,🌊 Metarotik,node,5,1,4,no,no,yes
+ordner-05-produkte-services-detail,GENESIS,🎟️ Genesis Pass,node,6,1,2,no,no,no
+ordner-05-produkte-services-detail,FRAMEWORK,📦 Prompt Framework,node,7,1,2,no,no,no
+ordner-05-produkte-services-detail,P_EXPORT,📄 EXPORT-READY,node,9,1,0,yes,no,no
+ordner-05-produkte-services-detail,P_LAUNCH,📦 Marketing Assets & Launch Kit,node,10,1,0,no,no,no
+ordner-05-produkte-services-detail,P_LINKEDIN,📱 LinkedIn Launch Post,node,11,1,0,no,no,no
+ordner-05-produkte-services-detail,P_CONTENT,10 Master-Prompts Content,node,12,1,6,no,no,no
+ordner-05-produkte-services-detail,P1,1️⃣ System-Initialisierung,node,14,1,0,no,no,no
+ordner-05-produkte-services-detail,P2,2️⃣ Context-Stacking,node,15,1,0,yes,no,no
+ordner-05-produkte-services-detail,P3,3️⃣ Trigger-basierter Flow,node,16,1,0,yes,no,no
+ordner-05-produkte-services-detail,P4,4️⃣ Memory-Management,node,17,1,0,no,no,no
+ordner-05-produkte-services-detail,P5,5️⃣ Output-Modulation,node,18,1,0,yes,no,no
+ordner-05-produkte-services-detail,P_MORE,...6-10,node,19,1,0,no,no,no
+ordner-05-produkte-services-detail,M_SALES,🌊 Sales Page,node,21,1,0,no,no,no
+ordner-05-produkte-services-detail,M_PLAN,📋 Produktplan,node,22,1,0,no,no,no
+ordner-05-produkte-services-detail,M_INTERN,🔒 Metarotik Intern,node,23,1,0,no,no,yes
+ordner-05-produkte-services-detail,M_CODEX,Codex 1130-1151,node,24,1,0,no,no,no
+ordner-05-produkte-services-detail,GEN_CONCEPT,Konzept & Scope,node,26,1,0,no,no,no
+ordner-05-produkte-services-detail,GEN_PRICE,Preis: CHF 5'000,node,27,1,0,no,no,no
+ordner-05-produkte-services-detail,FW_CONCEPT,49 CHF Produkt,node,29,1,0,no,no,no
+ordner-05-produkte-services-detail,FW_CONTENT,"50+ Seiten, 20+ Templates",node,30,1,0,no,no,no
+ordner-06-technische-dokumentation-detail,G06,📚 06_Technische Dokumentation,node,2,0,5,no,no,no
+ordner-06-technische-dokumentation-detail,DELTA,🚀 Delta-Sync System v1.0,node,4,1,4,yes,no,no
+ordner-06-technische-dokumentation-detail,RAS,🧬 RAS – Rekursiver Affinitätsspeicher,node,5,1,2,no,no,no
+ordner-06-technische-dokumentation-detail,VORTEX,🌪️ VortexCanvas,node,6,1,2,no,yes,no
+ordner-06-technische-dokumentation-detail,API,🔗 API-Dokumentation,node,7,1,3,no,no,no
+ordner-06-technische-dokumentation-detail,PATENTE,🔐 Patente,node,8,1,7,no,no,yes
+ordner-06-technische-dokumentation-detail,DELTA_GUIDE,Complete Guide,node,10,1,3,no,no,no
+ordner-06-technische-dokumentation-detail,DELTA_SCRIPT,Delta-Sync Script v1.0,node,11,1,0,yes,no,no
+ordner-06-technische-dokumentation-detail,DELTA_PROPS,Sync Properties Template,node,12,1,0,yes,no,no
+ordner-06-technische-dokumentation-detail,DELTA_PROTOCOL,Sync-Protokoll v1.0,node,13,1,0,yes,no,no
+ordner-06-technische-dokumentation-detail,SECURITY,🔒 Sicherheit & Rollback,node,15,1,0,no,no,no
+ordner-06-technische-dokumentation-detail,TESTING,🧪 Testing-Strategie,node,16,1,0,no,no,no
+ordner-06-technische-dokumentation-detail,CONFLICT,⚠️ Conflict Resolution,node,17,1,0,no,no,no
+ordner-06-technische-dokumentation-detail,RAS_SPEC,Systemspezifikation,node,19,1,0,no,no,no
+ordner-06-technische-dokumentation-detail,RAS_MEMORY,Memory-Architektur,node,20,1,0,no,no,no
+ordner-06-technische-dokumentation-detail,VORTEX_OVERVIEW,Systemübersicht,node,22,1,0,no,no,no
+ordner-06-technische-dokumentation-detail,VORTEX_CANVAS,Entscheidungs-Canvas,node,23,1,0,no,no,no
+ordner-06-technische-dokumentation-detail,API_SETUP,API-Integration Setup,node,25,1,0,no,no,no
+ordner-06-technische-dokumentation-detail,API_SYNC,Notion ↔ ChatGPT Sync,node,26,1,0,yes,no,no
+ordner-06-technische-dokumentation-detail,API_GUIDE,Custom GPT Setup Guide,node,27,1,0,no,no,no
+ordner-06-technische-dokumentation-detail,P1,Patent_1: MindCode,node,29,1,0,no,no,yes
+ordner-06-technische-dokumentation-detail,P2,Patent_2: TNAV,node,30,1,0,no,no,yes
+ordner-06-technische-dokumentation-detail,P3,Patent_3: Kognitionsspiegel,node,31,1,0,no,no,yes
+ordner-06-technische-dokumentation-detail,P4,Patent_4: Einflusskoerper,node,32,1,0,no,no,yes
+ordner-06-technische-dokumentation-detail,P5,Patent_5: Codex-Kern,node,33,1,0,no,no,yes
+ordner-06-technische-dokumentation-detail,P6,Patent_6: VORTEX,node,34,1,0,no,yes,yes
+ordner-06-technische-dokumentation-detail,P7,Patent_7: MSA,node,35,1,0,no,no,yes
+tokenaccess-triggermap-988-992,A,988 Snapshot Lockpoint,node,2,0,1,no,no,no
+tokenaccess-triggermap-988-992,B,ZIP_Index_Master,node,2,3,1,no,no,no
+tokenaccess-triggermap-988-992,C,989 Token Sync Beacon,node,3,0,1,yes,no,yes
+tokenaccess-triggermap-988-992,D,TokenVault_DB,node,3,2,0,no,no,yes
+tokenaccess-triggermap-988-992,E,990 Trigger Audit Engine,node,4,0,1,yes,no,no
+tokenaccess-triggermap-988-992,F,Trigger_Mapping_DB,node,4,2,1,yes,no,no
+tokenaccess-triggermap-988-992,G,991 ZIP Integrity Pulse,node,5,0,1,no,no,no
+tokenaccess-triggermap-988-992,H,992 TriggerMap Echo Sync,node,6,0,1,yes,no,no
+tokenaccess-triggermap-988-992,I,Codex_139_Sync_DB,node,6,1,1,yes,no,no
+terra-nova-master-overview-complete-workspace,ROOT,🌍 TERRA NOVA WORKSPACE,node,2,0,6,no,no,no
+terra-nova-master-overview-complete-workspace,ECOSYSTEM,🌐 Digital Ecosystem,node,5,1,7,no,no,no
+terra-nova-master-overview-complete-workspace,GRUNDSTRUKTUR,🗄️ Grundstruktur Werdegang,node,6,1,10,no,no,no
+terra-nova-master-overview-complete-workspace,CONFIG,🧠 Meine Notion-KI,node,7,1,4,no,no,no
+terra-nova-master-overview-complete-workspace,PHYSICAL,🏗️ Physical Business,node,8,1,4,no,no,no
+terra-nova-master-overview-complete-workspace,METAROTIK,🔒 Metarotik - Privat,node,9,1,4,no,no,yes
+terra-nova-master-overview-complete-workspace,LOOSE,📄 Lose Seiten,node,10,1,3,no,no,no
+terra-nova-master-overview-complete-workspace,ECO_TOKEN,🪙 Token & DAO,node,13,1,3,no,no,yes
+terra-nova-master-overview-complete-workspace,ECO_PRODUKTE,📦 Digitale Produkte,node,14,1,4,no,no,no
+terra-nova-master-overview-complete-workspace,ECO_SYSTEM,🧠 System & Frameworks,node,15,1,4,no,no,no
+terra-nova-master-overview-complete-workspace,ECO_MONEY,💰 Monetization,node,16,1,4,no,no,no
+terra-nova-master-overview-complete-workspace,ECO_DOKU,📋 System & Dokumentation,node,17,1,6,no,no,no
+terra-nova-master-overview-complete-workspace,ECO_API,🔗 Integrationen & API,node,18,1,4,no,no,no
+terra-nova-master-overview-complete-workspace,ECO_HUB,🎛️ Terra Nova Hub,node,19,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,TOKEN_ACCESS,🪙 TokenAccess v1.0,node,22,1,0,no,no,yes
+terra-nova-master-overview-complete-workspace,TOKEN_DAO,DAO Proposals,node,23,1,0,no,no,yes
+terra-nova-master-overview-complete-workspace,TOKEN_LIZENZ,CAP-II Lizenz,node,24,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,PROD_PROMPTS,💫 10 Master-Prompts,node,27,1,3,no,no,no
+terra-nova-master-overview-complete-workspace,PROD_META,🌊 Metarotik Werkbuch,node,28,1,2,no,no,yes
+terra-nova-master-overview-complete-workspace,PROD_GENESIS,🎟️ Genesis Pass,node,29,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,PROD_FRAMEWORK,Prompt Framework,node,30,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,PROMPTS_EXPORT,Export-Ready v1.0,node,32,1,0,yes,no,no
+terra-nova-master-overview-complete-workspace,PROMPTS_LAUNCH,Launch Kit,node,33,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,PROMPTS_LINKEDIN,LinkedIn Post,node,34,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,META_SALES,Sales Page CHF 167,node,36,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,META_PLAN,Monetarisierungs-Plan,node,37,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,SYS_TRIGGER,🌀 Trigger-Architektur,node,40,1,2,yes,no,no
+terra-nova-master-overview-complete-workspace,SYS_RAS,🧬 RAS,node,41,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,SYS_VORTEX,🌪️ VortexCanvas,node,42,1,0,no,yes,no
+terra-nova-master-overview-complete-workspace,SYS_CODEX,📜 Codex 170+,node,43,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,TRIG_MULTI,Multi-Dimensional 6 Layer,node,45,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,TRIG_1200,1200 Trigger-Feld,node,46,1,0,yes,no,no
+terra-nova-master-overview-complete-workspace,MONEY_GUMROAD,Gumroad Setup,node,49,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,MONEY_ZORA,Zora NFT,node,50,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,MONEY_OPENSEA,OpenSea,node,51,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,MONEY_ASSETS,Asset Registry,node,52,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,DOKU_IPERKA,📐 IPERKAs 5+,node,55,1,5,no,no,no
+terra-nova-master-overview-complete-workspace,DOKU_WHITE,🔱 Whitepaper v2.0,node,56,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,DOKU_PITCH,🚀 Investor Pitch 2026,node,57,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,DOKU_REFLEXION,📘 FerrAI Reflexions-Log,node,58,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,DOKU_AUDIT,📋 Audit-Log,node,59,1,0,yes,no,no
+terra-nova-master-overview-complete-workspace,DOKU_QUICK,📐 Quick Rules,node,60,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,IPERKA_WORKSPACE,Workspace-Konsolidierung,node,62,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,IPERKA_GUMROAD,Gumroad Setup,node,63,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,IPERKA_SPLIT,Digital/Physical Split,node,64,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,IPERKA_QUALITY,Qualitäts-Standards,node,65,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,IPERKA_RISK,Risiko-Management,node,66,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,API_SYNC,🔄 Notion↔ChatGPT Sync,node,69,1,0,yes,no,no
+terra-nova-master-overview-complete-workspace,API_DELTA,🚀 Delta-Sync v1.0,node,70,1,0,yes,no,no
+terra-nova-master-overview-complete-workspace,API_IPFS,📦 IPFS Setup,node,71,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,API_PROPERTIES,🧱 Sync Properties,node,72,1,0,yes,no,no
+terra-nova-master-overview-complete-workspace,G01,01_Governance & System,node,75,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,G02,02_Codex & Trigger,node,76,1,2,yes,no,no
+terra-nova-master-overview-complete-workspace,G03,03_Patente & IP,node,77,1,1,no,no,yes
+terra-nova-master-overview-complete-workspace,G04,04_DAO & Token,node,78,1,0,no,no,yes
+terra-nova-master-overview-complete-workspace,G05,05_Produkte & Services,node,79,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,G06,06_Technische Doku,node,80,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,G07,07_Persönlich & Reflexion,node,81,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,G08,08_Entwicklungsprotokoll,node,82,1,2,no,no,no
+terra-nova-master-overview-complete-workspace,G09,09_Archive & Backup,node,83,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,G10,10_Pendent & Offen,node,84,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,PATENTE,7 Patente,node,86,1,4,no,no,yes
+terra-nova-master-overview-complete-workspace,PAT_1,Patent 1: MindCode,node,87,1,0,no,no,yes
+terra-nova-master-overview-complete-workspace,PAT_2,Patent 2: TNAV,node,88,1,0,no,no,yes
+terra-nova-master-overview-complete-workspace,PAT_3,Patent 3: Kognitionsspiegel,node,89,1,0,no,no,yes
+terra-nova-master-overview-complete-workspace,PAT_7,Patent 7: MSA,node,90,1,0,no,no,yes
+terra-nova-master-overview-complete-workspace,CODEX_DOCS,Codex-Dokumente,node,92,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,TRIGGER_DOCS,Trigger-Listen,node,93,1,0,yes,no,no
+terra-nova-master-overview-complete-workspace,SESSIONS,Session-Snapshots,node,95,1,0,yes,no,no
+terra-nova-master-overview-complete-workspace,CHAT_DB,Chat Sessions DB,node,96,1,0,yes,no,no
+terra-nova-master-overview-complete-workspace,CONF_HANDBUCH,📘 FerrAI Systemhandbuch,node,99,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,CONF_DASHBOARD,🎛️ Master Dashboard,node,100,1,3,no,no,no
+terra-nova-master-overview-complete-workspace,CONF_REFLEXION,📘 Reflexions-Log,node,101,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,CONF_MEMORY,🧠 Memory Bank,node,102,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,DASH_METRICS,System Metrics DB,node,104,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,DASH_COMPONENTS,Komponenten-Status DB,node,105,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,DASH_HEALTH,Health Monitor DB,node,106,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,PHYS_WEB,🌐 Web Presence,node,109,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,PHYS_PORTFOLIO,Portfolio Website,node,110,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,PHYS_PATENTE,Patent-Upload Page,node,111,1,0,yes,no,yes
+terra-nova-master-overview-complete-workspace,PHYS_MARKETING,Marketing Material,node,112,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,META_WERKBUCH,📘 Werkbuch Struktur,node,115,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,META_LEVEL,Level 1-8 Sessions,node,116,1,0,yes,no,no
+terra-nova-master-overview-complete-workspace,META_AUDIO,Audio Scripts,node,117,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,META_PONY,Ponyverse Hub,node,118,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,LOOSE_VORTEX,VortexCanvas,node,121,1,0,no,yes,no
+terra-nova-master-overview-complete-workspace,LOOSE_ANALYSE,Deep-Analyse,node,122,1,0,no,no,no
+terra-nova-master-overview-complete-workspace,LOOSE_DOCS,Diverses,node,123,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,ROOT,🌍 TERRA NOVA WORKSPACE,node,2,0,3,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,ARCHIVE,🗄️ Archive – Master-Struktur,node,4,1,10,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,CONFIG,🧠 Meine Notion-KI,node,5,1,2,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,PHYSICAL,🏗️ Terra Nova Restore – Physical,node,6,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,G01,01_Governance & System,node,8,1,3,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,G02,02_Codex & Trigger,node,9,1,3,yes,no,no
+digital-ecosystem-ziel-struktur-v2-0,G03,03_Patente & IP,node,10,1,7,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,G04,04_DAO & Token,node,11,1,3,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,G05,05_Produkte & Services,node,12,1,4,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,G06,06_Technische Doku,node,13,1,4,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,G07,07_Persönlich & Reflexion,node,14,1,2,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,G08,08_Entwicklungsprotokoll,node,15,1,3,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,G09,09_Archive & Backup,node,16,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,G10,10_Pendent & Offen,node,17,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,META_INDEX,📋 TERRANOVA META-INDEX,node,19,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,ABLAGE,🗂️ ABLAGESYSTEM,node,20,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,CONDUCTOR,🧬 Meta-Conductor,node,21,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,CODEX,📖 Codex170_Plus_FINAL,node,23,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,TRIGGER_ARCH,🌀 Trigger-Architektur,node,24,1,0,yes,no,no
+digital-ecosystem-ziel-struktur-v2-0,TRIGGER_LISTEN,⚡ Trigger-Listen,node,25,1,0,yes,no,no
+digital-ecosystem-ziel-struktur-v2-0,P1,Patent_1: MindCode,node,27,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,P2,Patent_2: TNAV,node,28,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,P3,Patent_3: Kognitionsspiegel,node,29,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,P4,Patent_4: Einflusskoerper,node,30,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,P5,Patent_5: Codex-Kern,node,31,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,P6,Patent_6: VORTEX,node,32,1,0,no,yes,yes
+digital-ecosystem-ziel-struktur-v2-0,P7,Patent_7: MSA,node,33,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,TOKEN_FERR,🪙 FERR Token,node,35,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,DAO_STRUCTURE,🏛️ DAO-Struktur,node,36,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,TOKENOMICS,💎 Tokenomics,node,37,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,PROMPTS,💫 10 Master-Prompts v1.0,node,39,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,METAROTIK,🌊 Metarotik,node,40,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,GENESIS,🎟️ Genesis Pass,node,41,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,FRAMEWORK,📦 Prompt Framework,node,42,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,RAS,🧬 RAS – Rekursiver Affinitätsspeicher,node,44,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,VORTEX,🌪️ VortexCanvas,node,45,1,0,no,yes,no
+digital-ecosystem-ziel-struktur-v2-0,DELTA_SYNC,🚀 Delta-Sync System v1.0,node,46,1,0,yes,no,no
+digital-ecosystem-ziel-struktur-v2-0,API_DOCS,🔗 API-Dokumentation,node,47,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,REFLEXION,📘 FerrAI Reflexions-Log,node,49,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,METAROTIK_INTERN,🔒 Metarotik Intern,node,50,1,0,no,no,yes
+digital-ecosystem-ziel-struktur-v2-0,SESSIONS,📝 Development Sessions,node,52,1,0,yes,no,no
+digital-ecosystem-ziel-struktur-v2-0,IPERKA,📐 IPERKA-Projekte,node,53,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,MEETING_NOTES,🎙️ Meeting Notes,node,54,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,SYSTEM_HANDBUCH,📘 FerrAI Systemhandbuch,node,56,1,0,no,no,no
+digital-ecosystem-ziel-struktur-v2-0,AGENT_INSTRUCTIONS,🎯 Agent Instructions,node,57,1,0,no,no,no
+notion-chatgpt-system-architektur,User,👤 Silvii | (User),node,3,0,2,no,no,no
+notion-chatgpt-system-architektur,Notion,📓 Notion Workspace | (Single Source of Truth),node,4,3,6,no,no,no
+notion-chatgpt-system-architektur,ChatGPT,🤖 ChatGPT Custom GPT | (Kognitiver Motor),node,5,1,3,no,no,no
+notion-chatgpt-system-architektur,Python,🐍 Python Sync Script | (Batch-Operationen),node,6,0,1,yes,no,no
+notion-chatgpt-system-architektur,Codex,📚 Codex | (Wissensbase),node,9,1,2,no,no,no
+notion-chatgpt-system-architektur,Manifest,📜 Manifest | (Vision & Mission),node,10,1,2,no,no,no
+notion-chatgpt-system-architektur,PM,📊 Project Management | (Tasks & KPIs),node,11,2,2,no,no,no
+notion-chatgpt-system-architektur,Trigger,⚡ Trigger-System | (~675 Trigger),node,12,1,1,yes,no,no
+notion-chatgpt-system-architektur,Reflexion,🧠 Reflexionen | (Meta-Ebene),node,13,2,0,no,no,no
+notion-chatgpt-system-architektur,Sync,🔄 Bidirektionaler Sync | (Delta-Updates),node,16,1,1,yes,no,no
+notion-chatgpt-system-architektur,Analysis,🔍 Fundamentalanalyse | (Cross-Reference),node,17,5,3,no,no,no
+notion-chatgpt-system-architektur,Auto,⚙️ Automatisierung | (Trigger-basiert),node,18,4,2,yes,no,no
+notion-chatgpt-system-architektur,Audit,📋 Audit Trail | (Provenienz),node,19,1,2,no,no,no
+notion-chatgpt-system-architektur,Insights,💡 Strukturierte Insights,node,22,2,1,no,no,no
+notion-chatgpt-system-architektur,KPI,📈 KPI Dashboard,node,23,1,0,no,no,no
+notion-chatgpt-system-architektur,Pitch,🎯 Investor Pitch | (Auto-generiert),node,24,2,0,no,no,no
+notion-chatgpt-system-architektur,Verdichtung,📝 Codex-Verdichtung,node,25,1,0,no,no,no
+meta-conductor-agent-routing,A,INPUT,node,3,0,1,no,no,no
+meta-conductor-agent-routing,B,Agent?,node,3,1,2,no,no,no
+meta-conductor-agent-routing,GPT,ChatGPT/FerrAI,node,4,1,1,no,no,no
+meta-conductor-agent-routing,NOTION,Notion AI,node,5,1,1,no,no,no
+meta-conductor-agent-routing,C,Ergebnis FerrAI,node,6,1,1,no,no,no
+meta-conductor-agent-routing,D,Struktur Resultat,node,7,1,1,no,no,no
+meta-conductor-agent-routing,E,Audit,node,8,2,1,no,no,no
+meta-conductor-agent-routing,F,Silvii Final,node,10,1,0,no,no,no
+session-root-living-trigger-organism,T520,🚀 T-520: SESSION_START | ferro:state=init,node,2,0,1,yes,no,no
+session-root-living-trigger-organism,T521,T521,implicit,3,1,1,yes,no,no
+session-root-living-trigger-organism,ROOT,ROOT,implicit,5,1,15,yes,no,no
+session-root-living-trigger-organism,T01,T01,implicit,9,1,0,yes,no,no
+session-root-living-trigger-organism,T02,T02,implicit,10,1,0,yes,no,no
+session-root-living-trigger-organism,T03,T03,implicit,11,1,0,yes,no,no
+session-root-living-trigger-organism,T04,T04,implicit,12,1,0,yes,no,no
+session-root-living-trigger-organism,T05,T05,implicit,13,1,0,yes,no,no
+session-root-living-trigger-organism,T06,T06,implicit,14,1,0,yes,no,no
+session-root-living-trigger-organism,T07,T07,implicit,15,1,0,yes,no,no
+session-root-living-trigger-organism,T08,T08,implicit,16,1,0,yes,no,no
+session-root-living-trigger-organism,T09,T09,implicit,17,1,0,yes,no,no
+session-root-living-trigger-organism,T10,T10,implicit,18,1,0,yes,no,no
+session-root-living-trigger-organism,T11,T11,implicit,19,1,0,yes,no,no
+session-root-living-trigger-organism,T12,T12,implicit,20,1,0,yes,no,no
+session-root-living-trigger-organism,T13,T13,implicit,21,1,1,yes,no,no
+session-root-living-trigger-organism,T14,T14,implicit,22,1,1,yes,no,no
+session-root-living-trigger-organism,T15,T15,implicit,23,1,1,yes,no,no
+session-root-living-trigger-organism,T777,T777,implicit,41,1,0,yes,no,no
+session-root-living-trigger-organism,T517,T517,implicit,42,1,0,yes,no,no
+session-root-living-trigger-organism,T544,T544,implicit,43,1,0,yes,no,no
+full-sync-terra-nova-mcp-sequence,U,Benutzer (Silvi),participant,3,3,3,no,no,no
+full-sync-terra-nova-mcp-sequence,UI,UI (ChatGPT/Notion),participant,4,5,5,no,no,no
+full-sync-terra-nova-mcp-sequence,IN,Eingabe-Filter (Sicherheit),participant,5,2,2,no,no,no
+full-sync-terra-nova-mcp-sequence,FSM,Trigger/FSM (FerrAI-Kern),participant,6,8,12,no,no,no
+full-sync-terra-nova-mcp-sequence,MCP,MCP Client,participant,7,15,15,no,no,no
+full-sync-terra-nova-mcp-sequence,SRV,MCP Server (SSE Endpoint),participant,8,16,16,no,no,no
+full-sync-terra-nova-mcp-sequence,AUTH,Notion OAuth,participant,9,3,3,no,no,no
+full-sync-terra-nova-mcp-sequence,N,Notion API,participant,10,3,3,no,no,no
+full-sync-terra-nova-mcp-sequence,SE,Sync Engine (Backend),participant,11,20,26,no,no,no
+full-sync-terra-nova-mcp-sequence,DB,Canonical Store (DB),participant,12,5,1,no,no,no
+full-sync-terra-nova-mcp-sequence,AUD,Audit + Savepoints,participant,13,6,4,no,no,no
+full-sync-terra-nova-mcp-sequence,OUT,Ausgabe-Filter (Moderation),participant,14,5,1,no,no,no
+mmd-001-cap-visual-control-model,MMD,Mermaid Universe,node,2,1,4,no,no,no
+mmd-001-cap-visual-control-model,IST,IST: current map,node,3,1,1,no,no,no
+mmd-001-cap-visual-control-model,SOLL,SOLL: target map,node,4,1,1,no,no,no
+mmd-001-cap-visual-control-model,INT,INTEGRATION: data/sync,node,5,1,1,yes,no,no
+mmd-001-cap-visual-control-model,ORCH,ORCHESTRATION: routing,node,6,1,1,no,no,no
+mmd-001-cap-visual-control-model,ZOOM,ZOOM lenses,node,7,2,1,no,no,no
+mmd-001-cap-visual-control-model,VTX,VORTEX coherence,node,8,1,1,no,yes,no
+mmd-001-cap-visual-control-model,TRG,Trigger registry,node,9,1,1,yes,no,no
+mmd-001-cap-visual-control-model,CAP,CAP Control Tower,node,10,3,1,no,no,no

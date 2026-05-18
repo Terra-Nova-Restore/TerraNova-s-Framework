@@ -1,0 +1,3 @@
+Object,Notion URL,Action,Status,Boundary
+DASH-ZEN-004 - Zenodo Release-State Matrix,notion://redacted-internal-object,"Created registry row for the release-state matrix artifact",Applied,"Control artifact only; no Zenodo write, PR advance, workflow execution, DOI/file/version mutation or L3/L4 elevation"
+CAP 0.1.0 - Cognitive Ability Point,notion://redacted-internal-object,"Appended DASH-ZEN-004 Release-State Matrix checkpoint",Applied,"No schema change, deletion, raw private inventory export, Zenodo mutation or Notion AI credit use"

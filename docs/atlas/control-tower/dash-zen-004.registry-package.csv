@@ -1,0 +1,2 @@
+Object,Object Type,Source Tier,Canon Level,Canon Decision,Sensitivity,Allowed Summary,Blocked Summary
+DASH-ZEN-004 - Zenodo Release-State Matrix,GitHub Artifact,T1 Reviewed Repo Governance,L2-ROUTING-MARKER,Hold at L2,Internal,"Authority-order matrix for live Zenodo API, Notion root and Z1/Z2/Z3 anchors","No Zenodo write, PR advance, workflow execution, DOI/file/version mutation or latest-state claim from Z3 alone"

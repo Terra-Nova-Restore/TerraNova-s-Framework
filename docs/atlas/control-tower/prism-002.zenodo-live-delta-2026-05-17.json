@@ -1,0 +1,20 @@
+{
+  "record_id": "20073579",
+  "record_url": "https://zenodo.org/records/20073579",
+  "doi": "10.5281/zenodo.20073579",
+  "doi_url": "https://doi.org/10.5281/zenodo.20073579",
+  "conceptdoi": "10.5281/zenodo.19774446",
+  "conceptdoi_url": "https://doi.org/10.5281/zenodo.19774446",
+  "title": "FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries",
+  "version": "RC01-v12",
+  "publication_date": "2026-05-17",
+  "record_created": "2026-05-07T19:39:34.352179+02:00",
+  "metadata_updated": "2026-05-17T07:20:40.751823+02:00",
+  "file": {
+    "key": "main (44).pdf",
+    "checksum": "md5:d791d480e75f3d89f9a103a28a5c5001",
+    "size": 2943457
+  },
+  "interpretation": "Metadata-only refresh observed on 2026-05-17. The record DOI, concept DOI, version label and file checksum remain stable; title and publication_date now reflect the 2026-05-17 metadata state.",
+  "boundary": "No Zenodo draft, upload, DOI reservation, publish action or file mutation is authorized by this delta."
+}

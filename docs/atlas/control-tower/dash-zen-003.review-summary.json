@@ -1,0 +1,44 @@
+{
+  "review_id": "DASH-ZEN-003",
+  "created_at": "2026-05-18T10:39:00+02:00",
+  "status": "complete",
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "objects_reviewed": [
+    "Zenodo-Z1 routing anchor",
+    "Zenodo-Z2 routing anchor",
+    "Zenodo-Z3 routing anchor"
+  ],
+  "registry_rows_created": 3,
+  "cap_checkpoints_appended": 1,
+  "canon_decision": {
+    "zenodo_z1": "Hold at L2",
+    "zenodo_z2": "Hold at L2",
+    "zenodo_z3": "Hold at L2"
+  },
+  "canon_level": {
+    "zenodo_z1": "L2-ROUTING-MARKER",
+    "zenodo_z2": "L2-ROUTING-MARKER",
+    "zenodo_z3": "L2-ROUTING-MARKER"
+  },
+  "sensitivity": {
+    "zenodo_z1": "Internal",
+    "zenodo_z2": "Internal",
+    "zenodo_z3": "Internal"
+  },
+  "allowed_claims": [
+    "Z1, Z2 and Z3 are internal Zenodo routing-state anchors.",
+    "Z1 remains deferred and parked.",
+    "Z2 is a closed metadata-only hard-lock precedent.",
+    "Z3 is a closed metadata-refresh hard-lock precedent.",
+    "Current live Zenodo state must still be checked through the Zenodo root/API."
+  ],
+  "blocked_claims": [
+    "DASH-ZEN-003 authorizes Zenodo write actions.",
+    "DASH-ZEN-003 advances PR #40 or any Z workflow.",
+    "Z3 is the sole latest live-state authority after the 2026-05-17 metadata refresh.",
+    "Any Z-anchor authorizes file upload, DOI mutation, new version, publish event, secret exposure or token handling.",
+    "The pass consumes Notion AI credits or uses a Notion Custom Agent."
+  ],
+  "next_source_action": "Run DASH-ZEN-004 only if the live Zenodo root/API and Z-anchor history need reconciliation into one release-state matrix."
+}

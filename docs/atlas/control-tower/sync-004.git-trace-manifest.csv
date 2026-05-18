@@ -1,0 +1,13 @@
+Trace ID,Path,Role,Included In Commit,Boundary
+SYNC4-T001,docs/atlas/control-tower/batch-sync-004.md,SYNC-004 batch record,Yes,Control Tower only
+SYNC4-T002,docs/atlas/control-tower/sync-004.git-trace-manifest.csv,SYNC-004 inclusion manifest,Yes,Control Tower only
+SYNC4-T003,docs/atlas/control-tower/causal-log.sync-004-github-trace-closure-2026-05-18.json,SYNC-004 causal log,Yes,No external mutation
+SYNC4-T004,docs/atlas/control-tower/batch-test-520.md,TEST-520 batch record,Yes,Repo-local bounded test only
+SYNC4-T005,docs/atlas/control-tower/test-520.sessionstart-bounded-test.md,TEST-520 human-readable contract,Yes,No runtime trigger execution
+SYNC4-T006,docs/atlas/control-tower/test-520.test-cases.csv,TEST-520 test cases,Yes,Five bounded gates only
+SYNC4-T007,docs/atlas/control-tower/test-520.results.csv,TEST-520 results,Yes,No L3/L4 admission
+SYNC4-T008,docs/atlas/control-tower/source-520.registry-updates.csv,SOURCE-520 applied Notion mutation trace,Yes,No raw private inventory
+SYNC4-T009,docs/atlas/control-tower/causal-log.source-520-mutation-2026-05-18.json,SOURCE-520 mutation causal log,Yes,No init_all_modules execution
+SYNC4-T010,docs/atlas/control-tower/auto-001.test-results-2026-05-18.json,AUTO-001 live validation result,Yes,No writes to Notion or Zenodo
+SYNC4-T011,scripts/cap_control_checks.py,AUTO-001 validation harness,Yes,No external mutation
+SYNC4-T012,unrelated dirty files outside Control Tower,Out of scope,No,Do not stage or revert

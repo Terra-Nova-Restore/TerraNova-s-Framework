@@ -1,0 +1,46 @@
+{
+  "log_id": "DASH-ZEN-001-MUTATION-2026-05-18",
+  "event_type": "notion_mutation",
+  "created_at": "2026-05-18T09:55:00+00:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "genauso mache mers",
+  "mode": "BIZ gated external mutation",
+  "source_trace": [
+    "Notion: Zenodo root page",
+    "Notion: Monographie Teil I",
+    "Notion: Monographie Teil II",
+    "Notion: Monographie Teil III",
+    "Notion: CAP 0.1.0 Workspace Object Registry data source",
+    "docs/atlas/control-tower/dash-zen-001.notion-mutation-package.csv"
+  ],
+  "deterministic_boundary": [
+    "Explicit user authorization present",
+    "Only four CAP registry rows targeted",
+    "No deletion",
+    "No page movement",
+    "No schema change",
+    "No raw private Notion IDs in GitHub trace",
+    "No Zenodo republish or DOI/version mutation",
+    "No public-canon elevation",
+    "No Notion AI credit use"
+  ],
+  "probabilistic_hypothesis": "Indexing the new Zenodo Notion root and monographie child pages will reduce dashboard drift while preserving source and sensitivity boundaries.",
+  "selected_action": "Created four CAP registry rows for the new Zenodo dashboard structure and held monographie pages at L1/sensitivity-bound state.",
+  "notion_updates": [
+    "DASH-ZEN-001 - Zenodo Root created",
+    "DASH-ZEN-001 - Monographie Teil I created",
+    "DASH-ZEN-001 - Monographie Teil II created",
+    "DASH-ZEN-001 - Monographie Teil III created",
+    "CAP 0.1.0 page checkpoint appended"
+  ],
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "feedback_target": [
+    "CAP registry",
+    "Prism / Zenodo",
+    "GitHub Atlas",
+    "DASH-ZEN-002 source/sensitivity pass"
+  ],
+  "status": "completed"
+}

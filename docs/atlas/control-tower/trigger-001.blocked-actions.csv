@@ -1,0 +1,13 @@
+Action ID,Blocked Or Gated Action,Default State,Reason,Allowed Only If,Feedback Target
+TRG-BLOCK-001,External mutation without explicit target GO,Blocked,Connector policy and Equilibrium R15/R16,Explicit scoped GO exists,Logbook
+TRG-BLOCK-002,Delete Notion/GitHub/Drive content,Blocked,Archive-over-delete and reversibility,Separate destructive approval plus recovery path,Registry
+TRG-BLOCK-003,Raw private Notion page list or ID export,Blocked,Privacy and SENS-001 boundary,Never by default; only redacted aggregate outputs,Registry
+TRG-BLOCK-004,Notion Custom Agents or scheduled Notion AI,Blocked,User has no credit budget for agent runs,Manual/Codex no-credit path,GitHub Atlas
+TRG-BLOCK-005,Zenodo draft/upload/publish/DOI reservation,Blocked,Publication consequences and PRISM gates,Explicit Zenodo stage GO plus gates passed,Prism / Zenodo
+TRG-BLOCK-006,Stripe/payment/token/licensing action,Blocked,High-risk commercial surface,Explicit BIZ gate and commercial authorization,Logbook
+TRG-BLOCK-007,Restricted wiki child-title/content exposure,Blocked,Restricted source boundary,Existence-only marker or explicit restricted-source review,Registry
+TRG-BLOCK-008,Protected duplicate cleanup for IP/private/deep-trigger lanes,Blocked,SENS-001 gate,SENS review and explicit scoped mutation GO,Registry
+TRG-BLOCK-009,Block-3/Schattenarchiv-depth normalization,Blocked,Deep/high-risk mode not routine,Observer concept and explicit scope,Logbook
+TRG-BLOCK-010,Machine consciousness/personhood claim,Blocked,Operational simulation boundary,Never as factual claim; may describe model terms as simulation,Notion Canon
+TRG-BLOCK-011,Silvan personality imitation as governance model,Blocked,Silvan is recovery anchor not template,Never; only recovery-anchor escalation,Logbook
+TRG-BLOCK-012,Schema mutation without package,Blocked,Schema changes can break registry control,Prepared package plus explicit target GO,Registry

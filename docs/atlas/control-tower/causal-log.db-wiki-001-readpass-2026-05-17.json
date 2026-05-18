@@ -1,0 +1,36 @@
+{
+  "id": "db-wiki-001-readpass-2026-05-17",
+  "timestamp": "2026-05-17T10:50:27+02:00",
+  "actor": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "trigger_or_cluster": "GO; DB-WIKI-001 read-only verification",
+  "source_trace": [
+    "docs/atlas/control-tower/batch-db-wiki-001.md",
+    "docs/atlas/control-tower/workspace-object-registry.seed.csv",
+    "Notion fetch: Cognitive Terranova System",
+    "Notion fetch: Meine Notion-KI",
+    "Notion fetch: Library Sync - 100 Batches",
+    "Notion fetch: CAP 0.1.0 - Workspace Object Registry"
+  ],
+  "probabilistic_hypothesis": "The DB/wiki layer can stabilize CAP faster if multi-source hubs are treated as containers instead of canonical registries.",
+  "deterministic_boundary": "Read-only Notion fetch pass; no row updates, no schema changes, no restricted child-page import.",
+  "selected_action": "Verified nine DB/wiki/data-source targets and produced local findings plus a future mutation package.",
+  "feedback_target": "Registry",
+  "backpropagation_target": "GitHub Atlas",
+  "observed_result": {
+    "verified_targets": 9,
+    "multi_source_hub": "Cognitive Terranova System",
+    "restricted_wiki_boundary": "existence-only",
+    "missing_registry_row": "Library Sync - 100 Batches data source",
+    "missing_registry_data_source_id": "notion-ds://redacted-internal-source",
+    "notion_mutations_performed": 0
+  },
+  "equilibrium_check": {
+    "status": "pass",
+    "trace": "Fetched only target DB/wiki/data-source surfaces from the CAP batch plan.",
+    "boundary": "No external mutation; restricted wiki content not expanded.",
+    "mode": "STUDIO",
+    "github_sync": "Local findings and causal log created."
+  },
+  "next_review": "Request explicit Notion mutation GO for DB-WIKI-001 update package if the findings are accepted."
+}

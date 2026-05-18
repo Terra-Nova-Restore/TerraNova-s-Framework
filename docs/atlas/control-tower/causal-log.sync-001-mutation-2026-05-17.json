@@ -1,0 +1,26 @@
+{
+  "event_id": "sync-001-mutation-2026-05-17",
+  "date": "2026-05-17",
+  "mode": "STUDIO",
+  "trigger_band": "301-400",
+  "freedom_mode": "/fff bounded by explicit GO",
+  "source_trace": [
+    "User instruction: GO SYNC-001",
+    "TerraNova skill read before action",
+    "Notion fetch: CAP 0.1.0 - Workspace Object Registry",
+    "SYNC-001 local batch trace",
+    "sync-001.registry-updates.csv"
+  ],
+  "probabilistic_hypothesis": "Reducing Needs sync to zero at registry-metadata level improves workspace control without pretending the whole workspace is mirrored.",
+  "deterministic_boundary": "Metadata-only row updates; no Notion schema changes, no content rewrites, no raw private page list, no credit-consuming Notion agents.",
+  "selected_action": "Update eleven CAP registry rows from Needs sync to In sync with scoped SYNC-001 notes.",
+  "feedback_target": "CAP Registry",
+  "backpropagation_target": "CAP 0.2 batch queue",
+  "result": {
+    "target_rows": 11,
+    "updated_rows": 11,
+    "remaining_needs_sync_rows": 0,
+    "schema_changes": 0,
+    "raw_content_imports": 0
+  }
+}

@@ -1,0 +1,4 @@
+Package ID,Target,Proposed Action,Apply Condition,Boundary
+SENS2-N001,CAP-MOD-DRAFT-521 - Preflight,Keep Admission Review as Sensitivity Review Required,Only if live field drift is observed,"No L2/L3/L4 elevation; no TRG assignment"
+SENS2-N002,CAP page checkpoint,Append SENS-002 checkpoint,Only after explicit GO Notion SENS-002 anwenden,"No private/raw source details"
+SENS2-N003,CAP Canon Admission Queue view,Use existing view for protected-lane follow-up,Only if manual visibility is needed,"No schema change; no row deletion"

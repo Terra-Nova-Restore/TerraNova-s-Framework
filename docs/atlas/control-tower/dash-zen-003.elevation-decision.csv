@@ -1,0 +1,4 @@
+Object,Decision,Canon Level,Admission Review,Next Source Action
+DASH-ZEN-003 - Zenodo Z1 Routing Anchor,Hold at L2,L2-ROUTING-MARKER,Source Review Passed,"Keep parked until explicit Z1 opening; verify PR #40 state before any future action"
+DASH-ZEN-003 - Zenodo Z2 Routing Anchor,Hold at L2,L2-ROUTING-MARKER,Source Review Passed,"Use as metadata-only hard-lock precedent; no further action without explicit Zenodo opening"
+DASH-ZEN-003 - Zenodo Z3 Routing Anchor,Hold at L2,L2-ROUTING-MARKER,Source Review Passed,"Use as metadata-refresh hard-lock precedent; reconcile with 2026-05-17 live Zenodo state before latest-state claims"

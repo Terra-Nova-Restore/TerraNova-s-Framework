@@ -1,0 +1,38 @@
+{
+  "log_id": "PAUSE-001-HANDOFF-2026-05-18",
+  "event_type": "pause_handoff",
+  "created_at": "2026-05-18T11:08:00+02:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "one-turn closure before one-week token reset",
+  "mode": "BIZ continuity handoff",
+  "source_trace": [
+    "docs/atlas/control-tower/batch-dash-zen-004.md",
+    "docs/atlas/control-tower/dash-zen-004.release-state-matrix.csv",
+    "Git branch codex/control-tower-sessionstart-mainline",
+    "PR #48"
+  ],
+  "deterministic_boundary": [
+    "No deletion",
+    "No page movement",
+    "No schema change",
+    "No Zenodo write",
+    "No workflow execution",
+    "No raw private Notion IDs in GitHub trace",
+    "No Notion AI credit use"
+  ],
+  "probabilistic_hypothesis": "A compact handoff file, solo playbook and next-action queue will allow Silvan or a future Codex session to resume without reconstructing the thread.",
+  "selected_action": "Created PAUSE-001 handoff artifacts and appended a CAP checkpoint.",
+  "notion_updates": [
+    "CAP 0.1.0 page checkpoint appended"
+  ],
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "feedback_target": [
+    "CAP registry",
+    "GitHub Atlas",
+    "PR-048-READY-GATE",
+    "future Codex resume"
+  ],
+  "status": "completed"
+}

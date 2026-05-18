@@ -1,0 +1,5 @@
+Package ID,Target,Proposed Action,Apply Condition,Boundary
+SOURCE521-N001,CAP-MOD-DRAFT-521 - Preflight,"Set Canon Level to L2-ROUTING-MARKER; Source Tier to T2 Live Notion System Record; Canon Decision to Source Review Passed","Only after explicit GO Notion SOURCE-521 anwenden","No L3/L4 elevation; no TRG assignment"
+SOURCE521-N002,CAP-MOD-DRAFT-521 - Preflight,"Update Allowed Claims and Blocked Claims from source-521.claim-review.csv","Only after explicit GO Notion SOURCE-521 anwenden","No automation or protection execution claim"
+SOURCE521-N003,CAP-MOD-DRAFT-521 - Preflight,"Set Admission Review to Protected Source Review Passed and update Equilibrium Notes","Only after explicit GO Notion SOURCE-521 anwenden","Preserve 777-depth and public-canon block"
+SOURCE521-N004,CAP page checkpoint,"Append SOURCE-521 checkpoint to CAP page","Only after explicit GO Notion SOURCE-521 anwenden","No raw private IDs or sensitive source dump"

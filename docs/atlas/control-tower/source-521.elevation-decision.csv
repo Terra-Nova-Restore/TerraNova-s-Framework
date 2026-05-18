@@ -1,0 +1,4 @@
+Decision ID,Object,Previous Local Level,New Local Level,Strongest Source Tier,Decision,Allowed Now,Still Blocked,Live Notion State,External Mutation
+SOURCE521-D001,CAP-MOD-DRAFT-521 - Preflight,L1-NAME-CLUSTER,L2-ROUTING-MARKER,T2,local_source_pass,"Internal protected routing marker for /preflight safety gate","L3 semantics; automation; TRG assignment; 777-depth behavior",Not changed in this pass,No
+SOURCE521-D002,CAP registry row for 521,L1 live registry,L2 update queued,T2,prepare_future_apply,"Future registry update may reflect SOURCE-521 after explicit GO","Any schema change; row creation; deletion; L3/L4 elevation",Still at last applied REGISTRY-002/SYNC-002 state,Future only
+SOURCE521-D003,CAP-MOD-DRAFT-521 - Preflight,L2-ROUTING-MARKER,L3-MODULE-SEMANTICS,T2,hold_at_l2,"Source queue may search for reviewed primary module definition and tests","Execution contract; protection behavior; public canon",No live L3/L4 claim,No

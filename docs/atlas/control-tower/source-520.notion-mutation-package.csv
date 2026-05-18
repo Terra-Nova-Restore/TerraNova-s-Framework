@@ -1,0 +1,5 @@
+Package ID,Target,Proposed Action,Apply Condition,Boundary
+SOURCE520-N001,CAP-MOD-DRAFT-520 - SessionStart,"Keep Canon Level at L2-ROUTING-MARKER; set Source Tier to T2 Live Notion System Record; Canon Decision to Hold at L2","Only after explicit GO Notion SOURCE-520 anwenden","No L3/L4 elevation; no TRG assignment"
+SOURCE520-N002,CAP-MOD-DRAFT-520 - SessionStart,"Update Allowed Claims and Blocked Claims from source-520.claim-review.csv","Only after explicit GO Notion SOURCE-520 anwenden","No external mutation automation or init_all_modules claim"
+SOURCE520-N003,CAP-MOD-DRAFT-520 - SessionStart,"Set Admission Review to Source Review Passed; set Next Source Action to TEST-520 bounded SessionStart test","Only after explicit GO Notion SOURCE-520 anwenden","Preserve non-mutation and public-canon block"
+SOURCE520-N004,CAP page checkpoint,"Append SOURCE-520 checkpoint to CAP page","Only after explicit GO Notion SOURCE-520 anwenden","No raw private IDs or sensitive source dump"

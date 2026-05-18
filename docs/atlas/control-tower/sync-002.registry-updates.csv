@@ -1,0 +1,6 @@
+Object,Notion URL,Action,Status,Boundary
+CAP-MOD-DRAFT-516 - Inspiration,notion://redacted-internal-object,"Set Sync Status to In sync and updated Equilibrium Notes",Applied,"L2 routing marker only; no TRG assignment or L3/L4 elevation"
+CAP-MOD-DRAFT-520 - SessionStart,notion://redacted-internal-object,"Set Sync Status to In sync and updated Equilibrium Notes",Applied,"L2 routing marker only; no external mutation permission or L3/L4 elevation"
+CAP-MOD-DRAFT-521 - Preflight,notion://redacted-internal-object,"Set Sync Status to In sync and updated Equilibrium Notes",Applied,"L1 protected name/cluster only; sensitivity review required before elevation"
+CAP-MOD-DRAFT-540 - Observable Momentum,notion://redacted-internal-object,"Set Sync Status to In sync and updated Equilibrium Notes",Applied,"L2 routing marker only; no proof or public scientific claim"
+CAP-MOD-DRAFT-544 - Synchronization Node,notion://redacted-internal-object,"Set Sync Status to In sync and updated Equilibrium Notes",Applied,"L2 routing marker only; no full workspace sync or automatic sync claim"

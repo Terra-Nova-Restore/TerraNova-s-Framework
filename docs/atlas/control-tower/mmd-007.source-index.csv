@@ -1,0 +1,6 @@
+Source ID,Source Path,Tier,Source Status,Use In MMD-007,Boundary
+MMD7-S001,docs/triggers/gap_ledger.md,S1,reviewed_gap_ledger,range status and canon boundary,Does not provide full per-trigger semantics.
+MMD7-S002,atlas/sources/trigger-complement-2026-03-30.md,S1,user_provided_trigger_complement,"trigger truth model, clusters and known single triggers","Summary-level complement, not a full trigger definition."
+MMD7-S003,atlas/atlas.manifest.v1.1.json,S2,generated_from_reviewed_sources,"object summaries, cluster membership and architecture layer",Atlas context only; not complete historical trigger definition.
+MMD7-S004,docs/atlas/control-tower/mmd-005.module-evidence.csv,S2,generated_evidence_matrix,"visual candidates, guard relations and Atlas evidence rows",Evidence only; visual rows never equal canon by themselves.
+MMD7-S005,docs/atlas/control-tower/mmd-004.candidate-review-and-canon-gate.md,S1,canon_gate,canon admission boundary and held references,"Gate output, not trigger semantics."

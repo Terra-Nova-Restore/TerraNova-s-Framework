@@ -1,0 +1,43 @@
+{
+  "review_id": "MMD-004",
+  "created_at": "2026-05-17T15:48:47.578482+00:00",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "candidate_review_rows": 53,
+  "guard_review_rows": 140,
+  "module_record_candidates": 14,
+  "lane_summary_rows": 8,
+  "candidate_lane_counts": {
+    "CANON-SOURCE-NEEDED": 2,
+    "CAP-MODULE-CANDIDATE": 7,
+    "CAUTION-AUTOFLOW": 1,
+    "CONTEXT-SURFACE": 17,
+    "CONTROL-SURFACE": 17,
+    "SENS-HELD": 9
+  },
+  "guard_lane_counts": {
+    "CAUTION-AUTOFLOW": 1,
+    "GUARD-CANDIDATE": 109,
+    "SENS-HELD": 14,
+    "STRUCTURAL-RELATION": 16
+  },
+  "eligible_module_candidates": [
+    "516",
+    "520",
+    "521",
+    "540",
+    "544"
+  ],
+  "held_references": [
+    "174-210",
+    "517",
+    "600",
+    "777",
+    "988",
+    "989",
+    "990",
+    "991",
+    "992"
+  ],
+  "boundary": "Review and canon gate only; no canonical TRG assignment."
+}

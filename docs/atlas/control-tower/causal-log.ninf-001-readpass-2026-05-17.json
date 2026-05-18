@@ -1,0 +1,45 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-NINF001-READ",
+  "event_id": "ninf-001-readpass-2026-05-17",
+  "created_at": "2026-05-17T11:55:00+02:00",
+  "date": "2026-05-17",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "TerraNova skill read before action",
+    "Notion fetch: CAP page notion://redacted-internal-object",
+    "Notion fetch: registry database notion://redacted-internal-object",
+    "Notion fetch: data source notion-ds://redacted-internal-source",
+    "Notion search: CAP 0.3 / DUP / PRISM / SENS registry signals"
+  ],
+  "observation": "The CAP page and registry are reachable. The CAP page still points to CAP 0.3 creation as next action even though CAP 0.3 now exists repo-local. Registry search confirms DUP-001, SENS-001 and PRISM-001 are present. SQL data-source querying remains unavailable.",
+  "trigger_band": "301-400",
+  "trigger_ids": [
+    "/fff",
+    "NINF-001"
+  ],
+  "freedom_mode": "/fff bounded by read-only Notion infiltration and explicit-GO mutation gate",
+  "probabilistic_hypothesis": "The best next Notion move is a low-risk CAP 0.3 visibility update plus operational views and rows, but only after explicit GO.",
+  "probability_note": "High confidence for CAP page drift and registry visibility; moderate confidence for view creation details because SQL querying is unavailable.",
+  "deterministic_boundary": "No Notion mutation, no schema change, no page move, no deletion, no raw private inventory export and no Notion Custom Agent usage during this readpass.",
+  "selected_action": "Create repo-local NINF-001 readpass findings and Notion mutation package.",
+  "feedback_target": "github_atlas",
+  "backpropagation_target": "CAP 0.3",
+  "backpropagation_result": "CAP 0.3 now has a concrete Notion infiltration package that can be applied later with explicit GO.",
+  "verification_state": "notion_checked",
+  "external_mutation": false,
+  "mutation_authorization": "",
+  "result": {
+    "cap_page_reachable": true,
+    "registry_database_reachable": true,
+    "registry_data_source_reachable": true,
+    "registry_search_signals_found": [
+      "DUP-001",
+      "SENS-001",
+      "PRISM-001"
+    ],
+    "sql_query_available": false,
+    "external_mutations": 0
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "canon-001-readpass-2026-05-17",
+  "timestamp": "2026-05-17T11:02:20+02:00",
+  "actor": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "trigger_or_cluster": "CANON-001 go; Source-of-Truth verification",
+  "source_trace": [
+    "Notion fetch: CAP 0.1.0 - Cognitive Ability Point",
+    "Notion fetch: EQUILIBRIUM - Offizielles Regelbuch",
+    "Notion fetch: CIC - Cognitive Intelligent Cooperation",
+    "Notion fetch: CEI-DATA-05 - Workspace Index & Page Census Note",
+    "docs/references/zenodo.md",
+    "releases/zenodo/rc01-v12-2026-05-07/",
+    "docs/atlas/control-tower/README.md"
+  ],
+  "probabilistic_hypothesis": "The current Source-of-Truth rows are valid if their canon scope is narrowed to exact operational domains.",
+  "deterministic_boundary": "Do not promote broad universal canon claims; each Source-of-Truth row must declare what it is canonical for and what it is not canonical for.",
+  "selected_action": "Produced CANON-001 findings and prepared a metadata-only update package.",
+  "feedback_target": "Registry",
+  "backpropagation_target": "GitHub Atlas",
+  "observed_result": {
+    "source_of_truth_rows_checked": 7,
+    "demotions_recommended": 0,
+    "new_rule_detected": "Equilibrium R16",
+    "cap_page_stale_live_count": "21 shown; 22 live after DB-WIKI-001"
+  },
+  "equilibrium_check": {
+    "status": "pass",
+    "trace": "Each canon row was checked against a direct Notion or GitHub/local source.",
+    "boundary": "Read pass and local package before metadata mutation.",
+    "mode": "STUDIO",
+    "github_sync": "Local CANON-001 files created."
+  },
+  "next_review": "Apply metadata-only Notion updates and CAP page live-state refresh after explicit GO."
+}

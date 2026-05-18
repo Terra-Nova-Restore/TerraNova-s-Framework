@@ -1,0 +1,28 @@
+{
+  "event_id": "prism-001-mutation-2026-05-17",
+  "date": "2026-05-17",
+  "mode": "BIZ",
+  "trigger_band": "301-400",
+  "freedom_mode": "/fff bounded by explicit PRISM-001 GO",
+  "source_trace": [
+    "User instruction: Prism-001 GO",
+    "TerraNova skill read before action",
+    "PRISM-001 local batch trace",
+    "prism-001.backpropagation-queue.csv"
+  ],
+  "probabilistic_hypothesis": "Registering the PRISM-001 queue closes CAP 0.2 by making the publication-to-living-system feedback loop visible.",
+  "deterministic_boundary": "Metadata-only registry update; no Zenodo write, no Notion schema change, no raw sensitive export.",
+  "selected_action": "Created a Notion registry row for the PRISM-001 backpropagation layer and updated two Zenodo registry rows.",
+  "feedback_target": "CAP Registry",
+  "backpropagation_target": "CAP 0.3",
+  "result": {
+    "created_rows": 1,
+    "created_row_id": "notion-id://redacted",
+    "updated_rows": 2,
+    "cap_page_refreshed": true,
+    "current_live_registry_rows": 25,
+    "schema_changes": 0,
+    "zenodo_mutations": 0,
+    "raw_content_imports": 0
+  }
+}

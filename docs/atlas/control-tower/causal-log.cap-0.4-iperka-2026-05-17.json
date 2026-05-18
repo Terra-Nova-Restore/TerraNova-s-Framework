@@ -1,0 +1,50 @@
+{
+  "log_id": "CAP-0.4-IPERKA-2026-05-17",
+  "event_type": "governance_boot",
+  "created_at": "2026-05-17T20:05:00+00:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "GO CAP 0.4 IPERKA",
+  "mode": "STUDIO repo-local canon governance",
+  "source_trace": [
+    "docs/atlas/control-tower/cap-0.3-operational-control-iperka.md",
+    "docs/atlas/control-tower/mmd-007.cap-module-source-review.md",
+    "docs/atlas/control-tower/mmd-007.source-review.csv",
+    "docs/atlas/control-tower/mmd-007.canon-decision-queue.csv",
+    "docs/atlas/control-tower/sens-001.boundary-map.csv",
+    "docs/atlas/control-tower/trigger-001.command-surface.md"
+  ],
+  "deterministic_boundary": [
+    "No external mutation without explicit GO",
+    "No Notion Custom Agent or credit-consuming Notion automation",
+    "No canonical TRG assignment from visual evidence alone",
+    "No execution or public canon without L4 gate",
+    "Sensitivity-held material remains gated"
+  ],
+  "probabilistic_hypothesis": "The next bottleneck is not module discovery but canon admission governance.",
+  "selected_action": "Create CAP 0.4 canon admission IPERKA, rulebook, source-tier map and elevation queue.",
+  "local_outputs": [
+    "docs/atlas/control-tower/cap-0.4-canon-admission-iperka.md",
+    "docs/atlas/control-tower/canon-admission-rulebook.md",
+    "docs/atlas/control-tower/canon-source-tier-map.csv",
+    "docs/atlas/control-tower/canon-elevation-queue.csv",
+    "docs/atlas/control-tower/batch-canon-002.md"
+  ],
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "feedback_target": [
+    "CAP registry canon fields",
+    "MMD-007 module source review",
+    "SENS-002 protected-lane review",
+    "future REGISTRY-002 Notion mutation package"
+  ],
+  "blocked_claims": [
+    "Full historical trigger definitions",
+    "Canonical TRG assignment",
+    "Execution permission",
+    "Public-facing canon",
+    "Schattenarchiv-depth expansion",
+    "AutoFlow sibling expansion"
+  ],
+  "status": "completed"
+}

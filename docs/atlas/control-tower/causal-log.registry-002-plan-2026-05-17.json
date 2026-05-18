@@ -1,0 +1,48 @@
+{
+  "log_id": "REGISTRY-002-PLAN-2026-05-17",
+  "event_type": "notion_mutation_package_prepared",
+  "created_at": "2026-05-17T20:18:00+00:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "REGISTRY-002",
+  "mode": "STUDIO repo-local package",
+  "source_trace": [
+    "docs/atlas/control-tower/mmd-006.registry-updates.csv",
+    "docs/atlas/control-tower/mmd-007.source-review.csv",
+    "docs/atlas/control-tower/mmd-007.canon-decision-queue.csv",
+    "docs/atlas/control-tower/canon-admission-rulebook.md",
+    "docs/atlas/control-tower/canon-source-tier-map.csv",
+    "docs/atlas/control-tower/canon-elevation-queue.csv"
+  ],
+  "deterministic_boundary": [
+    "No live Notion mutation from a question-form apply request",
+    "No schema overwrite",
+    "No row deletion",
+    "No canonical TRG assignment",
+    "No L3/L4 elevation"
+  ],
+  "probabilistic_hypothesis": "The live registry should expose canon admission metadata, but only after a prepared package and explicit apply command.",
+  "selected_action": "Create Notion-safe schema and row update package for REGISTRY-002.",
+  "local_outputs": [
+    "docs/atlas/control-tower/registry-002.field-package.csv",
+    "docs/atlas/control-tower/registry-002.module-canon-updates.csv",
+    "docs/atlas/control-tower/registry-002.notion-mutation-package.csv",
+    "docs/atlas/control-tower/registry-002.apply-gate.md",
+    "docs/atlas/control-tower/registry-002.review-summary.json",
+    "docs/atlas/control-tower/batch-registry-002.md"
+  ],
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "feedback_target": [
+    "Future Notion registry canon fields",
+    "CAP Canon Admission Queue view",
+    "AUTO-001 local validation"
+  ],
+  "blocked_claims": [
+    "Immediate live schema mutation from ambiguous request",
+    "L3/L4 canon elevation",
+    "Status demotion",
+    "Public-facing canon claim"
+  ],
+  "status": "completed"
+}

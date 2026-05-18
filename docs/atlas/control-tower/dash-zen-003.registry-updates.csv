@@ -1,0 +1,5 @@
+Object,Notion URL,Action,Status,Boundary
+DASH-ZEN-003 - Zenodo Z1 Routing Anchor,notion://redacted-internal-object,"Created registry row for deferred Z1 routing-state anchor",Applied,"Parked only; no PR #40 advance, workflow run, draft, DOI, upload or publish"
+DASH-ZEN-003 - Zenodo Z2 Routing Anchor,notion://redacted-internal-object,"Created registry row for closed Z2 metadata-only routing-state anchor",Applied,"Historical precedent only; no new Zenodo write or v13 claim"
+DASH-ZEN-003 - Zenodo Z3 Routing Anchor,notion://redacted-internal-object,"Created registry row for closed Z3 metadata-refresh routing-state anchor",Applied,"Historical lane anchor; current latest state must be reconciled with live Zenodo/API"
+CAP 0.1.0 - Cognitive Ability Point,notion://redacted-internal-object,"Appended DASH-ZEN-003 Routing Anchor Registry Package checkpoint",Applied,"No schema change, deletion, raw private inventory export, Zenodo mutation or Notion AI credit use"

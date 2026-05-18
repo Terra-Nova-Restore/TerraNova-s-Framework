@@ -1,0 +1,9 @@
+Object,Notion URL,Action,Status,Boundary
+Workspace Object Registry,notion://redacted-internal-object,"Added nine canon admission schema fields",Applied,"Add-only schema mutation; no existing field removal or overwrite"
+CAP-MOD-DRAFT-516 - Inspiration,notion://redacted-internal-object,"Backfilled canon admission metadata",Applied,"L2 routing marker only; no AutoFlow sibling semantics; no public trigger canon"
+CAP-MOD-DRAFT-520 - SessionStart,notion://redacted-internal-object,"Backfilled canon admission metadata",Applied,"L2 routing marker only; no external mutation permission or autonomous session control"
+CAP-MOD-DRAFT-521 - Preflight,notion://redacted-internal-object,"Backfilled canon admission metadata",Applied,"L1 protected name/cluster only; sensitivity review required before elevation"
+CAP-MOD-DRAFT-540 - Observable Momentum,notion://redacted-internal-object,"Backfilled canon admission metadata",Applied,"L2 routing marker only; no proof, metric finality or public scientific claim"
+CAP-MOD-DRAFT-544 - Synchronization Node,notion://redacted-internal-object,"Backfilled canon admission metadata",Applied,"L2 routing marker only; no full workspace sync or automatic sync claim"
+CAP Canon Admission Queue,view://notion-id://redacted,"Created registry database view",Applied,"View only; filters Candidate GitHub Artifact rows; no row deletion"
+CAP page,notion://redacted-internal-object,"Appended REGISTRY-002 Live Canon Field Application checkpoint",Applied,"No deletion; no raw private inventory; no L3/L4 elevation; no Notion AI credit use"

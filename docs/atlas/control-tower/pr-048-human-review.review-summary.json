@@ -1,0 +1,36 @@
+{
+  "review_id": "PR-048-HUMAN-REVIEW",
+  "created_at": "2026-05-18T16:27:00+02:00",
+  "status": "applied",
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "pr": {
+    "number": 48,
+    "state": "open",
+    "draft_before": true,
+    "draft_after": false,
+    "merged": false,
+    "head_ref_before_trace_commit": "codex/control-tower-sessionstart-mainline",
+    "head_sha_before_trace_commit": "89def245f8debff804a2eaeee1b455a28f3bf324",
+    "base_ref": "main"
+  },
+  "pre_transition_checks": {
+    "python_compile": "pass",
+    "auto_001_live_zenodo": "pass",
+    "git_diff_check": "pass",
+    "raw_private_notion_id_scan": "pass",
+    "pr_mergeable_state": "clean"
+  },
+  "github_mutations": [
+    "Marked PR #48 ready for review.",
+    "Updated PR body to remove obsolete draft-hold wording."
+  ],
+  "blocked_actions": [
+    "merge PR #48",
+    "close PR #48",
+    "Notion deletion, page movement, schema change or Custom Agent use",
+    "Zenodo writes, DOI mutation, uploads, workflow dispatch or new versions",
+    "canonicalize all trigger, SCL or Mermaid material"
+  ],
+  "next_action": "PR-048-REVIEW-DECISION"
+}

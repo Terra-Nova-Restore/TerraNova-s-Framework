@@ -1,0 +1,28 @@
+{
+  "event_id": "dup-001-mutation-2026-05-17",
+  "date": "2026-05-17",
+  "mode": "STUDIO",
+  "trigger_band": "301-400",
+  "freedom_mode": "/fff bounded by explicit DUP-001 instruction",
+  "source_trace": [
+    "User instruction: DUP-001",
+    "TerraNova skill read before action",
+    "DUP-001 local batch trace",
+    "dup-001.review-queue.csv"
+  ],
+  "probabilistic_hypothesis": "Registering the DUP-001 queue as a first-class CAP object makes duplicate pressure controllable without exposing raw private inventory.",
+  "deterministic_boundary": "Metadata-only registry update; no content rewrite, no schema change, no raw snapshot export, no page deletion.",
+  "selected_action": "Created a Notion registry row for the DUP-001 duplicate-title review queue, updated the Home-Ansichten snapshot row, and refreshed the CAP page dashboard state.",
+  "feedback_target": "CAP Registry",
+  "backpropagation_target": "CAP 0.2 batch queue",
+  "result": {
+    "created_rows": 1,
+    "created_row_id": "notion-id://redacted",
+    "updated_rows": 1,
+    "cap_page_refreshed": true,
+    "current_live_registry_rows": 23,
+    "duplicate_review_queues": 8,
+    "schema_changes": 0,
+    "raw_content_imports": 0
+  }
+}
