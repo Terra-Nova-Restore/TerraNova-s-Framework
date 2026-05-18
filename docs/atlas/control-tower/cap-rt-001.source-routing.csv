@@ -1,0 +1,8 @@
+source_id,source_name,authority_role,allowed_use,blocked_use,validation_method
+SRC-RT-01,Notion CAP registry,Internal workspace state,Object status decisions and next source actions,Public release truth by itself,Connector fetch/search plus manual review
+SRC-RT-02,GitHub Atlas,Audit and validation trace,Plans logs checks PR gates and public-safe trace,Raw private Notion inventory storage,Repo validator and PR checks
+SRC-RT-03,Zenodo public API,External citation truth,Public release metadata and file checksum verification,Any write or publish operation,AUTO-001 live Zenodo check
+SRC-RT-04,Mermaid universe in Notion,Visual structure source,Graph extraction and bridge candidates,Immediate canon admission,Readpass plus MMD review gates
+SRC-RT-05,Local snapshots,Historical input,Compare and recover old context,Current truth without re-verification,Snapshot date and source label
+SRC-RT-06,GPT,Bounded synthesis,Draft summaries and decision checks,Source authority or hidden mutation,Human/Codex review against sources
+SRC-RT-07,GitHub Copilot,Mechanical edit helper,Small file edits and formatting,Canon decisions or publication actions,Diff review and validator checks

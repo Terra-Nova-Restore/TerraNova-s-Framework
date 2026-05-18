@@ -1,0 +1,9 @@
+lane_id,lane_name,source_of_record,primary_output,next_gate,blocked_by_default
+RT-LANE-01,Session Intake,GitHub Atlas plus latest Notion checkpoint,Active gate and resume state,CAP-RT-002,Whole-workspace inference
+RT-LANE-02,Workspace Registry,Notion CAP registry,Visible object status and next source action,REGISTRY-NEXT,Schema change without explicit approval
+RT-LANE-03,Canon Admission,GitHub canon artifacts plus Notion source state,Canon level and allowed claims,CANON-NEXT,L3/L4 elevation without source pass
+RT-LANE-04,Source Verification,Live source where applicable,Source ledger and claim review,SOURCE-NEXT,Claim from memory only
+RT-LANE-05,Sensitivity Boundary,Notion sensitivity state plus GitHub boundary maps,Protected lane decision,SENS-NEXT,Teil II/III elevation
+RT-LANE-06,Zenodo Prism State,Zenodo API public record,Release-state matrix and citation truth,DASH-ZEN-NEXT,Zenodo write or workflow dispatch
+RT-LANE-07,Mermaid Trigger Bridge,Notion Mermaid universe plus GitHub MMD artifacts,Visual trigger/module bridge,MMD-NEXT,Full trigger canonization in one step
+RT-LANE-08,GitHub Review Flow,GitHub PR/check state,PR gate and merge/hold/close decision,PR-NEXT,Merge without green checks

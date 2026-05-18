@@ -1,0 +1,29 @@
+{
+  "review_id": "CAP-RT-001",
+  "created_at": "2026-05-18T16:45:00+02:00",
+  "status": "planned",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "parent_gate": "PR-048-REVIEW-DECISION",
+  "purpose": "Define the first Control Tower runtime contract after PR #48 merged.",
+  "deliverables": [
+    "batch-cap-rt-001.md",
+    "cap-rt-001.runtime-contract.md",
+    "cap-rt-001.bedienungshandbuch.md",
+    "cap-rt-001.dashboard-lanes.csv",
+    "cap-rt-001.source-routing.csv",
+    "cap-rt-001.guardrails.csv",
+    "cap-rt-001.action-queue.csv",
+    "causal-log.cap-rt-001-plan-2026-05-18.json"
+  ],
+  "runtime_decision": "Runtime means a repeatable human/Codex control loop, not an autonomous Notion agent.",
+  "blocked_actions": [
+    "Notion deletion or page movement",
+    "raw private Notion IDs in public GitHub trace",
+    "Notion Custom Agents or credit-consuming automation",
+    "Zenodo writes, workflow dispatch, DOI mutation, upload, new version or publish event",
+    "full trigger/SCL/Mermaid canonization in one step",
+    "sensitive Monographie Teil II/III elevation"
+  ],
+  "next_gate": "CAP-RT-002"
+}
