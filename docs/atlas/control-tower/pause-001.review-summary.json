@@ -1,0 +1,36 @@
+{
+  "review_id": "PAUSE-001",
+  "created_at": "2026-05-18T11:08:00+02:00",
+  "status": "complete",
+  "purpose": "One-week continuation handoff for Control Tower / PR #48 work.",
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "current_branch": "codex/control-tower-sessionstart-mainline",
+  "current_head_before_pause_commit": "91c0781 docs(control-tower): add zenodo release matrix",
+  "current_pr": "PR #48",
+  "completed_lanes": [
+    "CAP 0.1.0 registry/control surface",
+    "MMD-001 through MMD-007",
+    "SOURCE-520 and TEST-520",
+    "SOURCE-521",
+    "DASH-ZEN-001 through DASH-ZEN-004"
+  ],
+  "recommended_resume_action": "PR-048-READY-GATE",
+  "solo_tools": [
+    "Notion for workspace memory and decisions",
+    "GPT for bounded synthesis",
+    "GitHub Copilot for mechanical edits",
+    "GitHub UI for PR/check status",
+    "Zenodo API/web for read verification only"
+  ],
+  "blocked_actions": [
+    "Notion deletion or page movement",
+    "raw private Notion IDs in GitHub artifacts",
+    "Notion Custom Agents or credit-consuming automation",
+    "Zenodo writes, uploads, DOI mutation, new version or publish event",
+    "PR #40 / Z1 advancement",
+    "sensitive Monographie Teil II/III elevation"
+  ],
+  "resume_prompt_file": "docs/atlas/control-tower/batch-pause-001.md",
+  "solo_playbook_file": "docs/atlas/control-tower/pause-001.solo-operating-playbook.md"
+}

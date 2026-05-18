@@ -1,0 +1,7 @@
+Priority,Action,Owner,When,Done Condition,Boundary
+1,PR-048-READY-GATE,Silvan + Codex,After reset or manually,"PR #48 checks and raw-ID scans are green; ready/hold decision is recorded","No merge without Silvan review"
+2,Review DASH-ZEN-004 matrix,Silvan,During pause,"Authority order is understood: Zenodo API, Notion root, Z anchors, GitHub Atlas","No Zenodo write"
+3,Manual Notion cleanup notes,Silvan,During pause,"Only notes or comments added; no pages deleted/moved","No mass AI/autofill"
+4,Solo GPT summaries,Silvan,During pause,"Small allowed/blocked/next-action summaries exist for selected pages","No full-workspace import"
+5,Copilot mechanical edits,Silvan,Only if needed,"Local checks pass after any edit","No broad refactor"
+6,Resume Codex,Silvan,After token reset,"Paste minimal resume prompt from batch-pause-001.md","Read TerraNova skill first"
