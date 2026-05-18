@@ -1,0 +1,43 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-CAP03-001",
+  "event_id": "cap-0.3-iperka-2026-05-17",
+  "created_at": "2026-05-17T00:00:00+02:00",
+  "date": "2026-05-17",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "TerraNova skill read before action",
+    "docs/atlas/control-tower/README.md",
+    "docs/atlas/control-tower/cap-0.2-registry-stabilization-iperka.md",
+    "docs/atlas/control-tower/causal-log.schema.json",
+    "docs/atlas/control-tower/prism-001.backpropagation-queue.csv"
+  ],
+  "observation": "CAP 0.2 closed with 25 live registry rows, zero scoped Needs sync rows, eight duplicate review queues, five protected sensitivity classes and seven Prism backpropagation rows.",
+  "trigger_band": "301-400",
+  "trigger_ids": [
+    "/fff",
+    "CAP3-BOOT-001"
+  ],
+  "freedom_mode": "/fff bounded by repo-local execution and no external mutation",
+  "probabilistic_hypothesis": "The next coherent move is an operational CAP 0.3 layer that turns existing queues into controlled execution paths before adding more Notion structure.",
+  "probability_note": "High confidence because CAP 0.2 already created the required queue and boundary artifacts; uncertainty remains around current live Notion drift until a later read-only check.",
+  "deterministic_boundary": "No Notion mutation, no Zenodo mutation, no raw private inventory export, no Notion Custom Agents and no credit-consuming Notion automation without explicit human GO.",
+  "selected_action": "Create CAP 0.3 repo-local IPERKA, workstream map and causal log as CAP3-BOOT-001.",
+  "feedback_target": "github_atlas",
+  "backpropagation_target": "CAP 0.3",
+  "backpropagation_result": "CAP 0.3 reframes the Control Tower from registry stabilization into repeatable operational control while keeping external mutation at zero.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": "",
+  "result": {
+    "created_files": [
+      "docs/atlas/control-tower/cap-0.3-operational-control-iperka.md",
+      "docs/atlas/control-tower/cap-0.3.workstream-map.csv",
+      "docs/atlas/control-tower/causal-log.cap-0.3-iperka-2026-05-17.json"
+    ],
+    "external_mutations": 0,
+    "notion_custom_agents": 0,
+    "credit_consuming_notion_automation": 0
+  }
+}

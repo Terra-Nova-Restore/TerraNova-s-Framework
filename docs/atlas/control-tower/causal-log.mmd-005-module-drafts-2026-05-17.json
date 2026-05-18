@@ -1,0 +1,32 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-MMD-005",
+  "created_at": "2026-05-17T19:23:43.070171+00:00",
+  "operator": "Codex",
+  "mode": "STUDIO",
+  "activation": "manual",
+  "source_trace": [
+    "docs/atlas/control-tower/mmd-004.module-record-candidates.csv",
+    "docs/atlas/control-tower/mmd-004.candidate-review.csv",
+    "docs/atlas/control-tower/mmd-004.guard-review.csv",
+    "atlas/atlas.manifest.v1.1.json",
+    "atlas/sources/trigger-complement-2026-03-30.md"
+  ],
+  "observation": "MMD-004 promoted five safe visual trigger references for local CAP module draft work.",
+  "trigger_band": "401+",
+  "trigger_ids": [
+    "516",
+    "520",
+    "521",
+    "540",
+    "544"
+  ],
+  "probabilistic_hypothesis": "The five safe references can act as a minimal CAP module surface for session start, preflight, inspiration, momentum and synchronization.",
+  "probability_note": "High confidence for local draft use; incomplete confidence for historical trigger canon until source review expands definitions.",
+  "deterministic_boundary": "No external mutation, no Notion AI credit use, no canonical TRG assignment, no expansion of held sensitive or AutoFlow material.",
+  "selected_action": "Created local CAP module drafts, evidence rows, relation map and draft hash ledger for references 516, 520, 521, 540 and 544.",
+  "feedback_target": "github_atlas",
+  "backpropagation_result": "CAP now has five local draft module records that can feed a later registry package or source-review pass.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": ""
+}

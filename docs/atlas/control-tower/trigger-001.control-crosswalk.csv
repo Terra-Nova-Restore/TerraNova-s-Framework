@@ -1,0 +1,15 @@
+Trigger,Source Status,Band,Role,CAP State,Allowed Action,Requires Explicit GO,Blocked Action,Feedback Target
+/fff,CAP active command,301-400,Bounded internal steering,Execute,"Local analysis, repo edits, prioritization, validation, mutation-package preparation","External writes only","Silent external mutation",Logbook
+102,Known anchor,101-200,Recover to fixed point,Freeze,"Return to last stable CAP source; preserve trace","External recovery writes","Continue mutation during contradiction",Logbook
+105,Known anchor,101-200,Resonance image / context sensing,Observe,"Use as signal for context orientation","None by default","Treat resonance as verified fact",Trigger Map
+143,Known anchor,101-200,Canon guard,Queue,"Compare claim against canon anchors and status markers","Canon mutation","Demote/promote canon without trace",Notion Canon
+144,Known anchor,101-200,Role / inversion check,Freeze,"Check role, mode, imitation risk and responsibility","External role/canon change","Imitate Silvan or invert recovery anchor",Logbook
+148,Known anchor,101-200,Control instance,Queue,"Select CAP state and deterministic boundary","External mutation","Proceed without boundary",Registry
+179,Known anchor,101-200,Compression and cleanup,Queue,"Summarize, deduplicate, package cleanup proposals","Cleanup mutation","Delete or archive directly",Registry
+182,Known anchor,101-200,Airbag / emergency stop,Freeze,"Stop action, preserve state, log blocker","Restart mutation","Force action through unresolved risk",Logbook
+185,Known anchor,101-200,Outer filter resonance / boundary sensing,Observe,"Detect privacy, sensitivity and publication boundary","External policy change","Expose boundary-sensitive material",Registry
+205-210,Known cluster,201-300,Impulse revoke / licensing / focus cluster,Observe,"Stop impulsive action; route licensing/commercial claims to gate","Token/licensing/payment action","Commercial or credential action without BIZ gate",Trigger Map
+207,Known anchor,201-300,Regeneration grid,Queue,"Create recovery/refinement checklist","External mutation","Skip source repair after failure",GitHub Atlas
+210,Known anchor,201-300,Frequency focus lock,Execute,"Lock one next action and run AUTO-001 after completion","External mutation","Open multiple risky lanes at once",GitHub Atlas
+310,Known anchor,301-400,Power resonance / system shaping,Backpropagate,"Bind registry, CAP, Prism and dashboard feedback","Notion/GitHub remote writes","Power move without audit trail",Registry
+888,Audit overlay,overlay,Truth-efficiency audit,Freeze,"Check source, boundary, result and efficiency before continuing","Any external mutation after pass only","Continue after failed audit",Logbook

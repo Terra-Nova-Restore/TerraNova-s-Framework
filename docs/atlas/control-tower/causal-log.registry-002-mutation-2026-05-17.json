@@ -1,0 +1,56 @@
+{
+  "log_id": "REGISTRY-002-MUTATION-2026-05-17",
+  "event_type": "notion_mutation_applied",
+  "created_at": "2026-05-17T20:13:00+00:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "GO Notion REGISTRY-002 anwenden",
+  "mode": "STUDIO live Notion registry mutation",
+  "source_trace": [
+    "docs/atlas/control-tower/registry-002.apply-gate.md",
+    "docs/atlas/control-tower/registry-002.field-package.csv",
+    "docs/atlas/control-tower/registry-002.module-canon-updates.csv",
+    "docs/atlas/control-tower/registry-002.notion-mutation-package.csv",
+    "docs/atlas/control-tower/canon-admission-rulebook.md"
+  ],
+  "deterministic_boundary": [
+    "Explicit Notion apply command was present",
+    "Add-only schema mutation",
+    "No row deletion",
+    "No raw private inventory export",
+    "No canonical TRG assignment",
+    "No L3/L4 elevation",
+    "No Status or Canon Status demotion",
+    "No Notion AI credit use"
+  ],
+  "probabilistic_hypothesis": "The live registry becomes operationally safer when canon admission level, source tier, blocked claims and next source action are visible on candidate rows.",
+  "selected_action": "Apply REGISTRY-002 to the live CAP Workspace Object Registry.",
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "live_outputs": [
+    "Added Canon Level, Source Tier, Canon Decision, Allowed Claims, Blocked Claims, Next Source Action, Downgrade Rule, Admission Review and Canon Updated fields",
+    "Backfilled five CAP module draft rows",
+    "Created CAP Canon Admission Queue view",
+    "Appended REGISTRY-002 checkpoint to CAP page"
+  ],
+  "verification": {
+    "sql_query_tool": "unavailable: notion-query-data-sources not found",
+    "fallback": "Fetched five rows and database schema/view directly",
+    "rows_verified": 5,
+    "view_verified": "view://363f7297-de7e-81ab-aaa7-000c0705abc4",
+    "preflight_521_review": "Sensitivity Review Required"
+  },
+  "feedback_target": [
+    "CAP Canon Admission Queue",
+    "SENS-002 protected-lane review",
+    "future CANON-003 elevation review"
+  ],
+  "blocked_claims": [
+    "Full historical trigger definitions",
+    "Canonical TRG assignment",
+    "Execution permission",
+    "Public-facing canon",
+    "L3/L4 admission"
+  ],
+  "status": "completed"
+}

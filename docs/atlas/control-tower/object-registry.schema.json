@@ -1,0 +1,309 @@
+{
+  "version": "0.1",
+  "name": "CAP 0.1.0 Workspace Object Registry",
+  "status": "draft",
+  "created": "2026-05-17",
+  "purpose": "CAP 0.1.0 registry schema for TerraNova Notion workspace objects, trigger steering, causal coherence and Prism/Zenodo feedback.",
+  "boundaries": {
+    "notion": "system_of_record",
+    "github": "audit_and_version_trace",
+    "raw_private_page_lists": "do_not_publish",
+    "notion_custom_agents": "disabled_by_policy"
+  },
+  "fields": [
+    {
+      "name": "Name",
+      "type": "title",
+      "required": true
+    },
+    {
+      "name": "Object Type",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Page",
+        "Database",
+        "Wiki",
+        "Data Source",
+        "View",
+        "Template",
+        "Synced Block",
+        "GitHub Artifact",
+        "Drive Artifact",
+        "External Source"
+      ]
+    },
+    {
+      "name": "Object ID / URL",
+      "type": "url_or_text",
+      "required": true
+    },
+    {
+      "name": "Parent / Hub",
+      "type": "relation_or_text",
+      "required": false
+    },
+    {
+      "name": "Source Layer",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Notion UI",
+        "Notion Connector",
+        "Export Hard Count",
+        "Historic Trigger Anchor",
+        "GitHub Atlas",
+        "Google Drive",
+        "External"
+      ]
+    },
+    {
+      "name": "Count Basis",
+      "type": "select",
+      "required": true,
+      "options": [
+        "777 historic_trigger_anchor",
+        "808 export_hard_count",
+        "~880 notion_ui_horizon",
+        "not counted",
+        "unknown"
+      ]
+    },
+    {
+      "name": "Mode",
+      "type": "select",
+      "required": true,
+      "options": [
+        "PLAY",
+        "STUDIO",
+        "BIZ",
+        "Mixed",
+        "Unknown"
+      ]
+    },
+    {
+      "name": "Trigger Band",
+      "type": "select",
+      "required": false,
+      "options": [
+        "1-100",
+        "101-200",
+        "201-300",
+        "301-400",
+        "401+",
+        "Not applicable",
+        "Unknown"
+      ]
+    },
+    {
+      "name": "Freedom Mode",
+      "type": "select",
+      "required": true,
+      "options": [
+        "/fff enabled",
+        "/fff candidate",
+        "bounded manual",
+        "blocked",
+        "not applicable"
+      ]
+    },
+    {
+      "name": "Status",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Raw",
+        "Indexed",
+        "Reviewed",
+        "Canonical",
+        "Archived",
+        "Blocked"
+      ]
+    },
+    {
+      "name": "Canon Status",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Source of Truth",
+        "Reference",
+        "Duplicate",
+        "Deprecated",
+        "Candidate",
+        "Unknown"
+      ]
+    },
+    {
+      "name": "Sensitivity",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Public",
+        "Internal",
+        "Sensitive",
+        "Private",
+        "Restricted",
+        "Unknown"
+      ]
+    },
+    {
+      "name": "Owner",
+      "type": "person_or_text",
+      "required": false
+    },
+    {
+      "name": "Last Edited",
+      "type": "date",
+      "required": false
+    },
+    {
+      "name": "Last Reviewed",
+      "type": "date",
+      "required": false
+    },
+    {
+      "name": "Related Canonical Object",
+      "type": "relation_or_url",
+      "required": false
+    },
+    {
+      "name": "Causal Chain",
+      "type": "text",
+      "required": false
+    },
+    {
+      "name": "Emergent Coherence Evidence",
+      "type": "text",
+      "required": false
+    },
+    {
+      "name": "Probabilistic Hypothesis",
+      "type": "text",
+      "required": false
+    },
+    {
+      "name": "Deterministic Boundary",
+      "type": "text",
+      "required": false
+    },
+    {
+      "name": "Feedback / Backpropagation Target",
+      "type": "select",
+      "required": false,
+      "options": [
+        "Registry",
+        "Logbook",
+        "Trigger Map",
+        "Prism / Zenodo",
+        "Notion Canon",
+        "GitHub Atlas",
+        "No feedback",
+        "Unknown"
+      ]
+    },
+    {
+      "name": "Prism / Zenodo Relevance",
+      "type": "select",
+      "required": false,
+      "options": [
+        "Foreground",
+        "Backpropagation",
+        "Citation",
+        "Next-release candidate",
+        "Not relevant",
+        "Unknown"
+      ]
+    },
+    {
+      "name": "Understanding State",
+      "type": "select",
+      "required": false,
+      "options": [
+        "not read",
+        "read",
+        "understood",
+        "grasped",
+        "operationalized",
+        "blocked"
+      ]
+    },
+    {
+      "name": "Duplicate Group",
+      "type": "text",
+      "required": false
+    },
+    {
+      "name": "GitHub Path",
+      "type": "text",
+      "required": false
+    },
+    {
+      "name": "Sync Status",
+      "type": "select",
+      "required": true,
+      "options": [
+        "Not synced",
+        "In sync",
+        "Needs sync",
+        "Conflict",
+        "Not applicable"
+      ]
+    },
+    {
+      "name": "Equilibrium Notes",
+      "type": "text",
+      "required": false
+    }
+  ],
+  "views": [
+    {
+      "name": "All Objects",
+      "type": "table"
+    },
+    {
+      "name": "Databases & Wikis",
+      "type": "table",
+      "filter": "Object Type in Database, Wiki, Data Source"
+    },
+    {
+      "name": "Canonical Sources",
+      "type": "table",
+      "filter": "Canon Status = Source of Truth"
+    },
+    {
+      "name": "Review Needed",
+      "type": "table",
+      "filter": "Status in Raw, Indexed, Blocked or Canon Status = Unknown"
+    },
+    {
+      "name": "Duplicates",
+      "type": "table",
+      "filter": "Canon Status = Duplicate"
+    },
+    {
+      "name": "Sensitive / Restricted",
+      "type": "table",
+      "filter": "Sensitivity in Sensitive, Private, Restricted, Unknown"
+    },
+    {
+      "name": "GitHub Sync Needed",
+      "type": "table",
+      "filter": "Sync Status in Needs sync, Conflict"
+    },
+    {
+      "name": "Trigger 1-400 Steering",
+      "type": "table",
+      "filter": "Trigger Band in 1-100, 101-200, 201-300, 301-400"
+    },
+    {
+      "name": "Causal Emergence Log",
+      "type": "table",
+      "filter": "Causal Chain is not empty"
+    },
+    {
+      "name": "Prism / Zenodo Feedback",
+      "type": "table",
+      "filter": "Prism / Zenodo Relevance in Foreground, Backpropagation, Citation, Next-release candidate"
+    }
+  ]
+}

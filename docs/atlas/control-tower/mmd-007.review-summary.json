@@ -1,0 +1,18 @@
+{
+  "review_id": "MMD-007",
+  "created_at": "2026-05-17T19:48:37.206021+00:00",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "reviewed_modules": 5,
+  "source_index_rows": 5,
+  "canon_level_rows": 5,
+  "decision_queue_rows": 5,
+  "current_allowed_levels": {
+    "516": "L2-ROUTING-MARKER",
+    "520": "L2-ROUTING-MARKER",
+    "521": "L1-NAME-CLUSTER",
+    "540": "L2-ROUTING-MARKER",
+    "544": "L2-ROUTING-MARKER"
+  },
+  "boundary": "Source review only; no live Notion mutation and no canonical TRG assignment."
+}

@@ -1,0 +1,21 @@
+Review ID,Source Type,Source ID,Graph ID,Reason,Evidence,Required Gate,Decision
+VTR-001,candidate,VTB-008,ordner-02-codex-trigger-detail,Restricted,Ordner 02: Codex & Trigger Detail :: T777 :: Trigger 777: Schattenarchiv,SENS-001 boundary,hold for explicit review
+VTR-002,candidate,VTB-019,tokenaccess-triggermap-988-992,Sensitive,TokenAccess – TriggerMap (988-992) :: A :: 988 Snapshot Lockpoint,SENS-001 boundary,hold for explicit review
+VTR-003,candidate,VTB-020,tokenaccess-triggermap-988-992,Sensitive,TokenAccess – TriggerMap (988-992) :: C :: 989 Token Sync Beacon,SENS-001 boundary,hold for explicit review
+VTR-004,candidate,VTB-021,tokenaccess-triggermap-988-992,Sensitive,TokenAccess – TriggerMap (988-992) :: E :: 990 Trigger Audit Engine,SENS-001 boundary,hold for explicit review
+VTR-005,candidate,VTB-022,tokenaccess-triggermap-988-992,Sensitive,TokenAccess – TriggerMap (988-992) :: F :: Trigger_Mapping_DB,SENS-001 boundary,hold for explicit review
+VTR-006,candidate,VTB-023,tokenaccess-triggermap-988-992,Sensitive,TokenAccess – TriggerMap (988-992) :: G :: 991 ZIP Integrity Pulse,SENS-001 boundary,hold for explicit review
+VTR-007,candidate,VTB-024,tokenaccess-triggermap-988-992,Sensitive,TokenAccess – TriggerMap (988-992) :: H :: 992 TriggerMap Echo Sync,SENS-001 boundary,hold for explicit review
+VTR-008,candidate,VTB-025,tokenaccess-triggermap-988-992,Sensitive,TokenAccess – TriggerMap (988-992) :: I :: Codex_139_Sync_DB,SENS-001 boundary,hold for explicit review
+VTR-009,guard,VTG-018,tokenaccess-triggermap-988-992,Sensitive,A -> B | Hash,SENS-001 boundary,hold for explicit review
+VTR-010,guard,VTG-019,tokenaccess-triggermap-988-992,Sensitive,C -> D | CID,SENS-001 boundary,hold for explicit review
+VTR-011,guard,VTG-020,tokenaccess-triggermap-988-992,Sensitive,E -> F | Check,SENS-001 boundary,hold for explicit review
+VTR-012,guard,VTG-021,tokenaccess-triggermap-988-992,Sensitive,G -> B | SHA256,SENS-001 boundary,hold for explicit review
+VTR-013,guard,VTG-022,tokenaccess-triggermap-988-992,Sensitive,H -> I | Mirror,SENS-001 boundary,hold for explicit review
+VTR-014,guard,VTG-023,tokenaccess-triggermap-988-992,Sensitive,B -> D | Relation,SENS-001 boundary,hold for explicit review
+VTR-015,guard,VTG-024,tokenaccess-triggermap-988-992,Sensitive,F -> B | Relation,SENS-001 boundary,hold for explicit review
+VTR-016,guard,VTG-025,tokenaccess-triggermap-988-992,Sensitive,I -> F | Relation,SENS-001 boundary,hold for explicit review
+VTR-017,guard,VTG-057,full-sync-terra-nova-mcp-sequence,Sensitive,"DB -> SE | state (tokens?, cursor?, readOnly?)",SENS-001 boundary,hold for explicit review
+VTR-018,guard,VTG-074,full-sync-terra-nova-mcp-sequence,Sensitive,SE -> AUTH | Token exchange,SENS-001 boundary,hold for explicit review
+VTR-019,guard,VTG-075,full-sync-terra-nova-mcp-sequence,Sensitive,AUTH -> SE | access_token + refresh_token,SENS-001 boundary,hold for explicit review
+VTR-020,guard,VTG-076,full-sync-terra-nova-mcp-sequence,Sensitive,SE -> DB | store(encrypted tokens + workspace_id),SENS-001 boundary,hold for explicit review

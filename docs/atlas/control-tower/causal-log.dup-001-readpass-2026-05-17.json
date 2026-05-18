@@ -1,0 +1,29 @@
+{
+  "event_id": "dup-001-readpass-2026-05-17",
+  "date": "2026-05-17",
+  "mode": "STUDIO",
+  "trigger_band": "301-400",
+  "freedom_mode": "/fff bounded by explicit DUP-001 instruction",
+  "source_trace": [
+    "TerraNova skill read before action",
+    "CAP 0.2 registry stabilization IPERKA",
+    "home-ansichten-snapshot-2026-05-11.md",
+    "home-ansichten.snapshot.summary.json",
+    "Local sensitive Home-Ansichten snapshot, aggregate duplicate-title parsing only"
+  ],
+  "probabilistic_hypothesis": "Duplicate titles are mostly naming, template and import-pressure signals rather than duplicate object collisions.",
+  "deterministic_boundary": "Do not publish raw page list, Notion URLs, Notion IDs, restricted child titles or deletion decisions from the sensitive snapshot.",
+  "selected_action": "Classify 46 duplicate title groups into 8 safe review queues.",
+  "feedback_target": "CAP Registry",
+  "backpropagation_target": "DUP-002 or SENS-001",
+  "result": {
+    "duplicate_id_groups": 0,
+    "duplicate_title_groups": 46,
+    "duplicate_title_occurrences": 226,
+    "review_queues": 8,
+    "raw_urls_exported": 0,
+    "raw_ids_exported": 0,
+    "delete_actions": 0
+  }
+}
+

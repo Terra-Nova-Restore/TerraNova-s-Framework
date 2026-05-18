@@ -1,0 +1,6 @@
+Canon Level,Meaning,Minimum Evidence,Allowed Claim,Blocked Claim
+L0-ID-ANCHOR,Trigger number exists as a named internal anchor.,Reviewed gap/source ledger or trigger complement plus no sensitivity block.,Use the numeric trigger reference internally.,Any operational semantics beyond the source.
+L1-NAME-CLUSTER,"Working name, cluster and architecture layer are source-supported.",Trigger complement plus Atlas v1.1 object or cluster relation.,"Name, cluster and layer can be used as canon candidate metadata.",Full module behavior or execution permission.
+L2-ROUTING-MARKER,The module can guide routing inside CAP.,L1 evidence plus reviewed guard or Mermaid relation.,Use as internal routing marker with boundary text.,Treat route as automation or external mutation permission.
+L3-MODULE-SEMANTICS,Full CAP module semantics are source-supported.,Direct primary source definition plus secondary corroboration plus boundary review.,Move from draft module to canon module candidate.,Public canon or execution rule without test and sensitivity review.
+L4-EXECUTION-OR-PUBLIC,The module can drive execution rules or public-facing canon.,"L3 plus tests, SENS review, Equilibrium check and publication boundary.",Execution/public claim after explicit GO.,"Silent external mutation, restricted expansion or raw private source exposure."

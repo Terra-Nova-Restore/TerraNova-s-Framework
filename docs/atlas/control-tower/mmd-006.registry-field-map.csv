@@ -1,0 +1,28 @@
+Registry Field,Schema Type,Required,MMD-006 Source Rule,Boundary
+Name,title,True,MMD-005 Draft Module ID plus working name,Creates one stable registry title per CAP draft module.
+Object Type,select,True,Fixed value: GitHub Artifact,"The module draft exists locally in GitHub, not as a Notion source page yet."
+Object ID / URL,url_or_text,True,Local GitHub path anchor,Uses repo path text and avoids raw private Notion IDs.
+Parent / Hub,relation_or_text,False,Fixed value: CAP 0.1.0 - Workspace Object Registry,Routes rows to the registry control surface.
+Source Layer,select,True,Fixed value: GitHub Atlas,MMD-005 is a repo-local Atlas artifact.
+Count Basis,select,True,Fixed value: not counted,Module drafts do not change 777/808/~880 workspace count layers.
+Mode,select,True,Fixed value: STUDIO,This is system control work.
+Trigger Band,select,False,Fixed value: 401+,"Visible references are 516, 520, 521, 540 and 544."
+Freedom Mode,select,True,Fixed value: bounded manual,MMD-006 prepares rows; it does not authorize autonomous mutation.
+Status,select,True,Fixed value: Indexed,Rows are package-ready but not canonical.
+Canon Status,select,True,Fixed value: Candidate,MMD-004 explicitly blocked canonical TRG assignment.
+Sensitivity,select,True,Fixed value: Internal,No raw private IDs or restricted trigger expansion included.
+Owner,person_or_text,False,Fixed value: Silvan / Codex,Silvan remains recovery anchor; Codex built the package.
+Last Edited,date,False,Blank,No external edited date is claimed.
+Last Reviewed,date,False,Fixed date: 2026-05-17,Matches MMD-006 package creation date.
+Related Canonical Object,relation_or_url,False,MMD-004 and Atlas v1.1 references,Links draft rows back to canon gate and source complement.
+Causal Chain,text,False,MMD-001 -> MMD-006 chain,Makes emergent coherence auditable.
+Emergent Coherence Evidence,text,False,"Evidence count, guard count, hash handle, cluster",Summarizes why each row exists.
+Probabilistic Hypothesis,text,False,Module role hypothesis,States draft usefulness without final truth claim.
+Deterministic Boundary,text,False,MMD-005 boundary plus no-mutation clause,Prevents registry package from becoming silent action.
+Feedback / Backpropagation Target,select,False,Mapped from MMD-005 hash material,Preserves module-specific feedback route.
+Prism / Zenodo Relevance,select,False,"540/544 Backpropagation, others Not relevant",Keeps Prism link focused.
+Understanding State,select,False,Fixed value: grasped,"Drafts are understood enough for registry sync, not final canon."
+Duplicate Group,text,False,Blank,No duplicate row claim.
+GitHub Path,text,False,Local GitHub path anchor,Keeps sync trace local and reviewable.
+Sync Status,select,True,Fixed value: Needs sync,Rows are not live in Notion yet.
+Equilibrium Notes,text,False,Fixed R4/R13/R16 note,"Trace, GitHub sync and boundary are explicit."

@@ -1,0 +1,9 @@
+Object,Notion URL,Action,Status,Boundary
+CAP-MOD-DRAFT-516 - Inspiration,https://www.notion.so/363f7297de7e8100b122c5cd3d6f689b,"Created registry row",Applied,"Internal Candidate row; no canonical TRG assignment; no restricted expansion"
+CAP-MOD-DRAFT-520 - SessionStart,https://www.notion.so/363f7297de7e815ab878f37a60edcf4c,"Created registry row",Applied,"Internal Candidate row; no canonical TRG assignment; no external mutation permission"
+CAP-MOD-DRAFT-521 - Preflight,https://www.notion.so/363f7297de7e811ba280eeebe2a9955f,"Created registry row",Applied,"Internal Candidate row; protection-layer overlap does not open Schattenarchiv depth"
+CAP-MOD-DRAFT-540 - Observable Momentum,https://www.notion.so/363f7297de7e81ca8392ddbbe3f325e1,"Created registry row",Applied,"Internal Candidate row; observable momentum is a control signal, not proof"
+CAP-MOD-DRAFT-544 - Synchronization Node,https://www.notion.so/363f7297de7e815188ded6b5bec87c7e,"Created registry row",Applied,"Internal Candidate row; sync requires explicit scope"
+CAP Module Drafts,view://363f7297-de7e-8114-b017-000c790c3bca,"Created registry database view",Applied,"View only; no schema change"
+CAP Module Sync Needed,view://363f7297-de7e-818f-898b-000ce32ea18d,"Created registry database view",Applied,"View only; no schema change"
+CAP page,https://www.notion.so/363f7297de7e816e840ae8d95cfd7842,"Appended MMD-006 Live Registry Application checkpoint",Applied,"No deletion; no raw private inventory; no restricted trigger expansion"

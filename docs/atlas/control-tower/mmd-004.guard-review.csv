@@ -1,0 +1,141 @@
+Review ID,Bridge Edge ID,Graph ID,Source Node,Target Node,Guard Condition,Trigger References,Sensitivity,Lane,Gate Status,Reason,Boundary
+MMD4-G001,VTG-001,ordner-02-codex-trigger-detail,G02,CODEX170,,,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G002,VTG-002,ordner-02-codex-trigger-detail,G02,CODEX139,,,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G003,VTG-003,ordner-02-codex-trigger-detail,G02,TRIGGER_ARCH,,,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G004,VTG-004,ordner-02-codex-trigger-detail,TRIGGER_ARCH,T516,,516,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G005,VTG-005,ordner-02-codex-trigger-detail,TRIGGER_ARCH,T520,,520,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G006,VTG-006,ordner-02-codex-trigger-detail,TRIGGER_ARCH,T540,,540,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G007,VTG-007,ordner-02-codex-trigger-detail,TRIGGER_ARCH,T544,,544,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G008,VTG-008,ordner-02-codex-trigger-detail,TRIGGER_ARCH,T777,,777,Internal,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G009,VTG-009,ordner-02-codex-trigger-detail,CODEX170,PRINZIPIEN,,,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G010,VTG-010,ordner-02-codex-trigger-detail,PRINZIPIEN,ORA,,,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G011,VTG-011,ordner-02-codex-trigger-detail,PRINZIPIEN,TRIQUETRA,,,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G012,VTG-012,ordner-02-codex-trigger-detail,PRINZIPIEN,EIS,,,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G013,VTG-013,ordner-02-codex-trigger-detail,PRINZIPIEN,FDAS,,,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G014,VTG-014,ordner-02-codex-trigger-detail,G02,TRIGGER_LISTEN,,,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G015,VTG-015,ordner-02-codex-trigger-detail,TRIGGER_LISTEN,T174_210,,174-210,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G016,VTG-016,ordner-02-codex-trigger-detail,TRIGGER_LISTEN,T600,,600,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G017,VTG-017,ordner-02-codex-trigger-detail,TRIGGER_LISTEN,EMERGENT,,,Internal,STRUCTURAL-RELATION,context,Unlabeled visual relation,Guard relation only; not execution permission.
+MMD4-G018,VTG-018,tokenaccess-triggermap-988-992,A,B,Hash,,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G019,VTG-019,tokenaccess-triggermap-988-992,C,D,CID,,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G020,VTG-020,tokenaccess-triggermap-988-992,E,F,Check,,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G021,VTG-021,tokenaccess-triggermap-988-992,G,B,SHA256,,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G022,VTG-022,tokenaccess-triggermap-988-992,H,I,Mirror,,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G023,VTG-023,tokenaccess-triggermap-988-992,B,D,Relation,,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G024,VTG-024,tokenaccess-triggermap-988-992,F,B,Relation,,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G025,VTG-025,tokenaccess-triggermap-988-992,I,F,Relation,,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G026,VTG-026,notion-chatgpt-system-architektur,Python,Sync,Batch Sync<br/>Cron Jobs,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G027,VTG-027,notion-chatgpt-system-architektur,Auto,PM,Triggert Updates,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G028,VTG-028,notion-chatgpt-system-architektur,ChatGPT,Auto,Triggert,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G029,VTG-029,notion-chatgpt-system-architektur,Notion,Auto,sync_enabled<br/>Property,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G030,VTG-030,session-root-living-trigger-organism,T520,T521,session_opened,520;521,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G031,VTG-031,session-root-living-trigger-organism,T521,ROOT,preflight_ok,521,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G032,VTG-032,session-root-living-trigger-organism,ROOT,T01,context_loaded,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G033,VTG-033,session-root-living-trigger-organism,ROOT,T02,system_healthy,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G034,VTG-034,session-root-living-trigger-organism,ROOT,T03,mode_requested,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G035,VTG-035,session-root-living-trigger-organism,ROOT,T04,instance_called,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G036,VTG-036,session-root-living-trigger-organism,ROOT,T05,event_detected,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G037,VTG-037,session-root-living-trigger-organism,ROOT,T06,rule_invoked,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G038,VTG-038,session-root-living-trigger-organism,ROOT,T07,decision_pending,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G039,VTG-039,session-root-living-trigger-organism,ROOT,T08,memory_accessed,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G040,VTG-040,session-root-living-trigger-organism,ROOT,T09,output_required,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G041,VTG-041,session-root-living-trigger-organism,ROOT,T10,symbol_parsed,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G042,VTG-042,session-root-living-trigger-organism,ROOT,T11,session_ongoing,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G043,VTG-043,session-root-living-trigger-organism,ROOT,T12,error_detected,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G044,VTG-044,session-root-living-trigger-organism,ROOT,T13,meta_cycle,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G045,VTG-045,session-root-living-trigger-organism,ROOT,T14,agent_active,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G046,VTG-046,session-root-living-trigger-organism,ROOT,T15,delta_observed,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G047,VTG-047,session-root-living-trigger-organism,T13,T777,audit_kernel,777,Internal,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G048,VTG-048,session-root-living-trigger-organism,T14,T517,autoflow_on,517,Internal,CAUTION-AUTOFLOW,defer,AutoFlow guard needs observer framing,Guard relation only; not execution permission.
+MMD4-G049,VTG-049,session-root-living-trigger-organism,T15,T544,delta_confirmed,544,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G050,VTG-050,full-sync-terra-nova-mcp-sequence,U,UI,/full_sync_terra_nova_lovable_ferrai,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G051,VTG-051,full-sync-terra-nova-mcp-sequence,UI,IN,Benutzereingabe,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G052,VTG-052,full-sync-terra-nova-mcp-sequence,IN,FSM,Validieren (Policy/Scope/Rate),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G053,VTG-053,full-sync-terra-nova-mcp-sequence,FSM,MCP,Toolcall sync.status(),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G054,VTG-054,full-sync-terra-nova-mcp-sequence,MCP,SRV,POST /tools/sync.status (via SSE session),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G055,VTG-055,full-sync-terra-nova-mcp-sequence,SRV,SE,status(workspace/user),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G056,VTG-056,full-sync-terra-nova-mcp-sequence,SE,DB,read sync_state,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G057,VTG-057,full-sync-terra-nova-mcp-sequence,DB,SE,"state (tokens?, cursor?, readOnly?)",,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G058,VTG-058,full-sync-terra-nova-mcp-sequence,SE,SRV,status payload,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G059,VTG-059,full-sync-terra-nova-mcp-sequence,SRV,MCP,tool result,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G060,VTG-060,full-sync-terra-nova-mcp-sequence,MCP,FSM,status data,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G061,VTG-061,full-sync-terra-nova-mcp-sequence,FSM,OUT,Antwort entwerfe (keine Writes),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G062,VTG-062,full-sync-terra-nova-mcp-sequence,OUT,UI,Status anzeige,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G063,VTG-063,full-sync-terra-nova-mcp-sequence,UI,U,"""Ready / Needs OAuth / Cursor...""",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G064,VTG-064,full-sync-terra-nova-mcp-sequence,FSM,MCP,Toolcall auth.start(),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G065,VTG-065,full-sync-terra-nova-mcp-sequence,MCP,SRV,auth.start(),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G066,VTG-066,full-sync-terra-nova-mcp-sequence,SRV,AUTH,Redirect URL erstellen,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G067,VTG-067,full-sync-terra-nova-mcp-sequence,AUTH,SRV,auth_url + state,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G068,VTG-068,full-sync-terra-nova-mcp-sequence,SRV,MCP,auth_url,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G069,VTG-069,full-sync-terra-nova-mcp-sequence,MCP,UI,Link anzeigen,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G070,VTG-070,full-sync-terra-nova-mcp-sequence,UI,U,Öffne OAuth Link,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G071,VTG-071,full-sync-terra-nova-mcp-sequence,U,AUTH,Consent (Notion Workspace),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G072,VTG-072,full-sync-terra-nova-mcp-sequence,AUTH,SRV,"auth.callback(code,state)",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G073,VTG-073,full-sync-terra-nova-mcp-sequence,SRV,SE,exchangeCode(code),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G074,VTG-074,full-sync-terra-nova-mcp-sequence,SE,AUTH,Token exchange,,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G075,VTG-075,full-sync-terra-nova-mcp-sequence,AUTH,SE,access_token + refresh_token,,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G076,VTG-076,full-sync-terra-nova-mcp-sequence,SE,DB,store(encrypted tokens + workspace_id),,Sensitive,SENS-HELD,blocked,Relation held behind SENS-001,Guard relation only; not execution permission.
+MMD4-G077,VTG-077,full-sync-terra-nova-mcp-sequence,SE,AUD,"log(""OAuth connected"")",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G078,VTG-078,full-sync-terra-nova-mcp-sequence,AUD,SE,ok,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G079,VTG-079,full-sync-terra-nova-mcp-sequence,SE,SRV,ok,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G080,VTG-080,full-sync-terra-nova-mcp-sequence,SRV,MCP,auth.ok,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G081,VTG-081,full-sync-terra-nova-mcp-sequence,MCP,FSM,auth.ok,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G082,VTG-082,full-sync-terra-nova-mcp-sequence,FSM,MCP,Toolcall sync.bootstrap(readOnly=true),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G083,VTG-083,full-sync-terra-nova-mcp-sequence,MCP,SRV,sync.bootstrap,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G084,VTG-084,full-sync-terra-nova-mcp-sequence,SRV,SE,bootstrap(readOnly=true),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G085,VTG-085,full-sync-terra-nova-mcp-sequence,SE,N,List DBs / Query changes (initial),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G086,VTG-086,full-sync-terra-nova-mcp-sequence,N,SE,Pages/DB schema + content,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G087,VTG-087,full-sync-terra-nova-mcp-sequence,SE,SE,mapSchema -> Canonical Model + content_hash,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G088,VTG-088,full-sync-terra-nova-mcp-sequence,SE,DB,upsert canonical records + cursor,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G089,VTG-089,full-sync-terra-nova-mcp-sequence,SE,AUD,"savepoint(""bootstrap snapshot"")",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G090,VTG-090,full-sync-terra-nova-mcp-sequence,AUD,SE,savepoint_id,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G091,VTG-091,full-sync-terra-nova-mcp-sequence,SE,SRV,"bootstrap_done(cursor, savepoint_id)",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G092,VTG-092,full-sync-terra-nova-mcp-sequence,SRV,MCP,result,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G093,VTG-093,full-sync-terra-nova-mcp-sequence,MCP,FSM,bootstrap_done,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G094,VTG-094,full-sync-terra-nova-mcp-sequence,FSM,OUT,Summary + next steps,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G095,VTG-095,full-sync-terra-nova-mcp-sequence,FSM,MCP,Toolcall sync.pull(cursor),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G096,VTG-096,full-sync-terra-nova-mcp-sequence,MCP,SRV,sync.pull,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G097,VTG-097,full-sync-terra-nova-mcp-sequence,SRV,SE,pull(cursor),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G098,VTG-098,full-sync-terra-nova-mcp-sequence,SE,N,Search changes since cursor,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G099,VTG-099,full-sync-terra-nova-mcp-sequence,N,SE,changed objects,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G100,VTG-100,full-sync-terra-nova-mcp-sequence,SE,SE,diff -> patches,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G101,VTG-101,full-sync-terra-nova-mcp-sequence,SE,DB,apply patches (idempotent),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G102,VTG-102,full-sync-terra-nova-mcp-sequence,SE,AUD,"log(""pull"", counts, cursor_new)",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G103,VTG-103,full-sync-terra-nova-mcp-sequence,AUD,SE,ok,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G104,VTG-104,full-sync-terra-nova-mcp-sequence,SE,SRV,"pull_done(cursor_new, stats)",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G105,VTG-105,full-sync-terra-nova-mcp-sequence,SRV,MCP,result,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G106,VTG-106,full-sync-terra-nova-mcp-sequence,MCP,FSM,pull_done,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G107,VTG-107,full-sync-terra-nova-mcp-sequence,FSM,OUT,Update anzeige,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G108,VTG-108,full-sync-terra-nova-mcp-sequence,FSM,MCP,Toolcall sync.plan_push(changeset),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G109,VTG-109,full-sync-terra-nova-mcp-sequence,MCP,SRV,sync.plan_push,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G110,VTG-110,full-sync-terra-nova-mcp-sequence,SRV,SE,plan_push(changeset),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G111,VTG-111,full-sync-terra-nova-mcp-sequence,SE,SE,validate scopes + policy + conflict check,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G112,VTG-112,full-sync-terra-nova-mcp-sequence,SE,SRV,plan_id + preview + risk_flags,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G113,VTG-113,full-sync-terra-nova-mcp-sequence,SRV,MCP,plan result,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G114,VTG-114,full-sync-terra-nova-mcp-sequence,MCP,UI,Plan anzeigen (Preview),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G115,VTG-115,full-sync-terra-nova-mcp-sequence,UI,U,"""Bestätige?""",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G116,VTG-116,full-sync-terra-nova-mcp-sequence,U,UI,confirm(plan_id),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G117,VTG-117,full-sync-terra-nova-mcp-sequence,UI,IN,confirm input,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G118,VTG-118,full-sync-terra-nova-mcp-sequence,IN,FSM,ok,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G119,VTG-119,full-sync-terra-nova-mcp-sequence,FSM,MCP,Toolcall sync.commit_push(plan_id),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G120,VTG-120,full-sync-terra-nova-mcp-sequence,MCP,SRV,sync.commit_push,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G121,VTG-121,full-sync-terra-nova-mcp-sequence,SRV,SE,commit_push(plan_id),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G122,VTG-122,full-sync-terra-nova-mcp-sequence,SE,N,Write updates (patches),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G123,VTG-123,full-sync-terra-nova-mcp-sequence,N,SE,write ok / errors,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G124,VTG-124,full-sync-terra-nova-mcp-sequence,SE,AUD,"savepoint(""post-write snapshot"")",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G125,VTG-125,full-sync-terra-nova-mcp-sequence,SE,AUD,"log(""commit"", results)",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G126,VTG-126,full-sync-terra-nova-mcp-sequence,AUD,SE,ok,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G127,VTG-127,full-sync-terra-nova-mcp-sequence,SE,SRV,commit_done,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G128,VTG-128,full-sync-terra-nova-mcp-sequence,SRV,MCP,commit_done,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G129,VTG-129,full-sync-terra-nova-mcp-sequence,MCP,FSM,commit_done,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G130,VTG-130,full-sync-terra-nova-mcp-sequence,FSM,OUT,Ergebnis + Konflikte (falls),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G131,VTG-131,full-sync-terra-nova-mcp-sequence,FSM,MCP,"Toolcall sync.reconcile(strategy=""deterministic"")",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G132,VTG-132,full-sync-terra-nova-mcp-sequence,MCP,SRV,sync.reconcile,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G133,VTG-133,full-sync-terra-nova-mcp-sequence,SRV,SE,reconcile(strategy),,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G134,VTG-134,full-sync-terra-nova-mcp-sequence,SE,SE,resolve conflicts + record decisions,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G135,VTG-135,full-sync-terra-nova-mcp-sequence,SE,DB,persist resolutions,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G136,VTG-136,full-sync-terra-nova-mcp-sequence,SE,AUD,"log(""reconcile"", decisions)",,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G137,VTG-137,full-sync-terra-nova-mcp-sequence,SE,SRV,reconcile_done,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G138,VTG-138,full-sync-terra-nova-mcp-sequence,SRV,MCP,result,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G139,VTG-139,full-sync-terra-nova-mcp-sequence,MCP,FSM,reconcile_done,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.
+MMD4-G140,VTG-140,full-sync-terra-nova-mcp-sequence,FSM,OUT,Konfliktbericht,,Internal,GUARD-CANDIDATE,candidate,Guard can support route understanding,Guard relation only; not execution permission.

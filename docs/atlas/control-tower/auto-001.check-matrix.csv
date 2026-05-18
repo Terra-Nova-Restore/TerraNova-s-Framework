@@ -1,0 +1,26 @@
+Check ID,Layer,Command or Source,Expected Result,Mutation,Credit Use,Status
+AUTO-001-A,Local required files,"python scripts/cap_control_checks.py","Required CAP 0.3 files exist",None,0,Implemented
+AUTO-001-B,CSV row counts,"python scripts/cap_control_checks.py","cap-0.3=7; dup-002=8; ninf-001=5; prism checklist=7; prism gates=10",None,0,Implemented
+AUTO-001-C,Causal logs,"python scripts/cap_control_checks.py","All causal-log JSON files parse; legacy files without log_id/event_id are reported as warnings",None,0,Implemented
+AUTO-001-D,Zenodo reference,"python scripts/cap_control_checks.py","docs/references/zenodo.md reflects 2026-05-17 metadata refresh",None,0,Implemented
+AUTO-001-E,Zenodo live delta,"python scripts/cap_control_checks.py","prism-002.zenodo-live-delta-2026-05-17.json matches expected DOI/version/file",None,0,Implemented
+AUTO-001-F,Public Zenodo API,"python scripts/cap_control_checks.py --live-zenodo","Live API matches record 20073579, RC01-v12, 2026-05-17 and unchanged file checksum",None,0,Implemented
+AUTO-001-G,Workflow dry run,"GitHub Actions: zenodo-rc01-v13-preflight.yml","Preflight validates without Zenodo writes",None,0,Pending
+AUTO-001-H,Notion dashboard check,"Manual/Codex Notion fetch/search","CAP 0.3 Operations and Duplicate Review remain visible",Read-only,0,Pending
+AUTO-001-I,Trigger command surface,"python scripts/cap_control_checks.py","TRIGGER-001 command surface, crosswalk, blocked actions and test cases exist with expected row counts",None,0,Implemented
+AUTO-001-J,Mermaid universe layer,"python scripts/cap_control_checks.py","MMD-001 readpass files exist; diagram inventory has 14 rows; relation map has 14 rows",None,0,Implemented
+AUTO-001-K,Mermaid graph extraction,"python scripts/cap_control_checks.py","MMD-002 graphs=11; nodes=277; edges=363; guards=363; gaps=4",None,0,Implemented
+AUTO-001-L,Visual trigger bridge,"python scripts/cap_control_checks.py","MMD-003 candidates=53; guard bridge=140; sensitivity review=20",None,0,Implemented
+AUTO-001-M,Candidate canon gate,"python scripts/cap_control_checks.py","MMD-004 candidate review=53; guard review=140; module candidates=14; lane summary=8",None,0,Implemented
+AUTO-001-N,CAP module drafts,"python scripts/cap_control_checks.py","MMD-005 module drafts=5; evidence rows=33; relation rows=21; hash rows=5",None,0,Implemented
+AUTO-001-O,CAP module registry package,"python scripts/cap_control_checks.py","MMD-006 registry rows=5; field map=27; views=2; mutation package=4",None,0,Implemented
+AUTO-001-P,CAP module registry apply trace,"python scripts/cap_control_checks.py","MMD-006 registry-updates rows=8; mutation causal log exists and parses",None,0,Implemented
+AUTO-001-Q,CAP module source review,"python scripts/cap_control_checks.py","MMD-007 source index=5; canon levels=5; source review=5; decision queue=5",None,0,Implemented
+AUTO-001-R,CAP 0.4 canon admission,"python scripts/cap_control_checks.py","CAP 0.4 IPERKA and rulebook exist; source tiers=8; elevation queue=9",None,0,Implemented
+AUTO-001-S,Registry canon field package,"python scripts/cap_control_checks.py","REGISTRY-002 field package=9; module updates=5; mutation package=4",None,0,Implemented
+AUTO-001-T,Registry canon field apply trace,"python scripts/cap_control_checks.py","REGISTRY-002 registry-updates rows=8; mutation causal log exists and parses",None,0,Implemented
+AUTO-001-U,Canon field sync closure,"python scripts/cap_control_checks.py","SYNC-002 registry-updates rows=5; mutation causal log exists and parses",None,0,Implemented
+AUTO-001-V,SENS-002 protected canon gate,"python scripts/cap_control_checks.py","SENS-002 protected lane review=7; elevation gate=5; mutation package=3",None,0,Implemented
+AUTO-001-W,SOURCE-521 primary source pass,"python scripts/cap_control_checks.py","SOURCE-521 source ledger=9; claim review=9; elevation decision=3; mutation package=4",None,0,Implemented
+AUTO-001-X,SOURCE-521 live apply trace,"python scripts/cap_control_checks.py","SOURCE-521 registry-updates rows=4; mutation causal log exists and parses",None,0,Implemented
+AUTO-001-Y,SYNC-003 GitHub trace closure,"python scripts/cap_control_checks.py","SYNC-003 manifest=8; trace closure causal log exists and parses",None,0,Implemented

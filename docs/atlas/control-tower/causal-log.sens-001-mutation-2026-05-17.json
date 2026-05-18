@@ -1,0 +1,28 @@
+{
+  "event_id": "sens-001-mutation-2026-05-17",
+  "date": "2026-05-17",
+  "mode": "STUDIO",
+  "trigger_band": "301-400",
+  "freedom_mode": "/fff bounded by explicit SENS-001 instruction",
+  "source_trace": [
+    "User instruction: angenommen SENS-001",
+    "TerraNova skill read before action",
+    "SENS-001 local batch trace",
+    "sens-001.boundary-map.csv"
+  ],
+  "probabilistic_hypothesis": "Registering a sensitivity boundary queue prevents DUP-002 from accidentally treating protected classes as ordinary naming cleanup.",
+  "deterministic_boundary": "Metadata-only registry update; no content rewrite, no schema change, no raw snapshot export, no page deletion.",
+  "selected_action": "Created a Notion registry row for the SENS-001 sensitivity boundary layer and updated three protected registry rows.",
+  "feedback_target": "CAP Registry",
+  "backpropagation_target": "CAP 0.2 batch queue",
+  "result": {
+    "created_rows": 1,
+    "created_row_id": "363f7297-de7e-817f-9641-efa61b2eb502",
+    "updated_rows": 3,
+    "cap_page_refreshed": true,
+    "current_live_registry_rows": 24,
+    "protected_sensitivity_classes": 5,
+    "schema_changes": 0,
+    "raw_content_imports": 0
+  }
+}

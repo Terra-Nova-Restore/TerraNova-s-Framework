@@ -1,0 +1,7 @@
+Boundary ID,Class,Sensitivity,Allowed Now,Blocked Until,Deletion Policy,Export Policy,Feedback Target,Notes
+SENS-001-A,Restricted wiki material,Restricted,Existence-only registry marker,Explicit restricted-source review,No deletion,No raw child titles or content,Registry,The wiki can be indexed only as a protected source handle.
+SENS-001-B,Raw Home-Ansichten inventory,Sensitive,Aggregate counts and queue signals,Current Notion verification and redaction review,No deletion,No raw private page list or URL/ID dump,Registry,The snapshot is not current truth and stays local.
+SENS-001-C,Patent/IP dossier duplicates,Sensitive,Boundary classification only,IP and redaction review,No deletion,No public detail expansion,Registry,Keep protected before DUP-002 rename/merge work.
+SENS-001-D,Trigger/session/deep-system exports,Internal/Restricted,Internal canon routing,Trigger/session canon review,No deletion,No public reuse by default,Trigger Map,Depth-sensitive material requires explicit routing.
+SENS-001-E,Chat/person/export remnants,Private,Private classification only,Source check and owner decision,No deletion,No public summary by default,Logbook,Treat as private import/remnant material.
+

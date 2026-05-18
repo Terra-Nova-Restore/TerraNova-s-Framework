@@ -1,0 +1,31 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-MMD-006-MUTATION",
+  "created_at": "2026-05-17T19:42:00+00:00",
+  "operator": "Codex",
+  "mode": "STUDIO",
+  "activation": "manual",
+  "source_trace": [
+    "docs/atlas/control-tower/mmd-006.registry-package.csv",
+    "docs/atlas/control-tower/mmd-006.notion-mutation-package.csv",
+    "docs/atlas/control-tower/mmd-006.apply-gate.md",
+    "docs/atlas/control-tower/mmd-006.registry-updates.csv"
+  ],
+  "observation": "Silvan authorized the exact MMD-006 apply phrase after the registry package was prepared.",
+  "trigger_band": "401+",
+  "trigger_ids": [
+    "516",
+    "520",
+    "521",
+    "540",
+    "544"
+  ],
+  "probabilistic_hypothesis": "The five CAP module draft rows improve live registry steering without converting draft module material into trigger canon.",
+  "probability_note": "High confidence for live registry visibility; canonical trigger status remains explicitly unassigned.",
+  "deterministic_boundary": "Apply only the MMD-006 package; no deletion, no schema change, no raw private inventory, no canonical TRG assignment, no expansion of 517, 777 or 988-992.",
+  "selected_action": "Created five CAP module draft registry rows, two registry views and one CAP page checkpoint in Notion.",
+  "feedback_target": "registry",
+  "backpropagation_result": "Live CAP registry now exposes the five MMD-005 draft modules as Candidate GitHub Artifact rows with Needs sync status.",
+  "verification_state": "notion_checked",
+  "external_mutation": true,
+  "mutation_authorization": "GO Notion MMD-006 anwenden"
+}

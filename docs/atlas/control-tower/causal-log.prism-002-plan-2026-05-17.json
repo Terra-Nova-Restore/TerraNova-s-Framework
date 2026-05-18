@@ -1,0 +1,45 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-PRISM002-PLAN",
+  "event_id": "prism-002-plan-2026-05-17",
+  "created_at": "2026-05-17T16:50:00+02:00",
+  "date": "2026-05-17",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "TerraNova skill read before action",
+    "docs/atlas/control-tower/prism-001.backpropagation-queue.csv",
+    "docs/atlas/control-tower/prism-001.findings.md",
+    "docs/references/zenodo.md",
+    "releases/zenodo/rc01-v12-2026-05-07/manifest.json",
+    "releases/zenodo/rc01-v13-preflight-2026-05-13/README.md",
+    "releases/zenodo/rc01-v13-preflight-2026-05-13/OK_CHECKLIST.md",
+    "releases/zenodo/rc01-v13-preflight-2026-05-13/manifest.json",
+    "releases/zenodo/rc01-v12-metadata-patch-2026-05-13/zenodo_metadata_patch.rc01-v12.review.json"
+  ],
+  "observation": "RC01-v12 is the current citable snapshot. RC01-v13 preflight already exists but is blocked because no distinct public-safe RC01-v13 PDF exists; main (45).pdf is byte-identical to RC01-v12.",
+  "trigger_band": "301-400",
+  "trigger_ids": [
+    "/fff",
+    "PRISM-002"
+  ],
+  "freedom_mode": "/fff enabled for repo-local Prism backpropagation planning",
+  "probabilistic_hypothesis": "The best next move is to turn PRISM-001 into release-readiness gates and companion-material routing, not to attempt a Zenodo draft.",
+  "probability_note": "High confidence because existing preflight artifacts explicitly block RC01-v13 upload until a distinct artifact exists.",
+  "deterministic_boundary": "No Zenodo mutation, no DOI reservation, no upload, no publish, no raw private inventory export and no sensitive IP expansion.",
+  "selected_action": "Create PRISM-002 next-release checklist, release-readiness gate and companion material map.",
+  "feedback_target": "prism_zenodo",
+  "backpropagation_target": "CAP 0.3",
+  "backpropagation_result": "PRISM-002 connects the live CAP control layer to the RC01-v13 preflight lane while keeping publication blocked until artifact and public-boundary gates pass.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": "",
+  "result": {
+    "prism_001_items_translated": 7,
+    "release_gates_created": 10,
+    "zenodo_mutations": 0,
+    "draft_creation_authorized": false,
+    "publish_authorized": false,
+    "current_publication_blocker": "missing distinct public-safe RC01-v13 PDF artifact"
+  }
+}

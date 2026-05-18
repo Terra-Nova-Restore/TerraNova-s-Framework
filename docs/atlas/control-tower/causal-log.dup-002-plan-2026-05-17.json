@@ -1,0 +1,42 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-DUP002-PLAN",
+  "event_id": "dup-002-plan-2026-05-17",
+  "created_at": "2026-05-17T16:35:00+02:00",
+  "date": "2026-05-17",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "TerraNova skill read before action",
+    "docs/atlas/control-tower/dup-001.review-queue.csv",
+    "docs/atlas/control-tower/sens-001.boundary-map.csv",
+    "docs/atlas/control-tower/home-ansichten.snapshot.summary.json",
+    "docs/atlas/control-tower/dup-001.findings.md",
+    "NINF-001 Duplicate Review Notion view created"
+  ],
+  "observation": "DUP-001 found 46 duplicate-title groups and 226 duplicate-title occurrences, but zero duplicate ID groups. SENS-001 blocks sensitive, private and restricted lanes from automated cleanup.",
+  "trigger_band": "301-400",
+  "trigger_ids": [
+    "/fff",
+    "DUP-002"
+  ],
+  "freedom_mode": "/fff enabled for repo-local duplicate verification planning",
+  "probabilistic_hypothesis": "Low-risk duplicate-title queues can be prepared for verification now, but destructive or sensitive cleanup would be premature.",
+  "probability_note": "High confidence for queue ordering because the largest pressure is untitled placeholders and SENS-001 already defines protected lanes.",
+  "deterministic_boundary": "No Notion page mutation, no deletion, no raw URL/ID export and no protected-lane cleanup during DUP-002 planning.",
+  "selected_action": "Create DUP-002 safe verification manifest and rename rules.",
+  "feedback_target": "registry",
+  "backpropagation_target": "CAP 0.3",
+  "backpropagation_result": "DUP-002 is ready to use the live Duplicate Review view without mutating actual Notion pages.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": "",
+  "result": {
+    "lanes_total": 8,
+    "lanes_proceed": 5,
+    "lanes_gated_or_blocked": 3,
+    "deletions": 0,
+    "raw_private_inventory_exports": 0,
+    "notion_page_mutations": 0
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "db-wiki-001-mutation-2026-05-17",
+  "timestamp": "2026-05-17T10:54:02+02:00",
+  "actor": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "trigger_or_cluster": "GO; DB-WIKI-001 Notion mutation package",
+  "source_trace": [
+    "docs/atlas/control-tower/db-wiki-001.findings.md",
+    "CAP registry: https://www.notion.so/f9aafd4eaf9046e0beb7552b1018af83",
+    "Registry data source: collection://f8e7df9f-e1ed-43f0-888b-39d362f2cef2"
+  ],
+  "probabilistic_hypothesis": "Adding the missing Library Sync data source row and marking verified DB/wiki targets as reviewed reduces control drift without deep content import.",
+  "deterministic_boundary": "Only registry metadata was updated; no database schemas changed, no restricted child pages imported, no batch rows executed.",
+  "selected_action": "Added the Library Sync data source row and updated nine DB/wiki/data-source registry rows to Reviewed with DB-WIKI-001 boundary notes.",
+  "feedback_target": "Registry",
+  "backpropagation_target": "GitHub Atlas",
+  "observed_result": {
+    "new_registry_row": {
+      "name": "Library Sync - 100 Batches data source",
+      "page_id": "363f7297-de7e-81e4-9d8f-ef4df1e09257",
+      "url": "https://www.notion.so/363f7297de7e81e49d8fef4df1e09257",
+      "object_id": "collection://31af7297-de7e-8025-9f67-000bbdefc5db"
+    },
+    "updated_registry_rows": 9,
+    "notion_mutations_performed": 10,
+    "new_live_registry_row_count": 22
+  },
+  "equilibrium_check": {
+    "status": "pass",
+    "trace": "Findings log was written before mutation package was applied.",
+    "boundary": "Metadata-only registry update.",
+    "mode": "STUDIO",
+    "github_sync": "Local source map, seed append and exact registry update delta recorded."
+  },
+  "next_review": "Start CANON-001 or run a focused query over Library Sync batch rows after explicit GO."
+}

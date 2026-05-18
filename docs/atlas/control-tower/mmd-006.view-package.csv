@@ -1,0 +1,3 @@
+View Name,Target,View Type,Filter,Sort,Requires GO,Boundary
+CAP Module Drafts,CAP registry database,Table,Object Type = GitHub Artifact AND Canon Status = Candidate AND GitHub Path contains mmd-005.cap-module-drafts,Name ascending,Yes,View only; no schema change and no row mutation beyond MMD-006 package.
+CAP Module Sync Needed,CAP registry database,Table,Sync Status = Needs sync AND GitHub Path contains mmd-005.cap-module-drafts,"Feedback / Backpropagation Target ascending, Name ascending",Yes,View only; supports manual follow-up after package application.

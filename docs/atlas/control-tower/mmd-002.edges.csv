@@ -1,0 +1,364 @@
+Graph ID,Edge ID,Source Node,Target Node,Guard Condition,Operator,Source Line,Edge Role
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E001,G02,CODEX170,,-->,4,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E002,G02,CODEX139,,-->,5,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E003,G02,TRIGGER_ARCH,,-->,6,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E004,TRIGGER_ARCH,T516,,-->,8,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E005,TRIGGER_ARCH,T520,,-->,9,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E006,TRIGGER_ARCH,T540,,-->,10,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E007,TRIGGER_ARCH,T544,,-->,11,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E008,TRIGGER_ARCH,T777,,-->,12,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E009,CODEX170,PRINZIPIEN,,-->,14,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E010,PRINZIPIEN,ORA,,-->,15,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E011,PRINZIPIEN,TRIQUETRA,,-->,16,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E012,PRINZIPIEN,EIS,,-->,17,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E013,PRINZIPIEN,FDAS,,-->,18,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E014,G02,TRIGGER_LISTEN,,-->,20,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E015,TRIGGER_LISTEN,T174_210,,-->,21,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E016,TRIGGER_LISTEN,T600,,-->,22,unlabeled_transition
+ordner-02-codex-trigger-detail,ordner-02-codex-trigger-detail-E017,TRIGGER_LISTEN,EMERGENT,,-->,23,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E001,G05,PROMPTS,,-->,4,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E002,G05,METAROTIK,,-->,5,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E003,G05,GENESIS,,-->,6,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E004,G05,FRAMEWORK,,-->,7,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E005,PROMPTS,P_EXPORT,,-->,9,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E006,PROMPTS,P_LAUNCH,,-->,10,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E007,PROMPTS,P_LINKEDIN,,-->,11,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E008,PROMPTS,P_CONTENT,,-->,12,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E009,P_CONTENT,P1,,-->,14,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E010,P_CONTENT,P2,,-->,15,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E011,P_CONTENT,P3,,-->,16,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E012,P_CONTENT,P4,,-->,17,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E013,P_CONTENT,P5,,-->,18,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E014,P_CONTENT,P_MORE,,-->,19,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E015,METAROTIK,M_SALES,,-->,21,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E016,METAROTIK,M_PLAN,,-->,22,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E017,METAROTIK,M_INTERN,,-->,23,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E018,METAROTIK,M_CODEX,,-->,24,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E019,GENESIS,GEN_CONCEPT,,-->,26,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E020,GENESIS,GEN_PRICE,,-->,27,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E021,FRAMEWORK,FW_CONCEPT,,-->,29,unlabeled_transition
+ordner-05-produkte-services-detail,ordner-05-produkte-services-detail-E022,FRAMEWORK,FW_CONTENT,,-->,30,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E001,G06,DELTA,,-->,4,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E002,G06,RAS,,-->,5,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E003,G06,VORTEX,,-->,6,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E004,G06,API,,-->,7,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E005,G06,PATENTE,,-->,8,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E006,DELTA,DELTA_GUIDE,,-->,10,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E007,DELTA,DELTA_SCRIPT,,-->,11,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E008,DELTA,DELTA_PROPS,,-->,12,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E009,DELTA,DELTA_PROTOCOL,,-->,13,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E010,DELTA_GUIDE,SECURITY,,-->,15,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E011,DELTA_GUIDE,TESTING,,-->,16,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E012,DELTA_GUIDE,CONFLICT,,-->,17,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E013,RAS,RAS_SPEC,,-->,19,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E014,RAS,RAS_MEMORY,,-->,20,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E015,VORTEX,VORTEX_OVERVIEW,,-->,22,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E016,VORTEX,VORTEX_CANVAS,,-->,23,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E017,API,API_SETUP,,-->,25,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E018,API,API_SYNC,,-->,26,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E019,API,API_GUIDE,,-->,27,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E020,PATENTE,P1,,-->,29,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E021,PATENTE,P2,,-->,30,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E022,PATENTE,P3,,-->,31,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E023,PATENTE,P4,,-->,32,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E024,PATENTE,P5,,-->,33,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E025,PATENTE,P6,,-->,34,unlabeled_transition
+ordner-06-technische-dokumentation-detail,ordner-06-technische-dokumentation-detail-E026,PATENTE,P7,,-->,35,unlabeled_transition
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E001,A,B,Hash,-->,2,explicit_guard
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E002,C,D,CID,-->,3,explicit_guard
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E003,E,F,Check,-->,4,explicit_guard
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E004,G,B,SHA256,-->,5,explicit_guard
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E005,H,I,Mirror,-->,6,explicit_guard
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E006,B,D,Relation,-->,8,explicit_guard
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E007,F,B,Relation,-->,9,explicit_guard
+tokenaccess-triggermap-988-992,tokenaccess-triggermap-988-992-E008,I,F,Relation,-->,10,explicit_guard
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E001,ROOT,ECOSYSTEM,,-->,5,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E002,ROOT,GRUNDSTRUKTUR,,-->,6,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E003,ROOT,CONFIG,,-->,7,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E004,ROOT,PHYSICAL,,-->,8,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E005,ROOT,METAROTIK,,-->,9,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E006,ROOT,LOOSE,,-->,10,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E007,ECOSYSTEM,ECO_TOKEN,,-->,13,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E008,ECOSYSTEM,ECO_PRODUKTE,,-->,14,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E009,ECOSYSTEM,ECO_SYSTEM,,-->,15,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E010,ECOSYSTEM,ECO_MONEY,,-->,16,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E011,ECOSYSTEM,ECO_DOKU,,-->,17,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E012,ECOSYSTEM,ECO_API,,-->,18,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E013,ECOSYSTEM,ECO_HUB,,-->,19,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E014,ECO_TOKEN,TOKEN_ACCESS,,-->,22,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E015,ECO_TOKEN,TOKEN_DAO,,-->,23,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E016,ECO_TOKEN,TOKEN_LIZENZ,,-->,24,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E017,ECO_PRODUKTE,PROD_PROMPTS,,-->,27,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E018,ECO_PRODUKTE,PROD_META,,-->,28,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E019,ECO_PRODUKTE,PROD_GENESIS,,-->,29,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E020,ECO_PRODUKTE,PROD_FRAMEWORK,,-->,30,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E021,PROD_PROMPTS,PROMPTS_EXPORT,,-->,32,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E022,PROD_PROMPTS,PROMPTS_LAUNCH,,-->,33,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E023,PROD_PROMPTS,PROMPTS_LINKEDIN,,-->,34,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E024,PROD_META,META_SALES,,-->,36,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E025,PROD_META,META_PLAN,,-->,37,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E026,ECO_SYSTEM,SYS_TRIGGER,,-->,40,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E027,ECO_SYSTEM,SYS_RAS,,-->,41,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E028,ECO_SYSTEM,SYS_VORTEX,,-->,42,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E029,ECO_SYSTEM,SYS_CODEX,,-->,43,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E030,SYS_TRIGGER,TRIG_MULTI,,-->,45,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E031,SYS_TRIGGER,TRIG_1200,,-->,46,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E032,ECO_MONEY,MONEY_GUMROAD,,-->,49,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E033,ECO_MONEY,MONEY_ZORA,,-->,50,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E034,ECO_MONEY,MONEY_OPENSEA,,-->,51,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E035,ECO_MONEY,MONEY_ASSETS,,-->,52,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E036,ECO_DOKU,DOKU_IPERKA,,-->,55,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E037,ECO_DOKU,DOKU_WHITE,,-->,56,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E038,ECO_DOKU,DOKU_PITCH,,-->,57,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E039,ECO_DOKU,DOKU_REFLEXION,,-->,58,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E040,ECO_DOKU,DOKU_AUDIT,,-->,59,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E041,ECO_DOKU,DOKU_QUICK,,-->,60,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E042,DOKU_IPERKA,IPERKA_WORKSPACE,,-->,62,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E043,DOKU_IPERKA,IPERKA_GUMROAD,,-->,63,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E044,DOKU_IPERKA,IPERKA_SPLIT,,-->,64,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E045,DOKU_IPERKA,IPERKA_QUALITY,,-->,65,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E046,DOKU_IPERKA,IPERKA_RISK,,-->,66,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E047,ECO_API,API_SYNC,,-->,69,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E048,ECO_API,API_DELTA,,-->,70,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E049,ECO_API,API_IPFS,,-->,71,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E050,ECO_API,API_PROPERTIES,,-->,72,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E051,GRUNDSTRUKTUR,G01,,-->,75,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E052,GRUNDSTRUKTUR,G02,,-->,76,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E053,GRUNDSTRUKTUR,G03,,-->,77,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E054,GRUNDSTRUKTUR,G04,,-->,78,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E055,GRUNDSTRUKTUR,G05,,-->,79,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E056,GRUNDSTRUKTUR,G06,,-->,80,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E057,GRUNDSTRUKTUR,G07,,-->,81,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E058,GRUNDSTRUKTUR,G08,,-->,82,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E059,GRUNDSTRUKTUR,G09,,-->,83,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E060,GRUNDSTRUKTUR,G10,,-->,84,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E061,G03,PATENTE,,-->,86,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E062,PATENTE,PAT_1,,-->,87,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E063,PATENTE,PAT_2,,-->,88,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E064,PATENTE,PAT_3,,-->,89,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E065,PATENTE,PAT_7,,-->,90,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E066,G02,CODEX_DOCS,,-->,92,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E067,G02,TRIGGER_DOCS,,-->,93,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E068,G08,SESSIONS,,-->,95,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E069,G08,CHAT_DB,,-->,96,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E070,CONFIG,CONF_HANDBUCH,,-->,99,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E071,CONFIG,CONF_DASHBOARD,,-->,100,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E072,CONFIG,CONF_REFLEXION,,-->,101,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E073,CONFIG,CONF_MEMORY,,-->,102,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E074,CONF_DASHBOARD,DASH_METRICS,,-->,104,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E075,CONF_DASHBOARD,DASH_COMPONENTS,,-->,105,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E076,CONF_DASHBOARD,DASH_HEALTH,,-->,106,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E077,PHYSICAL,PHYS_WEB,,-->,109,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E078,PHYSICAL,PHYS_PORTFOLIO,,-->,110,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E079,PHYSICAL,PHYS_PATENTE,,-->,111,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E080,PHYSICAL,PHYS_MARKETING,,-->,112,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E081,METAROTIK,META_WERKBUCH,,-->,115,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E082,METAROTIK,META_LEVEL,,-->,116,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E083,METAROTIK,META_AUDIO,,-->,117,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E084,METAROTIK,META_PONY,,-->,118,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E085,LOOSE,LOOSE_VORTEX,,-->,121,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E086,LOOSE,LOOSE_ANALYSE,,-->,122,unlabeled_transition
+terra-nova-master-overview-complete-workspace,terra-nova-master-overview-complete-workspace-E087,LOOSE,LOOSE_DOCS,,-->,123,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E001,ROOT,ARCHIVE,,-->,4,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E002,ROOT,CONFIG,,-->,5,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E003,ROOT,PHYSICAL,,-->,6,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E004,ARCHIVE,G01,,-->,8,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E005,ARCHIVE,G02,,-->,9,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E006,ARCHIVE,G03,,-->,10,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E007,ARCHIVE,G04,,-->,11,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E008,ARCHIVE,G05,,-->,12,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E009,ARCHIVE,G06,,-->,13,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E010,ARCHIVE,G07,,-->,14,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E011,ARCHIVE,G08,,-->,15,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E012,ARCHIVE,G09,,-->,16,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E013,ARCHIVE,G10,,-->,17,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E014,G01,META_INDEX,,-->,19,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E015,G01,ABLAGE,,-->,20,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E016,G01,CONDUCTOR,,-->,21,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E017,G02,CODEX,,-->,23,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E018,G02,TRIGGER_ARCH,,-->,24,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E019,G02,TRIGGER_LISTEN,,-->,25,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E020,G03,P1,,-->,27,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E021,G03,P2,,-->,28,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E022,G03,P3,,-->,29,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E023,G03,P4,,-->,30,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E024,G03,P5,,-->,31,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E025,G03,P6,,-->,32,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E026,G03,P7,,-->,33,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E027,G04,TOKEN_FERR,,-->,35,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E028,G04,DAO_STRUCTURE,,-->,36,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E029,G04,TOKENOMICS,,-->,37,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E030,G05,PROMPTS,,-->,39,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E031,G05,METAROTIK,,-->,40,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E032,G05,GENESIS,,-->,41,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E033,G05,FRAMEWORK,,-->,42,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E034,G06,RAS,,-->,44,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E035,G06,VORTEX,,-->,45,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E036,G06,DELTA_SYNC,,-->,46,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E037,G06,API_DOCS,,-->,47,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E038,G07,REFLEXION,,-->,49,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E039,G07,METAROTIK_INTERN,,-->,50,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E040,G08,SESSIONS,,-->,52,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E041,G08,IPERKA,,-->,53,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E042,G08,MEETING_NOTES,,-->,54,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E043,CONFIG,SYSTEM_HANDBUCH,,-->,56,unlabeled_transition
+digital-ecosystem-ziel-struktur-v2-0,digital-ecosystem-ziel-struktur-v2-0-E044,CONFIG,AGENT_INSTRUCTIONS,,-->,57,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E001,User,Notion,Erstellt & Bearbeitet,-->,28,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E002,User,ChatGPT,Fragt & Instruiert,-->,29,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E003,Notion,Codex,,-->,32,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E004,Notion,Manifest,,-->,33,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E005,Notion,PM,,-->,34,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E006,Notion,Trigger,,-->,35,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E007,Notion,Reflexion,,-->,36,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E008,Python,Sync,Batch Sync<br/>Cron Jobs,-->,41,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E009,Sync,Analysis,,-->,44,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E010,Analysis,Auto,,-->,45,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E011,Auto,Audit,,-->,46,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E012,Codex,Analysis,Liest,-.->,49,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E013,Manifest,Analysis,Liest,-.->,50,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E014,PM,Analysis,Liest & Schreibt,-.->,51,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E015,Trigger,Auto,Evaluiert,-.->,52,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E016,Analysis,Insights,,-->,55,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E017,Analysis,Verdichtung,,-->,56,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E018,PM,KPI,,-->,57,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E019,Codex,Pitch,,-->,58,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E020,Manifest,Pitch,,-->,59,unlabeled_transition
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E021,Insights,Reflexion,Schreibt zurück,-->,62,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E022,Auto,PM,Triggert Updates,-->,63,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E023,Audit,Notion,Dokumentiert,-->,64,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E024,ChatGPT,Insights,Generiert,-->,67,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E025,ChatGPT,Analysis,Analysiert,-->,68,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E026,ChatGPT,Auto,Triggert,-->,69,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E027,Notion,Auto,sync_enabled<br/>Property,-.->,72,explicit_guard
+notion-chatgpt-system-architektur,notion-chatgpt-system-architektur-E028,Audit,Notion,last_modified_by<br/>timestamps,-.->,73,explicit_guard
+meta-conductor-agent-routing,meta-conductor-agent-routing-E001,A,B,,-->,3,unlabeled_transition
+meta-conductor-agent-routing,meta-conductor-agent-routing-E002,B,GPT,Strategie,-->,4,explicit_guard
+meta-conductor-agent-routing,meta-conductor-agent-routing-E003,B,NOTION,Struktur,-->,5,explicit_guard
+meta-conductor-agent-routing,meta-conductor-agent-routing-E004,GPT,C,,-->,6,unlabeled_transition
+meta-conductor-agent-routing,meta-conductor-agent-routing-E005,NOTION,D,,-->,7,unlabeled_transition
+meta-conductor-agent-routing,meta-conductor-agent-routing-E006,C,E,,-->,8,unlabeled_transition
+meta-conductor-agent-routing,meta-conductor-agent-routing-E007,D,E,,-->,9,unlabeled_transition
+meta-conductor-agent-routing,meta-conductor-agent-routing-E008,E,F,,-->,10,unlabeled_transition
+session-root-living-trigger-organism,session-root-living-trigger-organism-E001,T520,T521,session_opened,-->,3,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E002,T521,ROOT,preflight_ok,-->,5,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E003,ROOT,T01,context_loaded,-->,9,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E004,ROOT,T02,system_healthy,-->,10,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E005,ROOT,T03,mode_requested,-->,11,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E006,ROOT,T04,instance_called,-->,12,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E007,ROOT,T05,event_detected,-->,13,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E008,ROOT,T06,rule_invoked,-->,14,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E009,ROOT,T07,decision_pending,-->,15,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E010,ROOT,T08,memory_accessed,-->,16,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E011,ROOT,T09,output_required,-->,17,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E012,ROOT,T10,symbol_parsed,-->,18,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E013,ROOT,T11,session_ongoing,-->,19,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E014,ROOT,T12,error_detected,-->,20,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E015,ROOT,T13,meta_cycle,-->,21,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E016,ROOT,T14,agent_active,-->,22,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E017,ROOT,T15,delta_observed,-->,23,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E018,T13,T777,audit_kernel,-->,41,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E019,T14,T517,autoflow_on,-->,42,explicit_guard
+session-root-living-trigger-organism,session-root-living-trigger-organism-E020,T15,T544,delta_confirmed,-->,43,explicit_guard
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E001,U,UI,/full_sync_terra_nova_lovable_ferrai,->>,16,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E002,UI,IN,Benutzereingabe,->>,17,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E003,IN,FSM,Validieren (Policy/Scope/Rate),->>,18,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E004,FSM,MCP,Toolcall sync.status(),->>,19,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E005,MCP,SRV,POST /tools/sync.status (via SSE session),->>,21,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E006,SRV,SE,status(workspace/user),->>,22,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E007,SE,DB,read sync_state,->>,23,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E008,DB,SE,"state (tokens?, cursor?, readOnly?)",-->>,24,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E009,SE,SRV,status payload,-->>,25,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E010,SRV,MCP,tool result,-->>,26,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E011,MCP,FSM,status data,->>,27,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E012,FSM,OUT,Antwort entwerfe (keine Writes),->>,28,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E013,OUT,UI,Status anzeige,-->>,29,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E014,UI,U,"""Ready / Needs OAuth / Cursor...""",-->>,30,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E015,FSM,MCP,Toolcall auth.start(),->>,33,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E016,MCP,SRV,auth.start(),->>,34,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E017,SRV,AUTH,Redirect URL erstellen,->>,35,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E018,AUTH,SRV,auth_url + state,-->>,36,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E019,SRV,MCP,auth_url,-->>,37,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E020,MCP,UI,Link anzeigen,->>,38,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E021,UI,U,Öffne OAuth Link,-->>,39,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E022,U,AUTH,Consent (Notion Workspace),->>,41,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E023,AUTH,SRV,"auth.callback(code,state)",-->>,42,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E024,SRV,SE,exchangeCode(code),->>,43,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E025,SE,AUTH,Token exchange,->>,44,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E026,AUTH,SE,access_token + refresh_token,-->>,45,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E027,SE,DB,store(encrypted tokens + workspace_id),->>,46,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E028,SE,AUD,"log(""OAuth connected"")",->>,47,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E029,AUD,SE,ok,-->>,48,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E030,SE,SRV,ok,-->>,49,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E031,SRV,MCP,auth.ok,-->>,50,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E032,MCP,FSM,auth.ok,->>,51,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E033,FSM,MCP,Toolcall sync.bootstrap(readOnly=true),->>,56,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E034,MCP,SRV,sync.bootstrap,->>,57,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E035,SRV,SE,bootstrap(readOnly=true),->>,58,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E036,SE,N,List DBs / Query changes (initial),->>,60,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E037,N,SE,Pages/DB schema + content,-->>,61,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E038,SE,SE,mapSchema -> Canonical Model + content_hash,->>,62,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E039,SE,DB,upsert canonical records + cursor,->>,63,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E040,SE,AUD,"savepoint(""bootstrap snapshot"")",->>,64,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E041,AUD,SE,savepoint_id,-->>,65,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E042,SE,SRV,"bootstrap_done(cursor, savepoint_id)",-->>,66,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E043,SRV,MCP,result,-->>,67,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E044,MCP,FSM,bootstrap_done,->>,68,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E045,FSM,OUT,Summary + next steps,->>,69,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E046,FSM,MCP,Toolcall sync.pull(cursor),->>,73,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E047,MCP,SRV,sync.pull,->>,74,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E048,SRV,SE,pull(cursor),->>,75,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E049,SE,N,Search changes since cursor,->>,77,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E050,N,SE,changed objects,-->>,78,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E051,SE,SE,diff -> patches,->>,79,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E052,SE,DB,apply patches (idempotent),->>,80,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E053,SE,AUD,"log(""pull"", counts, cursor_new)",->>,81,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E054,AUD,SE,ok,-->>,82,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E055,SE,SRV,"pull_done(cursor_new, stats)",-->>,83,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E056,SRV,MCP,result,-->>,84,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E057,MCP,FSM,pull_done,->>,85,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E058,FSM,OUT,Update anzeige,->>,86,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E059,FSM,MCP,Toolcall sync.plan_push(changeset),->>,91,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E060,MCP,SRV,sync.plan_push,->>,92,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E061,SRV,SE,plan_push(changeset),->>,93,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E062,SE,SE,validate scopes + policy + conflict check,->>,94,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E063,SE,SRV,plan_id + preview + risk_flags,-->>,95,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E064,SRV,MCP,plan result,-->>,96,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E065,MCP,UI,Plan anzeigen (Preview),->>,97,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E066,UI,U,"""Bestätige?""",-->>,98,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E067,U,UI,confirm(plan_id),->>,100,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E068,UI,IN,confirm input,->>,101,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E069,IN,FSM,ok,->>,102,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E070,FSM,MCP,Toolcall sync.commit_push(plan_id),->>,103,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E071,MCP,SRV,sync.commit_push,->>,104,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E072,SRV,SE,commit_push(plan_id),->>,105,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E073,SE,N,Write updates (patches),->>,107,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E074,N,SE,write ok / errors,-->>,108,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E075,SE,AUD,"savepoint(""post-write snapshot"")",->>,109,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E076,SE,AUD,"log(""commit"", results)",->>,110,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E077,AUD,SE,ok,-->>,111,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E078,SE,SRV,commit_done,-->>,112,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E079,SRV,MCP,commit_done,-->>,113,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E080,MCP,FSM,commit_done,->>,114,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E081,FSM,OUT,Ergebnis + Konflikte (falls),->>,115,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E082,FSM,MCP,"Toolcall sync.reconcile(strategy=""deterministic"")",->>,117,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E083,MCP,SRV,sync.reconcile,->>,118,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E084,SRV,SE,reconcile(strategy),->>,119,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E085,SE,SE,resolve conflicts + record decisions,->>,120,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E086,SE,DB,persist resolutions,->>,121,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E087,SE,AUD,"log(""reconcile"", decisions)",->>,122,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E088,SE,SRV,reconcile_done,-->>,123,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E089,SRV,MCP,result,-->>,124,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E090,MCP,FSM,reconcile_done,->>,125,sequence_message
+full-sync-terra-nova-mcp-sequence,full-sync-terra-nova-mcp-sequence-E091,FSM,OUT,Konfliktbericht,->>,126,sequence_message
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E001,MMD,IST,,-->,12,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E002,MMD,SOLL,,-->,13,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E003,MMD,INT,,-->,14,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E004,MMD,ORCH,,-->,15,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E005,IST,ZOOM,,-->,16,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E006,SOLL,ZOOM,,-->,17,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E007,ZOOM,VTX,,-->,18,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E008,INT,CAP,,-->,19,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E009,ORCH,CAP,,-->,20,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E010,VTX,TRG,,-->,21,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E011,TRG,CAP,,-->,22,unlabeled_transition
+mmd-001-cap-visual-control-model,mmd-001-cap-visual-control-model-E012,CAP,MMD,feedback / backpropagation,-->,23,explicit_guard

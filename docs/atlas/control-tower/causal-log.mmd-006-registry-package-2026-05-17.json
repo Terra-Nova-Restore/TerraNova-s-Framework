@@ -1,0 +1,31 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-MMD-006",
+  "created_at": "2026-05-17T19:34:45.878381+00:00",
+  "operator": "Codex",
+  "mode": "STUDIO",
+  "activation": "manual",
+  "source_trace": [
+    "docs/atlas/control-tower/mmd-005.cap-module-drafts.csv",
+    "docs/atlas/control-tower/mmd-005.hash-ledger.csv",
+    "docs/atlas/control-tower/notion-registry-field-map.md",
+    "docs/atlas/control-tower/object-registry.schema.json"
+  ],
+  "observation": "MMD-005 produced five CAP module drafts ready for registry packaging.",
+  "trigger_band": "401+",
+  "trigger_ids": [
+    "516",
+    "520",
+    "521",
+    "540",
+    "544"
+  ],
+  "probabilistic_hypothesis": "The five draft modules can be represented in the CAP registry as internal candidate GitHub artifacts without asserting canon.",
+  "probability_note": "High confidence for package preparation; no claim about live Notion state until apply verification.",
+  "deterministic_boundary": "No external mutation without exact GO phrase; no canonical TRG assignment; no raw private IDs.",
+  "selected_action": "Prepared registry rows, field map, view package, mutation package and apply gate for MMD-006.",
+  "feedback_target": "registry",
+  "backpropagation_result": "CAP module drafts now have a controlled path into the live registry if explicitly authorized.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": ""
+}

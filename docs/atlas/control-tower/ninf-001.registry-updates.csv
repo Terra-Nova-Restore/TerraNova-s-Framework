@@ -1,0 +1,6 @@
+Object,Notion URL,Action,Status,Boundary
+CAP page,https://www.notion.so/363f7297de7e816e840ae8d95cfd7842,"Updated Current Dashboard State and Next Internal Work Queue for CAP 0.3 / NINF-001",Applied,"No deletion; no child content removal; no raw private inventory"
+CAP 0.3 - Operational Control IPERKA,https://www.notion.so/363f7297de7e8171b282f08b65f2072f,"Created registry row",Applied,"Internal GitHub artifact only"
+NINF-001 Notion Infiltration Package,https://www.notion.so/363f7297de7e81bb8986fb268190e78c,"Created registry row",Applied,"Internal GitHub artifact only"
+CAP 0.3 Operations,view://363f7297-de7e-8108-b0b2-000c2bba2165,"Created registry database view",Applied,"View only; no schema change"
+Duplicate Review,view://363f7297-de7e-8119-ace1-000c8e1384d5,"Created registry database view",Applied,"View only; no schema change"

@@ -1,0 +1,15 @@
+Name,Kind,Role,Zoom,Status,Type,Lines,Source Layer,Use,Boundary
+Terra Nova Master Overview - Complete Workspace,Diagram,KANON,IST,ACTIVE,flowchart,150,Notion Mermaid Registry + docs/atlas/diagrams.md,Primary current workspace map,Use as orientation not as full content truth
+Digital Ecosystem - Ziel-Struktur v2.0,Diagram,KANON,SOLL,ACTIVE,flowchart,80,Notion Mermaid Registry + docs/atlas/diagrams.md,Target structure map,Blank page content means use registry properties and export source
+Notion <-> ChatGPT System-Architektur,Diagram,KANON,INTEGRATION,ACTIVE,graph LR,100,Notion Mermaid Registry + docs/atlas/diagrams.md,Data and sync architecture,Do not infer live bidirectional sync beyond source claim
+Meta-Conductor - Agent Routing,Diagram,KANON,ORCHESTRATION,ACTIVE,flowchart,20,Notion Mermaid Registry + docs/atlas/diagrams.md,Actor and routing flow,No Notion Custom Agent activation
+Ordner 02: Codex & Trigger Detail,Diagram,ZOOM,IST,ACTIVE,graph TB,40,Notion Mermaid Registry + docs/atlas/diagrams.md,Trigger and Codex detail lens,Do not reconstruct full trigger list from lens alone
+Ordner 05: Produkte & Services Detail,Diagram,ZOOM,IST,ACTIVE,graph TB,45,docs/atlas/diagrams.md,Product and service detail lens,Commercial details need separate review
+Ordner 06: Technische Dokumentation Detail,Diagram,ZOOM,IST,ACTIVE,graph TB,50,Notion Mermaid Registry + docs/atlas/diagrams.md,Technical documentation lens,Patent/IP details need SENS boundary
+TokenAccess - TriggerMap (988-992),Diagram,APPENDIX,,ACTIVE,graph LR,15,docs/atlas/diagrams.md,Integrity trigger appendix,Token/wallet material remains restricted
+Mermaid Code Library - Depot,Container,DEPOT,,ACTIVE,graph LR,,Notion Mermaid Registry + docs/atlas/diagrams.md,Diagram code depot,Use as provenance layer
+Mermaid Atlas - Start Here,Navigation,ATLAS,,ACTIVE,markdown,,Notion fetch,Four-chef-diagram entrypoint,Navigation only
+Mermaid als lebendiger Trigger-Organismus,Concept,MANIFEST,,ACTIVE,markdown+mermaid,,Notion fetch + raw export,Node/edge/graph trigger ontology,Do not over-publicize private trigger canon
+Mermaid-Diagramme als lebende Systeme,Concept,TECHNICAL ESSAY,,ACTIVE,markdown+mermaid,,Notion fetch + raw export,Executable architecture and guard conditions,External Mermaid feature claims need verification before publication
+VortexCanvas - Systemuebersicht,VORTEX Bridge,VORTEX,,ACTIVE,markdown,,Notion fetch,Visual decision and resonance field,Not a timeline
+VortexCanvas - Entscheidungsraeume,VORTEX Bridge,VORTEX,,ACTIVE,markdown,,Notion fetch,Decision-space minimal operating unit,Keep as bridge not trigger register

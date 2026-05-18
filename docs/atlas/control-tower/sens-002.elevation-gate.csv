@@ -1,0 +1,6 @@
+Gate ID,Object,Current Level,Requested Target,Decision,Required Before Elevation,Stop Rule,External Mutation
+SENS2-G001,CAP-MOD-DRAFT-521,L1-NAME-CLUSTER,L2-ROUTING-MARKER,blocked_until_source,"Direct Preflight/protection source and explicit non-777 boundary","If source mixes Preflight with Schattenarchiv-depth, keep L1 protected",No
+SENS2-G002,Schattenarchiv depth,No CAP module admission,L1/L2 review,blocked_until_separate_review,"Dedicated Schattenarchiv-depth SENS review","No reuse as normal module evidence",No
+SENS2-G003,Integrity suite 988-992,No CAP module admission,L1/L2 review,blocked_until_security_review,"Security/integrity source review and redaction rule","No token or integrity execution claim",No
+SENS2-G004,AutoFlow sibling 517,No CAP module admission,L1/L2 review,blocked_until_primary_source,"Direct AutoFlow source separate from Inspiration","No sibling semantics by proximity",No
+SENS2-G005,Trigger band 174-210,No mass admission,L1/L2 review,blocked_until_source_ledger,"Source-ledger review for the band","No mass TRG assignment from visual range alone",No

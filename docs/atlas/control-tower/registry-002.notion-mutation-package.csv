@@ -1,0 +1,5 @@
+Mutation ID,Target,Action,Input,Expected Result,Boundary
+REG2-M001,Workspace Object Registry database,Add schema fields,registry-002.field-package.csv,"Canon Level, Source Tier, Canon Decision, Allowed Claims, Blocked Claims, Next Source Action, Downgrade Rule, Admission Review and Canon Updated exist",No row deletion; no existing field removal; no forced L3/L4 values
+REG2-M002,Five CAP module draft rows,Backfill canon admission fields,registry-002.module-canon-updates.csv,Five live rows receive L1/L2 canon admission metadata,Keep Status Indexed and Canon Status Candidate unless a later rule says otherwise
+REG2-M003,Workspace Object Registry database,Create review view,CAP Canon Admission Queue,View filters Candidate rows with Admission Review not Ready for Elevation,View only; no schema removal or raw private inventory export
+REG2-M004,CAP page,Append checkpoint,batch-registry-002.md,CAP page records that REGISTRY-002 package exists and awaits/received explicit apply,No deletion; no publication claim; no Notion AI agent use

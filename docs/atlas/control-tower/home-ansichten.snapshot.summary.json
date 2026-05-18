@@ -1,0 +1,67 @@
+{
+  "snapshot": {
+    "name": "Home-Ansichten Snapshot 2026-05-11",
+    "source_file": "C:\\Users\\Silvan\\Desktop\\[Home-Ansichten](httpswww.notion.so.txt",
+    "last_write_time": "2026-05-11T05:43:22+02:00",
+    "reviewed_at": "2026-05-17",
+    "sensitivity": "Sensitive",
+    "canon_status": "Reference",
+    "source_layer": "Export Hard Count",
+    "count_basis": "808 export_hard_count"
+  },
+  "counts": {
+    "bytes": 108362,
+    "lines": 1746,
+    "words": 3856,
+    "characters": 106862,
+    "markdown_link_count": 801,
+    "notion_url_count": 808,
+    "unique_notion_id_count": 808,
+    "duplicate_notion_id_group_count": 0,
+    "empty_title_count": 30,
+    "duplicate_title_group_count": 46
+  },
+  "top_duplicate_titles": [
+    { "title": "Unbenannt", "count": 74 },
+    { "title": "", "count": 30 },
+    { "title": "**Korrekturlesen**", "count": 6 },
+    { "title": "**Verbessere den Schreibstil**", "count": 6 },
+    { "title": "**Erklaeren**", "count": 6 },
+    { "title": "KI-Faehigkeiten", "count": 6 },
+    { "title": "Patent_3_TNIAP", "count": 4 },
+    { "title": "Patent_2_TNAV", "count": 4 },
+    { "title": "Patent_1_Mindcode", "count": 4 },
+    { "title": "Umformatieren", "count": 4 },
+    { "title": "Patent_4_Tokenisierung", "count": 4 }
+  ],
+  "keyword_title_counts": {
+    "CAP": 7,
+    "EQUILIBRIUM": 1,
+    "FerrAI": 60,
+    "TerraNova": 55,
+    "Cognitive": 2,
+    "CIC": 13,
+    "GitHub": 13,
+    "Sync": 18,
+    "Library": 3,
+    "Trigger": 45,
+    "VORTEX": 6,
+    "Prism": 0,
+    "Zenodo": 1,
+    "Notion": 23,
+    "Database": 1,
+    "Wiki": 1,
+    "Dashboard": 7,
+    "Control": 5,
+    "IPERKA": 17,
+    "Framework": 9,
+    "Regelbuch": 0
+  },
+  "cap_interpretation": {
+    "probabilistic_hypothesis": "Duplicate titles and empty titles are likely a major control problem before content quality itself.",
+    "deterministic_boundary": "The snapshot is not current truth and must not be published as a raw private page list.",
+    "feedback_target": "Registry",
+    "next_registry_use": "Seed duplicate-title review queues and compare against current Notion connector results."
+  }
+}
+

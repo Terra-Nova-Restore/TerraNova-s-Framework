@@ -1,0 +1,52 @@
+{
+  "bridge_id": "MMD-003",
+  "created_at": "2026-05-17T15:43:34.229998+00:00",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "candidate_count": 53,
+  "guard_bridge_count": 140,
+  "review_count": 20,
+  "unique_trigger_reference_count": 14,
+  "unique_trigger_references": [
+    "174-210",
+    "516",
+    "517",
+    "520",
+    "521",
+    "540",
+    "544",
+    "600",
+    "777",
+    "988",
+    "989",
+    "990",
+    "991",
+    "992"
+  ],
+  "candidate_class_counts": {
+    "audit_surface": 4,
+    "codex_surface": 1,
+    "numeric_anchor": 16,
+    "numeric_range": 1,
+    "sync_surface": 13,
+    "trigger_surface": 18
+  },
+  "candidate_sensitivity_counts": {
+    "Internal": 45,
+    "Restricted": 1,
+    "Sensitive": 7
+  },
+  "top_graphs": {
+    "ordner-02-codex-trigger-detail": 12,
+    "terra-nova-master-overview-complete-workspace": 8,
+    "tokenaccess-triggermap-988-992": 7,
+    "ordner-06-technische-dokumentation-detail": 5,
+    "notion-chatgpt-system-architektur": 5,
+    "session-root-living-trigger-organism": 5,
+    "digital-ecosystem-ziel-struktur-v2-0": 4,
+    "full-sync-terra-nova-mcp-sequence": 3,
+    "mmd-001-cap-visual-control-model": 2,
+    "ordner-05-produkte-services-detail": 1
+  },
+  "boundary": "Candidate bridge only; no canonical TRG assignment."
+}

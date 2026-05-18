@@ -1,0 +1,27 @@
+{
+  "event_id": "sens-001-readpass-2026-05-17",
+  "date": "2026-05-17",
+  "mode": "STUDIO",
+  "trigger_band": "301-400",
+  "freedom_mode": "/fff bounded by explicit SENS-001 instruction",
+  "source_trace": [
+    "TerraNova skill read before action",
+    "CAP 0.2 registry stabilization IPERKA",
+    "DUP-001 review queue",
+    "DB-WIKI-001 restricted wiki registry update",
+    "Home-Ansichten snapshot aggregate summary"
+  ],
+  "probabilistic_hypothesis": "The highest-risk duplicate-title classes are not cleanup targets; they are boundary objects requiring protected routing.",
+  "deterministic_boundary": "No raw page list, restricted child titles, private chat titles, IP details, schema changes, deletion or public promotion.",
+  "selected_action": "Classify five protected sensitivity boundaries and prepare registry metadata updates.",
+  "feedback_target": "CAP Registry",
+  "backpropagation_target": "DUP-002 gate and SENS policy",
+  "result": {
+    "protected_boundary_classes": 5,
+    "raw_content_imports": 0,
+    "raw_title_exports": 0,
+    "delete_actions": 0,
+    "public_promotions": 0
+  }
+}
+

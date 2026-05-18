@@ -1,0 +1,29 @@
+{
+  "event_id": "sync-001-readpass-2026-05-17",
+  "date": "2026-05-17",
+  "mode": "STUDIO",
+  "trigger_band": "301-400",
+  "freedom_mode": "/fff bounded by explicit GO",
+  "source_trace": [
+    "CAP 0.2 registry stabilization IPERKA",
+    "workspace-object-registry.seed.csv",
+    "db-wiki-001.registry-updates.csv",
+    "canon-001.registry-updates.csv",
+    "Notion fetch: CAP registry schema",
+    "Notion search: Home-Ansichten Snapshot 2026-05-11",
+    "GitHub search: CIC, Equilibrium R16, CEI-DATA-05 and Home-Ansichten traces"
+  ],
+  "probabilistic_hypothesis": "The remaining Needs sync rows are mostly registry-governance drift, not evidence of missing full content mirrors.",
+  "deterministic_boundary": "Mark only registry metadata alignment; do not claim full Notion content mirroring, schema mutation, restricted content access, or raw page-list publication.",
+  "selected_action": "Prepare SYNC-001 local trace and Notion metadata update package for eleven Needs sync rows.",
+  "feedback_target": "CAP Registry",
+  "backpropagation_target": "GitHub Atlas",
+  "result": {
+    "target_rows": 11,
+    "planned_sync_status": "In sync",
+    "schema_changes": 0,
+    "raw_content_imports": 0,
+    "restricted_content_imports": 0
+  }
+}
+

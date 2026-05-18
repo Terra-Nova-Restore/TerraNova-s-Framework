@@ -1,0 +1,30 @@
+{
+  "log_id": "CAP-LOG-2026-05-17-001",
+  "created_at": "2026-05-17T06:32:41+02:00",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "manual",
+  "source_trace": [
+    "C:/Users/Silvan/.codex/skills/terranova-ferrai/SKILL.md",
+    "docs/atlas/control-tower/cap-0.1.0.md",
+    "docs/atlas/control-tower/notion-mutation-gate.md",
+    "https://www.notion.so/6e7731daf8154dcdb063833255618be3",
+    "https://www.notion.so/363f7297de7e816e840ae8d95cfd7842"
+  ],
+  "observation": "Silvan explicitly approved the first CAP 0.1.0 Notion page creation with the gate phrase.",
+  "trigger_band": "301-400",
+  "trigger_ids": [
+    "/fff",
+    "143",
+    "148"
+  ],
+  "probabilistic_hypothesis": "CAP needs a live Notion control surface now that the repo-local gate and schema exist.",
+  "probability_note": "High confidence because the approval phrase matched the prepared gate and the parent page was verified immediately before creation.",
+  "deterministic_boundary": "Only one internal Notion page creation was authorized; no database, view, property, external publication, deletion, credential or payment mutation was authorized.",
+  "selected_action": "Created Notion page 'CAP 0.1.0 - Cognitive Ability Point' under 'TerraNova - Entwicklungs- & Integrationszone'.",
+  "feedback_target": "notion_canon",
+  "backpropagation_result": "Notion page created and source-map / mutation gate updated with page ID and URL.",
+  "verification_state": "notion_checked",
+  "external_mutation": true,
+  "mutation_authorization": "GO Notion CAP 0.1.0 erstellen"
+}

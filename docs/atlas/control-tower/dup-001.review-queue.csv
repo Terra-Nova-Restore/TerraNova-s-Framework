@@ -1,0 +1,10 @@
+Queue ID,Duplicate Class,Group Count,Duplicate Occurrences,Sensitivity,Primary Action,Deletion Policy,Feedback Target,Notes
+DUP-001-A,Untitled placeholders,2,104,Internal,Verify current Notion objects and prepare rename candidates,No deletion; archive only after source check,Registry,Largest pressure; includes untitled and empty-title placeholders.
+DUP-001-B,Prompt/action templates,5,24,Internal,Consolidate into canonical prompt/template family,No deletion; preserve useful templates,Registry,Repeated action-command titles are likely template or prompt artifacts.
+DUP-001-C,Patent/IP dossier titles,11,30,Sensitive,Defer to SENS-001 before deeper handling,No deletion; no public detail expansion,Registry,IP-sensitive queue; keep scoped and protected.
+DUP-001-D,Trigger/session/deep-system exports,8,20,Internal/Restricted,Classify against trigger/session canon,No deletion; no public reuse without review,Trigger Map,Depth-sensitive system exports need canon routing.
+DUP-001-E,Navigation/working surfaces,5,12,Internal,Verify active hubs and dashboards,No deletion; rename stale copies only after verification,Registry,May include active work surfaces rather than duplicates.
+DUP-001-F,Generic low-signal titles,8,16,Internal,Prepare rename or archive candidate list after ID verification,No deletion; archive only after source check,Registry,Numeric and generic text titles are likely import remnants or weak working names.
+DUP-001-G,Chat/person/export remnants,4,10,Private,Classify as private/import-remnant candidates,No deletion; private review required,Logbook,Keep private by default.
+DUP-001-H,Capability/governance concepts,3,10,Internal,Compare with canonical support pages,No deletion; canon comparison first,Notion Canon,May contain support concepts rather than duplicate waste.
+
