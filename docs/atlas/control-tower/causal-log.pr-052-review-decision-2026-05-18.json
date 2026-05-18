@@ -1,0 +1,6 @@
+{
+  "log_id": "pr-052-review-decision",
+  "timestamp": "2026-05-18T18:15:00Z",
+  "event_type": "review_decision",
+  "decision": "merge"
+}
