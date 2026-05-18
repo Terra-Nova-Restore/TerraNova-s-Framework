@@ -1,7 +1,7 @@
 action_id,action,next_gate,owner,status
-CAP-RT-ACT-01,Choose first visible runtime surface,CAP-RT-002,Silvan plus Codex,open
-CAP-RT-ACT-02,Map CAP registry fields to dashboard widgets,CAP-RT-002,Codex,open
-CAP-RT-ACT-03,Define Notion-safe view package without Custom Agents,CAP-RT-002,Codex,open
-CAP-RT-ACT-04,Add source-state summary for active lanes,CAP-RT-003,Codex,open
-CAP-RT-ACT-05,Create resume card format for future sessions,CAP-RT-003,Codex,open
+CAP-RT-ACT-01,Choose first visible runtime surface,CAP-RT-002,Silvan plus Codex,closed
+CAP-RT-ACT-02,Map CAP registry fields to dashboard widgets,CAP-RT-002,Codex,closed
+CAP-RT-ACT-03,Define Notion-safe view package without Custom Agents,CAP-RT-002,Codex,closed
+CAP-RT-ACT-04,Add source-state summary for active lanes,CAP-RT-003,Codex,closed
+CAP-RT-ACT-05,Create resume card format for future sessions,CAP-RT-003,Codex,closed
 CAP-RT-ACT-06,Decide whether dashboard runtime needs local app prototype,CAP-RT-004,Silvan plus Codex,open
