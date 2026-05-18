@@ -1,0 +1,4 @@
+view_id,view_type,filter,sort,purpose
+DASH-VIEW-01,board,"review_status != 'closed'","canon_level desc",Active admission queue
+DASH-VIEW-02,table,"source_class == 'sensitive'","created_at desc",Sensitive review lane
+DASH-VIEW-03,list,"canon_level == 'canon'","created_at desc",Stabilized canon reference
