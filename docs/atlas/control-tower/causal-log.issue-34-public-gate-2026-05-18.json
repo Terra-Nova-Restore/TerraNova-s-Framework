@@ -1,0 +1,6 @@
+{
+  "log_id": "issue-34-public-gate-open",
+  "timestamp": "2026-05-18T18:55:00Z",
+  "event_type": "security_gate",
+  "decision": "public_gate_open_aggregates_only"
+}
