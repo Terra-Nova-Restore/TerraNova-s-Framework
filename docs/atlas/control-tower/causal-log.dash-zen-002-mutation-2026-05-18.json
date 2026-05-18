@@ -1,0 +1,51 @@
+{
+  "log_id": "DASH-ZEN-002-MUTATION-2026-05-18",
+  "event_type": "notion_mutation",
+  "created_at": "2026-05-18T10:18:00+02:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "DASH-ZEN-002 GO",
+  "mode": "BIZ gated external mutation",
+  "source_trace": [
+    "Notion: Zenodo root page",
+    "Notion: Monographie Teil I",
+    "Notion: Monographie Teil II",
+    "Notion: Monographie Teil III",
+    "Notion: Zenodo-Z1 routing-state anchor",
+    "Notion: Zenodo-Z2 routing-state anchor",
+    "Notion: Zenodo-Z3 routing-state anchor",
+    "Notion: CAP 0.1.0 Workspace Object Registry data source",
+    "docs/atlas/control-tower/dash-zen-002.notion-mutation-package.csv"
+  ],
+  "deterministic_boundary": [
+    "Explicit user authorization present",
+    "Only four existing CAP registry rows targeted for property updates",
+    "One CAP 0.1.0 checkpoint appended",
+    "No deletion",
+    "No page movement",
+    "No schema change",
+    "No new registry rows for Z1/Z2/Z3 in this pass",
+    "No raw private Notion IDs in GitHub trace",
+    "No Zenodo republish or DOI/version mutation",
+    "No public-canon elevation",
+    "No Notion AI credit use"
+  ],
+  "probabilistic_hypothesis": "Separating existing Zenodo dashboard registry closure from newly reachable Z-anchor packaging reduces drift and keeps the control tower auditable.",
+  "selected_action": "Updated four DASH-ZEN-001 registry rows with source/sensitivity decisions and queued Z1/Z2/Z3 for DASH-ZEN-003.",
+  "notion_updates": [
+    "DASH-ZEN-001 - Zenodo Root updated",
+    "DASH-ZEN-001 - Monographie Teil I updated",
+    "DASH-ZEN-001 - Monographie Teil II updated",
+    "DASH-ZEN-001 - Monographie Teil III updated",
+    "CAP 0.1.0 page checkpoint appended"
+  ],
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "feedback_target": [
+    "CAP registry",
+    "Prism / Zenodo",
+    "GitHub Atlas",
+    "DASH-ZEN-003 Z-anchor package"
+  ],
+  "status": "completed"
+}

@@ -1,0 +1,8 @@
+Object,Sensitivity Before,Sensitivity After,Reason,Required Guard
+Zenodo root,Internal,Internal,"Dashboard mirror contains internal routing context but no raw manuscript payload in the registry row","Keep as L2 dashboard; no Zenodo republish or DOI/version mutation"
+Monographie Teil I,Internal,Internal,"Entry-point monographie material is source-reviewable but still internal and not final public canon","Use only bounded claims; reconcile freeze/version references before citation reuse"
+Monographie Teil II,Sensitive,Sensitive,"Contains source-index, appendix, patent/token and implementation-adjacent material","Hold at L1 until sensitive material is split from publishable claims"
+Monographie Teil III,Sensitive,Sensitive,"Contains return-path, Track-C, appendix/faksimile-adjacent and next-release material","Hold at L1 until redaction-safe extraction exists"
+Zenodo-Z1 routing anchor,Internal,Internal,"Routing state is historical/control-oriented and includes PR/workflow references, not raw private manuscript material","Queue separate registry row; keep deferred state intact"
+Zenodo-Z2 routing anchor,Internal,Internal,"Closed metadata-only execution trace is operational history with hard-lock notes","Queue separate registry row; do not expose secrets or private account material"
+Zenodo-Z3 routing anchor,Internal,Internal,"Closed metadata-refresh execution trace is operational history with hard-lock notes","Queue separate registry row; preserve metadata-only boundary"

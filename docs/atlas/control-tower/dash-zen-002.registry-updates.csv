@@ -1,0 +1,6 @@
+Object,Notion URL,Action,Status,Boundary
+DASH-ZEN-001 - Zenodo Root,notion://redacted-internal-object,"Set Status Reviewed; refreshed source-reviewed L2 dashboard mirror claims and DASH-ZEN-002 next-action closure",Applied,"Internal dashboard/control surface only; no Zenodo republish or DOI/version mutation"
+DASH-ZEN-001 - Monographie Teil I,notion://redacted-internal-object,"Set Status Reviewed; promoted from queued L1 entry point to L2 internal reference/routing marker",Applied,"No public-canon elevation; reconcile freeze/version references before external citation reuse"
+DASH-ZEN-001 - Monographie Teil II,notion://redacted-internal-object,"Set Status Reviewed; kept L1-NAME-CLUSTER and Sensitivity Review Required with clearer split requirement",Applied,"Sensitive manuscript, appendix, patent, token and private intake remain held"
+DASH-ZEN-001 - Monographie Teil III,notion://redacted-internal-object,"Set Status Reviewed; kept L1-NAME-CLUSTER and Sensitivity Review Required with clearer split requirement",Applied,"Sensitive return-path, Track-C, appendix and faksimile-adjacent material remains held"
+CAP 0.1.0 - Cognitive Ability Point,notion://redacted-internal-object,"Appended DASH-ZEN-002 Source / Sensitivity Pass checkpoint",Applied,"No schema change, deletion, raw private inventory export, Zenodo mutation or Notion AI credit use"

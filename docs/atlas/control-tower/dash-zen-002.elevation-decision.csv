@@ -1,0 +1,8 @@
+Object,Decision,Canon Level,Admission Review,Next Source Action
+Zenodo root,Hold at L2,L2-ROUTING-MARKER,Source Review Passed,"Monitor against live Zenodo/API and keep as internal dashboard mirror"
+Monographie Teil I,Hold at L2,L2-ROUTING-MARKER,Source Review Passed,"Extract bounded citation/source ledger; reconcile older freeze references with current RC01-v12 root before public/reference reuse"
+Monographie Teil II,Sensitivity hold,L1-NAME-CLUSTER,Sensitivity Review Required,"Split publishable appendix/control material from sensitive manuscript, patent, token and private intake before elevation"
+Monographie Teil III,Sensitivity hold,L1-NAME-CLUSTER,Sensitivity Review Required,"Split return-path, Track-C, appendix and faksimile candidates from sensitive internal material before elevation"
+Zenodo-Z1 routing anchor,Queue for DASH-ZEN-003,Unassigned in 002,Pending Review,"Create a separate Z-anchor registry row package before any canon decision"
+Zenodo-Z2 routing anchor,Queue for DASH-ZEN-003,Unassigned in 002,Pending Review,"Create a separate Z-anchor registry row package before any canon decision"
+Zenodo-Z3 routing anchor,Queue for DASH-ZEN-003,Unassigned in 002,Pending Review,"Create a separate Z-anchor registry row package before any canon decision"
