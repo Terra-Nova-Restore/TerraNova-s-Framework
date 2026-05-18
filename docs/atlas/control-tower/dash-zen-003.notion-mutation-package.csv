@@ -1,0 +1,5 @@
+Target,Mutation Type,Fields or Content,Authorization,Guard
+DASH-ZEN-003 - Zenodo Z1 Routing Anchor,create_page,"Create registry row with L2 routing-marker state and deferred/backlog boundary",DASH-ZEN-003,"No PR advance, workflow run, Zenodo draft, upload, DOI reservation or publish"
+DASH-ZEN-003 - Zenodo Z2 Routing Anchor,create_page,"Create registry row with L2 routing-marker state and closed metadata-only boundary",DASH-ZEN-003,"No further Zenodo write, secret exposure, token handling or v13 claim"
+DASH-ZEN-003 - Zenodo Z3 Routing Anchor,create_page,"Create registry row with L2 routing-marker state and closed metadata-refresh boundary",DASH-ZEN-003,"No latest-state claim without live Zenodo/API reconciliation"
+CAP 0.1.0 - Cognitive Ability Point,update_content,"Append DASH-ZEN-003 checkpoint with Z-anchor decisions, boundaries and GitHub trace",DASH-ZEN-003,"Append only; preserve child databases and existing checkpoints"

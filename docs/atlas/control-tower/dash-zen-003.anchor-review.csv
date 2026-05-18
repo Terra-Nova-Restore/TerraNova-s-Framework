@@ -1,0 +1,4 @@
+Anchor,Routing State,Source Evidence,Review Result,Boundary
+Zenodo-Z1,Deferred / backlog,"GitHub-only draft PR lane, parked preflight state, explicit no-Zenodo-touch boundary",Source reviewed,"Do not advance PR #40, workflow, draft, DOI, upload or publish from this row"
+Zenodo-Z2,Updated / closed,"Metadata-only RC01-v12 correction lane, workflow success trace, file/version/DOI/publish hard locks",Source reviewed,"Historical metadata-only precedent; no further Zenodo write authorization"
+Zenodo-Z3,Closed metadata refresh,"Metadata-refresh lane, title/abstract/keyword refresh, workflow success trace, hard-lock verification",Source reviewed,"Historical lane anchor; verify current live state through Zenodo root/API before latest-state claims"

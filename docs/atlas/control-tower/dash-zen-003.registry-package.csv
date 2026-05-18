@@ -1,0 +1,4 @@
+Object,Object Type,Source Tier,Canon Level,Canon Decision,Sensitivity,Allowed Summary,Blocked Summary
+DASH-ZEN-003 - Zenodo Z1 Routing Anchor,Page,T2 Live Notion System Record,L2-ROUTING-MARKER,Hold at L2,Internal,"Deferred/backlog routing-state anchor for parked preflight work","No PR merge, workflow execution, draft, DOI, upload or publish"
+DASH-ZEN-003 - Zenodo Z2 Routing Anchor,Page,T2 Live Notion System Record,L2-ROUTING-MARKER,Hold at L2,Internal,"Closed metadata-only hard-lock precedent for RC01-v12 correction","No further Zenodo write or v13/publication claim"
+DASH-ZEN-003 - Zenodo Z3 Routing Anchor,Page,T2 Live Notion System Record,L2-ROUTING-MARKER,Hold at L2,Internal,"Closed metadata-refresh hard-lock precedent","Not the sole latest live-state authority after 2026-05-17 refresh"
