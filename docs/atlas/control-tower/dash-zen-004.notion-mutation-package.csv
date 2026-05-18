@@ -1,0 +1,3 @@
+Target,Mutation Type,Fields or Content,Authorization,Guard
+DASH-ZEN-004 - Zenodo Release-State Matrix,create_page,"Create registry row for T1 release-state matrix control artifact",DASH-ZEN-004,"No Zenodo write, PR advance, workflow execution, DOI/file/version mutation or latest-state claim from Z3 alone"
+CAP 0.1.0 - Cognitive Ability Point,update_content,"Append DASH-ZEN-004 checkpoint with authority order, boundary and GitHub trace",DASH-ZEN-004,"Append only; preserve child databases and existing checkpoints"

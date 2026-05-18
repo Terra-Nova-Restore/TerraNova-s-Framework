@@ -1,0 +1,5 @@
+Rank,Authority,Object,Use For,Do Not Use For,Reason
+1,T0 Published Reference Anchor,Zenodo API / public record,"External citation, current DOI/version/file/publication-state checks","Internal canon, manuscript interpretation, private workspace state","Public record is the external release truth"
+2,T2 Live Notion System Record,Zenodo root dashboard,"Internal dashboard routing and mirror context","Unverified current external claims","Notion is system-of-record for workspace memory, not external release API"
+3,T2 Live Notion System Record,Z1/Z2/Z3 routing anchors,"Historical lane state, hard-lock precedent, routing correction","New Zenodo execution, PR advancement, publication permission","Anchors are state records, not commands"
+4,T1 Reviewed Repo Governance,GitHub Atlas DASH-ZEN-004,"Auditable interpretation, checker contract and PR trace","External publication state without live/API read","GitHub proves our interpretation, not Zenodo itself"

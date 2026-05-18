@@ -1,0 +1,45 @@
+{
+  "review_id": "DASH-ZEN-004",
+  "created_at": "2026-05-18T10:52:00+02:00",
+  "status": "complete",
+  "external_mutation": true,
+  "notion_ai_credits_used": 0,
+  "objects_reviewed": [
+    "Zenodo API record 20073579",
+    "Zenodo root dashboard",
+    "Zenodo-Z1 routing anchor",
+    "Zenodo-Z2 routing anchor",
+    "Zenodo-Z3 routing anchor",
+    "GitHub Atlas DASH-ZEN-004"
+  ],
+  "registry_rows_created": 1,
+  "cap_checkpoints_appended": 1,
+  "authority_order": [
+    "T0 Zenodo API / public record",
+    "T2 Notion Zenodo root dashboard",
+    "T2 Z1/Z2/Z3 routing anchors",
+    "T1 GitHub Atlas interpretation"
+  ],
+  "live_zenodo": {
+    "record_id": "20073579",
+    "doi": "10.5281/zenodo.20073579",
+    "concept_doi": "10.5281/zenodo.19774446",
+    "version": "RC01-v12",
+    "publication_date": "2026-05-17",
+    "modified": "2026-05-17T05:20:40.751823+00:00",
+    "file": "main (44).pdf",
+    "file_checksum": "md5:d791d480e75f3d89f9a103a28a5c5001",
+    "file_size": 2943457
+  },
+  "canon_decision": {
+    "release_state_matrix": "Hold at L2"
+  },
+  "blocked_claims": [
+    "DASH-ZEN-004 authorizes Zenodo write actions.",
+    "DASH-ZEN-004 advances PR #40 or any Z workflow.",
+    "Z3 is the sole latest-state authority after the 2026-05-17 live update.",
+    "The Notion dashboard root alone proves current external Zenodo state.",
+    "The pass consumes Notion AI credits or uses a Notion Custom Agent."
+  ],
+  "next_source_action": "Use DASH-ZEN-004 as the release-state lookup before future Zenodo/Prism wording; run live API verification before external claims."
+}

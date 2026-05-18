@@ -1,0 +1,7 @@
+Rule,If,Then,Boundary
+R1,"Zenodo API conflicts with Notion root for current public metadata","Treat Zenodo API as external release authority and queue Notion root sync","No Zenodo write implied"
+R2,"Z3 historical anchor conflicts with 2026-05-17 live Zenodo state","Treat Z3 as historical closed lane and live API as current state","Do not rewrite Z3 history"
+R3,"Z1 appears as actionable work","Keep Z1 parked until explicit separate Z1 opening","No PR #40 advance from matrix"
+R4,"Z2/Z3 are reused as precedent","Reuse only metadata-only hard-lock pattern","No secret/token handling, workflow dispatch or external write"
+R5,"Public/citable claim is needed","Run live Zenodo/API verification before wording the claim","No citation claim from Notion-only state"
+R6,"Internal canon claim is needed","Use CAP registry and GitHub Atlas, then reconcile against Zenodo only where publication state matters","No manuscript/private material in public trace"
