@@ -1,6 +1,6 @@
 Queue ID,Object,Current Level,Target Level,Source Tier,Decision,Next Source Action,Blocked Until,External Mutation
 CANON4-Q001,CAP-MOD-DRAFT-516,L2-ROUTING-MARKER,L3-MODULE-SEMANTICS,T3,Hold at L2,Find or curate direct Inspiration behavior source,"Primary definition and blocked AutoFlow boundary exist",No
-CANON4-Q002,CAP-MOD-DRAFT-520,L2-ROUTING-MARKER,L3-MODULE-SEMANTICS,T3,Hold at L2,Curate primary SessionStart definition and bounded test,"SessionStart definition and non-mutation boundary exist",No
+CANON4-Q002,CAP-MOD-DRAFT-520,L2-ROUTING-MARKER,L3-MODULE-SEMANTICS,T2,Hold at L2 after SOURCE-520 and TEST-520,"Curate 520 implementation contract and runtime test before L3","init_all_modules execution autonomous session control and external mutation stay blocked",No
 CANON4-Q003,CAP-MOD-DRAFT-521,L1 live / L2 local,L3-MODULE-SEMANTICS,T2,Hold at L2 after SOURCE-521,"Apply future Notion update only after explicit GO; curate reviewed primary module definition and tests before L3","Preflight automation and 777-depth behavior stay blocked",No
 CANON4-Q004,CAP-MOD-DRAFT-540,L2-ROUTING-MARKER,L3-MODULE-SEMANTICS,T3,Hold at L2,Tie Observable Momentum to explicit Prism/CAP text,"Metric/proof language has bounded wording",No
 CANON4-Q005,CAP-MOD-DRAFT-544,L2-ROUTING-MARKER,L3-MODULE-SEMANTICS,T3,Hold at L2,Add explicit synchronization scope source and test,"Full workspace sync and automatic sync claims are blocked",No

@@ -1,0 +1,6 @@
+Result ID,Test ID,Observed Result,Pass,Evidence,Residual Risk
+TEST520-R001,TEST520-C001,bounded session_frame opened as simulated internal state,yes,test-520.sessionstart-bounded-test.md,No runtime implementation exists yet
+TEST520-R002,TEST520-C002,session_opened guard routes toward 521 but does not execute 521,yes,source-520.source-ledger.csv and MMD guard evidence,Future runtime must preserve non-execution boundary
+TEST520-R003,TEST520-C003,context loading is defined as bounded source list not raw dump,yes,source-520.claim-review.csv,Context-source list still needs implementation detail
+TEST520-R004,TEST520-C004,init_all_modules remains blocked and non-executable,yes,source-520.claim-review.csv,Implementation contract needed before L3
+TEST520-R005,TEST520-C005,Equilibrium trace and downgrade rule remain visible,yes,canon-elevation-queue.csv and causal log,Live Notion row must be updated after explicit GO

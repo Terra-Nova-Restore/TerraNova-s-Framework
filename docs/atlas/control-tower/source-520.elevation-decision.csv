@@ -1,0 +1,4 @@
+Decision ID,Object,Previous Local Level,New Local Level,Strongest Source Tier,Decision,Allowed Now,Still Blocked,Live Notion State,External Mutation
+SOURCE520-D001,CAP-MOD-DRAFT-520 - SessionStart,L2-ROUTING-MARKER,L2-ROUTING-MARKER,T2,local_source_pass,"Internal core routing marker for /start SessionStart","L3 semantics; automation; TRG assignment; external mutation; public canon",Applied to Notion on 2026-05-18 after explicit GO,Yes
+SOURCE520-D002,CAP registry row for 520,L2 live registry,L2 source-tier update applied,T2,applied_after_go,"Registry update reflects SOURCE-520 and TEST-520","Any schema change; row creation; deletion; L3/L4 elevation",Live row set to T2 L2 hold at L2,Yes
+SOURCE520-D003,CAP-MOD-DRAFT-520 - SessionStart,L2-ROUTING-MARKER,L3-MODULE-SEMANTICS,T2,hold_at_l2,"Source queue may create TEST-520 bounded SessionStart test","init_all_modules execution; autonomous session control; public canon",No live L3/L4 claim,No

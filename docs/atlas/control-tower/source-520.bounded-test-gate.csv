@@ -1,0 +1,6 @@
+Test ID,Gate,Required Evidence,Pass Condition,Blocked Failure Mode,Status
+SOURCE520-T001,Neutral session start,"A work unit opens from no active session state","520 records a bounded start state without external writes","Hidden external mutation or unlogged state creation",Queued
+SOURCE520-T002,Preflight handoff,"T520 to T521 relation is triggered only by session_opened","Handoff remains an internal routing event and does not execute 521 automatically","Skipping Preflight boundary or auto-executing checks",Queued
+SOURCE520-T003,Context loading boundary,"SessionStart lists the context sources it loads","Context source list is visible and raw private dumps are not exposed","Unbounded workspace dump or raw private ID export",Queued
+SOURCE520-T004,No automatic init execution,"Module JSON action init_all_modules remains non-executable","Any initialization action is simulated or described until implementation review passes","Automatic module execution from specification text",Queued
+SOURCE520-T005,Equilibrium feedback,"Status trace boundary mode and GitHub sync fields are captured","Causal chain downgrade rule and next action are visible","Untraceable session state or missing downgrade rule",Queued

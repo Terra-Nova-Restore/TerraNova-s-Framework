@@ -1,0 +1,42 @@
+{
+  "log_id": "TEST-520-BOUNDED-SESSIONSTART-2026-05-18",
+  "event_type": "bounded_test_case",
+  "created_at": "2026-05-18T05:00:00+00:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "TEST-520 - SessionStart Bounded Test Case",
+  "mode": "STUDIO repo-local bounded test",
+  "source_trace": [
+    "docs/atlas/control-tower/source-520.primary-source-pass.md",
+    "docs/atlas/control-tower/source-520.claim-review.csv",
+    "docs/atlas/control-tower/source-520.bounded-test-gate.csv",
+    "docs/atlas/control-tower/test-520.test-cases.csv",
+    "docs/atlas/control-tower/test-520.results.csv"
+  ],
+  "deterministic_boundary": [
+    "Repo-local simulation only",
+    "No live trigger engine execution",
+    "No external mutation",
+    "No Notion AI credit use",
+    "No init_all_modules execution",
+    "No L3/L4 elevation",
+    "No raw private source dump"
+  ],
+  "probabilistic_hypothesis": "If SessionStart opens only a bounded internal frame and routes toward Preflight through session_opened, then it is safe to keep 520 at L2 while preparing later implementation tests.",
+  "selected_action": "Pass all five TEST-520 gates locally and allow SOURCE-520 live registry update under explicit user authorization.",
+  "local_outputs": [
+    "docs/atlas/control-tower/batch-test-520.md",
+    "docs/atlas/control-tower/test-520.sessionstart-bounded-test.md",
+    "docs/atlas/control-tower/test-520.test-cases.csv",
+    "docs/atlas/control-tower/test-520.results.csv",
+    "docs/atlas/control-tower/test-520.review-summary.json"
+  ],
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "feedback_target": [
+    "SOURCE-520 Notion apply",
+    "CAP Canon Admission Queue",
+    "AUTO-001"
+  ],
+  "status": "completed"
+}

@@ -37,9 +37,11 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `batch-sync-001.md` | Registry sync stabilization plan and scoped sync decisions. |
 | `batch-sync-002.md` | Canon field sync closure for the five CAP module draft rows. |
 | `batch-sync-003.md` | GitHub trace closure after SOURCE-521 live Notion mutation. |
+| `batch-sync-004.md` | GitHub trace closure after TEST-520 and SOURCE-520 live Notion mutation. |
 | `sync-001.registry-updates.csv` | Planned/applied Sync Status metadata updates for SYNC-001. |
 | `sync-002.registry-updates.csv` | Applied Sync Status closure updates for the five CAP module draft rows. |
 | `sync-003.git-trace-manifest.csv` | Scoped inclusion manifest for SYNC-003 local Git trace closure. |
+| `sync-004.git-trace-manifest.csv` | Scoped inclusion manifest and branch-state record for SYNC-004. |
 | `dup-001.registry-updates.csv` | Planned/applied metadata updates for DUP-001. |
 | `batch-sens-001.md` | Sensitivity boundary stabilization plan. |
 | `sens-001.findings.md` | Findings for restricted, sensitive and private duplicate classes. |
@@ -51,6 +53,20 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `sens-002.elevation-gate.csv` | Five elevation stop rules for protected canon lanes. |
 | `sens-002.notion-mutation-package.csv` | Future Notion apply package for SENS-002, currently not applied. |
 | `sens-002.review-summary.json` | Machine-readable SENS-002 summary. |
+| `batch-source-520.md` | SOURCE-520 batch record for the SessionStart primary source pass. |
+| `source-520.primary-source-pass.md` | Human-readable SOURCE-520 source interpretation and canon decision. |
+| `source-520.source-ledger.csv` | Ten source rows checked for `520 / SessionStart`. |
+| `source-520.claim-review.csv` | Claim-by-claim admission and block table for `520`. |
+| `source-520.elevation-decision.csv` | Local L2 confirmation and future Notion apply boundary for `520`. |
+| `source-520.bounded-test-gate.csv` | Five required gates before any future `520` L3 module admission. |
+| `source-520.notion-mutation-package.csv` | Future Notion mutation package for applying SOURCE-520. |
+| `source-520.registry-updates.csv` | Applied Notion update trace for SOURCE-520. |
+| `source-520.review-summary.json` | Machine-readable SOURCE-520 summary. |
+| `batch-test-520.md` | TEST-520 batch record for the bounded SessionStart test. |
+| `test-520.sessionstart-bounded-test.md` | Human-readable TEST-520 contract, input, expected output and result. |
+| `test-520.test-cases.csv` | Five bounded SessionStart test cases. |
+| `test-520.results.csv` | Five TEST-520 pass results and residual risks. |
+| `test-520.review-summary.json` | Machine-readable TEST-520 summary. |
 | `batch-source-521.md` | SOURCE-521 batch record for the Preflight primary source pass. |
 | `source-521.primary-source-pass.md` | Human-readable SOURCE-521 source interpretation and canon decision. |
 | `source-521.source-ledger.csv` | Nine source rows checked for `521 / Preflight`. |
@@ -73,6 +89,7 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `auto-001.check-matrix.csv` | AUTO-001 validation matrix. |
 | `auto-001.runbook.md` | AUTO-001 runbook for local and live-read checks. |
 | `auto-001.test-results-2026-05-17.json` | First AUTO-001 test run result with live Zenodo read. |
+| `auto-001.test-results-2026-05-18.json` | Latest AUTO-001 test run result with live Zenodo read. |
 | `batch-ninf-001.md` | CAP 0.3 Notion infiltration readpass and future mutation package. |
 | `ninf-001.findings.md` | Read-only Notion findings for CAP page, registry and tool limitation. |
 | `ninf-001.notion-mutation-package.csv` | Proposed Notion updates that require explicit GO before execution. |
@@ -107,9 +124,13 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `causal-log.sens-001-readpass-2026-05-17.json` | Causal log event for the SENS-001 read-only pass. |
 | `causal-log.sens-001-mutation-2026-05-17.json` | Causal log event for the SENS-001 registry metadata update. |
 | `causal-log.sens-002-plan-2026-05-17.json` | Causal log event for the SENS-002 protected canon lane review. |
+| `causal-log.source-520-primary-source-pass-2026-05-18.json` | Causal log event for the SOURCE-520 SessionStart primary source pass. |
+| `causal-log.test-520-bounded-sessionstart-2026-05-18.json` | Causal log event for the TEST-520 bounded SessionStart test. |
+| `causal-log.source-520-mutation-2026-05-18.json` | Causal log event for the applied SOURCE-520 live Notion mutation. |
 | `causal-log.source-521-primary-source-pass-2026-05-17.json` | Causal log event for the SOURCE-521 Preflight primary source pass. |
 | `causal-log.source-521-mutation-2026-05-18.json` | Causal log event for the applied SOURCE-521 live Notion mutation. |
 | `causal-log.sync-003-github-trace-closure-2026-05-18.json` | Causal log event for SYNC-003 GitHub trace closure. |
+| `causal-log.sync-004-github-trace-closure-2026-05-18.json` | Causal log event for SYNC-004 GitHub trace closure. |
 | `causal-log.prism-001-readpass-2026-05-17.json` | Causal log event for the PRISM-001 read-only pass. |
 | `causal-log.prism-001-mutation-2026-05-17.json` | Causal log event for the PRISM-001 registry metadata update. |
 | `causal-log.prism-002-plan-2026-05-17.json` | Causal log event for the PRISM-002 next-release backpropagation plan. |
@@ -520,7 +541,7 @@ docs/atlas/control-tower/cap-0.4-canon-admission-iperka.md
 
 CAP 0.4 turns canon into an admission system. A claim may enter canon only when source tier, canon level, allowed claims, blocked claims, downgrade rule and sensitivity boundary are visible. The current source-tier map has eight tiers, and the first elevation queue has nine rows.
 
-Immediate CAP 0.4 stance after SOURCE-521: `516`, `520`, `521`, `540` and `544` have bounded local L2 routing-marker admission. `521` remains protected and its live Notion row still requires a future explicit apply command before the registry reflects the local L2 pass. No canonical `TRG-*`, execution rule or public-facing canon claim is created by CAP 0.4 boot.
+Immediate CAP 0.4 stance after SOURCE-520: `516`, `520`, `521`, `540` and `544` have bounded local L2 routing-marker admission. `520` and `521` now have T2-backed primary source passes; both hold at L2 until bounded tests and reviewed module contracts exist. No canonical `TRG-*`, execution rule or public-facing canon claim is created by CAP 0.4 boot.
 
 REGISTRY-002 has been applied after the exact command `GO Notion REGISTRY-002 anwenden`. It added nine canon admission fields, backfilled the five CAP module draft rows, created the `CAP Canon Admission Queue` view and appended a CAP page checkpoint. The apply did not delete rows, export private inventory, assign canonical `TRG-*`, elevate any row to L3/L4, demote Status/Canon Status or use Notion AI credits.
 
@@ -530,4 +551,8 @@ SENS-002 has closed the first protected canon lane review locally. `521` remains
 
 SOURCE-521 has completed the Preflight primary source pass and was applied to Notion on 2026-05-18 after the exact command `GO Notion SOURCE-521 anwenden`. Targeted Notion `workspace_search` and repo-local source review support `521 / Preflight` as a protected `L2-ROUTING-MARKER`: active `/preflight` safety entrypoint, pre-action routing gate and non-777 normal route. L3 semantics, automation, protection execution, `TRG-*` assignment and public canon remain blocked.
 
+SOURCE-520 has completed the SessionStart primary source pass and was applied to Notion on 2026-05-18 after the exact command `GO Notion SOURCE-520`. Targeted Notion `workspace_search` and repo-local source review confirm `520 / SessionStart` as an active internal `L2-ROUTING-MARKER`: active `/start` core entrypoint, start-of-work-unit marker, initialization/root-state marker and bounded `session_opened` handoff toward Preflight. `TEST-520` passed five bounded gates locally. `init_all_modules()` execution, autonomous session control, external mutation permission, `TRG-*` assignment, L3 semantics and public canon remain blocked.
+
 SYNC-003 closes the GitHub trace after SOURCE-521. It keeps the closure scoped to Control Tower artifacts, `scripts/cap_control_checks.py` and the 2026-05-18 AUTO-001 result; unrelated dirty files remain untouched and no push is performed.
+
+SYNC-004 closes the repo-local GitHub trace after TEST-520 and SOURCE-520. It records that the current local branch `codex/governance-doc-validation` has a gone upstream and is 2 commits ahead / 45 commits behind `origin/main`, so no push, rebase or merge is performed in this pass. The closure remains scoped to Control Tower artifacts and `scripts/cap_control_checks.py`; unrelated dirty files remain untouched.

@@ -1,0 +1,25 @@
+{
+  "review_id": "TEST-520",
+  "title": "SessionStart Bounded Test Case",
+  "created": "2026-05-18",
+  "status": "complete_local",
+  "mode": "STUDIO repo-local bounded test",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "parent_gate": "SOURCE-520",
+  "tests_total": 5,
+  "tests_passed": 5,
+  "tests_failed": 0,
+  "decision": "pass_l2_bounded_contract",
+  "canon_effect": "520 remains L2-ROUTING-MARKER; SOURCE-520 may be applied to Notion; L3 remains blocked.",
+  "blocked_claims": [
+    "init_all_modules execution",
+    "autonomous session control",
+    "external mutation permission",
+    "automatic Preflight execution",
+    "raw private inventory export",
+    "public-facing trigger canon"
+  ],
+  "notion_application": "SOURCE-520 applied on 2026-05-18 after explicit GO",
+  "next_best_action": "Continue with SOURCE-544 or a future implementation contract for 520."
+}

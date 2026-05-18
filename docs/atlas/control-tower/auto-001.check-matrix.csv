@@ -24,3 +24,7 @@ AUTO-001-V,SENS-002 protected canon gate,"python scripts/cap_control_checks.py",
 AUTO-001-W,SOURCE-521 primary source pass,"python scripts/cap_control_checks.py","SOURCE-521 source ledger=9; claim review=9; elevation decision=3; mutation package=4",None,0,Implemented
 AUTO-001-X,SOURCE-521 live apply trace,"python scripts/cap_control_checks.py","SOURCE-521 registry-updates rows=4; mutation causal log exists and parses",None,0,Implemented
 AUTO-001-Y,SYNC-003 GitHub trace closure,"python scripts/cap_control_checks.py","SYNC-003 manifest=8; trace closure causal log exists and parses",None,0,Implemented
+AUTO-001-Z,SOURCE-520 primary source pass,"python scripts/cap_control_checks.py","SOURCE-520 source ledger=10; claim review=9; elevation decision=3; bounded test gate=5; mutation package=4",None,0,Implemented
+AUTO-001-AA,TEST-520 bounded test,"python scripts/cap_control_checks.py","TEST-520 test cases=5; results=5; review summary and causal log parse",None,0,Implemented
+AUTO-001-AB,SOURCE-520 live apply trace,"python scripts/cap_control_checks.py","SOURCE-520 registry-updates rows=4; mutation causal log exists and parses",None,0,Implemented
+AUTO-001-AC,SYNC-004 GitHub trace closure,"python scripts/cap_control_checks.py","SYNC-004 manifest=12; trace closure causal log exists and parses",None,0,Implemented

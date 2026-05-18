@@ -1,0 +1,6 @@
+Test ID,Scenario,Input State,Expected Output,Blocked Failure Mode,Decision
+TEST520-C001,Neutral session opening,no active session,bounded session_frame opened without external write,hidden external mutation,pass
+TEST520-C002,Preflight handoff,session_frame opened,session_opened guard routes to 521 without executing 521,automatic preflight execution,pass
+TEST520-C003,Context loading boundary,/start requested,context source list remains bounded and no raw private dump is exposed,raw workspace inventory export,pass
+TEST520-C004,Module execution block,module JSON contains init_all_modules,action remains non-executable specification text,automatic module execution,pass
+TEST520-C005,Equilibrium trace,session start accepted,status trace boundary mode and next action are visible,untraceable session state,pass

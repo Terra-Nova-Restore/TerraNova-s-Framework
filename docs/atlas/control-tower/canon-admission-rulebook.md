@@ -110,8 +110,8 @@ The five MMD-007 module drafts stay bounded:
 | Reference | Allowed Now | Blocked |
 | --- | --- | --- |
 | `516` | L2 internal routing marker. | AutoFlow sibling semantics, execution, public trigger canon. |
-| `520` | L2 internal routing marker. | External mutation, autonomous session control, full trigger definition. |
-| `521` | L2 protected internal routing marker after `SOURCE-521` local source pass; live Notion update pending. | L3 semantics, protection execution, Schattenarchiv-depth behavior, preflight automation, public canon. |
+| `520` | L2 internal routing marker confirmed by `SOURCE-520` and `TEST-520`; live Notion source tier is now T2. | L3 semantics, `init_all_modules` execution, external mutation, autonomous session control, public canon. |
+| `521` | L2 protected internal routing marker after `SOURCE-521`; live Notion update applied on 2026-05-18. | L3 semantics, protection execution, Schattenarchiv-depth behavior, preflight automation, public canon. |
 | `540` | L2 internal routing marker. | Proof finality, metric finality, public scientific claim. |
 | `544` | L2 internal routing marker. | Full workspace sync claim, automatic sync, public canon. |
 
