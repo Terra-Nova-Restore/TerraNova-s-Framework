@@ -1,8 +1,8 @@
 # TRIGGER-001 - Bounded Command Surface
 
-Status: STUDIO implementation, repo-local  
-Date: 2026-05-17  
-External mutation: none  
+Status: STUDIO implementation, repo-local
+Date: 2026-05-17
+External mutation: none
 Activation: `/fff`
 
 ## Recommended Variant

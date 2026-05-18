@@ -1,10 +1,10 @@
 # CAP 0.3 - Operational Control IPERKA
 
-Status: STUDIO plan, repo-local, Notion mutation pending explicit GO  
-Date: 2026-05-17  
-Predecessor: `CAP 0.2 - Registry Stabilization IPERKA`  
-Live registry: `https://www.notion.so/f9aafd4eaf9046e0beb7552b1018af83`  
-Data source: `collection://f8e7df9f-e1ed-43f0-888b-39d362f2cef2`
+Status: STUDIO plan, repo-local, Notion mutation pending explicit GO
+Date: 2026-05-17
+Predecessor: `CAP 0.2 - Registry Stabilization IPERKA`
+Live registry: `notion://redacted-internal-object`
+Data source: `notion-ds://redacted-internal-source`
 
 ## Purpose
 

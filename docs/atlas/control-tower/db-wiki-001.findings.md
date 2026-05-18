@@ -1,8 +1,8 @@
 # DB-WIKI-001 Findings - Read-only Pass
 
-Status: findings complete, Notion metadata package applied after explicit GO  
-Date: 2026-05-17  
-Batch: `DB-WIKI-001`  
+Status: findings complete, Notion metadata package applied after explicit GO
+Date: 2026-05-17
+Batch: `DB-WIKI-001`
 Scope: databases, data sources and wikis from the CAP 0.1.0 registry seed
 
 ## Summary
@@ -41,7 +41,7 @@ This means CAP must treat it as a hub/container, not as a clean single registry 
 The `Library Sync - 100 Batches` database has a data source:
 
 ```text
-collection://31af7297-de7e-8025-9f67-000bbdefc5db
+notion-ds://redacted-internal-source
 ```
 
 The current registry has the database row, but not a separate data-source row. CAP should add this as an explicit row in a future mutation package because it is the operational handle for batch rows.
@@ -71,13 +71,13 @@ Initial read pass performed no Notion mutation. After explicit GO, the metadata-
 | Meine Notion-KI | Keep `Reference`; add role note: `ownership and verification surface`. |
 | Meine Notion-KI wiki data source | Keep `Reference`; add boundary: `wiki parent/page update limitation`. |
 | Library Sync - 100 Batches | Keep `Reference`; add note: `future batch execution surface`. |
-| New row | Add `Library Sync - 100 Batches data source` with ID `collection://31af7297-de7e-8025-9f67-000bbdefc5db`. |
+| New row | Add `Library Sync - 100 Batches data source` with ID `notion-ds://redacted-internal-source`. |
 
 Applied result:
 
 ```text
 new row: Library Sync - 100 Batches data source
-new row id: 363f7297-de7e-81e4-9d8f-ef4df1e09257
+new row id: notion-id://redacted
 updated rows: 9
 live registry rows: 22
 ```

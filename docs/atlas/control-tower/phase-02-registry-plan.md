@@ -1,7 +1,7 @@
 # CAP 0.1.0 Phase 02 - Registry Seed Plan
 
-Status: executed, Notion registry created  
-Date: 2026-05-17  
+Status: executed, Notion registry created
+Date: 2026-05-17
 Scope: first `Workspace Object Registry` seed after CAP page creation
 
 ## Purpose
@@ -14,13 +14,13 @@ The first seed now has 21 rows, derived from `source-map.csv`, the Home-Ansichte
 
 | Item | Value |
 | --- | --- |
-| Registry database | `https://www.notion.so/f9aafd4eaf9046e0beb7552b1018af83` |
-| Registry data source | `collection://f8e7df9f-e1ed-43f0-888b-39d362f2cef2` |
+| Registry database | `notion://redacted-internal-object` |
+| Registry data source | `notion-ds://redacted-internal-source` |
 | Parent page | `CAP 0.1.0 - Cognitive Ability Point` |
 | Seed rows created | 21 |
 | Database views created | 5 plus default table |
 | CAP page linked views created | 3 |
-| Snapshot source | `C:\Users\Silvan\Desktop\[Home-Ansichten](httpswww.notion.so.txt` |
+| Snapshot source | `<local-sensitive-home-ansichten-snapshot>` |
 
 ## Created Local Artifacts
 

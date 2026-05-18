@@ -22,7 +22,7 @@
     "multi_source_hub": "Cognitive Terranova System",
     "restricted_wiki_boundary": "existence-only",
     "missing_registry_row": "Library Sync - 100 Batches data source",
-    "missing_registry_data_source_id": "collection://31af7297-de7e-8025-9f67-000bbdefc5db",
+    "missing_registry_data_source_id": "notion-ds://redacted-internal-source",
     "notion_mutations_performed": 0
   },
   "equilibrium_check": {
@@ -34,4 +34,3 @@
   },
   "next_review": "Request explicit Notion mutation GO for DB-WIKI-001 update package if the findings are accepted."
 }
-

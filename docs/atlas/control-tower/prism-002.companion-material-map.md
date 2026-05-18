@@ -1,6 +1,6 @@
 # PRISM-002 Companion Material Map
 
-Status: draft, repo-local  
+Status: draft, repo-local
 Date: 2026-05-17
 
 ## Recommended Variant

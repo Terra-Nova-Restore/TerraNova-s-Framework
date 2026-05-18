@@ -1,7 +1,7 @@
 # TRIGGER-001 Command Surface
 
-Status: active  
-Date: 2026-05-17  
+Status: active
+Date: 2026-05-17
 Scope: CAP 0.3 / Trigger 1-400 / `/fff`
 
 ## Operating Rule

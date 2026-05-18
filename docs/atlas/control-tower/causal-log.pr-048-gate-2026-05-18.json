@@ -1,0 +1,31 @@
+{
+  "log_id": "CAP-LOG-2026-05-18-PR048-GATE",
+  "event_id": "pr-048-gate-2026-05-18",
+  "created_at": "2026-05-18T07:45:00+02:00",
+  "actor": "Codex",
+  "trigger": "PR-048-GATE go",
+  "mode": "GitHub public-boundary gate",
+  "input": [
+    "PR #48 draft branch codex/control-tower-sessionstart-mainline",
+    "origin/main",
+    "AUTO-001 live Zenodo validation",
+    "public repository visibility check"
+  ],
+  "observation": "The PR was structurally valid and AUTO-001 passed, but the public repository context required redaction of raw Notion URLs, collection handles, UUID object IDs and local desktop paths before the PR could pass the gate.",
+  "selected_action": "Run public-boundary scans, redact internal handles, clean whitespace drift, rerun local checks and keep the PR as draft.",
+  "deterministic_boundary": "No Notion, Zenodo, Drive, Slack, Linear, Stripe or other external system was mutated. GitHub mutation is limited to the explicitly authorized PR branch update. No merge and no ready-for-review transition are authorized by this gate.",
+  "probabilistic_hypothesis": "Keeping semantic object names while removing raw private handles preserves review value and reduces public leakage risk.",
+  "emergent_coherence": "The public GitHub trace now matches the Control Tower boundary: Notion remains the internal system of record, GitHub carries a redacted audit trace, and Zenodo remains the citable external anchor.",
+  "external_mutation": true,
+  "external_mutation_scope": "GitHub PR #48 branch update only",
+  "notion_ai_credits_used": 0,
+  "checks": [
+    "repository visibility public",
+    "raw Notion handle scan passed after redaction",
+    "secret/token scan passed with only policy-word false positives",
+    "git diff --check passed",
+    "python -m py_compile scripts/cap_control_checks.py passed",
+    "python scripts/cap_control_checks.py --live-zenodo passed"
+  ],
+  "result": "gate passed; PR remains draft pending explicit ready or merge command"
+}

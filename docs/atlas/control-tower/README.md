@@ -1,7 +1,7 @@
 # CAP 0.1.0 - Cognitive Ability Point
 
-Status: STUDIO control tower, Notion-backed as of 2026-05-17  
-Owner: Silvan Lenhard / TerraNova  
+Status: STUDIO control tower, Notion-backed as of 2026-05-17
+Owner: Silvan Lenhard / TerraNova
 Operating frame: Equilibrium, CIC, IPERKA, Notion as system of record, GitHub as audit/version trace
 
 This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive Ability Point** as the Control Tower for the TerraNova workspace. It does this without using Notion Custom Agents or credit-consuming autonomous agent runs.
@@ -174,9 +174,9 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 
 | Object | Value |
 | --- | --- |
-| CAP page | `https://www.notion.so/363f7297de7e816e840ae8d95cfd7842` |
-| Registry database | `https://www.notion.so/f9aafd4eaf9046e0beb7552b1018af83` |
-| Registry data source | `collection://f8e7df9f-e1ed-43f0-888b-39d362f2cef2` |
+| CAP page | `notion://redacted-internal-object` |
+| Registry database | `notion://redacted-internal-object` |
+| Registry data source | `notion-ds://redacted-internal-source` |
 | Initial rows | 21 |
 | Current live rows | 32 after `MMD-006` |
 | Current `Needs sync` rows | 0 for the CAP module draft lane after `SYNC-002` scoped closure |
@@ -464,7 +464,7 @@ It should contain and route:
 Live registry:
 
 ```text
-https://www.notion.so/f9aafd4eaf9046e0beb7552b1018af83
+notion://redacted-internal-object
 ```
 
 ## CAP 0.2 Continuation

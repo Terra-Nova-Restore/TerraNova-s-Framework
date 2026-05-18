@@ -1,7 +1,7 @@
 # REGISTRY-002 Apply Gate
 
-Status: prepared, not applied  
-Date: 2026-05-17  
+Status: prepared, not applied
+Date: 2026-05-17
 Target: live CAP Workspace Object Registry
 
 ## Purpose

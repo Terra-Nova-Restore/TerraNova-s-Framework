@@ -1,7 +1,7 @@
 # CAP 0.1.0 Notion Mutation Gate
 
-Status: BIZ gate, first CAP page mutation completed  
-Date: 2026-05-17  
+Status: BIZ gate, first CAP page mutation completed
+Date: 2026-05-17
 Scope: First Notion creation/update package for CAP 0.1.0
 
 ## Current State
@@ -12,10 +12,10 @@ Created page:
 
 ```text
 Title: CAP 0.1.0 - Cognitive Ability Point
-Page ID: 363f7297-de7e-816e-840a-e8d95cfd7842
-URL: https://www.notion.so/363f7297de7e816e840ae8d95cfd7842
+Page ID: notion-id://redacted
+URL: notion://redacted-internal-object
 Parent: TerraNova - Entwicklungs- & Integrationszone
-Parent ID: 6e7731da-f815-4dcd-b063-833255618be3
+Parent ID: notion-id://redacted
 ```
 
 No database, view, property or further page mutation is authorized by this file.
@@ -82,4 +82,3 @@ GO Notion CAP 0.1.0 erstellen
 ## Next Gate
 
 Any next Notion mutation requires a new explicit approval phrase and fresh parent/database fetch.
-

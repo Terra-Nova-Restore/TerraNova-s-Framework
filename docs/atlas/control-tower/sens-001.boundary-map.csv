@@ -4,4 +4,3 @@ SENS-001-B,Raw Home-Ansichten inventory,Sensitive,Aggregate counts and queue sig
 SENS-001-C,Patent/IP dossier duplicates,Sensitive,Boundary classification only,IP and redaction review,No deletion,No public detail expansion,Registry,Keep protected before DUP-002 rename/merge work.
 SENS-001-D,Trigger/session/deep-system exports,Internal/Restricted,Internal canon routing,Trigger/session canon review,No deletion,No public reuse by default,Trigger Map,Depth-sensitive material requires explicit routing.
 SENS-001-E,Chat/person/export remnants,Private,Private classification only,Source check and owner decision,No deletion,No public summary by default,Logbook,Treat as private import/remnant material.
-

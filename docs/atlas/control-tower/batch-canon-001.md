@@ -1,8 +1,8 @@
 # CANON-001 - Source-of-Truth Stabilization
 
-Status: Notion metadata package applied, local trace synced  
-Date: 2026-05-17  
-Parent IPERKA: `CAP 0.2 - Registry Stabilization IPERKA`  
+Status: Notion metadata package applied, local trace synced
+Date: 2026-05-17
+Parent IPERKA: `CAP 0.2 - Registry Stabilization IPERKA`
 Mutation policy: metadata-only Notion updates after explicit GO
 
 ## Purpose

@@ -1,7 +1,7 @@
 # NINF-001 Findings
 
-Date: 2026-05-17  
-Mode: STUDIO  
+Date: 2026-05-17
+Mode: STUDIO
 Mutation: applied after explicit full-speed approval
 
 ## Live Notion State
@@ -10,9 +10,9 @@ The CAP page and registry are reachable.
 
 Observed live anchors:
 
-- CAP page: `https://www.notion.so/363f7297de7e816e840ae8d95cfd7842`
-- Registry database: `https://www.notion.so/f9aafd4eaf9046e0beb7552b1018af83`
-- Registry data source: `collection://f8e7df9f-e1ed-43f0-888b-39d362f2cef2`
+- CAP page: `notion://redacted-internal-object`
+- Registry database: `notion://redacted-internal-object`
+- Registry data source: `notion-ds://redacted-internal-source`
 
 The CAP page stated that the next internal queue was to close CAP 0.2 and create CAP 0.3. CAP 0.3 already existed repo-local, so Notion was behind the GitHub trace.
 

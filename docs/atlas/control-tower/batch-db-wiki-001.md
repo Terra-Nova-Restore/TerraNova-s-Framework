@@ -1,8 +1,8 @@
 # DB-WIKI-001 - Database, Data Source and Wiki Stabilization
 
-Status: Notion metadata package applied, local delta logged  
-Date: 2026-05-17  
-Parent IPERKA: `CAP 0.2 - Registry Stabilization IPERKA`  
+Status: Notion metadata package applied, local delta logged
+Date: 2026-05-17
+Parent IPERKA: `CAP 0.2 - Registry Stabilization IPERKA`
 Mutation policy: Notion read-only until explicit GO
 
 ## Purpose

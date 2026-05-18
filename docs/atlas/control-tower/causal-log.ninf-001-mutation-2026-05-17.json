@@ -37,12 +37,12 @@
     "registry_views_created": 2,
     "current_live_rows": 27,
     "new_registry_rows": [
-      "https://www.notion.so/363f7297de7e8171b282f08b65f2072f",
-      "https://www.notion.so/363f7297de7e81bb8986fb268190e78c"
+      "notion://redacted-internal-object",
+      "notion://redacted-internal-object"
     ],
     "new_views": [
-      "view://363f7297-de7e-8108-b0b2-000c2bba2165",
-      "view://363f7297-de7e-8119-ace1-000c8e1384d5"
+      "view://notion-id://redacted",
+      "view://notion-id://redacted"
     ],
     "deleted_pages": 0,
     "schema_changes": 0,

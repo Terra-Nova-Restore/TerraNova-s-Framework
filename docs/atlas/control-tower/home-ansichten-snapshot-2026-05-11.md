@@ -1,8 +1,8 @@
 # Home-Ansichten Snapshot - 2026-05-11
 
-Status: sensitive local snapshot, indexed as CAP reference  
-Reviewed: 2026-05-17  
-Source file: `C:\Users\Silvan\Desktop\[Home-Ansichten](httpswww.notion.so.txt`
+Status: sensitive local snapshot, indexed as CAP reference
+Reviewed: 2026-05-17
+Source file: `<local-sensitive-home-ansichten-snapshot>`
 
 ## Role In CAP 0.1.0
 

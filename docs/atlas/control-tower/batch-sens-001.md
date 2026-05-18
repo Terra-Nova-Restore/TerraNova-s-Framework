@@ -48,7 +48,7 @@ Applied Notion metadata result:
 
 ```text
 new registry row: SENS-001 Sensitivity Boundary Queue
-new row id: 363f7297-de7e-817f-9641-efa61b2eb502
+new row id: notion-id://redacted
 updated row: Restricted wiki data source
 updated row: Home-Ansichten Snapshot 2026-05-11
 updated row: DUP-001 Duplicate Title Review Queue

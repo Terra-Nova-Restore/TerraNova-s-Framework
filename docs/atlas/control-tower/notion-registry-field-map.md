@@ -1,7 +1,7 @@
 # CAP 0.1.0 Notion Registry Field Map
 
-Status: executed mapping, Notion registry created  
-Date: 2026-05-17  
+Status: executed mapping, Notion registry created
+Date: 2026-05-17
 Input: `object-registry.schema.json` and `workspace-object-registry.seed.csv`
 
 ## Purpose
@@ -22,19 +22,19 @@ Parent:
 
 ```text
 CAP 0.1.0 - Cognitive Ability Point
-https://www.notion.so/363f7297de7e816e840ae8d95cfd7842
+notion://redacted-internal-object
 ```
 
 Created database:
 
 ```text
-https://www.notion.so/f9aafd4eaf9046e0beb7552b1018af83
+notion://redacted-internal-object
 ```
 
 Created data source:
 
 ```text
-collection://f8e7df9f-e1ed-43f0-888b-39d362f2cef2
+notion-ds://redacted-internal-source
 ```
 
 ## Required Properties

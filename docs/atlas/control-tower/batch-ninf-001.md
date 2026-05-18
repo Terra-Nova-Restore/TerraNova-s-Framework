@@ -1,8 +1,8 @@
 # NINF-001 - CAP 0.3 Notion Infiltration Readpass
 
-Status: STUDIO mutation applied  
-Date: 2026-05-17  
-Scope: CAP page, CAP registry database, CAP registry data source and registry search evidence  
+Status: STUDIO mutation applied
+Date: 2026-05-17
+Scope: CAP page, CAP registry database, CAP registry data source and registry search evidence
 External mutation: low-risk Notion visibility update applied after user approval
 
 ## Recommended Variant
@@ -27,7 +27,7 @@ The mutation has now been applied after Silvan's full-speed approval.
 | CAP page | `CAP 0.1.0 - Cognitive Ability Point` exists under `TerraNova - Entwicklungs- & Integrationszone`. |
 | CAP page content | The page still says: `Next: close CAP 0.2 and create CAP 0.3 IPERKA`. |
 | Registry database | `CAP 0.1.0 - Workspace Object Registry` exists under the CAP page. |
-| Registry data source | `collection://f8e7df9f-e1ed-43f0-888b-39d362f2cef2` is available and schema-visible. |
+| Registry data source | `notion-ds://redacted-internal-source` is available and schema-visible. |
 | Registry views | `Default view`, `By Status`, `By Object Type`, `By Sensitivity`, `Canonical Sources`, `Prism / Zenodo Feedback`. |
 | Registry search | `DUP-001`, `SENS-001`, `PRISM-001`, CAP page, registry and core anchors are searchable. |
 | Query tool | SQL data-source query remains blocked by `notion-query-data-sources not found`. |

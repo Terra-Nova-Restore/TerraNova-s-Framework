@@ -1,11 +1,11 @@
 Name,Notion Page ID,Update Type,Status,Sync Status,Equilibrium Notes
-Cognitive Terranova System,363f7297-de7e-81ac-9f3d-c643a2d3ba72,updated,Reviewed,Needs sync,DB-WIKI-001 verified this as a multi-source hub with parked GitHub-Sync template; keep Candidate not CAP registry replacement.
-Cognitive Terranova System main data source,363f7297-de7e-8194-831f-eb2937ac76fa,updated,Reviewed,Needs sync,DB-WIKI-001 verified schema; keep Reference and map fields before mutation.
-Restricted wiki data source,363f7297-de7e-817c-93d8-c12a800f7492,updated,Reviewed,Not applicable,DB-WIKI-001 verified restricted wiki schema only; existence-only marker no raw child titles or content.
-Mermaid Diagrams - Code Library,363f7297-de7e-810e-827d-cf62d0583122,updated,Reviewed,Needs sync,DB-WIKI-001 verified diagram schema; future review should prioritize ACTIVE and KANON rows.
-Meine Notion-KI,363f7297-de7e-8162-b078-f883be7b7850,updated,Reviewed,Needs sync,DB-WIKI-001 verified top-level wiki database; use as ownership and verification surface not CAP registry.
-Meine Notion-KI wiki data source,363f7297-de7e-816e-b089-c0b6943f8ac3,updated,Reviewed,Needs sync,DB-WIKI-001 verified wiki data source; custom property updates are limited parent operations use wiki page URL.
-Library Sync - 100 Batches,363f7297-de7e-8196-b8f5-d5660309f07c,updated,Reviewed,Needs sync,DB-WIKI-001 verified database and discovered operational data source handle; use as future staged inventory surface.
-CAP 0.1.0 - Workspace Object Registry,363f7297-de7e-81d2-8932-dd890b5771c8,updated,Reviewed,In sync,DB-WIKI-001 verified registry database as live Source of Truth for CAP object governance.
-CAP 0.1.0 Registry data source,363f7297-de7e-810d-b7fc-e577c47dbb75,updated,Reviewed,In sync,DB-WIKI-001 verified registry data source as operational handle for CAP rows and views.
-Library Sync - 100 Batches data source,363f7297-de7e-81e4-9d8f-ef4df1e09257,created,Reviewed,In sync,DB-WIKI-001 discovered missing operational data source row; added after explicit GO.
+Cognitive Terranova System,notion-id://redacted,updated,Reviewed,Needs sync,DB-WIKI-001 verified this as a multi-source hub with parked GitHub-Sync template; keep Candidate not CAP registry replacement.
+Cognitive Terranova System main data source,notion-id://redacted,updated,Reviewed,Needs sync,DB-WIKI-001 verified schema; keep Reference and map fields before mutation.
+Restricted wiki data source,notion-id://redacted,updated,Reviewed,Not applicable,DB-WIKI-001 verified restricted wiki schema only; existence-only marker no raw child titles or content.
+Mermaid Diagrams - Code Library,notion-id://redacted,updated,Reviewed,Needs sync,DB-WIKI-001 verified diagram schema; future review should prioritize ACTIVE and KANON rows.
+Meine Notion-KI,notion-id://redacted,updated,Reviewed,Needs sync,DB-WIKI-001 verified top-level wiki database; use as ownership and verification surface not CAP registry.
+Meine Notion-KI wiki data source,notion-id://redacted,updated,Reviewed,Needs sync,DB-WIKI-001 verified wiki data source; custom property updates are limited parent operations use wiki page URL.
+Library Sync - 100 Batches,notion-id://redacted,updated,Reviewed,Needs sync,DB-WIKI-001 verified database and discovered operational data source handle; use as future staged inventory surface.
+CAP 0.1.0 - Workspace Object Registry,notion-id://redacted,updated,Reviewed,In sync,DB-WIKI-001 verified registry database as live Source of Truth for CAP object governance.
+CAP 0.1.0 Registry data source,notion-id://redacted,updated,Reviewed,In sync,DB-WIKI-001 verified registry data source as operational handle for CAP rows and views.
+Library Sync - 100 Batches data source,notion-id://redacted,created,Reviewed,In sync,DB-WIKI-001 discovered missing operational data source row; added after explicit GO.

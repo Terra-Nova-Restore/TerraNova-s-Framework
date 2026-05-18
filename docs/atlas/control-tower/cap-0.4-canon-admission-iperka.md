@@ -1,8 +1,8 @@
 # CAP 0.4 - Canon Admission IPERKA
 
-Status: STUDIO plan, repo-local, Notion mutation pending explicit GO  
-Date: 2026-05-17  
-Predecessor: `CAP 0.3 - Operational Control IPERKA`  
+Status: STUDIO plan, repo-local, Notion mutation pending explicit GO
+Date: 2026-05-17
+Predecessor: `CAP 0.3 - Operational Control IPERKA`
 Primary input: `MMD-007 - CAP Module Source Review`
 
 ## Purpose

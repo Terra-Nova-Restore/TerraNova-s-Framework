@@ -53,4 +53,3 @@ Raw Home-Ansichten inventory
 No raw page list, Notion IDs, restricted child titles, private chat titles or IP details are exported by this batch.
 
 No Notion schema, page content or source database content is rewritten.
-

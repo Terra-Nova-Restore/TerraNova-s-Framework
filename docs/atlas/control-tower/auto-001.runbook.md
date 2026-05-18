@@ -1,6 +1,6 @@
 # AUTO-001 Runbook
 
-Status: active  
+Status: active
 Date: 2026-05-17
 
 ## Best Default

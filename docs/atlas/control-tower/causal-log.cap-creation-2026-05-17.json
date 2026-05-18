@@ -8,8 +8,8 @@
     "C:/Users/Silvan/.codex/skills/terranova-ferrai/SKILL.md",
     "docs/atlas/control-tower/cap-0.1.0.md",
     "docs/atlas/control-tower/notion-mutation-gate.md",
-    "https://www.notion.so/6e7731daf8154dcdb063833255618be3",
-    "https://www.notion.so/363f7297de7e816e840ae8d95cfd7842"
+    "notion://redacted-internal-object",
+    "notion://redacted-internal-object"
   ],
   "observation": "Silvan explicitly approved the first CAP 0.1.0 Notion page creation with the gate phrase.",
   "trigger_band": "301-400",

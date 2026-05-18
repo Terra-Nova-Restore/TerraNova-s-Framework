@@ -1,7 +1,7 @@
 # CAP 0.1.0 - Cognitive Ability Point
 
-Status: STUDIO specification seed  
-Date: 2026-05-17  
+Status: STUDIO specification seed
+Date: 2026-05-17
 Source discipline: Equilibrium R1-R15.1, CIC, IPERKA, GitHub trace before Notion mutation
 
 ## Definition
@@ -138,4 +138,3 @@ Each release is a temporary coherence point. Every snapshot must expose:
 - what it only simulates
 - what it cannot verify
 - what it feeds back into the next loop
-

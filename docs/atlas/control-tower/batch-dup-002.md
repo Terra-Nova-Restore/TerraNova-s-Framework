@@ -1,8 +1,8 @@
 # DUP-002 - Safe Duplicate Verification
 
-Status: STUDIO plan, repo-local  
-Date: 2026-05-17  
-Predecessor: `DUP-001 Duplicate Title Review Queue`  
+Status: STUDIO plan, repo-local
+Date: 2026-05-17
+Predecessor: `DUP-001 Duplicate Title Review Queue`
 External mutation: none
 
 ## Recommended Variant

@@ -1,7 +1,7 @@
 # Trigger 1-400 Steering Map
 
-Status: STUDIO seed, extended by TRIGGER-001  
-Date: 2026-05-17  
+Status: STUDIO seed, extended by TRIGGER-001
+Date: 2026-05-17
 Scope: CAP 0.1.0 bounded internal steering layer
 
 ## Purpose

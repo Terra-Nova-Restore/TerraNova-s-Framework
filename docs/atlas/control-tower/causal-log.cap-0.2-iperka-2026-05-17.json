@@ -8,7 +8,7 @@
     "docs/atlas/control-tower/README.md",
     "docs/atlas/control-tower/workspace-object-registry.seed.csv",
     "docs/atlas/control-tower/home-ansichten.snapshot.summary.json",
-    "CAP registry: https://www.notion.so/f9aafd4eaf9046e0beb7552b1018af83"
+    "CAP registry: notion://redacted-internal-object"
   ],
   "probabilistic_hypothesis": "The workspace will become controllable faster by stabilizing object state, canon and sync before deep content analysis.",
   "deterministic_boundary": "No Notion mutation was performed in this step; external systems require explicit GO. Silvan is recovery anchor, not the operating model.",
@@ -31,4 +31,3 @@
   },
   "next_review": "Start DB-WIKI-001 and prepare a Notion mutation package only after explicit GO."
 }
-

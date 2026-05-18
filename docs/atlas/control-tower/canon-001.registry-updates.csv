@@ -1,9 +1,8 @@
 Name,Notion Page ID,Update Type,Status,Canon Status,Sync Status,Equilibrium Notes
-CAP 0.1.0 - Cognitive Ability Point,363f7297-de7e-8167-b61b-e0951fd4f518,updated,Reviewed,Source of Truth,In sync,CANON-001 verified CAP as internal control surface; live registry now has 22 rows after DB-WIKI-001.
-EQUILIBRIUM - Offizielles Regelbuch,363f7297-de7e-819c-8265-cc79b935acbc,updated,Reviewed,Source of Truth,Needs sync,CANON-001 verified Equilibrium as governance canon; R16 now active and mirrored in CAP trace.
-CIC - Cognitive Intelligent Cooperation,363f7297-de7e-8174-857d-c7b2e8f1934f,updated,Reviewed,Source of Truth,Needs sync,CANON-001 verified CIC as conceptual canon for reference architecture and negative redundancy; GitHub mirror alignment remains open.
-CEI-DATA-05 - Workspace Index & Page Census Note,363f7297-de7e-814d-b8e1-defa14ce436e,updated,Reviewed,Source of Truth,Needs sync,CANON-001 verified CEI-DATA-05 as source for count model and redaction gates only.
-Zenodo RC01-v12 reference,363f7297-de7e-813e-8d4b-cd9192050453,updated,Reviewed,Source of Truth,In sync,CANON-001 verified local Zenodo reference and release mirror as citable snapshot.
-CAP 0.1.0 - Workspace Object Registry,363f7297-de7e-81d2-8932-dd890b5771c8,updated,Reviewed,Source of Truth,In sync,CANON-001 verified registry database as Source of Truth for object-governance state.
-CAP 0.1.0 Registry data source,363f7297-de7e-810d-b7fc-e577c47dbb75,updated,Reviewed,Source of Truth,In sync,CANON-001 verified registry data source as operational Source of Truth handle.
-
+CAP 0.1.0 - Cognitive Ability Point,notion-id://redacted,updated,Reviewed,Source of Truth,In sync,CANON-001 verified CAP as internal control surface; live registry now has 22 rows after DB-WIKI-001.
+EQUILIBRIUM - Offizielles Regelbuch,notion-id://redacted,updated,Reviewed,Source of Truth,Needs sync,CANON-001 verified Equilibrium as governance canon; R16 now active and mirrored in CAP trace.
+CIC - Cognitive Intelligent Cooperation,notion-id://redacted,updated,Reviewed,Source of Truth,Needs sync,CANON-001 verified CIC as conceptual canon for reference architecture and negative redundancy; GitHub mirror alignment remains open.
+CEI-DATA-05 - Workspace Index & Page Census Note,notion-id://redacted,updated,Reviewed,Source of Truth,Needs sync,CANON-001 verified CEI-DATA-05 as source for count model and redaction gates only.
+Zenodo RC01-v12 reference,notion-id://redacted,updated,Reviewed,Source of Truth,In sync,CANON-001 verified local Zenodo reference and release mirror as citable snapshot.
+CAP 0.1.0 - Workspace Object Registry,notion-id://redacted,updated,Reviewed,Source of Truth,In sync,CANON-001 verified registry database as Source of Truth for object-governance state.
+CAP 0.1.0 Registry data source,notion-id://redacted,updated,Reviewed,Source of Truth,In sync,CANON-001 verified registry data source as operational Source of Truth handle.

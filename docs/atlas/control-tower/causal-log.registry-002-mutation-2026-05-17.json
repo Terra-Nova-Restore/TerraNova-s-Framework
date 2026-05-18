@@ -37,7 +37,7 @@
     "sql_query_tool": "unavailable: notion-query-data-sources not found",
     "fallback": "Fetched five rows and database schema/view directly",
     "rows_verified": 5,
-    "view_verified": "view://363f7297-de7e-81ab-aaa7-000c0705abc4",
+    "view_verified": "view://notion-id://redacted",
     "preflight_521_review": "Sensitivity Review Required"
   },
   "feedback_target": [

@@ -1,8 +1,8 @@
 # AUTO-001 - No-Credit Control Checks
 
-Status: STUDIO implementation, repo-local  
-Date: 2026-05-17  
-External mutation: none  
+Status: STUDIO implementation, repo-local
+Date: 2026-05-17
+External mutation: none
 Credit-consuming automation: none
 
 ## Recommended Variant

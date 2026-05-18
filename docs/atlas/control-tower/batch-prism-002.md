@@ -1,8 +1,8 @@
 # PRISM-002 - Next-Release Backpropagation
 
-Status: STUDIO plan, repo-local  
-Date: 2026-05-17  
-Predecessor: `PRISM-001 Backpropagation Queue`  
+Status: STUDIO plan, repo-local
+Date: 2026-05-17
+Predecessor: `PRISM-001 Backpropagation Queue`
 External mutation: none
 
 ## Recommended Variant

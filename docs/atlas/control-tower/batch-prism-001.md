@@ -75,7 +75,7 @@ Applied Notion metadata result:
 
 ```text
 new registry row: PRISM-001 Backpropagation Queue
-new row id: 363f7297-de7e-81f6-8c0b-e4591247de09
+new row id: notion-id://redacted
 updated row: Zenodo RC01-v12 reference
 updated row: Zenodo RC01-v12 release mirror
 CAP page refresh: 25 live rows and PRISM-001 complete

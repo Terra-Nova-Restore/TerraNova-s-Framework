@@ -1,7 +1,7 @@
 # Canon Admission Rulebook
 
-Status: CAP 0.4 rulebook, repo-local  
-Date: 2026-05-17  
+Status: CAP 0.4 rulebook, repo-local
+Date: 2026-05-17
 Scope: TerraNova CAP canon admission, source governance and elevation control
 
 ## Core Rule

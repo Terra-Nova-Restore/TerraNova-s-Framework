@@ -17,7 +17,7 @@
   "backpropagation_target": "CAP 0.2 batch queue",
   "result": {
     "created_rows": 1,
-    "created_row_id": "363f7297-de7e-817f-9641-efa61b2eb502",
+    "created_row_id": "notion-id://redacted",
     "updated_rows": 3,
     "cap_page_refreshed": true,
     "current_live_registry_rows": 24,

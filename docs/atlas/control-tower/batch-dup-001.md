@@ -59,7 +59,7 @@ delete actions: 0
 
 ```text
 new registry row: DUP-001 Duplicate Title Review Queue
-new row id: 363f7297-de7e-814d-86fe-df6557d831a8
+new row id: notion-id://redacted
 updated registry row: Home-Ansichten Snapshot 2026-05-11
 CAP page refreshed: 23 live rows and 8 duplicate review queues
 schema changes: 0

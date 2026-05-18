@@ -7,4 +7,3 @@ DUP-001-E,Navigation/working surfaces,5,12,Internal,Verify active hubs and dashb
 DUP-001-F,Generic low-signal titles,8,16,Internal,Prepare rename or archive candidate list after ID verification,No deletion; archive only after source check,Registry,Numeric and generic text titles are likely import remnants or weak working names.
 DUP-001-G,Chat/person/export remnants,4,10,Private,Classify as private/import-remnant candidates,No deletion; private review required,Logbook,Keep private by default.
 DUP-001-H,Capability/governance concepts,3,10,Internal,Compare with canonical support pages,No deletion; canon comparison first,Notion Canon,May contain support concepts rather than duplicate waste.
-
