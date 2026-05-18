@@ -1,0 +1,38 @@
+{
+  "review_id": "PR-048-READY-GATE",
+  "created_at": "2026-05-18T16:22:00+02:00",
+  "status": "passed",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "pr": {
+    "number": 48,
+    "state": "open",
+    "draft": true,
+    "head_ref": "codex/control-tower-sessionstart-mainline",
+    "head_sha": "ccbf0b005f68439eea9871fc24f053365e307460",
+    "base_ref": "main",
+    "mergeable_state": "clean",
+    "distance_from_origin_main": "0 behind / 10 ahead"
+  },
+  "local_checks": {
+    "python_compile": "pass",
+    "auto_001_live_zenodo": "pass",
+    "git_diff_check": "pass",
+    "raw_private_notion_id_scan": "pass"
+  },
+  "github_checks": {
+    "validate": "success",
+    "submit_pypi": "success",
+    "netlify_deploy_preview": "success",
+    "netlify_informational_checks": "neutral"
+  },
+  "decision": "PR #48 is technically ready for Silvan review but should remain draft until Silvan explicitly chooses ready-for-review or merge handling.",
+  "next_action": "PR-048-HUMAN-REVIEW",
+  "blocked_actions": [
+    "merge PR #48",
+    "mark PR #48 ready for review automatically",
+    "Zenodo writes, DOI mutation, uploads, workflow dispatch or new versions",
+    "Notion deletion, page movement, schema change or Custom Agent use",
+    "canonicalize all trigger, SCL or Mermaid material"
+  ]
+}
