@@ -1,0 +1,11 @@
+guardrail_id,guardrail,reason,default_action
+RT-GUARD-01,No silent Notion deletion,Workspace memory must remain recoverable,Block and ask explicit approval
+RT-GUARD-02,No silent Notion page movement,Routing can break hidden relations,Block and create mutation package first
+RT-GUARD-03,No raw private Notion IDs in GitHub,Public trace must stay sanitized,Run raw-ID scan before commit
+RT-GUARD-04,No Notion Custom Agents by default,Credits and control boundaries are constrained,Use manual connector fetch/search
+RT-GUARD-05,No Zenodo write by default,Publication state is high-risk,Read live API only
+RT-GUARD-06,No workflow dispatch by default,Automation can mutate publication state,Require explicit gate
+RT-GUARD-07,No full trigger canonization in one step,Trigger history is large and unstable,Use source-reviewed batches
+RT-GUARD-08,No Teil II/III sensitivity elevation by default,Protected material needs explicit review,Hold at sensitivity boundary
+RT-GUARD-09,No claim without source route,Runtime must remain auditable,Record source tier and allowed/blocked claim
+RT-GUARD-10,No merge without green checks,Mainline must remain stable,Run AUTO-001 plus GitHub checks

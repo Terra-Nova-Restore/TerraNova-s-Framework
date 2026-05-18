@@ -1,0 +1,33 @@
+{
+  "log_id": "CAP-RT-001-BREAK-2026-05-18",
+  "event_type": "break_marker",
+  "created_at": "2026-05-18T16:55:00+02:00",
+  "actor": "Codex / FerrAI",
+  "requested_by": "Silvan Lenhard",
+  "activation": "last-turn break and GitHub end control",
+  "mode": "BIZ continuity break",
+  "source_trace": [
+    "docs/atlas/control-tower/batch-cap-rt-001.md",
+    "docs/atlas/control-tower/cap-rt-001.bedienungshandbuch.md",
+    "branch codex/cap-rt-001-control-tower-runtime",
+    "origin/main after PR #48 merge"
+  ],
+  "deterministic_boundary": [
+    "No Notion mutation",
+    "No Zenodo mutation",
+    "No Notion Custom Agents",
+    "No credit-consuming automation",
+    "No workflow dispatch",
+    "No raw private Notion IDs in GitHub trace"
+  ],
+  "probabilistic_hypothesis": "A compact break marker plus draft GitHub PR will make the CAP-RT-001 runtime work easy to resume after the reset.",
+  "selected_action": "Create break marker, run end control checks, push branch and prepare GitHub review surface.",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "feedback_target": [
+    "CAP-RT-002",
+    "Control Tower Runtime",
+    "future GitHub PR review"
+  ],
+  "status": "break_marked"
+}

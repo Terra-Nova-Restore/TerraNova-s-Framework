@@ -1,0 +1,28 @@
+{
+  "review_id": "CAP-RT-001-BREAK",
+  "created_at": "2026-05-18T16:55:00+02:00",
+  "status": "break_marker_created",
+  "external_mutation": false,
+  "notion_ai_credits_used": 0,
+  "branch": "codex/cap-rt-001-control-tower-runtime",
+  "head_before_break_marker": "8fd66ce docs(control-tower): add cap runtime contract",
+  "base_anchor": "a81135b Merge PR #48: Control Tower SessionStart mainline trace",
+  "completed": [
+    "Runtime contract",
+    "Bedienungshandbuch",
+    "Dashboard lanes",
+    "Source routing",
+    "Guardrails",
+    "Action queue",
+    "Validator registration"
+  ],
+  "blocked_actions": [
+    "Notion deletion or page movement",
+    "raw private Notion IDs in GitHub trace",
+    "Notion Custom Agents or credit-consuming automation",
+    "Zenodo writes, workflow dispatch, DOI mutation, upload, new version or publish event",
+    "merge decision for CAP-RT branch"
+  ],
+  "next_gate": "CAP-RT-002",
+  "resume_file": "docs/atlas/control-tower/batch-cap-rt-001-break.md"
+}
