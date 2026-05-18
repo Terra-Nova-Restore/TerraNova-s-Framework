@@ -12,6 +12,7 @@ import csv
 import json
 import sys
 import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -302,7 +303,11 @@ def check_live_delta(errors: list[str]) -> dict[str, Any]:
     if not path.is_file():
         add_error(errors, "missing prism-002 live delta file")
         return {}
-    data = read_json(path)
+    try:
+        data = read_json(path)
+    except json.JSONDecodeError as exc:
+        add_error(errors, f"invalid JSON in prism-002 live delta file: {exc}")
+        return {}
     checks = {
         "record_id": str(data.get("record_id")) == EXPECTED_ZENODO["record_id"],
         "doi": data.get("doi") == EXPECTED_ZENODO["doi"],
@@ -320,9 +325,13 @@ def check_live_delta(errors: list[str]) -> dict[str, Any]:
 
 def fetch_live_zenodo(errors: list[str]) -> dict[str, Any]:
     url = f"https://zenodo.org/api/records/{EXPECTED_ZENODO['record_id']}"
-    with urllib.request.urlopen(url, timeout=20) as response:
-        body = response.read().decode("utf-8")
-    data = json.loads(body)
+    try:
+        with urllib.request.urlopen(url, timeout=20) as response:
+            body = response.read().decode("utf-8")
+        data = json.loads(body)
+    except Exception as exc:
+        add_error(errors, f"live Zenodo API fetch failed: {exc}")
+        return {"url": url, "checks": {}, "title": None, "updated": None}
     files = data.get("files", [])
     first_file = files[0] if files else {}
     checks = {
