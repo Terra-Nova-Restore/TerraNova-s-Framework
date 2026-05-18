@@ -1,0 +1,4 @@
+registry_field,notion_property_type,notion_property_name,options
+canon_level,select,Canon Level,canon; candidate; unverified; blocked
+source_class,select,Source Class,primary; secondary; sensitive; raw
+review_status,status,Review Status,open; in_progress; blocked; closed
