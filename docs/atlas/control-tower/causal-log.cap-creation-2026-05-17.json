@@ -5,7 +5,7 @@
   "mode": "STUDIO",
   "activation": "manual",
   "source_trace": [
-    "C:/Users/Silvan/.codex/skills/terranova-ferrai/SKILL.md",
+    "codex skill terranova-ferrai: SKILL.md",
     "docs/atlas/control-tower/cap-0.1.0.md",
     "docs/atlas/control-tower/notion-mutation-gate.md",
     "notion://redacted-internal-object",

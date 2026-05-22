@@ -10,6 +10,7 @@ Status: local reviewed CIC atlas workspace
 | `public_overview.md` | Public-candidate slice for Mermaid/CIC/Systemnavigation material. |
 | `operator_map.md` | Internal routing map for Codex, OpenAI Prism source context and future agents. |
 | `diagrams.md` | Active/legacy/unknown Mermaid diagram registry. |
+| `control-tower/` | CAP 0.1.0 / Control Tower CIC plan, registry schema and source map for Notion workspace governance. |
 | `source_inventory.csv` | Machine-readable source file inventory. |
 | `source_manifest.json` | Full generated source and diagram manifest. |
 

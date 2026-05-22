@@ -12,7 +12,7 @@
     "scripts/review_visual_trigger_candidates.py",
     "docs/atlas/control-tower/mmd-003.visual-trigger-candidates.csv",
     "docs/atlas/control-tower/mmd-003.guard-bridge.csv",
-    "C:/Users/Silvan/.codex/skills/terranova-ferrai/references/canon-details.md"
+    "codex skill terranova-ferrai: references/canon-details.md"
   ],
   "deterministic_boundary": "Local files only; no Notion mutation; no Notion AI; no canonical TRG assignment; AutoFlow, Schattenarchiv and token/integrity surfaces remain gated.",
   "probabilistic_hypothesis": "A candidate review gate will prevent visual graph evidence from being overpromoted while preserving the most useful safe module candidates.",
