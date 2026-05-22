@@ -45,6 +45,28 @@ class ValidateDocsTests(unittest.TestCase):
                 ],
             )
 
+    def test_validate_file_requires_markers_for_governance_docs(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            repo_root = Path(tmp_dir)
+            self.mod.REPO_ROOT = repo_root
+            path = repo_root / "docs" / "governance" / "example.md"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(
+                "# Governance Example\n\n"
+                "This file lives in docs/governance but has no explicit marker lines.\n",
+                encoding="utf-8",
+            )
+
+            errors = self.mod.validate_file(path)
+
+            self.assertEqual(
+                errors,
+                [
+                    "docs/governance/example.md: missing required marker(s): "
+                    "Status, Source, Trace, Boundary, Mode, GitHub sync state, Notion source awareness"
+                ],
+            )
+
     def test_validate_file_accepts_explicit_marker_lines(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             repo_root = Path(tmp_dir)

@@ -54,7 +54,7 @@ def is_biz_relevant(path: Path, text: str) -> bool:
         return True
     if rel == "docs/architecture/ferrAI_operating_kernel_v0.1.md":
         return True
-    if rel == "docs/governance/source_of_record_policy.md":
+    if rel.startswith("docs/governance/"):
         return True
     return bool(BIZ_MARKER.search(text))
 

@@ -8,22 +8,28 @@ on:
       - 'docs/architecture/ferrAI_operating_kernel_v0.1.md'
       - 'docs/codex/**'
       - 'docs/governance/**'
+      - 'docs/references/zenodo.md'
+      - 'releases/zenodo/**'
       - 'schemas/artifact_status.schema.json'
       - 'config/source_registry.json'
       - 'scripts/validate_docs.py'
       - 'tests/test_validate_docs.py'
       - '.github/workflows/validate-docs.yml'
+      - '.github/workflows/zenodo-*.yml'
   push:
     paths:
       - 'BIZ.md'
       - 'docs/architecture/ferrAI_operating_kernel_v0.1.md'
       - 'docs/codex/**'
       - 'docs/governance/**'
+      - 'docs/references/zenodo.md'
+      - 'releases/zenodo/**'
       - 'schemas/artifact_status.schema.json'
       - 'config/source_registry.json'
       - 'scripts/validate_docs.py'
       - 'tests/test_validate_docs.py'
       - '.github/workflows/validate-docs.yml'
+      - '.github/workflows/zenodo-*.yml'
 
 permissions:
   contents: read
@@ -45,6 +51,26 @@ jobs:
 
       - name: Run validator unit tests
         run: python -m unittest tests.test_validate_docs
+
+      - name: Validate Zenodo release JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          zenodo_root = Path("releases/zenodo")
+          if not zenodo_root.exists():
+              print("No releases/zenodo directory present.")
+              raise SystemExit(0)
+
+          json_files = sorted(zenodo_root.rglob("*.json"))
+          for path in json_files:
+              with path.open(encoding="utf-8") as handle:
+                  json.load(handle)
+              print(f"Validated {path}")
+
+          print(f"Validated {len(json_files)} Zenodo JSON file(s).")
+          PY
 
       - name: Validate registry and schema JSON
         run: |
