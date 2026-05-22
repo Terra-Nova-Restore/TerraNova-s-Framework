@@ -1,5 +1,13 @@
 # Public Boundary Governance
 
+Status: BIZ / Public-boundary governance
+Source: Repository-local governance file, aligned with Equilibrium public/private separation.
+Trace: Required by `scripts/validate_docs.py`; supports Control Tower publication gates.
+Boundary: Defines public repository boundaries only; does not authorize external publication or Notion/Zenodo mutation.
+Mode: BIZ
+GitHub sync state: tracked in this repository.
+Notion source awareness: Notion remains the internal system of record for live workspace state.
+
 ## Purpose
 Defines the absolute boundary of what can be committed to the public `TerraNova-s-Framework` repository.
 

@@ -55,4 +55,3 @@ Blocked use:
 - automated Notion full sync
 - direct Zenodo release event
 - final monograph renumbering without a new LaTeX build and review pass
-

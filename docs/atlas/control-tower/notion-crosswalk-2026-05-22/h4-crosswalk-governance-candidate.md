@@ -228,4 +228,3 @@ material without opening the raw corpus.
 This module is strong enough to be treated as a next-build candidate for the
 evidence apparatus. It remains open enough for later correction, additional
 review columns, GitHub mapping, redaction decisions and Zenodo back-binding.
-

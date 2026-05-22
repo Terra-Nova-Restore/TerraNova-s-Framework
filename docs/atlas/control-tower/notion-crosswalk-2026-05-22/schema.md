@@ -62,4 +62,3 @@ Public-safe domain labels may include:
 
 The domain label does not override the risk class. A page can be `framework`
 and still be `internal`, `protected` or `legal_ip`.
-

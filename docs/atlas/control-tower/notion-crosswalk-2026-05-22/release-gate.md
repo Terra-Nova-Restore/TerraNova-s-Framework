@@ -43,4 +43,3 @@ Stop the build path if:
 - the register XLSX/CSV cannot be located or checked
 - the monograph insertion would silently rewrite the RC01-v12 public snapshot
 - Zenodo action is implied instead of explicitly authorized
-
