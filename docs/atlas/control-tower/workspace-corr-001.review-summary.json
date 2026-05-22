@@ -1,0 +1,93 @@
+{
+  "source": {
+    "label": "Home_Ansicht_22.05.2026.txt",
+    "sha256": "7c8ee97c6bdd3299a0f380230e681e1036a86c78a266329b291b2a2c221b3163",
+    "bytes": 110432
+  },
+  "metrics": {
+    "urls_seen": 877,
+    "unique_page_refs": 841,
+    "database_view_urls_with_v": 93,
+    "block_anchor_urls": 23,
+    "axis_count": 10,
+    "publication_lane_count": 10
+  },
+  "axis_counts": {
+    "chatgpt_export": 68,
+    "control_tower": 174,
+    "github_sync": 39,
+    "mermaid": 16,
+    "metarotik": 18,
+    "notion_workspace": 841,
+    "patent_ip": 64,
+    "prism_zenodo": 12,
+    "tokenomics": 89,
+    "trigger": 43
+  },
+  "axis_cooccurrences": {
+    "chatgpt_export|control_tower": 9,
+    "chatgpt_export|github_sync": 8,
+    "chatgpt_export|mermaid": 1,
+    "chatgpt_export|notion_workspace": 68,
+    "chatgpt_export|patent_ip": 3,
+    "chatgpt_export|prism_zenodo": 1,
+    "chatgpt_export|tokenomics": 5,
+    "chatgpt_export|trigger": 14,
+    "control_tower|github_sync": 10,
+    "control_tower|mermaid": 6,
+    "control_tower|metarotik": 3,
+    "control_tower|notion_workspace": 174,
+    "control_tower|patent_ip": 12,
+    "control_tower|prism_zenodo": 1,
+    "control_tower|tokenomics": 66,
+    "control_tower|trigger": 8,
+    "github_sync|mermaid": 1,
+    "github_sync|notion_workspace": 39,
+    "github_sync|patent_ip": 1,
+    "github_sync|prism_zenodo": 1,
+    "github_sync|tokenomics": 5,
+    "mermaid|notion_workspace": 16,
+    "mermaid|prism_zenodo": 3,
+    "mermaid|tokenomics": 2,
+    "mermaid|trigger": 1,
+    "metarotik|notion_workspace": 18,
+    "metarotik|patent_ip": 1,
+    "notion_workspace|patent_ip": 64,
+    "notion_workspace|prism_zenodo": 12,
+    "notion_workspace|tokenomics": 89,
+    "notion_workspace|trigger": 43,
+    "patent_ip|tokenomics": 8,
+    "prism_zenodo|tokenomics": 1,
+    "tokenomics|trigger": 2
+  },
+  "publication_lanes": {
+    "chat_export_correlation_candidate": 46,
+    "control_tower_candidate": 75,
+    "diagram_bridge_candidate": 13,
+    "evidence_apparatus_candidate": 7,
+    "public_after_biz_review": 81,
+    "public_after_ip_review": 64,
+    "public_after_phenomenology_review": 17,
+    "sync_trace_candidate": 26,
+    "trigger_module_candidate": 41,
+    "workspace_index_candidate": 471
+  },
+  "redaction": {
+    "raw_urls_printed": false,
+    "raw_page_ids_printed": false,
+    "raw_titles_printed": false,
+    "raw_content_printed": false
+  },
+  "boundary": {
+    "silvan_related_default": "public_after_professional_framing",
+    "exceptions": [
+      "private_third_parties",
+      "accounts",
+      "raw_identities",
+      "intimate_real_names",
+      "security_material",
+      "unreviewed_ip_specifics"
+    ],
+    "correlation_rule": "Do not remove relation axes during redaction."
+  }
+}

@@ -1,0 +1,11 @@
+Publication Lane,Page Count,Rule
+chat_export_correlation_candidate,46,Wait for ChatGPT export pass before final correlation.
+control_tower_candidate,75,Route through CAP/Equilibrium control tower.
+diagram_bridge_candidate,13,Route through MMD bridge before trigger/canon use.
+evidence_apparatus_candidate,7,Route through Prism/Zenodo evidence apparatus.
+public_after_biz_review,81,Keep correlation; review tokenomics and commercial claims.
+public_after_ip_review,64,Keep correlation; review IP/legal specifics before public text.
+public_after_phenomenology_review,17,Keep correlation; frame Metarotik professionally before release.
+sync_trace_candidate,26,Route through GitHub/Notion sync trace.
+trigger_module_candidate,41,Convert to trigger-module source review before canon claim.
+workspace_index_candidate,471,Keep as indexed workspace object until classified.
