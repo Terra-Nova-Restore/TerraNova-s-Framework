@@ -1,0 +1,33 @@
+{
+  "batch": "GH-XW-001",
+  "source_file_label": "Home_Ansicht_22.05.2026.txt",
+  "source_file_sha256": "7c8ee97c6bdd3299a0f380230e681e1036a86c78a266329b291b2a2c221b3163",
+  "source_file_bytes": 110432,
+  "source_file_last_seen_local": "2026-05-22T11:36:58+02:00",
+  "metrics": {
+    "total_lines": 1753,
+    "nonempty_lines": 877,
+    "notion_urls_found": 877,
+    "unique_raw_urls": 864,
+    "unique_page_ids": 841,
+    "database_view_urls_with_v": 93,
+    "block_anchor_urls": 23,
+    "page_ids_with_multiple_occurrences": 24,
+    "page_ids_with_multiple_distinct_raw_urls": 11,
+    "page_ids_with_multiple_distinct_clean_urls": 0,
+    "title_groups_with_multiple_page_ids": 48
+  },
+  "public_boundary": {
+    "raw_url_list_committed": false,
+    "raw_page_ids_committed": false,
+    "raw_page_titles_committed": false,
+    "private_content_committed": false,
+    "zenodo_mutation_requested": false
+  },
+  "interpretation": {
+    "status": "public-safe aggregate metrics only",
+    "meaning": "The raw export is usable as a local source for counts, hashing and review queues, but not as a public inventory.",
+    "next_build_note": "The crosswalk can be proposed as a new H.4 after the current H.3, requiring downstream renumbering of the existing H.4-H.9 sections in a future LaTeX build."
+  }
+}
+
