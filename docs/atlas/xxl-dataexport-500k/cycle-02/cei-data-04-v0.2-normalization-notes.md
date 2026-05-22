@@ -4,7 +4,7 @@ Status: R5_SYNC_NOTE
 Cycle: 2
 Boundary: aggregate-only / no raw dump
 Zenodo Target: HOLD / no push
-Notion Page: https://www.notion.so/1cd470f1c9104e2d9b064e9a2830d0f4
+Notion Page: <notion-sensitive-page-reference>
 
 ## Purpose
 

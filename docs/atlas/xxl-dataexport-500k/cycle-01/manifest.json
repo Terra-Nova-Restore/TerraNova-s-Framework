@@ -7,8 +7,8 @@
     "private_corpus_zip_name": "XXL_DatenExport_500_000Zeilen.zip",
     "private_corpus_text_name": "XXL_DatenExport_500_000Zeilen.txt",
     "notion_page_title": "ZIP_ANALYSIS_CONTINUATION_01 -- Hash-Anchored Korpus-Metrics",
-    "local_export_block_zip": "C:/Users/Silvan/Downloads/235369c0-7156-4e4a-aae1-44cb5cedab68_ExportBlock-b55cb645-b3d9-4fbf-8008-c2699d85fabd.zip",
-    "nested_export_zip": "ExportBlock-b55cb645-b3d9-4fbf-8008-c2699d85fabd-Part-1.zip"
+    "local_export_block_zip": "<local-sensitive-export-block-zip>",
+    "nested_export_zip": "<local-sensitive-nested-export-block-zip>"
   },
   "hashes": {
     "private_corpus_zip_sha256": "4e804d279535d273b9363e0171200ca6462fee52fbb75bd5b3ed070d7fb42f81",
