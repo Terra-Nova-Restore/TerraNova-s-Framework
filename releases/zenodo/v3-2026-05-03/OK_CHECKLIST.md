@@ -4,7 +4,7 @@ Generated: 2026-05-02T22:27:19.785962+00:00
 
 ## Artifact
 
-- Source: `C:\Users\Silvan\Downloads\main (22).pdf`
+- Source: `<local-sensitive-v3-source-pdf>`
 - Repository upload path: `releases/zenodo/v3-2026-05-03/ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf`
 - Zenodo filename: `ferrai-terra-nova-dissertationsentwurf-v3-2026-05-03.pdf`
 - Size bytes: `2554266`

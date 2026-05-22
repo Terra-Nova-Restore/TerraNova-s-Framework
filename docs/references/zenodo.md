@@ -27,7 +27,7 @@ Record created:
 2026-05-07T17:39:34Z / ca. 19:39 Europe/Zurich
 
 Metadata updated:
-2026-05-17T05:20:40Z / ca. 07:20 Europe/Zurich
+2026-05-21T19:29:35.963451+02:00 / ca. 19:29 Europe/Zurich
 
 DOI:
 https://doi.org/10.5281/zenodo.20073579
@@ -136,14 +136,16 @@ Status: CAP 0.3 release-readiness gates created on 2026-05-17.
 
 ### PRISM-002 Live Metadata Delta
 
-Zenodo was refreshed on 2026-05-17 as a metadata-only update.
+Zenodo publication metadata was refreshed on 2026-05-17. The public
+Zenodo API currently reports the record as updated on 2026-05-21. The file
+artifact and checksum remain unchanged.
 
 Current live metadata observed through the public Zenodo API:
 
 - title: `FerrAI-Terra'Nova CIC Framework - System Architecture, State Logic and Governance Boundaries`
 - version: `RC01-v12`
 - publication date: `2026-05-17`
-- metadata updated: `2026-05-17T07:20:40.751823+02:00`
+- metadata updated: `2026-05-21T19:29:35.963451+02:00`
 - DOI: `10.5281/zenodo.20073579`
 - concept DOI: `10.5281/zenodo.19774446`
 - file: `main (44).pdf`

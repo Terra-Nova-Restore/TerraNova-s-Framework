@@ -11,6 +11,13 @@
 **Zenodo Record:** <https://zenodo.org/records/19774447>  
 **Indexierung:** laut Dokumentstand in OpenAIRE indexiert
 
+**Status-Hinweis (2026-05-15):** Diese Datei dokumentiert den historischen
+Upload-/Review-Stand von **Text Nr. 16**. Die aktuelle zitierfähige
+RC01-v12-Linie läuft separat über Zenodo
+[`10.5281/zenodo.20073579`](https://doi.org/10.5281/zenodo.20073579) /
+Record <https://zenodo.org/records/20073579>; siehe auch
+`docs/references/zenodo.md`.
+
 ---
 
 ## 1. Zweck dieses GitHub-Eintrags

@@ -23,7 +23,7 @@
   },
   "candidate_artifact": {
     "status": "missing_distinct_v13_artifact",
-    "observed_local_candidate": "C:/Users/Silvan/Downloads/main (45).pdf",
+    "observed_local_candidate": "<local-sensitive-rc01-v13-candidate-pdf>",
     "observed_local_candidate_sha256": "1e9ce2f810b0af8c245887bb3a01ebcb01ca8f90c971bd5cf39da47a6b8dda40",
     "observed_local_candidate_md5": "d791d480e75f3d89f9a103a28a5c5001",
     "byte_identical_to_current_artifact": true,

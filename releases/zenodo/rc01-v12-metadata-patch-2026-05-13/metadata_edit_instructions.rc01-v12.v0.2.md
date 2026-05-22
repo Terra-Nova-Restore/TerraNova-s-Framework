@@ -49,13 +49,17 @@ Conceptual flow:
 
 ```text
 POST /api/deposit/depositions/20073579/actions/edit
-PUT  /api/deposit/depositions/20073579
-POST /api/deposit/depositions/20073579/actions/publish
+PUT  /api/deposit/depositions/{edit_id}
+POST /api/deposit/depositions/{edit_id}/actions/publish
 ```
 
 The API path must be rechecked against the authenticated Zenodo deposition
 response before execution, because published-record edit flows expose edit and
 publish links in the deposition resource.
+
+Resolve `{edit_id}` from the authenticated `actions/edit` response rather than
+assuming that the published record id stays writable for the follow-up `PUT`
+and `publish` calls.
 
 ## Fields To Preserve
 
