@@ -107,6 +107,13 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `trigger-001.control-crosswalk.csv` | Known trigger anchors mapped to CAP states, allowed actions and gates. |
 | `trigger-001.blocked-actions.csv` | Explicit blocked/gated action list for trigger handling. |
 | `trigger-001.test-cases.csv` | Test cases for `/fff` and trigger safety behavior. |
+| `batch-trigger-def-001-scaffold.md` | Scaffold-only Trigger Definition Canon rulebook package. |
+| `trigger-def-001.term-scaffold.csv` | Draft term definitions for Trigger, Trigger-ID, instances, lanes and states. |
+| `trigger-def-001.admission-levels.csv` | L0-L4 canon admission scaffold and current examples. |
+| `trigger-def-001.publication-lanes.csv` | Public, internal, protected and deferred publication lane scaffold. |
+| `trigger-def-001.rule-gates.csv` | Gates before public rulebook, canon promotion or TRG assignment. |
+| `trigger-def-001.dependency-map.csv` | Dependency map from Trigger Truth, Track A, Track B and workspace correlation. |
+| `trigger-def-001.review-summary.json` | Machine-readable TRIGGER-DEF-001 scaffold summary and boundary flags. |
 | `causal-log.schema.json` | Machine-readable causal coherence log schema. |
 | `causal-log.cap-creation-2026-05-17.json` | First causal log event for the CAP Notion page creation. |
 | `causal-log.registry-creation-2026-05-17.json` | Causal log event for the live registry creation. |
@@ -138,6 +145,7 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `causal-log.registry-002-mutation-2026-05-17.json` | Causal log event for the applied REGISTRY-002 live Notion mutation. |
 | `causal-log.auto-001-plan-2026-05-17.json` | Causal log event for AUTO-001 no-credit validation automation. |
 | `causal-log.trigger-001-plan-2026-05-17.json` | Causal log event for TRIGGER-001 command-surface hardening. |
+| `causal-log.trigger-def-001-scaffold-2026-05-23.json` | Causal log event for TRIGGER-DEF-001 scaffold creation. |
 | `causal-log.cap-0.3-iperka-2026-05-17.json` | Causal log event for the CAP 0.3 operational-control IPERKA creation. |
 | `causal-log.cap-0.4-iperka-2026-05-17.json` | Causal log event for the CAP 0.4 canon admission IPERKA creation. |
 | `causal-log.ninf-001-readpass-2026-05-17.json` | Causal log event for the NINF-001 Notion read-only infiltration pass. |

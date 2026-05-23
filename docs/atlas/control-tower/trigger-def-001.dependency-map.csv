@@ -1,0 +1,8 @@
+Dependency,Current Status,Provides,Needed For TRIGGER-DEF,Blocks
+Trigger Truth complement,source_handle_available,Unique key rule and trigger-truth model.,Core definition section.,Rulebook if key rule is absent.
+WORKSPACE-CORR-001,committed,Correlation-preservation and Silvan framing rule.,Publication/redaction doctrine.,Rulebook if correlation is destroyed by over-redaction.
+TRIGGER-MAP-001,committed,Source-backed trigger map and 171-173 reserved slots.,Admission examples and L0/L2 boundaries.,Any claim that all 174-210 rows are L3/L4.
+TNPX-CAPII-TOKENOMICS-GATE-001,public_safe_protection_gate,Protected/public split for 205-210.,Protected/IP/business/tokenomics clause.,Public wording for 205-210 and protected claims.
+SOURCE-174-210-PROMOTION-QUEUE-001,private_promotion_queue_built,Private promotion queue for 176/182/202 and holds for 196/201.,Promotion/admission flow and negative-control rule.,L3 candidate wording and public canon draft.
+XPORT-002 excerpt gate,count_only_completed,"Private routing evidence, no raw publication.",Evidence-source boundary clause.,Direct XPORT public source claims.
+Future METAROTIK-PHEN-001,deferred,Later phenomenology cluster treatment.,Only relation marker now.,Metarotik public explanation in this scaffold.
