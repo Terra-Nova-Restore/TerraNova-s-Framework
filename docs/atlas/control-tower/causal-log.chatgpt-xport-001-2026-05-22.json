@@ -1,0 +1,35 @@
+{
+  "log_id": "CAP-LOG-2026-05-22-CHATGPT-XPORT-001",
+  "created_at": "2026-05-22T00:00:00+02:00",
+  "operator": "Codex",
+  "mode": "STUDIO",
+  "activation": "CHATGPT-XPORT-001",
+  "source_trace": [
+    "local-only OpenAI project conversation export tree (path withheld)",
+    "local-only GPT dialogue notes (path withheld)",
+    "local-only GPT memory notes (path withheld)",
+    "local-only ChatGPT page part 1 export (path withheld)",
+    "repo-local Codex/GPT lockpoint note",
+    "docs/atlas/control-tower/workspace-corr-001.review-summary.json",
+    "scripts/build_chatgpt_export_intake.py"
+  ],
+  "observation": "After WORKSPACE-CORR-001, the ChatGPT/Codex export corpus becomes the required second correlation layer before tokenomics, trigger and Metarotik expansion.",
+  "trigger_band": "301-400",
+  "trigger_ids": [
+    "143",
+    "148",
+    "185",
+    "210",
+    "310",
+    "888"
+  ],
+  "probabilistic_hypothesis": "Hash-ledger and axis-level intake can preserve ChatGPT export correlations without publishing raw dialogue.",
+  "probability_note": "High confidence for source discovery and aggregate counts; semantic classification remains keyword-derived and requires follow-up review.",
+  "deterministic_boundary": "No raw prompts, messages, conversation titles, local paths, conversation IDs, account data, third-party identities, secrets or unreviewed IP specifics are published by CHATGPT-XPORT-001.",
+  "selected_action": "Created a repo-local ChatGPT export intake package with source-family hashes, per-file hash ledger, axis counts, file-type counts, publication-lane counts, review-gate counts and a reproducible analysis script.",
+  "feedback_target": "registry",
+  "backpropagation_result": "The Control Tower now has a second corpus layer after Notion: ChatGPT/Codex export evidence can be correlated before tokenomics, trigger and Metarotik work continues.",
+  "verification_state": "local_generated_and_pending_commit",
+  "external_mutation": false,
+  "mutation_authorization": null
+}

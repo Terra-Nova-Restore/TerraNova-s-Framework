@@ -1,0 +1,135 @@
+{
+  "batch": "CHATGPT-XPORT-001",
+  "metrics": {
+    "source_count": 7,
+    "file_count": 174,
+    "total_bytes": 13095583,
+    "total_scan_chars": 16326635,
+    "message_markers": 2205,
+    "axis_count": 10,
+    "publication_lane_count": 6,
+    "review_gate_count": 10
+  },
+  "source_rows": [
+    {
+      "Source Handle": "xport-src-001",
+      "Source Label": "openai_project_conversations_2026_05_05",
+      "File Count": 168,
+      "Bytes": 11564219,
+      "Conversation JSON": 168,
+      "Text Files": 0,
+      "Binary Files": 0,
+      "Source Hash": "1129b9efcfc2433fb038f705005c2e70449e660d9d3d7d30572ef67c52ece09e",
+      "Path Published": "no"
+    },
+    {
+      "Source Handle": "xport-src-002",
+      "Source Label": "local_gpt_dialogue_txt",
+      "File Count": 1,
+      "Bytes": 664440,
+      "Conversation JSON": 0,
+      "Text Files": 1,
+      "Binary Files": 0,
+      "Source Hash": "f34ea7e20b1fb1629ced0e00b06d3f7b6871988d04ebcd6eab91935c260ef000",
+      "Path Published": "no"
+    },
+    {
+      "Source Handle": "xport-src-003",
+      "Source Label": "local_gpt_dialogue_md",
+      "File Count": 1,
+      "Bytes": 664440,
+      "Conversation JSON": 0,
+      "Text Files": 1,
+      "Binary Files": 0,
+      "Source Hash": "f34ea7e20b1fb1629ced0e00b06d3f7b6871988d04ebcd6eab91935c260ef000",
+      "Path Published": "no"
+    },
+    {
+      "Source Handle": "xport-src-004",
+      "Source Label": "local_gpt_memory_txt",
+      "File Count": 1,
+      "Bytes": 78712,
+      "Conversation JSON": 0,
+      "Text Files": 1,
+      "Binary Files": 0,
+      "Source Hash": "19285eff50809de5f30c871676cfb9a6384e743f47e084db0d08b2906bbf6e7a",
+      "Path Published": "no"
+    },
+    {
+      "Source Handle": "xport-src-005",
+      "Source Label": "local_gpt_memory_md",
+      "File Count": 1,
+      "Bytes": 78712,
+      "Conversation JSON": 0,
+      "Text Files": 1,
+      "Binary Files": 0,
+      "Source Hash": "19285eff50809de5f30c871676cfb9a6384e743f47e084db0d08b2906bbf6e7a",
+      "Path Published": "no"
+    },
+    {
+      "Source Handle": "xport-src-006",
+      "Source Label": "local_chatgpt_page_part_1",
+      "File Count": 1,
+      "Bytes": 43915,
+      "Conversation JSON": 0,
+      "Text Files": 1,
+      "Binary Files": 0,
+      "Source Hash": "0d7be80a4df09c7f491977a081c12517ed1b47cd638aa791bed395345e1205b9",
+      "Path Published": "no"
+    },
+    {
+      "Source Handle": "xport-src-007",
+      "Source Label": "repo_codex_gpt_lockpoint",
+      "File Count": 1,
+      "Bytes": 1145,
+      "Conversation JSON": 0,
+      "Text Files": 1,
+      "Binary Files": 0,
+      "Source Hash": "9e789093c51a7bacfc6822d70c217c9878459614bc1b3cd29164955332d90e5d",
+      "Path Published": "no"
+    }
+  ],
+  "axis_counts": {
+    "chatgpt_export": 174,
+    "control_tower": 57,
+    "github_sync": 47,
+    "mermaid": 60,
+    "metarotik": 22,
+    "notion_workspace": 61,
+    "patent_ip": 59,
+    "prism_zenodo": 71,
+    "tokenomics": 43,
+    "trigger": 46
+  },
+  "file_type_counts": {
+    "conversation_json": 168,
+    "text": 6
+  },
+  "publication_lanes": {
+    "chat_export_index_candidate": 100,
+    "diagram_correlation_candidate": 7,
+    "evidence_apparatus_candidate": 2,
+    "public_after_biz_review": 1,
+    "public_after_ip_review": 59,
+    "trigger_correlation_candidate": 5
+  },
+  "review_gates": {
+    "biz_tokenomics_review": 43,
+    "chat_export_index_review": 100,
+    "control_tower_review": 57,
+    "evidence_apparatus_review": 71,
+    "ip_review": 59,
+    "mermaid_graph_review": 60,
+    "notion_correlation_review": 61,
+    "phenomenology_metarotik_review": 22,
+    "sync_trace_review": 47,
+    "trigger_source_review": 46
+  },
+  "redaction": {
+    "raw_messages_printed": false,
+    "raw_titles_printed": false,
+    "local_paths_printed": false,
+    "conversation_ids_printed": false,
+    "account_data_printed": false
+  }
+}

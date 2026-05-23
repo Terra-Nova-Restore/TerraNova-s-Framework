@@ -113,6 +113,15 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `workspace-corr-001.axis-cooccurrence.csv` | Aggregate co-occurrence matrix across workspace relation axes. |
 | `workspace-corr-001.publication-lane-counts.csv` | Aggregate publication and review lane counts for the Home export. |
 | `workspace-corr-001.review-summary.json` | Machine-readable WORKSPACE-CORR-001 summary. |
+| `batch-chatgpt-xport-001.md` | ChatGPT/Codex export intake batch after WORKSPACE-CORR-001. |
+| `chatgpt-xport-001.intake-rules.md` | Public-safe intake and review-gate rules for ChatGPT/Codex exports. |
+| `chatgpt-xport-001.source-families.csv` | Source-family hash ledger without raw paths. |
+| `chatgpt-xport-001.file-ledger.csv` | Per-file hash, axis and review-gate ledger without raw dialogue or paths. |
+| `chatgpt-xport-001.axis-counts.csv` | Aggregate ChatGPT/Codex export correlation axis counts. |
+| `chatgpt-xport-001.file-type-counts.csv` | Aggregate source file type counts. |
+| `chatgpt-xport-001.publication-lane-counts.csv` | Primary publication-lane count for export files. |
+| `chatgpt-xport-001.review-gate-counts.csv` | Non-exclusive review-gate count preserving overlapping correlations. |
+| `chatgpt-xport-001.review-summary.json` | Machine-readable CHATGPT-XPORT-001 summary. |
 | `causal-log.schema.json` | Machine-readable causal coherence log schema. |
 | `causal-log.cap-creation-2026-05-17.json` | First causal log event for the CAP Notion page creation. |
 | `causal-log.registry-creation-2026-05-17.json` | Causal log event for the live registry creation. |
@@ -145,6 +154,7 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `causal-log.auto-001-plan-2026-05-17.json` | Causal log event for AUTO-001 no-credit validation automation. |
 | `causal-log.trigger-001-plan-2026-05-17.json` | Causal log event for TRIGGER-001 command-surface hardening. |
 | `causal-log.workspace-corr-001-2026-05-22.json` | Causal log event for relation-preserving workspace correlation. |
+| `causal-log.chatgpt-xport-001-2026-05-22.json` | Causal log event for ChatGPT/Codex export intake. |
 | `causal-log.cap-0.3-iperka-2026-05-17.json` | Causal log event for the CAP 0.3 operational-control IPERKA creation. |
 | `causal-log.cap-0.4-iperka-2026-05-17.json` | Causal log event for the CAP 0.4 canon admission IPERKA creation. |
 | `causal-log.ninf-001-readpass-2026-05-17.json` | Causal log event for the NINF-001 Notion read-only infiltration pass. |

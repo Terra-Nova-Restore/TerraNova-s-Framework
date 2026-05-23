@@ -1,0 +1,8 @@
+Source Handle,Source Label,File Count,Bytes,Conversation JSON,Text Files,Binary Files,Source Hash,Path Published
+xport-src-001,openai_project_conversations_2026_05_05,168,11564219,168,0,0,1129b9efcfc2433fb038f705005c2e70449e660d9d3d7d30572ef67c52ece09e,no
+xport-src-002,local_gpt_dialogue_txt,1,664440,0,1,0,f34ea7e20b1fb1629ced0e00b06d3f7b6871988d04ebcd6eab91935c260ef000,no
+xport-src-003,local_gpt_dialogue_md,1,664440,0,1,0,f34ea7e20b1fb1629ced0e00b06d3f7b6871988d04ebcd6eab91935c260ef000,no
+xport-src-004,local_gpt_memory_txt,1,78712,0,1,0,19285eff50809de5f30c871676cfb9a6384e743f47e084db0d08b2906bbf6e7a,no
+xport-src-005,local_gpt_memory_md,1,78712,0,1,0,19285eff50809de5f30c871676cfb9a6384e743f47e084db0d08b2906bbf6e7a,no
+xport-src-006,local_chatgpt_page_part_1,1,43915,0,1,0,0d7be80a4df09c7f491977a081c12517ed1b47cd638aa791bed395345e1205b9,no
+xport-src-007,repo_codex_gpt_lockpoint,1,1145,0,1,0,9e789093c51a7bacfc6822d70c217c9878459614bc1b3cd29164955332d90e5d,no
