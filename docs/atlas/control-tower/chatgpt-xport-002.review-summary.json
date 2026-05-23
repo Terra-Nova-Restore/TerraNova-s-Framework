@@ -1,0 +1,156 @@
+{
+  "batch": "CHATGPT-XPORT-002",
+  "inputs": {
+    "source_batch": "CHATGPT-XPORT-001",
+    "raw_source_count": 7,
+    "raw_file_count": 174
+  },
+  "dedupe": {
+    "canonical_source_family_count": 5,
+    "collapsed_alias_source_count": 2,
+    "duplicate_hash_group_count": 19,
+    "duplicate_file_rows": 19,
+    "unique_file_hash_count": 155
+  },
+  "review_corridor": {
+    "sample_count": 12,
+    "sample_focus_counts": {
+      "tokenomics_only": 3,
+      "tokenomics_trigger_shared": 6,
+      "trigger_only": 3
+    }
+  },
+  "alias_groups": [
+    {
+      "dedupe_family": "xport2-family-002",
+      "canonical_source_handle": "xport-src-002",
+      "alias_source_handles": "xport-src-003",
+      "source_labels": "local_gpt_dialogue_txt;local_gpt_dialogue_md",
+      "source_hash": "f34ea7e20b1fb1629ced0e00b06d3f7b6871988d04ebcd6eab91935c260ef000"
+    },
+    {
+      "dedupe_family": "xport2-family-003",
+      "canonical_source_handle": "xport-src-004",
+      "alias_source_handles": "xport-src-005",
+      "source_labels": "local_gpt_memory_txt;local_gpt_memory_md",
+      "source_hash": "19285eff50809de5f30c871676cfb9a6384e743f47e084db0d08b2906bbf6e7a"
+    }
+  ],
+  "selected_samples": [
+    {
+      "sample_handle": "xport2-sample-001",
+      "review_focus": "tokenomics_trigger_shared",
+      "representative_file_handle": "xport-src-001-file-0079",
+      "sha256": "e61952666c8e5bf6145ed01093ec64b457b4b18c9a62bd2cdeb51a08ece3b63b",
+      "axis_count": 10,
+      "message_markers": 976,
+      "file_copies": 1
+    },
+    {
+      "sample_handle": "xport2-sample-002",
+      "review_focus": "tokenomics_trigger_shared",
+      "representative_file_handle": "xport-src-001-file-0091",
+      "sha256": "3dd120685565e42ab27bbc7f4930bdff31d26570273bd2b2f790647c4ad80a69",
+      "axis_count": 10,
+      "message_markers": 310,
+      "file_copies": 1
+    },
+    {
+      "sample_handle": "xport2-sample-003",
+      "review_focus": "tokenomics_trigger_shared",
+      "representative_file_handle": "xport-src-001-file-0054",
+      "sha256": "dc4c24bf6ff9c852dbc6f96cbcc06f2a7cac2060ee0a452a845b5fa4ee1e87e3",
+      "axis_count": 10,
+      "message_markers": 90,
+      "file_copies": 1
+    },
+    {
+      "sample_handle": "xport2-sample-004",
+      "review_focus": "tokenomics_trigger_shared",
+      "representative_file_handle": "xport-src-001-file-0093",
+      "sha256": "0bc3e545aec4320f66d981649c17dbfe3519ce47d032f2e02c112be3a249b9a5",
+      "axis_count": 10,
+      "message_markers": 84,
+      "file_copies": 1
+    },
+    {
+      "sample_handle": "xport2-sample-005",
+      "review_focus": "tokenomics_trigger_shared",
+      "representative_file_handle": "xport-src-001-file-0121",
+      "sha256": "943d44466cd4cbb17daa3c435b0d2791458cd50746b6cce57df80f4fc8e13d44",
+      "axis_count": 10,
+      "message_markers": 30,
+      "file_copies": 2
+    },
+    {
+      "sample_handle": "xport2-sample-006",
+      "review_focus": "tokenomics_trigger_shared",
+      "representative_file_handle": "xport-src-001-file-0057",
+      "sha256": "c0c6cb0eb9de603d08e573f67d197fbb446f924552e047e8b042928f1d9e1a22",
+      "axis_count": 10,
+      "message_markers": 24,
+      "file_copies": 1
+    },
+    {
+      "sample_handle": "xport2-sample-007",
+      "review_focus": "tokenomics_only",
+      "representative_file_handle": "xport-src-001-file-0001",
+      "sha256": "d40661aea16a40d8a2a29874a900f0f3149632ca684103e01761f3fe66819fb1",
+      "axis_count": 9,
+      "message_markers": 12,
+      "file_copies": 1
+    },
+    {
+      "sample_handle": "xport2-sample-008",
+      "review_focus": "tokenomics_only",
+      "representative_file_handle": "xport-src-001-file-0014",
+      "sha256": "2c42eec981a1fe7d69bc1b00ded5573c41953f9e6596339cf469bec136ac6b2f",
+      "axis_count": 8,
+      "message_markers": 48,
+      "file_copies": 1
+    },
+    {
+      "sample_handle": "xport2-sample-009",
+      "review_focus": "tokenomics_only",
+      "representative_file_handle": "xport-src-001-file-0020",
+      "sha256": "36e4c7808805e8a6c68537a8c7293a5807f4e60a0e093d01f46063f2e5a345e6",
+      "axis_count": 8,
+      "message_markers": 6,
+      "file_copies": 1
+    },
+    {
+      "sample_handle": "xport2-sample-010",
+      "review_focus": "trigger_only",
+      "representative_file_handle": "xport-src-001-file-0053",
+      "sha256": "e8d5483928bb2555082caf36dd227e56c57f1f606ba16ba870040b0ff694458b",
+      "axis_count": 8,
+      "message_markers": 0,
+      "file_copies": 1
+    },
+    {
+      "sample_handle": "xport2-sample-011",
+      "review_focus": "trigger_only",
+      "representative_file_handle": "xport-src-001-file-0015",
+      "sha256": "afa24c59b4b64f742e5ed8d0740bdf38dec36b0a218af48a8c6a613fa28b4348",
+      "axis_count": 7,
+      "message_markers": 18,
+      "file_copies": 1
+    },
+    {
+      "sample_handle": "xport2-sample-012",
+      "review_focus": "trigger_only",
+      "representative_file_handle": "xport-src-001-file-0127",
+      "sha256": "bac6a7f983599830876251f095d469a593c6527bf7d76081d5ef9f5e9be083b7",
+      "axis_count": 6,
+      "message_markers": 76,
+      "file_copies": 2
+    }
+  ],
+  "boundaries": {
+    "raw_messages_printed": false,
+    "raw_titles_printed": false,
+    "local_paths_printed": false,
+    "conversation_ids_printed": false,
+    "account_data_printed": false
+  }
+}

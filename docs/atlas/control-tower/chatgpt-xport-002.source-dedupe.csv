@@ -1,0 +1,6 @@
+Dedupe Family,Canonical Source Handle,Canonical Source Label,Alias Source Handles,Source Labels,Source Hash,Source Copies,Nominal File Count,Canonical File Count,Nominal Bytes,Canonical Bytes,Conversation JSON,Text Files,Binary Files,Path Published,Dedupe Status
+xport2-family-001,xport-src-001,openai_project_conversations_2026_05_05,,openai_project_conversations_2026_05_05,1129b9efcfc2433fb038f705005c2e70449e660d9d3d7d30572ef67c52ece09e,1,168,168,11564219,11564219,168,0,0,no,canonical-only
+xport2-family-002,xport-src-002,local_gpt_dialogue_txt,xport-src-003,local_gpt_dialogue_txt;local_gpt_dialogue_md,f34ea7e20b1fb1629ced0e00b06d3f7b6871988d04ebcd6eab91935c260ef000,2,2,1,1328880,664440,0,2,0,no,alias-collapsed
+xport2-family-003,xport-src-004,local_gpt_memory_txt,xport-src-005,local_gpt_memory_txt;local_gpt_memory_md,19285eff50809de5f30c871676cfb9a6384e743f47e084db0d08b2906bbf6e7a,2,2,1,157424,78712,0,2,0,no,alias-collapsed
+xport2-family-004,xport-src-006,local_chatgpt_page_part_1,,local_chatgpt_page_part_1,0d7be80a4df09c7f491977a081c12517ed1b47cd638aa791bed395345e1205b9,1,1,1,43915,43915,0,1,0,no,canonical-only
+xport2-family-005,xport-src-007,repo_codex_gpt_lockpoint,,repo_codex_gpt_lockpoint,9e789093c51a7bacfc6822d70c217c9878459614bc1b3cd29164955332d90e5d,1,1,1,1145,1145,0,1,0,no,canonical-only

@@ -122,6 +122,11 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `chatgpt-xport-001.publication-lane-counts.csv` | Primary publication-lane count for export files. |
 | `chatgpt-xport-001.review-gate-counts.csv` | Non-exclusive review-gate count preserving overlapping correlations. |
 | `chatgpt-xport-001.review-summary.json` | Machine-readable CHATGPT-XPORT-001 summary. |
+| `batch-chatgpt-xport-002.md` | Deduped ChatGPT/Codex review corridor for tokenomics and trigger mapping. |
+| `chatgpt-xport-002.source-dedupe.csv` | Canonical source families with alias-collapsed TXT/Markdown mirrors preserved as correlation evidence. |
+| `chatgpt-xport-002.hash-groups.csv` | Duplicate file-hash groups for repeat-review collapse without losing file-handle traceability. |
+| `chatgpt-xport-002.review-samples.csv` | Tokenomics/trigger review-sample corridor built from deduped hash groups. |
+| `chatgpt-xport-002.review-summary.json` | Machine-readable CHATGPT-XPORT-002 dedupe and review summary. |
 | `causal-log.schema.json` | Machine-readable causal coherence log schema. |
 | `causal-log.cap-creation-2026-05-17.json` | First causal log event for the CAP Notion page creation. |
 | `causal-log.registry-creation-2026-05-17.json` | Causal log event for the live registry creation. |
@@ -155,6 +160,7 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `causal-log.trigger-001-plan-2026-05-17.json` | Causal log event for TRIGGER-001 command-surface hardening. |
 | `causal-log.workspace-corr-001-2026-05-22.json` | Causal log event for relation-preserving workspace correlation. |
 | `causal-log.chatgpt-xport-001-2026-05-22.json` | Causal log event for ChatGPT/Codex export intake. |
+| `causal-log.chatgpt-xport-002-2026-05-23.json` | Causal log event for ChatGPT/Codex dedupe and review-sample extraction. |
 | `causal-log.cap-0.3-iperka-2026-05-17.json` | Causal log event for the CAP 0.3 operational-control IPERKA creation. |
 | `causal-log.cap-0.4-iperka-2026-05-17.json` | Causal log event for the CAP 0.4 canon admission IPERKA creation. |
 | `causal-log.ninf-001-readpass-2026-05-17.json` | Causal log event for the NINF-001 Notion read-only infiltration pass. |

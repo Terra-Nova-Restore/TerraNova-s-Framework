@@ -1,0 +1,32 @@
+{
+  "trace": "CHATGPT-XPORT-002",
+  "date": "2026-05-23",
+  "status": "completed",
+  "mode": "STUDIO",
+  "source": [
+    "CHATGPT-XPORT-001",
+    "local ChatGPT/Codex export ledgers",
+    "Control Tower relation-preservation rule"
+  ],
+  "decision": [
+    "Collapsed only hash-identical source families.",
+    "Grouped duplicate file hashes before review sampling.",
+    "Selected tokenomics/trigger review samples from deduped hash groups."
+  ],
+  "boundary": {
+    "raw_prompts": "excluded",
+    "raw_messages": "excluded",
+    "titles": "excluded",
+    "local_paths": "excluded",
+    "conversation_ids": "excluded",
+    "account_data": "excluded"
+  },
+  "outputs": [
+    "batch-chatgpt-xport-002.md",
+    "chatgpt-xport-002.source-dedupe.csv",
+    "chatgpt-xport-002.hash-groups.csv",
+    "chatgpt-xport-002.review-samples.csv",
+    "chatgpt-xport-002.review-summary.json"
+  ],
+  "next": "TRIGGER-MAP-001"
+}
