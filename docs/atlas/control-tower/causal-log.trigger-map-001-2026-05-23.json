@@ -1,0 +1,40 @@
+{
+  "log_id": "CAP-LOG-2026-05-23-TRIGGER-MAP-001",
+  "created_at": "2026-05-23T12:50:14+02:00",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "N-CODEX-MASTER",
+    "N-TTRUTH-001",
+    "N-CODEX139-174210",
+    "N-ACTIVE-SYSTEM-TABLE",
+    "N-TRGMOD-NATIVE",
+    "N-TRGSYS-CAPII",
+    "L-DEEP-REFERENCE-1-992",
+    "L-GAP-LEDGER",
+    "L-TRIGGER-COMPLEMENT",
+    "L-ATLAS-MANIFEST-V11",
+    "L-XPORT-002"
+  ],
+  "observation": "Local gap artifacts held 174-210 for source review, while Notion Codex139+ supplies all 37 names and short definitions.",
+  "trigger_band": "201-300",
+  "trigger_ids": [
+    "174-210",
+    "205-210",
+    "520",
+    "521",
+    "777",
+    "988-992",
+    "/fff"
+  ],
+  "probabilistic_hypothesis": "The next stable trigger layer is a source-backed map, not a public canon or execution protocol.",
+  "probability_note": "High confidence for 174-210 names/short definitions; 171-173 are owner-reserved L0 ID anchors; lower confidence remains for sensitive security/token labels.",
+  "deterministic_boundary": "No external mutation, no raw private inventory export, no canonical TRG assignment, and no public canon without source-tiered admission.",
+  "selected_action": "Create TRIGGER-MAP-001 source index, seed rows, range-status corrections, contradiction ledger and review summary.",
+  "feedback_target": "trigger_map",
+  "backpropagation_result": "174-210 is promoted to documented reference evidence; 171-173 are reserved slots per Silvi directive; 211-505 remains open except known exceptions; 205-210 and 988-992 stay protected.",
+  "verification_state": "notion_checked",
+  "external_mutation": false,
+  "mutation_authorization": ""
+}

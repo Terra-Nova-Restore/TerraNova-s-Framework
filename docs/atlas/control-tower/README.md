@@ -127,6 +127,13 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `chatgpt-xport-002.hash-groups.csv` | Duplicate file-hash groups for repeat-review collapse without losing file-handle traceability. |
 | `chatgpt-xport-002.review-samples.csv` | Tokenomics/trigger review-sample corridor built from deduped hash groups. |
 | `chatgpt-xport-002.review-summary.json` | Machine-readable CHATGPT-XPORT-002 dedupe and review summary. |
+| `batch-trigger-map-001.md` | Source-backed trigger map pass after CHATGPT-XPORT-002 and targeted Notion review. |
+| `trigger-map-001.source-index.csv` | Public-safe source handles and evidence scopes for TRIGGER-MAP-001. |
+| `trigger-map-001.seed.csv` | Source-backed trigger seed rows, including the full 174-210 Codex139+ reference range. |
+| `trigger-map-001.range-status.csv` | Range-level correction map from old gap state to current source-backed status. |
+| `trigger-map-001.contradictions.csv` | Drift ledger for trigger source conflicts and current resolutions. |
+| `trigger-map-001.source-search.csv` | Positive and negative source-search trace for `171-173` and `174-210`. |
+| `trigger-map-001.review-summary.json` | Machine-readable TRIGGER-MAP-001 source map summary. |
 | `causal-log.schema.json` | Machine-readable causal coherence log schema. |
 | `causal-log.cap-creation-2026-05-17.json` | First causal log event for the CAP Notion page creation. |
 | `causal-log.registry-creation-2026-05-17.json` | Causal log event for the live registry creation. |
@@ -161,6 +168,7 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `causal-log.workspace-corr-001-2026-05-22.json` | Causal log event for relation-preserving workspace correlation. |
 | `causal-log.chatgpt-xport-001-2026-05-22.json` | Causal log event for ChatGPT/Codex export intake. |
 | `causal-log.chatgpt-xport-002-2026-05-23.json` | Causal log event for ChatGPT/Codex dedupe and review-sample extraction. |
+| `causal-log.trigger-map-001-2026-05-23.json` | Causal log event for the source-backed trigger map pass. |
 | `causal-log.cap-0.3-iperka-2026-05-17.json` | Causal log event for the CAP 0.3 operational-control IPERKA creation. |
 | `causal-log.cap-0.4-iperka-2026-05-17.json` | Causal log event for the CAP 0.4 canon admission IPERKA creation. |
 | `causal-log.ninf-001-readpass-2026-05-17.json` | Causal log event for the NINF-001 Notion read-only infiltration pass. |
@@ -571,6 +579,8 @@ REGISTRY-002 has been applied after the exact command `GO Notion REGISTRY-002 an
 SYNC-002 has closed the canon-field sync state for the five CAP module draft rows after the command `SYNC-002 - Canon Field Sync Closure. GO`. It set those rows to `In sync` and updated their Equilibrium notes to point at REGISTRY-002 verification while preserving the L1/L2 canon boundaries.
 
 SENS-002 has closed the first protected canon lane review locally. `521` remains L1 protected, `777` and `988-992` stay outside normal module admission, and `517`, `174-210`, FERR/token and raw/private export lanes now have explicit stop rules. No live Notion mutation was needed because `SYNC-002` already verified the protected review state for `521`.
+
+TRIGGER-MAP-001 has reopened `174-210` after targeted source review. The Notion Codex139+ reference supports all 37 names and short definitions, so the range is promoted from visual/source-review-needed to `L2-SOURCE-BACKED-REFERENCE`; execution semantics, public canon, canonical `TRG-*` assignment and activation protocol remain blocked. `171-173` are reserved slots per Silvi decision from 2026-05-23 (`reserved_slot` / `L0-ID-ANCHOR`), not source gaps, and `205-210` stays behind CAP-II/Revoke, tokenomics, business and IP review.
 
 SOURCE-521 has completed the Preflight primary source pass and was applied to Notion on 2026-05-18 after the exact command `GO Notion SOURCE-521 anwenden`. Targeted Notion `workspace_search` and repo-local source review support `521 / Preflight` as a protected `L2-ROUTING-MARKER`: active `/preflight` safety entrypoint, pre-action routing gate and non-777 normal route. L3 semantics, automation, protection execution, `TRG-*` assignment and public canon remain blocked.
 

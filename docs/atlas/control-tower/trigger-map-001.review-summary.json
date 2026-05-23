@@ -1,0 +1,63 @@
+{
+  "batch": "TRIGGER-MAP-001",
+  "created": "2026-05-23",
+  "mode": "STUDIO / /fff bounded local execution",
+  "external_mutation": false,
+  "notion_mutation": false,
+  "source_handles": 16,
+  "seed_rows": 71,
+  "codex139_174_210_rows": 37,
+  "range_status_rows": 12,
+  "contradictions": 6,
+  "source_search_rows": 5,
+  "definition_status_counts": {
+    "active_command_surface": 1,
+    "defined_reference_export": 37,
+    "documented_anchor": 5,
+    "documented_point": 2,
+    "documented_range_reference": 7,
+    "documented_sensitive": 3,
+    "documented_sensitive_conflict": 3,
+    "documented_subset": 3,
+    "documented_subset_caution": 1,
+    "identified_cluster": 1,
+    "known_anchor": 3,
+    "reserved_slot": 3,
+    "source_review_complete": 2
+  },
+  "publication_lane_counts": {
+    "hold_until_filled": 3,
+    "internal": 11,
+    "internal_caution": 1,
+    "internal_public_rule_ok": 3,
+    "internal_sensitivity_review": 2,
+    "protected_biz_ip_review": 6,
+    "protected_internal": 1,
+    "protected_internal_only": 6,
+    "protected_later": 2,
+    "public_after_source_extraction": 7,
+    "public_after_trigger_review": 29
+  },
+  "upgrades": [
+    "174-210 moved from visual/source-review-needed range to documented_reference_export.",
+    "205-210 are source-backed but gated by CAP-II/Revoke, tokenomics, business and IP review."
+  ],
+  "unresolved": [
+    "211-505 remains open/partial except known documented exceptions.",
+    "988-992 label conflict requires TokenAccess TriggerMap review before public appendix."
+  ],
+  "reserved_slots": [
+    "171",
+    "172",
+    "173"
+  ],
+  "next_best_action": "SOURCE-174-210; fill 171-173 later from XPORT-002 / TNPX-01 / future session.",
+  "boundaries": {
+    "raw_messages_printed": false,
+    "raw_notion_urls_printed": false,
+    "local_private_inventory_exported": false,
+    "canonical_trg_ids_assigned": false,
+    "public_trigger_canon_created": false,
+    "external_mutation_performed": false
+  }
+}
