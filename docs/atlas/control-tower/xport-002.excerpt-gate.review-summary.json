@@ -1,0 +1,45 @@
+{
+  "batch": "XPORT-002-EXCERPT-GATE-001",
+  "status": "private_excerpt_context_gate_completed",
+  "created_at": "2026-05-23T16:30:00+02:00",
+  "inputs": {
+    "review_samples": "chatgpt-xport-002.review-samples.csv",
+    "sample_corridor": "xport-002.sample-corridor.review.csv",
+    "trigger_seed": "trigger-map-001.seed.csv",
+    "local_source_roots": "provided at runtime; not published"
+  },
+  "sample_count": 12,
+  "local_hash_match_count": 14,
+  "sample_focus_counts": {
+    "tokenomics_only": 3,
+    "tokenomics_trigger_shared": 6,
+    "trigger_only": 3
+  },
+  "context_row_count": 143,
+  "best_trigger_row_count": 37,
+  "best_decision_counts": {
+    "excerpt_context_supports_definition_candidate": 3,
+    "excerpt_context_supports_name_candidate": 32,
+    "numeric_context_only": 2
+  },
+  "gate_status_counts": {
+    "blocked": 1,
+    "candidate": 2,
+    "completed_count_only": 1,
+    "pending": 1,
+    "requires_manual_rejection_or_confirmation": 1
+  },
+  "boundaries": {
+    "raw_messages_printed": false,
+    "raw_titles_printed": false,
+    "raw_excerpts_printed": false,
+    "local_paths_printed": false,
+    "conversation_ids_printed": false,
+    "account_data_printed": false,
+    "notion_write_performed": false,
+    "git_push_performed": false,
+    "pr_opened": false,
+    "commit_created": false
+  },
+  "decision": "Private excerpt-context gate can route direct candidates into SOURCE-174-210 review, but public canon, raw excerpts, TRG assignment and tokenomics/IP wording remain blocked."
+}

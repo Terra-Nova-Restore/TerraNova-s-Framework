@@ -1,0 +1,7 @@
+Gate ID,Gate,Status,Evidence,Blocks Until Cleared
+XPORT2-EXCERPT-G001,Private raw context read,completed_count_only,Local raw windows were read by script; only classification counts were emitted.,Raw excerpt publication and human-readable quote use remain blocked.
+XPORT2-EXCERPT-G002,Definition-context candidate promotion,candidate,"3 triggers have name, definition-token and source-anchor support.",Direct claim that XPORT-002 defines a trigger without private human confirmation.
+XPORT2-EXCERPT-G003,Name-context candidate promotion,candidate,32 triggers have name and source-anchor support without full definition-token threshold.,Public source-evidence claim for these rows.
+XPORT2-EXCERPT-G004,Numeric-only context,requires_manual_rejection_or_confirmation,2 triggers remain numeric-only in selected samples.,Any numeric-only trigger-source claim.
+XPORT2-EXCERPT-G005,CAP-II/tokenomics/IP wording,pending,"205-210 can be routed through XPORT context, but CAP-II/tokenomics/IP public wording is not cleared.","CAP-II, Revoke, license, tokenomics, TNPX-01 or IP-facing public claim."
+XPORT2-EXCERPT-G006,Public canon / TRG assignment,blocked,Excerpt context classification is not an L3/L4 contract.,"Canonical TRG assignment, activation semantics or public trigger canon promotion."

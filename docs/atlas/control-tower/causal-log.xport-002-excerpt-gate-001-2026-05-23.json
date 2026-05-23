@@ -1,0 +1,29 @@
+{
+  "log_id": "CAP-LOG-2026-05-23-XPORT-002-EXCERPT-GATE-001",
+  "created_at": "2026-05-23T16:30:00+02:00",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "chatgpt-xport-002.review-samples.csv",
+    "xport-002.sample-corridor.review.csv",
+    "trigger-map-001.seed.csv",
+    "local raw export roots provided at runtime; paths withheld"
+  ],
+  "observation": "Private raw context can classify trigger signals without publishing raw excerpts.",
+  "trigger_band": "201-300",
+  "trigger_ids": [
+    "174-210",
+    "205-210",
+    "/fff"
+  ],
+  "probabilistic_hypothesis": "XPORT-002 can strengthen SOURCE-174-210 routing, but remains below public canon until human source promotion.",
+  "probability_note": "High confidence for count-only context classes; public wording remains blocked by no-raw-excerpt and CAP-II/IP gates.",
+  "deterministic_boundary": "No raw excerpts, no paths, no conversation IDs, no external mutation, no commit, no push and no PR.",
+  "selected_action": "Create private excerpt-context gate artifacts with public-safe classification only.",
+  "feedback_target": "trigger_map",
+  "backpropagation_result": "Direct XPORT candidates can be routed into SOURCE-174-210; public canon and CAP-II/tokenomics/IP claims remain blocked.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": ""
+}

@@ -1,0 +1,7 @@
+Gate ID,Gate,Status,Evidence,Blocks Until Cleared
+XPORT2-CORR-G001,Local raw hash integrity,passed,All selected sample handles resolve to local files with matching SHA-256.,Any XPORT-002 raw review claim.
+XPORT2-CORR-G002,Raw excerpt publication,blocked,"This pass emits counts only; no prompt, message, title, path or conversation ID is printed.","Public quote, raw title, raw message or local path publication."
+XPORT2-CORR-G003,Direct 174-210 trigger-name evidence,candidate,xport2-sample-001;xport2-sample-002;xport2-sample-003;xport2-sample-005;xport2-sample-006;xport2-sample-010,Claim that XPORT-002 directly defines any 174-210 trigger.
+XPORT2-CORR-G004,Numeric trigger context,requires_private_context_review,xport2-sample-001;xport2-sample-002;xport2-sample-003;xport2-sample-004;xport2-sample-005;xport2-sample-006;xport2-sample-007;xport2-sample-008;xport2-sample-009;xport2-sample-010;xport2-sample-011,Use of numeric hits as per-trigger evidence.
+XPORT2-CORR-G005,CAP-II/tokenomics/IP public wording,pending,"P1 shared samples remain protected corridors for 205-210, tokenomics, business and IP review.","Any CAP-II, Revoke, license, tokenomics or TNPX-01 public claim."
+XPORT2-CORR-G006,SOURCE-174-210 promotion,blocked,A hash/sample corridor is not a canon contract or activation protocol.,"L3/L4 canon admission, canonical TRG assignment or activation semantics."

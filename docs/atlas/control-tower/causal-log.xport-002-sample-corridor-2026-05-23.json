@@ -1,0 +1,28 @@
+{
+  "log_id": "CAP-LOG-2026-05-23-XPORT-002-SAMPLE-CORRIDOR",
+  "created_at": "2026-05-23T16:17:52+02:00",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "chatgpt-xport-002.review-samples.csv",
+    "trigger-map-001.seed.csv",
+    "local raw export roots provided at runtime; paths withheld"
+  ],
+  "observation": "XPORT-002 sample handles can be checked against local raw files by SHA-256 without publishing raw content.",
+  "trigger_band": "201-300",
+  "trigger_ids": [
+    "174-210",
+    "205-210",
+    "/fff"
+  ],
+  "probabilistic_hypothesis": "XPORT-002 is currently strongest as a review corridor, not direct public trigger canon evidence.",
+  "probability_note": "High confidence for hash integrity; lower confidence for direct trigger definition evidence until private excerpt context is reviewed.",
+  "deterministic_boundary": "No raw content, no local paths, no conversation IDs, no external mutation, no commit, no push and no PR.",
+  "selected_action": "Create public-safe XPORT-002 sample corridor review artifacts with count-only signal rows.",
+  "feedback_target": "trigger_map",
+  "backpropagation_result": "SOURCE-174-210 can use XPORT-002 for review routing; direct evidence promotion remains blocked by private excerpt review.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": ""
+}

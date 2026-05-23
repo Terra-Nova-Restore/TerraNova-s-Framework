@@ -1,0 +1,52 @@
+{
+  "batch": "XPORT-002-SAMPLE-CORRIDOR",
+  "status": "local_raw_sample_corridor_review",
+  "created_at": "2026-05-23T16:17:52+02:00",
+  "inputs": {
+    "review_samples": "chatgpt-xport-002.review-samples.csv",
+    "trigger_seed": "trigger-map-001.seed.csv",
+    "local_source_roots": "provided at runtime; not published"
+  },
+  "sample_count": 12,
+  "local_hash_match_count": 14,
+  "sample_focus_counts": {
+    "tokenomics_only": 3,
+    "tokenomics_trigger_shared": 6,
+    "trigger_only": 3
+  },
+  "review_decision_counts": {
+    "axis_corridor_for_trigger_review": 1,
+    "direct_trigger_name_evidence_candidate": 6,
+    "numeric_trigger_signal_only": 5
+  },
+  "term_signal_counts": {
+    "cap_ii_tokenomics": 1372,
+    "control_tower": 4181,
+    "mermaid_graph": 453,
+    "metarotik": 544,
+    "notion_workspace": 6540,
+    "source_governance": 2129,
+    "tnpx_patent_ip": 537,
+    "trigger_core": 2450
+  },
+  "trigger_signal_row_count": 143,
+  "gate_status_counts": {
+    "blocked": 2,
+    "candidate": 1,
+    "passed": 1,
+    "pending": 1,
+    "requires_private_context_review": 1
+  },
+  "boundaries": {
+    "raw_messages_printed": false,
+    "raw_titles_printed": false,
+    "local_paths_printed": false,
+    "conversation_ids_printed": false,
+    "account_data_printed": false,
+    "notion_write_performed": false,
+    "git_push_performed": false,
+    "pr_opened": false,
+    "commit_created": false
+  },
+  "decision": "XPORT-002 is verified as a local raw hash corridor. It remains corridor evidence unless private excerpt review confirms direct trigger definitions."
+}
