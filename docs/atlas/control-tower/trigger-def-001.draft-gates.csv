@@ -1,0 +1,8 @@
+Gate ID,Gate,Status,Evidence,Blocks Until Cleared
+TRIGGER-DEF-DRAFT-G001,Draft status,completed_draft,trigger-def-001.draft.md created with explicit draft boundaries.,Final public rulebook claim.
+TRIGGER-DEF-DRAFT-G002,Unique-key rule,included,Draft states Trigger-ID alone is not unique.,Any flat ID-only registry model.
+TRIGGER-DEF-DRAFT-G003,Protected/public split,included,Draft carries Track A protected lanes and Track B queue boundaries.,Protected claim release and final canon wording.
+TRIGGER-DEF-DRAFT-G004,Silvan framing,included,"Draft frames Silvan-specific material as authored source material, not default-private material.",Any over-redacted version that destroys correlation.
+TRIGGER-DEF-DRAFT-G005,Raw source boundary,blocked,"Draft forbids raw excerpts, titles, local paths and conversation IDs.",Any publication of raw source material.
+TRIGGER-DEF-DRAFT-G006,Public canon / TRG assignment,blocked,Draft does not assign TRG or promote final canon.,TRIGGER-174-210-CANON-DRAFT-001 plus explicit Silvan GO.
+TRIGGER-DEF-DRAFT-G007,External mutation,blocked,/fff local-only execution.,"Notion write, GitHub push, PR or publication."

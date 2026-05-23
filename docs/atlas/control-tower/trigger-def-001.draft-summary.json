@@ -1,0 +1,41 @@
+{
+  "batch": "TRIGGER-DEF-001-DRAFT",
+  "status": "draft_ready_for_human_review_not_public_canon",
+  "created_at": "2026-05-23T19:29:44+02:00",
+  "inputs": {
+    "scaffold_summary": "trigger-def-001.review-summary.json",
+    "term_scaffold": "trigger-def-001.term-scaffold.csv",
+    "admission_levels": "trigger-def-001.admission-levels.csv",
+    "publication_lanes": "trigger-def-001.publication-lanes.csv",
+    "dependency_map": "trigger-def-001.dependency-map.csv",
+    "rule_gates": "trigger-def-001.rule-gates.csv"
+  },
+  "draft_sections": 12,
+  "decision_rows": 5,
+  "open_review_items": 5,
+  "gate_rows": 7,
+  "gate_status_counts": {
+    "completed_draft": 1,
+    "included": 3,
+    "blocked": 3
+  },
+  "decision": "TRIGGER-DEF-001-DRAFT is ready for human review, but remains blocked from final public canon, TRG assignment and publication.",
+  "next_lane": "TRIGGER-DEF-001-DRAFT-REVIEW or TRIGGER-DEF-001-DRAFT-COMMIT, then TRIGGER-174-210-CANON-DRAFT-001 only after explicit GO.",
+  "boundaries": {
+    "raw_excerpts_printed": false,
+    "raw_messages_printed": false,
+    "raw_titles_printed": false,
+    "local_paths_printed": false,
+    "conversation_ids_printed": false,
+    "account_data_printed": false,
+    "patent_claims_printed": false,
+    "tokenomics_claims_printed": false,
+    "metarotik_expanded": false,
+    "public_canon_promoted": false,
+    "trg_assigned": false,
+    "notion_write_performed": false,
+    "git_push_performed": false,
+    "pr_opened": false,
+    "commit_created": false
+  }
+}

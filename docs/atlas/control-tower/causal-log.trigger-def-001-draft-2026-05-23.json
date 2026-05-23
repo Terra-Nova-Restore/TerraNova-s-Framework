@@ -1,0 +1,35 @@
+{
+  "log_id": "CAP-LOG-2026-05-23-TRIGGER-DEF-001-DRAFT",
+  "created_at": "2026-05-23T19:29:44+02:00",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "trigger-def-001.term-scaffold.csv",
+    "trigger-def-001.admission-levels.csv",
+    "trigger-def-001.publication-lanes.csv",
+    "trigger-def-001.dependency-map.csv",
+    "trigger-def-001.rule-gates.csv"
+  ],
+  "observation": "The trigger definition scaffold can be rendered as a human-readable rulebook draft without changing canon status.",
+  "trigger_band": "trigger-definition-canon",
+  "trigger_ids": [
+    "171-173",
+    "176",
+    "182",
+    "196",
+    "201",
+    "202",
+    "205-210",
+    "/fff"
+  ],
+  "probabilistic_hypothesis": "A public-capable draft improves review quality while preserving final-public gates.",
+  "probability_note": "High confidence for structure; final wording and publication remain human decision points.",
+  "deterministic_boundary": "No public canon, no TRG assignment, no raw source publication, no external mutation, no push and no PR.",
+  "selected_action": "Create TRIGGER-DEF-001-DRAFT from committed scaffold artifacts.",
+  "feedback_target": "trigger_definition_public_rulebook",
+  "backpropagation_result": "The rulebook now has a readable draft with key rule, definitions, L0-L4 levels, lanes, exceptions and review gates.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": ""
+}
