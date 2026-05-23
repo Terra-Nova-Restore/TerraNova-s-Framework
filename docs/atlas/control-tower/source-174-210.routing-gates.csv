@@ -1,0 +1,8 @@
+Gate ID,Gate,Status,Evidence,Blocks Until Cleared
+SOURCE174210-ROUTE-G001,XPORT excerpt gate consumed,completed,All 37 SOURCE-174-210 rows are joined with best XPORT excerpt-gate classification.,None for local routing; this does not clear publication.
+SOURCE174210-ROUTE-G002,Definition-context shortlist,candidate,176;182;202,Direct public claim that XPORT defines these triggers.
+SOURCE174210-ROUTE-G003,Name-context review queue,private_review_required,32 trigger rows require private context review.,Public source-evidence claim for name-context-only rows.
+SOURCE174210-ROUTE-G004,Numeric-only rejection/hold,hold,196;201,Any XPORT promotion for numeric-only rows.
+SOURCE174210-ROUTE-G005,Sensitivity wording,pending,177;182;208 remain sensitivity-language rows.,Public-facing wording for sensitive trigger labels.
+SOURCE174210-ROUTE-G006,CAP-II/tokenomics/IP/TNPX,pending,"205-210 remain behind CAP-II, tokenomics, business, IP and TNPX-01 gates.","Any CAP-II, Revoke, license, tokenomics, TNPX-01 or IP-facing public claim."
+SOURCE174210-ROUTE-G007,Public canon / TRG assignment,blocked,Routing is not an L3/L4 module contract.,"Canonical TRG assignment, activation semantics or public trigger canon promotion."

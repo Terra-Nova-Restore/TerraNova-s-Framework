@@ -127,6 +127,17 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `chatgpt-xport-002.hash-groups.csv` | Duplicate file-hash groups for repeat-review collapse without losing file-handle traceability. |
 | `chatgpt-xport-002.review-samples.csv` | Tokenomics/trigger review-sample corridor built from deduped hash groups. |
 | `chatgpt-xport-002.review-summary.json` | Machine-readable CHATGPT-XPORT-002 dedupe and review summary. |
+| `batch-xport-002-sample-corridor.md` | Local raw XPORT-002 sample-corridor review with public-safe count artifacts. |
+| `xport-002.sample-corridor.review.csv` | Per-sample hash-integrity, signal and allowed-use review rows. |
+| `xport-002.sample-corridor.term-signals.csv` | Count-only term-signal groups per XPORT-002 sample. |
+| `xport-002.sample-corridor.trigger-signals.csv` | Count-only `174-210` number/name signal rows from selected samples. |
+| `xport-002.sample-corridor.gates.csv` | Gates before excerpt publication, source promotion, CAP-II/tokenomics/IP wording or TRG assignment. |
+| `xport-002.sample-corridor.review-summary.json` | Machine-readable XPORT-002 raw corridor review summary and boundary flags. |
+| `batch-xport-002-excerpt-gate-001.md` | Private XPORT-002 excerpt-context gate with public-safe classification output. |
+| `xport-002.excerpt-gate.context-review.csv` | Count-only per sample/trigger context classification after private raw-window review. |
+| `xport-002.excerpt-gate.best-trigger-review.csv` | Best XPORT excerpt-gate classification per trigger from `174-210`. |
+| `xport-002.excerpt-gate.gates.csv` | Gates before direct source promotion, CAP-II/tokenomics/IP wording, public canon or TRG assignment. |
+| `xport-002.excerpt-gate.review-summary.json` | Machine-readable private excerpt-context gate summary and boundary flags. |
 | `batch-trigger-map-001.md` | Source-backed trigger map pass after CHATGPT-XPORT-002 and targeted Notion review. |
 | `trigger-map-001.source-index.csv` | Public-safe source handles and evidence scopes for TRIGGER-MAP-001. |
 | `trigger-map-001.seed.csv` | Source-backed trigger seed rows, including the full 174-210 Codex139+ reference range. |
@@ -134,6 +145,15 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `trigger-map-001.contradictions.csv` | Drift ledger for trigger source conflicts and current resolutions. |
 | `trigger-map-001.source-search.csv` | Positive and negative source-search trace for `171-173` and `174-210`. |
 | `trigger-map-001.review-summary.json` | Machine-readable TRIGGER-MAP-001 source map summary. |
+| `batch-source-174-210.md` | Started SOURCE-174-210 per-trigger review corridor against CHATGPT-XPORT-002. |
+| `source-174-210.per-trigger-review.csv` | Per-trigger review rows for `174-210`, holding all entries at L2 reference level. |
+| `source-174-210.xport-002-correlation.csv` | XPORT-002 sample handles and roles for trigger, CAP-II, tokenomics and IP review. |
+| `batch-source-174-210-routing-001.md` | XPORT excerpt-gate routing layer for SOURCE-174-210. |
+| `source-174-210.xport-excerpt-routing.csv` | Per-trigger routing from XPORT-002 excerpt-gate results into SOURCE-174-210. |
+| `source-174-210.routing-gates.csv` | Gates before XPORT source promotion, sensitivity wording, CAP-II/IP claims or TRG assignment. |
+| `source-174-210.xport-excerpt-routing.summary.json` | Machine-readable XPORT excerpt routing summary for SOURCE-174-210. |
+| `source-174-210.review-gates.csv` | Gates before public canon, TRG assignment, TNPX-01/IP wording, tokenomics claims or mutation. |
+| `source-174-210.review-summary.json` | Machine-readable SOURCE-174-210 review scaffold summary and boundary flags. |
 | `causal-log.schema.json` | Machine-readable causal coherence log schema. |
 | `causal-log.cap-creation-2026-05-17.json` | First causal log event for the CAP Notion page creation. |
 | `causal-log.registry-creation-2026-05-17.json` | Causal log event for the live registry creation. |
@@ -168,7 +188,11 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `causal-log.workspace-corr-001-2026-05-22.json` | Causal log event for relation-preserving workspace correlation. |
 | `causal-log.chatgpt-xport-001-2026-05-22.json` | Causal log event for ChatGPT/Codex export intake. |
 | `causal-log.chatgpt-xport-002-2026-05-23.json` | Causal log event for ChatGPT/Codex dedupe and review-sample extraction. |
+| `causal-log.xport-002-sample-corridor-2026-05-23.json` | Causal log event for raw XPORT-002 sample-corridor review. |
+| `causal-log.xport-002-excerpt-gate-001-2026-05-23.json` | Causal log event for private XPORT-002 excerpt-context gate. |
 | `causal-log.trigger-map-001-2026-05-23.json` | Causal log event for the source-backed trigger map pass. |
+| `causal-log.source-174-210-2026-05-23.json` | Causal log event for the started per-trigger review corridor against XPORT-002. |
+| `causal-log.source-174-210-routing-001-2026-05-23.json` | Causal log event for SOURCE-174-210 XPORT excerpt routing. |
 | `causal-log.cap-0.3-iperka-2026-05-17.json` | Causal log event for the CAP 0.3 operational-control IPERKA creation. |
 | `causal-log.cap-0.4-iperka-2026-05-17.json` | Causal log event for the CAP 0.4 canon admission IPERKA creation. |
 | `causal-log.ninf-001-readpass-2026-05-17.json` | Causal log event for the NINF-001 Notion read-only infiltration pass. |

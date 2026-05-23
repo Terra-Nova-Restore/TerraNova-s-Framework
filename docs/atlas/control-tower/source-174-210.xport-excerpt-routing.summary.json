@@ -1,0 +1,63 @@
+{
+  "batch": "SOURCE-174-210-ROUTING-001",
+  "status": "public_safe_xport_excerpt_routing",
+  "created_at": "2026-05-23T17:37:10+02:00",
+  "inputs": {
+    "source_review": "source-174-210.per-trigger-review.csv",
+    "excerpt_gate": "xport-002.excerpt-gate.best-trigger-review.csv"
+  },
+  "trigger_rows": 37,
+  "routing_decision_counts": {
+    "do_not_promote_from_xport": 2,
+    "route_to_private_context_review": 32,
+    "shortlist_for_private_source_confirmation": 3
+  },
+  "excerpt_confidence_counts": {
+    "high_context_candidate": 3,
+    "low_numeric_signal": 2,
+    "medium_context_candidate": 32
+  },
+  "gate_status_counts": {
+    "blocked": 1,
+    "candidate": 1,
+    "completed": 1,
+    "hold": 1,
+    "pending": 2,
+    "private_review_required": 1
+  },
+  "definition_context_shortlist": [
+    "176",
+    "182",
+    "202"
+  ],
+  "numeric_only_hold": [
+    "196",
+    "201"
+  ],
+  "protected_capii_range": [
+    "205",
+    "206",
+    "207",
+    "208",
+    "209",
+    "210"
+  ],
+  "sensitivity_rows": [
+    "177",
+    "182",
+    "208"
+  ],
+  "boundaries": {
+    "raw_excerpts_printed": false,
+    "raw_messages_printed": false,
+    "raw_titles_printed": false,
+    "local_paths_printed": false,
+    "conversation_ids_printed": false,
+    "account_data_printed": false,
+    "notion_write_performed": false,
+    "git_push_performed": false,
+    "pr_opened": false,
+    "commit_created": false
+  },
+  "decision": "XPORT excerpt-gate results are routed into SOURCE-174-210 without promoting public canon or publishing raw excerpts."
+}

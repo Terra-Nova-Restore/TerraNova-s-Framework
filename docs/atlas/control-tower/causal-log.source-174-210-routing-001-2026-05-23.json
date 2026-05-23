@@ -1,0 +1,33 @@
+{
+  "log_id": "CAP-LOG-2026-05-23-SOURCE-174-210-ROUTING-001",
+  "created_at": "2026-05-23T17:37:10+02:00",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "source-174-210.per-trigger-review.csv",
+    "xport-002.excerpt-gate.best-trigger-review.csv",
+    "xport-002.excerpt-gate.gates.csv"
+  ],
+  "observation": "XPORT excerpt-gate classes can be routed into SOURCE-174-210 without raw excerpt publication.",
+  "trigger_band": "201-300",
+  "trigger_ids": [
+    "174-210",
+    "176",
+    "182",
+    "196",
+    "201",
+    "202",
+    "205-210",
+    "/fff"
+  ],
+  "probabilistic_hypothesis": "The routing layer can strengthen review priority but cannot replace Notion Codex139+ as source authority.",
+  "probability_note": "High confidence for routing categories; public source promotion remains blocked by private confirmation and canon gates.",
+  "deterministic_boundary": "No raw excerpts, no external mutation, no commit, no push, no PR and no canonical TRG assignment.",
+  "selected_action": "Create SOURCE-174-210-ROUTING-001 matrix and gates from XPORT excerpt-gate output.",
+  "feedback_target": "trigger_map",
+  "backpropagation_result": "176, 182 and 202 enter private confirmation shortlist; 196 and 201 are XPORT numeric-only holds; 205-210 remain CAP-II/tokenomics/IP protected.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": ""
+}
