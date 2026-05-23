@@ -1,0 +1,31 @@
+{
+  "log_id": "CAP-LOG-2026-05-23-SOURCE-174-210",
+  "created_at": "2026-05-23T13:31:24+02:00",
+  "operator": "Codex / FerrAI",
+  "mode": "STUDIO",
+  "activation": "/fff",
+  "source_trace": [
+    "trigger-map-001.seed.csv",
+    "chatgpt-xport-002.review-samples.csv",
+    "chatgpt-xport-002.review-summary.json",
+    "N-CODEX139-174210",
+    "L-XPORT-002"
+  ],
+  "observation": "TRIGGER-MAP-001 contains 37 source-backed rows for 174-210; XPORT-002 contains hashed tokenomics/trigger review samples.",
+  "trigger_band": "201-300",
+  "trigger_ids": [
+    "174-210",
+    "205-210",
+    "171-173",
+    "/fff"
+  ],
+  "probabilistic_hypothesis": "The next stable move is a per-trigger review corridor, not immediate public canon admission.",
+  "probability_note": "High confidence for names and short definitions from N-CODEX139-174210; lower confidence for public wording, tokenomics/IP relation and execution semantics.",
+  "deterministic_boundary": "No raw export content, no external mutation, no commit, no push, no PR, and no canonical TRG assignment.",
+  "selected_action": "Create SOURCE-174-210 local review scaffold linking trigger-map rows to XPORT-002 samples.",
+  "feedback_target": "trigger_map",
+  "backpropagation_result": "174-210 now has a per-trigger review queue against XPORT-002; 205-210 are held behind tokenomics/CAP-II/IP gates; 171-173 remain reserved L0 anchors.",
+  "verification_state": "repo_checked",
+  "external_mutation": false,
+  "mutation_authorization": ""
+}

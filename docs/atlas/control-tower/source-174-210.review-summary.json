@@ -1,0 +1,65 @@
+{
+  "batch": "SOURCE-174-210",
+  "status": "started_local_review_scaffold",
+  "created_at": "2026-05-23T13:31:24+02:00",
+  "inputs": {
+    "trigger_map_seed": "trigger-map-001.seed.csv",
+    "xport_002_samples": "chatgpt-xport-002.review-samples.csv",
+    "xport_002_summary": "chatgpt-xport-002.review-summary.json"
+  },
+  "scope": {
+    "trigger_start": 174,
+    "trigger_end": 210,
+    "per_trigger_rows": 37,
+    "reserved_slots_out_of_scope": [
+      "171",
+      "172",
+      "173"
+    ]
+  },
+  "review_lane_counts": {
+    "cap_ii_tokenomics_ip_gate": 6,
+    "sensitivity_language_gate": 2,
+    "standard_trigger_source_gate": 29
+  },
+  "xport_002": {
+    "sample_count": 12,
+    "sample_focus_counts": {
+      "tokenomics_only": 3,
+      "tokenomics_trigger_shared": 6,
+      "trigger_only": 3
+    },
+    "trigger_only_samples": [
+      "xport2-sample-010",
+      "xport2-sample-011",
+      "xport2-sample-012"
+    ],
+    "tokenomics_trigger_shared_samples": [
+      "xport2-sample-001",
+      "xport2-sample-002",
+      "xport2-sample-003",
+      "xport2-sample-004",
+      "xport2-sample-005",
+      "xport2-sample-006"
+    ]
+  },
+  "gate_status_counts": {
+    "blocked": 1,
+    "blocked_by_directive": 1,
+    "passed": 1,
+    "pending": 3,
+    "started_not_completed": 1
+  },
+  "boundaries": {
+    "raw_messages_printed": false,
+    "raw_titles_printed": false,
+    "local_paths_printed": false,
+    "conversation_ids_printed": false,
+    "account_data_printed": false,
+    "notion_write_performed": false,
+    "git_push_performed": false,
+    "pr_opened": false,
+    "commit_created": false
+  },
+  "next_source_action": "review XPORT-002 sample corridors against raw local exports, then compare with TNPX-01 and CAP-II/tokenomics gates before any public trigger canon expansion"
+}

@@ -1,0 +1,8 @@
+Gate ID,Gate,Scope,Status,Evidence,Required Before
+SOURCE174210-G001,Trigger-map seed coverage,174-210,passed,trigger-map-001.seed.csv contains 37 source-backed rows from N-CODEX139-174210,Use names and short definitions as L2 reference entries
+SOURCE174210-G002,XPORT-002 trigger-only sample review,174-210,started_not_completed,xport2-sample-010;xport2-sample-011;xport2-sample-012 linked as hash corridors,Any public trigger canon or TRG assignment
+SOURCE174210-G003,XPORT-002 tokenomics-trigger shared review,205-210,pending,xport2-sample-001 through xport2-sample-006 linked for protected CAP-II review,"Any CAP-II, Revoke, business, tokenomics or license claim"
+SOURCE174210-G004,TNPX-01 comparison,174-210,pending,TNPX-01 is referenced by TRIGGER-MAP-001 but not reviewed in this source pass,Patent/IP-facing wording or public reference expansion
+SOURCE174210-G005,Sensitivity language review,177;182;208,pending,TRIGGER-MAP-001 marks sensitivity review on these trigger rows,Public-facing formulations for sensitive trigger labels
+SOURCE174210-G006,Canonical TRG assignment,174-210,blocked,"No reviewed L3/L4 contract, no activation protocol, no public canon decision",Any TRG-* number or execution rule
+SOURCE174210-G007,External mutation / publication,all,blocked_by_directive,"Silvi directive: no push, no PR; DIRTY-SPLIT-001 remains separate","Notion write, push, PR or publication"
