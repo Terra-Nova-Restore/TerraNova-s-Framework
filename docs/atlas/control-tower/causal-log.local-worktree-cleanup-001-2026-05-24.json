@@ -1,0 +1,23 @@
+{
+  "id": "causal-log.local-worktree-cleanup-001-2026-05-24",
+  "date": "2026-05-24",
+  "lane": "LOCAL-WORKTREE-CLEANUP-001",
+  "event_type": "local_worktree_inventory",
+  "input_state": {
+    "main_merge_commit": "5b6c30118ec8edb3a0e26bb6cab7d4283a78db6e",
+    "worktree_count_observed": 8
+  },
+  "output_state": {
+    "active_branch": "codex/post-merge-snapshot-001",
+    "cleanup_policy_documented": true,
+    "worktrees_deleted": 0,
+    "branches_deleted": 0
+  },
+  "boundaries": {
+    "destructive_local_operation": false,
+    "github_write": false,
+    "notion_write": false
+  },
+  "next_action": "publish via normal PR only after explicit GO"
+}
+
