@@ -5,12 +5,18 @@ on:
   pull_request:
     paths:
       - 'config/notion_map*.json'
+      - 'scripts/notion_to_github.py'
+      - 'scripts/preflight.py'
       - 'scripts/validate_notion_map.py'
+      - 'tests/test_notion_to_github.py'
       - '.github/workflows/notion-map-validate.yml'
   push:
     paths:
       - 'config/notion_map*.json'
+      - 'scripts/notion_to_github.py'
+      - 'scripts/preflight.py'
       - 'scripts/validate_notion_map.py'
+      - 'tests/test_notion_to_github.py'
       - '.github/workflows/notion-map-validate.yml'
 
 permissions:
@@ -36,3 +42,8 @@ jobs:
 
       - name: Validate map
         run: python scripts/validate_notion_map.py ${{ matrix.config_path }}
+
+      - name: Validate sync hardening logic
+        run: |
+          python -m py_compile scripts/notion_to_github.py scripts/preflight.py scripts/validate_notion_map.py
+          python -m unittest tests.test_notion_to_github
