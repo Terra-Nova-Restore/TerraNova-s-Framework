@@ -74,11 +74,11 @@ are prioritization signals, not proof of truth or final importance.
 | R1 | 340 |
 | R3 | 320 |
 | R9 | 300 |
+| R15.1 | 300 |
 | R16 | 280 |
-| R15.1 | 260 |
 | R13 | 240 |
 | R14 | 220 |
-| R5 | 200 |
+| R5 | 220 |
 
 ## Core Set
 
@@ -89,6 +89,8 @@ The current must-carry core set is:
 ## Dependency Pass Notes
 
 `DEP-LINKED-RULE-PASS-001` was applied on 2026-05-24 in Notion only.
+`WEIGHT-PASS-001` was applied on 2026-05-24 in Notion only: `R5` moved to
+`220`, `R15.1` moved to `300`, and `R13` stayed at `240`.
 
 - `R9` is intentionally left without broad linked-rule dependencies because it
   is a high-risk global mode gate.
