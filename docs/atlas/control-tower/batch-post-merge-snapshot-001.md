@@ -59,4 +59,3 @@ Notion verification, branch deletion, or release publication.
 The next safe local lane is `LOCAL-WORKTREE-CLEANUP-001`, followed by a
 small, reviewable PR for this post-merge control-tower closure if Silvan
 explicitly asks to publish it.
-
