@@ -3,6 +3,8 @@ name: Validate Prism Atlas
 on:
   pull_request:
     paths:
+      - 'scripts/build_trigger_def_001_scaffold.py'
+      - 'scripts/build_trigger_def_001_draft.py'
       - 'scripts/render_prism_atlas.py'
       - 'scripts/quick_script_sanity.py'
       - 'docs/atlas/**'
@@ -16,6 +18,8 @@ on:
       - '.github/workflows/prism-atlas-validate.yml'
   push:
     paths:
+      - 'scripts/build_trigger_def_001_scaffold.py'
+      - 'scripts/build_trigger_def_001_draft.py'
       - 'scripts/render_prism_atlas.py'
       - 'scripts/quick_script_sanity.py'
       - 'docs/atlas/**'
@@ -51,6 +55,14 @@ jobs:
 
       - name: Run atlas unit tests
         run: python -m unittest tests.test_render_prism_atlas
+
+      - name: Validate trigger definition generators
+        run: python -m py_compile scripts/build_trigger_def_001_scaffold.py scripts/build_trigger_def_001_draft.py
+
+      - name: Regenerate trigger definition docs
+        run: |
+          python scripts/build_trigger_def_001_scaffold.py
+          python scripts/build_trigger_def_001_draft.py
 
       - name: Regenerate atlas docs
         run: python scripts/render_prism_atlas.py
