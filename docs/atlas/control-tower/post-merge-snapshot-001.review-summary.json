@@ -1,0 +1,35 @@
+{
+  "id": "POST-MERGE-SNAPSHOT-001",
+  "status": "local_snapshot",
+  "date": "2026-05-24",
+  "repository": "Terra-Nova-Restore/TerraNova-s-Framework",
+  "pull_request": {
+    "number": 57,
+    "url": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/pull/57",
+    "title": "docs: add trigger map and equilibrium policy updates",
+    "merged": true,
+    "merged_at": "2026-05-24T12:07:02Z",
+    "head_branch": "release/trigger-map-001",
+    "head_sha": "145533ee7c613ee3248a23db769a56cba8ea8804",
+    "merge_commit": "5b6c30118ec8edb3a0e26bb6cab7d4283a78db6e"
+  },
+  "merged_lanes": [
+    "TRIGGER-DEF-001 scaffold",
+    "TRIGGER-DEF-001 draft",
+    "TRIGGER-MAP 174-210",
+    "EQUILIBRIUM weight policy mirror",
+    "dissertation main(16) clarification"
+  ],
+  "boundaries": {
+    "notion_write": false,
+    "rule_text_migration": false,
+    "direct_main_push": false,
+    "branch_deletion": false
+  },
+  "current_policy_values": {
+    "R5": 220,
+    "R15.1": 300,
+    "R13": 240
+  },
+  "next_lane": "LOCAL-WORKTREE-CLEANUP-001"
+}

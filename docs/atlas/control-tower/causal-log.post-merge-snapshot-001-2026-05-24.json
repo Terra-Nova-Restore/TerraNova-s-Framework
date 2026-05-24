@@ -1,0 +1,23 @@
+{
+  "id": "causal-log.post-merge-snapshot-001-2026-05-24",
+  "date": "2026-05-24",
+  "lane": "POST-MERGE-SNAPSHOT-001",
+  "event_type": "github_merge_closure",
+  "input_state": {
+    "pr": 57,
+    "head_branch": "release/trigger-map-001",
+    "head_sha": "145533ee7c613ee3248a23db769a56cba8ea8804",
+    "base_branch": "main"
+  },
+  "output_state": {
+    "merged": true,
+    "merge_commit": "5b6c30118ec8edb3a0e26bb6cab7d4283a78db6e",
+    "local_snapshot_created": true
+  },
+  "boundaries": {
+    "notion_write": false,
+    "push": false,
+    "branch_delete": false
+  },
+  "next_action": "LOCAL-WORKTREE-CLEANUP-001"
+}

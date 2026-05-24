@@ -1,0 +1,21 @@
+{
+  "id": "LOCAL-WORKTREE-CLEANUP-001",
+  "status": "local_operating_rule",
+  "date": "2026-05-24",
+  "active_branch": "codex/post-merge-snapshot-001",
+  "main_merge_commit": "5b6c30118ec8edb3a0e26bb6cab7d4283a78db6e",
+  "worktree_policy": {
+    "main_derived_execution_lane": "TerraNova-s-Framework-z3",
+    "completed_release_lane": "TerraNova-s-Framework",
+    "delete_worktrees_without_explicit_go": false,
+    "push_directly_to_main": false,
+    "use_short_lived_codex_branch_for_new_work": true
+  },
+  "dry_run": {
+    "git_worktree_prune_reported_stale_entries": false
+  },
+  "external_mutations": {
+    "github": false,
+    "notion": false
+  }
+}
