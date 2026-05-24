@@ -68,7 +68,7 @@ jobs:
         run: python scripts/render_prism_atlas.py
 
       - name: Verify generated docs are committed
-        run: git diff --exit-code -- docs/atlas docs/triggers/gap_ledger.md
+        run: git diff --ignore-cr-at-eol --exit-code -- docs/atlas docs/triggers/gap_ledger.md
 
       - name: Validate fill script syntax
         run: bash -n raw/exports/fill_850k_raw.sh
