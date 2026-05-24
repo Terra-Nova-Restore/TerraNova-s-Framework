@@ -12,6 +12,7 @@ from __future__ import annotations
 import csv
 import json
 from collections import Counter
+from copy import deepcopy
 from pathlib import Path
 
 
@@ -20,6 +21,16 @@ OUT = ROOT / "docs" / "atlas" / "control-tower"
 BATCH = "TRIGGER-DEF-001-SCAFFOLD"
 TODAY = "2026-05-23"
 CREATED_AT = "2026-05-23T19:07:42+02:00"
+
+DEFAULT_TRACK_A = {
+    "status": "public_safe_protection_gate",
+    "protected_trigger_refs": ["205", "206", "207", "208", "209", "210"],
+}
+
+DEFAULT_TRACK_B = {
+    "status": "private_promotion_queue_built",
+    "candidate_trigger_refs": ["176", "182", "202"],
+}
 
 
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, object]]) -> None:
@@ -37,8 +48,13 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8", newline="\n")
 
 
-def read_json(path: str) -> dict[str, object]:
-    return json.loads((OUT / path).read_text(encoding="utf-8"))
+def read_json(path: str, fallback: dict[str, object] | None = None) -> dict[str, object]:
+    source = OUT / path
+    if source.exists():
+        return json.loads(source.read_text(encoding="utf-8"))
+    if fallback is None:
+        raise FileNotFoundError(source)
+    return deepcopy(fallback)
 
 
 def build_term_rows() -> list[dict[str, object]]:
@@ -543,8 +559,11 @@ def build_causal_log() -> dict[str, object]:
 
 
 def main() -> None:
-    track_a = read_json("tnpx-capii-tokenomics-gate-001.review-summary.json")
-    track_b = read_json("source-174-210.promotion-summary.json")
+    # These upstream review summaries are referenced in the committed scaffold
+    # outputs, but they are not part of the public repo snapshot. Fall back to
+    # the committed summary values so the generator remains reproducible.
+    track_a = read_json("tnpx-capii-tokenomics-gate-001.review-summary.json", DEFAULT_TRACK_A)
+    track_b = read_json("source-174-210.promotion-summary.json", DEFAULT_TRACK_B)
     term_rows = build_term_rows()
     admission_rows = build_admission_rows()
     publication_rows = build_publication_rows()
