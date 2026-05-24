@@ -1,0 +1,10 @@
+Gate ID,Gate,Status,Evidence,Blocks Until Cleared
+TRIGGER-DEF-G001,Unique key rule,must_include,Trigger-ID + layer/instance + mode/promille + context.,Any public rulebook that treats Trigger-ID alone as unique.
+TRIGGER-DEF-G002,Track A protected/public split,available_as_scaffold_input,TNPX-CAPII-TOKENOMICS-GATE-001 committed locally.,Final public protected/IP/tokenomics wording.
+TRIGGER-DEF-G003,Track B promotion queue,available_as_scaffold_input,SOURCE-174-210-PROMOTION-QUEUE-001 committed locally.,"L3 wording for 176, 182 and 202."
+TRIGGER-DEF-G004,Raw source boundary,blocked,XPORT and source corridors emit count-only/hash/source-handle outputs.,"Any raw excerpt, raw title, local path or conversation ID publication."
+TRIGGER-DEF-G005,Public canon and TRG assignment,blocked,Current lanes explicitly stop at scaffold/private queue.,TRIGGER-174-210-CANON-DRAFT-001 and explicit Silvan GO.
+TRIGGER-DEF-G006,Silvan framing,must_include,WORKSPACE-CORR-001 relation-preservation rule.,Any rulebook that hides Silvan-specific authorship instead of professionally framing it.
+TRIGGER-DEF-G007,Third-party/account/security/IP redaction,must_include,WORKSPACE-CORR-001 and Track A protected gates.,"Any public text exposing third parties, accounts, raw identities, security details or protected IP."
+TRIGGER-DEF-G008,Metarotik deferral,deferred,Metarotik is a recognized cluster but intentionally later than tokenomics/trigger scaffolding.,Any public metarotik explanation inside this scaffold.
+TRIGGER-DEF-G009,External mutation,blocked,/fff local-only execution.,"Notion write, GitHub push, PR or publication."

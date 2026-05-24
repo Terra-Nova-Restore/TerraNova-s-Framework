@@ -1,0 +1,6 @@
+Canon Level,Meaning,Minimum Evidence,Allowed Use,Blocked Use,Example From Current Sprint
+L0-ID-ANCHOR,Reserved or named slot with no source-definition claim.,Explicit reservation or source index.,Keep number or symbolic slot available.,"Definition, canon claim, activation or TRG assignment.",171;172;173
+L1-NAME-CLUSTER,Name or cluster-level routing marker.,"Name, cluster or visual/source relation.",Route review and preserve relation.,"Definition authority, implementation contract or public canon.",legacy MMD/CAP candidates
+L2-SOURCE-BACKED-REFERENCE,Source-backed reference with name and/or definition candidate.,Reviewed source handle and boundary gates.,Use as source-backed reference material.,"TRG assignment, activation semantics, public canon promotion.",174-210
+L3-CANON-CANDIDATE,Draft public or internal canon candidate with explicit gates and wording.,"L2 source plus private confirmation, sensitivity review and protected/public split.",Draft candidate wording for review.,Final public canon or executable contract.,future 176/182/202 after human confirmation
+L4-PUBLIC-CANON,Public stable rule or module contract.,"Approved source, publication, redaction, legal/IP and implementation gates.",Public rulebook or canonical module reference.,Anything beyond the approved scope.,not reached

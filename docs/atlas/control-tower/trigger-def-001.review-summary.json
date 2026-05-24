@@ -1,0 +1,57 @@
+{
+  "batch": "TRIGGER-DEF-001-SCAFFOLD",
+  "status": "scaffold_only_not_public_canon",
+  "created_at": "2026-05-23T19:07:42+02:00",
+  "inputs": {
+    "trigger_truth_seed": "trigger-complement-2026-03-30.md",
+    "trigger_map": "trigger-map-001.seed.csv",
+    "track_a_gate": "tnpx-capii-tokenomics-gate-001.review-summary.json",
+    "track_b_queue": "source-174-210.promotion-summary.json",
+    "workspace_corr": "workspace-corr-001.relation-preservation-rules.md"
+  },
+  "term_rows": 17,
+  "admission_rows": 5,
+  "publication_rows": 6,
+  "gate_rows": 9,
+  "dependency_rows": 7,
+  "gate_status_counts": {
+    "must_include": 3,
+    "available_as_scaffold_input": 2,
+    "blocked": 3,
+    "deferred": 1
+  },
+  "track_a_status": "public_safe_protection_gate",
+  "track_b_status": "private_promotion_queue_built",
+  "candidate_trigger_refs": [
+    "176",
+    "182",
+    "202"
+  ],
+  "protected_trigger_refs": [
+    "205",
+    "206",
+    "207",
+    "208",
+    "209",
+    "210"
+  ],
+  "decision": "TRIGGER-DEF-001 may be scaffolded from Track A and Track B, but final public rulebook, public canon and TRG assignment remain blocked.",
+  "next_lane": "TRIGGER-DEF-001-DRAFT after human review of scaffold scope, then TRIGGER-174-210-CANON-DRAFT-001.",
+  "boundaries": {
+    "raw_excerpts_printed": false,
+    "raw_messages_printed": false,
+    "raw_titles_printed": false,
+    "local_paths_printed": false,
+    "conversation_ids_printed": false,
+    "account_data_printed": false,
+    "public_canon_promoted": false,
+    "trg_assigned": false,
+    "patent_claims_printed": false,
+    "tokenomics_claims_printed": false,
+    "metarotik_expanded": false,
+    "notion_write_performed": false,
+    "git_push_performed": false,
+    "pr_opened": false,
+    "commit_created": false
+  }
+}

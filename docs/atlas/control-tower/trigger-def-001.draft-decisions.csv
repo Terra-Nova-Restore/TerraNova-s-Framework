@@ -1,0 +1,6 @@
+Decision ID,Decision,Status,Reason
+TRIGGER-DEF-D001,Draft is public-capable but not final public canon.,draft_only,"Track A and Track B are stable enough for rulebook wording, not for final canon release."
+TRIGGER-DEF-D002,Trigger-ID alone is never the unique trigger entry key.,must_include,Trigger Truth requires Trigger-ID plus layer/instance plus mode/promille plus context.
+TRIGGER-DEF-D003,"Silvan-specific source material is professionally framed, not hidden by default.",must_include,Workspace correlation rules preserve authorship and relation while redacting sensitive details.
+TRIGGER-DEF-D004,Protected lanes preserve relation but suppress protected details.,must_include,"TNPX/IP, CAP-II, tokenomics, accounts, security and third-party content cannot be exposed by rulebook wording."
+TRIGGER-DEF-D005,Metarotik remains deferred.,deferred,The cluster is recognized but comes after trigger/tokenomics foundations.

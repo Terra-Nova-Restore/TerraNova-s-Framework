@@ -1,0 +1,7 @@
+Lane,Scope,Allowed Now,Blocked Now,Current Sprint Anchor
+public_after_trigger_review,Trigger material that can become public after source and canon gates.,Handle relation and L2 reference wording.,Public canon until TRIGGER-DEF and promotion gates clear.,176;202 candidates
+internal_sensitivity_review,Material needing wording or sensitivity review before public use.,Internal queue and redacted relation.,Public wording until sensitivity gate clears.,182
+protected_biz_ip_review,"Trigger rows entangled with IP, CAP-II, Revoke, license, tokenomics or business review.",Handle-level protected L2 reference.,"Patent, contract, tokenomics, financial or protected technical claims.",205-210
+private_context_input,Private raw or excerpt context used only for classification and routing.,Count-only evidence and sample handles.,"Raw excerpt, title, local path, conversation ID or direct source claim.",XPORT-002 excerpt gate
+metarotik_deferred,Metarotik/phenomenology relations preserved for later lane.,Relation marker only.,Public explanation or canon expansion in TRIGGER-DEF-001 scaffold.,future METAROTIK-PHEN-001
+external_mutation_blocked,"Notion, GitHub push/PR, token/contract and publication actions.",Local artifacts and review packages only.,External mutation without explicit Silvan GO per lane.,/fff local-only
