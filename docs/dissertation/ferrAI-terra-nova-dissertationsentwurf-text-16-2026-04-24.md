@@ -1,10 +1,10 @@
-# FerrAI / Terra Nova – Dissertationsentwurf, Text Nr. 16
+# FerrAI / Terra Nova – Dissertationsentwurf, Upload-Fassung `main(16)`
 
 **Untertitel:** Quellengebundene Rekonstruktion des Terra-Nova/FerrAI-Korpus und der sichtbaren CIC-Dokumentfamilie  
 **Autor:** Silvan Lenhard  
 **Dokumentdatum:** 24. April 2026  
 **Repository-Indexdatum:** 27. April 2026  
-**Arbeitsstand:** Text Nr. 16 / PDF Nr. 16 / erweiterte Arbeits-, Intake- und Ausbau-Fassung  
+**Arbeitsstand:** Upload-Fassung `main(16)` / `PDF-16-Text.txt` / erweiterte Arbeits-, Intake- und Ausbau-Fassung
 **Primäre lokale Artefakte:** `main (16).pdf` und `PDF-16-Text.txt`  
 **Zenodo Version-DOI:** [`10.5281/zenodo.19774447`](https://doi.org/10.5281/zenodo.19774447)  
 **Zenodo Concept-DOI:** [`10.5281/zenodo.19774446`](https://doi.org/10.5281/zenodo.19774446)  
@@ -15,23 +15,23 @@
 
 ## 1. Zweck dieses GitHub-Eintrags
 
-Diese Datei verankert **Text Nr. 16** des FerrAI/Terra-Nova-Dissertationsentwurfs im GitHub-Repository `Terra-Nova-Restore/TerraNova-s-Framework`.
+Diese Datei verankert die **Upload-Fassung `main(16)`** des FerrAI/Terra-Nova-Dissertationsentwurfs im GitHub-Repository `Terra-Nova-Restore/TerraNova-s-Framework`.
 
 Der Eintrag ist bewusst nicht als Ersatz für das PDF, den Zenodo-Record oder die vollständige Textfassung gedacht. Er dient als präziser Repository-Anker für:
 
-- die Identifikation der aktuellen Nr.-16-Fassung,
+- die Identifikation der aktuellen Upload-Fassung `main(16)`,
 - die Unterscheidung gegenüber älteren Fassungen, insbesondere der früheren 258-Seiten-Fassung,
 - die Einordnung der neuen Ausbau- und Intakebereiche,
 - die spätere Rückführung von Reviews, Issues, Pull Requests, Changelogs und Appendix-Dateien,
 - die Verbindung von wissenschaftlicher Nachweisführung, Repository-Struktur und TerraNova/FerrAI-Framework.
 
-Text Nr. 16 ist gegenüber der vorherigen Fassung erweitert. Er enthält neben dem bisherigen Hauptkörper zusätzliche Ausbau-, Datenexport-, Rückführungs- und Mehrbandbereiche.
+Die Upload-Fassung `main(16)` ist gegenüber der vorherigen Fassung erweitert. Sie enthält neben dem bisherigen Hauptkörper zusätzliche Ausbau-, Datenexport-, Rückführungs- und Mehrbandbereiche.
 
 ---
 
 ## 2. Kurzstatus
 
-Text Nr. 16 ist eine erweiterte Fassung des Dissertationsentwurfs. Die Fassung bleibt datiert auf den 24. April 2026 und führt weiterhin die Zenodo-DOIs:
+Die Upload-Fassung `main(16)` ist eine erweiterte Fassung des Dissertationsentwurfs. Die Fassung bleibt datiert auf den 24. April 2026 und führt weiterhin die Zenodo-DOIs:
 
 - Version-DOI: `10.5281/zenodo.19774447`
 - Concept-DOI: `10.5281/zenodo.19774446`
@@ -54,7 +54,7 @@ Damit verschiebt sich die Funktion des Dokuments: Es ist nicht nur eine erste zi
 | Feld | Wert |
 |---|---|
 | Titel | FerrAI / Terra Nova – Dissertationsentwurf |
-| Fassung | Text Nr. 16 / PDF Nr. 16 |
+| Fassung | Upload-Fassung `main(16)` / `PDF-16-Text.txt` |
 | Autor | Silvan Lenhard |
 | Datum im Dokument | 24. April 2026 |
 | Repository-Indexdatum | 27. April 2026 |
@@ -69,7 +69,7 @@ Damit verschiebt sich die Funktion des Dokuments: Es ist nicht nur eine erste zi
 
 ## 4. Arbeitsdefinition dieser Fassung
 
-Text Nr. 16 rekonstruiert Terra Nova/FerrAI als mehrschichtigen Verbund aus:
+Die Upload-Fassung `main(16)` rekonstruiert Terra Nova/FerrAI als mehrschichtigen Verbund aus:
 
 - Architektur,
 - Prozesslogik,
@@ -89,7 +89,7 @@ Die zentrale Arbeitsrichtung bleibt quellengebunden: Aussagen werden nicht frei 
 
 ## 5. Methodische Leitlogik
 
-Text Nr. 16 arbeitet weiterhin nach einer expliziten Beleg- und Statusdisziplin.
+Die Upload-Fassung `main(16)` arbeitet weiterhin nach einer expliziten Beleg- und Statusdisziplin.
 
 ### 5.1 Quellenbindung
 
@@ -110,13 +110,13 @@ Die Claim/Evidence-Schicht bleibt ein zentrales Steuerungsprinzip. Sie dient daz
 
 ### 5.4 Ausbau vor Verdichtung
 
-Neu an Text Nr. 16 ist die deutliche Betonung, dass das Werk zunächst in Richtung größerer Fassung und Mehrbandlogik wachsen darf, bevor eine finale Verdichtung erfolgt. Das ist kein formaler Fehler, sondern eine bewusst gesetzte Arbeitslogik.
+Neu an der Upload-Fassung `main(16)` ist die deutliche Betonung, dass das Werk zunächst in Richtung größerer Fassung und Mehrbandlogik wachsen darf, bevor eine finale Verdichtung erfolgt. Das ist kein formaler Fehler, sondern eine bewusst gesetzte Arbeitslogik.
 
 ---
 
 ## 6. Grobarchitektur des Dokuments
 
-Die Nr.-16-Fassung umfasst weiterhin den Hauptkörper der Dissertation sowie eine deutlich erweiterte Appendix-, Audit-, Intake- und Rückführungsschicht.
+Die Upload-Fassung `main(16)` umfasst weiterhin den Hauptkörper der Dissertation sowie eine deutlich erweiterte Appendix-, Audit-, Intake- und Rückführungsschicht.
 
 ### 6.1 Hauptkapitel
 
@@ -153,7 +153,7 @@ O. Register des 24.-April-Codex-Intakes
 P. Workspace-Rollen- und Titelregister  
 Q. Meine Notion-KI als Steuerseite, Bibliotheksindex und Arbeitsprotokoll
 
-### 6.3 Neue Ausbau- und Intakebereiche in Text Nr. 16
+### 6.3 Neue Ausbau- und Intakebereiche in der Upload-Fassung `main(16)`
 
 R. Ausbaukorridor zur 500-Seiten-Fassung und Mehrbandlogik  
 S. XXL-Datenexport: Fensterkatalog, Dubletten und Clusterdetails  
@@ -161,7 +161,7 @@ T. Verdichtungs- und Notion-/GPT-Rückführungspfad
 U. Band-I-bis-III-Intakekorridor und vorläufige Track-C-Klassifikation  
 V. Notion-/GPT-Gesamtpaket: Paketmanifest und Rückführungsraum
 
-Diese neuen Abschnitte sind die eigentliche Signatur von Text Nr. 16 gegenüber der älteren Fassung.
+Diese neuen Abschnitte sind die eigentliche Signatur der Upload-Fassung `main(16)` gegenüber der älteren Fassung.
 
 ---
 
@@ -212,7 +212,7 @@ Das ist für spätere Ordnungsarbeit entscheidend, weil neue Materialien nicht d
 
 Abschnitt V fungiert als Paketmanifest und Rückführungsraum. Er beschreibt Grunddaten, Upload-Reihenfolge und Dateimanifest.
 
-Damit wird Text Nr. 16 zu einem operativen Übergangsdokument zwischen Manuskript, Notion, GPT, lokaler Dateiordnung und GitHub.
+Damit wird die Upload-Fassung `main(16)` zu einem operativen Übergangsdokument zwischen Manuskript, Notion, GPT, lokaler Dateiordnung und GitHub.
 
 ---
 
@@ -260,11 +260,11 @@ docs/
 
 ## 9. Abgrenzung gegenüber der älteren Fassung
 
-Die ältere Fassung wurde als erste Langfassung beziehungsweise RC-0.1-Kern gelesen. Text Nr. 16 geht darüber hinaus.
+Die ältere Fassung wurde als erste Langfassung beziehungsweise RC-0.1-Kern gelesen. Die Upload-Fassung `main(16)` geht darüber hinaus.
 
 Wesentliche Verschiebungen:
 
-| Bereich | Frühere Fassung | Text Nr. 16 |
+| Bereich | Frühere Fassung | Upload-Fassung `main(16)` |
 |---|---|---|
 | Grundstatus | erste Langfassung / RC-0.1 | erweiterte Arbeits-, Intake- und Ausbau-Fassung |
 | Schwerpunkt | zitierfähiger Arbeitsstand | Ausbau, Mehrbandlogik, Rückführung, Datenexport |
@@ -279,9 +279,9 @@ Wesentliche Verschiebungen:
 
 Nach dieser Indexdatei sollten folgende Issues angelegt werden:
 
-### Issue 1: Text Nr. 16 – Review und Statushärtung
+### Review-Issue #12: Upload-Fassung `main(16)` – Review und Statushärtung
 
-Ziel: Prüfung der Nr.-16-Fassung auf Konsistenz, Zitierfähigkeit, Statuslogik und öffentliche Freigabegrenzen.
+Ziel: Prüfung der Upload-Fassung `main(16)` auf Konsistenz, Zitierfähigkeit, Statuslogik und öffentliche Freigabegrenzen.
 
 ### Issue 2: Abschnitt R – Mehrbandlogik operationalisieren
 
@@ -313,7 +313,7 @@ Ziel: Upload-Reihenfolge, Bandklassifikation und Dateimanifest versionierbar mac
   publisher    = {Zenodo},
   doi          = {10.5281/zenodo.19774447},
   url          = {https://doi.org/10.5281/zenodo.19774447},
-  note         = {Text Nr. 16 / PDF Nr. 16 / erweiterte Arbeits-, Intake- und Ausbau-Fassung}
+  note         = {Upload-Fassung main(16) / PDF-16-Text.txt / erweiterte Arbeits-, Intake- und Ausbau-Fassung}
 }
 ```
 
@@ -323,7 +323,7 @@ Ziel: Upload-Reihenfolge, Bandklassifikation und Dateimanifest versionierbar mac
 
 | Kontrollpunkt | Status |
 |---|---|
-| Neue Fassung Nr. 16 erkannt | erfüllt |
+| Upload-Fassung `main(16)` erkannt | erfüllt |
 | PDF- und Textform unterschieden | erfüllt |
 | Alte 258-Seiten-Lesart nicht übernommen | erfüllt |
 | Zenodo-DOIs übernommen | erfüllt |
@@ -333,13 +333,13 @@ Ziel: Upload-Reihenfolge, Bandklassifikation und Dateimanifest versionierbar mac
 | Notion-/GPT-Rückführungspfad markiert | erfüllt |
 | GitHub-Rolle als Index und Steuerknoten definiert | erfüllt |
 | Vollständiges PDF als Binärdatei hochgeladen | nicht über diesen Connector ausgeführt |
-| Repository-Pfad für Text-16-Index angelegt | erfüllt |
+| Repository-Pfad für den Upload-Index angelegt | erfüllt |
 
 ---
 
 ## 13. Kurzanker
 
-**FerrAI / Terra Nova – Dissertationsentwurf, Text Nr. 16.**  
+**FerrAI / Terra Nova – Dissertationsentwurf, Upload-Fassung `main(16)`.**
 Erweiterte Arbeits-, Intake- und Ausbau-Fassung vom 24. April 2026.  
 Mit 300-/500-Seiten-Korridor, Mehrbandlogik, XXL-Datenexport, Notion-/GPT-Rückführungspfad und Paketmanifest.  
 Zenodo Version-DOI: <https://doi.org/10.5281/zenodo.19774447>  
