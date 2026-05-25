@@ -120,4 +120,3 @@ The payment route does not create:
 - guaranteed business outcome,
 - private workspace access,
 - access to raw Notion or protected trigger material.
-
