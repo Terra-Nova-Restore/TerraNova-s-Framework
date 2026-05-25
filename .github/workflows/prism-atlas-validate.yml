@@ -81,6 +81,16 @@ jobs:
             echo "fill_850k_raw.sh unexpectedly succeeded from repo root" >&2
             exit 1
           fi
+          grep -q "TNV_ALLOW_PRIVATE_RAW_FILL=1" "$log_file"
+
+      - name: Validate fill script placeholder guard from repo root
+        run: |
+          log_file="$(mktemp)"
+          if TNV_ALLOW_PRIVATE_RAW_FILL=1 bash raw/exports/fill_850k_raw.sh >"$log_file" 2>&1; then
+            cat "$log_file"
+            echo "fill_850k_raw.sh unexpectedly accepted placeholder payload" >&2
+            exit 1
+          fi
           grep -q "Template placeholder still present" "$log_file"
 
       - name: Validate fill script guard from raw/exports
@@ -92,6 +102,19 @@ jobs:
           ); then
             cat "$log_file"
             echo "fill_850k_raw.sh unexpectedly succeeded from raw/exports" >&2
+            exit 1
+          fi
+          grep -q "TNV_ALLOW_PRIVATE_RAW_FILL=1" "$log_file"
+
+      - name: Validate fill script placeholder guard from raw/exports
+        run: |
+          log_file="$(mktemp)"
+          if (
+            cd raw/exports
+            TNV_ALLOW_PRIVATE_RAW_FILL=1 bash ./fill_850k_raw.sh >"$log_file" 2>&1
+          ); then
+            cat "$log_file"
+            echo "fill_850k_raw.sh unexpectedly accepted placeholder payload from raw/exports" >&2
             exit 1
           fi
           grep -q "Template placeholder still present" "$log_file"
