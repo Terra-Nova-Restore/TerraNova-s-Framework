@@ -67,6 +67,7 @@ a separate automation if project backlog state is required.
 - Prism import manifest: [`docs/governance/prism_import_manifest.md`](docs/governance/prism_import_manifest.md)
 - Track C intake checklist: [`docs/governance/track_c_intake_checklist.md`](docs/governance/track_c_intake_checklist.md)
 - ChatGPT connector runtime policy: [`docs/governance/chatgpt_connector_runtime_policy.md`](docs/governance/chatgpt_connector_runtime_policy.md)
+- Stripe Entry Pack activation plan: [`docs/governance/stripe_entry_pack_activation_plan.md`](docs/governance/stripe_entry_pack_activation_plan.md)
 - Repository maturity note: [`docs/governance/repository_maturity.md`](docs/governance/repository_maturity.md)
 - Raw export review gate: [`raw/exports/REVIEW_GATE.md`](raw/exports/REVIEW_GATE.md)
 

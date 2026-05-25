@@ -73,6 +73,9 @@ Payment status: not active.
 Stripe status: no product, price or payment link has been created by this
 artifact.
 
+Stripe planning:
+[Stripe Entry Pack Activation Plan](../governance/stripe_entry_pack_activation_plan.md)
+
 Before publishing a payment link, complete:
 
 1. Product review.
