@@ -82,6 +82,8 @@ a separate automation if project backlog state is required.
 - Mermaid Cluster: [`docs/atlas/mermaid_cluster.md`](docs/atlas/mermaid_cluster.md)
 - Semantic spine registry: [`docs/atlas/semantic_spine_registry.md`](docs/atlas/semantic_spine_registry.md)
 - Public release candidate: [`docs/public/semantic_architecture_public_release_v0_1.md`](docs/public/semantic_architecture_public_release_v0_1.md)
+- Public artifacts index: [`docs/public/README.md`](docs/public/README.md)
+- Architecture Entry Pack v0.1: [`docs/public/entry_pack_architecture_v0_1.md`](docs/public/entry_pack_architecture_v0_1.md)
 
 ## Current published release
 
