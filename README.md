@@ -62,6 +62,7 @@ a separate automation if project backlog state is required.
 - Public repository boundary: [`docs/governance/public_boundary.md`](docs/governance/public_boundary.md)
 - Repository role vocabulary: [`docs/governance/repo_roles.md`](docs/governance/repo_roles.md)
 - Source-of-record policy: [`docs/governance/source_of_record_policy.md`](docs/governance/source_of_record_policy.md)
+- ChatGPT connector runtime policy: [`docs/governance/chatgpt_connector_runtime_policy.md`](docs/governance/chatgpt_connector_runtime_policy.md)
 - Repository maturity note: [`docs/governance/repository_maturity.md`](docs/governance/repository_maturity.md)
 - Raw export review gate: [`raw/exports/REVIEW_GATE.md`](raw/exports/REVIEW_GATE.md)
 
