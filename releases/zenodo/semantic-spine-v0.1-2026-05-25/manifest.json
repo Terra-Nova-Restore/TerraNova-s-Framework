@@ -1,0 +1,62 @@
+{
+  "version": "semantic-spine-v0.1",
+  "prepared_at": "2026-05-25",
+  "status": "release-ready-review-package",
+  "external_upload_state": "not_uploaded",
+  "title": "TerraNova / FerrAI Semantic Architecture Public Release v0.1",
+  "primary_artifact": "docs/public/semantic_architecture_public_release_v0_1.md",
+  "boundary": {
+    "raw_notion_urls": false,
+    "raw_exports": false,
+    "tnpx_01_protected_draft_details": false,
+    "external_zenodo_mutation": false
+  },
+  "files": [
+    {
+      "path": "docs/public/semantic_architecture_public_release_v0_1.md",
+      "role": "primary citable release artifact",
+      "sha256": "740CFA04E7F29CCA1BAF16E727DD2F6426A57E620A25CE9E623C5BC0A53A86F0"
+    },
+    {
+      "path": "docs/atlas/semantic_spine_registry.md",
+      "role": "registry bridge",
+      "sha256": "057A499FB00EEF453705EF9C4C08473BBD01AB5597093B1B063A769AC05D422B"
+    },
+    {
+      "path": "docs/architecture/public_semantic_architecture_spine.md",
+      "role": "architecture spine entry point",
+      "sha256": "EFA283E08111BDA06B8FE99C6B5AB35C8585B48185D620F64EF2657F00186DC1"
+    },
+    {
+      "path": "docs/architecture/semantic_trigger_architecture.md",
+      "role": "semantic trigger architecture",
+      "sha256": "B55F5A4356070766C6B78D138A9DE4528DF880E9A6D91EAE15C603E47AE0CFDB"
+    },
+    {
+      "path": "docs/architecture/semantic_core_layer.md",
+      "role": "Semantic Core Layer",
+      "sha256": "0A823609FE978CD4A9ADD5266795FA1F441DE1D7ECB56EC609D802EAEEB47E13"
+    },
+    {
+      "path": "docs/architecture/iterative_interaction_collapse.md",
+      "role": "interaction collapse model",
+      "sha256": "443D062519FEB6FDF55DC27A287A285F44BE9D670D24BEA9DDD4881E0CF00A56"
+    },
+    {
+      "path": "docs/architecture/lenhard_decoding_module.md",
+      "role": "Lenhard Decoding Module",
+      "sha256": "3A81A7668B6DC2C82664E369FEA6ED6AAC46A1DB98B99CB0D08487D731769501"
+    },
+    {
+      "path": "docs/architecture/lenhard_model.md",
+      "role": "Lenhard Model",
+      "sha256": "5EC2D4061E4616D79C6CA7BBCD5F5E6BD7F9F495342F7E6C45ED6ED1A9E2C267"
+    },
+    {
+      "path": "docs/atlas/mermaid_cluster.md",
+      "role": "Mermaid Cluster",
+      "sha256": "E8EA8B26B55BF932FD90A15739D4E6DB40486B0E4A70B530E1400140AD12CCC6"
+    }
+  ],
+  "next_external_step": "Explicit Zenodo metadata review and upload/update action."
+}

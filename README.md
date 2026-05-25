@@ -75,6 +75,8 @@ a separate automation if project backlog state is required.
 - Lenhard Decoding Module: [`docs/architecture/lenhard_decoding_module.md`](docs/architecture/lenhard_decoding_module.md)
 - Lenhard Model: [`docs/architecture/lenhard_model.md`](docs/architecture/lenhard_model.md)
 - Mermaid Cluster: [`docs/atlas/mermaid_cluster.md`](docs/atlas/mermaid_cluster.md)
+- Semantic spine registry: [`docs/atlas/semantic_spine_registry.md`](docs/atlas/semantic_spine_registry.md)
+- Public release candidate: [`docs/public/semantic_architecture_public_release_v0_1.md`](docs/public/semantic_architecture_public_release_v0_1.md)
 
 ## Current published release
 

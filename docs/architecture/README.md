@@ -19,6 +19,8 @@ Notion source awareness: Notion may remain source of record for selected living 
 | [lenhard_decoding_module.md](lenhard_decoding_module.md) | LDM as signal-to-route decoding layer. |
 | [lenhard_model.md](lenhard_model.md) | Umbrella transformation model connecting SCL, triggers, LDM, collapse, Mermaid and CIC. |
 | [../atlas/mermaid_cluster.md](../atlas/mermaid_cluster.md) | Mermaid Cluster as visual trigger graph layer. |
+| [../atlas/semantic_spine_registry.md](../atlas/semantic_spine_registry.md) | Registry bridge into atlas/source routing and public release packaging. |
+| [../public/semantic_architecture_public_release_v0_1.md](../public/semantic_architecture_public_release_v0_1.md) | Citable public release candidate for the semantic architecture spine. |
 
 ## Existing Architecture Anchors
 
