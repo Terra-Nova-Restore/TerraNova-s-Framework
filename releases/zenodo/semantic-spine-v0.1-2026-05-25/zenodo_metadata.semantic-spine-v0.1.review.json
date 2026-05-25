@@ -1,0 +1,55 @@
+{
+  "review_package": {
+    "id": "semantic-spine-v0.1-2026-05-25",
+    "status": "REVIEW_ONLY_NO_MUTATION",
+    "created_date": "2026-05-25",
+    "zenodo_mutation_authorized": false,
+    "github_release_authorized": false,
+    "tag_authorized": false
+  },
+  "proposed_api_payload_candidate": {
+    "metadata": {
+      "title": "TerraNova / FerrAI Semantic Architecture Public Release v0.1",
+      "upload_type": "publication",
+      "publication_type": "workingpaper",
+      "description": "<p>Public-safe release candidate defining the TerraNova / FerrAI semantic architecture spine: Semantic Trigger Architecture, Semantic Core Layer (SCL), Iterative Interaction Collapse, Lenhard Decoding Module, Lenhard Model, and Mermaid Cluster. This package is a review candidate and does not claim an external Zenodo upload until an explicit upload action is performed.</p>",
+      "creators": [
+        {
+          "name": "Lenhard, Silvan",
+          "affiliation": "Terra'Nova'Restore",
+          "orcid": "0009-0007-8033-3508"
+        }
+      ],
+      "access_right": "open",
+      "license": "cc-by-4.0",
+      "version": "v0.1",
+      "language": "eng",
+      "publication_date": "2026-05-25",
+      "keywords": [
+        "TerraNova",
+        "FerrAI",
+        "Semantic Core Layer",
+        "Semantic Trigger Architecture",
+        "Iterative Interaction Collapse",
+        "Lenhard Decoding Module",
+        "Lenhard Model",
+        "Mermaid",
+        "human-AI collaboration",
+        "system architecture"
+      ],
+      "related_identifiers": [
+        {
+          "identifier": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework",
+          "relation": "isSupplementTo",
+          "scheme": "url",
+          "resource_type": "software"
+        }
+      ],
+      "custom": {
+        "code:codeRepository": "https://github.com/Terra-Nova-Restore/TerraNova-s-Framework"
+      },
+      "notes": "Review package only. No Zenodo draft, DOI reservation, upload, publish action, GitHub tag, or GitHub release is authorized by this file."
+    }
+  },
+  "github_commit": "ad8da3e67d1f27b144d5585908df4c42626ee70e"
+}

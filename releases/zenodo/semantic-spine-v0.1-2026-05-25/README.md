@@ -23,8 +23,27 @@ It is intentionally a review package, not proof of a completed Zenodo upload.
 | Version | v0.1 |
 | Prepared | 2026-05-25 |
 | Primary file | `docs/public/semantic_architecture_public_release_v0_1.md` |
+| Rendered HTML | `semantic_architecture_public_release_v0_1.html` |
+| Rendered PDF | `semantic_architecture_public_release_v0_1.pdf` |
 | Registry bridge | `docs/atlas/semantic_spine_registry.md` |
 | Architecture spine | `docs/architecture/public_semantic_architecture_spine.md` |
+
+## Living Flow
+
+The four release steps are represented as local artifacts:
+
+| Step | Artifact | State |
+| --- | --- | --- |
+| 1. Render whitepaper/PDF | `semantic_architecture_public_release_v0_1.html` and `.pdf` | Generated |
+| 2. Prepare Zenodo metadata | `zenodo_metadata.semantic-spine-v0.1.review.json` | Review-ready |
+| 3. Prepare GitHub tag/release | `github_release_draft.semantic-spine-v0.1.md` | Draft-ready |
+| 4. Gate Zenodo upload | `zenodo_upload_gate.semantic-spine-v0.1.md` | Explicit-GO gate |
+
+The reproducible builder is:
+
+```powershell
+python scripts/build_semantic_spine_release.py --github-commit ad8da3e67d1f27b144d5585908df4c42626ee70e
+```
 
 ## Release Scope
 

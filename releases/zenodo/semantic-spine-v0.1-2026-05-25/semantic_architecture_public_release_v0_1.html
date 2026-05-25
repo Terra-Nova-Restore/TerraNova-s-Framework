@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TerraNova / FerrAI Semantic Architecture Public Release v0.1</title>
+  <style>
+    :root {
+      --ink: #18201b;
+      --muted: #5d675f;
+      --paper: #fffdf6;
+      --line: #d8cbb1;
+      --accent: #8f4e24;
+      --accent-dark: #4d2f1e;
+      --wash: #f3ead8;
+      --code: #1e2420;
+    }
+    @page { size: A4; margin: 18mm 16mm; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top left, #f6ead3 0, #fffdf6 34%, #f9f4e8 100%);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.58;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 52px 38px 72px;
+      background: rgba(255, 253, 246, 0.92);
+    }
+    .kicker {
+      color: var(--accent);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, h4 {
+      color: var(--accent-dark);
+      line-height: 1.15;
+      page-break-after: avoid;
+    }
+    h1 {
+      max-width: 760px;
+      margin: 12px 0 20px;
+      font-size: 2.55rem;
+    }
+    h2 {
+      margin-top: 2.2rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+      font-size: 1.55rem;
+    }
+    h3 { margin-top: 1.6rem; }
+    p { margin: 0.85rem 0; }
+    a { color: #7f3f1f; text-decoration-thickness: 0.08em; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.35rem;
+      font-size: 0.92rem;
+      page-break-inside: avoid;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 0.55rem 0.65rem;
+      vertical-align: top;
+    }
+    th {
+      background: var(--wash);
+      text-align: left;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    code {
+      background: #efe5d0;
+      border-radius: 4px;
+      padding: 0.08rem 0.22rem;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.9em;
+    }
+    pre {
+      background: var(--code);
+      color: #f8f1df;
+      border-radius: 12px;
+      margin: 1.1rem 0;
+      padding: 1rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      page-break-inside: avoid;
+    }
+    pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem 1.2rem;
+      margin: 1.25rem 0 2rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: rgba(243, 234, 216, 0.58);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 0.88rem;
+    }
+    .meta strong { color: var(--accent-dark); }
+    @media print {
+      body { background: #fffdf6; }
+      main { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div class="kicker">TerraNova / FerrAI public release candidate</div>
+  <section class="meta">
+    <div><strong>Version:</strong> v0.1</div>
+    <div><strong>Prepared:</strong> 2026-05-25</div>
+    <div><strong>Author:</strong> Silvan Lenhard</div>
+    <div><strong>Repository:</strong> Terra-Nova-Restore/TerraNova-s-Framework</div>
+  </section>
+<h1 id="terranova-ferrai-semantic-architecture-public-release-v0-1">TerraNova / FerrAI Semantic Architecture Public Release v0.1</h1>
+<p>Status: public release candidate v0.1 Source: GitHub public semantic architecture spine, atlas Mermaid Cluster bridge, public boundary governance Trace: prepared 2026-05-25 from PR #62 follow-up work Boundary: public-safe synthesis only; no raw Notion URLs, no raw exports, no protected TNPX-01 draft details Mode: SYNC / citable public artifact preparation GitHub sync state: prepared for public GitHub review Notion source awareness: Notion remains a living source layer for Mermaid/SCL material; this artifact cites GitHub-visible redacted mirrors</p>
+<h2 id="citation-block">Citation Block</h2>
+<p>Suggested citation:</p>
+<pre class="code-block language-text"><code>Lenhard, Silvan. TerraNova / FerrAI Semantic Architecture Public Release v0.1.
+Terra-Nova-Restore/TerraNova-s-Framework, 2026-05-25.</code></pre>
+<p>Canonical GitHub entry points:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Architecture spine</td>
+<td><a href="../architecture/public_semantic_architecture_spine.md">../architecture/public_semantic_architecture_spine.md</a></td>
+</tr>
+<tr>
+<td>Registry bridge</td>
+<td><a href="../atlas/semantic_spine_registry.md">../atlas/semantic_spine_registry.md</a></td>
+</tr>
+<tr>
+<td>Mermaid Cluster</td>
+<td><a href="../atlas/mermaid_cluster.md">../atlas/mermaid_cluster.md</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="abstract">Abstract</h2>
+<p>This release defines the public TerraNova / FerrAI semantic architecture spine. It introduces triggers as semantic displacement spaces, the Semantic Core Layer as language-first control surface, iterative interaction collapse as the route from semantic ambiguity to traceable artifact, the Lenhard Decoding Module as signal-to-route decoder, the Lenhard Model as transformation umbrella, and the Mermaid Cluster as visual trigger graph layer.</p>
+<p>The release is a public-safe architecture synthesis. It is not a raw workspace export, not a patent filing, not a medical model and not a claim of hidden connector authorization.</p>
+<h2 id="core-claims">Core Claims</h2>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Public status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A TerraNova trigger is a semantic field operator, not a flat activator.</td>
+<td>Architecture claim</td>
+</tr>
+<tr>
+<td>SCL is a language-first operating surface, not a prompt library.</td>
+<td>Architecture claim</td>
+</tr>
+<tr>
+<td>Interaction can collapse iteratively into traceable artifacts.</td>
+<td>Workflow claim</td>
+</tr>
+<tr>
+<td>LDM translates signals and context into route, gate and schema.</td>
+<td>Architecture claim</td>
+</tr>
+<tr>
+<td>The Lenhard Model connects SCL, triggers, LDM, collapse, Mermaid and CIC.</td>
+<td>Transformation model claim</td>
+</tr>
+<tr>
+<td>Mermaid diagrams can be read as living graph surfaces with nodes, edges and guards.</td>
+<td>Documentation/modeling claim</td>
+</tr>
+</tbody>
+</table>
+<h2 id="concept-map">Concept Map</h2>
+<pre class="code-block language-mermaid"><code>flowchart TB
+    SCL[&quot;Semantic Core Layer&quot;]
+    TRG[&quot;Semantic Trigger Architecture&quot;]
+    IIC[&quot;Iterative Interaction Collapse&quot;]
+    LDM[&quot;Lenhard Decoding Module&quot;]
+    LM[&quot;Lenhard Model&quot;]
+    MMD[&quot;Mermaid Cluster&quot;]
+    CIC[&quot;CIC / coherence frame&quot;]
+    ART[&quot;Traceable public artifact&quot;]
+
+    SCL --&gt; TRG
+    TRG --&gt; IIC
+    SCL --&gt; LDM
+    LDM --&gt; LM
+    IIC --&gt; LM
+    LM --&gt; MMD
+    LM --&gt; CIC
+    MMD --&gt; ART
+    CIC --&gt; ART</code></pre>
+<h2 id="public-boundary">Public Boundary</h2>
+<p>This release keeps protected content out of the public artifact:</p>
+<table>
+<thead>
+<tr>
+<th>Blocked detail</th>
+<th>Public substitute</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raw Notion page URLs and page IDs</td>
+<td>Source class and GitHub mirror paths</td>
+</tr>
+<tr>
+<td>Raw exports and chat transcripts</td>
+<td>Synthesized public docs</td>
+</tr>
+<tr>
+<td>Protected TNPX-01 draft mechanics</td>
+<td>Historical context anchor only</td>
+</tr>
+<tr>
+<td>Private trigger tables</td>
+<td>Semantic trigger architecture</td>
+</tr>
+<tr>
+<td>Wallet, token or operational secrets</td>
+<td>Public boundary reference only</td>
+</tr>
+<tr>
+<td>Medical, psychological or legal claims</td>
+<td>Architecture and workflow framing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="release-spine">Release Spine</h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../architecture/semantic_trigger_architecture.md">Semantic Trigger Architecture</a></td>
+<td>Defines trigger-as-field-operator model.</td>
+</tr>
+<tr>
+<td><a href="../architecture/semantic_core_layer.md">Semantic Core Layer</a></td>
+<td>Defines language-first control layer.</td>
+</tr>
+<tr>
+<td><a href="../architecture/iterative_interaction_collapse.md">Iterative Interaction Collapse</a></td>
+<td>Defines collapse from open field to artifact.</td>
+</tr>
+<tr>
+<td><a href="../architecture/lenhard_decoding_module.md">Lenhard Decoding Module</a></td>
+<td>Defines decoder from signal to route.</td>
+</tr>
+<tr>
+<td><a href="../architecture/lenhard_model.md">Lenhard Model</a></td>
+<td>Defines the transformation umbrella model.</td>
+</tr>
+<tr>
+<td><a href="../atlas/mermaid_cluster.md">Mermaid Cluster</a></td>
+<td>Defines visual trigger graph interpretation.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zenodo-preparation-note">Zenodo Preparation Note</h2>
+<p>This Markdown file is release-ready as a citable public artifact. A Zenodo publication step still requires an explicit external upload/action and final metadata review.</p>
+</main>
+</body>
+</html>

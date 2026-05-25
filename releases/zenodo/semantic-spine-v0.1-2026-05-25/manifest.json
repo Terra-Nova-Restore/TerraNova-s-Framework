@@ -9,54 +9,90 @@
     "raw_notion_urls": false,
     "raw_exports": false,
     "tnpx_01_protected_draft_details": false,
-    "external_zenodo_mutation": false
+    "external_zenodo_mutation": false,
+    "github_release_mutation": false
+  },
+  "rendering": {
+    "html": true,
+    "pdf": true,
+    "renderer": "python-stdlib-html + headless-browser-pdf"
   },
   "files": [
     {
       "path": "docs/public/semantic_architecture_public_release_v0_1.md",
-      "role": "primary citable release artifact",
-      "sha256": "740CFA04E7F29CCA1BAF16E727DD2F6426A57E620A25CE9E623C5BC0A53A86F0"
+      "size_bytes": 4521,
+      "sha256": "0ECACEC59F0DFFDEDA1D216AA31A16C713B08B2A95FD328DA15A8AF32ED0E90E"
     },
     {
       "path": "docs/atlas/semantic_spine_registry.md",
-      "role": "registry bridge",
-      "sha256": "057A499FB00EEF453705EF9C4C08473BBD01AB5597093B1B063A769AC05D422B"
+      "size_bytes": 3884,
+      "sha256": "BCA2AAA0836E24AA144FA41035059F9D1C8232F5D57386CAE4507B6746194C78"
     },
     {
       "path": "docs/architecture/public_semantic_architecture_spine.md",
-      "role": "architecture spine entry point",
+      "size_bytes": 4039,
       "sha256": "EFA283E08111BDA06B8FE99C6B5AB35C8585B48185D620F64EF2657F00186DC1"
     },
     {
       "path": "docs/architecture/semantic_trigger_architecture.md",
-      "role": "semantic trigger architecture",
+      "size_bytes": 4719,
       "sha256": "B55F5A4356070766C6B78D138A9DE4528DF880E9A6D91EAE15C603E47AE0CFDB"
     },
     {
       "path": "docs/architecture/semantic_core_layer.md",
-      "role": "Semantic Core Layer",
+      "size_bytes": 3411,
       "sha256": "0A823609FE978CD4A9ADD5266795FA1F441DE1D7ECB56EC609D802EAEEB47E13"
     },
     {
       "path": "docs/architecture/iterative_interaction_collapse.md",
-      "role": "interaction collapse model",
+      "size_bytes": 3485,
       "sha256": "443D062519FEB6FDF55DC27A287A285F44BE9D670D24BEA9DDD4881E0CF00A56"
     },
     {
       "path": "docs/architecture/lenhard_decoding_module.md",
-      "role": "Lenhard Decoding Module",
+      "size_bytes": 3175,
       "sha256": "3A81A7668B6DC2C82664E369FEA6ED6AAC46A1DB98B99CB0D08487D731769501"
     },
     {
       "path": "docs/architecture/lenhard_model.md",
-      "role": "Lenhard Model",
+      "size_bytes": 3836,
       "sha256": "5EC2D4061E4616D79C6CA7BBCD5F5E6BD7F9F495342F7E6C45ED6ED1A9E2C267"
     },
     {
       "path": "docs/atlas/mermaid_cluster.md",
-      "role": "Mermaid Cluster",
+      "size_bytes": 3915,
       "sha256": "E8EA8B26B55BF932FD90A15739D4E6DB40486B0E4A70B530E1400140AD12CCC6"
+    },
+    {
+      "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/semantic_architecture_public_release_v0_1.html",
+      "size_bytes": 9396,
+      "sha256": "417EDD3FE36D95B7169C0F37BDEDB7083A7F620C3782C411C13F2E80927DFEDE"
+    },
+    {
+      "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/semantic_architecture_public_release_v0_1.pdf",
+      "size_bytes": 157828,
+      "sha256": "01090E396DF21A1C9C71C9315B2655452155FE952709C04D64D45A1F836B6661"
+    },
+    {
+      "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/zenodo_metadata.semantic-spine-v0.1.review.json",
+      "size_bytes": 2174,
+      "sha256": "CD085B308650B46096F788DE233537659BEBFC35EDFF6725365551C504907CCE"
+    },
+    {
+      "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/github_release_draft.semantic-spine-v0.1.md",
+      "size_bytes": 1261,
+      "sha256": "0CE36E5999109A439B646BBEEDE16A5CDD5B064890F0C2ED1DCC28858CB3443D"
+    },
+    {
+      "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/zenodo_upload_gate.semantic-spine-v0.1.md",
+      "size_bytes": 1389,
+      "sha256": "A84F92B8418B2F9EFE12AA9BECC7CF251C385444D5EEA7F69923613B95615229"
+    },
+    {
+      "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/README.md",
+      "size_bytes": 2775,
+      "sha256": "434AF94D7A9812A564AAD407C429B2D700851699DAC7EDCE733F275971907677"
     }
   ],
-  "next_external_step": "Explicit Zenodo metadata review and upload/update action."
+  "next_external_step": "Explicit GitHub release/tag GO or Zenodo metadata review and upload/update GO."
 }
