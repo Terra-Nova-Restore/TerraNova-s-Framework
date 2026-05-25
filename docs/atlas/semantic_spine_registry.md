@@ -25,6 +25,7 @@ semantic architecture docs -> atlas / Mermaid registry -> release artifact
 | SEM-TRG-001 | [../architecture/semantic_trigger_architecture.md](../architecture/semantic_trigger_architecture.md) | Trigger field model | GitHub synthesis + reviewed trigger sources | Public OK, no private trigger table |
 | SCL-001 | [../architecture/semantic_core_layer.md](../architecture/semantic_core_layer.md) | Language-first control layer | GitHub synthesis + SCL source review | Public OK |
 | IIC-001 | [../architecture/iterative_interaction_collapse.md](../architecture/iterative_interaction_collapse.md) | Interaction collapse loop | GitHub synthesis + CIC/IPERKA frame | Public OK |
+| RIIC-001 | [../architecture/recursive_iterative_interaction_collapse.md](../architecture/recursive_iterative_interaction_collapse.md) | Recursive target layer for collapse output re-entry | GitHub synthesis + IIC/SCL/LDM relation | Target, not final public canon |
 | LDM-001 | [../architecture/lenhard_decoding_module.md](../architecture/lenhard_decoding_module.md) | Signal-to-route decoder | GitHub synthesis + Lenhard/SCL review | Public OK, no personal/medical claims |
 | LMODEL-001 | [../architecture/lenhard_model.md](../architecture/lenhard_model.md) | Transformation umbrella model | GitHub synthesis + CIC layer relation | Public OK, no patent grant claim |
 | MMD-CLUSTER-001 | [mermaid_cluster.md](mermaid_cluster.md) | Visual trigger graph layer | GitHub readpass + Mermaid source review | Public OK, no raw Mermaid DB dump |
@@ -50,6 +51,7 @@ flowchart LR
     SCL["SCL"]
     TRG["Semantic Trigger Architecture"]
     IIC["Iterative Interaction Collapse"]
+    RIIC["Recursive-Iterative Interaction Collapse"]
     LDM["Lenhard Decoding Module"]
     LM["Lenhard Model"]
     MMD["Mermaid Cluster"]
@@ -58,7 +60,9 @@ flowchart LR
     SPINE --> SCL
     SPINE --> TRG
     TRG --> IIC
+    IIC --> RIIC
     SCL --> LDM
+    RIIC --> LDM
     LDM --> LM
     LM --> MMD
     MMD --> REL

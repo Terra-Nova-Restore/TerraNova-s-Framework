@@ -16,6 +16,7 @@ Notion source awareness: Notion may remain source of record for selected living 
 | [semantic_trigger_architecture.md](semantic_trigger_architecture.md) | Trigger architecture as semantic displacement spaces and vector-field distortions. |
 | [semantic_core_layer.md](semantic_core_layer.md) | SCL as the language-first control surface. |
 | [iterative_interaction_collapse.md](iterative_interaction_collapse.md) | Interaction collapse from open semantic field to traceable artifact. |
+| [recursive_iterative_interaction_collapse.md](recursive_iterative_interaction_collapse.md) | Next target: collapse output re-enters SCL/LDM as the next semantic field. |
 | [lenhard_decoding_module.md](lenhard_decoding_module.md) | LDM as signal-to-route decoding layer. |
 | [lenhard_model.md](lenhard_model.md) | Umbrella transformation model connecting SCL, triggers, LDM, collapse, Mermaid and CIC. |
 | [../atlas/mermaid_cluster.md](../atlas/mermaid_cluster.md) | Mermaid Cluster as visual trigger graph layer. |

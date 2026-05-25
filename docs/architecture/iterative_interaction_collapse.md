@@ -35,6 +35,19 @@ The next interaction reopens the field at a more precise level.
 field_0 -> collapse_1 -> field_1 -> collapse_2 -> field_2 -> artifact_n
 ```
 
+## Recursive Extension
+
+The next target is the recursive-iterative form:
+
+```text
+artifact_n -> decode(artifact_n) -> field_n+1 -> collapse_n+1
+```
+
+That extension is tracked separately in
+[recursive_iterative_interaction_collapse.md](recursive_iterative_interaction_collapse.md).
+The key difference is that a collapse result becomes structured input for the
+next collapse, not just background context.
+
 This is why TerraNova work often moves through:
 
 | Phase | Function |
@@ -110,4 +123,7 @@ flowchart LR
 Use Iterative Interaction Collapse to describe the public TerraNova loop from
 ambiguous semantic input to traceable output. Do not use it to claim physical,
 medical or legal causality.
+
+Use Recursive-Iterative Interaction Collapse when the prior artifact itself
+re-enters SCL/LDM as the next semantic field.
 

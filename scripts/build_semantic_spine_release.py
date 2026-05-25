@@ -344,7 +344,8 @@ def metadata_payload(github_commit: str | None = None) -> dict[str, object]:
     description = (
         "Public-safe release candidate defining the TerraNova / FerrAI semantic "
         "architecture spine: Semantic Trigger Architecture, Semantic Core Layer "
-        "(SCL), Iterative Interaction Collapse, Lenhard Decoding Module, Lenhard "
+        "(SCL), Iterative Interaction Collapse, Recursive-Iterative Interaction "
+        "Collapse, Lenhard Decoding Module, Lenhard "
         "Model, and Mermaid Cluster. This package is a review candidate and does "
         "not claim an external Zenodo upload until an explicit upload action is "
         "performed."
@@ -382,6 +383,7 @@ def metadata_payload(github_commit: str | None = None) -> dict[str, object]:
                     "Semantic Core Layer",
                     "Semantic Trigger Architecture",
                     "Iterative Interaction Collapse",
+                    "Recursive-Iterative Interaction Collapse",
                     "Lenhard Decoding Module",
                     "Lenhard Model",
                     "Mermaid",
@@ -437,6 +439,7 @@ Included:
 - Semantic Trigger Architecture
 - Semantic Core Layer (SCL)
 - Iterative Interaction Collapse
+- Recursive-Iterative Interaction Collapse
 - Lenhard Decoding Module (LDM)
 - Lenhard Model
 - Mermaid Cluster
@@ -566,6 +569,7 @@ def build(args: argparse.Namespace) -> int:
         REPO_ROOT / "docs/architecture/semantic_trigger_architecture.md",
         REPO_ROOT / "docs/architecture/semantic_core_layer.md",
         REPO_ROOT / "docs/architecture/iterative_interaction_collapse.md",
+        REPO_ROOT / "docs/architecture/recursive_iterative_interaction_collapse.md",
         REPO_ROOT / "docs/architecture/lenhard_decoding_module.md",
         REPO_ROOT / "docs/architecture/lenhard_model.md",
         REPO_ROOT / "docs/atlas/mermaid_cluster.md",

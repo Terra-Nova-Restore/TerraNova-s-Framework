@@ -30,9 +30,10 @@ Canonical GitHub entry points:
 This release defines the public TerraNova / FerrAI semantic architecture spine.
 It introduces triggers as semantic displacement spaces, the Semantic Core Layer
 as language-first control surface, iterative interaction collapse as the route
-from semantic ambiguity to traceable artifact, the Lenhard Decoding Module as
-signal-to-route decoder, the Lenhard Model as transformation umbrella, and the
-Mermaid Cluster as visual trigger graph layer.
+from semantic ambiguity to traceable artifact, recursive-iterative interaction
+collapse as the next target for artifact re-entry, the Lenhard Decoding Module
+as signal-to-route decoder, the Lenhard Model as transformation umbrella, and
+the Mermaid Cluster as visual trigger graph layer.
 
 The release is a public-safe architecture synthesis. It is not a raw workspace
 export, not a patent filing, not a medical model and not a claim of hidden
@@ -45,6 +46,7 @@ connector authorization.
 | A TerraNova trigger is a semantic field operator, not a flat activator. | Architecture claim |
 | SCL is a language-first operating surface, not a prompt library. | Architecture claim |
 | Interaction can collapse iteratively into traceable artifacts. | Workflow claim |
+| Collapse artifacts can re-enter the semantic field as recursive input. | Next-target architecture claim |
 | LDM translates signals and context into route, gate and schema. | Architecture claim |
 | The Lenhard Model connects SCL, triggers, LDM, collapse, Mermaid and CIC. | Transformation model claim |
 | Mermaid diagrams can be read as living graph surfaces with nodes, edges and guards. | Documentation/modeling claim |
@@ -56,6 +58,7 @@ flowchart TB
     SCL["Semantic Core Layer"]
     TRG["Semantic Trigger Architecture"]
     IIC["Iterative Interaction Collapse"]
+    RIIC["Recursive-Iterative Interaction Collapse"]
     LDM["Lenhard Decoding Module"]
     LM["Lenhard Model"]
     MMD["Mermaid Cluster"]
@@ -64,7 +67,9 @@ flowchart TB
 
     SCL --> TRG
     TRG --> IIC
+    IIC --> RIIC
     SCL --> LDM
+    RIIC --> LDM
     LDM --> LM
     IIC --> LM
     LM --> MMD
@@ -93,6 +98,7 @@ This release keeps protected content out of the public artifact:
 | [Semantic Trigger Architecture](../architecture/semantic_trigger_architecture.md) | Defines trigger-as-field-operator model. |
 | [Semantic Core Layer](../architecture/semantic_core_layer.md) | Defines language-first control layer. |
 | [Iterative Interaction Collapse](../architecture/iterative_interaction_collapse.md) | Defines collapse from open field to artifact. |
+| [Recursive-Iterative Interaction Collapse](../architecture/recursive_iterative_interaction_collapse.md) | Defines the next target where a collapse artifact re-enters the next semantic field. |
 | [Lenhard Decoding Module](../architecture/lenhard_decoding_module.md) | Defines decoder from signal to route. |
 | [Lenhard Model](../architecture/lenhard_model.md) | Defines the transformation umbrella model. |
 | [Mermaid Cluster](../atlas/mermaid_cluster.md) | Defines visual trigger graph interpretation. |
