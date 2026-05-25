@@ -1,28 +1,46 @@
 # Raw Export Archive
 
-This folder holds large raw export payloads that should not be mixed directly into the core manuscript.
+Status: public repository boundary layer
 
-## Current artifact
+This folder documents raw-export containers, derived intake batches, checksums
+and review gates. It is not a place for unreviewed private dumps.
 
-- `2026-04-30_batch_850k_raw.txt` (prepared full-dump container)
-- `2026-04-30_batch_850k_raw.sha256` (integrity hash)
+## Current public-safe shape
 
-## Usage
+The legacy `850k` artifact is a prepared container and historical planning
+label. The tracked file is a placeholder, not the raw dump.
 
-1. Paste/import the full raw 850k-character batch into the `.txt` file.
-2. Recompute checksum:
-   - `sha256sum raw/exports/2026-04-30_batch_850k_raw.txt > raw/exports/2026-04-30_batch_850k_raw.sha256`
-3. Reference the artifact in intake and decision logs before promotion attempts.
-- `2026-04-30_batch_850k_raw.txt` (legacy-named full-dump container)
-- `2026-04-30_batch_850k_raw.sha256` (integrity hash)
-- `prism/prism_full_pack_495p_2026-05-02.*` (current full-pack snapshot; exceeds the old 850k planning label)
+```text
+2026-04-30_batch_850k_raw.txt                 placeholder only
+2026-04-30_batch_850k_raw_fuellversion.md     placeholder/fill template
+2026-04-30_batch_850k_raw.sha256              integrity pointer
+fill_850k_raw.sh                              private-only fill helper
+```
 
-The `850k` segment in older file names is a historical RC01 planning label, not
-an active size limit.
+Actual private raw payloads stay outside the public repository unless a later
+review gate explicitly classifies a redacted derivative as public-safe.
 
-## Usage
+`fill_850k_raw.sh` refuses to run unless `TNV_ALLOW_PRIVATE_RAW_FILL=1` is set
+and writes to `raw/exports/local-private/`, which is ignored by git.
 
-1. Paste/import the complete current raw payload into `2026-04-30_batch_850k_raw_fuellversion.md` between the `RAW_PAYLOAD` markers.
-2. Run `./fill_850k_raw.sh` from `raw/exports/`, or `raw/exports/fill_850k_raw.sh` from repo root, to extract the payload and recompute the checksum.
-3. The helper aborts if the payload block is empty or still contains a template placeholder.
-4. Reference the artifact in intake and decision logs before promotion attempts.
+## Incoming derivatives
+
+`raw/exports/incoming/` contains derived manuscript and appendix intake batches.
+These files are larger than aggregate index rows and therefore have their own
+boundary policy:
+
+- They are not treated as private raw ChatGPT dumps.
+- They are not a precedent for committing unreviewed raw exports.
+- New files in this lane require classification, checksum and sensitivity scan.
+- Promotion from this lane must produce curated docs, release notes or public
+  indexes outside `raw/exports/`.
+- Files that later prove private, credential-bearing, patent-sensitive or
+  Track-C/GODFATHER_LOCK-sensitive must be moved out of the public lane.
+
+See `incoming/README.md` and `REVIEW_GATE.md` for the operative rules.
+
+## Hard rule
+
+No unclassified raw export may be committed to this public repository. Raw or
+private source material lands in local/private storage first; GitHub receives
+only placeholders, hashes, reviewed derivatives, or redacted public outputs.
