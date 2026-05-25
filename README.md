@@ -66,6 +66,16 @@ a separate automation if project backlog state is required.
 - Repository maturity note: [`docs/governance/repository_maturity.md`](docs/governance/repository_maturity.md)
 - Raw export review gate: [`raw/exports/REVIEW_GATE.md`](raw/exports/REVIEW_GATE.md)
 
+## Public semantic architecture
+- Architecture index: [`docs/architecture/README.md`](docs/architecture/README.md)
+- Public semantic spine: [`docs/architecture/public_semantic_architecture_spine.md`](docs/architecture/public_semantic_architecture_spine.md)
+- Semantic Trigger Architecture: [`docs/architecture/semantic_trigger_architecture.md`](docs/architecture/semantic_trigger_architecture.md)
+- Semantic Core Layer: [`docs/architecture/semantic_core_layer.md`](docs/architecture/semantic_core_layer.md)
+- Iterative Interaction Collapse: [`docs/architecture/iterative_interaction_collapse.md`](docs/architecture/iterative_interaction_collapse.md)
+- Lenhard Decoding Module: [`docs/architecture/lenhard_decoding_module.md`](docs/architecture/lenhard_decoding_module.md)
+- Lenhard Model: [`docs/architecture/lenhard_model.md`](docs/architecture/lenhard_model.md)
+- Mermaid Cluster: [`docs/atlas/mermaid_cluster.md`](docs/atlas/mermaid_cluster.md)
+
 ## Current published release
 
 The current citable Zenodo release is RC01-v12:
