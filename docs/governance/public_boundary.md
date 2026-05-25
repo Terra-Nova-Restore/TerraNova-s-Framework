@@ -22,3 +22,15 @@ Items classified as `redact-candidate` hold structural value but currently conta
 
 ## Raw-Exports
 Raw exports must never touch the `main` branch unless pre-classified and heavily scrubbed. All raw exports land in local staging or isolated private storage first.
+
+## Public Derivative Exception
+
+Some tracked files under `raw/exports/incoming/` are manuscript or appendix
+derivatives rather than private raw dumps. They are allowed only as bounded
+public-review artifacts when they have checksum sidecars, classification, and no
+detected secrets or direct PII. They do not weaken the raw-export rule.
+
+Any future derivative that contains credential-like values, direct PII, raw
+Notion IDs, protected patent-source material, Track C, `GODFATHER_LOCK`, or
+private-session content must leave the public lane and be represented only by a
+redacted manifest or checksum pointer.

@@ -11,3 +11,8 @@ mirror/
 # Archival Prism/Notion source packs can contain private, token, wallet, raw-chat,
 # or patent-sensitive material. Commit curated docs under docs/atlas instead.
 raw/exports/prism/source-pack/*/
+
+# Private raw export staging. Public repo keeps placeholders, hashes, manifests
+# and reviewed derivatives only.
+raw/exports/local-private/
+raw/exports/private/

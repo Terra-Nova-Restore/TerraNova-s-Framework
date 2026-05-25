@@ -25,8 +25,8 @@ No raw dump, split files, unredacted extracts, chat contexts, wallet/API/token t
 ```text
 RAW_INLINE: no
 RAW_IN_REPO: no
-PUBLIC_RELEASE: blocked
-NEXT_GATE: CEI-04A manual class-3 review
+PUBLIC_RELEASE: open_for_aggregates_only
+NEXT_GATE: none for aggregate index; new raw/derivative files require fresh review
 ```
 
 ## Notion anchors
@@ -48,3 +48,10 @@ PRIVATE_RAW_ARCHIVE       full raw dump, split files, hashes, restricted
 INTERNAL_EVIDENCE_INDEX   CEI analysis, sensitive review, claim corridor
 SAFE_PUBLIC_CORE          this folder and later redacted public summaries
 ```
+
+## Chronology note
+
+Issue #34 recorded the initial blocked state before CEI-04A, CEI-04B and
+CEI-04C closed. The current source for publication status is
+`public_gate_status.md`: aggregates only are open; raw publication and public
+extracts remain rejected.
