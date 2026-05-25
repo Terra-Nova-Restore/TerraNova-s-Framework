@@ -2,7 +2,7 @@
 
 Status: BIZ / Governance
 Source: Repository-side maturity assessment derived from current GitHub, Zenodo and governance state.
-Trace: `docs/governance/public_boundary.md`, `docs/governance/repo_roles.md`, `docs/governance/source_of_record_policy.md`, Zenodo record `10.5281/zenodo.20073579`
+Trace: `docs/governance/public_boundary.md`, `docs/governance/repo_roles.md`, `docs/governance/source_of_record_policy.md`, `docs/governance/issue_status_registry.md`, Zenodo record `10.5281/zenodo.20073579`
 Boundary: Snapshot maturity note only; not a prestige claim, certification or guarantee of completeness.
 Mode: BIZ
 GitHub sync state: tracked in this repository as a public-facing reality check.
@@ -43,6 +43,7 @@ The repository already demonstrates:
 - reproducible governance around review gates, promotion rules and release state
 - a visible chain between drafts, releases, issues, PRs and publication records
 - technical and documentary separation between working memory, release anchors and public-safe outputs
+- issue-status reconciliation that keeps stale issue text below merged PR evidence
 
 ## Current Limits
 

@@ -27,7 +27,7 @@ Record created:
 2026-05-07T17:39:34Z / ca. 19:39 Europe/Zurich
 
 Metadata updated:
-2026-05-17T05:20:40Z / ca. 07:20 Europe/Zurich
+2026-05-21T17:29:35.963451Z / 2026-05-21T19:29:35.963451 Europe/Zurich
 
 DOI:
 https://doi.org/10.5281/zenodo.20073579
@@ -65,7 +65,7 @@ Checksum:
 `md5:d791d480e75f3d89f9a103a28a5c5001`
 
 Local working note:
-published RC01-v12 working state, metadata refreshed 17 May 2026. File checksum unchanged.
+published RC01-v12 working state, Z3 metadata-only refresh observed on 21 May 2026. File checksum unchanged.
 
 ## Version relationship
 
@@ -136,20 +136,25 @@ Status: CAP 0.3 release-readiness gates created on 2026-05-17.
 
 ### PRISM-002 Live Metadata Delta
 
-Zenodo was refreshed on 2026-05-17 as a metadata-only update.
+Zenodo was refreshed on 2026-05-21 as a metadata-only update after the earlier
+2026-05-17 citation-surface refresh.
 
-Current live metadata observed through the public Zenodo API:
+Current live metadata observed through the public Zenodo API on 2026-05-25:
 
-- title: `FerrAI-Terra'Nova CIC Framework - System Architecture, State Logic and Governance Boundaries`
+- title: `FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries`
 - version: `RC01-v12`
 - publication date: `2026-05-17`
-- metadata updated: `2026-05-17T07:20:40.751823+02:00`
+- metadata updated: `2026-05-21T19:29:35.963451+02:00`
+- revision: `12`
 - DOI: `10.5281/zenodo.20073579`
 - concept DOI: `10.5281/zenodo.19774446`
 - file: `main (44).pdf`
 - file checksum: `md5:d791d480e75f3d89f9a103a28a5c5001`
+- file size: `2,943,457 bytes`
+- stats at read time: `305` views, `209` unique views, `270` downloads, `167` unique downloads
 
-Interpretation: the citation surface changed, but the file artifact and DOI lineage did not.
+Interpretation: the metadata surface changed, but the file artifact, DOI lineage,
+version label and checksum did not.
 
 PRISM-002 connects the live CAP control layer to the existing RC01-v13 preflight package:
 
