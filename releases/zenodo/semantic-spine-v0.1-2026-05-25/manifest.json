@@ -20,13 +20,13 @@
   "files": [
     {
       "path": "docs/public/semantic_architecture_public_release_v0_1.md",
-      "size_bytes": 4521,
-      "sha256": "0ECACEC59F0DFFDEDA1D216AA31A16C713B08B2A95FD328DA15A8AF32ED0E90E"
+      "size_bytes": 4979,
+      "sha256": "68D52AF75A46E3E770A4891787CB7FC4EB314B1942FC0827C204944612FC8491"
     },
     {
       "path": "docs/atlas/semantic_spine_registry.md",
-      "size_bytes": 3884,
-      "sha256": "BCA2AAA0836E24AA144FA41035059F9D1C8232F5D57386CAE4507B6746194C78"
+      "size_bytes": 4228,
+      "sha256": "4F60221CDF0D0CE27D9FBE1AF1B36101973567C1BEFE5BE40E24C78B95C398C6"
     },
     {
       "path": "docs/architecture/public_semantic_architecture_spine.md",
@@ -45,8 +45,13 @@
     },
     {
       "path": "docs/architecture/iterative_interaction_collapse.md",
-      "size_bytes": 3485,
-      "sha256": "443D062519FEB6FDF55DC27A287A285F44BE9D670D24BEA9DDD4881E0CF00A56"
+      "size_bytes": 4005,
+      "sha256": "C8085FE4B69ECE52F800E2D143DFB55E9060342F54702874EEB8E6B9BC3958E2"
+    },
+    {
+      "path": "docs/architecture/recursive_iterative_interaction_collapse.md",
+      "size_bytes": 4503,
+      "sha256": "0BD36B24B1415127C1B95E374B6C413B8987490824D61043652FB666B9B4DB9F"
     },
     {
       "path": "docs/architecture/lenhard_decoding_module.md",
@@ -65,23 +70,23 @@
     },
     {
       "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/semantic_architecture_public_release_v0_1.html",
-      "size_bytes": 9396,
-      "sha256": "417EDD3FE36D95B7169C0F37BDEDB7083A7F620C3782C411C13F2E80927DFEDE"
+      "size_bytes": 9953,
+      "sha256": "D65E42A383B614BF60033D5125410AD13BA43B55110BF01BA12082E30709B44D"
     },
     {
       "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/semantic_architecture_public_release_v0_1.pdf",
-      "size_bytes": 157828,
-      "sha256": "01090E396DF21A1C9C71C9315B2655452155FE952709C04D64D45A1F836B6661"
+      "size_bytes": 160647,
+      "sha256": "4B997627491B09D05124FDEDB0AA69D7A12F298190FFC23EABDF52FA5E586E0B"
     },
     {
       "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/zenodo_metadata.semantic-spine-v0.1.review.json",
-      "size_bytes": 2174,
-      "sha256": "CD085B308650B46096F788DE233537659BEBFC35EDFF6725365551C504907CCE"
+      "size_bytes": 2269,
+      "sha256": "A0F489F2FFBCDF1577018504DF4CB34610C9B41EEFD6DD53104C361B0E05E242"
     },
     {
       "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/github_release_draft.semantic-spine-v0.1.md",
-      "size_bytes": 1261,
-      "sha256": "0CE36E5999109A439B646BBEEDE16A5CDD5B064890F0C2ED1DCC28858CB3443D"
+      "size_bytes": 1305,
+      "sha256": "9208430C852E26CADEEF1BAA2415A5AA3FE7DB3CA6A42D86CBE3B2C6591CF157"
     },
     {
       "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/zenodo_upload_gate.semantic-spine-v0.1.md",
@@ -90,8 +95,8 @@
     },
     {
       "path": "releases/zenodo/semantic-spine-v0.1-2026-05-25/README.md",
-      "size_bytes": 2775,
-      "sha256": "434AF94D7A9812A564AAD407C429B2D700851699DAC7EDCE733F275971907677"
+      "size_bytes": 2849,
+      "sha256": "0A69BFE4B251877734AC98631C274EF1408DE3034A7491C2433FCE735F732D7F"
     }
   ],
   "next_external_step": "Explicit GitHub release/tag GO or Zenodo metadata review and upload/update GO."

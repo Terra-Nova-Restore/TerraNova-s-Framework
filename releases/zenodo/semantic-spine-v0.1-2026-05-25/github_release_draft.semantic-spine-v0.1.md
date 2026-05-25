@@ -28,6 +28,7 @@ Included:
 - Semantic Trigger Architecture
 - Semantic Core Layer (SCL)
 - Iterative Interaction Collapse
+- Recursive-Iterative Interaction Collapse
 - Lenhard Decoding Module (LDM)
 - Lenhard Model
 - Mermaid Cluster

@@ -12,7 +12,7 @@
       "title": "TerraNova / FerrAI Semantic Architecture Public Release v0.1",
       "upload_type": "publication",
       "publication_type": "workingpaper",
-      "description": "<p>Public-safe release candidate defining the TerraNova / FerrAI semantic architecture spine: Semantic Trigger Architecture, Semantic Core Layer (SCL), Iterative Interaction Collapse, Lenhard Decoding Module, Lenhard Model, and Mermaid Cluster. This package is a review candidate and does not claim an external Zenodo upload until an explicit upload action is performed.</p>",
+      "description": "<p>Public-safe release candidate defining the TerraNova / FerrAI semantic architecture spine: Semantic Trigger Architecture, Semantic Core Layer (SCL), Iterative Interaction Collapse, Recursive-Iterative Interaction Collapse, Lenhard Decoding Module, Lenhard Model, and Mermaid Cluster. This package is a review candidate and does not claim an external Zenodo upload until an explicit upload action is performed.</p>",
       "creators": [
         {
           "name": "Lenhard, Silvan",
@@ -31,6 +31,7 @@
         "Semantic Core Layer",
         "Semantic Trigger Architecture",
         "Iterative Interaction Collapse",
+        "Recursive-Iterative Interaction Collapse",
         "Lenhard Decoding Module",
         "Lenhard Model",
         "Mermaid",
@@ -51,5 +52,5 @@
       "notes": "Review package only. No Zenodo draft, DOI reservation, upload, publish action, GitHub tag, or GitHub release is authorized by this file."
     }
   },
-  "github_commit": "ad8da3e67d1f27b144d5585908df4c42626ee70e"
+  "github_commit": "3a7d1931518885353facb7d285cf9371e7ac8e35"
 }
