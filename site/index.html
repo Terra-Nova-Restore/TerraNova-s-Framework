@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Public documentation portal for the FerrAI TerraNova CIC Framework, linking citable Zenodo records and public-safe GitHub architecture artifacts."
+    />
+    <title>FerrAI TerraNova CIC Framework</title>
+    <style>
+      :root {
+        --ink: #16130f;
+        --muted: #63594c;
+        --paper: #f6efe2;
+        --paper-strong: #fff9ec;
+        --line: rgba(22, 19, 15, 0.16);
+        --ember: #b94f32;
+        --moss: #526d47;
+        --brass: #c99d4a;
+        --night: #101610;
+        --shadow: 0 24px 70px rgba(28, 23, 16, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 14% 10%, rgba(201, 157, 74, 0.32), transparent 26rem),
+          radial-gradient(circle at 88% 18%, rgba(82, 109, 71, 0.24), transparent 30rem),
+          linear-gradient(135deg, #efe4cf 0%, #f8f0e0 46%, #dfd0b7 100%);
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+        line-height: 1.55;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        content: "";
+        background-image:
+          linear-gradient(rgba(22, 19, 15, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(22, 19, 15, 0.035) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: linear-gradient(to bottom, black, transparent 72%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 0.18em;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 34px 0 52px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 54px;
+      }
+
+      .mark {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .sigil {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        color: var(--paper-strong);
+        background: var(--night);
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 2px rgba(255, 249, 236, 0.22);
+        place-items: center;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+
+      .pill {
+        padding: 9px 13px;
+        color: var(--night);
+        background: rgba(255, 249, 236, 0.58);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .hero-card,
+      .side-card,
+      .tile,
+      .boundary {
+        background: rgba(255, 249, 236, 0.74);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(14px);
+      }
+
+      .hero-card {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(28px, 5vw, 70px);
+        border-radius: 34px;
+      }
+
+      .hero-card::after {
+        position: absolute;
+        right: -88px;
+        bottom: -112px;
+        width: 260px;
+        height: 260px;
+        content: "";
+        background: conic-gradient(from 120deg, var(--ember), var(--brass), var(--moss), var(--ember));
+        border-radius: 50%;
+        opacity: 0.28;
+        filter: blur(2px);
+      }
+
+      .eyebrow {
+        margin: 0 0 18px;
+        color: var(--ember);
+        font-family: "Cascadia Mono", "IBM Plex Mono", "Courier New", monospace;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 860px;
+        margin: 0;
+        font-size: clamp(3rem, 8vw, 7.3rem);
+        line-height: 0.89;
+        letter-spacing: -0.08em;
+      }
+
+      .lede {
+        max-width: 720px;
+        margin: 28px 0 0;
+        color: var(--muted);
+        font-size: clamp(1.15rem, 2vw, 1.45rem);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 12px 18px;
+        border-radius: 999px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        color: var(--paper-strong);
+        background: var(--night);
+      }
+
+      .button.secondary {
+        color: var(--night);
+        background: rgba(255, 249, 236, 0.74);
+        border: 1px solid var(--line);
+      }
+
+      .side-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 28px;
+        border-radius: 28px;
+      }
+
+      .stat {
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .stat:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.35rem;
+        line-height: 1.1;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-family: "Cascadia Mono", "IBM Plex Mono", "Courier New", monospace;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      .section {
+        margin-top: 34px;
+      }
+
+      .section h2 {
+        margin: 0 0 16px;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        letter-spacing: -0.04em;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .tile {
+        min-height: 220px;
+        padding: 24px;
+        border-radius: 24px;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease;
+      }
+
+      .tile:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 28px 82px rgba(28, 23, 16, 0.23);
+      }
+
+      .tile h3 {
+        margin: 0 0 10px;
+        font-size: 1.28rem;
+      }
+
+      .tile p {
+        margin: 0 0 18px;
+        color: var(--muted);
+      }
+
+      .tile a {
+        font-weight: 800;
+      }
+
+      .boundary {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 24px;
+        padding: 28px;
+        border-radius: 28px;
+      }
+
+      .boundary ul {
+        display: grid;
+        gap: 10px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .boundary li {
+        padding-left: 18px;
+        border-left: 4px solid var(--moss);
+      }
+
+      footer {
+        margin-top: 44px;
+        color: var(--muted);
+        font-family: "Cascadia Mono", "IBM Plex Mono", "Courier New", monospace;
+        font-size: 0.78rem;
+      }
+
+      @media (max-width: 860px) {
+        .topbar,
+        .hero,
+        .boundary {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav {
+          justify-content: flex-start;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar" aria-label="Site header">
+        <div class="mark"><span class="sigil">F</span> FerrAI TerraNova</div>
+        <nav class="nav" aria-label="Primary links">
+          <a class="pill" href="https://doi.org/10.5281/zenodo.20073579">Zenodo DOI</a>
+          <a class="pill" href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework">GitHub</a>
+          <a class="pill" href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/SECURITY.md">Security</a>
+        </nav>
+      </header>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-card">
+          <p class="eyebrow">Public docs portal · boundary-first</p>
+          <h1 id="hero-title">CIC framework, made citable.</h1>
+          <p class="lede">
+            A public entry point for the FerrAI TerraNova CIC Framework:
+            semantic architecture, governance boundaries, Zenodo proof state,
+            and GitHub-visible working artifacts.
+          </p>
+          <div class="actions">
+            <a
+              class="button primary"
+              href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/public/entry_pack_architecture_v0_1.md"
+              >Start with the Entry Pack</a
+            >
+            <a
+              class="button secondary"
+              href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/public/semantic_architecture_public_release_v0_1.md"
+              >Read semantic release</a
+            >
+            <a class="button secondary" href="https://zenodo.org/records/20073579">Open Zenodo record</a>
+          </div>
+        </div>
+
+        <aside class="side-card" aria-label="Reference state">
+          <div class="stat">
+            <span>Current reference</span>
+            <strong>RC01-v12</strong>
+          </div>
+          <div class="stat">
+            <span>DOI</span>
+            <strong>10.5281/zenodo.20073579</strong>
+          </div>
+          <div class="stat">
+            <span>Concept DOI</span>
+            <strong>10.5281/zenodo.19774446</strong>
+          </div>
+          <div class="stat">
+            <span>Repository role</span>
+            <strong>Working state and audit trace</strong>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" aria-labelledby="entry-pack-title">
+        <h2 id="entry-pack-title">Start Here</h2>
+        <div class="grid">
+          <article class="tile">
+            <h3>Architecture Entry Pack v0.1</h3>
+            <p>Compact public-safe orientation pack for the framework, semantic architecture, evidence layers, and review path.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/public/entry_pack_architecture_v0_1.md">Open Entry Pack</a>
+          </article>
+          <article class="tile">
+            <h3>Offer Draft</h3>
+            <p>Commercial routing draft for the Entry Pack. No price, payment link, Stripe object, or active sale is created here.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/public/entry_pack_architecture_offer_v0_1.md">Open offer draft</a>
+          </article>
+          <article class="tile">
+            <h3>Boundary Sheet</h3>
+            <p>Non-claims, blocked content, source-of-record rules, and payment activation gates for public-safe use.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/public/entry_pack_architecture_boundary_v0_1.md">Open boundary sheet</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="artifacts-title">
+        <h2 id="artifacts-title">Public Artifacts</h2>
+        <div class="grid">
+          <article class="tile">
+            <h3>Semantic Architecture Spine</h3>
+            <p>Public-safe synthesis of trigger architecture, SCL, LDM, collapse models, and Mermaid graph interpretation.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/architecture/public_semantic_architecture_spine.md">Open GitHub artifact</a>
+          </article>
+          <article class="tile">
+            <h3>Semantic Trigger Architecture</h3>
+            <p>Defines triggers as semantic field operators and displacement spaces instead of flat prompt activators.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/architecture/semantic_trigger_architecture.md">Open trigger architecture</a>
+          </article>
+          <article class="tile">
+            <h3>Semantic Core Layer</h3>
+            <p>Language-first control surface for routing, meaning stabilization, boundary checks, and interaction flow.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/architecture/semantic_core_layer.md">Open SCL artifact</a>
+          </article>
+          <article class="tile">
+            <h3>Interaction Collapse</h3>
+            <p>Workflow model for collapsing ambiguity into traceable artifacts, then feeding artifacts back into the field.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/architecture/recursive_iterative_interaction_collapse.md">Open collapse model</a>
+          </article>
+          <article class="tile">
+            <h3>Lenhard Decoding Module</h3>
+            <p>Signal-to-route decoder for translating context, field shifts, and source status into operational gates.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/architecture/lenhard_decoding_module.md">Open LDM artifact</a>
+          </article>
+          <article class="tile">
+            <h3>Semantic Release v0.1</h3>
+            <p>Review package for the semantic architecture release, including generated HTML/PDF and metadata gates.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/tree/main/releases/zenodo/semantic-spine-v0.1-2026-05-25">Open release package</a>
+          </article>
+          <article class="tile">
+            <h3>Control Tower</h3>
+            <p>CAP control surface for registry state, Equilibrium gates, trigger review, and no-credit operational routines.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/tree/main/docs/atlas/control-tower">Open control tower</a>
+          </article>
+          <article class="tile">
+            <h3>Equilibrium Kernel</h3>
+            <p>Minimal operating-kernel mirror. The full living rulebook remains in Notion; GitHub carries bounded technical mirrors.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/architecture/ferrAI_operating_kernel_v0.1.md">Open kernel mirror</a>
+          </article>
+          <article class="tile">
+            <h3>Equilibrium Weight Policy</h3>
+            <p>Bounded policy mirror for weighting, trace, and guardrails. It is not a migration of canonical rule text.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/architecture/equilibrium_weight_policy_v0.1.md">Open policy mirror</a>
+          </article>
+          <article class="tile">
+            <h3>Connector Runtime Policy</h3>
+            <p>Governance note for UI state, runtime tool state, connector traces, and claim-status discipline.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/governance/chatgpt_connector_runtime_policy.md">Open runtime policy</a>
+          </article>
+          <article class="tile">
+            <h3>Zenodo Reference</h3>
+            <p>Published citable proof state for the framework, with DOI lineage, file checksum, and repository relationship.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/references/zenodo.md">Open reference note</a>
+          </article>
+          <article class="tile">
+            <h3>Public Boundary</h3>
+            <p>Repository boundary policy for raw exports, private material, credentials, Notion IDs, and public derivative lanes.</p>
+            <a href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/blob/main/docs/governance/public_boundary.md">Open boundary policy</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section boundary" aria-labelledby="boundary-title">
+        <div>
+          <p class="eyebrow">Operating boundary</p>
+          <h2 id="boundary-title">Public means synthesized, not raw.</h2>
+        </div>
+        <ul>
+          <li>No raw Notion URLs, workspace IDs, private exports, credentials, wallet secrets, or private-session material.</li>
+          <li>GitHub is the public working state and audit trace; Zenodo is the citable proof state.</li>
+          <li>Notion remains the internal living index and source-of-record layer for workspace state.</li>
+          <li>Phase 1 is static and dependency-free: no application framework, serverless functions, database, or generated release action.</li>
+          <li>Future releases require explicit review gates before Zenodo draft, upload, or publication actions.</li>
+        </ul>
+      </section>
+
+      <footer>
+        Prepared as a static public portal. External records remain authoritative:
+        Zenodo for citation, GitHub for reviewed public artifacts.
+      </footer>
+    </main>
+  </body>
+</html>
