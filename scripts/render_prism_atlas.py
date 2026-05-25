@@ -600,14 +600,16 @@ def render_public_overview(
         "## Positioning",
         "",
         "TerraNova is a source-aware coordination framework for complex knowledge work.",
-        "The public-facing slice should present three ideas only: a navigable system",
-        "atlas, Mermaid diagrams as living system maps, and CIC as the consistency",
-        "and coordination model behind the workspace.",
+        "The public-facing slice now has four stable ideas: a navigable system atlas,",
+        "Mermaid diagrams as living system maps, CIC as the consistency and coordination",
+        "model behind the workspace, and the public semantic architecture spine.",
         "",
         "## Public Story",
         "",
         "- The atlas gives humans and agents the same orientation map.",
         "- Mermaid diagrams act as executable-looking system maps: nodes mark active concepts, edges mark relationships and routing paths.",
+        "- Semantic Trigger Architecture treats triggers as semantic displacement spaces, not flat activators.",
+        "- SCL treats language, commands, trigger names and symbolic references as operating surfaces.",
         "- CIC keeps large workspaces coherent by separating source, claim, route, review and publication layers.",
         "- Prism is treated as the internal authoring/editor layer until naming review is complete.",
         "",
@@ -620,8 +622,22 @@ def render_public_overview(
             [
                 ["Atlas", "High-level workspace navigation and onboarding."],
                 ["Mermaid", "Visual language for system structure, routing and public explanation."],
+                ["Semantic Spine", "Public bridge for SCL, triggers, interaction collapse, LDM and Lenhard Model."],
                 ["CIC", "Consistency and coordination model for human-AI collaboration."],
                 ["Prism", "Internal authoring/editor context; avoid market-facing name hardening before review."],
+            ],
+        )
+    )
+
+    lines.extend(["", "## Semantic Spine Entry Points", ""])
+    lines.extend(
+        md_table(
+            ["Artifact", "Use"],
+            [
+                ["`docs/architecture/public_semantic_architecture_spine.md`", "Public entry point for the semantic architecture spine."],
+                ["`docs/atlas/semantic_spine_registry.md`", "Registry bridge between architecture docs, atlas, source routing and release artifact."],
+                ["`docs/public/semantic_architecture_public_release_v0_1.md`", "Citable public release candidate."],
+                ["`docs/atlas/mermaid_cluster.md`", "Visual trigger graph bridge from Mermaid to trigger/SCL architecture."],
             ],
         )
     )
@@ -653,16 +669,17 @@ def render_public_overview(
         md_table(
             ["Role", "Internal source"],
             [
-                ["Landing atlas", source_cell(landing)],
-                ["Mermaid manifesto", source_cell(manifesto)],
+                ["Landing atlas", "Reviewed local atlas export, redacted source handle."],
+                ["Mermaid manifesto", "Reviewed local Mermaid manifesto export, redacted source handle."],
                 ["Diagram selection", "`docs/atlas/diagrams.md`"],
                 ["Source manifest", "`docs/atlas/source_manifest.json`"],
+                ["Semantic spine registry", "`docs/atlas/semantic_spine_registry.md`"],
             ],
         )
     )
 
     lines.extend(["", "## Next Public Artifact", ""])
-    lines.append("Build a short public page from this file plus selected ACTIVE diagrams after redaction review.")
+    lines.append("Prepare a release/Zenodo metadata package from `docs/public/semantic_architecture_public_release_v0_1.md` after final metadata review.")
 
     return "\n".join(lines) + "\n"
 

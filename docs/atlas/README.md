@@ -8,6 +8,7 @@ Status: local reviewed CIC atlas workspace
 | --- | --- |
 | `index.md` | Main local CIC atlas start page and source-pack orientation. |
 | `public_overview.md` | Public-candidate slice for Mermaid/CIC/Systemnavigation material. |
+| `semantic_spine_registry.md` | Public bridge between semantic architecture docs, atlas/source routing and release artifact. |
 | `operator_map.md` | Internal routing map for Codex, OpenAI Prism source context and future agents. |
 | `diagrams.md` | Active/legacy/unknown Mermaid diagram registry. |
 | `source_inventory.csv` | Machine-readable source file inventory. |
