@@ -15,7 +15,8 @@ This is a local preflight freeze only. It is not a Zenodo release, not a BIZ-cla
 - Working file: `main_rc01_v13_preflight.tex`
 - Integrated chapter: `chapters/90_4_bahn_theorem_zenodo_calibrated_cic_case.tex`
 - PDF artifact: `main_rc01_v13_preflight.pdf`
-- Exported local copy: `RC01-v13-preflight_4-Bahn-Theorem_integrated_FINAL_FREEZE.pdf`
+- Current exported PDF filename: `RC01-v13-preflight_FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries.pdf`
+- Previous local freeze copy: `RC01-v13-preflight_4-Bahn-Theorem_integrated_FINAL_FREEZE.pdf`
 - Pages: 686
 - PDF size: 2,573,987 bytes
 - PDF Producer: `pdfTeX-1.40.28`
@@ -54,3 +55,7 @@ This is a local preflight freeze only. It is not a Zenodo release, not a BIZ-cla
 ## Sync note
 
 This note is the GitHub-side sync anchor for the Notion/GitHub handoff after the local Ubuntu build freeze.
+
+## Filename update
+
+Silvi renamed the exported PDF title after the freeze. The hash above refers to the PDF bytes of `main_rc01_v13_preflight.pdf`; the filename update is a metadata/path naming update, not a content rebuild.
