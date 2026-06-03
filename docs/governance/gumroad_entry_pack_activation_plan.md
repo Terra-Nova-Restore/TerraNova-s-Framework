@@ -1,11 +1,15 @@
 # Gumroad Entry Pack Activation Plan v0.1
 
 Status: BIZ / commerce activation plan  
+Source: Gumroad route review, Entry Pack bundle artifact map, public boundary governance, and Gumroad pricing/prohibited-product source check  
 Product: TerraNova / FerrAI Architecture Entry Pack v0.1  
 Route: Gumroad first-sale test  
 Price anchor: USD 19  
 Boundary: digital documentation product only  
 Trace: prepared 2026-05-25 after Gumroad route review
+Mode: BIZ / commerce activation plan
+GitHub sync state: tracked in this repository; validate with `scripts/validate_docs.py`.
+Notion source awareness: Notion may hold living launch context; this file is the public-safe GitHub activation plan only.
 
 ## Purpose
 
