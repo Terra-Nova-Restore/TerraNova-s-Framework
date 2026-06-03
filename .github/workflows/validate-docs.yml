@@ -4,25 +4,35 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
+      - 'README.md'
       - 'BIZ.md'
       - 'docs/architecture/ferrAI_operating_kernel_v0.1.md'
       - 'docs/codex/**'
       - 'docs/governance/**'
+      - 'docs/public/**'
+      - 'site/**'
       - 'schemas/artifact_status.schema.json'
       - 'config/source_registry.json'
       - 'scripts/validate_docs.py'
+      - 'scripts/validate_public_portal.py'
       - 'tests/test_validate_docs.py'
+      - 'tests/test_validate_public_portal.py'
       - '.github/workflows/validate-docs.yml'
   push:
     paths:
+      - 'README.md'
       - 'BIZ.md'
       - 'docs/architecture/ferrAI_operating_kernel_v0.1.md'
       - 'docs/codex/**'
       - 'docs/governance/**'
+      - 'docs/public/**'
+      - 'site/**'
       - 'schemas/artifact_status.schema.json'
       - 'config/source_registry.json'
       - 'scripts/validate_docs.py'
+      - 'scripts/validate_public_portal.py'
       - 'tests/test_validate_docs.py'
+      - 'tests/test_validate_public_portal.py'
       - '.github/workflows/validate-docs.yml'
 
 permissions:
@@ -45,6 +55,12 @@ jobs:
 
       - name: Run validator unit tests
         run: python -m unittest tests.test_validate_docs
+
+      - name: Validate public portal surfaces
+        run: python scripts/validate_public_portal.py
+
+      - name: Run public portal validator unit tests
+        run: python -m unittest tests.test_validate_public_portal
 
       - name: Validate registry and schema JSON
         run: |

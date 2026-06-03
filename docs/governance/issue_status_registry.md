@@ -1,8 +1,8 @@
 # Governance Issue Status Registry
 
 Status: BIZ / Governance
-Source: GitHub issue and PR state after PR #60 and PR #66 merge.
-Trace: Issues #15, #23, #25; PR #60, PR #66; Zenodo record `10.5281/zenodo.20073579`.
+Source: GitHub issue and PR state after PR #60 and PR #66 merge, refreshed on 2026-06-02.
+Trace: Issues #11, #15, #17, #23, #25; PR #60, PR #66; Zenodo record `10.5281/zenodo.20073579`.
 Boundary: Public-safe issue-status mirror only. It does not close issues by itself and does not mutate Notion or Zenodo.
 Mode: BIZ
 GitHub sync state: tracked in this repository; validate with `scripts/validate_docs.py`.
@@ -22,8 +22,9 @@ from outranking newer reviewed repository state.
 | #25 GitHub container hardening | Closed/completed | `docs/governance/public_boundary.md`; `docs/governance/repo_roles.md`; `raw/exports/REVIEW_GATE.md`; `raw/exports/incoming/README.md`; PR #66, merge commit `49e4024` | Keep as historical closure anchor |
 | #15 Citation/stub reality check | Open | `CITATION.cff`; `docs/references/zenodo.md`; `docs/architecture/core_grid_spec.md`; `docs/science/dissertation/appendix/A02_formula_collection.tex`; `docs/architecture/cic_convergence_9_layers.md` | Keep open until A.2 formulas and CIC convergence receive controlled real exports |
 | #13 Source-tier and Prism naming | Open | `docs/governance/source_tier_and_naming_policy.md`; `docs/ai/cic_atlas_usage.md`; `docs/ai/prism_atlas_usage.md` | Keep open until public naming review and external product-name decision are complete |
-| #17 Prism scale governance | Open | `docs/governance/prism_import_manifest.md`; `raw/exports/prism/source-pack/README.md`; `docs/atlas/README.md`; boundary docs from PR #66 | Keep open until a real import batch is classified against the manifest |
-| #10/#11 Track C intake/review | Open | `docs/governance/track_c_intake_checklist.md`; `docs/governance/public_boundary.md`; `raw/exports/incoming/README.md`; Track C references in issue bodies | Keep open until a real Track C batch is classified against the checklist |
+| #17 Prism scale governance | Closed/completed | `docs/governance/prism_import_manifest.md`; `raw/exports/prism/source-pack/README.md`; `docs/atlas/README.md`; boundary docs from PR #66; GitHub issue closed as completed on 2026-05-25 | None for the issue; future import batches must still pass the manifest |
+| #10 Track C intake | Open | `docs/governance/track_c_intake_checklist.md`; `docs/governance/public_boundary.md`; `raw/exports/incoming/README.md`; Track C references in issue body | Keep open until a real Track C batch is classified against the checklist |
+| #11 Prism workspace review | Closed/completed | `docs/governance/track_c_intake_checklist.md`; `docs/governance/public_boundary.md`; issue closure on 2026-05-25 | Keep as historical review marker; no blind merge or deletion implied |
 
 ## Issue #15 Reality Check
 
@@ -56,18 +57,21 @@ container-hardening surfaces:
 The remaining credential-rotation proof remains an account-level operational
 check, not repository text evidence.
 
-## Issue #17 Import Gate
+## Issue #17 Closure Check
 
-The Prism scale checkpoint now has a public import manifest:
+Issue #17 is closed as completed. The Prism scale checkpoint now has a public
+import manifest:
 
 - `docs/governance/prism_import_manifest.md`
 
-This is not a bulk-import approval. It is the gate a future import batch must
-pass before entering public docs.
+Closure is not a bulk-import approval. The manifest remains the gate a future
+import batch must pass before entering public docs.
 
 ## Issues #10/#11 Track C Gate
 
-Track C now has a public intake checklist:
+Issue #10 remains open as the Track C intake marker. Issue #11 is closed as a
+historical Prism workspace review marker. Track C now has a public intake
+checklist:
 
 - `docs/governance/track_c_intake_checklist.md`
 
