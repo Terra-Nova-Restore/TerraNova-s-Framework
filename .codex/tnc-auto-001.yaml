@@ -1,0 +1,34 @@
+id: TNC-AUTO-001
+name: TerraNovaCIC Self-Extension Controller
+status: dry-run-mvp
+mode: LOCAL_ONLY
+default_action: report
+source_dir: raw/exports/local-private
+output_dir: raw/exports/local-private/tnc-auto-001-dry-run
+required_outputs:
+  - source_manifest.json
+  - claim_ledger.csv
+  - model_vote_matrix.csv
+  - contradiction_ledger.md
+  - boundary_report.md
+  - risk_report.md
+  - proposed_changes.md
+  - next_gate.md
+  - dry_run_report.json
+blocked_actions:
+  - notion_write
+  - github_push
+  - github_pr
+  - merge
+  - publish
+  - zenodo_mutation
+  - gumroad_mutation
+  - stripe_mutation
+  - netlify_mutation
+  - raw_private_publication
+human_gate_required:
+  - external_mutation
+  - public_release
+  - protected_ip_claim_expansion
+  - payment_action
+  - production_deploy

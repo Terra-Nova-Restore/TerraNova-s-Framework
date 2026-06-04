@@ -1,0 +1,29 @@
+policy_id: TNC-AUTO-001-SAFETY
+default_external_mutation: deny
+default_git_remote_mutation: deny
+default_notion_mutation: deny
+default_publication: deny
+default_payment_mutation: deny
+commit_policy: report_commit_safe_only
+branch_policy: clean_worktree_required
+private_public_boundary:
+  raw_exports: private_only
+  local_private: ignored_by_git
+  private_session_material: private_only
+  metarotik: private_or_gated
+  token_ip_business: protected_gated
+required_checks:
+  - source_manifest
+  - claim_ledger
+  - boundary_report
+  - risk_report
+  - validators
+  - git_status
+  - external_mutation_count_zero
+refusal_triggers:
+  - raw_private_to_public
+  - unverified_public_claim
+  - protected_ip_public_expansion
+  - payment_or_production_action
+  - dirty_worktree_for_commit
+  - missing_human_gate
