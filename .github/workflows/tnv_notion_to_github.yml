@@ -83,3 +83,42 @@ jobs:
             git pull --rebase origin "$BRANCH"
             git push origin "HEAD:$BRANCH"
           fi
+deploy_to_github_pages:
+    name: 🚀 Deploy to GitHub Pages
+    needs: sync 
+    runs-on: ubuntu-latest
+    
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+
+    steps:
+      - name: 📥 Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: 🔍 Validate Assets (Mode: validate / dry-run)
+        if: ${{ github.event.inputs.mode == 'validate' || github.event.inputs.mode == 'dry-run' }}
+        run: |
+          echo "Current Mode: ${{ github.event.inputs.mode }} -> Executing Dry-Run."
+          if [ -f "index.html" ]; then
+            echo "✅ VALIDATION PASS: index.html exists."
+          else
+            echo "❌ VALIDATION FAIL: index.html is missing!"
+            exit 1
+          fi
+
+      - name: 🛠️ Setup GitHub Pages
+        if: ${{ github.event.inputs.mode == 'full' }}
+        uses: actions/configure-pages@v5
+
+      - name: 📤 Upload Pages Artifact
+        if: ${{ github.event.inputs.mode == 'full' }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' 
+
+      - name: 🌍 Deploy to GitHub Pages
+        if: ${{ github.event.inputs.mode == 'full' }}
+        id: deployment
+        uses: actions/deploy-pages@v4

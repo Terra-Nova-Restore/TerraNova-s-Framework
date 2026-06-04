@@ -19,6 +19,7 @@ This folder defines the first implementation layer for **CAP 0.1.0 - Cognitive A
 | `cap-0.3-operational-control-iperka.md` | Operational IPERKA layer for queue execution, no-credit routines and bounded trigger steering. |
 | `cap-0.3.workstream-map.csv` | CAP 0.3 workstream map and completion signals. |
 | `cap-0.4-canon-admission-iperka.md` | Canon admission IPERKA layer for source-tiered canon governance. |
+| `cap-0.5-public-entry-product-ladder-iperka.md` | Public entry and product ladder IPERKA for Gumroad, Notion template, portal routing and Codex fallback. |
 | `canon-admission-rulebook.md` | CAP 0.4 rulebook for canon claims, source tiers, admission levels and downgrade rules. |
 | `canon-source-tier-map.csv` | Source-tier authority map for canon admission decisions. |
 | `canon-elevation-queue.csv` | Current queue of canon elevation actions and stop conditions. |
@@ -577,3 +578,13 @@ SOURCE-520 has completed the SessionStart primary source pass and was applied to
 SYNC-003 closes the GitHub trace after SOURCE-521. It keeps the closure scoped to Control Tower artifacts, `scripts/cap_control_checks.py` and the 2026-05-18 AUTO-001 result; unrelated dirty files remain untouched and no push is performed.
 
 SYNC-004 closes the repo-local GitHub trace after TEST-520 and SOURCE-520. It records that the current local branch `codex/governance-doc-validation` has a gone upstream and is 2 commits ahead / 45 commits behind `origin/main`, so no push, rebase or merge is performed in this pass. The closure remains scoped to Control Tower artifacts and `scripts/cap_control_checks.py`; unrelated dirty files remain untouched.
+
+## CAP 0.5 Continuation
+
+Next local public-entry layer:
+
+```text
+docs/atlas/control-tower/cap-0.5-public-entry-product-ladder-iperka.md
+```
+
+CAP 0.5 turns the verified public product layer into a source-safe operating surface. It records the three live Gumroad products, treats the Notion Marketplace state as pending until concrete directory evidence exists, keeps Codex as an optional local execution layer and routes future portal CTA work through verified product evidence instead of placeholder-only PR state.
