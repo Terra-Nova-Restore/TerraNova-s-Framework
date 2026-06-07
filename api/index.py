@@ -46,7 +46,7 @@ LANDING_HTML = """<!doctype html>
     <p>TerraNovaCIC turns AI chats, ideas and decisions into structured artifacts, source-aware records, publishable outputs and practical databases.</p>
     <div class="cta">
       <a class="button" href="#products">View products</a>
-      <a class="button secondary" href="https://artifact-pipeline.notion.site">Free Notion Starter</a>
+      <a class="button secondary" href="https://app.notion.com/p/de399ec6ae50416fb38fd82c3b08b461">Free Notion Starter</a>
       <a class="button secondary" href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework">Open GitHub</a>
       <a class="button secondary" href="/api">API status</a>
     </div>
@@ -85,7 +85,7 @@ LANDING_HTML = """<!doctype html>
       <div class="tag">Free funnel</div>
       <h3>AI Workflow Starter — Entry Edition</h3>
       <p>Free Notion starter for turning scattered AI work into repeatable workflow structure.</p>
-      <a class="button secondary" href="https://artifact-pipeline.notion.site">Open free starter</a>
+      <a class="button secondary" href="https://app.notion.com/p/de399ec6ae50416fb38fd82c3b08b461">Open free starter</a>
     </div>
     <div class="card">
       <h3>Terra'Nova'Restore</h3>
