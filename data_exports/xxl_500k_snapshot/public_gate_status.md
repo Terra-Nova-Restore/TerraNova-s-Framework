@@ -27,7 +27,7 @@ aggregate/index publication is open; raw publication and contextual extracts
 remain rejected.
 
 ## Action Taken (CEI-04A & CEI-04B)
-The 27 K3 hits (potential credential / wallet traces) and all PII/account traces (Emails, IBANs, Phone numbers) have been strictly isolated. 
+All sensitive categories (potential credential / wallet traces and personal / account / contact data) have been reviewed and strictly isolated outside the public repository.
 **No raw files will ever be published.** The data leak risk has been entirely neutralized by dropping the raw payload requirement.
 
 ## Allowed in public repository
