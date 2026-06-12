@@ -37,9 +37,12 @@ must refuse external mutation by default.
 - GitHub push or PR creation
 - merge, rebase, reset, stash or branch deletion
 - Zenodo, Gumroad, Stripe or Netlify mutation
-- public exposure of private, survival, Metarotik, Schattenarchiv-depth or raw
-  export material
-- protected TNPX, CAP-II, tokenomics, FERR or payment claim expansion
+- public exposure of private, operator-sensitive or raw export material
+- protected IP, tokenization, licensing or payment claim expansion
+
+Exact sensitive taxonomy terms and local blocker patterns are kept in a
+gitignored local-private lexicon. The tracked controller only carries generic
+category names.
 
 ## Human Gate
 

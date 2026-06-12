@@ -15,10 +15,10 @@ lanes:
     description: Codex, controller, automation, VORTEX, SCL, trigger and dry-run material.
     default_visibility: internal
   protected_ip_token:
-    description: TNPX, patent, CAP-II, FERR, tokenomics, Polygon, IPFS and licensing material.
+    description: Protected IP, licensing, tokenization and controlled business material.
     default_visibility: protected_gated
   private_sensitive:
-    description: private, survival, personal, intimate, Metarotik, Schattenarchiv-depth or operator-sensitive material.
+    description: Private, personal or operator-sensitive material.
     default_visibility: private_only
   residue_unknown:
     description: material that cannot yet be assigned safely.

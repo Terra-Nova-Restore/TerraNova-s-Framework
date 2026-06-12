@@ -30,6 +30,7 @@ REQUIRED_OUTPUTS = [
     "dry_run_report.json",
 ]
 OUTPUT_DIR = Path("raw/exports/local-private/tnc-auto-001-dry-run")
+LOCAL_LEXICON_PATH = Path("raw/exports/local-private/tnc-auto-001/lane_lexicon.local.json")
 
 
 def error(message: str) -> None:
@@ -63,6 +64,47 @@ def validate_no_network_imports() -> list[str]:
             if root_name in blocked:
                 found.append(node.module)
     return found
+
+
+def git_ls_files(paths: list[str]) -> list[str]:
+    args = ["git", "ls-files"]
+    if paths:
+        args.extend(["--", *paths])
+    result = subprocess.run(
+        args,
+        cwd=REPO_ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode != 0:
+        return []
+    return [line for line in result.stdout.splitlines() if line]
+
+
+def validate_tracked_public_deny_terms() -> list[str]:
+    path = REPO_ROOT / LOCAL_LEXICON_PATH
+    if not path.exists():
+        return []
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        return ["local lexicon root must be an object"]
+
+    terms = payload.get("tracked_public_deny_terms", [])
+    scan_paths = payload.get("tracked_public_deny_paths", [])
+    if not isinstance(terms, list) or not all(isinstance(item, str) for item in terms):
+        return ["local lexicon tracked_public_deny_terms must be a string list"]
+    if not isinstance(scan_paths, list) or not all(isinstance(item, str) for item in scan_paths):
+        return ["local lexicon tracked_public_deny_paths must be a string list"]
+
+    findings: list[str] = []
+    for rel in git_ls_files(scan_paths):
+        text = (REPO_ROOT / rel).read_text(encoding="utf-8", errors="replace")
+        if any(term and term in text for term in terms):
+            findings.append(f"tracked public deny term found in scoped file: {rel}")
+    return findings
 
 
 def main(argv: list[str]) -> int:
@@ -102,6 +144,9 @@ def main(argv: list[str]) -> int:
     network_imports = validate_no_network_imports()
     if network_imports:
         errors.append(f"network imports are not allowed: {', '.join(network_imports)}")
+
+    deny_findings = validate_tracked_public_deny_terms()
+    errors.extend(deny_findings)
 
     if errors:
         for item in errors:

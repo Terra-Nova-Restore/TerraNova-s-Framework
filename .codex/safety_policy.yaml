@@ -10,7 +10,7 @@ private_public_boundary:
   raw_exports: private_only
   local_private: ignored_by_git
   private_session_material: private_only
-  metarotik: private_or_gated
+  sensitive_personal: private_or_gated
   token_ip_business: protected_gated
 required_checks:
   - source_manifest

@@ -18,14 +18,15 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, Mapping
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE_DIR = Path("raw/exports/local-private")
 DEFAULT_OUTPUT_DIR = Path("raw/exports/local-private/tnc-auto-001-dry-run")
+DEFAULT_LEXICON_PATH = Path("raw/exports/local-private/tnc-auto-001/lane_lexicon.local.json")
 
-LANE_PATTERNS: dict[str, list[str]] = {
+BASE_LANE_PATTERNS: dict[str, list[str]] = {
     "github_governance": [
         r"\bgithub\b",
         r"\bPR\b",
@@ -70,31 +71,26 @@ LANE_PATTERNS: dict[str, list[str]] = {
         r"\b601\b",
     ],
     "protected_ip_token": [
-        r"\bTNPX\b",
-        r"\bpatent\b",
-        r"\bCAP-II\b",
-        r"\bFERR\b",
-        r"\btoken\b",
-        r"\bPolygon\b",
-        r"\bIPFS\b",
+        r"\bprotected IP\b",
+        r"\btokenization\b",
+        r"\bcontrolled business\b",
         r"\blicen[cs]e\b",
+        r"\blicensing\b",
         r"\blizenz\b",
     ],
     "private_sensitive": [
         r"\bprivate\b",
         r"\bprivat\b",
-        r"\bsurvival\b",
-        r"\bMetarotik\b",
-        r"\bSchattenarchiv\b",
         r"\bpersonal\b",
-        r"\bintimate\b",
+        r"\boperator-sensitive\b",
+        r"\bsensitive personal\b",
     ],
 }
 
-PUBLIC_BLOCKERS: dict[str, list[str]] = {
-    "raw_private_export": [r"raw export", r"raw/exports/local-private", r"Gemini_unterhaltung"],
-    "protected_ip": [r"\bTNPX\b", r"\bCAP-II\b", r"\bFERR\b", r"\btoken\b"],
-    "private_sensitive": [r"\bprivate\b", r"\bprivat\b", r"\bsurvival\b", r"\bMetarotik\b"],
+BASE_PUBLIC_BLOCKERS: dict[str, list[str]] = {
+    "raw_private_export": [r"raw export", r"raw/exports/local-private"],
+    "protected_ip": [r"\bprotected IP\b", r"\btokenization\b", r"\blicensing claim\b"],
+    "private_sensitive": [r"\bprivate\b", r"\bprivat\b", r"\boperator-sensitive\b"],
     "external_mutation": [r"\bpush\b", r"\bopen PR\b", r"\bStripe\b", r"\bNetlify\b", r"\bZenodo\b"],
 }
 
@@ -166,15 +162,102 @@ def count_patterns(text: str, patterns: Iterable[str]) -> int:
     return sum(len(re.findall(pattern, text, flags=re.IGNORECASE)) for pattern in patterns)
 
 
-def classify_text(text: str) -> dict[str, int]:
-    counts = {lane: count_patterns(text, patterns) for lane, patterns in LANE_PATTERNS.items()}
+def _empty_local_lexicon() -> dict[str, object]:
+    return {
+        "lane_patterns": {},
+        "public_blockers": {},
+        "tracked_public_deny_terms": [],
+        "tracked_public_deny_paths": [],
+    }
+
+
+def _pattern_map(payload: object, section: str) -> dict[str, list[str]]:
+    if payload is None:
+        return {}
+    if not isinstance(payload, dict):
+        raise ValueError(f"local lexicon section must be an object: {section}")
+
+    result: dict[str, list[str]] = {}
+    for key, values in payload.items():
+        if not isinstance(key, str):
+            raise ValueError(f"local lexicon key must be a string: {section}")
+        if not isinstance(values, list) or not all(isinstance(item, str) for item in values):
+            raise ValueError(f"local lexicon values must be string lists: {section}.{key}")
+        result[key] = values
+    return result
+
+
+def _string_list(payload: object, section: str) -> list[str]:
+    if payload is None:
+        return []
+    if not isinstance(payload, list) or not all(isinstance(item, str) for item in payload):
+        raise ValueError(f"local lexicon section must be a string list: {section}")
+    return payload
+
+
+def load_local_lexicon(root: Path, lexicon_path: Path | None = None) -> dict[str, object]:
+    rel_path = lexicon_path or DEFAULT_LEXICON_PATH
+    path = rel_path if rel_path.is_absolute() else root / rel_path
+    if not path.exists():
+        return _empty_local_lexicon()
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("local lexicon root must be an object")
+
+    return {
+        "lane_patterns": _pattern_map(payload.get("lane_patterns"), "lane_patterns"),
+        "public_blockers": _pattern_map(payload.get("public_blockers"), "public_blockers"),
+        "tracked_public_deny_terms": _string_list(
+            payload.get("tracked_public_deny_terms"), "tracked_public_deny_terms"
+        ),
+        "tracked_public_deny_paths": _string_list(
+            payload.get("tracked_public_deny_paths"), "tracked_public_deny_paths"
+        ),
+    }
+
+
+def merge_pattern_maps(
+    base: Mapping[str, list[str]],
+    local: Mapping[str, list[str]],
+) -> dict[str, list[str]]:
+    merged = {key: list(values) for key, values in base.items()}
+    for key, values in local.items():
+        merged.setdefault(key, []).extend(values)
+    return merged
+
+
+def active_lane_patterns(root: Path, lexicon_path: Path | None = None) -> dict[str, list[str]]:
+    local = load_local_lexicon(root, lexicon_path)
+    return merge_pattern_maps(BASE_LANE_PATTERNS, local["lane_patterns"])
+
+
+def active_public_blockers(root: Path, lexicon_path: Path | None = None) -> dict[str, list[str]]:
+    local = load_local_lexicon(root, lexicon_path)
+    return merge_pattern_maps(BASE_PUBLIC_BLOCKERS, local["public_blockers"])
+
+
+def classify_text(
+    text: str,
+    root: Path = REPO_ROOT,
+    lane_patterns: Mapping[str, list[str]] | None = None,
+    lexicon_path: Path | None = None,
+) -> dict[str, int]:
+    patterns = dict(lane_patterns) if lane_patterns is not None else active_lane_patterns(root, lexicon_path)
+    counts = {lane: count_patterns(text, lane_patterns) for lane, lane_patterns in patterns.items()}
     if not any(counts.values()):
         counts["residue_unknown"] = 1
     return counts
 
 
-def boundary_counts(text: str) -> dict[str, int]:
-    return {risk: count_patterns(text, patterns) for risk, patterns in PUBLIC_BLOCKERS.items()}
+def boundary_counts(
+    text: str,
+    root: Path = REPO_ROOT,
+    blockers: Mapping[str, list[str]] | None = None,
+    lexicon_path: Path | None = None,
+) -> dict[str, int]:
+    patterns = dict(blockers) if blockers is not None else active_public_blockers(root, lexicon_path)
+    return {risk: count_patterns(text, risk_patterns) for risk, risk_patterns in patterns.items()}
 
 
 def highest_lane(counts: dict[str, int]) -> str:
@@ -204,12 +287,17 @@ def write_source_manifest(output_dir: Path, records: list[SourceRecord]) -> None
     )
 
 
-def write_claim_ledger(output_dir: Path, root: Path, records: list[SourceRecord]) -> list[dict[str, object]]:
+def write_claim_ledger(
+    output_dir: Path,
+    root: Path,
+    records: list[SourceRecord],
+    lexicon_path: Path | None = None,
+) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
     for record in records:
         text = record.path.read_text(encoding="utf-8", errors="replace")
-        lane_counts = classify_text(text)
-        risk_counts = boundary_counts(text)
+        lane_counts = classify_text(text, root=root, lexicon_path=lexicon_path)
+        risk_counts = boundary_counts(text, root=root, lexicon_path=lexicon_path)
         rows.append(
             {
                 "source": record.rel_path,
@@ -291,8 +379,8 @@ def write_markdown_reports(output_dir: Path, rows: list[dict[str, object]], stat
         "Public-safe default: deny until source-backed and boundary-cleared.\n\n"
         "Risk-bearing source count: "
         f"{len(risk_sources)}\n\n"
-        "Blocked lanes: raw private exports, protected IP/token/business, private "
-        "survival or Metarotik material, payment and production surfaces.\n",
+        "Blocked lanes: raw private exports, protected IP/tokenization/business, "
+        "private or operator-sensitive material, payment and production surfaces.\n",
         encoding="utf-8",
     )
     (output_dir / "risk_report.md").write_text(
@@ -329,14 +417,19 @@ def write_markdown_reports(output_dir: Path, rows: list[dict[str, object]], stat
     return report
 
 
-def run_controller(root: Path, source_dir: Path, output_dir: Path) -> dict[str, object]:
+def run_controller(
+    root: Path,
+    source_dir: Path,
+    output_dir: Path,
+    lexicon_path: Path | None = None,
+) -> dict[str, object]:
     abs_source_dir = (root / source_dir).resolve()
     abs_output_dir = (root / output_dir).resolve()
     abs_output_dir.mkdir(parents=True, exist_ok=True)
 
     records = [build_source_record(root, path) for path in iter_sources(abs_source_dir)]
     write_source_manifest(abs_output_dir, records)
-    rows = write_claim_ledger(abs_output_dir, root, records)
+    rows = write_claim_ledger(abs_output_dir, root, records, lexicon_path=lexicon_path)
     write_model_vote_matrix(abs_output_dir)
     status = git_status(root)
     report = write_markdown_reports(abs_output_dir, rows, status)
@@ -347,10 +440,11 @@ def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description="Run the TNC-AUTO-001 local dry-run controller.")
     parser.add_argument("--source-dir", default=DEFAULT_SOURCE_DIR.as_posix())
     parser.add_argument("--output-dir", default=DEFAULT_OUTPUT_DIR.as_posix())
+    parser.add_argument("--lexicon", default=DEFAULT_LEXICON_PATH.as_posix())
     parser.add_argument("--json", action="store_true", help="Print the final report as JSON.")
     args = parser.parse_args(argv[1:])
 
-    result = run_controller(REPO_ROOT, Path(args.source_dir), Path(args.output_dir))
+    result = run_controller(REPO_ROOT, Path(args.source_dir), Path(args.output_dir), Path(args.lexicon))
     if args.json:
         print(json.dumps(result, indent=2, ensure_ascii=False))
     else:
