@@ -24,3 +24,12 @@ material or requiring a payment integration to exist first.
 The current public architecture release candidate is:
 
 - [semantic_architecture_public_release_v0_1.md](semantic_architecture_public_release_v0_1.md)
+
+## Trigger Lexicon
+
+The current local trigger lexicon release candidate is:
+
+- [trigger_names_0001_0088_v0_1.md](triggers/trigger_names_0001_0088_v0_1.md)
+- [CSV](triggers/trigger_names_0001_0088_v0_1.csv)
+- [JSON](triggers/trigger_names_0001_0088_v0_1.json)
+- [Manifest](triggers/trigger_names_0001_0088_manifest_v0_1.md)
