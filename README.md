@@ -73,7 +73,7 @@ The atlas does not change the production sync workflow. It is a separate, machin
 2. Share Notion database with integration (in Notion UI)
 3. Workflow runs automatically every 10 minutes
 
-The workflow resolves `GITHUB_REPO` automatically from `$ github.repository `.
+The workflow resolves `GITHUB_REPO` automatically from the GitHub Actions `github.repository` context expression.
 Optional override for cross-repo sync: set `TARGET_GITHUB_REPO` (secret or variable) to `owner/repo`.
 
 **Trigger manually:**
