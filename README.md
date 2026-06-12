@@ -30,7 +30,7 @@ stays traceable instead of disappearing into chat logs.
 ## Public-safe boundaries
 
 - Draft PRs are used **intentionally** as review gates — not signs of an unfinished mess.
-- Files under `raw/exports/` and `data_exports/` are sanitized placeholders / fill-versions, not live data dumps.
+- Files under `raw/exports/` are sanitized placeholders / fill-versions, not live data dumps. Other export-related directories require separate review before being described publicly.
 - Internal terms (Prism, Trigger Registry, Equilibrium) are legacy/internal vocabulary; see the governance docs before reading them as products.
 
 ## Current status
