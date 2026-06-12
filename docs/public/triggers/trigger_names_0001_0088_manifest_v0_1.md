@@ -1,6 +1,8 @@
 # Trigger Names 0001-0088 v0.1 Manifest
 
-Status: release candidate, not yet published.
+Status: published to public main branch
+Tag/Release: none
+Publication scope: GitHub main branch only
 
 ## Scope
 
@@ -28,4 +30,4 @@ This release candidate is a public lexical layer only. It must not expose raw ev
 
 ## Gate Meaning
 
-This manifest records a local release candidate. A future commit, push, pull request, or publication requires a separate explicit gate.
+This manifest was merged into the public `main` branch via PR #85 (merge commit `3e7236e7cc3f401d0f545d1411d7805628e29b90`, 2026-06-12). Publication scope is the GitHub `main` branch only: no git tag and no GitHub release were created. Any further publication (git tag, GitHub release, Zenodo deposit, or external distribution) requires a separate explicit gate.
