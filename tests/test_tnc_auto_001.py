@@ -153,6 +153,39 @@ class TncAuto001Tests(unittest.TestCase):
                     None,
                 )
 
+    def test_run_controller_refuses_empty_source_dir_before_reports(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            init_gitignore(root)
+            (root / "raw" / "exports" / "local-private").mkdir(parents=True)
+            output_dir = root / "raw" / "exports" / "local-private" / "tnc-auto-001-dry-run"
+
+            with self.assertRaisesRegex(ValueError, "at least one matching local-private input"):
+                self.mod.run_controller(
+                    root,
+                    Path("raw/exports/local-private"),
+                    Path("raw/exports/local-private/tnc-auto-001-dry-run"),
+                    None,
+                )
+
+            self.assertFalse(output_dir.exists())
+
+    def test_run_controller_refuses_missing_source_dir_before_reports(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            init_gitignore(root)
+            output_dir = root / "raw" / "exports" / "local-private" / "tnc-auto-001-dry-run"
+
+            with self.assertRaisesRegex(ValueError, "at least one matching local-private input"):
+                self.mod.run_controller(
+                    root,
+                    Path("raw/exports/local-private-missing"),
+                    Path("raw/exports/local-private/tnc-auto-001-dry-run"),
+                    None,
+                )
+
+            self.assertFalse(output_dir.exists())
+
 
 class ValidateTncAuto001Tests(unittest.TestCase):
     def setUp(self):

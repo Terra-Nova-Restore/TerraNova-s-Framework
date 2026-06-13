@@ -160,6 +160,14 @@ def iter_sources(source_dir: Path) -> list[Path]:
     )
 
 
+def validate_source_records(root: Path, source_dir: Path) -> list[Path]:
+    abs_source_dir = (root / source_dir).resolve()
+    sources = iter_sources(abs_source_dir)
+    if not sources:
+        raise ValueError(f"source directory must contain at least one matching local-private input: {source_dir}")
+    return sources
+
+
 def build_source_record(root: Path, path: Path) -> SourceRecord:
     data = path.read_bytes()
     text = data.decode("utf-8", errors="replace")
@@ -439,11 +447,11 @@ def run_controller(
     output_dir: Path,
     lexicon_path: Path | None = None,
 ) -> dict[str, object]:
-    abs_source_dir = (root / source_dir).resolve()
     abs_output_dir = validate_output_dir(root, output_dir)
+    source_paths = validate_source_records(root, source_dir)
     abs_output_dir.mkdir(parents=True, exist_ok=True)
 
-    records = [build_source_record(root, path) for path in iter_sources(abs_source_dir)]
+    records = [build_source_record(root, path) for path in source_paths]
     write_source_manifest(abs_output_dir, records)
     rows = write_claim_ledger(abs_output_dir, root, records, lexicon_path=lexicon_path)
     write_model_vote_matrix(abs_output_dir)
