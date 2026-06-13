@@ -215,6 +215,17 @@ def validate_report_targets(output_dir: Path) -> None:
     symlink_targets = [name for name in REPORT_OUTPUT_FILES if (output_dir / name).is_symlink()]
     if symlink_targets:
         raise ValueError("report targets must not be symlinks before writing: " + ", ".join(symlink_targets))
+    hardlink_targets = [
+        name
+        for name in REPORT_OUTPUT_FILES
+        if (output_dir / name).is_file()
+        and not (output_dir / name).is_symlink()
+        and (output_dir / name).stat().st_nlink > 1
+    ]
+    if hardlink_targets:
+        raise ValueError(
+            "report targets must not be hard-linked before writing: " + ", ".join(hardlink_targets)
+        )
 
 
 def build_source_record(root: Path, path: Path) -> SourceRecord:
