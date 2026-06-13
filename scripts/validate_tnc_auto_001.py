@@ -40,7 +40,12 @@ def error(message: str) -> None:
 
 def git_check_ignore(path: str) -> bool:
     result = subprocess.run(
-        ["git", "check-ignore", "-q", path],
+        [
+            "git",
+            "check-ignore",
+            "-q",
+            path,
+        ],
         cwd=REPO_ROOT,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
@@ -147,6 +152,7 @@ def ensure_dry_run_outputs() -> list[str]:
 def main(argv: list[str]) -> int:
     errors: list[str] = []
 
+    # PHASE 1 - STATIC PRE-EXECUTION CHECKS
     for rel in REQUIRED_FILES:
         if not (REPO_ROOT / rel).exists():
             errors.append(f"missing required file: {rel}")
@@ -165,8 +171,23 @@ def main(argv: list[str]) -> int:
     if not git_check_ignore(output_rel):
         errors.append(f"output directory is not gitignored: {output_rel}")
 
+    network_imports = validate_no_network_imports()
+    if network_imports:
+        errors.append(f"network imports are not allowed: {', '.join(network_imports)}")
+
+    deny_findings = validate_tracked_public_deny_terms()
+    errors.extend(deny_findings)
+
+    # HARD GATE - if any static checks failed, abort before executing controller
+    if errors:
+        for item in errors:
+            error(item)
+        return 1
+
+    # PHASE 2 - EXECUTION
     errors.extend(ensure_dry_run_outputs())
 
+    # PHASE 3 - POST-EXECUTION CHECKS
     for rel in REQUIRED_OUTPUTS:
         output = REPO_ROOT / OUTPUT_DIR / rel
         if not output.exists():
@@ -179,13 +200,6 @@ def main(argv: list[str]) -> int:
             errors.append("external_mutation_count is not zero")
         if report.get("commit_safe") is not False:
             errors.append("first dry-run must report commit_safe=false")
-
-    network_imports = validate_no_network_imports()
-    if network_imports:
-        errors.append(f"network imports are not allowed: {', '.join(network_imports)}")
-
-    deny_findings = validate_tracked_public_deny_terms()
-    errors.extend(deny_findings)
 
     if errors:
         for item in errors:
