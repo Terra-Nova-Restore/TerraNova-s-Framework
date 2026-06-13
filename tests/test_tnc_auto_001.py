@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import csv
 import importlib.util
 import json
@@ -301,6 +302,9 @@ class ValidateTncAuto001Tests(unittest.TestCase):
     def setUp(self):
         self.mod = load_validate_module()
 
+    def blocked_imports(self, source: str) -> list[str]:
+        return self.mod.blocked_network_imports_from_tree(ast.parse(source))
+
     def test_blocked_network_module_preserves_dotted_names(self):
         self.assertTrue(self.mod.is_blocked_network_module("http.client"))
         self.assertTrue(self.mod.is_blocked_network_module("http.client.extra"))
@@ -308,6 +312,44 @@ class ValidateTncAuto001Tests(unittest.TestCase):
         self.assertTrue(self.mod.is_blocked_network_module("requests.sessions"))
         self.assertFalse(self.mod.is_blocked_network_module("http"))
         self.assertFalse(self.mod.is_blocked_network_module("pathlib"))
+
+    def test_blocked_network_import_forms_are_detected(self):
+        cases = {
+            "import http.client\n": ["http.client"],
+            "import http.client as c\n": ["http.client"],
+            "from http.client import HTTPConnection\n": ["http.client"],
+            "from http import client\n": ["http.client"],
+            "from http import client as c\n": ["http.client"],
+        }
+        for source, expected in cases.items():
+            with self.subTest(source=source.strip()):
+                self.assertEqual(self.blocked_imports(source), expected)
+
+    def test_blocked_network_import_forms_cover_all_configured_roots(self):
+        cases = {
+            "import requests\n": ["requests"],
+            "import requests.sessions as sessions\n": ["requests.sessions"],
+            "from requests import Session\n": ["requests"],
+            "from urllib import request\n": ["urllib"],
+            "from urllib.request import urlopen\n": ["urllib.request"],
+            "from http import client\n": ["http.client"],
+            "from http.client import HTTPConnection\n": ["http.client"],
+        }
+        for source, expected in cases.items():
+            with self.subTest(source=source.strip()):
+                self.assertEqual(self.blocked_imports(source), expected)
+
+    def test_network_import_detector_allows_unblocked_siblings_and_relative_imports(self):
+        source = "\n".join(
+            [
+                "import http",
+                "from http import server",
+                "from urllibish import request",
+                "from .http import client",
+                "from pathlib import Path",
+            ]
+        )
+        self.assertEqual(self.blocked_imports(source), [])
 
 
 if __name__ == "__main__":

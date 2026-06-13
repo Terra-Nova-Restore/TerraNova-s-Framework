@@ -52,16 +52,29 @@ def git_check_ignore(path: str) -> bool:
 def validate_no_network_imports() -> list[str]:
     path = REPO_ROOT / "scripts" / "tnc_auto_001.py"
     tree = ast.parse(path.read_text(encoding="utf-8"))
+    return blocked_network_imports_from_tree(tree)
+
+
+def blocked_network_imports_from_tree(tree: ast.AST) -> list[str]:
     found: list[str] = []
     for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                if is_blocked_network_module(alias.name):
-                    found.append(alias.name)
-        elif isinstance(node, ast.ImportFrom) and node.module:
-            if is_blocked_network_module(node.module):
-                found.append(node.module)
+        for module in network_import_candidates(node):
+            if is_blocked_network_module(module):
+                found.append(module)
+                break
     return found
+
+
+def network_import_candidates(node: ast.AST) -> list[str]:
+    if isinstance(node, ast.Import):
+        return [alias.name for alias in node.names]
+    if not isinstance(node, ast.ImportFrom) or node.level != 0 or not node.module:
+        return []
+    candidates = [node.module]
+    for alias in node.names:
+        if alias.name != "*":
+            candidates.append(f"{node.module}.{alias.name}")
+    return candidates
 
 
 def is_blocked_network_module(module: str) -> bool:
