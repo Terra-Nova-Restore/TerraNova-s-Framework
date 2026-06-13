@@ -120,6 +120,22 @@ def git_check_ignored(root: Path, rel_path: str) -> bool:
     return result.returncode == 0
 
 
+def validate_output_dir(root: Path, output_dir: Path) -> Path:
+    abs_root = root.resolve()
+    abs_output_dir = (root / output_dir).resolve()
+    try:
+        rel_output_dir = abs_output_dir.relative_to(abs_root).as_posix()
+    except ValueError as exc:
+        raise ValueError(f"output directory must stay inside repo: {output_dir}") from exc
+
+    local_private = DEFAULT_SOURCE_DIR.as_posix()
+    if rel_output_dir != local_private and not rel_output_dir.startswith(f"{local_private}/"):
+        raise ValueError(f"output directory must stay under {local_private}: {rel_output_dir}")
+    if not git_check_ignored(abs_root, rel_output_dir):
+        raise ValueError(f"output directory must be gitignored before writing: {rel_output_dir}")
+    return abs_output_dir
+
+
 def git_status(root: Path) -> str:
     result = subprocess.run(
         ["git", "status", "--short", "--branch"],
@@ -424,7 +440,7 @@ def run_controller(
     lexicon_path: Path | None = None,
 ) -> dict[str, object]:
     abs_source_dir = (root / source_dir).resolve()
-    abs_output_dir = (root / output_dir).resolve()
+    abs_output_dir = validate_output_dir(root, output_dir)
     abs_output_dir.mkdir(parents=True, exist_ok=True)
 
     records = [build_source_record(root, path) for path in iter_sources(abs_source_dir)]

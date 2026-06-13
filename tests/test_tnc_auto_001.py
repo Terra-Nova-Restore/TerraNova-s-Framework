@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import importlib.util
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -10,14 +11,28 @@ from pathlib import Path
 
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "tnc_auto_001.py"
+VALIDATE_MODULE_PATH = Path(__file__).resolve().parents[1] / "scripts" / "validate_tnc_auto_001.py"
 
 
-def load_module():
-    spec = importlib.util.spec_from_file_location("tnc_auto_001", MODULE_PATH)
+def load_module_from_path(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def load_module():
+    return load_module_from_path("tnc_auto_001", MODULE_PATH)
+
+
+def load_validate_module():
+    return load_module_from_path("validate_tnc_auto_001", VALIDATE_MODULE_PATH)
+
+
+def init_gitignore(root: Path) -> None:
+    subprocess.run(["git", "init", "--quiet"], cwd=root, check=True)
+    (root / ".gitignore").write_text("raw/exports/local-private/\n", encoding="utf-8")
 
 
 def write_local_lexicon(root: Path) -> Path:
@@ -79,6 +94,7 @@ class TncAuto001Tests(unittest.TestCase):
     def test_run_controller_writes_expected_outputs(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             root = Path(tmp_dir)
+            init_gitignore(root)
             source_dir = root / "raw" / "exports" / "local-private"
             output_dir = root / "raw" / "exports" / "local-private" / "tnc-auto-001-dry-run"
             source_dir.mkdir(parents=True)
@@ -104,6 +120,51 @@ class TncAuto001Tests(unittest.TestCase):
             self.assertEqual(rows[0]["public_safe"], "false")
             manifest = json.loads((output_dir / "source_manifest.json").read_text(encoding="utf-8"))
             self.assertEqual(len(manifest), 1)
+
+    def test_run_controller_refuses_public_output_dir_before_mkdir(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            init_gitignore(root)
+            source_dir = root / "raw" / "exports" / "local-private"
+            source_dir.mkdir(parents=True)
+
+            with self.assertRaisesRegex(ValueError, "output directory must stay under"):
+                self.mod.run_controller(
+                    root,
+                    Path("raw/exports/local-private"),
+                    Path("docs/tnc-auto-001-dry-run"),
+                    None,
+                )
+
+            self.assertFalse((root / "docs" / "tnc-auto-001-dry-run").exists())
+
+    def test_run_controller_refuses_out_of_repo_output_dir(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            init_gitignore(root)
+            source_dir = root / "raw" / "exports" / "local-private"
+            source_dir.mkdir(parents=True)
+
+            with self.assertRaisesRegex(ValueError, "output directory must stay inside repo"):
+                self.mod.run_controller(
+                    root,
+                    Path("raw/exports/local-private"),
+                    Path("..") / "tnc-auto-outside",
+                    None,
+                )
+
+
+class ValidateTncAuto001Tests(unittest.TestCase):
+    def setUp(self):
+        self.mod = load_validate_module()
+
+    def test_blocked_network_module_preserves_dotted_names(self):
+        self.assertTrue(self.mod.is_blocked_network_module("http.client"))
+        self.assertTrue(self.mod.is_blocked_network_module("http.client.extra"))
+        self.assertTrue(self.mod.is_blocked_network_module("urllib.request"))
+        self.assertTrue(self.mod.is_blocked_network_module("requests.sessions"))
+        self.assertFalse(self.mod.is_blocked_network_module("http"))
+        self.assertFalse(self.mod.is_blocked_network_module("pathlib"))
 
 
 if __name__ == "__main__":

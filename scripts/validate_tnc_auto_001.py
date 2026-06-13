@@ -31,6 +31,7 @@ REQUIRED_OUTPUTS = [
 ]
 OUTPUT_DIR = Path("raw/exports/local-private/tnc-auto-001-dry-run")
 LOCAL_LEXICON_PATH = Path("raw/exports/local-private/tnc-auto-001/lane_lexicon.local.json")
+BLOCKED_NETWORK_MODULES = {"requests", "urllib", "http.client"}
 
 
 def error(message: str) -> None:
@@ -51,19 +52,20 @@ def git_check_ignore(path: str) -> bool:
 def validate_no_network_imports() -> list[str]:
     path = REPO_ROOT / "scripts" / "tnc_auto_001.py"
     tree = ast.parse(path.read_text(encoding="utf-8"))
-    blocked = {"requests", "urllib", "http.client"}
     found: list[str] = []
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             for alias in node.names:
-                root_name = alias.name.split(".")[0]
-                if root_name in blocked:
+                if is_blocked_network_module(alias.name):
                     found.append(alias.name)
         elif isinstance(node, ast.ImportFrom) and node.module:
-            root_name = node.module.split(".")[0]
-            if root_name in blocked:
+            if is_blocked_network_module(node.module):
                 found.append(node.module)
     return found
+
+
+def is_blocked_network_module(module: str) -> bool:
+    return any(module == blocked or module.startswith(f"{blocked}.") for blocked in BLOCKED_NETWORK_MODULES)
 
 
 def git_ls_files(paths: list[str]) -> list[str]:
