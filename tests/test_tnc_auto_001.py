@@ -4,6 +4,7 @@ import ast
 import csv
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -288,6 +289,32 @@ class TncAuto001Tests(unittest.TestCase):
                 self.skipTest(f"symlink creation unavailable: {exc}")
 
             with self.assertRaisesRegex(ValueError, "report targets must not be symlinks before writing"):
+                self.mod.run_controller(
+                    root,
+                    Path("raw/exports/local-private"),
+                    Path("raw/exports/local-private/tnc-auto-001-dry-run"),
+                    None,
+                )
+
+            self.assertEqual(tracked_target.read_text(encoding="utf-8"), "keep me")
+
+    def test_run_controller_refuses_hardlinked_report_target_before_writing(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            init_gitignore(root)
+            source_dir = root / "raw" / "exports" / "local-private"
+            source_dir.mkdir(parents=True)
+            (source_dir / "tncic-neutral.md").write_text("A neutral note, no blocker terms.", encoding="utf-8")
+            output_dir = source_dir / "tnc-auto-001-dry-run"
+            output_dir.mkdir(parents=True)
+            tracked_target = root / "tracked-report.md"
+            tracked_target.write_text("keep me", encoding="utf-8")
+            try:
+                os.link(tracked_target, output_dir / "claim_ledger.csv")
+            except (NotImplementedError, OSError) as exc:
+                self.skipTest(f"hardlink creation unavailable: {exc}")
+
+            with self.assertRaisesRegex(ValueError, "report targets must not be hard-linked before writing"):
                 self.mod.run_controller(
                     root,
                     Path("raw/exports/local-private"),
