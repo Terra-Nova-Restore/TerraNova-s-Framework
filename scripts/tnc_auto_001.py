@@ -163,6 +163,13 @@ def iter_sources(source_dir: Path) -> list[Path]:
 def validate_source_records(root: Path, source_dir: Path) -> list[Path]:
     abs_root = root.resolve()
     abs_source_dir = (root / source_dir).resolve()
+    try:
+        rel_source_dir = abs_source_dir.relative_to(abs_root).as_posix()
+    except ValueError as exc:
+        raise ValueError(f"source directory must stay inside repo: {source_dir}") from exc
+    local_private = DEFAULT_SOURCE_DIR.as_posix()
+    if rel_source_dir != local_private and not rel_source_dir.startswith(f"{local_private}/"):
+        raise ValueError(f"source directory must stay under {local_private}: {rel_source_dir}")
     sources = iter_sources(abs_source_dir)
     if not sources:
         raise ValueError(f"source directory must contain at least one matching local-private input: {source_dir}")
@@ -332,13 +339,20 @@ def write_claim_ledger(
         text = record.path.read_text(encoding="utf-8", errors="replace")
         lane_counts = classify_text(text, root=root, lexicon_path=lexicon_path)
         risk_counts = boundary_counts(text, root=root, lexicon_path=lexicon_path)
+        local_private = DEFAULT_SOURCE_DIR.as_posix()
+        path_is_local_private = (
+            record.rel_path == local_private or record.rel_path.startswith(f"{local_private}/")
+        )
+        if path_is_local_private:
+            risk_counts = dict(risk_counts)
+            risk_counts["local_private_path"] = risk_counts.get("local_private_path", 0) + 1
         rows.append(
             {
                 "source": record.rel_path,
                 "primary_lane": highest_lane(lane_counts),
                 "lane_counts": json.dumps(lane_counts, sort_keys=True),
                 "risk_counts": json.dumps(risk_counts, sort_keys=True),
-                "public_safe": "false" if any(risk_counts.values()) else "true",
+                "public_safe": "false" if (path_is_local_private or any(risk_counts.values())) else "true",
                 "action": "report_only",
             }
         )

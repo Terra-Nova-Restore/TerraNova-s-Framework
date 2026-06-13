@@ -179,7 +179,7 @@ class TncAuto001Tests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "at least one matching local-private input"):
                 self.mod.run_controller(
                     root,
-                    Path("raw/exports/local-private-missing"),
+                    Path("raw/exports/local-private/missing"),
                     Path("raw/exports/local-private/tnc-auto-001-dry-run"),
                     None,
                 )
@@ -189,8 +189,9 @@ class TncAuto001Tests(unittest.TestCase):
     def test_run_controller_refuses_non_ignored_source_input_before_reports(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             root = Path(tmp_dir)
-            init_gitignore(root)
-            source_dir = root / "tracked-sources"
+            subprocess.run(["git", "init", "--quiet"], cwd=root, check=True)
+            (root / ".gitignore").write_text("raw/exports/local-private/tnc-auto-001-dry-run\n", encoding="utf-8")
+            source_dir = root / "raw" / "exports" / "local-private"
             source_dir.mkdir(parents=True)
             (source_dir / "terra-nova-leak.md").write_text("Codex #77 material", encoding="utf-8")
             output_dir = root / "raw" / "exports" / "local-private" / "tnc-auto-001-dry-run"
@@ -198,12 +199,51 @@ class TncAuto001Tests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "source inputs must be gitignored before reading"):
                 self.mod.run_controller(
                     root,
-                    Path("tracked-sources"),
+                    Path("raw/exports/local-private"),
                     Path("raw/exports/local-private/tnc-auto-001-dry-run"),
                     None,
                 )
 
             self.assertFalse(output_dir.exists())
+
+    def test_run_controller_refuses_source_dir_outside_local_private(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            init_gitignore(root)
+            outside = root / "logs"
+            outside.mkdir(parents=True)
+            (outside / "tncic-debug.md").write_text("Codex #77 log material", encoding="utf-8")
+            output_dir = root / "raw" / "exports" / "local-private" / "tnc-auto-001-dry-run"
+
+            with self.assertRaisesRegex(ValueError, "source directory must stay under"):
+                self.mod.run_controller(
+                    root,
+                    Path("logs"),
+                    Path("raw/exports/local-private/tnc-auto-001-dry-run"),
+                    None,
+                )
+
+            self.assertFalse(output_dir.exists())
+
+    def test_claim_ledger_marks_local_private_path_as_not_public_safe(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            init_gitignore(root)
+            source_dir = root / "raw" / "exports" / "local-private"
+            source_dir.mkdir(parents=True)
+            output_dir = source_dir / "tnc-auto-001-dry-run"
+            (source_dir / "tncic-neutral.md").write_text("A neutral note, no blocker terms.", encoding="utf-8")
+
+            self.mod.run_controller(
+                root,
+                Path("raw/exports/local-private"),
+                Path("raw/exports/local-private/tnc-auto-001-dry-run"),
+                None,
+            )
+            with (output_dir / "claim_ledger.csv").open(encoding="utf-8", newline="") as handle:
+                rows = list(csv.DictReader(handle))
+
+            self.assertEqual(rows[0]["public_safe"], "false")
 
 
 class ValidateTncAuto001Tests(unittest.TestCase):
