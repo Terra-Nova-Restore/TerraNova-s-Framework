@@ -161,10 +161,20 @@ def iter_sources(source_dir: Path) -> list[Path]:
 
 
 def validate_source_records(root: Path, source_dir: Path) -> list[Path]:
+    abs_root = root.resolve()
     abs_source_dir = (root / source_dir).resolve()
     sources = iter_sources(abs_source_dir)
     if not sources:
         raise ValueError(f"source directory must contain at least one matching local-private input: {source_dir}")
+    not_ignored = [
+        rel
+        for rel in (path.relative_to(abs_root).as_posix() for path in sources)
+        if not git_check_ignored(abs_root, rel)
+    ]
+    if not_ignored:
+        raise ValueError(
+            "source inputs must be gitignored before reading: " + ", ".join(not_ignored)
+        )
     return sources
 
 

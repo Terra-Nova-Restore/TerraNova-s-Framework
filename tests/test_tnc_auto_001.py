@@ -186,6 +186,25 @@ class TncAuto001Tests(unittest.TestCase):
 
             self.assertFalse(output_dir.exists())
 
+    def test_run_controller_refuses_non_ignored_source_input_before_reports(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            init_gitignore(root)
+            source_dir = root / "tracked-sources"
+            source_dir.mkdir(parents=True)
+            (source_dir / "terra-nova-leak.md").write_text("Codex #77 material", encoding="utf-8")
+            output_dir = root / "raw" / "exports" / "local-private" / "tnc-auto-001-dry-run"
+
+            with self.assertRaisesRegex(ValueError, "source inputs must be gitignored before reading"):
+                self.mod.run_controller(
+                    root,
+                    Path("tracked-sources"),
+                    Path("raw/exports/local-private/tnc-auto-001-dry-run"),
+                    None,
+                )
+
+            self.assertFalse(output_dir.exists())
+
 
 class ValidateTncAuto001Tests(unittest.TestCase):
     def setUp(self):
