@@ -1,0 +1,539 @@
+#!/usr/bin/env python3
+"""Local dry-run controller for TerraNovaCIC self-extension.
+
+The controller is intentionally dependency-free and side-effect limited. It
+reads local-private source material, classifies it into lanes and emits reports
+under an ignored local-private output directory. It does not call external
+services or perform Git remote actions.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import re
+import subprocess
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Iterable, Mapping
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_SOURCE_DIR = Path("raw/exports/local-private")
+DEFAULT_OUTPUT_DIR = Path("raw/exports/local-private/tnc-auto-001-dry-run")
+DEFAULT_LEXICON_PATH = Path("raw/exports/local-private/tnc-auto-001/lane_lexicon.local.json")
+REPORT_OUTPUT_FILES = (
+    "source_manifest.json",
+    "claim_ledger.csv",
+    "model_vote_matrix.csv",
+    "contradiction_ledger.md",
+    "boundary_report.md",
+    "risk_report.md",
+    "proposed_changes.md",
+    "next_gate.md",
+    "dry_run_report.json",
+)
+
+BASE_LANE_PATTERNS: dict[str, list[str]] = {
+    "github_governance": [
+        r"\bgithub\b",
+        r"\bPR\b",
+        r"#77",
+        r"\bbranch\b",
+        r"\bcommit\b",
+        r"\bpush\b",
+        r"\bworkflow\b",
+        r"\bCI\b",
+    ],
+    "notion_substrate": [
+        r"\bnotion\b",
+        r"\bworkspace\b",
+        r"\bReflexions-Log\b",
+        r"\bpage\b",
+        r"\bdatabase\b",
+        r"\bsource of record\b",
+    ],
+    "zenodo_publication": [
+        r"\bzenodo\b",
+        r"\bDOI\b",
+        r"\brelease\b",
+        r"\bpublication\b",
+        r"\bpublikation\b",
+    ],
+    "gumroad_portal": [
+        r"\bgumroad\b",
+        r"\bportal\b",
+        r"\bproduct\b",
+        r"\bCTA\b",
+        r"\bStripe\b",
+        r"\bNetlify\b",
+    ],
+    "codex_internal": [
+        r"\bcodex\b",
+        r"\bTNC-AUTO-001\b",
+        r"\bcontroller\b",
+        r"\bVORTEX\b",
+        r"\bSCL\b",
+        r"\btrigger\b",
+        r"\b777\b",
+        r"\b601\b",
+    ],
+    "protected_ip_token": [
+        r"\bprotected IP\b",
+        r"\btokenization\b",
+        r"\bcontrolled business\b",
+        r"\blicen[cs]e\b",
+        r"\blicensing\b",
+        r"\blizenz\b",
+    ],
+    "private_sensitive": [
+        r"\bprivate\b",
+        r"\bprivat\b",
+        r"\bpersonal\b",
+        r"\boperator-sensitive\b",
+        r"\bsensitive personal\b",
+    ],
+}
+
+BASE_PUBLIC_BLOCKERS: dict[str, list[str]] = {
+    "raw_private_export": [r"raw export", r"raw/exports/local-private"],
+    "protected_ip": [r"\bprotected IP\b", r"\btokenization\b", r"\blicensing claim\b"],
+    "private_sensitive": [r"\bprivate\b", r"\bprivat\b", r"\boperator-sensitive\b"],
+    "external_mutation": [r"\bpush\b", r"\bopen PR\b", r"\bStripe\b", r"\bNetlify\b", r"\bZenodo\b"],
+}
+
+
+@dataclass(frozen=True)
+class SourceRecord:
+    path: Path
+    rel_path: str
+    bytes: int
+    lines: int
+    sha256: str
+    ignored_by_git: bool
+
+
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest().upper()
+
+
+def git_check_ignored(root: Path, rel_path: str) -> bool:
+    result = subprocess.run(
+        ["git", "check-ignore", "-q", rel_path],
+        cwd=root,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    return result.returncode == 0
+
+
+def validate_output_dir(root: Path, output_dir: Path) -> Path:
+    abs_root = root.resolve()
+    abs_output_dir = (root / output_dir).resolve()
+    try:
+        rel_output_dir = abs_output_dir.relative_to(abs_root).as_posix()
+    except ValueError as exc:
+        raise ValueError(f"output directory must stay inside repo: {output_dir}") from exc
+
+    local_private = DEFAULT_SOURCE_DIR.as_posix()
+    if rel_output_dir != local_private and not rel_output_dir.startswith(f"{local_private}/"):
+        raise ValueError(f"output directory must stay under {local_private}: {rel_output_dir}")
+    if not git_check_ignored(abs_root, rel_output_dir):
+        raise ValueError(f"output directory must be gitignored before writing: {rel_output_dir}")
+    return abs_output_dir
+
+
+def git_status(root: Path) -> str:
+    result = subprocess.run(
+        ["git", "status", "--short", "--branch"],
+        cwd=root,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode != 0:
+        return f"git status failed: {result.stderr.strip()}"
+    return result.stdout.strip()
+
+
+def iter_sources(source_dir: Path) -> list[Path]:
+    if not source_dir.exists():
+        return []
+    return sorted(
+        path
+        for path in source_dir.glob("*.md")
+        if path.name.startswith(("gemini-", "terra-nova", "tncic-"))
+    )
+
+
+def validate_source_records(root: Path, source_dir: Path) -> list[Path]:
+    abs_root = root.resolve()
+    abs_source_dir = (root / source_dir).resolve()
+    try:
+        rel_source_dir = abs_source_dir.relative_to(abs_root).as_posix()
+    except ValueError as exc:
+        raise ValueError(f"source directory must stay inside repo: {source_dir}") from exc
+    local_private = DEFAULT_SOURCE_DIR.as_posix()
+    if rel_source_dir != local_private and not rel_source_dir.startswith(f"{local_private}/"):
+        raise ValueError(f"source directory must stay under {local_private}: {rel_source_dir}")
+    sources = iter_sources(abs_source_dir)
+    if not sources:
+        raise ValueError(f"source directory must contain at least one matching local-private input: {source_dir}")
+    escaping_sources: list[str] = []
+    for path in sources:
+        resolved_source = path.resolve()
+        try:
+            rel_resolved_source = resolved_source.relative_to(abs_root).as_posix()
+        except ValueError:
+            escaping_sources.append(path.relative_to(abs_root).as_posix())
+            continue
+        if rel_resolved_source != local_private and not rel_resolved_source.startswith(f"{local_private}/"):
+            escaping_sources.append(path.relative_to(abs_root).as_posix())
+    if escaping_sources:
+        raise ValueError(
+            "source inputs must resolve under raw/exports/local-private before reading: "
+            + ", ".join(escaping_sources)
+        )
+    not_ignored = [
+        rel
+        for rel in (path.relative_to(abs_root).as_posix() for path in sources)
+        if not git_check_ignored(abs_root, rel)
+    ]
+    if not_ignored:
+        raise ValueError(
+            "source inputs must be gitignored before reading: " + ", ".join(not_ignored)
+        )
+    return sources
+
+
+def validate_report_targets(output_dir: Path) -> None:
+    symlink_targets = [name for name in REPORT_OUTPUT_FILES if (output_dir / name).is_symlink()]
+    if symlink_targets:
+        raise ValueError("report targets must not be symlinks before writing: " + ", ".join(symlink_targets))
+
+
+def build_source_record(root: Path, path: Path) -> SourceRecord:
+    data = path.read_bytes()
+    text = data.decode("utf-8", errors="replace")
+    rel_path = path.relative_to(root).as_posix()
+    return SourceRecord(
+        path=path,
+        rel_path=rel_path,
+        bytes=len(data),
+        lines=len(text.splitlines()),
+        sha256=sha256_bytes(data),
+        ignored_by_git=git_check_ignored(root, rel_path),
+    )
+
+
+def count_patterns(text: str, patterns: Iterable[str]) -> int:
+    return sum(len(re.findall(pattern, text, flags=re.IGNORECASE)) for pattern in patterns)
+
+
+def _empty_local_lexicon() -> dict[str, object]:
+    return {
+        "lane_patterns": {},
+        "public_blockers": {},
+        "tracked_public_deny_terms": [],
+        "tracked_public_deny_paths": [],
+    }
+
+
+def _pattern_map(payload: object, section: str) -> dict[str, list[str]]:
+    if payload is None:
+        return {}
+    if not isinstance(payload, dict):
+        raise ValueError(f"local lexicon section must be an object: {section}")
+
+    result: dict[str, list[str]] = {}
+    for key, values in payload.items():
+        if not isinstance(key, str):
+            raise ValueError(f"local lexicon key must be a string: {section}")
+        if not isinstance(values, list) or not all(isinstance(item, str) for item in values):
+            raise ValueError(f"local lexicon values must be string lists: {section}.{key}")
+        result[key] = values
+    return result
+
+
+def _string_list(payload: object, section: str) -> list[str]:
+    if payload is None:
+        return []
+    if not isinstance(payload, list) or not all(isinstance(item, str) for item in payload):
+        raise ValueError(f"local lexicon section must be a string list: {section}")
+    return payload
+
+
+def load_local_lexicon(root: Path, lexicon_path: Path | None = None) -> dict[str, object]:
+    rel_path = lexicon_path or DEFAULT_LEXICON_PATH
+    path = rel_path if rel_path.is_absolute() else root / rel_path
+    if not path.exists():
+        return _empty_local_lexicon()
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("local lexicon root must be an object")
+
+    return {
+        "lane_patterns": _pattern_map(payload.get("lane_patterns"), "lane_patterns"),
+        "public_blockers": _pattern_map(payload.get("public_blockers"), "public_blockers"),
+        "tracked_public_deny_terms": _string_list(
+            payload.get("tracked_public_deny_terms"), "tracked_public_deny_terms"
+        ),
+        "tracked_public_deny_paths": _string_list(
+            payload.get("tracked_public_deny_paths"), "tracked_public_deny_paths"
+        ),
+    }
+
+
+def merge_pattern_maps(
+    base: Mapping[str, list[str]],
+    local: Mapping[str, list[str]],
+) -> dict[str, list[str]]:
+    merged = {key: list(values) for key, values in base.items()}
+    for key, values in local.items():
+        merged.setdefault(key, []).extend(values)
+    return merged
+
+
+def active_lane_patterns(root: Path, lexicon_path: Path | None = None) -> dict[str, list[str]]:
+    local = load_local_lexicon(root, lexicon_path)
+    return merge_pattern_maps(BASE_LANE_PATTERNS, local["lane_patterns"])
+
+
+def active_public_blockers(root: Path, lexicon_path: Path | None = None) -> dict[str, list[str]]:
+    local = load_local_lexicon(root, lexicon_path)
+    return merge_pattern_maps(BASE_PUBLIC_BLOCKERS, local["public_blockers"])
+
+
+def classify_text(
+    text: str,
+    root: Path = REPO_ROOT,
+    lane_patterns: Mapping[str, list[str]] | None = None,
+    lexicon_path: Path | None = None,
+) -> dict[str, int]:
+    patterns = dict(lane_patterns) if lane_patterns is not None else active_lane_patterns(root, lexicon_path)
+    counts = {lane: count_patterns(text, lane_patterns) for lane, lane_patterns in patterns.items()}
+    if not any(counts.values()):
+        counts["residue_unknown"] = 1
+    return counts
+
+
+def boundary_counts(
+    text: str,
+    root: Path = REPO_ROOT,
+    blockers: Mapping[str, list[str]] | None = None,
+    lexicon_path: Path | None = None,
+) -> dict[str, int]:
+    patterns = dict(blockers) if blockers is not None else active_public_blockers(root, lexicon_path)
+    return {risk: count_patterns(text, risk_patterns) for risk, risk_patterns in patterns.items()}
+
+
+def highest_lane(counts: dict[str, int]) -> str:
+    non_zero = {lane: value for lane, value in counts.items() if value > 0}
+    if not non_zero:
+        return "residue_unknown"
+    return max(non_zero.items(), key=lambda item: item[1])[0]
+
+
+def write_json(path: Path, payload: object) -> None:
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def write_source_manifest(output_dir: Path, records: list[SourceRecord]) -> None:
+    write_json(
+        output_dir / "source_manifest.json",
+        [
+            {
+                "path": record.rel_path,
+                "bytes": record.bytes,
+                "lines": record.lines,
+                "sha256": record.sha256,
+                "ignored_by_git": record.ignored_by_git,
+            }
+            for record in records
+        ],
+    )
+
+
+def write_claim_ledger(
+    output_dir: Path,
+    root: Path,
+    records: list[SourceRecord],
+    lexicon_path: Path | None = None,
+) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for record in records:
+        text = record.path.read_text(encoding="utf-8", errors="replace")
+        lane_counts = classify_text(text, root=root, lexicon_path=lexicon_path)
+        risk_counts = boundary_counts(text, root=root, lexicon_path=lexicon_path)
+        local_private = DEFAULT_SOURCE_DIR.as_posix()
+        path_is_local_private = (
+            record.rel_path == local_private or record.rel_path.startswith(f"{local_private}/")
+        )
+        if path_is_local_private:
+            risk_counts = dict(risk_counts)
+            risk_counts["local_private_path"] = risk_counts.get("local_private_path", 0) + 1
+        rows.append(
+            {
+                "source": record.rel_path,
+                "primary_lane": highest_lane(lane_counts),
+                "lane_counts": json.dumps(lane_counts, sort_keys=True),
+                "risk_counts": json.dumps(risk_counts, sort_keys=True),
+                "public_safe": "false" if (path_is_local_private or any(risk_counts.values())) else "true",
+                "action": "report_only",
+            }
+        )
+
+    with (output_dir / "claim_ledger.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=["source", "primary_lane", "lane_counts", "risk_counts", "public_safe", "action"],
+        )
+        writer.writeheader()
+        writer.writerows(rows)
+    return rows
+
+
+def write_model_vote_matrix(output_dir: Path) -> None:
+    rows = [
+        {
+            "instance": "Codex",
+            "role": "local executor",
+            "vote": "build local-only dry-run controller",
+            "authority": "local facts, git, tests, diffs",
+        },
+        {
+            "instance": "GPT",
+            "role": "governance reviewer",
+            "vote": "concordance closure before implementation",
+            "authority": "scope, boundary, risk",
+        },
+        {
+            "instance": "Gemini",
+            "role": "long-context verifier",
+            "vote": "local anchor and validation loop",
+            "authority": "breadth and contradiction review",
+        },
+        {
+            "instance": "Notion Grok",
+            "role": "workspace distiller",
+            "vote": "Notion substrate and self-extension spec",
+            "authority": "Notion context, requires verification",
+        },
+    ]
+    with (output_dir / "model_vote_matrix.csv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["instance", "role", "vote", "authority"])
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def write_markdown_reports(output_dir: Path, rows: list[dict[str, object]], status: str) -> dict[str, object]:
+    risk_sources = [row for row in rows if row["public_safe"] == "false"]
+    commit_safe = False
+    report = {
+        "run_id": "TNC-AUTO-001-2026-06-04",
+        "mode": "LOCAL_ONLY/DRY_RUN_CONTROLLER",
+        "external_mutation_count": 0,
+        "sources": len(rows),
+        "risk_sources": len(risk_sources),
+        "commit_safe": commit_safe,
+        "git_status": status,
+    }
+
+    (output_dir / "contradiction_ledger.md").write_text(
+        "# Contradiction Ledger\n\n"
+        "Status: dry-run only.\n\n"
+        "- Grok and Gemini are more permissive about automation expansion.\n"
+        "- GPT and Codex require a local-only controller before implementation.\n"
+        "- Resolution: local-only dry-run MVP; no external mutation.\n",
+        encoding="utf-8",
+    )
+    (output_dir / "boundary_report.md").write_text(
+        "# Boundary Report\n\n"
+        "External mutation count: 0\n\n"
+        "Public-safe default: deny until source-backed and boundary-cleared.\n\n"
+        "Risk-bearing source count: "
+        f"{len(risk_sources)}\n\n"
+        "Blocked lanes: raw private exports, protected IP/tokenization/business, "
+        "private or operator-sensitive material, payment and production surfaces.\n",
+        encoding="utf-8",
+    )
+    (output_dir / "risk_report.md").write_text(
+        "# Risk Report\n\n"
+        "| Risk | Control |\n"
+        "| --- | --- |\n"
+        "| Raw private material leaks into public docs | Keep outputs local-private; boundary report required |\n"
+        "| Notion claims treated as Git truth | Verify through source-of-record before any tracked diff |\n"
+        "| External mutation without explicit GO | Default deny; human gate required |\n"
+        "| Existing dirty branch contamination | Use clean worktree; report git status |\n"
+        "| Premature commit | commit_safe remains false for first dry-run |\n",
+        encoding="utf-8",
+    )
+    (output_dir / "proposed_changes.md").write_text(
+        "# Proposed Changes\n\n"
+        "Dry-run proposal only:\n\n"
+        "1. Keep TNC-AUTO-001 local-only until ledgers are reviewed.\n"
+        "2. Add tracked controller files only after dry-run validation.\n"
+        "3. Defer PR creation to AUTO-PR-001 after explicit gate.\n"
+        "4. Do not alter #77, CAP, Control Tower, Notion, Zenodo, token/IP or portal lanes in this MVP.\n",
+        encoding="utf-8",
+    )
+    (output_dir / "next_gate.md").write_text(
+        "# Next Gate\n\n"
+        "Recommended next command after review:\n\n"
+        "```text\n"
+        "REVIEW_TNC_AUTO_001_DRY_RUN\n"
+        "```\n\n"
+        "Commit is not recommended until a human reviews the dry-run outputs and "
+        "explicitly approves a tracked implementation commit.\n",
+        encoding="utf-8",
+    )
+    write_json(output_dir / "dry_run_report.json", report)
+    return report
+
+
+def run_controller(
+    root: Path,
+    source_dir: Path,
+    output_dir: Path,
+    lexicon_path: Path | None = None,
+) -> dict[str, object]:
+    abs_output_dir = validate_output_dir(root, output_dir)
+    source_paths = validate_source_records(root, source_dir)
+    abs_output_dir.mkdir(parents=True, exist_ok=True)
+    validate_report_targets(abs_output_dir)
+
+    records = [build_source_record(root, path) for path in source_paths]
+    write_source_manifest(abs_output_dir, records)
+    rows = write_claim_ledger(abs_output_dir, root, records, lexicon_path=lexicon_path)
+    write_model_vote_matrix(abs_output_dir)
+    status = git_status(root)
+    report = write_markdown_reports(abs_output_dir, rows, status)
+    return {"output_dir": abs_output_dir.as_posix(), **report}
+
+
+def main(argv: list[str]) -> int:
+    parser = argparse.ArgumentParser(description="Run the TNC-AUTO-001 local dry-run controller.")
+    parser.add_argument("--source-dir", default=DEFAULT_SOURCE_DIR.as_posix())
+    parser.add_argument("--output-dir", default=DEFAULT_OUTPUT_DIR.as_posix())
+    parser.add_argument("--lexicon", default=DEFAULT_LEXICON_PATH.as_posix())
+    parser.add_argument("--json", action="store_true", help="Print the final report as JSON.")
+    args = parser.parse_args(argv[1:])
+
+    result = run_controller(REPO_ROOT, Path(args.source_dir), Path(args.output_dir), Path(args.lexicon))
+    if args.json:
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    else:
+        print(f"[tnc-auto-001] output_dir={result['output_dir']}")
+        print(f"[tnc-auto-001] commit_safe={result['commit_safe']}")
+        print("[tnc-auto-001] external_mutation_count=0")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv))

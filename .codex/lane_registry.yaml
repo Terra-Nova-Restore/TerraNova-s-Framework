@@ -1,0 +1,25 @@
+lanes:
+  github_governance:
+    description: GitHub, PR, issue, branch, workflow, CI and repository-state material.
+    default_visibility: internal
+  notion_substrate:
+    description: Notion pages, databases, Reflexions-Log, workspace memory and source-of-record material.
+    default_visibility: internal
+  zenodo_publication:
+    description: DOI, Zenodo, release, publication and citation material.
+    default_visibility: public_gated
+  gumroad_portal:
+    description: Gumroad, portal, product ladder, CTA and buyer-path material.
+    default_visibility: public_gated
+  codex_internal:
+    description: Codex, controller, automation, VORTEX, SCL, trigger and dry-run material.
+    default_visibility: internal
+  protected_ip_token:
+    description: Protected IP, licensing, tokenization and controlled business material.
+    default_visibility: protected_gated
+  private_sensitive:
+    description: Private, personal or operator-sensitive material.
+    default_visibility: private_only
+  residue_unknown:
+    description: material that cannot yet be assigned safely.
+    default_visibility: hold
