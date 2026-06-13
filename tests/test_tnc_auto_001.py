@@ -351,6 +351,48 @@ class ValidateTncAuto001Tests(unittest.TestCase):
         )
         self.assertEqual(self.blocked_imports(source), [])
 
+    def test_static_checks_prevent_controller_execution(self):
+        # Ensure static checks run and fail before any controller subprocess is executed.
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            # create minimal required files and safety policy
+            for rel in self.mod.REQUIRED_FILES:
+                p = root / rel
+                p.parent.mkdir(parents=True, exist_ok=True)
+                if rel == ".codex/safety_policy.yaml":
+                    p.write_text(
+                        "default_external_mutation: deny\ndefault_git_remote_mutation: deny\ndefault_notion_mutation: deny\nexternal_mutation_count_zero\n",
+                        encoding="utf-8",
+                    )
+                else:
+                    p.write_text("# placeholder\n", encoding="utf-8")
+
+            # init gitignore so git_check_ignore succeeds for output dir
+            init_gitignore(root)
+
+            # point module to our temp repo root
+            orig_root = self.mod.REPO_ROOT
+            self.mod.REPO_ROOT = root
+
+            try:
+                # force a static check failure
+                self.mod.validate_no_network_imports = lambda: ["requests"]
+
+                called = {"called": False}
+
+                def fake_ensure():
+                    called["called"] = True
+                    return []
+
+                self.mod.ensure_dry_run_outputs = fake_ensure
+
+                rc = self.mod.main([])
+
+                self.assertEqual(rc, 1)
+                self.assertFalse(called["called"], "ensure_dry_run_outputs was called despite static check failure")
+            finally:
+                self.mod.REPO_ROOT = orig_root
+
 
 if __name__ == "__main__":
     unittest.main()
