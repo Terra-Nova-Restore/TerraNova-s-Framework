@@ -25,6 +25,17 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE_DIR = Path("raw/exports/local-private")
 DEFAULT_OUTPUT_DIR = Path("raw/exports/local-private/tnc-auto-001-dry-run")
 DEFAULT_LEXICON_PATH = Path("raw/exports/local-private/tnc-auto-001/lane_lexicon.local.json")
+REPORT_OUTPUT_FILES = (
+    "source_manifest.json",
+    "claim_ledger.csv",
+    "model_vote_matrix.csv",
+    "contradiction_ledger.md",
+    "boundary_report.md",
+    "risk_report.md",
+    "proposed_changes.md",
+    "next_gate.md",
+    "dry_run_report.json",
+)
 
 BASE_LANE_PATTERNS: dict[str, list[str]] = {
     "github_governance": [
@@ -173,6 +184,21 @@ def validate_source_records(root: Path, source_dir: Path) -> list[Path]:
     sources = iter_sources(abs_source_dir)
     if not sources:
         raise ValueError(f"source directory must contain at least one matching local-private input: {source_dir}")
+    escaping_sources: list[str] = []
+    for path in sources:
+        resolved_source = path.resolve()
+        try:
+            rel_resolved_source = resolved_source.relative_to(abs_root).as_posix()
+        except ValueError:
+            escaping_sources.append(path.relative_to(abs_root).as_posix())
+            continue
+        if rel_resolved_source != local_private and not rel_resolved_source.startswith(f"{local_private}/"):
+            escaping_sources.append(path.relative_to(abs_root).as_posix())
+    if escaping_sources:
+        raise ValueError(
+            "source inputs must resolve under raw/exports/local-private before reading: "
+            + ", ".join(escaping_sources)
+        )
     not_ignored = [
         rel
         for rel in (path.relative_to(abs_root).as_posix() for path in sources)
@@ -183,6 +209,12 @@ def validate_source_records(root: Path, source_dir: Path) -> list[Path]:
             "source inputs must be gitignored before reading: " + ", ".join(not_ignored)
         )
     return sources
+
+
+def validate_report_targets(output_dir: Path) -> None:
+    symlink_targets = [name for name in REPORT_OUTPUT_FILES if (output_dir / name).is_symlink()]
+    if symlink_targets:
+        raise ValueError("report targets must not be symlinks before writing: " + ", ".join(symlink_targets))
 
 
 def build_source_record(root: Path, path: Path) -> SourceRecord:
@@ -474,6 +506,7 @@ def run_controller(
     abs_output_dir = validate_output_dir(root, output_dir)
     source_paths = validate_source_records(root, source_dir)
     abs_output_dir.mkdir(parents=True, exist_ok=True)
+    validate_report_targets(abs_output_dir)
 
     records = [build_source_record(root, path) for path in source_paths]
     write_source_manifest(abs_output_dir, records)

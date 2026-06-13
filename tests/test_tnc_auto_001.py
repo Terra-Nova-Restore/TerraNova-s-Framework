@@ -245,6 +245,57 @@ class TncAuto001Tests(unittest.TestCase):
 
             self.assertEqual(rows[0]["public_safe"], "false")
 
+    def test_run_controller_refuses_source_symlink_escaping_local_private(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            init_gitignore(root)
+            source_dir = root / "raw" / "exports" / "local-private"
+            source_dir.mkdir(parents=True)
+            tracked_target = root / "tracked-source.md"
+            tracked_target.write_text("Codex #77 material", encoding="utf-8")
+            source_link = source_dir / "tncic-link.md"
+            try:
+                source_link.symlink_to(tracked_target)
+            except (NotImplementedError, OSError) as exc:
+                self.skipTest(f"symlink creation unavailable: {exc}")
+            output_dir = root / "raw" / "exports" / "local-private" / "tnc-auto-001-dry-run"
+
+            with self.assertRaisesRegex(ValueError, "source inputs must resolve under"):
+                self.mod.run_controller(
+                    root,
+                    Path("raw/exports/local-private"),
+                    Path("raw/exports/local-private/tnc-auto-001-dry-run"),
+                    None,
+                )
+
+            self.assertFalse(output_dir.exists())
+
+    def test_run_controller_refuses_symlinked_report_target_before_writing(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            init_gitignore(root)
+            source_dir = root / "raw" / "exports" / "local-private"
+            source_dir.mkdir(parents=True)
+            (source_dir / "tncic-neutral.md").write_text("A neutral note, no blocker terms.", encoding="utf-8")
+            output_dir = source_dir / "tnc-auto-001-dry-run"
+            output_dir.mkdir(parents=True)
+            tracked_target = root / "tracked-report.md"
+            tracked_target.write_text("keep me", encoding="utf-8")
+            try:
+                (output_dir / "claim_ledger.csv").symlink_to(tracked_target)
+            except (NotImplementedError, OSError) as exc:
+                self.skipTest(f"symlink creation unavailable: {exc}")
+
+            with self.assertRaisesRegex(ValueError, "report targets must not be symlinks before writing"):
+                self.mod.run_controller(
+                    root,
+                    Path("raw/exports/local-private"),
+                    Path("raw/exports/local-private/tnc-auto-001-dry-run"),
+                    None,
+                )
+
+            self.assertEqual(tracked_target.read_text(encoding="utf-8"), "keep me")
+
 
 class ValidateTncAuto001Tests(unittest.TestCase):
     def setUp(self):
