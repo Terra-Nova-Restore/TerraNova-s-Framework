@@ -107,6 +107,28 @@ def validate_tracked_public_deny_terms() -> list[str]:
     return findings
 
 
+def ensure_dry_run_outputs() -> list[str]:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/tnc_auto_001.py",
+            "--output-dir",
+            OUTPUT_DIR.as_posix(),
+            "--lexicon",
+            LOCAL_LEXICON_PATH.as_posix(),
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode != 0:
+        details = result.stderr.strip() or result.stdout.strip()
+        return [f"dry-run controller failed while preparing validation outputs: {details}"]
+    return []
+
+
 def main(argv: list[str]) -> int:
     errors: list[str] = []
 
@@ -127,6 +149,8 @@ def main(argv: list[str]) -> int:
     output_rel = OUTPUT_DIR.as_posix()
     if not git_check_ignore(output_rel):
         errors.append(f"output directory is not gitignored: {output_rel}")
+
+    errors.extend(ensure_dry_run_outputs())
 
     for rel in REQUIRED_OUTPUTS:
         output = REPO_ROOT / OUTPUT_DIR / rel
