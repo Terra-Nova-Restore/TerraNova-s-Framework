@@ -1,11 +1,12 @@
 # Edentität — public concept anchor v0.1
 
-Status: public-safe concept draft v0.1  
+Status: public-safe concept anchor v0.1  
 Source: Notion canon review (`EDENTITÄT-CANON-001`, `Edentität ≠ KSE ≠ Identität`)  
 Trace: TerraNova internal concept line dated 2026-03-21; canon anchor dated 2026-06-08; Zenodo v16 long-form anchor dated 2026-06-17  
 Boundary: conceptual and architectural description only; no consciousness, personhood, legal-status, patent or first-coinage claim  
 Mode: SYNC / public-safe terminology mirror  
-GitHub sync state: prepared for review on `docs/edentitaet-concept-pack-v0-1`  
+GitHub sync state: merged to `main` via PR #89 on 2026-07-11  
+Merge commit: `b42d1739c92e4fb0f172cb0dae09d2daadf5b868`  
 Source-of-record awareness: Notion remains the living definition source; this file is the reviewed public mirror
 
 ## Definition

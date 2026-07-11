@@ -1,6 +1,6 @@
 # Edentität — cross-system trace v0.1
 
-Status: public-safe crosswalk draft  
+Status: public-safe crosswalk v0.1  
 Purpose: connect the living concept source, public mirror, evidence trail and long-form archive without exposing private workspace material
 
 ## Source map
@@ -80,12 +80,17 @@ Suggested pinpoint citation:
 
 > Lenhard, Silvan (2026), *FerrAI / Terra’Nova’CIC — Werkmonographie und Evidenzapparat*, v16, Appendix BY, pp. 645–647, DOI: 10.5281/zenodo.20732376.
 
-## Promotion gate
+## Promotion status
 
-This draft may be promoted from `reference` to `canonical` in the public repo
-when:
+This concept pack was promoted to the public `main` branch on 2026-07-11 via PR #89.
+Within the GitHub public mirror, it is the reviewed terminology anchor for
+Edentität v0.1. Notion remains the living source-of-record.
 
-- the wording is reviewed by the human owner;
-- the external provenance wording is confirmed;
-- repository validation passes;
-- the branch is merged through the normal review gate.
+Promotion evidence:
+
+- wording reviewed by the human owner;
+- external provenance wording confirmed;
+- Zenodo v16 DOI and page anchors verified;
+- Vercel and Netlify deployment previews passed;
+- merged through the normal review gate;
+- merge commit: `b42d1739c92e4fb0f172cb0dae09d2daadf5b868`.
