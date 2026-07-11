@@ -10,7 +10,7 @@ Purpose: connect the living concept source, public mirror, evidence trail and lo
 | **Notion** | Living source-of-record | `Edentität ≠ Identität · Kernkonzept TerraNova`; `EDENTITÄT-CANON-001`; `Edentität ≠ KSE ≠ Identität`; milestone and architecture references | Titles and reviewed definitions may be mirrored; private page URLs and raw workspace content stay out of the public repo. |
 | **Gmail / correspondence** | Direct provenance evidence | June 2026 exchange with Christina Ott confirming the Ott/Lill word origin and permission to quote | The evidence is summarized. Raw messages, addresses and private thread content are not published here. |
 | **GitHub** | Versioned public-safe mirror | This concept pack | Reviewable terminology, provenance, boundaries and trace. GitHub does not replace the living Notion source. |
-| **Zenodo** | Citable long-form archive | TerraNova / FerrAI CIC framework record, DOI `10.5281/zenodo.20073579` | Used as the stable long-form citation. Exact page anchors are added only after checking the 713-page release file. |
+| **Zenodo** | Citable long-form archive | *FerrAI / Terra’Nova’CIC — Werkmonographie und Evidenzapparat*, v16, 713 pages, version DOI `10.5281/zenodo.20732376`, concept DOI `10.5281/zenodo.19774446` | Primary Edentität anchor: Appendix BY, printed pages 645–647; PDF file pages 674–676. |
 
 ## Canon relationship
 
@@ -53,11 +53,32 @@ contents are not reproduced.
 | [`NON_CLAIMS.md`](NON_CLAIMS.md) | Prevent consciousness, agency, legal, scientific and ownership overclaiming. |
 | [`CROSSWALK.md`](CROSSWALK.md) | Map Notion, correspondence, GitHub and Zenodo roles. |
 
-## Open verification item
+## Verified Zenodo anchors
 
-The only deliberate gap in v0.1 is the **exact page-level mapping into the
-713-page Zenodo release**. Until the release PDF has been checked directly, this
-pack cites the DOI but does not invent page numbers or chapter locations.
+The 713-page v16 release was checked directly on 2026-07-11.
+
+| Anchor | Printed page(s) | 1-based PDF file page(s) | Function |
+| --- | ---: | ---: | --- |
+| Appendix BY — `Edentität und KSE` | 645–647 | 674–676 | Primary definition, KSE system form, interaction-loop position, identity boundary, naming risks and intermediate conclusion. |
+| Appendix BZ.10 — `Zwischenfazit` | 651 | 680 | Relates Edentität/KSE to the larger semantic architecture spine. |
+| Appendix CA.9 — `Relation to C1A and C1B` | 655 | 684 | Places Edentität/KSE inside the sober external narrative and non-claim structure. |
+
+Page references use the page numbers printed in the monograph. The PDF file-page
+numbers are included separately because the front matter creates an offset.
+
+## Citation form
+
+For this exact 713-page release, cite the version DOI:
+
+- <https://doi.org/10.5281/zenodo.20732376>
+
+For a version-independent work reference, use the concept DOI:
+
+- <https://doi.org/10.5281/zenodo.19774446>
+
+Suggested pinpoint citation:
+
+> Lenhard, Silvan (2026), *FerrAI / Terra’Nova’CIC — Werkmonographie und Evidenzapparat*, v16, Appendix BY, pp. 645–647, DOI: 10.5281/zenodo.20732376.
 
 ## Promotion gate
 
@@ -66,6 +87,5 @@ when:
 
 - the wording is reviewed by the human owner;
 - the external provenance wording is confirmed;
-- the Zenodo page anchors are verified or explicitly left as not applicable;
 - repository validation passes;
 - the branch is merged through the normal review gate.
