@@ -2,7 +2,7 @@
 
 Status: public-safe concept draft v0.1  
 Source: Notion canon review (`EDENTITÄT-CANON-001`, `Edentität ≠ KSE ≠ Identität`)  
-Trace: TerraNova internal concept line dated 2026-03-21; canon anchor dated 2026-06-08  
+Trace: TerraNova internal concept line dated 2026-03-21; canon anchor dated 2026-06-08; Zenodo v16 long-form anchor dated 2026-06-17  
 Boundary: conceptual and architectural description only; no consciousness, personhood, legal-status, patent or first-coinage claim  
 Mode: SYNC / public-safe terminology mirror  
 GitHub sync state: prepared for review on `docs/edentitaet-concept-pack-v0-1`  
@@ -24,6 +24,10 @@ German working definition:
 > Edentität bezeichnet eine emergente, relationale Bedeutungs- und Bezugsform,
 > die keiner einzelnen Seite gehört, sondern sich im Zusammenspiel von Mensch,
 > System, Sprache, Kontext und sozial-semiotischer Praxis ausbildet.
+
+The long-form v16 monograph expresses the same core boundary in Appendix BY:
+Edentität is not a finished identity or an independent unit, but a relational
+meaning-form that emerges between actor, system, language and context.
 
 ## Term boundaries
 
@@ -99,9 +103,16 @@ The public English explanation should remain descriptive.
 
 ## Long-form reference
 
-The current citable TerraNova / FerrAI framework record is:
+Verified release:
 
-- DOI: <https://doi.org/10.5281/zenodo.20073579>
+- Title: *FerrAI / Terra’Nova’CIC — Werkmonographie und Evidenzapparat*
+- Version: v16, 17 June 2026, 713 pages
+- Version DOI: <https://doi.org/10.5281/zenodo.20732376>
+- Concept DOI: <https://doi.org/10.5281/zenodo.19774446>
+- Primary concept anchor: Appendix BY, `Edentität und KSE`, printed pp. 645–647
+- Corresponding 1-based PDF file pages: 674–676
+- Secondary cross-references: Appendix BZ.10, printed p. 651; Appendix CA.9, printed p. 655
 
-Exact page-level cross-references for the 713-page long-form document are not
-asserted in this draft until they have been checked against the release file.
+Suggested pinpoint citation:
+
+> Lenhard, Silvan (2026), *FerrAI / Terra’Nova’CIC — Werkmonographie und Evidenzapparat*, v16, Appendix BY, pp. 645–647, DOI: 10.5281/zenodo.20732376.
