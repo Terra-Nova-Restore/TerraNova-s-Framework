@@ -25,6 +25,15 @@ The current public architecture release candidate is:
 
 - [semantic_architecture_public_release_v0_1.md](semantic_architecture_public_release_v0_1.md)
 
+## Public Concept Anchors
+
+The current public-safe terminology anchor is:
+
+- [Edentität concept pack v0.1](concepts/edentitaet/README.md)
+  - [Provenance](concepts/edentitaet/PROVENANCE.md)
+  - [Boundaries and non-claims](concepts/edentitaet/NON_CLAIMS.md)
+  - [Cross-system trace](concepts/edentitaet/CROSSWALK.md)
+
 ## Trigger Lexicon
 
 The current local trigger lexicon release candidate is:
