@@ -4,18 +4,22 @@ This controller expects these properties in the **Changes** database:
 
 ## Required Environment Variables
 
-Before running sync, ensure these are configured:
+For a GitHub Actions run, configure the Notion values below. GitHub Actions
+injects GITHUB_TOKEN automatically for the same-repository workflow, so it is
+not a repository secret.
 
 ```bash
 NOTION_TOKEN=ntn_xxxx...                # Notion Integration API key
 NOTION_DATABASE_ID_CHANGES=abc123...    # Database ID to sync from
-GH_PAT=ghp_xxxx...                      # GitHub Personal Access Token
-TARGET_GITHUB_REPO=owner/repo           # Optional cross-repo override (highest priority)
+TARGET_GITHUB_REPO=owner/repo           # Optional cross-repo override; target access must be configured separately
 GITHUB_REPO=owner/repo                  # Optional fallback target repository
 ```
 
 **See `.env.example` for template and detailed documentation.**
 **Note:** In workflow runs, `GITHUB_REPO` defaults to `${{ github.repository }}`.
+The workflow job must retain `contents: write` and `issues: write` permissions.
+For a local manual run, supply a GitHub token through `GITHUB_TOKEN` with
+access to the target repository.
 
 ## Required Notion Properties
 

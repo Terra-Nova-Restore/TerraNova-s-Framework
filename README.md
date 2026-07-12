@@ -69,12 +69,16 @@ The atlas does not change the production sync workflow. It is a separate, machin
 1. Create GitHub repo secrets:
    - `NOTION_TOKEN` (Notion integration token)
    - `NOTION_DATABASE_ID_CHANGES` (Notion database ID)
-   - `GH_PAT` (GitHub Personal Access Token with `repo` + `issues` scopes)
-2. Share Notion database with integration (in Notion UI)
-3. Workflow runs automatically every 10 minutes
+2. GitHub Actions automatically provides `GITHUB_TOKEN` for this same-repository sync.
+   Do not add a `GH_PAT` repository secret. The workflow job must retain
+   `contents: write` and `issues: write` permissions.
+3. Share Notion database with integration (in Notion UI)
+4. Workflow runs automatically every 10 minutes
 
 The workflow resolves `GITHUB_REPO` automatically from the GitHub Actions `github.repository` context expression.
 Optional override for cross-repo sync: set `TARGET_GITHUB_REPO` (secret or variable) to `owner/repo`.
+For a cross-repo target, configure separate target-repository access; the automatic
+same-repository `GITHUB_TOKEN` is not a cross-repository access guarantee.
 
 **Trigger manually:**
 ```bash
@@ -84,13 +88,14 @@ gh workflow run tnv_notion_to_github.yml --repo owner/repo
 ### Safety defaults
 - The script only exports rows you explicitly mark (`Export_to_GitHub`).
 - No automatic mutation of compliance risk fields.
-- Tokens are never stored in Notion or in the repo – only GitHub encrypted secrets.
+- Notion credentials are never stored in Notion or in the repo; GitHub Actions creates the GitHub token at runtime.
 
 ### Local run (not recommended – use workflow instead)
 ```bash
 export NOTION_TOKEN="..."
 export NOTION_DATABASE_ID_CHANGES="..."
-export GH_PAT="..."
+# For a local manual run, provide a token with access to the target repository.
+export GITHUB_TOKEN="..."
 # Optional: override target repo (cross-repo)
 export TARGET_GITHUB_REPO="owner/other-repo"
 # Optional fallback if TARGET_GITHUB_REPO is not set

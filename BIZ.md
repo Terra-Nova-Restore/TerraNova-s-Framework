@@ -26,7 +26,8 @@ manual copy/paste.
 
 ## Required operating inputs
 - Notion integration token and database id.
-- GitHub token and target `owner/repo`.
+- Automatic GitHub Actions `GITHUB_TOKEN` for the same-repository sync; the job retains `contents: write` and `issues: write`.
+- Target repository `owner/repo`, defaulting to the workflow repository.
 - Stable Notion property schema documented in `NOTION_PROPERTIES.md`.
 
 ## Suggested KPIs
@@ -38,12 +39,14 @@ manual copy/paste.
 ## Risk and controls
 - **Risk:** Schema drift in Notion property names.
   - **Control:** Keep mapping centralized in `scripts/notion_to_github.py` and review on schema changes.
-- **Risk:** Token misconfiguration or expiration.
-  - **Control:** Secrets managed in GitHub repository settings with periodic rotation.
+- **Risk:** Notion credential misconfiguration or expiration.
+  - **Control:** Store Notion credentials in GitHub repository secrets and rotate them when needed.
+- **Risk:** GitHub Actions permissions drift.
+  - **Control:** Keep the TNV workflow job permissions at `contents: write` and `issues: write`.
 - **Risk:** Over-exporting noisy items.
   - **Control:** Explicit checkbox gate (`Export_to_GitHub`) and optional severity-based triage policy.
 
 ## `/biz` operating cadence
 - Weekly: review KPI dashboard and stale exported GitHub Issues.
-- Monthly: verify Notion property compatibility and secret health.
+- Monthly: verify Notion property compatibility, Notion credential health, and Actions workflow permissions.
 - Quarterly: review governance fields and escalation rules for incident severity.

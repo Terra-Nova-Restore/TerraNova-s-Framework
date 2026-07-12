@@ -22,7 +22,7 @@ The script orchestrates:
 - [ ] Read NOTION_PROPERTIES.md to understand current field mappings
 - [ ] Review GITHUB_PROJECT_HELP.md to understand GitHub integration points
 - [ ] Check requirements.txt for current dependency versions
-- [ ] Verify all environment variables: `NOTION_TOKEN`, `NOTION_DATABASE_ID_CHANGES`, `GH_PAT`, optional `TARGET_GITHUB_REPO`, fallback `GITHUB_REPO`
+- [ ] Verify all environment variables: `NOTION_TOKEN`, `NOTION_DATABASE_ID_CHANGES`, automatic `GITHUB_TOKEN` in Actions (or a local token for manual tests), optional `TARGET_GITHUB_REPO`, fallback `GITHUB_REPO`
 - [ ] Test locally with a **test database** (not production)
 
 ## Critical Patterns
@@ -35,8 +35,9 @@ Always distinguish between:
 
 ### Environment Variable Consistency
 - Use `NOTION_TOKEN` (current workflow convention)
-- Use `GH_PAT` (current workflow convention)
-- Script accepts `NOTION_API_KEY` and `GITHUB_TOKEN` as fallbacks for flexibility, but workflow sends the primary names
+- Use `GITHUB_TOKEN` (current workflow convention; GitHub Actions injects it automatically)
+- Do not add a GitHub repository secret for this same-repository workflow
+- Keep the workflow job permissions `contents: write` and `issues: write`
 - **After any change**: Verify the source is `.github/workflows/tnv_notion_to_github.yml`
 
 ### Concurrency & Idempotency
@@ -82,7 +83,7 @@ Always distinguish between:
 - ✗ Make breaking changes to property mappings without updating NOTION_PROPERTIES.md
 - ✗ Remove error logging or flatten error details
 - ✗ Assume environment is always valid; replicate preflight checks from Notion Sync Agent
-- ✗ Change the primary token variable names in the workflow (NOTION_TOKEN, GH_PAT) without coordination
+- ✗ Change the primary token variable names in the workflow (NOTION_TOKEN, GITHUB_TOKEN) without coordination
 - ✗ Delete or archive GitHub issues without explicit user confirmation in log
 
 ## Preflight Validation (Required)
@@ -93,10 +94,8 @@ def preflight_check():
     """Validate all prerequisites before sync."""
     checks = {
         "NOTION_TOKEN": os.getenv("NOTION_TOKEN"),
-        "GH_PAT": os.getenv("GH_PAT"),
+        "GITHUB_TOKEN": os.getenv("GITHUB_TOKEN"),
         "NOTION_DATABASE_ID_CHANGES": os.getenv("NOTION_DATABASE_ID_CHANGES"),
-        "TARGET_GITHUB_REPO": os.getenv("TARGET_GITHUB_REPO"),
-        "GITHUB_REPO": os.getenv("GITHUB_REPO"),
     }
     for key, value in checks.items():
         if not value:

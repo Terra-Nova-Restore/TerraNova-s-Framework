@@ -60,7 +60,7 @@ Understand your Notion database and GitHub target before syncing.
 Verify prerequisites before attempting sync.
 
 **Actions:**
-1. Validate API credentials exist (`NOTION_API_KEY`, `GH_PAT`/`GITHUB_TOKEN`)
+1. Validate the Notion credential and the automatic Actions `GITHUB_TOKEN` (or a local token for a manual local run)
 2. Test Notion database access (can read at least 1 record)
 3. Test GitHub repo access (can read repo details)
 4. Verify property mappings in NOTION_PROPERTIES.md match actual database schema
@@ -71,8 +71,8 @@ Verify prerequisites before attempting sync.
 Preflight Validation for [Database Name]
 
 ✓ Secrets Configured
-  - NOTION_API_KEY: [present/missing]
-  - GH_PAT or GITHUB_TOKEN: [present/missing]
+  - NOTION_TOKEN: [present/missing; NOTION_API_KEY is a compatible fallback]
+  - GITHUB_TOKEN: [automatic in Actions / present for local run]
 
 ✓ Notion Database Access
   - Database ID: [ID]
@@ -84,6 +84,7 @@ Preflight Validation for [Database Name]
   - Repository: [owner/repo]
   - Can read: [yes/no]
   - Can create issues: [yes/no]
+  - Job permissions: contents: write; issues: write
   - Last error (if any): [error message]
 
 ✓ Property Mappings
@@ -225,7 +226,7 @@ Set up recurring sync and monitoring.
 
 ## Prerequisites
 - Notion API key still valid
-- GitHub PAT still valid
+- Automatic GitHub Actions GITHUB_TOKEN available; workflow job retains contents: write and issues: write
 - No ongoing GitHub incidents
 
 ## Sync Procedure
