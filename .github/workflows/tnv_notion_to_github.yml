@@ -29,6 +29,7 @@ jobs:
     env:
       TARGET_GITHUB_REPO: ${{ secrets.TARGET_GITHUB_REPO || vars.TARGET_GITHUB_REPO }}
       GITHUB_REPO: ${{ github.repository }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SYNC_MODE: ${{ inputs.mode || 'full' }}
 
     steps:
@@ -48,7 +49,6 @@ jobs:
         run: |
           echo "NOTION_TOKEN=${{ secrets.NOTION_TOKEN }}" >> $GITHUB_ENV
           echo "NOTION_DATABASE_ID_CHANGES=${{ secrets.NOTION_DATABASE_ID_CHANGES }}" >> $GITHUB_ENV
-          echo "GH_PAT=${{ secrets.GH_PAT }}" >> $GITHUB_ENV
 
       - name: Run Notion → GitHub sync
         id: sync
