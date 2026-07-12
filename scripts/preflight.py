@@ -117,10 +117,19 @@ class GitHubValidator:
             'Authorization': f'Bearer {token}',
             'Accept': 'application/vnd.github+json'
         })
+
+    @staticmethod
+    def _uses_github_actions_token():
+        """Return whether the selected token is the Actions installation token."""
+        return (
+            not os.environ.get('GH_PAT')
+            and bool(os.environ.get('GITHUB_TOKEN'))
+            and os.environ.get('GITHUB_ACTIONS') == 'true'
+        )
     
     def test_repo_access(self, repo):
         """
-        Test read/write access to GitHub repository.
+        Test repository access and validate write permission.
         
         Args:
             repo: Repository in format 'owner/repo'
@@ -135,9 +144,21 @@ class GitHubValidator:
             resp = self.session.get(f'{self.BASE_URL}/repos/{repo}')
             resp.raise_for_status()
             data = resp.json()
-            
-            # Check if token has write permission (pusher permission)
-            if not data.get('permissions', {}).get('push'):
+
+            push_permission = bool(data.get('permissions', {}).get('push'))
+            if push_permission:
+                permission_validation = {
+                    'method': 'repository_push_metadata',
+                    'repository_push': True
+                }
+            elif self._uses_github_actions_token():
+                # The automatic Actions token is governed by workflow permissions;
+                # its repository metadata does not reliably expose permissions.push.
+                permission_validation = {
+                    'method': 'github_actions_workflow_permissions',
+                    'repository_push': False
+                }
+            else:
                 raise PreflightError(
                     f"GitHub token lacks write permission to repository\n"
                     f"  Repository: {repo}\n"
@@ -149,7 +170,8 @@ class GitHubValidator:
                 'repository': repo,
                 'full_name': data.get('full_name'),
                 'private': data.get('private'),
-                'push_permission': True
+                'push_permission': push_permission,
+                'permission_validation': permission_validation
             }
         except requests.exceptions.HTTPError as e:
             status = e.response.status_code
@@ -351,7 +373,11 @@ class PreflightChecker:
                 )
             github = GitHubValidator(github_token)
             repo_info = github.test_repo_access(repo)
-            results['checks']['github_access'] = {'status': 'pass', 'repository': repo_info.get('repository')}
+            results['checks']['github_access'] = {
+                'status': 'pass',
+                'repository': repo_info.get('repository'),
+                'permission_validation': repo_info.get('permission_validation')
+            }
             results['passed'] += 1
             self.log.info(f"  ✓ GitHub repo accessible: {repo}")
         except PreflightError as e:
