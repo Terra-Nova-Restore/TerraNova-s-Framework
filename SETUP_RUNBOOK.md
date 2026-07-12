@@ -26,20 +26,20 @@ Nachdem dies einmal gemacht ist, läuft alles automatisch – keine lokalen Secr
 
 ---
 
-### Step 2: GitHub Personal Access Token erstellen (2 min)
+### Step 2: GitHub Actions-Berechtigungen prüfen (1 min)
 
-**In GitHub:**
-1. https://github.com/settings/tokens öffnen
-2. Click **Generate new token** → **Generate new token (classic)**
-3. **Token name**: `TNV-Notion-Sync` (oder was du willst)
-4. **Expiration**: `90 days` (GitHub default)
-5. **Select scopes**:
-   - ☑️ `repo` (full control of private repositories)
-   - ☑️ `issues` (manage issues)
-6. Click **Generate token**
-7. **KOPIER DEN TOKEN SOFORT** (danach siehst du ihn nicht mehr!)
-   - Format: `ghp_xxxxx...`
-   - **Du brauchst diesen Wert für Step 3!**
+Der TNV-Sync läuft im selben Repository. GitHub Actions stellt pro Workflow-Run
+automatisch `GITHUB_TOKEN` bereit. Dafür brauchst du keinen Personal Access
+Token und kein `GH_PAT`-Repository-Secret.
+
+Der Job in `.github/workflows/tnv_notion_to_github.yml` muss diese
+Berechtigungen behalten:
+
+~~~yaml
+permissions:
+  contents: write
+  issues: write
+~~~
 
 ---
 
@@ -47,7 +47,6 @@ Nachdem dies einmal gemacht ist, läuft alles automatisch – keine lokalen Secr
 
 **Infos sammeln, die du jetzt brauchst:**
 - **NOTION_TOKEN**: Von Step 1 (Integration Token)
-- **GH_PAT**: Von Step 2 (GitHub Token)
 - **NOTION_DATABASE_ID_CHANGES**: Database ID aus Notion URL
   - Notion öffnen → Database öffnen → URL kopieren
   - ID ist dieser lange String: `https://www.notion.so/workspace/[ID]?v=xyz`
@@ -56,18 +55,21 @@ Nachdem dies einmal gemacht ist, läuft alles automatisch – keine lokalen Secr
 **In GitHub:**
 1. Repository öffnen
 2. **Settings** → **Secrets and variables** → **Actions**
-3. Click **New repository secret** (3x)
+3. Click **New repository secret** (2x)
 
-Erstelle diese 3 Secrets:
+Erstelle diese 2 Secrets:
 
 | Name | Value | Beispiel |
 |------|-------|----------|
 | `NOTION_TOKEN` | Dein Notion Integration Token | `ntn_abc123...` |
 | `NOTION_DATABASE_ID_CHANGES` | Database ID | `abc123def456...` (32 Zeichen) |
-| `GH_PAT` | Dein GitHub Token | `ghp_abc123...` |
 
+GitHub Actions stellt `GITHUB_TOKEN` automatisch bereit; dafür wird kein
+weiteres GitHub-Secret angelegt.
 `GITHUB_REPO` wird im Workflow automatisch aus `${{ github.repository }}` gesetzt.
 Optionaler Override für Cross-Repo-Sync: `TARGET_GITHUB_REPO` als Secret oder Variable im Format `owner/repo`.
+Für ein Cross-Repo-Ziel muss der Zugriff auf das Ziel-Repository separat
+konfiguriert werden; der automatische Token garantiert nur den Same-Repo-Zugriff.
 
 **Wichtig:** 
 - ⚠️ Secrets sind nach Erstellung **unsichtbar** – kopier den Wert BEVOR du speicherst!
@@ -109,7 +111,9 @@ Dann in GitHub Actions Tab checken, ob das Workflow-Run erfolgreich ist.
 3. **Häufige Fehler**:
    - `Notion auth failed` → Token ist falsch/abgelaufen
    - `Database not found` → Database ID ist falsch
-   - `GitHub token lacks write permission` → Token hat nicht die richtigen Scopes
+   - `GitHub token lacks write permission` → Prüfe, ob der Workflow-Job weiterhin
+     `contents: write` und `issues: write` hat; bei einem Cross-Repo-Override
+     zusätzlich den Zugriff auf das Ziel-Repository prüfen
 
 **Wenn alles passt:**
 - Sync läuft automatisch
@@ -127,9 +131,10 @@ Dann in GitHub Actions Tab checken, ob das Workflow-Run erfolgreich ist.
 - ✓ Syncht Daten automatisch
 - ✓ Loggt alles zum Debuggen
 
-**Wenn du Token erneuern musst:**
-- GitHub Secrets aktualisieren (Settings → Secrets)
-- Fertig – nächster Workflow-Run nutzt den neuen Token
+**Wenn die Notion-Verbindung aktualisiert werden muss:**
+- Betroffenes Notion-Secret in **Settings → Secrets** aktualisieren
+- Fertig – der nächste Workflow-Run nutzt den neuen Wert
+- `GITHUB_TOKEN` wird von GitHub Actions pro Workflow-Run automatisch bereitgestellt
 
 ---
 
@@ -139,10 +144,12 @@ Dann in GitHub Actions Tab checken, ob das Workflow-Run erfolgreich ist.
 - Secrets sind GitHub-verschlüsselt, nicht im Code
 - Nur GitHub Actions Runtime kann sie lesen
 - Nicht auf deinem PC, nicht im Git History
-- Tokens haben minimale Scopes (nur `repo` + `issues`)
+- GitHub Actions stellt `GITHUB_TOKEN` automatisch bereit; der Job braucht nur
+  `contents: write` und `issues: write`
 
 ⚠️ **Nicht vergessen:**
-- Tokens rotieren (GitHub PAT: 90 Tage default)
+- Notion Integration Token gemäss deiner Sicherheitsroutine prüfen und bei Bedarf rotieren
+- Workflow-Berechtigungen `contents: write` und `issues: write` beibehalten
 - Notion Integration Token vor GitHub Sharing clearen (1Password etc.)
 - Wenn kompromittiert: GitHub UI → Secret löschen und neu erstellen
 

@@ -35,7 +35,8 @@ Full policy: `docs/governance/public_boundary.md`
 ## Credential Hygiene
 
 - No real API keys, tokens, passwords, or secrets may be committed to this repository.
-- The repository uses GitHub encrypted secrets (`NOTION_TOKEN`, `GH_PAT`, `ZENODO_API`) for CI/CD.
+- The repository uses GitHub encrypted secrets for external credentials such as `NOTION_TOKEN` and `ZENODO_API`.
+  GitHub Actions supplies `GITHUB_TOKEN` automatically for the TNV sync; no `GH_PAT` repository secret is required.
 - If you believe a secret has been leaked, report it immediately and rotate the affected credential.
 
 ## Redaction Policy

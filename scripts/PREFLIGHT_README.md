@@ -14,13 +14,13 @@ The sync pipeline consists of:
 ### 1. **Secrets Validation**
 Ensures API credentials are configured.
 
-- ✓ `NOTION_API_KEY` is set (or legacy `NOTION_TOKEN` as fallback)
-- ✓ `GH_PAT` is set (or `GITHUB_TOKEN` as fallback)
+- ✓ `NOTION_TOKEN` is set (or compatible `NOTION_API_KEY`)
+- ✓ `GITHUB_TOKEN` is supplied automatically by GitHub Actions, or is set for a manual local run
 
 **Failure Diagnostic**:
 ```
-Missing NOTION_API_KEY (or legacy NOTION_TOKEN)
-→ Solution: Set NOTION_API_KEY env var or .env file
+Missing NOTION_TOKEN (or compatible NOTION_API_KEY)
+→ Solution: Set NOTION_TOKEN in the workflow secret or local environment
 ```
 
 ### 2. **Configuration File Validation**
@@ -52,20 +52,21 @@ Tests actual read access to Notion database.
 | `Notion database not found` | Wrong database ID | Copy correct ID from Notion URL |
 
 ### 4. **GitHub Repository Access**
-Tests read/write access to GitHub repository.
+Tests authenticated access to the GitHub repository and validates the applicable permission model.
 
 - ✓ GitHub API responds
 - ✓ Repository exists and is accessible
-- ✓ Token has write permission (push)
+- ✓ In GitHub Actions, the workflow job retains `contents: write` and `issues: write`
+- ✓ For a local token, repository metadata reports write permission
 
 **Failure Diagnostics**:
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| `GitHub auth failed: token invalid or expired` | Wrong/expired token | Regenerate PAT in GitHub settings |
-| `GitHub permission denied: token lacks repo access` | Token has insufficient scopes | Regenerate with `repo` scope |
+| `GitHub auth failed: token invalid or expired` | Missing or invalid GitHub token | Confirm that Actions provides `GITHUB_TOKEN`; for a local run, replace the local token |
+| `GitHub permission denied: token lacks repo access` | Token cannot access the target repository | Verify the target repository and the workflow's GitHub Actions permissions |
 | `GitHub repository not found` | Wrong owner/repo format | Use format: `owner/repo` |
-| `GitHub token lacks write permission to repository` | Token is read-only | Regenerate with `repo` scope (includes write) |
+| `GitHub token lacks write permission to repository` | Local token is read-only or workflow permissions drifted | For Actions, retain `contents: write` and `issues: write`; for local runs, use a token with target-repository write access |
 
 ### 5. **Concurrency Check**
 Prevents multiple sync processes from running simultaneously.
@@ -85,12 +86,19 @@ Another sync process is running.
 |----------|------|--------|--------|
 | `NOTION_TOKEN` | Notion | Workflow | ✓ Currently used |
 | `NOTION_API_KEY` | Notion | Alternative | ⚠️ Flexible fallback |
-| `GH_PAT` | GitHub | Workflow | ✓ Currently used |
-| `GITHUB_TOKEN` | GitHub | Alternative | ⚠️ Flexible fallback |
+| `GITHUB_TOKEN` | GitHub | GitHub Actions automatic token / local environment | ✓ Current workflow |
 | `TARGET_GITHUB_REPO` | GitHub Repo | Secret/Variable/Local env | ✓ Optional override |
 | `GITHUB_REPO` | GitHub Repo | Workflow/local env | ✓ Default/fallback |
 
-**Current Practice**: Workflow sends `NOTION_TOKEN` and `GH_PAT`. Script accepts both the current names and alternatives for flexibility, but expects the workflow names.
+**Current Practice**: The workflow exports `NOTION_TOKEN` and
+`NOTION_DATABASE_ID_CHANGES`; GitHub Actions injects `GITHUB_TOKEN`
+automatically. No separate GitHub repository secret is required for this
+same-repository sync. The workflow job must retain `contents: write` and
+`issues: write`.
+
+**Actions permission note**: When `GITHUB_ACTIONS=true`, successful
+authenticated repository access with those workflow permissions passes
+preflight even if repository metadata reports `permissions.push=false`.
 
 **Repository resolution order**: `TARGET_GITHUB_REPO` → `GITHUB_REPO` → `config/notion_map.json (github_repo)`.
 
@@ -139,8 +147,9 @@ The script stops at the first failure and provides actionable diagnostics.
 
 ### Scenario 1: First-time Setup
 ```bash
-export NOTION_API_KEY=ntn_xxxx...
-export GH_PAT=ghp_xxxx...
+export NOTION_TOKEN=ntn_xxxx...
+# For a local manual run, provide a token with target-repository access.
+export GITHUB_TOKEN=github_token_here
 export NOTION_DATABASE_ID_CHANGES=xxx...
 python scripts/notion_to_github.py
 # Preflight will guide you through any missing config
