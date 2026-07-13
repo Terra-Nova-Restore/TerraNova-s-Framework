@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "bridge_id": "CHATGPT-WORK-BRIDGE-001",
+  "attempt_id": "CHATGPT-WORK-BRIDGE-001-CLOUD-ATTEMPT-001",
+  "actor": "chatgpt-work",
+  "observed_at_utc": "2026-07-13T14:25:00Z",
+  "repository_full_name": "Terra-Nova-Restore/TerraNova-s-Framework",
+  "branch": "codex/chatgpt-work-bridge-001",
+  "pull_request": 94,
+  "request_readable": true,
+  "pull_request_readable": true,
+  "local_codex_host_exposed_to_runtime": false,
+  "local_laptop_filesystem_exposed_to_runtime": false,
+  "execution_environment": "isolated-cloud-workspace",
+  "repository_checkout_present_in_execution_environment": false,
+  "github_connector_available": true,
+  "expected_local_outputs_present": false,
+  "public_boundary_check": "pass",
+  "external_mutations": [
+    "GitHub trace artifacts on the test branch",
+    "automatic preconfigured PR preview integrations"
+  ],
+  "manual_workflow_dispatch": false,
+  "status": "blocked",
+  "blocker_code": "NO_LOCAL_CODEX_REMOTE_HANDLE",
+  "blocker": "The ChatGPT Work runtime has no callable local Codex session or connected desktop host. It cannot truthfully execute or attest the laptop-local verification.",
+  "required_condition_to_continue": "A local Codex instance must consume PR #94, or the desktop host must be exposed to this runtime as a callable remote task surface.",
+  "protected_data_read": false,
+  "secrets_read": false,
+  "local_result_fabricated": false
+}
