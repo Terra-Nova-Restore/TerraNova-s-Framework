@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "bridge_id": "CHATGPT-WORK-BRIDGE-003",
+  "activation_mode": "manual-only",
+  "poll_interval_minutes": 10,
+  "polling_enabled": false,
+  "notion_issue_intake": {
+    "enabled": false,
+    "transport": "existing Notion to GitHub issue exporter",
+    "execute_issue_body": false
+  },
+  "codex_exec": {
+    "ephemeral": true,
+    "sandbox": "workspace-write",
+    "approval_policy": "never",
+    "danger_full_access": false,
+    "load_user_config": true,
+    "load_project_rules": true
+  },
+  "publish": {
+    "enabled_by_default": false,
+    "gate_phrase": "PUBLISH CHATGPT-WORK-BRIDGE-003",
+    "remote": "origin",
+    "branch": "codex/chatgpt-work-bridge-003",
+    "merge_allowed": false
+  },
+  "promotion_gate": {
+    "manual_cycles_required": 3,
+    "current_clean_cycles": 2,
+    "automatic_activation_allowed": false
+  }
+}
