@@ -1,0 +1,35 @@
+{
+  "log_id": "CAP-LOG-2026-07-13-CHATGPT-WORK-BRIDGE-001-CLOUD-ATTEMPT",
+  "event_id": "CHATGPT-WORK-BRIDGE-001-CLOUD-ATTEMPT-001",
+  "created_at": "2026-07-13T14:25:00Z",
+  "activation": "User instructed ChatGPT Work to inspect PR #94 and execute CHATGPT-WORK-BRIDGE-001 without merging.",
+  "actor": "chatgpt-work",
+  "mode": "explicit execution attempt",
+  "observation": "The GitHub PR and request contract are readable, but no callable local Codex session, desktop remote host, laptop filesystem or local repository checkout is exposed to the active runtime.",
+  "selected_action": "Stopped before local attestation and recorded a public-safe blocked attempt instead of fabricating a local Codex result.",
+  "source_refs": [
+    "GitHub PR #94",
+    "docs/atlas/control-tower/batch-chatgpt-work-bridge-001.md",
+    "docs/atlas/control-tower/chatgpt-work-bridge-001.request.json",
+    "docs/governance/public_boundary.md",
+    "docs/governance/chatgpt_connector_runtime_policy.md"
+  ],
+  "deterministic_boundary": [
+    "No claim of laptop-local execution",
+    "No local path, hostname, username or device identifier recorded",
+    "No raw session or token data read",
+    "No Notion or Zenodo mutation",
+    "No manual workflow dispatch",
+    "No merge"
+  ],
+  "external_mutation": true,
+  "external_mutation_scope": "GitHub trace only",
+  "result": "blocked",
+  "blocker_code": "NO_LOCAL_CODEX_REMOTE_HANDLE",
+  "backpropagation_target": [
+    "CAP Control Tower",
+    "ChatGPT connector runtime policy",
+    "future local Codex handoff"
+  ],
+  "next_recommended_action": "Local Codex consumes PR #94 and writes the two expected local result artifacts, or a supported desktop remote-host surface is exposed to ChatGPT Work."
+}
