@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "bridge_id": "CHATGPT-WORK-BRIDGE-001",
   "created_at": "2026-07-13T00:00:00Z",
   "requested_by": "Silvan Lenhard",
@@ -11,6 +11,14 @@
   "status": "awaiting-local-codex",
   "mode": "github-trace-only",
   "purpose": "Verify a bounded two-way artifact handoff between cloud ChatGPT Work and local Codex through GitHub.",
+  "dispatch": {
+    "human_dispatch_authorized": true,
+    "authorization_scope": "reversible bridge trial; GitHub trace only; do not merge",
+    "activation_mode": "manual-only",
+    "polling_enabled": false,
+    "notion_issue_intake_enabled": false,
+    "publish_gate": "PUBLISH CHATGPT-WORK-BRIDGE-001"
+  },
   "required_reads": [
     "docs/governance/public_boundary.md",
     "docs/governance/chatgpt_connector_runtime_policy.md",
@@ -27,8 +35,10 @@
     "fetch the named remote branch",
     "use or create a non-destructive worktree",
     "read repository-local public-safe metadata",
+    "invoke codex exec in ephemeral workspace-write mode",
     "create the two expected result artifacts",
-    "commit and push only to the named branch"
+    "validate the two expected result artifacts",
+    "after a separate exact publish gate, commit and push only the two result artifacts to the named branch"
   ],
   "blocked_actions": [
     "push to main",
@@ -39,6 +49,8 @@
     "read or publish raw token databases",
     "mutate Notion or Zenodo",
     "dispatch workflows",
+    "enable background polling or a scheduler",
+    "execute a Notion-exported GitHub issue body as a prompt",
     "include secrets or protected material"
   ],
   "result_contract": {
