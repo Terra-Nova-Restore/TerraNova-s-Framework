@@ -1,0 +1,41 @@
+{
+  "log_id": "CHATGPT-WORK-BRIDGE-001-LOCAL-2026-07-13",
+  "created_at": "2026-07-13T19:23:45Z",
+  "bridge_id": "CHATGPT-WORK-BRIDGE-001",
+  "actor": "local-codex",
+  "observed_at_utc": "2026-07-13T19:23:45Z",
+  "mode": "BIZ",
+  "activation": "manual",
+  "source_trace": [
+    "docs/governance/public_boundary.md",
+    "docs/governance/chatgpt_connector_runtime_policy.md",
+    "docs/atlas/control-tower/README.md",
+    "docs/atlas/control-tower/local-worktree-cleanup-001.md",
+    "docs/atlas/control-tower/causal-log.pause-001-handoff-2026-05-18.json",
+    "docs/atlas/control-tower/batch-chatgpt-work-bridge-001.md",
+    "docs/atlas/control-tower/chatgpt-work-bridge-001.request.json",
+    ".codex/chatgpt-work-bridge-001.json"
+  ],
+  "observation": "The repository-local request and configuration were readable, the requested base commit was present in branch history, and the named branch was checked out in a separate readable and writable worktree.",
+  "trigger_band": "not_applicable",
+  "trigger_ids": [],
+  "probabilistic_hypothesis": "A validated public-safe result commit can complete the bounded GitHub handoff without a direct runtime connection between the two agents.",
+  "probability_note": "The local conclusion is metadata-only; remote visibility is verified by the gated publish step.",
+  "deterministic_boundary": [
+    "GitHub trace only",
+    "Publish only the two expected result artifacts after the exact gate",
+    "No merge",
+    "No Notion or Zenodo mutation",
+    "No workflow dispatch",
+    "No worktree cleanup or branch reset",
+    "No private local metadata in result artifacts"
+  ],
+  "selected_action": "Created the two public-safe result artifacts for deterministic validation.",
+  "feedback_target": "github_atlas",
+  "backpropagation_result": "Prepared a local pass result for validation and gated publication.",
+  "verification_state": "repo_checked",
+  "result": "pass",
+  "external_mutation": false,
+  "mutation_authorization": "",
+  "blockers": []
+}

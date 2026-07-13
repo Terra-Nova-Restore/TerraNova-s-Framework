@@ -1,0 +1,35 @@
+{
+  "bridge_id": "CHATGPT-WORK-BRIDGE-001",
+  "actor": "local-codex",
+  "observed_at_utc": "2026-07-13T19:23:45Z",
+  "repository_full_name": "Terra-Nova-Restore/TerraNova-s-Framework",
+  "branch": "codex/chatgpt-work-bridge-001",
+  "base_commit_observed": "e5ddb0e15e342593d5ead8f0e92ffd89a93463ca",
+  "request_readable": true,
+  "worktree_readable": true,
+  "branch_writable": true,
+  "terranova_worktree_count": 14,
+  "worktree_role_labels": [
+    "tnc-watch-review",
+    "detached-tool-lane-1",
+    "detached-tool-lane-2",
+    "token-docs",
+    "cei-cycle03",
+    "gumroad-ci-fix",
+    "portal-validator-backlog",
+    "cap-runtime",
+    "tnc-auto-dry-run",
+    "tnc-watch-calibration",
+    "zenodo-legacy-retry",
+    "control-tower-trace",
+    "zenodo-v3-mainline",
+    "bridge-trial"
+  ],
+  "public_boundary_check": "pass",
+  "files_created": [
+    "docs/atlas/control-tower/chatgpt-work-bridge-001.local-result.json",
+    "docs/atlas/control-tower/causal-log.chatgpt-work-bridge-001-local-2026-07-13.json"
+  ],
+  "status": "pass",
+  "blockers": []
+}
