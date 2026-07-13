@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "bridge_id": "CHATGPT-WORK-BRIDGE-001",
+  "created_at": "2026-07-13T00:00:00Z",
+  "requested_by": "Silvan Lenhard",
+  "request_actor": "chatgpt-work",
+  "execution_actor": "local-codex",
+  "repository_full_name": "Terra-Nova-Restore/TerraNova-s-Framework",
+  "branch": "codex/chatgpt-work-bridge-001",
+  "base_commit": "e5ddb0e15e342593d5ead8f0e92ffd89a93463ca",
+  "status": "awaiting-local-codex",
+  "mode": "github-trace-only",
+  "purpose": "Verify a bounded two-way artifact handoff between cloud ChatGPT Work and local Codex through GitHub.",
+  "required_reads": [
+    "docs/governance/public_boundary.md",
+    "docs/governance/chatgpt_connector_runtime_policy.md",
+    "docs/atlas/control-tower/README.md",
+    "docs/atlas/control-tower/local-worktree-cleanup-001.md",
+    "docs/atlas/control-tower/causal-log.pause-001-handoff-2026-05-18.json",
+    "docs/atlas/control-tower/batch-chatgpt-work-bridge-001.md"
+  ],
+  "expected_outputs": [
+    "docs/atlas/control-tower/chatgpt-work-bridge-001.local-result.json",
+    "docs/atlas/control-tower/causal-log.chatgpt-work-bridge-001-local-2026-07-13.json"
+  ],
+  "allowed_actions": [
+    "fetch the named remote branch",
+    "use or create a non-destructive worktree",
+    "read repository-local public-safe metadata",
+    "create the two expected result artifacts",
+    "commit and push only to the named branch"
+  ],
+  "blocked_actions": [
+    "push to main",
+    "merge the draft PR",
+    "delete or reset worktrees",
+    "expose absolute local paths or host identifiers",
+    "read or publish private session content",
+    "read or publish raw token databases",
+    "mutate Notion or Zenodo",
+    "dispatch workflows",
+    "include secrets or protected material"
+  ],
+  "result_contract": {
+    "required_fields": [
+      "bridge_id",
+      "actor",
+      "observed_at_utc",
+      "repository_full_name",
+      "branch",
+      "base_commit_observed",
+      "request_readable",
+      "worktree_readable",
+      "branch_writable",
+      "terranova_worktree_count",
+      "worktree_role_labels",
+      "public_boundary_check",
+      "files_created",
+      "status",
+      "blockers"
+    ],
+    "status_enum": [
+      "pass",
+      "partial",
+      "blocked"
+    ],
+    "absolute_paths_allowed": false,
+    "secrets_allowed": false,
+    "private_content_allowed": false
+  },
+  "success_condition": "ChatGPT Work reads both local result artifacts from the remote branch without user copy/paste or upload.",
+  "stop_rule": "If verification would cross the public boundary, write a redacted blocked result and stop."
+}
