@@ -1,0 +1,82 @@
+{
+  "bridge_id": "CHATGPT-WORK-BRIDGE-003",
+  "actor": "local-codex",
+  "observed_at_utc": "2026-07-13T20:50:26Z",
+  "repository_full_name": "Terra-Nova-Restore/TerraNova-s-Framework",
+  "branch": "codex/chatgpt-work-bridge-003",
+  "base_commit_observed": "17ccc08a6c0b01591dcefaf26c5cfbc0043a9222",
+  "request_readable": true,
+  "worktree_readable": true,
+  "branch_writable": true,
+  "terranova_worktree_count": 16,
+  "worktree_role_labels": [
+    "tnc-watch-review",
+    "detached-tool-lane-1",
+    "detached-tool-lane-2",
+    "token-docs",
+    "cei-cycle03",
+    "gumroad-ci-fix",
+    "portal-validator-backlog",
+    "cap-runtime",
+    "tnc-auto-dry-run",
+    "tnc-watch-calibration",
+    "zenodo-legacy-retry",
+    "control-tower-trace",
+    "zenodo-v3-mainline",
+    "bridge-001",
+    "bridge-002",
+    "bridge-003"
+  ],
+  "change_kind": "offline-validator-implementation",
+  "offline_mode_name": "offline-validate",
+  "implementation_paths": [
+    "scripts/notion_to_github.py",
+    "tests/test_notion_to_github_offline.py"
+  ],
+  "result_files_created": [
+    "docs/atlas/control-tower/chatgpt-work-bridge-003.local-result.json",
+    "docs/atlas/control-tower/causal-log.chatgpt-work-bridge-003-local-2026-07-13.json"
+  ],
+  "files_published": [
+    "scripts/notion_to_github.py",
+    "tests/test_notion_to_github_offline.py",
+    "docs/atlas/control-tower/chatgpt-work-bridge-003.local-result.json",
+    "docs/atlas/control-tower/causal-log.chatgpt-work-bridge-003-local-2026-07-13.json"
+  ],
+  "offline_mode_added": true,
+  "offline_path_precedes_live_setup": true,
+  "config_validation_present": true,
+  "workflow_validation_present": true,
+  "network_guard_tests_present": true,
+  "offline_cli_passed_without_credentials": true,
+  "offline_cli_exit_code": 0,
+  "offline_run_extra_files_created": false,
+  "offline_output_public_safe": true,
+  "existing_live_modes_intentionally_changed": false,
+  "notion_runtime_called": false,
+  "github_issue_api_called": false,
+  "credential_values_read": false,
+  "sync_live_mode_executed": false,
+  "workflow_dispatch_performed": false,
+  "notion_mutation_performed": false,
+  "tnc_watch_files_touched": false,
+  "validation_labels": [
+    "offline-cli",
+    "offline-cli-negative",
+    "network-refusal-tests",
+    "structural-workflow-validation",
+    "spoofed-workflow-refusal",
+    "existing-sync-tests",
+    "bridge-003-tests",
+    "unit-tests-25-pass",
+    "exact-scope-review"
+  ],
+  "tests_passed": true,
+  "public_boundary_check": "pass",
+  "status": "pass",
+  "limitations": [
+    "Offline validation checks repository-local configuration and workflow structure only; it does not validate live credentials or service connectivity.",
+    "The existing full, dry-run, and validate modes remain live-capable and were not executed."
+  ],
+  "blockers": []
+}
