@@ -1,0 +1,79 @@
+{
+  "bridge_id": "CHATGPT-WORK-BRIDGE-002",
+  "actor": "local-codex",
+  "observed_at_utc": "2026-07-13T20:04:06Z",
+  "repository_full_name": "Terra-Nova-Restore/TerraNova-s-Framework",
+  "branch": "codex/chatgpt-work-bridge-002",
+  "base_commit_observed": "c15ea912994e9426f70024f0a41f205386d234fc",
+  "request_readable": true,
+  "worktree_readable": true,
+  "branch_writable": true,
+  "terranova_worktree_count": 15,
+  "worktree_role_labels": [
+    "tnc-watch-review",
+    "detached-tool-lane-1",
+    "detached-tool-lane-2",
+    "token-docs",
+    "cei-cycle03",
+    "gumroad-ci-fix",
+    "portal-validator-backlog",
+    "cap-runtime",
+    "tnc-auto-dry-run",
+    "tnc-watch-calibration",
+    "zenodo-legacy-retry",
+    "control-tower-trace",
+    "zenodo-v3-mainline",
+    "bridge-001",
+    "bridge-002"
+  ],
+  "audit_kind": "notion-sync-reality-check",
+  "workflow_file": ".github/workflows/tnv_notion_to_github.yml",
+  "workflow_schedule_cron": "*/10 * * * *",
+  "workflow_dispatch_present": true,
+  "sync_direction": "notion-to-github",
+  "export_filter_verified": true,
+  "issue_creation_call_verified": true,
+  "notion_writeback_verified": true,
+  "shadow_record_write_verified": true,
+  "notion_page_creation_call_found": false,
+  "github_token_model": "actions-github-token-with-local-fallback",
+  "separate_github_pat_required_for_actions": false,
+  "workflow_permissions": [
+    "contents:write",
+    "issues:write"
+  ],
+  "recurrence_source_assessment": "outside-repository-supported",
+  "evidence_files": [
+    ".github/workflows/tnv_notion_to_github.yml",
+    "scripts/notion_to_github.py",
+    "tests/test_notion_to_github.py",
+    "README.md",
+    "SETUP_RUNBOOK.md",
+    "NOTION_PROPERTIES.md",
+    "config/notion_map.json",
+    ".github/skills/notion-sync-workflow/SKILL.md"
+  ],
+  "validation_labels": [
+    "source-inspection",
+    "unit-tests-notion-sync",
+    "unit-tests-bridge-002"
+  ],
+  "validation_passed": true,
+  "notion_runtime_called": false,
+  "github_issue_api_called": false,
+  "sync_script_executed": false,
+  "workflow_dispatch_performed": false,
+  "notion_mutation_performed": false,
+  "tnc_watch_files_touched": false,
+  "public_boundary_check": "pass",
+  "files_created": [
+    "docs/atlas/control-tower/chatgpt-work-bridge-002.local-result.json",
+    "docs/atlas/control-tower/causal-log.chatgpt-work-bridge-002-local-2026-07-13.json"
+  ],
+  "status": "pass",
+  "limitations": [
+    "Repository evidence does not establish the current state of a separate Notion-side recurrence or default-template automation.",
+    "No live runtime, credential, pending-record count, or external automation state was queried."
+  ],
+  "blockers": []
+}
