@@ -74,6 +74,15 @@ evaluator decision, rollback proof, Git status and zero external mutations.
 Evidence files are replaced atomically. A run remains `INCOMPLETE` until the
 validator has reconstructed the cross-artifact evidence and written a final
 completion marker that binds the SHA-256 digest of every other artifact.
+Semantic validation and digest binding use the same immutable in-memory byte
+snapshot. The write-free `--verify-existing <run-id>` path reconstructs the
+final bundle from one fresh snapshot and performs no test, dry-run or evidence
+write. Only a final `PASS` produced under Python 3.11 is promotion-ready;
+`PASS_WITH_RUNTIME_GAP` is valid local evidence but blocks promotion.
+
+All Git observations pass through a protected typed read-only adapter. It uses
+a fixed system Git executable, disables optional locks and filesystem monitors,
+and supplies a minimal child environment without arbitrary inherited values.
 
 No real predecessor Hubble or ALMA cycle is present in the repository at this
 bootstrap point. The included replay fixture is explicitly synthetic and may

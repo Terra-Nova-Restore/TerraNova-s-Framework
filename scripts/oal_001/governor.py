@@ -23,6 +23,7 @@ EXPECTED_PROTECTED_PATHS = (
     "schemas/oal_001_mutation_trace.schema.json",
     "scripts/oal_001/__init__.py",
     "scripts/oal_001/__main__.py",
+    "scripts/oal_001/git_read.py",
     "scripts/oal_001/governor.py",
     "scripts/oal_001/runtime.py",
     "scripts/validate_oal_001.py",

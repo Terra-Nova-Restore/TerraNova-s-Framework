@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import ast
+import argparse
 import difflib
 import hashlib
 import json
@@ -14,16 +15,18 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from typing import Mapping
+from typing import Literal, Mapping
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.dont_write_bytecode = True
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 PACKAGE_FILES = (
     "scripts/oal_001/__init__.py",
     "scripts/oal_001/__main__.py",
+    "scripts/oal_001/git_read.py",
     "scripts/oal_001/governor.py",
     "scripts/oal_001/observatory.py",
     "scripts/oal_001/runtime.py",
@@ -68,6 +71,7 @@ EXPECTED_PROTECTED_PATHS = [
     "schemas/oal_001_mutation_trace.schema.json",
     "scripts/oal_001/__init__.py",
     "scripts/oal_001/__main__.py",
+    "scripts/oal_001/git_read.py",
     "scripts/oal_001/governor.py",
     "scripts/oal_001/runtime.py",
     "scripts/validate_oal_001.py",
@@ -152,12 +156,13 @@ FORBIDDEN_SOURCE_SNIPPETS = (
     "exec(",
 )
 RUN_ID_PATTERN = re.compile(r"^OAL-001-[A-F0-9]{16}$")
-MINIMUM_OAL_TEST_COUNT = 37
-VALIDATOR_FIXED_GIT_READ_COMMANDS = {
-    ("git", "branch", "--show-current"),
-    ("git", "rev-parse", "HEAD"),
-    ("git", "status", "--short", "--branch"),
-}
+MINIMUM_OAL_TEST_COUNT = 47
+TARGET_PYTHON = (3, 11)
+STATUS_PASS = "PASS"
+STATUS_RUNTIME_GAP = "PASS_WITH_RUNTIME_GAP"
+STATUS_FAIL = "FAIL"
+EXIT_RUNTIME_GAP = 3
+ArtifactSnapshot = tuple[tuple[str, bytes], ...]
 
 
 class DuplicateJsonKeyError(ValueError):
@@ -390,14 +395,10 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
             errors.append(f"process execution API is forbidden in {rel_path}")
 
     expected: dict[str, list[tuple[str, ...]]] = {
-        "scripts/oal_001/__main__.py": [("$command",)],
-        "scripts/oal_001/runtime.py": [
-            ("git", "check-ignore", "-q", "$rel_path"),
-            ("git", "status", "--short", "--branch"),
-        ],
+        "scripts/oal_001/__main__.py": [],
+        "scripts/oal_001/git_read.py": [("$command",)],
+        "scripts/oal_001/runtime.py": [],
         "scripts/validate_oal_001.py": [
-            ("git", "check-ignore", "-q", "$rel_path"),
-            ("$command",),
             (
                 "$sys.executable",
                 "-m",
@@ -413,34 +414,20 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
         errors.append(
             f"subprocess calls do not match the fixed read-only allowlist in {rel_path}"
         )
-    if rel_path == "scripts/oal_001/__main__.py":
+    if rel_path == "scripts/oal_001/git_read.py":
         fixed_commands: object | None = None
         for node in tree.body:
             if isinstance(node, ast.Assign) and any(
-                isinstance(target, ast.Name) and target.id == "FIXED_GIT_READ_COMMANDS"
+                isinstance(target, ast.Name) and target.id == "FIXED_GIT_READ_ARGUMENTS"
                 for target in node.targets
             ):
                 fixed_commands = ast.literal_eval(node.value)
         if fixed_commands != {
-            ("git", "branch", "--show-current"),
-            ("git", "rev-parse", "HEAD"),
+            ("branch", "--show-current"),
+            ("rev-parse", "HEAD"),
+            ("status", "--short", "--branch"),
         }:
-            errors.append("CLI Git reads do not match the exact fixed allowlist")
-    if rel_path == "scripts/validate_oal_001.py":
-        fixed_commands = None
-        for node in tree.body:
-            if isinstance(node, ast.Assign) and any(
-                isinstance(target, ast.Name)
-                and target.id == "VALIDATOR_FIXED_GIT_READ_COMMANDS"
-                for target in node.targets
-            ):
-                fixed_commands = ast.literal_eval(node.value)
-        if fixed_commands != {
-            ("git", "branch", "--show-current"),
-            ("git", "rev-parse", "HEAD"),
-            ("git", "status", "--short", "--branch"),
-        }:
-            errors.append("validator Git reads do not match the exact fixed allowlist")
+            errors.append("typed Git reads do not match the exact fixed allowlist")
     return errors
 
 
@@ -491,30 +478,23 @@ def _top_level_yaml_scalars(data: bytes) -> tuple[dict[str, str], list[str]]:
 
 
 def git_check_ignored(rel_path: str) -> bool:
-    result = subprocess.run(
-        ["git", "check-ignore", "-q", rel_path],
-        cwd=REPO_ROOT,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-        check=False,
-    )
-    return result.returncode == 0
+    from scripts.oal_001.git_read import is_ignored
+
+    return is_ignored(REPO_ROOT, rel_path)
 
 
 def _git_read(command: list[str]) -> str:
-    if tuple(command) not in VALIDATOR_FIXED_GIT_READ_COMMANDS:
-        raise ValueError("validator Git command is outside the read-only allowlist")
-    result = subprocess.run(
-        command,
-        cwd=REPO_ROOT,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        check=False,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(f"{' '.join(command)} failed: {result.stderr.strip()}")
-    return result.stdout.strip()
+    from scripts.oal_001.git_read import current_branch, head_sha, worktree_status
+
+    readers = {
+        ("git", "branch", "--show-current"): current_branch,
+        ("git", "rev-parse", "HEAD"): head_sha,
+        ("git", "status", "--short", "--branch"): worktree_status,
+    }
+    reader = readers.get(tuple(command))
+    if reader is None:
+        raise ValueError("validator Git command is outside the typed read-only API")
+    return reader(REPO_ROOT)
 
 
 def static_errors() -> list[str]:
@@ -535,9 +515,6 @@ def static_errors() -> list[str]:
             )
     except (OSError, UnicodeDecodeError, ValueError, json.JSONDecodeError) as exc:
         errors.append(f"invalid immutable policy: {exc}")
-
-    if not git_check_ignored(EXPECTED_POLICY["output_root"]):
-        errors.append("configured local-private output root is not gitignored")
 
     safety, safety_errors = _top_level_yaml_scalars(
         _read_repo_file(".codex/safety_policy.yaml")
@@ -566,6 +543,9 @@ def static_errors() -> list[str]:
             for snippet in source_errors:
                 errors.append(f"forbidden source operation in {rel_path}: {snippet}")
         errors.extend(_subprocess_boundary_errors(rel_path, tree))
+
+    if not errors and not git_check_ignored(str(EXPECTED_POLICY["output_root"])):
+        errors.append("configured local-private output root is not gitignored")
 
     try:
         _parse_strategy_static(_read_repo_file("scripts/oal_001/observatory.py"))
@@ -723,70 +703,260 @@ def _validated_output_dir(summary: Mapping[str, object]) -> Path:
     return resolved
 
 
-def _load_artifact_json(output_dir: Path, name: str) -> object:
-    path = _regular_file(output_dir / name, REPO_ROOT, f"artifact {name}")
-    return strict_json_bytes(path.read_bytes())
-
-
-def _artifact_digest_map(output_dir: Path) -> dict[str, str]:
-    digests: dict[str, str] = {}
-    for name in sorted(EVIDENCE_ARTIFACTS - {"validation_complete.json"}):
-        path = _regular_file(output_dir / name, REPO_ROOT, f"artifact {name}")
-        digests[name] = hashlib.sha256(path.read_bytes()).hexdigest().upper()
-    return digests
-
-
-def validate_completion_marker(output_dir: Path) -> list[str]:
-    try:
-        actual_names = {path.name for path in output_dir.iterdir()}
-    except OSError as exc:
-        return [f"could not enumerate completed artifacts: {exc}"]
-    if actual_names != EVIDENCE_ARTIFACTS:
-        return ["completed artifact set does not match the exact evidence contract"]
-    try:
-        marker = _load_artifact_json(output_dir, "validation_complete.json")
-        trace = _load_artifact_json(output_dir, "mutation_trace.json")
-        test_result = _load_artifact_json(output_dir, "test_result.json")
-        current_digests = _artifact_digest_map(output_dir)
-    except (OSError, UnicodeDecodeError, ValueError, json.JSONDecodeError) as exc:
-        return [f"could not verify completion marker: {exc}"]
-    if not all(isinstance(item, dict) for item in (marker, trace, test_result)):
-        return [
-            "completion marker, mutation trace and test result must be JSON objects"
-        ]
-    unit_tests = test_result.get("unit_tests")
-    artifact_validation = test_result.get("artifact_validation")
-    semantic_pass = (
-        test_result.get("schema_version") == "OAL-1.0"
-        and test_result.get("run_id") == trace.get("run_id")
-        and test_result.get("status") == "PASS"
-        and test_result.get("evidence_complete") is True
-        and test_result.get("static_checks") == {"status": "PASS"}
-        and isinstance(unit_tests, dict)
-        and unit_tests.get("status") == "PASS"
-        and isinstance(unit_tests.get("count"), int)
-        and unit_tests["count"] >= MINIMUM_OAL_TEST_COUNT
-        and unit_tests.get("skipped") == 0
-        and unit_tests.get("outcome_details") == {}
-        and unit_tests.get("return_code") == 0
-        and test_result.get("dry_run") == {"status": "PASS", "return_code": 0}
-        and isinstance(artifact_validation, dict)
-        and artifact_validation.get("status") == "PASS"
-        and artifact_validation.get("errors") == []
-        and test_result.get("external_mutation_count") == 0
-    )
-    expected_status = "PASS" if semantic_pass else "FAIL"
-    expected = {
-        "schema_version": "OAL-1.0",
-        "run_id": trace.get("run_id"),
-        "status": expected_status,
-        "artifact_sha256": current_digests,
-    }
+def _artifact_set_errors(names: set[str]) -> list[str]:
     errors: list[str] = []
-    if marker.get("status") != expected_status:
-        errors.append("completion marker status does not match bound test semantics")
-    if marker != expected:
-        errors.append("completion marker artifact digests do not match current bytes")
+    missing = sorted(EVIDENCE_ARTIFACTS - names)
+    extra = sorted(names - EVIDENCE_ARTIFACTS)
+    if missing:
+        errors.append("missing artifacts: " + ", ".join(missing))
+    if extra:
+        errors.append("unexpected artifacts: " + ", ".join(extra))
+    return errors
+
+
+def _capture_artifact_snapshot(output_dir: Path) -> ArtifactSnapshot:
+    try:
+        names = {path.name for path in output_dir.iterdir()}
+    except OSError as exc:
+        raise ValueError(f"could not enumerate artifacts: {exc}") from exc
+    set_errors = _artifact_set_errors(names)
+    if set_errors:
+        raise ValueError("; ".join(set_errors))
+    return tuple(
+        (
+            name,
+            _regular_file(
+                output_dir / name, REPO_ROOT, f"artifact {name}"
+            ).read_bytes(),
+        )
+        for name in sorted(EVIDENCE_ARTIFACTS)
+    )
+
+
+def _snapshot_mapping(snapshot: ArtifactSnapshot) -> dict[str, bytes]:
+    mapping = dict(snapshot)
+    if len(mapping) != len(snapshot) or set(mapping) != EVIDENCE_ARTIFACTS:
+        raise ValueError("artifact snapshot does not match the exact evidence contract")
+    if not all(isinstance(data, bytes) for data in mapping.values()):
+        raise ValueError("artifact snapshot values must be immutable bytes")
+    return mapping
+
+
+def _snapshot_bytes(snapshot: ArtifactSnapshot, name: str) -> bytes:
+    try:
+        return _snapshot_mapping(snapshot)[name]
+    except KeyError as exc:
+        raise ValueError(f"artifact snapshot is missing {name}") from exc
+
+
+def _replace_snapshot_bytes(
+    snapshot: ArtifactSnapshot, name: str, data: bytes
+) -> ArtifactSnapshot:
+    mapping = _snapshot_mapping(snapshot)
+    if name not in mapping or not isinstance(data, bytes):
+        raise ValueError("snapshot replacement must target one evidence artifact")
+    mapping[name] = data
+    return tuple(sorted(mapping.items()))
+
+
+def _json_bytes(payload: object) -> bytes:
+    return (json.dumps(payload, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
+
+
+def _artifact_digest_map(snapshot: ArtifactSnapshot) -> dict[str, str]:
+    mapping = _snapshot_mapping(snapshot)
+    return {
+        name: hashlib.sha256(mapping[name]).hexdigest().upper()
+        for name in sorted(EVIDENCE_ARTIFACTS - {"validation_complete.json"})
+    }
+
+
+def _load_snapshot_json(snapshot: ArtifactSnapshot, name: str) -> object:
+    return strict_json_bytes(_snapshot_bytes(snapshot, name))
+
+
+def _validation_status(artifact_errors: list[str], runtime_status: str) -> str:
+    if artifact_errors:
+        return STATUS_FAIL
+    if runtime_status == STATUS_PASS:
+        return STATUS_PASS
+    if runtime_status == "NOT_RUN":
+        return STATUS_RUNTIME_GAP
+    raise ValueError("Python 3.11 runtime status is invalid")
+
+
+def _build_test_result(
+    run_id: str,
+    test_count: int,
+    test_outcomes: Mapping[str, int],
+    test_returncode: int,
+    dry_run_returncode: int,
+    artifact_errors: list[str],
+    python_version: str,
+    python_version_info: tuple[int, int],
+) -> dict[str, object]:
+    runtime_status = STATUS_PASS if python_version_info == TARGET_PYTHON else "NOT_RUN"
+    status = _validation_status(artifact_errors, runtime_status)
+    promotion_ready = status == STATUS_PASS
+    return {
+        "schema_version": "OAL-1.0",
+        "run_id": run_id,
+        "status": status,
+        "evidence_complete": promotion_ready,
+        "promotion_ready": promotion_ready,
+        "static_checks": {"status": STATUS_PASS},
+        "unit_tests": {
+            "status": STATUS_PASS,
+            "command": "python -m unittest tests.test_oal_001_governor tests.test_oal_001_runtime -v",
+            "count": test_count,
+            "skipped": test_outcomes.get("skipped", 0),
+            "outcome_details": dict(test_outcomes),
+            "return_code": test_returncode,
+        },
+        "python_runtime": {
+            "version": python_version,
+            "status": STATUS_PASS,
+        },
+        "python_3_11_target": {
+            "grammar": STATUS_PASS,
+            "runtime": runtime_status,
+            "reason": (
+                None
+                if runtime_status == STATUS_PASS
+                else "validator interpreter is not Python 3.11"
+            ),
+        },
+        "dry_run": {"status": STATUS_PASS, "return_code": dry_run_returncode},
+        "artifact_validation": {
+            "status": STATUS_PASS if not artifact_errors else STATUS_FAIL,
+            "errors": list(artifact_errors),
+        },
+        "external_mutation_count": 0,
+    }
+
+
+def _final_test_result_errors(test_result: object, expected_run_id: str) -> list[str]:
+    if not isinstance(test_result, dict):
+        return ["final test result must be a JSON object"]
+    errors: list[str] = []
+    expected_keys = {
+        "schema_version",
+        "run_id",
+        "status",
+        "evidence_complete",
+        "promotion_ready",
+        "static_checks",
+        "unit_tests",
+        "python_runtime",
+        "python_3_11_target",
+        "dry_run",
+        "artifact_validation",
+        "external_mutation_count",
+    }
+    if set(test_result) != expected_keys:
+        errors.append("final test result fields do not match the exact contract")
+    if test_result.get("schema_version") != "OAL-1.0":
+        errors.append("final test result schema version is invalid")
+    if test_result.get("run_id") != expected_run_id:
+        errors.append("final test result run ID is invalid")
+    if test_result.get("static_checks") != {"status": STATUS_PASS}:
+        errors.append("final static-check result is not PASS")
+
+    unit_tests = test_result.get("unit_tests")
+    expected_unit_keys = {
+        "status",
+        "command",
+        "count",
+        "skipped",
+        "outcome_details",
+        "return_code",
+    }
+    if not isinstance(unit_tests, dict) or set(unit_tests) != expected_unit_keys:
+        errors.append("final unit-test result fields do not match the exact contract")
+    else:
+        if unit_tests.get("status") != STATUS_PASS:
+            errors.append("final unit-test status is not PASS")
+        if unit_tests.get("command") != (
+            "python -m unittest tests.test_oal_001_governor "
+            "tests.test_oal_001_runtime -v"
+        ):
+            errors.append("final unit-test command is invalid")
+        count = unit_tests.get("count")
+        if not isinstance(count, int) or count < MINIMUM_OAL_TEST_COUNT:
+            errors.append("final unit-test count is below the required minimum")
+        if unit_tests.get("skipped") != 0:
+            errors.append("final unit-test result contains skipped tests")
+        if unit_tests.get("outcome_details") != {}:
+            errors.append("final unit-test outcome details are not empty")
+        if unit_tests.get("return_code") != 0:
+            errors.append("final unit-test return code is not zero")
+
+    python_runtime = test_result.get("python_runtime")
+    target_runtime = test_result.get("python_3_11_target")
+    recorded_version: tuple[int, int] | None = None
+    if not isinstance(python_runtime, dict) or set(python_runtime) != {
+        "version",
+        "status",
+    }:
+        errors.append("final Python runtime fields do not match the exact contract")
+    else:
+        version = python_runtime.get("version")
+        if not isinstance(version, str) or not re.fullmatch(
+            r"\d+\.\d+\.\d+(?:[A-Za-z0-9.+-]*)?", version
+        ):
+            errors.append("final Python runtime version is invalid")
+        else:
+            major, minor, *_ = version.split(".")
+            recorded_version = (int(major), int(minor))
+        if python_runtime.get("status") != STATUS_PASS:
+            errors.append("final Python runtime status is not PASS")
+    if not isinstance(target_runtime, dict) or set(target_runtime) != {
+        "grammar",
+        "runtime",
+        "reason",
+    }:
+        errors.append("Python 3.11 target fields do not match the exact contract")
+        runtime_status = None
+    else:
+        runtime_status = target_runtime.get("runtime")
+        if target_runtime.get("grammar") != STATUS_PASS:
+            errors.append("Python 3.11 grammar status is not PASS")
+        if runtime_status not in {STATUS_PASS, "NOT_RUN"}:
+            errors.append("Python 3.11 runtime status is invalid")
+        elif runtime_status == STATUS_PASS:
+            if (
+                recorded_version != TARGET_PYTHON
+                or target_runtime.get("reason") is not None
+            ):
+                errors.append(
+                    "Python 3.11 PASS is not supported by the recorded runtime"
+                )
+        elif (
+            recorded_version == TARGET_PYTHON
+            or target_runtime.get("reason")
+            != "validator interpreter is not Python 3.11"
+        ):
+            errors.append("Python 3.11 NOT_RUN reason is inconsistent")
+
+    expected_status = (
+        STATUS_PASS if runtime_status == STATUS_PASS else STATUS_RUNTIME_GAP
+    )
+    if test_result.get("status") != expected_status:
+        errors.append("final validation status does not match Python 3.11 execution")
+    promotion_ready = expected_status == STATUS_PASS
+    if test_result.get("promotion_ready") is not promotion_ready:
+        errors.append("final promotion readiness does not match validation status")
+    if test_result.get("evidence_complete") is not promotion_ready:
+        errors.append("final evidence completeness does not match validation status")
+    if test_result.get("dry_run") != {"status": STATUS_PASS, "return_code": 0}:
+        errors.append("final dry-run result is not PASS")
+    if test_result.get("artifact_validation") != {
+        "status": STATUS_PASS,
+        "errors": [],
+    }:
+        errors.append("final artifact validation result is not PASS")
+    if test_result.get("external_mutation_count") != 0:
+        errors.append("final external mutation count is not zero")
     return errors
 
 
@@ -802,33 +972,24 @@ def _expected_diff(target_path: str, baseline: bytes, candidate: str) -> str:
     )
 
 
-def validate_artifacts(output_dir: Path) -> list[str]:
+def validate_artifact_snapshot(
+    snapshot: ArtifactSnapshot,
+    output_dir: Path,
+    lifecycle: Literal["prepared", "complete"],
+) -> list[str]:
     errors: list[str] = []
+    if lifecycle not in {"prepared", "complete"}:
+        return ["artifact lifecycle must be prepared or complete"]
     try:
-        actual_names = {path.name for path in output_dir.iterdir()}
-    except OSError as exc:
-        return [f"could not enumerate artifacts: {exc}"]
-    if actual_names != EVIDENCE_ARTIFACTS:
-        missing = sorted(EVIDENCE_ARTIFACTS - actual_names)
-        extra = sorted(actual_names - EVIDENCE_ARTIFACTS)
-        if missing:
-            errors.append("missing artifacts: " + ", ".join(missing))
-        if extra:
-            errors.append("unexpected artifacts: " + ", ".join(extra))
-        return errors
-
-    try:
+        _snapshot_mapping(snapshot)
         payload = {
-            name: _load_artifact_json(output_dir, name)
+            name: _load_snapshot_json(snapshot, name)
             for name in EVIDENCE_ARTIFACTS
             if name.endswith(".json")
         }
-        report_path = _regular_file(
-            output_dir / "run_report.md", REPO_ROOT, "artifact run_report.md"
-        )
-        run_report = report_path.read_text(encoding="utf-8")
+        run_report = _snapshot_bytes(snapshot, "run_report.md").decode("utf-8")
     except (OSError, UnicodeDecodeError, ValueError, json.JSONDecodeError) as exc:
-        return [f"could not safely load artifacts: {exc}"]
+        return [f"could not safely load artifact snapshot: {exc}"]
 
     trace = payload["mutation_trace.json"]
     before = payload["replay_before.json"]
@@ -1087,28 +1248,69 @@ def validate_artifacts(output_dir: Path) -> list[str]:
     )
     if run_report != expected_report:
         errors.append("run report is not exactly reproducible from validated evidence")
-    if test_result != {
-        "schema_version": "OAL-1.0",
-        "run_id": expected_run_id,
-        "status": "NOT_RUN",
-        "evidence_complete": False,
-    }:
-        errors.append("test result placeholder is stale or malformed")
-    if completion != {
-        "schema_version": "OAL-1.0",
-        "run_id": expected_run_id,
-        "status": "INCOMPLETE",
-    }:
-        errors.append("completion marker must remain INCOMPLETE until final validation")
+    if lifecycle == "prepared":
+        if test_result != {
+            "schema_version": "OAL-1.0",
+            "run_id": expected_run_id,
+            "status": "NOT_RUN",
+            "evidence_complete": False,
+        }:
+            errors.append("test result placeholder is stale or malformed")
+        if completion != {
+            "schema_version": "OAL-1.0",
+            "run_id": expected_run_id,
+            "status": "INCOMPLETE",
+        }:
+            errors.append(
+                "completion marker must remain INCOMPLETE until final validation"
+            )
+    else:
+        errors.extend(_final_test_result_errors(test_result, expected_run_id))
+        final_status = (
+            test_result.get("status") if isinstance(test_result, dict) else STATUS_FAIL
+        )
+        expected_completion = {
+            "schema_version": "OAL-1.0",
+            "run_id": expected_run_id,
+            "status": final_status,
+            "artifact_sha256": _artifact_digest_map(snapshot),
+        }
+        if completion != expected_completion:
+            errors.append(
+                "completion marker does not bind the semantically validated snapshot"
+            )
     return errors
 
 
-def _atomic_write_json(path: Path, payload: object) -> None:
+def validate_artifacts(output_dir: Path) -> list[str]:
+    try:
+        snapshot = _capture_artifact_snapshot(output_dir)
+    except (OSError, ValueError) as exc:
+        return [str(exc)]
+    return validate_artifact_snapshot(snapshot, output_dir, lifecycle="prepared")
+
+
+def verify_existing_evidence(output_dir: Path) -> list[str]:
+    """Fully reconstruct one final evidence bundle without writing or executing it."""
+
+    try:
+        snapshot = _capture_artifact_snapshot(output_dir)
+    except (OSError, ValueError) as exc:
+        return [str(exc)]
+    return validate_artifact_snapshot(snapshot, output_dir, lifecycle="complete")
+
+
+def validate_completion_marker(output_dir: Path) -> list[str]:
+    """Compatibility wrapper for the full semantic final-bundle verifier."""
+
+    return verify_existing_evidence(output_dir)
+
+
+def _atomic_write_bytes(path: Path, data: bytes) -> None:
     _regular_file(path.parent / "mutation_trace.json", REPO_ROOT, "artifact anchor")
     _reject_link_components(REPO_ROOT, path, path.name)
     if path.exists():
         _regular_file(path, REPO_ROOT, path.name)
-    data = (json.dumps(payload, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
     descriptor, temporary_name = tempfile.mkstemp(
         prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
     )
@@ -1124,10 +1326,124 @@ def _atomic_write_json(path: Path, payload: object) -> None:
             temporary_path.unlink()
 
 
-def main(argv: list[str] | None = None) -> int:
-    if argv:
-        error("this validator accepts no arguments")
-        return 2
+def _atomic_write_json(path: Path, payload: object) -> None:
+    _atomic_write_bytes(path, _json_bytes(payload))
+
+
+def _finalized_snapshot(
+    prepared_snapshot: ArtifactSnapshot, test_result: Mapping[str, object]
+) -> ArtifactSnapshot:
+    bound_snapshot = _replace_snapshot_bytes(
+        prepared_snapshot, "test_result.json", _json_bytes(test_result)
+    )
+    status = test_result.get("status")
+    if status not in {STATUS_PASS, STATUS_RUNTIME_GAP}:
+        raise ValueError("only successful or runtime-gap evidence can be finalized")
+    trace = _load_snapshot_json(bound_snapshot, "mutation_trace.json")
+    if not isinstance(trace, dict):
+        raise ValueError("mutation trace must be a JSON object")
+    completion = {
+        "schema_version": "OAL-1.0",
+        "run_id": trace.get("run_id"),
+        "status": status,
+        "artifact_sha256": _artifact_digest_map(bound_snapshot),
+    }
+    return _replace_snapshot_bytes(
+        bound_snapshot, "validation_complete.json", _json_bytes(completion)
+    )
+
+
+def _finalize_evidence(
+    output_dir: Path,
+    prepared_snapshot: ArtifactSnapshot,
+    test_result: Mapping[str, object],
+) -> list[str]:
+    try:
+        if _capture_artifact_snapshot(output_dir) != prepared_snapshot:
+            return ["artifact set changed after semantic validation"]
+        finalized_snapshot = _finalized_snapshot(prepared_snapshot, test_result)
+        errors = validate_artifact_snapshot(
+            finalized_snapshot, output_dir, lifecycle="complete"
+        )
+        if errors:
+            return errors
+        _atomic_write_bytes(
+            output_dir / "test_result.json",
+            _snapshot_bytes(finalized_snapshot, "test_result.json"),
+        )
+        _atomic_write_bytes(
+            output_dir / "validation_complete.json",
+            _snapshot_bytes(finalized_snapshot, "validation_complete.json"),
+        )
+    except (OSError, UnicodeDecodeError, ValueError, json.JSONDecodeError) as exc:
+        return [f"could not atomically finalize evidence: {exc}"]
+    return verify_existing_evidence(output_dir)
+
+
+def _run_id_argument(value: str) -> str:
+    if not RUN_ID_PATTERN.fullmatch(value):
+        raise argparse.ArgumentTypeError("must be an OAL-001 run ID")
+    return value
+
+
+def _existing_output_dir(run_id: str) -> Path:
+    output_root = REPO_ROOT / str(EXPECTED_POLICY["output_root"])
+    output_dir = output_root / run_id
+    _reject_link_components(REPO_ROOT, output_dir, "existing evidence directory")
+    resolved_root = output_root.resolve(strict=True)
+    resolved = output_dir.resolve(strict=True)
+    if (
+        resolved.parent != resolved_root
+        or resolved.name != run_id
+        or not resolved.is_dir()
+    ):
+        raise ValueError("existing evidence directory is outside the fixed output root")
+    rel_path = resolved.relative_to(REPO_ROOT.resolve()).as_posix()
+    if not git_check_ignored(rel_path):
+        raise ValueError("existing evidence directory is not gitignored")
+    return resolved
+
+
+def _verify_existing(run_id: str) -> int:
+    static_validation_errors = static_errors()
+    if static_validation_errors:
+        for item in static_validation_errors:
+            error(item)
+        return 1
+    try:
+        output_dir = _existing_output_dir(run_id)
+        snapshot = _capture_artifact_snapshot(output_dir)
+        verification_errors = validate_artifact_snapshot(
+            snapshot, output_dir, lifecycle="complete"
+        )
+        test_result = _load_snapshot_json(snapshot, "test_result.json")
+    except (OSError, UnicodeDecodeError, ValueError, json.JSONDecodeError) as exc:
+        error(f"could not verify existing evidence: {exc}")
+        return 1
+    if verification_errors:
+        for item in verification_errors:
+            error(item)
+        return 1
+    if not isinstance(test_result, dict):
+        error("final test result must be a JSON object")
+        return 1
+    status = test_result.get("status")
+    target = test_result.get("python_3_11_target")
+    runtime_status = target.get("runtime") if isinstance(target, dict) else None
+    if status == STATUS_RUNTIME_GAP:
+        print(
+            f"[validate-oal-001] VERIFIED_WITH_RUNTIME_GAP run_id={run_id} "
+            f"status={status} python_3_11_runtime={runtime_status}"
+        )
+        return EXIT_RUNTIME_GAP
+    if status != STATUS_PASS:
+        error("final evidence status is not recognized")
+        return 1
+    print(f"[validate-oal-001] VERIFIED run_id={run_id} status={status}")
+    return 0
+
+
+def _run_validation() -> int:
 
     errors = static_errors()
     if errors:
@@ -1161,69 +1477,63 @@ def main(argv: list[str] | None = None) -> int:
         error(f"dry-run summary is invalid: {exc}")
         return 1
 
-    errors = validate_artifacts(output_dir)
-    runtime_status = "PASS" if sys.version_info[:2] == (3, 11) else "NOT_RUN"
-    test_result = {
-        "schema_version": "OAL-1.0",
-        "run_id": summary["run_id"],
-        "status": "PASS" if not errors else "FAIL",
-        "evidence_complete": not errors,
-        "static_checks": {"status": "PASS"},
-        "unit_tests": {
-            "status": "PASS",
-            "command": "python -m unittest tests.test_oal_001_governor tests.test_oal_001_runtime -v",
-            "count": test_count,
-            "skipped": (test_outcomes or {}).get("skipped", 0),
-            "outcome_details": test_outcomes,
-            "return_code": test_returncode,
-        },
-        "python_runtime": {
-            "version": sys.version.split()[0],
-            "status": "PASS",
-        },
-        "python_3_11_target": {
-            "grammar": "PASS",
-            "runtime": runtime_status,
-            "reason": (
-                None
-                if runtime_status == "PASS"
-                else "validator interpreter is not Python 3.11"
-            ),
-        },
-        "dry_run": {"status": "PASS", "return_code": dry_run_returncode},
-        "artifact_validation": {
-            "status": "PASS" if not errors else "FAIL",
-            "errors": errors,
-        },
-        "external_mutation_count": 0,
-    }
     try:
-        _validated_output_dir(summary)
-        _atomic_write_json(output_dir / "test_result.json", test_result)
-        completion = {
-            "schema_version": "OAL-1.0",
-            "run_id": summary["run_id"],
-            "status": "PASS" if not errors else "FAIL",
-            "artifact_sha256": _artifact_digest_map(output_dir),
-        }
-        _atomic_write_json(output_dir / "validation_complete.json", completion)
-        completion_errors = validate_completion_marker(output_dir)
-        errors.extend(completion_errors)
+        prepared_snapshot = _capture_artifact_snapshot(output_dir)
     except (OSError, ValueError) as exc:
-        errors.append(f"could not atomically finalize evidence: {exc}")
+        error(str(exc))
+        return 1
+    errors = validate_artifact_snapshot(
+        prepared_snapshot, output_dir, lifecycle="prepared"
+    )
+    test_result = _build_test_result(
+        run_id=str(summary["run_id"]),
+        test_count=int(test_count),
+        test_outcomes=test_outcomes or {},
+        test_returncode=test_returncode,
+        dry_run_returncode=dry_run_returncode,
+        artifact_errors=errors,
+        python_version=sys.version.split()[0],
+        python_version_info=sys.version_info[:2],
+    )
+    if errors:
+        for item in errors:
+            error(item)
+        return 1
+    errors = _finalize_evidence(output_dir, prepared_snapshot, test_result)
 
     if errors:
         for item in errors:
             error(item)
         return 1
 
+    status = str(test_result["status"])
+    label = "OK" if status == STATUS_PASS else "OK_WITH_RUNTIME_GAP"
     print(
-        f"[validate-oal-001] OK run_id={summary['run_id']} "
+        f"[validate-oal-001] {label} run_id={summary['run_id']} status={status} "
         f"tests={test_count} skipped={(test_outcomes or {}).get('skipped', 0)}"
     )
     print(f"[validate-oal-001] output_dir={summary['output_dir']}")
     print("[validate-oal-001] external_mutation_count=0")
-    return 0
+    return 0 if status == STATUS_PASS else EXIT_RUNTIME_GAP
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Validate or read-only verify OAL-001 local evidence."
+    )
+    parser.add_argument(
+        "--verify-existing",
+        metavar="RUN_ID",
+        type=_run_id_argument,
+        help="Verify one finalized run without tests, dry-run or writes.",
+    )
+    try:
+        args = parser.parse_args(argv)
+    except SystemExit as exc:
+        return int(exc.code)
+    if args.verify_existing:
+        return _verify_existing(args.verify_existing)
+    return _run_validation()
 
 
 if __name__ == "__main__":

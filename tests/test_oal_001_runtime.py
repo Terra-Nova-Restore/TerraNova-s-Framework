@@ -5,6 +5,7 @@ import copy
 import json
 import os
 import stat
+import sys
 import tempfile
 import unittest
 from dataclasses import replace
@@ -12,6 +13,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch as mock_patch
 
+from scripts.oal_001 import git_read
 from scripts.oal_001.governor import Governor, load_policy
 from scripts.oal_001.__main__ import git_branch, git_head
 from scripts.oal_001.runtime import (
@@ -32,13 +34,25 @@ from scripts.oal_001.runtime import (
     write_cycle_artifacts,
 )
 from scripts.validate_oal_001 import (
+    EXIT_RUNTIME_GAP,
+    MINIMUM_OAL_TEST_COUNT,
+    STATUS_PASS,
+    STATUS_RUNTIME_GAP,
     _artifact_digest_map,
+    _atomic_write_bytes,
     _atomic_write_json,
+    _build_test_result,
+    _capture_artifact_snapshot,
+    _finalize_evidence,
+    _finalized_snapshot,
     _subprocess_boundary_errors,
+    main as validator_main,
     run_unit_tests,
     unit_test_gate_errors,
+    validate_artifact_snapshot,
     validate_artifacts,
     validate_completion_marker,
+    verify_existing_evidence,
 )
 
 
@@ -309,6 +323,38 @@ class Oal001RuntimeTests(unittest.TestCase):
             git_status_after=status,
         )
 
+    def _prepared_evidence(self, temp_dir: str):
+        output_root = Path(temp_dir)
+        policy = replace(
+            self.policy,
+            output_root=output_root.relative_to(REPO_ROOT).as_posix(),
+        )
+        result = self._live_cycle()
+        output_dir = write_cycle_artifacts(REPO_ROOT, policy, result)
+        snapshot = _capture_artifact_snapshot(output_dir)
+        self.assertEqual(
+            validate_artifact_snapshot(snapshot, output_dir, lifecycle="prepared"),
+            [],
+        )
+        return result, output_dir, snapshot
+
+    def _test_result(
+        self,
+        run_id: str,
+        python_version: str = "3.11.9",
+        python_version_info: tuple[int, int] = (3, 11),
+    ) -> dict[str, object]:
+        return _build_test_result(
+            run_id=run_id,
+            test_count=MINIMUM_OAL_TEST_COUNT,
+            test_outcomes={},
+            test_returncode=0,
+            dry_run_returncode=0,
+            artifact_errors=[],
+            python_version=python_version,
+            python_version_info=python_version_info,
+        )
+
     def test_cross_artifact_replay_tampering_is_rejected(self) -> None:
         local_private = REPO_ROOT / "raw" / "exports" / "local-private"
         local_private.mkdir(parents=True, exist_ok=True)
@@ -368,44 +414,216 @@ class Oal001RuntimeTests(unittest.TestCase):
             self.assertFalse(test_result["evidence_complete"])
             self.assertEqual(completion["status"], "INCOMPLETE")
 
+    def test_validation_status_requires_python_3_11_for_pass(self) -> None:
+        passing = self._test_result("OAL-001-" + "A" * 16)
+        runtime_gap = self._test_result(
+            "OAL-001-" + "A" * 16,
+            python_version="3.12.10",
+            python_version_info=(3, 12),
+        )
+        failing = _build_test_result(
+            run_id="OAL-001-" + "A" * 16,
+            test_count=MINIMUM_OAL_TEST_COUNT,
+            test_outcomes={},
+            test_returncode=0,
+            dry_run_returncode=0,
+            artifact_errors=["synthetic failure"],
+            python_version="3.11.9",
+            python_version_info=(3, 11),
+        )
+
+        self.assertEqual(passing["status"], STATUS_PASS)
+        self.assertTrue(passing["promotion_ready"])
+        self.assertEqual(runtime_gap["status"], STATUS_RUNTIME_GAP)
+        self.assertFalse(runtime_gap["evidence_complete"])
+        self.assertFalse(runtime_gap["promotion_ready"])
+        self.assertEqual(failing["status"], "FAIL")
+
+    def test_finalized_snapshot_records_runtime_gap_without_pass(self) -> None:
+        local_private = REPO_ROOT / "raw" / "exports" / "local-private"
+        local_private.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(
+            prefix="oal-001-test-", dir=local_private
+        ) as temp_dir:
+            result, output_dir, prepared = self._prepared_evidence(temp_dir)
+            runtime_gap = self._test_result(
+                result.run_id,
+                python_version="3.12.10",
+                python_version_info=(3, 12),
+            )
+            finalized = _finalized_snapshot(prepared, runtime_gap)
+
+            self.assertEqual(
+                validate_artifact_snapshot(finalized, output_dir, lifecycle="complete"),
+                [],
+            )
+            completion = json.loads(
+                dict(finalized)["validation_complete.json"].decode("utf-8")
+            )
+            self.assertEqual(completion["status"], STATUS_RUNTIME_GAP)
+            self.assertNotEqual(completion["status"], STATUS_PASS)
+
+    def test_finalization_rejects_tamper_between_validation_and_binding(self) -> None:
+        local_private = REPO_ROOT / "raw" / "exports" / "local-private"
+        local_private.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(
+            prefix="oal-001-test-", dir=local_private
+        ) as temp_dir:
+            result, output_dir, prepared = self._prepared_evidence(temp_dir)
+            original_writer = _atomic_write_bytes
+
+            def racing_writer(path: Path, data: bytes) -> None:
+                original_writer(path, data)
+                if path.name == "test_result.json":
+                    replay = json.loads(
+                        (output_dir / "replay_after.json").read_text(encoding="utf-8")
+                    )
+                    replay["route_counts"]["exploration"] = 999
+                    (output_dir / "replay_after.json").write_text(
+                        json.dumps(replay, indent=2) + "\n", encoding="utf-8"
+                    )
+
+            with mock_patch(
+                "scripts.validate_oal_001._atomic_write_bytes",
+                side_effect=racing_writer,
+            ):
+                errors = _finalize_evidence(
+                    output_dir, prepared, self._test_result(result.run_id)
+                )
+
+            self.assertTrue(any("candidate replay" in item for item in errors))
+            self.assertNotEqual(verify_existing_evidence(output_dir), [])
+
+    def test_verify_existing_rejects_semantic_tamper_with_matching_digests(
+        self,
+    ) -> None:
+        local_private = REPO_ROOT / "raw" / "exports" / "local-private"
+        local_private.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(
+            prefix="oal-001-test-", dir=local_private
+        ) as temp_dir:
+            result, output_dir, prepared = self._prepared_evidence(temp_dir)
+            self.assertEqual(
+                _finalize_evidence(
+                    output_dir, prepared, self._test_result(result.run_id)
+                ),
+                [],
+            )
+            replay = json.loads(
+                (output_dir / "replay_after.json").read_text(encoding="utf-8")
+            )
+            replay["route_counts"]["exploration"] = 999
+            (output_dir / "replay_after.json").write_text(
+                json.dumps(replay, indent=2) + "\n", encoding="utf-8"
+            )
+            changed = _capture_artifact_snapshot(output_dir)
+            marker = {
+                "schema_version": "OAL-1.0",
+                "run_id": result.run_id,
+                "status": STATUS_PASS,
+                "artifact_sha256": _artifact_digest_map(changed),
+            }
+            _atomic_write_json(output_dir / "validation_complete.json", marker)
+
+            errors = verify_existing_evidence(output_dir)
+
+            self.assertTrue(any("candidate replay" in item for item in errors))
+            self.assertFalse(any("does not bind" in item for item in errors))
+
+    def test_verify_existing_rejects_pass_when_python_3_11_was_not_run(
+        self,
+    ) -> None:
+        local_private = REPO_ROOT / "raw" / "exports" / "local-private"
+        local_private.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(
+            prefix="oal-001-test-", dir=local_private
+        ) as temp_dir:
+            result, output_dir, prepared = self._prepared_evidence(temp_dir)
+            runtime_gap = self._test_result(
+                result.run_id,
+                python_version="3.12.10",
+                python_version_info=(3, 12),
+            )
+            self.assertEqual(_finalize_evidence(output_dir, prepared, runtime_gap), [])
+            forged = copy.deepcopy(runtime_gap)
+            forged["status"] = STATUS_PASS
+            forged["evidence_complete"] = True
+            forged["promotion_ready"] = True
+            _atomic_write_json(output_dir / "test_result.json", forged)
+            changed = _capture_artifact_snapshot(output_dir)
+            marker = {
+                "schema_version": "OAL-1.0",
+                "run_id": result.run_id,
+                "status": STATUS_PASS,
+                "artifact_sha256": _artifact_digest_map(changed),
+            }
+            _atomic_write_json(output_dir / "validation_complete.json", marker)
+
+            errors = verify_existing_evidence(output_dir)
+
+            self.assertIn(
+                "final validation status does not match Python 3.11 execution",
+                errors,
+            )
+
+    def test_verify_existing_mode_is_read_only_and_reports_runtime_gap(self) -> None:
+        self.assertTrue(sys.dont_write_bytecode)
+        local_private = REPO_ROOT / "raw" / "exports" / "local-private"
+        local_private.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(
+            prefix="oal-001-test-", dir=local_private
+        ) as temp_dir:
+            result, output_dir, prepared = self._prepared_evidence(temp_dir)
+            runtime_gap = self._test_result(
+                result.run_id,
+                python_version="3.12.10",
+                python_version_info=(3, 12),
+            )
+            self.assertEqual(_finalize_evidence(output_dir, prepared, runtime_gap), [])
+            before = {
+                path.name: sha256_bytes(path.read_bytes())
+                for path in output_dir.iterdir()
+            }
+            with (
+                mock_patch("scripts.validate_oal_001.static_errors", return_value=[]),
+                mock_patch(
+                    "scripts.validate_oal_001._existing_output_dir",
+                    return_value=output_dir,
+                ),
+                mock_patch(
+                    "scripts.validate_oal_001.run_unit_tests",
+                    side_effect=AssertionError("unit tests must not run"),
+                ),
+                mock_patch(
+                    "scripts.validate_oal_001.run_dry_run",
+                    side_effect=AssertionError("dry-run must not run"),
+                ),
+                mock_patch(
+                    "scripts.validate_oal_001._atomic_write_bytes",
+                    side_effect=AssertionError("verifier must not write"),
+                ),
+            ):
+                return_code = validator_main(["--verify-existing", result.run_id])
+            after = {
+                path.name: sha256_bytes(path.read_bytes())
+                for path in output_dir.iterdir()
+            }
+
+            self.assertEqual(return_code, EXIT_RUNTIME_GAP)
+            self.assertEqual(before, after)
+            self.assertEqual(validator_main(["--verify-existing", "not-a-run-id"]), 2)
+
     def test_completion_marker_detects_post_validation_tampering(self) -> None:
         local_private = REPO_ROOT / "raw" / "exports" / "local-private"
         local_private.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(
             prefix="oal-001-test-", dir=local_private
         ) as temp_dir:
-            output_root = Path(temp_dir)
-            policy = replace(
-                self.policy,
-                output_root=output_root.relative_to(REPO_ROOT).as_posix(),
+            result, output_dir, prepared = self._prepared_evidence(temp_dir)
+            pass_test_result = self._test_result(result.run_id)
+            self.assertEqual(
+                _finalize_evidence(output_dir, prepared, pass_test_result), []
             )
-            result = self._live_cycle()
-            output_dir = write_cycle_artifacts(REPO_ROOT, policy, result)
-            pass_test_result = {
-                "schema_version": "OAL-1.0",
-                "run_id": result.run_id,
-                "status": "PASS",
-                "evidence_complete": True,
-                "static_checks": {"status": "PASS"},
-                "unit_tests": {
-                    "status": "PASS",
-                    "count": 37,
-                    "skipped": 0,
-                    "outcome_details": {},
-                    "return_code": 0,
-                },
-                "dry_run": {"status": "PASS", "return_code": 0},
-                "artifact_validation": {"status": "PASS", "errors": []},
-                "external_mutation_count": 0,
-            }
-            _atomic_write_json(output_dir / "test_result.json", pass_test_result)
-            completion = {
-                "schema_version": "OAL-1.0",
-                "run_id": result.run_id,
-                "status": "PASS",
-                "artifact_sha256": _artifact_digest_map(output_dir),
-            }
-            _atomic_write_json(output_dir / "validation_complete.json", completion)
             self.assertEqual(validate_completion_marker(output_dir), [])
 
             fail_test_result = copy.deepcopy(pass_test_result)
@@ -416,28 +634,124 @@ class Oal001RuntimeTests(unittest.TestCase):
                 "errors": ["synthetic failure"],
             }
             _atomic_write_json(output_dir / "test_result.json", fail_test_result)
+            changed_snapshot = _capture_artifact_snapshot(output_dir)
             relabelled = {
                 "schema_version": "OAL-1.0",
                 "run_id": result.run_id,
                 "status": "PASS",
-                "artifact_sha256": _artifact_digest_map(output_dir),
+                "artifact_sha256": _artifact_digest_map(changed_snapshot),
             }
             _atomic_write_json(output_dir / "validation_complete.json", relabelled)
-            self.assertIn(
-                "completion marker status does not match bound test semantics",
-                validate_completion_marker(output_dir),
+            self.assertTrue(
+                any(
+                    "final validation status" in item or "completion marker" in item
+                    for item in validate_completion_marker(output_dir)
+                )
             )
 
-            _atomic_write_json(output_dir / "test_result.json", pass_test_result)
-            completion["artifact_sha256"] = _artifact_digest_map(output_dir)
-            _atomic_write_json(output_dir / "validation_complete.json", completion)
+            finalized = _finalized_snapshot(prepared, pass_test_result)
+            _atomic_write_bytes(
+                output_dir / "test_result.json",
+                dict(finalized)["test_result.json"],
+            )
+            _atomic_write_bytes(
+                output_dir / "validation_complete.json",
+                dict(finalized)["validation_complete.json"],
+            )
             (output_dir / "replay_after.json").write_text("{}\n", encoding="utf-8")
 
             errors = validate_completion_marker(output_dir)
 
-            self.assertIn(
-                "completion marker artifact digests do not match current bytes", errors
-            )
+            self.assertTrue(any("candidate replay" in item for item in errors))
+            self.assertTrue(any("completion marker" in item for item in errors))
+
+    def test_git_read_uses_hardened_absolute_process_context(self) -> None:
+        executable = Path(r"C:\Program Files\Git\cmd\git.exe")
+        completed = SimpleNamespace(
+            returncode=0,
+            stdout=BRANCH + "\n",
+            stderr="",
+        )
+        with (
+            mock_patch.object(
+                git_read, "_resolve_git_executable", return_value=executable
+            ),
+            mock_patch.object(
+                git_read.subprocess, "run", return_value=completed
+            ) as mocked_run,
+            mock_patch.dict(os.environ, {"OAL_TEST_SECRET": "do-not-forward"}),
+        ):
+            self.assertEqual(git_read.current_branch(REPO_ROOT), BRANCH)
+
+        command = mocked_run.call_args.args[0]
+        options = mocked_run.call_args.kwargs
+        self.assertEqual(command[0], str(executable))
+        self.assertTrue(executable.is_absolute())
+        self.assertIn("--no-optional-locks", command)
+        self.assertIn("core.fsmonitor=false", command)
+        self.assertEqual(options["env"]["GIT_OPTIONAL_LOCKS"], "0")
+        self.assertNotIn("OAL_TEST_SECRET", options["env"])
+        self.assertNotIn("shell", options)
+
+    def test_git_read_api_rejects_mutation_and_path_traversal(self) -> None:
+        with self.assertRaisesRegex(ValueError, "typed read-only API"):
+            git_read._run_git(REPO_ROOT, ("push", "origin", "main"))
+        for unsafe_path in (
+            "../escape",
+            "/absolute",
+            r"..\escape",
+            "C:/outside",
+            "C:outside",
+            "raw/*",
+            ":(top)raw/exports",
+        ):
+            with self.subTest(path=unsafe_path):
+                with self.assertRaises(ValueError):
+                    git_read.is_ignored(REPO_ROOT, unsafe_path)
+
+    def test_git_check_ignore_distinguishes_results_and_errors(self) -> None:
+        self.assertTrue(
+            git_read.is_ignored(REPO_ROOT, "raw/exports/local-private/oal-001")
+        )
+        executable = Path(r"C:\Program Files\Git\cmd\git.exe")
+        with mock_patch.object(
+            git_read, "_resolve_git_executable", return_value=executable
+        ):
+            with mock_patch.object(
+                git_read.subprocess,
+                "run",
+                return_value=SimpleNamespace(returncode=0, stdout="", stderr=""),
+            ) as mocked_run:
+                self.assertTrue(git_read.is_ignored(REPO_ROOT, "raw/exports"))
+                self.assertIn("--", mocked_run.call_args.args[0])
+            with mock_patch.object(
+                git_read.subprocess,
+                "run",
+                return_value=SimpleNamespace(returncode=1, stdout="", stderr=""),
+            ):
+                self.assertFalse(git_read.is_ignored(REPO_ROOT, "README.md"))
+            with mock_patch.object(
+                git_read.subprocess,
+                "run",
+                return_value=SimpleNamespace(
+                    returncode=2, stdout="", stderr="synthetic Git failure"
+                ),
+            ):
+                with self.assertRaisesRegex(RuntimeError, "synthetic Git failure"):
+                    git_read.is_ignored(REPO_ROOT, "README.md")
+
+    def test_git_executable_inside_repository_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            synthetic_repo = Path(temp_dir)
+            local_git = synthetic_repo / "git.exe"
+            local_git.write_bytes(b"not an executable")
+            with mock_patch.object(
+                git_read, "TRUSTED_GIT_CANDIDATES", (str(local_git),)
+            ):
+                with self.assertRaisesRegex(
+                    RuntimeError, "no fixed trusted Git executable"
+                ):
+                    git_read._resolve_git_executable(synthetic_repo)
 
     def test_subprocess_alias_bypass_is_rejected(self) -> None:
         tree = ast.parse(
@@ -470,13 +784,16 @@ class Oal001RuntimeTests(unittest.TestCase):
     def test_unit_test_gate_rejects_zero_tests(self) -> None:
         errors = unit_test_gate_errors(return_code=0, count=0, outcome_details={})
 
-        self.assertIn("unit test count must be at least 37, got 0", errors)
+        self.assertIn(
+            f"unit test count must be at least {MINIMUM_OAL_TEST_COUNT}, got 0",
+            errors,
+        )
 
     def test_unit_test_parser_uses_anchored_final_skip_summary(self) -> None:
         output = (
             "test_noise ... skipped=0\n"
             "----------------------------------------------------------------------\n"
-            "Ran 37 tests in 0.100s\n\n"
+            f"Ran {MINIMUM_OAL_TEST_COUNT} tests in 0.100s\n\n"
             "OK (skipped=1)\n"
         )
         completed = SimpleNamespace(returncode=0, stdout=output)
@@ -486,19 +803,20 @@ class Oal001RuntimeTests(unittest.TestCase):
             return_code, _, count, outcomes = run_unit_tests()
 
         self.assertEqual(return_code, 0)
-        self.assertEqual(count, 37)
+        self.assertEqual(count, MINIMUM_OAL_TEST_COUNT)
         self.assertEqual(outcomes, {"skipped": 1})
         self.assertTrue(unit_test_gate_errors(return_code, count, outcomes))
 
         expected_failure_output = output.replace(
-            "OK (skipped=1)", "OK (expected failures=37)"
+            "OK (skipped=1)",
+            f"OK (expected failures={MINIMUM_OAL_TEST_COUNT})",
         )
         completed = SimpleNamespace(returncode=0, stdout=expected_failure_output)
         with mock_patch(
             "scripts.validate_oal_001.subprocess.run", return_value=completed
         ):
             return_code, _, count, outcomes = run_unit_tests()
-        self.assertEqual(outcomes, {"expected failures": 37})
+        self.assertEqual(outcomes, {"expected failures": MINIMUM_OAL_TEST_COUNT})
         self.assertTrue(unit_test_gate_errors(return_code, count, outcomes))
 
 

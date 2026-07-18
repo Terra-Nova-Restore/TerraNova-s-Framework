@@ -9,13 +9,13 @@ import json
 import os
 import re
 import stat
-import subprocess
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Mapping
 
 from .governor import Governor, GovernorDecision, GovernorPolicy, PatchSpec
+from .git_read import is_ignored, worktree_status
 
 
 TARGET_PATH = "scripts/oal_001/observatory.py"
@@ -51,6 +51,7 @@ MANAGED_SOURCE_PATHS = (
     "schemas/oal_001_mutation_trace.schema.json",
     "scripts/oal_001/__init__.py",
     "scripts/oal_001/__main__.py",
+    "scripts/oal_001/git_read.py",
     "scripts/oal_001/governor.py",
     TARGET_PATH,
     "scripts/oal_001/runtime.py",
@@ -1125,28 +1126,11 @@ def validate_trace_payload(trace: Mapping[str, object]) -> list[str]:
 
 
 def _git_check_ignored(repo_root: Path, rel_path: str) -> bool:
-    result = subprocess.run(
-        ["git", "check-ignore", "-q", rel_path],
-        cwd=repo_root,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-        check=False,
-    )
-    return result.returncode == 0
+    return is_ignored(repo_root, rel_path)
 
 
 def _git_status(repo_root: Path) -> str:
-    result = subprocess.run(
-        ["git", "status", "--short", "--branch"],
-        cwd=repo_root,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        check=False,
-    )
-    if result.returncode != 0:
-        raise RuntimeError("git status failed: " + result.stderr.strip())
-    return result.stdout.strip()
+    return worktree_status(repo_root)
 
 
 def git_status_is_clean(status: str) -> bool:
