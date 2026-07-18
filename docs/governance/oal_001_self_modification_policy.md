@@ -114,11 +114,14 @@ dry-run child all execute with isolated mode, site initialization disabled and
 bytecode writes disabled; the repository root is appended only after the
 standard-library import paths. Protected interpreter import state may not be
 aliased, rebound or mutated outside that exact bootstrap. Direct writes to
-`sys` attributes are refused, and dynamic attribute calls are limited to the
-fixed reparse-point compatibility lookup. Governor scalar checks use explicit
-attribute bindings. An imported validator entry point refuses execution instead
-of bypassing the CLI boundary. The static AST boundary is defense in depth and
-is not a Python sandbox; the isolated interpreter remains the execution trust
+`sys` attributes are refused. The direct built-in `getattr` exception is bound
+to the exact module-level `_is_reparse_point` AST in the validator, Governor,
+runtime and typed Git reader, with one unaliased `stat` import and the integer
+literal `0` as its side-effect-free default; every other `getattr` binding,
+reference or call is refused. Governor scalar checks use explicit attribute
+bindings. An imported validator entry point refuses execution instead of
+bypassing the CLI boundary. The static AST boundary is defense in depth and is
+not a Python sandbox; the isolated interpreter remains the execution trust
 boundary.
 
 All Git observations pass through a protected typed read-only adapter. It uses

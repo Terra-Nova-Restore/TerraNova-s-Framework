@@ -144,7 +144,28 @@ EXPECTED_VALIDATOR_SYS_PATH_STATEMENTS = (
 """,
 )
 FORBIDDEN_REFLECTIVE_ATTRIBUTES = frozenset(
-    {"__dict__", "__getattr__", "__getattribute__", "__globals__"}
+    {"__builtins__", "__dict__", "__getattr__", "__getattribute__", "__globals__"}
+)
+EXPECTED_REPARSE_POINT_GETATTR_FILES = frozenset(
+    {
+        "scripts/oal_001/git_read.py",
+        "scripts/oal_001/governor.py",
+        "scripts/oal_001/runtime.py",
+        "scripts/validate_oal_001.py",
+    }
+)
+EXPECTED_REPARSE_POINT_FUNCTION_AST = ast.dump(
+    ast.parse(
+        """def _is_reparse_point(path: Path) -> bool:
+    try:
+        attributes = path.lstat().st_file_attributes
+    except (AttributeError, FileNotFoundError, OSError):
+        return False
+    return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
+""",
+        feature_version=(3, 11),
+    ).body[0],
+    include_attributes=False,
 )
 PACKAGE_FILES = (
     "scripts/oal_001/__init__.py",
@@ -283,7 +304,7 @@ FORBIDDEN_SOURCE_SNIPPETS = (
     "exec(",
 )
 RUN_ID_PATTERN = re.compile(r"^OAL-001-[A-F0-9]{16}$")
-MINIMUM_OAL_TEST_COUNT = 64
+MINIMUM_OAL_TEST_COUNT = 66
 TARGET_PYTHON = (3, 11)
 STATUS_PASS = "PASS"
 STATUS_RUNTIME_GAP = "PASS_WITH_RUNTIME_GAP"
@@ -628,17 +649,137 @@ def _module_statement(
     return None
 
 
-def _is_allowlisted_getattr_call(node: ast.Call) -> bool:
-    return (
-        isinstance(node.func, ast.Name)
-        and node.func.id == "getattr"
-        and not node.keywords
-        and len(node.args) == 3
-        and isinstance(node.args[0], ast.Name)
-        and node.args[0].id == "stat"
-        and isinstance(node.args[1], ast.Constant)
-        and node.args[1].value == "FILE_ATTRIBUTE_REPARSE_POINT"
+def _has_forbidden_name_binding(
+    tree: ast.AST, name: str, *, allowed_import: ast.Import | None = None
+) -> bool:
+    for node in ast.walk(tree):
+        if (
+            isinstance(node, ast.Name)
+            and node.id == name
+            and not isinstance(node.ctx, ast.Load)
+        ):
+            return True
+        if isinstance(node, ast.arg) and node.arg == name:
+            return True
+        if (
+            isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+            and node.name == name
+        ):
+            return True
+        if isinstance(node, ast.Import):
+            if node is allowed_import:
+                continue
+            for alias in node.names:
+                if (alias.asname or alias.name.partition(".")[0]) == name:
+                    return True
+        if isinstance(node, ast.ImportFrom):
+            for alias in node.names:
+                if alias.name == "*" or (alias.asname or alias.name) == name:
+                    return True
+        if isinstance(node, ast.ExceptHandler) and node.name == name:
+            return True
+        if isinstance(node, (ast.MatchAs, ast.MatchStar)) and node.name == name:
+            return True
+        if isinstance(node, ast.MatchMapping) and node.rest == name:
+            return True
+        if isinstance(node, (ast.Global, ast.Nonlocal)) and name in node.names:
+            return True
+    return False
+
+
+def _canonical_reparse_getattr_contract(
+    rel_path: str, tree: ast.AST
+) -> tuple[frozenset[ast.Call], list[str]]:
+    if rel_path not in EXPECTED_REPARSE_POINT_GETATTR_FILES:
+        return frozenset(), []
+
+    contract_error = (
+        f"canonical reparse-point getattr contract does not match in {rel_path}"
     )
+    if not isinstance(tree, ast.Module):
+        return frozenset(), [contract_error]
+
+    top_level_functions = [
+        node
+        for node in tree.body
+        if isinstance(node, ast.FunctionDef) and node.name == "_is_reparse_point"
+    ]
+    all_named_functions = [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+        and node.name == "_is_reparse_point"
+    ]
+    direct_getattr_calls = [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Name)
+        and node.func.id == "getattr"
+    ]
+    stat_imports = [
+        node
+        for node in tree.body
+        if isinstance(node, ast.Import)
+        and len(node.names) == 1
+        and node.names[0].name == "stat"
+        and node.names[0].asname is None
+    ]
+    if not (
+        len(top_level_functions) == 1
+        and all_named_functions == top_level_functions
+        and len(direct_getattr_calls) == 1
+        and len(stat_imports) == 1
+    ):
+        return frozenset(), [contract_error]
+
+    function = top_level_functions[0]
+    call = direct_getattr_calls[0]
+    stat_import = stat_imports[0]
+    getattr_names = [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Name) and node.id == "getattr"
+    ]
+    stat_names = [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Name) and node.id == "stat"
+    ]
+    exact_call = (
+        isinstance(call.func, ast.Name)
+        and call.func.id == "getattr"
+        and not call.keywords
+        and len(call.args) == 3
+        and isinstance(call.args[0], ast.Name)
+        and call.args[0].id == "stat"
+        and isinstance(call.args[1], ast.Constant)
+        and type(call.args[1].value) is str
+        and call.args[1].value == "FILE_ATTRIBUTE_REPARSE_POINT"
+        and isinstance(call.args[2], ast.Constant)
+        and type(call.args[2].value) is int
+        and call.args[2].value == 0
+    )
+    contract_matches = (
+        ast.dump(function, include_attributes=False)
+        == EXPECTED_REPARSE_POINT_FUNCTION_AST
+        and exact_call
+        and len(getattr_names) == 1
+        and getattr_names[0] is call.func
+        and len(stat_names) == 1
+        and stat_names[0] is call.args[0]
+        and not _has_forbidden_name_binding(tree, "getattr")
+        and not _has_forbidden_name_binding(tree, "stat", allowed_import=stat_import)
+    )
+    if not contract_matches:
+        return frozenset(), [contract_error]
+    return frozenset({call}), []
+
+
+def _is_allowlisted_getattr_call(
+    node: ast.Call, allowed_calls: frozenset[ast.Call]
+) -> bool:
+    return node in allowed_calls
 
 
 def _validator_sys_path_context(
@@ -700,6 +841,12 @@ def _import_path_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
         for parent in ast.walk(tree)
         for child in ast.iter_child_nodes(parent)
     }
+    allowed_getattr_calls, getattr_contract_errors = (
+        _canonical_reparse_getattr_contract(rel_path, tree)
+    )
+    errors.extend(getattr_contract_errors)
+    if _has_forbidden_name_binding(tree, "getattr"):
+        errors.append(f"getattr rebinding is forbidden in {rel_path}")
     import_state_references: list[ast.Attribute] = []
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
@@ -751,9 +898,21 @@ def _import_path_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
             isinstance(node, ast.Call)
             and isinstance(node.func, ast.Name)
             and node.func.id in {"getattr", "setattr"}
-            and not _is_allowlisted_getattr_call(node)
+            and not _is_allowlisted_getattr_call(node, allowed_getattr_calls)
         ):
             errors.append(f"reflective attribute call is forbidden in {rel_path}")
+        elif (
+            isinstance(node, ast.Name)
+            and node.id == "getattr"
+            and isinstance(node.ctx, ast.Load)
+        ):
+            parent = parents.get(node)
+            if not (
+                isinstance(parent, ast.Call)
+                and parent.func is node
+                and _is_allowlisted_getattr_call(parent, allowed_getattr_calls)
+            ):
+                errors.append(f"indirect getattr reference is forbidden in {rel_path}")
         elif isinstance(node, ast.arg) and node.arg == "sys":
             errors.append(f"sys rebinding is forbidden in {rel_path}")
         elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
@@ -871,6 +1030,9 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
         for parent in ast.walk(tree)
         for child in ast.iter_child_nodes(parent)
     }
+    allowed_getattr_calls, _ = _canonical_reparse_getattr_contract(rel_path, tree)
+    if _has_forbidden_name_binding(tree, "getattr"):
+        errors.append(f"getattr rebinding is forbidden in {rel_path}")
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             for alias in node.names:
@@ -917,10 +1079,29 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
                 errors.append(
                     f"dynamic execution or namespace access is forbidden in {rel_path}"
                 )
-            if node.func.id == "getattr" and not _is_allowlisted_getattr_call(node):
+            if node.func.id == "getattr" and not _is_allowlisted_getattr_call(
+                node, allowed_getattr_calls
+            ):
+                errors.append(f"indirect process API access is forbidden in {rel_path}")
+        elif (
+            isinstance(node, ast.Name)
+            and node.id == "getattr"
+            and isinstance(node.ctx, ast.Load)
+        ):
+            parent = parents.get(node)
+            if not (
+                isinstance(parent, ast.Call)
+                and parent.func is node
+                and _is_allowlisted_getattr_call(parent, allowed_getattr_calls)
+            ):
                 errors.append(f"indirect process API access is forbidden in {rel_path}")
         elif isinstance(node, ast.Name) and node.id == "__builtins__":
             errors.append(f"__builtins__ access is forbidden in {rel_path}")
+        elif (
+            isinstance(node, ast.Attribute)
+            and node.attr in FORBIDDEN_REFLECTIVE_ATTRIBUTES
+        ):
+            errors.append(f"reflective process access is forbidden in {rel_path}")
         elif (
             isinstance(node, ast.Attribute)
             and isinstance(node.value, ast.Name)

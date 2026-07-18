@@ -4,7 +4,6 @@ import ast
 import copy
 import json
 import os
-import stat
 import sys
 import tempfile
 import unittest
@@ -39,6 +38,7 @@ from scripts.validate_oal_001 import (
     EXIT_RUNTIME_GAP,
     MINIMUM_OAL_TEST_COUNT,
     PROTECTED_IMPORT_FILES,
+    PYTHON_FILES,
     STATUS_PASS,
     STATUS_RUNTIME_GAP,
     VALIDATOR_PATH,
@@ -299,7 +299,7 @@ class Oal001RuntimeTests(unittest.TestCase):
                 read_managed_source(root, TARGET_PATH)
 
     def test_windows_reparse_attribute_is_rejected(self) -> None:
-        attributes = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+        attributes = 0x400
         fake_stat = SimpleNamespace(st_file_attributes=attributes)
         with mock_patch.object(Path, "lstat", return_value=fake_stat):
             self.assertTrue(_is_reparse_point(Path("synthetic-junction")))
@@ -1244,28 +1244,179 @@ class Oal001RuntimeTests(unittest.TestCase):
         read_tree = ast.parse("import sys\nexecutable = sys.executable\n")
         self.assertEqual(_import_path_boundary_errors("synthetic.py", read_tree), [])
 
-    def test_reflective_getattr_allowlist_is_bound_to_fixed_call(self) -> None:
-        spoofed_tree = ast.parse(
-            "import os\n"
-            "policy = os\n"
-            "field = 'system'\n"
-            "operation = getattr(policy, field)\n"
+    def test_getattr_allowlist_accepts_only_four_canonical_sites(self) -> None:
+        expected_paths = (
+            "scripts/oal_001/git_read.py",
+            "scripts/oal_001/governor.py",
+            "scripts/oal_001/runtime.py",
+            "scripts/validate_oal_001.py",
         )
-        self.assertIn(
-            "reflective attribute call is forbidden in synthetic.py",
-            _import_path_boundary_errors("synthetic.py", spoofed_tree),
-        )
-        self.assertIn(
-            "indirect process API access is forbidden in synthetic.py",
-            _subprocess_boundary_errors("synthetic.py", spoofed_tree),
-        )
+        actual_paths: list[str] = []
+        for rel_path in PYTHON_FILES:
+            tree = ast.parse(
+                (REPO_ROOT / rel_path).read_text(encoding="utf-8"),
+                filename=rel_path,
+                feature_version=(3, 11),
+            )
+            direct_calls = [
+                node
+                for node in ast.walk(tree)
+                if isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Name)
+                and node.func.id == "getattr"
+            ]
+            if direct_calls:
+                actual_paths.append(rel_path)
+            if rel_path in expected_paths:
+                with self.subTest(rel_path=rel_path):
+                    self.assertEqual(len(direct_calls), 1)
+                    self.assertEqual(_import_path_boundary_errors(rel_path, tree), [])
+                    self.assertEqual(_subprocess_boundary_errors(rel_path, tree), [])
+            else:
+                with self.subTest(rel_path=rel_path):
+                    self.assertEqual(direct_calls, [])
 
-        governor_path = "scripts/oal_001/governor.py"
-        governor_tree = ast.parse(
-            (REPO_ROOT / governor_path).read_text(encoding="utf-8")
+        self.assertEqual(tuple(actual_paths), expected_paths)
+
+    def test_getattr_allowlist_rejects_wrong_shapes_and_contexts(self) -> None:
+        canonical_function = """def _is_reparse_point(path: Path) -> bool:
+    try:
+        attributes = path.lstat().st_file_attributes
+    except (AttributeError, FileNotFoundError, OSError):
+        return False
+    return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
+"""
+        canonical_source = f"import stat\n{canonical_function}"
+        canonical_path = "scripts/oal_001/governor.py"
+        mutants = {
+            "legacy dynamic fields": (
+                "import os\npolicy = os\nfield = 'system'\n"
+                "operation = getattr(policy, field)\n"
+            ),
+            "noncanonical path": canonical_source,
+            "module-level call": (
+                "import stat\n"
+                "value = getattr(stat, 'FILE_ATTRIBUTE_REPARSE_POINT', 0)\n"
+            ),
+            "wrong function": canonical_source.replace(
+                "def _is_reparse_point", "def other", 1
+            ),
+            "side-effectful default": canonical_source.replace(
+                ", 0))", ", side_effect()))", 1
+            ),
+            "boolean default": canonical_source.replace(", 0))", ", False))", 1),
+            "alternate integer default": canonical_source.replace(
+                ", 0))", ", 0x400))", 1
+            ),
+            "two arguments": canonical_source.replace(
+                ', "FILE_ATTRIBUTE_REPARSE_POINT", 0)',
+                ', "FILE_ATTRIBUTE_REPARSE_POINT")',
+                1,
+            ),
+            "four arguments": canonical_source.replace(
+                ', "FILE_ATTRIBUTE_REPARSE_POINT", 0)',
+                ', "FILE_ATTRIBUTE_REPARSE_POINT", 0, None)',
+                1,
+            ),
+            "keyword arguments": canonical_source.replace(
+                'getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)',
+                'getattr(stat, name="FILE_ATTRIBUTE_REPARSE_POINT", default=0)',
+                1,
+            ),
+            "wrong receiver": canonical_source.replace(
+                'getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)',
+                'getattr(os, "FILE_ATTRIBUTE_REPARSE_POINT", 0)',
+                1,
+            ),
+            "wrong attribute": canonical_source.replace(
+                '"FILE_ATTRIBUTE_REPARSE_POINT"', '"system"', 1
+            ),
+            "duplicate getter": canonical_source.replace(
+                'getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)',
+                'getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0) or '
+                'getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)',
+                1,
+            ),
+        }
+        for name, source in mutants.items():
+            rel_path = "synthetic.py" if name == "noncanonical path" else canonical_path
+            with self.subTest(name=name):
+                tree = ast.parse(source, feature_version=(3, 11))
+                self.assertTrue(_import_path_boundary_errors(rel_path, tree))
+                self.assertTrue(_subprocess_boundary_errors(rel_path, tree))
+
+        missing_call_tree = ast.parse(
+            canonical_source.replace(
+                'getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)', "0", 1
+            ),
+            feature_version=(3, 11),
         )
-        self.assertEqual(_import_path_boundary_errors(governor_path, governor_tree), [])
-        self.assertEqual(_subprocess_boundary_errors(governor_path, governor_tree), [])
+        self.assertTrue(_import_path_boundary_errors(canonical_path, missing_call_tree))
+
+    def test_getattr_allowlist_rejects_shadowing_aliases_and_rebinding(self) -> None:
+        canonical_function = """def _is_reparse_point(path: Path) -> bool:
+    try:
+        attributes = path.lstat().st_file_attributes
+    except (AttributeError, FileNotFoundError, OSError):
+        return False
+    return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
+"""
+        canonical_source = f"import stat\n{canonical_function}"
+        mutants = {
+            "getattr assignment": canonical_source.replace(
+                "import stat\n", "import stat\ngetattr = helper\n", 1
+            ),
+            "getattr function": canonical_source.replace(
+                "import stat\n",
+                "import stat\ndef getattr(*args):\n    return 0\n",
+                1,
+            ),
+            "getattr import alias": canonical_source.replace(
+                "import stat\n", "import stat\nimport helpers as getattr\n", 1
+            ),
+            "getattr function argument": canonical_source.replace(
+                "def _is_reparse_point(path: Path)",
+                "def _is_reparse_point(path: Path, getattr=getattr)",
+                1,
+            ),
+            "getattr reference alias": canonical_source.replace(
+                "import stat\n", "import stat\nreflect = getattr\n", 1
+            ),
+            "indirect builtins getattr": (
+                f"{canonical_source}import os\nimport codecs\n"
+                "getter = codecs.__builtins__['getattr']\n"
+                "operation = getter(os, 'system')\n"
+            ),
+            "stat assignment": canonical_source.replace(
+                "import stat\n", "import stat\nstat = other\n", 1
+            ),
+            "stat import alias": canonical_source.replace(
+                "import stat\n", "import helpers as stat\n", 1
+            ),
+            "stat reference alias": canonical_source.replace(
+                "import stat\n", "import stat\nstat_alias = stat\n", 1
+            ),
+            "stat attribute write": canonical_source.replace(
+                "import stat\n",
+                "import stat\nstat.FILE_ATTRIBUTE_REPARSE_POINT = 0\n",
+                1,
+            ),
+            "star import": canonical_source.replace(
+                "import stat\n", "import stat\nfrom helpers import *\n", 1
+            ),
+            "duplicate canonical function": (
+                f"import stat\n{canonical_function}{canonical_function}"
+            ),
+        }
+        for name, source in mutants.items():
+            with self.subTest(name=name):
+                tree = ast.parse(source, feature_version=(3, 11))
+                self.assertTrue(
+                    _import_path_boundary_errors("scripts/oal_001/governor.py", tree)
+                )
+                self.assertTrue(
+                    _subprocess_boundary_errors("scripts/oal_001/governor.py", tree)
+                )
 
     def test_import_state_aliases_and_mutations_are_rejected(self) -> None:
         validator_source = (REPO_ROOT / "scripts/validate_oal_001.py").read_text(
