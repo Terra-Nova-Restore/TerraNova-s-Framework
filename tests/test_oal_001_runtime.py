@@ -1072,6 +1072,74 @@ class Oal001RuntimeTests(unittest.TestCase):
                 )
                 self.assertTrue(bypass_errors)
 
+    def test_subprocess_import_is_canonical_and_rebinding_is_rejected(self) -> None:
+        expected_paths = {
+            "scripts/oal_001/git_read.py",
+            "scripts/validate_oal_001.py",
+        }
+        for rel_path in PYTHON_FILES:
+            tree = ast.parse(
+                (REPO_ROOT / rel_path).read_text(encoding="utf-8"),
+                filename=rel_path,
+                feature_version=(3, 11),
+            )
+            canonical_imports = [
+                node
+                for node in tree.body
+                if isinstance(node, ast.Import)
+                and len(node.names) == 1
+                and node.names[0].name == "subprocess"
+                and node.names[0].asname is None
+            ]
+            with self.subTest(rel_path=rel_path):
+                self.assertEqual(
+                    len(canonical_imports), int(rel_path in expected_paths)
+                )
+                self.assertNotIn(
+                    f"canonical subprocess import contract does not match in {rel_path}",
+                    _subprocess_boundary_errors(rel_path, tree),
+                )
+
+        canonical_path = "scripts/validate_oal_001.py"
+        canonical_source = (REPO_ROOT / canonical_path).read_text(encoding="utf-8")
+        rebinding_mutants = {
+            "assignment": canonical_source.replace(
+                "import subprocess\n",
+                "import subprocess\nsubprocess = helper\n",
+                1,
+            ),
+            "argument": canonical_source + "\ndef synthetic(subprocess):\n    pass\n",
+            "mapping pattern": (
+                canonical_source
+                + "\nmatch {}:\n    case {**subprocess}:\n        pass\n"
+            ),
+            "from import": canonical_source.replace(
+                "import subprocess\n",
+                "from helper import run as subprocess\n",
+                1,
+            ),
+        }
+        expected_rebinding = (
+            "subprocess rebinding is forbidden in scripts/validate_oal_001.py"
+        )
+        for name, source in rebinding_mutants.items():
+            with self.subTest(name=name):
+                errors = _subprocess_boundary_errors(
+                    canonical_path,
+                    ast.parse(source, feature_version=(3, 11)),
+                )
+                self.assertIn(expected_rebinding, errors)
+
+        missing_import = canonical_source.replace("import subprocess\n", "", 1)
+        self.assertIn(
+            "canonical subprocess import contract does not match in "
+            "scripts/validate_oal_001.py",
+            _subprocess_boundary_errors(
+                canonical_path,
+                ast.parse(missing_import, feature_version=(3, 11)),
+            ),
+        )
+
     def test_workflow_and_validator_use_isolated_import_bootstrap(self) -> None:
         workflow = (REPO_ROOT / ".github/workflows/oal-001-validate.yml").read_text(
             encoding="utf-8"
@@ -1248,6 +1316,19 @@ class Oal001RuntimeTests(unittest.TestCase):
 
         read_tree = ast.parse("import sys\nexecutable = sys.executable\n")
         self.assertEqual(_import_path_boundary_errors("synthetic.py", read_tree), [])
+
+    def test_sys_match_mapping_rebinding_is_rejected(self) -> None:
+        rel_path = "scripts/validate_oal_001.py"
+        validator_source = (REPO_ROOT / rel_path).read_text(encoding="utf-8")
+        modified_tree = ast.parse(
+            validator_source + "\nmatch {}:\n    case {**sys}:\n        pass\n",
+            feature_version=(3, 11),
+        )
+
+        self.assertIn(
+            "sys rebinding is forbidden in scripts/validate_oal_001.py",
+            _import_path_boundary_errors(rel_path, modified_tree),
+        )
 
     def test_getattr_allowlist_accepts_only_four_canonical_sites(self) -> None:
         expected_paths = (

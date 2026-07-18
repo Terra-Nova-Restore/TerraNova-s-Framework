@@ -154,6 +154,12 @@ EXPECTED_REPARSE_POINT_GETATTR_FILES = frozenset(
         "scripts/validate_oal_001.py",
     }
 )
+EXPECTED_SUBPROCESS_IMPORT_FILES = frozenset(
+    {
+        "scripts/oal_001/git_read.py",
+        "scripts/validate_oal_001.py",
+    }
+)
 EXPECTED_REPARSE_POINT_FUNCTION_AST = ast.dump(
     ast.parse(
         """def _is_reparse_point(path: Path) -> bool:
@@ -304,7 +310,7 @@ FORBIDDEN_SOURCE_SNIPPETS = (
     "exec(",
 )
 RUN_ID_PATTERN = re.compile(r"^OAL-001-[A-F0-9]{16}$")
-MINIMUM_OAL_TEST_COUNT = 66
+MINIMUM_OAL_TEST_COUNT = 68
 TARGET_PYTHON = (3, 11)
 STATUS_PASS = "PASS"
 STATUS_RUNTIME_GAP = "PASS_WITH_RUNTIME_GAP"
@@ -922,6 +928,8 @@ def _import_path_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
             errors.append(f"sys rebinding is forbidden in {rel_path}")
         elif isinstance(node, (ast.MatchAs, ast.MatchStar)) and node.name == "sys":
             errors.append(f"sys rebinding is forbidden in {rel_path}")
+        elif isinstance(node, ast.MatchMapping) and node.rest == "sys":
+            errors.append(f"sys rebinding is forbidden in {rel_path}")
         elif isinstance(node, (ast.Global, ast.Nonlocal)) and "sys" in node.names:
             errors.append(f"sys rebinding is forbidden in {rel_path}")
 
@@ -1025,6 +1033,32 @@ def _is_process_api_name(name: str) -> bool:
 def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
     errors: list[str] = []
     signatures: list[tuple[str, ...] | None] = []
+    canonical_imports = (
+        [
+            node
+            for node in tree.body
+            if isinstance(node, ast.Import)
+            and len(node.names) == 1
+            and node.names[0].name == "subprocess"
+            and node.names[0].asname is None
+        ]
+        if isinstance(tree, ast.Module)
+        else []
+    )
+    expected_import_count = int(rel_path in EXPECTED_SUBPROCESS_IMPORT_FILES)
+    if len(canonical_imports) != expected_import_count:
+        errors.append(
+            f"canonical subprocess import contract does not match in {rel_path}"
+        )
+    allowed_subprocess_import = (
+        canonical_imports[0]
+        if expected_import_count == 1 and len(canonical_imports) == 1
+        else None
+    )
+    if _has_forbidden_name_binding(
+        tree, "subprocess", allowed_import=allowed_subprocess_import
+    ):
+        errors.append(f"subprocess rebinding is forbidden in {rel_path}")
     parents: dict[ast.AST, ast.AST] = {
         child: parent
         for parent in ast.walk(tree)
