@@ -1,0 +1,29 @@
+{
+  "fixture_id": "OAL-001-SYNTHETIC-CURRENT-SLICE-001",
+  "fixture_kind": "synthetic_current_slice",
+  "historical_evidence": false,
+  "observations": [
+    "synthetic-signal-01",
+    "synthetic-signal-02",
+    "synthetic-signal-03",
+    "synthetic-signal-04",
+    "synthetic-signal-05",
+    "synthetic-signal-06",
+    "synthetic-signal-07",
+    "synthetic-signal-08",
+    "synthetic-signal-09",
+    "synthetic-signal-10",
+    "synthetic-signal-11",
+    "synthetic-signal-12",
+    "synthetic-signal-13",
+    "synthetic-signal-14",
+    "synthetic-signal-15",
+    "synthetic-signal-16",
+    "synthetic-signal-17",
+    "synthetic-signal-18",
+    "synthetic-signal-19",
+    "synthetic-signal-20"
+  ],
+  "expected_baseline_exploration_share": 0.25,
+  "expected_candidate_exploration_share": 0.3
+}
