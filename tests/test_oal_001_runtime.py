@@ -72,6 +72,11 @@ from scripts.validate_oal_001 import (
 REPO_ROOT = Path(__file__).resolve().parents[1]
 BASE_SHA = "e" * 40
 BRANCH = "codex/observatory-selfmod-001"
+ABSOLUTE_GIT_EXECUTABLE_FIXTURE = (
+    Path(r"C:\Program Files\Git\cmd\git.exe")
+    if os.name == "nt"
+    else Path("/usr/bin/git")
+)
 
 
 class Oal001RuntimeTests(unittest.TestCase):
@@ -878,7 +883,7 @@ class Oal001RuntimeTests(unittest.TestCase):
             self.assertTrue(any("completion marker" in item for item in errors))
 
     def test_git_read_uses_hardened_absolute_process_context(self) -> None:
-        executable = Path(r"C:\Program Files\Git\cmd\git.exe")
+        executable = ABSOLUTE_GIT_EXECUTABLE_FIXTURE
         completed = SimpleNamespace(
             returncode=0,
             stdout=BRANCH + "\n",
@@ -908,7 +913,7 @@ class Oal001RuntimeTests(unittest.TestCase):
     def test_worktree_status_preserves_porcelain_columns_without_tracking_data(
         self,
     ) -> None:
-        executable = Path(r"C:\Program Files\Git\cmd\git.exe")
+        executable = ABSOLUTE_GIT_EXECUTABLE_FIXTURE
         completed = SimpleNamespace(
             returncode=0,
             stdout=" M scripts/oal_001/runtime.py\n?? untracked.txt\n",
@@ -999,7 +1004,7 @@ class Oal001RuntimeTests(unittest.TestCase):
         self.assertTrue(
             git_read.is_ignored(REPO_ROOT, "raw/exports/local-private/oal-001")
         )
-        executable = Path(r"C:\Program Files\Git\cmd\git.exe")
+        executable = ABSOLUTE_GIT_EXECUTABLE_FIXTURE
         with mock_patch.object(
             git_read, "_resolve_git_executable", return_value=executable
         ):
