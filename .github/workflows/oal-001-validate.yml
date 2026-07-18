@@ -1,19 +1,7 @@
 name: Validate OAL-001
 
 on:
-  pull_request:
-    paths:
-      - '.codex/safety_policy.yaml'
-      - '.github/workflows/oal-001-validate.yml'
-      - '.gitignore'
-      - 'config/oal_001.json'
-      - 'docs/governance/oal_001_self_modification_policy.md'
-      - 'schemas/oal_001_mutation_trace.schema.json'
-      - 'scripts/oal_001/**'
-      - 'scripts/validate_oal_001.py'
-      - 'tests/fixtures/observatory/**'
-      - 'tests/test_oal_001_governor.py'
-      - 'tests/test_oal_001_runtime.py'
+  pull_request: {}
 
 permissions:
   contents: read
@@ -24,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
+      OAL_BASE_REPOSITORY: ${{ github.event.pull_request.base.repo.full_name }}
+      OAL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
       OAL_SOURCE_BRANCH: ${{ github.head_ref }}
       OAL_SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
 
@@ -33,21 +23,16 @@ jobs:
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ env.OAL_SOURCE_SHA }}
-          fetch-depth: 1
+          fetch-depth: 0
           persist-credentials: false
 
-      - name: Bind source to the governed local branch
+      - name: Bind checkout to the exact pull-request source
         shell: bash
         run: |
           if [[ ! "$OAL_SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
             echo "Invalid pull-request source SHA" >&2
             exit 1
           fi
-          if [[ ! "$OAL_SOURCE_BRANCH" =~ ^codex/observatory-selfmod-[A-Za-z0-9._/-]+$ ]]; then
-            echo "OAL changes require a codex/observatory-selfmod-* source branch" >&2
-            exit 1
-          fi
-          git switch --force-create "$OAL_SOURCE_BRANCH" "$OAL_SOURCE_SHA"
           test "$(git rev-parse HEAD)" = "$OAL_SOURCE_SHA"
 
       - name: Setup CPython 3.11
@@ -223,7 +208,59 @@ jobs:
               raise SystemExit("\n".join(errors))
           PY
 
+      - name: Classify governed OAL changes
+        id: oal_scope
+        shell: bash
+        run: |
+          if [[ ! "$OAL_BASE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Invalid pull-request base SHA" >&2
+            exit 1
+          fi
+          if [[ ! "$OAL_BASE_REPOSITORY" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
+            echo "Invalid pull-request base repository" >&2
+            exit 1
+          fi
+          git fetch --no-tags \
+            "https://github.com/${OAL_BASE_REPOSITORY}.git" "$OAL_BASE_SHA"
+          test "$(git rev-parse FETCH_HEAD)" = "$OAL_BASE_SHA"
+          merge_base="$(git merge-base "$OAL_BASE_SHA" "$OAL_SOURCE_SHA")"
+          if [[ ! "$merge_base" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Could not resolve the pull-request merge base" >&2
+            exit 1
+          fi
+
+          changed_paths="$RUNNER_TEMP/oal-001-changed-paths"
+          git diff --no-renames --name-only -z \
+            "$merge_base" "$OAL_SOURCE_SHA" -- > "$changed_paths"
+          oal_changed=false
+          while IFS= read -r -d '' changed_path; do
+            case "$changed_path" in
+              .codex/safety_policy.yaml|.github/workflows/oal-001-validate.yml|.gitignore|config/oal_001.json)
+                oal_changed=true
+                ;;
+              docs/governance/oal_001_self_modification_policy.md|schemas/oal_001_mutation_trace.schema.json|scripts/validate_oal_001.py)
+                oal_changed=true
+                ;;
+              scripts/oal_001/*|tests/fixtures/observatory/*|tests/test_oal_001_governor.py|tests/test_oal_001_runtime.py)
+                oal_changed=true
+                ;;
+            esac
+          done < "$changed_paths"
+          echo "oal_changed=$oal_changed" >> "$GITHUB_OUTPUT"
+
+      - name: Bind governed changes to an OAL branch
+        if: steps.oal_scope.outputs.oal_changed == 'true'
+        shell: bash
+        run: |
+          if [[ ! "$OAL_SOURCE_BRANCH" =~ ^codex/observatory-selfmod-[A-Za-z0-9._/-]+$ ]]; then
+            echo "OAL changes require a codex/observatory-selfmod-* source branch" >&2
+            exit 1
+          fi
+          git switch --force-create "$OAL_SOURCE_BRANCH" "$OAL_SOURCE_SHA"
+          test "$(git rev-parse HEAD)" = "$OAL_SOURCE_SHA"
+
       - name: Run complete OAL validator
+        if: steps.oal_scope.outputs.oal_changed == 'true'
         run: python -I -S -B scripts/validate_oal_001.py
 
       - name: Confirm no tracked or unignored mutation

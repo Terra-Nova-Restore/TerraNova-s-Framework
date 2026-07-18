@@ -47,9 +47,12 @@ from scripts.validate_oal_001 import (
     _atomic_write_json,
     _build_test_result,
     _capture_artifact_snapshot,
+    _dispatch as validator_dispatch,
     _finalize_evidence,
     _finalized_snapshot,
     _import_path_boundary_errors,
+    _pull_request_trigger_errors,
+    _runtime_isolation_errors,
     _replace_snapshot_bytes,
     _snapshot_promotion_eligible,
     _subprocess_boundary_errors,
@@ -562,7 +565,9 @@ class Oal001RuntimeTests(unittest.TestCase):
                         return_value=output_dir,
                     ),
                 ):
-                    return_code = validator_main(["--verify-existing", result.run_id])
+                    return_code = validator_dispatch(
+                        ["--verify-existing", result.run_id]
+                    )
                 self.assertEqual(return_code, EXIT_NOT_PROMOTION_READY)
 
                 forged = copy.deepcopy(test_result)
@@ -804,7 +809,7 @@ class Oal001RuntimeTests(unittest.TestCase):
                     side_effect=AssertionError("verifier must not write"),
                 ),
             ):
-                return_code = validator_main(["--verify-existing", result.run_id])
+                return_code = validator_dispatch(["--verify-existing", result.run_id])
             after = {
                 path.name: sha256_bytes(path.read_bytes())
                 for path in output_dir.iterdir()
@@ -812,7 +817,9 @@ class Oal001RuntimeTests(unittest.TestCase):
 
             self.assertEqual(return_code, EXIT_RUNTIME_GAP)
             self.assertEqual(before, after)
-            self.assertEqual(validator_main(["--verify-existing", "not-a-run-id"]), 2)
+            self.assertEqual(
+                validator_dispatch(["--verify-existing", "not-a-run-id"]), 2
+            )
 
     def test_completion_marker_detects_post_validation_tampering(self) -> None:
         local_private = REPO_ROOT / "raw" / "exports" / "local-private"
@@ -1070,6 +1077,26 @@ class Oal001RuntimeTests(unittest.TestCase):
 
         self.assertIn("python -I -S -B - <<'PY'", workflow)
         self.assertIn("run: python -I -S -B scripts/validate_oal_001.py", workflow)
+        preflight_index = workflow.index("Confirm isolated runtime and import topology")
+        classification_index = workflow.index("Classify governed OAL changes")
+        branch_gate_index = workflow.index("Bind governed changes to an OAL branch")
+        validator_index = workflow.index("Run complete OAL validator")
+        self.assertLess(
+            preflight_index,
+            classification_index,
+        )
+        self.assertLess(classification_index, branch_gate_index)
+        self.assertLess(branch_gate_index, validator_index)
+        self.assertEqual(
+            workflow.count("if: steps.oal_scope.outputs.oal_changed == 'true'"),
+            2,
+        )
+        self.assertIn("scripts/oal_001/*", workflow)
+        self.assertIn("scripts/validate_oal_001.py", workflow)
+        self.assertIn("fetch-depth: 0", workflow)
+        self.assertIn('merge_base="$(git merge-base ', workflow)
+        self.assertIn('"$merge_base" "$OAL_SOURCE_SHA" --', workflow)
+        self.assertNotIn('"$OAL_BASE_SHA" "$OAL_SOURCE_SHA" -- >', workflow)
         direct_imports = [
             node for node in validator_tree.body if isinstance(node, ast.Import)
         ]
@@ -1087,6 +1114,150 @@ class Oal001RuntimeTests(unittest.TestCase):
         self.assertTrue(
             _import_path_boundary_errors("scripts/validate_oal_001.py", unsafe_tree)
         )
+
+    def test_workflow_trigger_is_unfiltered_and_fail_closed(self) -> None:
+        workflow_source = (
+            REPO_ROOT / ".github/workflows/oal-001-validate.yml"
+        ).read_bytes()
+
+        self.assertEqual(_pull_request_trigger_errors(workflow_source), [])
+        workflow = workflow_source.decode("utf-8")
+        canonical_trigger = "on:\n  pull_request: {}"
+        filtered_or_indirect_triggers = (
+            "on:\n  pull_request:\n    paths:\n      - 'scripts/**'",
+            "on:\n  pull_request:\n    paths-ignore:\n      - 'docs/**'",
+            "on:\n  pull_request:\n    branches:\n      - main",
+            "on:\n  pull_request:\n    branches-ignore:\n      - legacy",
+            "on:\n  pull_request:\n    types: [opened]",
+            "on:\n  pull_request_target: {}",
+            "on:\n  push: {}\n  # pull_request: {}",
+            "on:\n  pull_request:",
+        )
+        trigger_error = [
+            "OAL workflow trigger must be exactly one unfiltered pull_request event"
+        ]
+        for replacement in filtered_or_indirect_triggers:
+            source = workflow.replace(canonical_trigger, replacement, 1).encode()
+            with self.subTest(replacement=replacement):
+                self.assertEqual(_pull_request_trigger_errors(source), trigger_error)
+
+        duplicate_or_alternative_keys = (
+            "on:\n  push: {}",
+            "on: {push: {}}",
+            '"on": {push: {}}',
+            "'on': {push: {}}",
+            "on : {push: {}}",
+            "!!str on: {push: {}}",
+            "? on\n: {push: {}}",
+            "{on: {push: {}}}",
+        )
+        top_level_error = [
+            "OAL workflow top-level mapping does not match the exact contract"
+        ]
+        for extra_key in duplicate_or_alternative_keys:
+            source = workflow.replace(
+                canonical_trigger,
+                f"{canonical_trigger}\n{extra_key}",
+                1,
+            ).encode()
+            with self.subTest(extra_key=extra_key):
+                self.assertEqual(_pull_request_trigger_errors(source), top_level_error)
+        aliased_source = workflow.replace(
+            canonical_trigger,
+            "on: &events\n  pull_request: {}",
+            1,
+        ).encode()
+        self.assertEqual(_pull_request_trigger_errors(aliased_source), top_level_error)
+
+    def test_imported_main_refuses_untrusted_import_state(self) -> None:
+        self.assertTrue(_runtime_isolation_errors())
+        with (
+            mock_patch("scripts.validate_oal_001._dispatch") as dispatch,
+            mock_patch("scripts.validate_oal_001.error") as emit_error,
+        ):
+            return_code = validator_main(
+                ["--verify-existing", "OAL-001-DECOY00000000000"]
+            )
+
+        self.assertEqual(return_code, 1)
+        dispatch.assert_not_called()
+        emit_error.assert_called()
+
+    def test_import_state_aliases_and_mutations_are_rejected(self) -> None:
+        validator_source = (REPO_ROOT / "scripts/validate_oal_001.py").read_text(
+            encoding="utf-8"
+        )
+        bypasses = (
+            "from sys import path\npath.insert(0, 'scripts/oal_001')\n",
+            "import sys\np = sys.path\np.insert(0, 'scripts/oal_001')\n",
+            "import sys\nsys.path_hooks.append(lambda value: None)\n",
+            "import sys\nsys.meta_path.clear()\n",
+            "import sys\nsys.path_importer_cache.clear()\n",
+            "import sys\nsys.modules.clear()\n",
+            "import sys\nforwarded = sys\nforwarded.path.insert(0, '.')\n",
+            "import sys as system\nsystem.path.insert(0, '.')\n",
+            "import sys\nsys.__getattribute__('path').insert(0, '.')\n",
+            "import os\nos.sys.path.insert(0, '.')\n",
+            "from os import sys as system\nsystem.path.insert(0, '.')\n",
+            "from os import *\nsys.path.insert(0, '.')\n",
+            "import pathlib\nsystem = pathlib.__dict__['sys']\n"
+            "system.path.insert(0, '.')\n",
+            "import pathlib\nsystem = pathlib.__getattribute__('sys')\n"
+            "system.path.insert(0, '.')\n",
+            "import pathlib\nsystem = getattr(pathlib, 'sys')\n"
+            "system.path.insert(0, '.')\n",
+        )
+        for bypass in bypasses:
+            with self.subTest(bypass=bypass):
+                modified_tree = ast.parse(f"{validator_source}\n{bypass}")
+                self.assertTrue(
+                    _import_path_boundary_errors(
+                        "scripts/validate_oal_001.py", modified_tree
+                    )
+                )
+        decoy_body = (
+            "for raw_path in sys.path:\n"
+            "    pass\n"
+            "if str(REPO_ROOT) not in sys.path:\n"
+            "    sys.path.append(str(REPO_ROOT))\n"
+            "if sys.path.count(str(REPO_ROOT)) != 1 or "
+            "sys.path[-1] != str(REPO_ROOT):\n"
+            "    pass\n"
+        )
+        decoy_sources = (
+            "import sys\nREPO_ROOT = 'synthetic'\ndef decoy():\n"
+            + "".join(f"    {line}\n" for line in decoy_body.splitlines()),
+            "import sys\nREPO_ROOT = 'synthetic'\nif False:\n"
+            + "".join(f"    {line}\n" for line in decoy_body.splitlines()),
+        )
+        for decoy_source in decoy_sources:
+            with self.subTest(decoy_source=decoy_source):
+                self.assertTrue(
+                    _import_path_boundary_errors(
+                        "scripts/validate_oal_001.py", ast.parse(decoy_source)
+                    )
+                )
+        disabled_bootstraps = (
+            validator_source.replace(
+                "if str(REPO_ROOT) not in sys.path:\n",
+                "if False and str(REPO_ROOT) not in sys.path:\n",
+                1,
+            ),
+            validator_source.replace(
+                "if sys.path.count(str(REPO_ROOT)) != 1 or "
+                "sys.path[-1] != str(REPO_ROOT):\n",
+                "if False and (sys.path.count(str(REPO_ROOT)) != 1 or "
+                "sys.path[-1] != str(REPO_ROOT)):\n",
+                1,
+            ),
+        )
+        for disabled_source in disabled_bootstraps:
+            with self.subTest(disabled_source=disabled_source):
+                self.assertTrue(
+                    _import_path_boundary_errors(
+                        "scripts/validate_oal_001.py", ast.parse(disabled_source)
+                    )
+                )
 
     def test_python_shadowing_paths_are_rejected_before_repo_imports(self) -> None:
         cases = (
@@ -1141,7 +1312,7 @@ class Oal001RuntimeTests(unittest.TestCase):
                         f"scripts.validate_oal_001.{internal_target}"
                     ) as internal,
                 ):
-                    return_code = validator_main([option])
+                    return_code = validator_dispatch([option])
 
                 self.assertEqual(return_code, 1)
                 internal.assert_not_called()

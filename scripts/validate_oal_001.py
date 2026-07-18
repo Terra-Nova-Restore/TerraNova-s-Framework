@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """Validate OAL-001 boundaries, tests, dry-run and cross-artifact evidence."""
+# ruff: noqa: E402 -- isolation checks intentionally precede remaining imports
 
 from __future__ import annotations
 
 import sys
 
 
-if __name__ == "__main__" and not (
+INTERPRETER_ISOLATED = (
     sys.flags.isolated
     and sys.flags.no_site
     and sys.flags.safe_path
     and sys.flags.dont_write_bytecode
-):
+)
+if __name__ == "__main__" and not INTERPRETER_ISOLATED:
     print(
         "[validate-oal-001] ERROR: validator requires python -I -S -B",
         file=sys.stderr,
@@ -35,44 +37,47 @@ from typing import Literal, Mapping
 
 VALIDATOR_PATH = Path(__file__).resolve(strict=True)
 REPO_ROOT = VALIDATOR_PATH.parents[1]
-if __name__ == "__main__":
-    forbidden_import_roots = {
-        REPO_ROOT,
-        VALIDATOR_PATH.parent,
-        Path.cwd().resolve(),
-    }
-    unsafe_import_path = False
-    for raw_path in sys.path:
-        if not raw_path:
+forbidden_import_roots = {
+    REPO_ROOT,
+    VALIDATOR_PATH.parent,
+    Path.cwd().resolve(),
+}
+unsafe_import_path = False
+for raw_path in sys.path:
+    if not raw_path:
+        unsafe_import_path = True
+        break
+    try:
+        if Path(raw_path).resolve() in forbidden_import_roots:
             unsafe_import_path = True
             break
-        try:
-            if Path(raw_path).resolve() in forbidden_import_roots:
-                unsafe_import_path = True
-                break
-        except OSError:
-            unsafe_import_path = True
-            break
-    if unsafe_import_path:
-        print(
-            "[validate-oal-001] ERROR: repository paths precede the isolated import boundary",
-            file=sys.stderr,
-        )
-        raise SystemExit(1)
-if str(REPO_ROOT) not in sys.path:
-    sys.path.append(str(REPO_ROOT))
-if __name__ == "__main__" and (
-    sys.path.count(str(REPO_ROOT)) != 1 or sys.path[-1] != str(REPO_ROOT)
-):
+    except OSError:
+        unsafe_import_path = True
+        break
+if __name__ == "__main__" and unsafe_import_path:
     print(
-        "[validate-oal-001] ERROR: repository import root is not isolated",
+        "[validate-oal-001] ERROR: repository paths precede the isolated import boundary",
         file=sys.stderr,
     )
     raise SystemExit(1)
+if str(REPO_ROOT) not in sys.path:
+    sys.path.append(str(REPO_ROOT))
+repository_import_root_isolated = True
+if sys.path.count(str(REPO_ROOT)) != 1 or sys.path[-1] != str(REPO_ROOT):
+    repository_import_root_isolated = False
+    if __name__ == "__main__":
+        print(
+            "[validate-oal-001] ERROR: repository import root is not isolated",
+            file=sys.stderr,
+        )
+        raise SystemExit(1)
+RUNTIME_ISOLATION_READY = (
+    INTERPRETER_ISOLATED and not unsafe_import_path and repository_import_root_isolated
+)
 
 OAL_CI_WORKFLOW_PATH = ".github/workflows/oal-001-validate.yml"
 EXPECTED_OAL_CI_WORKFLOW_SHA256 = (
-    "719D551B6E2BBE58CFC9CA5581F2B94E518A8331E3923923FB77B6F0F52E2123"
+    "FF6C9CFB8CA67235FF91FBEFD37B02876DE248131257450DEACAF0E8FF07F1E9"
 )
 ISOLATED_UNIT_TEST_COMMAND = (
     "python -I -S -B scripts/validate_oal_001.py --_internal-unit-tests"
@@ -88,6 +93,58 @@ PYTHON_IMPORT_SUFFIXES = tuple(
 PYTHON_SHADOW_MODULES = frozenset(
     {name.casefold() for name in sys.stdlib_module_names}
     | {"sitecustomize", "usercustomize"}
+)
+PROTECTED_SYS_IMPORT_STATE = frozenset(
+    {"__dict__", "meta_path", "modules", "path", "path_hooks", "path_importer_cache"}
+)
+ALLOWED_SYS_ATTRIBUTES = frozenset(
+    {
+        "argv",
+        "dont_write_bytecode",
+        "executable",
+        "flags",
+        "path",
+        "stderr",
+        "stdlib_module_names",
+        "version",
+        "version_info",
+    }
+)
+EXPECTED_VALIDATOR_SYS_PATH_CONTEXTS = (
+    "scan",
+    "membership",
+    "append",
+    "count",
+    "last",
+)
+EXPECTED_VALIDATOR_SYS_PATH_STATEMENTS = (
+    """for raw_path in sys.path:
+    if not raw_path:
+        unsafe_import_path = True
+        break
+    try:
+        if Path(raw_path).resolve() in forbidden_import_roots:
+            unsafe_import_path = True
+            break
+    except OSError:
+        unsafe_import_path = True
+        break
+""",
+    """if str(REPO_ROOT) not in sys.path:
+    sys.path.append(str(REPO_ROOT))
+""",
+    """if sys.path.count(str(REPO_ROOT)) != 1 or sys.path[-1] != str(REPO_ROOT):
+    repository_import_root_isolated = False
+    if __name__ == "__main__":
+        print(
+            "[validate-oal-001] ERROR: repository import root is not isolated",
+            file=sys.stderr,
+        )
+        raise SystemExit(1)
+""",
+)
+FORBIDDEN_REFLECTIVE_ATTRIBUTES = frozenset(
+    {"__dict__", "__getattr__", "__getattribute__", "__globals__"}
 )
 PACKAGE_FILES = (
     "scripts/oal_001/__init__.py",
@@ -226,7 +283,7 @@ FORBIDDEN_SOURCE_SNIPPETS = (
     "exec(",
 )
 RUN_ID_PATTERN = re.compile(r"^OAL-001-[A-F0-9]{16}$")
-MINIMUM_OAL_TEST_COUNT = 58
+MINIMUM_OAL_TEST_COUNT = 61
 TARGET_PYTHON = (3, 11)
 STATUS_PASS = "PASS"
 STATUS_RUNTIME_GAP = "PASS_WITH_RUNTIME_GAP"
@@ -476,13 +533,47 @@ def _call_signature(argument: ast.AST) -> tuple[str, ...] | None:
     return tuple(values)
 
 
-def _is_sys_path(node: ast.AST) -> bool:
-    return (
+def _pull_request_trigger_errors(workflow_source: bytes) -> list[str]:
+    try:
+        lines = workflow_source.decode("utf-8").splitlines()
+    except UnicodeDecodeError as exc:
+        return [f"OAL workflow is not valid UTF-8: {exc}"]
+
+    top_level_lines = [line for line in lines if line and not line[0].isspace()]
+    if top_level_lines != [
+        "name: Validate OAL-001",
+        "on:",
+        "permissions:",
+        "jobs:",
+    ]:
+        return ["OAL workflow top-level mapping does not match the exact contract"]
+
+    trigger_indexes = [index for index, line in enumerate(lines) if line == "on:"]
+    if len(trigger_indexes) != 1:
+        return ["OAL workflow must define exactly one top-level on block"]
+
+    trigger_lines: list[str] = []
+    for line in lines[trigger_indexes[0] + 1 :]:
+        if line and not line[0].isspace():
+            break
+        if line.strip():
+            trigger_lines.append(line)
+    if trigger_lines != ["  pull_request: {}"]:
+        return [
+            "OAL workflow trigger must be exactly one unfiltered pull_request event"
+        ]
+    return []
+
+
+def _sys_import_state_attribute(node: ast.AST) -> str | None:
+    if (
         isinstance(node, ast.Attribute)
         and isinstance(node.value, ast.Name)
         and node.value.id == "sys"
-        and node.attr == "path"
-    )
+        and node.attr in PROTECTED_SYS_IMPORT_STATE
+    ):
+        return node.attr
+    return None
 
 
 def _is_repo_root_string(node: ast.AST) -> bool:
@@ -497,62 +588,259 @@ def _is_repo_root_string(node: ast.AST) -> bool:
     )
 
 
-def _import_path_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
-    method_calls: list[ast.Call] = []
-    assigned = False
-    for node in ast.walk(tree):
+def _is_negative_one(node: ast.AST) -> bool:
+    return (
+        isinstance(node, ast.UnaryOp)
+        and isinstance(node.op, ast.USub)
+        and isinstance(node.operand, ast.Constant)
+        and node.operand.value == 1
+    )
+
+
+def _module_statement(
+    node: ast.AST, parents: Mapping[ast.AST, ast.AST]
+) -> ast.stmt | None:
+    current = node
+    parent = parents.get(current)
+    while parent is not None and not isinstance(parent, ast.Module):
+        current = parent
+        parent = parents.get(current)
+    if isinstance(current, ast.stmt) and isinstance(parent, ast.Module):
+        return current
+    return None
+
+
+def _is_allowlisted_getattr_call(node: ast.Call) -> bool:
+    if not (
+        isinstance(node.func, ast.Name)
+        and node.func.id == "getattr"
+        and not node.keywords
+    ):
+        return False
+    if (
+        len(node.args) == 3
+        and isinstance(node.args[0], ast.Name)
+        and node.args[0].id == "stat"
+        and isinstance(node.args[1], ast.Constant)
+        and node.args[1].value == "FILE_ATTRIBUTE_REPARSE_POINT"
+    ):
+        return True
+    return (
+        len(node.args) == 2
+        and isinstance(node.args[0], ast.Name)
+        and node.args[0].id == "policy"
+        and isinstance(node.args[1], ast.Name)
+        and node.args[1].id == "field"
+    )
+
+
+def _validator_sys_path_context(
+    node: ast.Attribute, parents: Mapping[ast.AST, ast.AST]
+) -> str | None:
+    parent = parents.get(node)
+    if (
+        isinstance(parent, ast.For)
+        and parent.iter is node
+        and isinstance(parent.target, ast.Name)
+        and parent.target.id == "raw_path"
+    ):
+        return "scan"
+    if (
+        isinstance(parent, ast.Compare)
+        and _is_repo_root_string(parent.left)
+        and len(parent.ops) == 1
+        and isinstance(parent.ops[0], ast.NotIn)
+        and len(parent.comparators) == 1
+        and parent.comparators[0] is node
+    ):
+        return "membership"
+    if (
+        isinstance(parent, ast.Attribute)
+        and parent.value is node
+        and parent.attr in {"append", "count"}
+    ):
+        call = parents.get(parent)
         if (
-            isinstance(node, ast.Call)
-            and isinstance(node.func, ast.Attribute)
-            and _is_sys_path(node.func.value)
+            isinstance(call, ast.Call)
+            and call.func is parent
+            and len(call.args) == 1
+            and _is_repo_root_string(call.args[0])
+            and not call.keywords
         ):
-            method_calls.append(node)
-        if isinstance(node, (ast.Assign, ast.AnnAssign, ast.AugAssign, ast.Delete)):
-            targets: list[ast.AST] = []
-            if isinstance(node, ast.Assign):
-                targets.extend(node.targets)
-            elif isinstance(node, ast.Delete):
-                targets.extend(node.targets)
-            else:
-                targets.append(node.target)
-            if any(
-                _is_sys_path(target)
-                or (isinstance(target, ast.Subscript) and _is_sys_path(target.value))
-                for target in targets
+            return parent.attr
+    if (
+        isinstance(parent, ast.Subscript)
+        and parent.value is node
+        and _is_negative_one(parent.slice)
+    ):
+        comparison = parents.get(parent)
+        if (
+            isinstance(comparison, ast.Compare)
+            and comparison.left is parent
+            and len(comparison.ops) == 1
+            and isinstance(comparison.ops[0], ast.NotEq)
+            and len(comparison.comparators) == 1
+            and _is_repo_root_string(comparison.comparators[0])
+        ):
+            return "last"
+    return None
+
+
+def _import_path_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
+    errors: list[str] = []
+    parents: dict[ast.AST, ast.AST] = {
+        child: parent
+        for parent in ast.walk(tree)
+        for child in ast.iter_child_nodes(parent)
+    }
+    import_state_references: list[ast.Attribute] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                bound_name = alias.asname or alias.name.partition(".")[0]
+                if alias.name == "sys":
+                    if alias.asname is not None:
+                        errors.append(f"sys import alias is forbidden in {rel_path}")
+                elif alias.name.startswith("sys.") or bound_name == "sys":
+                    errors.append(f"sys rebinding is forbidden in {rel_path}")
+        elif isinstance(node, ast.ImportFrom):
+            if node.module == "sys" or (
+                node.module is not None and node.module.startswith("sys.")
             ):
-                assigned = True
+                errors.append(f"from-sys imports are forbidden in {rel_path}")
+            if any(
+                alias.name in {"*", "__dict__", "__globals__", "sys", "_sys"}
+                or (alias.asname or alias.name) == "sys"
+                for alias in node.names
+            ):
+                errors.append(f"sys rebinding is forbidden in {rel_path}")
+        elif isinstance(node, ast.Name) and node.id == "sys":
+            parent = parents.get(node)
+            if not (
+                isinstance(node.ctx, ast.Load)
+                and isinstance(parent, ast.Attribute)
+                and parent.value is node
+            ):
+                errors.append(f"indirect sys access is forbidden in {rel_path}")
+        elif (
+            isinstance(node, ast.Attribute)
+            and isinstance(node.value, ast.Name)
+            and node.value.id == "sys"
+            and node.attr not in ALLOWED_SYS_ATTRIBUTES
+        ):
+            errors.append(f"sys attribute {node.attr!r} is forbidden in {rel_path}")
+        elif isinstance(node, ast.Attribute) and node.attr in {"sys", "_sys"}:
+            errors.append(f"indirect sys attribute access is forbidden in {rel_path}")
+        elif (
+            isinstance(node, ast.Attribute)
+            and node.attr in FORBIDDEN_REFLECTIVE_ATTRIBUTES
+        ):
+            errors.append(f"reflective attribute access is forbidden in {rel_path}")
+        elif (
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id in {"getattr", "setattr"}
+            and not _is_allowlisted_getattr_call(node)
+        ):
+            errors.append(f"reflective attribute call is forbidden in {rel_path}")
+        elif isinstance(node, ast.arg) and node.arg == "sys":
+            errors.append(f"sys rebinding is forbidden in {rel_path}")
+        elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            if node.name == "sys":
+                errors.append(f"sys rebinding is forbidden in {rel_path}")
+        elif isinstance(node, ast.ExceptHandler) and node.name == "sys":
+            errors.append(f"sys rebinding is forbidden in {rel_path}")
+        elif isinstance(node, (ast.MatchAs, ast.MatchStar)) and node.name == "sys":
+            errors.append(f"sys rebinding is forbidden in {rel_path}")
+        elif isinstance(node, (ast.Global, ast.Nonlocal)) and "sys" in node.names:
+            errors.append(f"sys rebinding is forbidden in {rel_path}")
+
+        if isinstance(node, ast.Attribute) and _sys_import_state_attribute(node):
+            import_state_references.append(node)
 
     if rel_path != "scripts/validate_oal_001.py":
-        if method_calls or assigned:
-            return [f"Python import-path mutation is forbidden in {rel_path}"]
-        return []
+        if import_state_references:
+            errors.append(f"Python import-state access is forbidden in {rel_path}")
+        return sorted(set(errors))
 
-    append_calls = [
-        node
-        for node in method_calls
-        if node.func.attr == "append"
-        and len(node.args) == 1
-        and _is_repo_root_string(node.args[0])
-        and not node.keywords
-    ]
-    count_calls = [
-        node
-        for node in method_calls
-        if node.func.attr == "count"
-        and len(node.args) == 1
-        and _is_repo_root_string(node.args[0])
-        and not node.keywords
-    ]
-    if (
-        assigned
-        or len(append_calls) != 1
-        or len(count_calls) != 1
-        or len(method_calls) != 2
+    contexts: list[str] = []
+    context_statements: dict[str, ast.stmt] = {}
+    for node in sorted(
+        import_state_references,
+        key=lambda item: (item.lineno, item.col_offset),
     ):
-        return [
+        attribute = _sys_import_state_attribute(node)
+        context = _validator_sys_path_context(node, parents)
+        if attribute != "path" or context is None:
+            errors.append(
+                "validator may access sys.path only in the exact isolated bootstrap"
+            )
+        else:
+            contexts.append(context)
+            statement = _module_statement(node, parents)
+            if statement is not None:
+                context_statements[context] = statement
+    if tuple(contexts) != EXPECTED_VALIDATOR_SYS_PATH_CONTEXTS:
+        errors.append(
             "validator import path must append REPO_ROOT exactly once after interpreter paths"
-        ]
-    return []
+        )
+    elif isinstance(tree, ast.Module):
+        scan_statement = context_statements.get("scan")
+        membership_statement = context_statements.get("membership")
+        append_statement = context_statements.get("append")
+        count_statement = context_statements.get("count")
+        last_statement = context_statements.get("last")
+        try:
+            statement_indexes = (
+                tree.body.index(scan_statement),
+                tree.body.index(membership_statement),
+                tree.body.index(count_statement),
+            )
+        except ValueError:
+            statement_indexes = (-1, -1, -1)
+        if not (
+            isinstance(scan_statement, ast.For)
+            and isinstance(membership_statement, ast.If)
+            and membership_statement is append_statement
+            and isinstance(count_statement, ast.If)
+            and count_statement is last_statement
+            and len(
+                {
+                    id(item)
+                    for item in (
+                        scan_statement,
+                        membership_statement,
+                        count_statement,
+                    )
+                }
+            )
+            == 3
+            and statement_indexes[0] < statement_indexes[1] < statement_indexes[2]
+        ):
+            errors.append(
+                "validator sys.path bootstrap must use three ordered top-level statements"
+            )
+        else:
+            actual_shapes = tuple(
+                ast.dump(statement, include_attributes=False)
+                for statement in (
+                    scan_statement,
+                    membership_statement,
+                    count_statement,
+                )
+            )
+            expected_shapes = tuple(
+                ast.dump(
+                    ast.parse(source, feature_version=(3, 11)).body[0],
+                    include_attributes=False,
+                )
+                for source in EXPECTED_VALIDATOR_SYS_PATH_STATEMENTS
+            )
+            if actual_shapes != expected_shapes:
+                errors.append(
+                    "validator sys.path bootstrap statements do not match the exact AST contract"
+                )
+    return sorted(set(errors))
 
 
 def _is_process_api_name(name: str) -> bool:
@@ -820,6 +1108,7 @@ def static_errors() -> list[str]:
 
     workflow_source = _read_repo_file(OAL_CI_WORKFLOW_PATH)
     normalized_workflow = workflow_source.replace(b"\r\n", b"\n")
+    errors.extend(_pull_request_trigger_errors(normalized_workflow))
     if (
         b"\r" in normalized_workflow
         or hashlib.sha256(normalized_workflow).hexdigest().upper()
@@ -1944,7 +2233,7 @@ def _run_validation() -> int:
     return 0
 
 
-def main(argv: list[str] | None = None) -> int:
+def _dispatch(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Validate or read-only verify OAL-001 local evidence."
     )
@@ -1981,6 +2270,26 @@ def main(argv: list[str] | None = None) -> int:
     if args.verify_existing:
         return _verify_existing(args.verify_existing)
     return _run_validation()
+
+
+def _runtime_isolation_errors() -> list[str]:
+    errors: list[str] = []
+    if not INTERPRETER_ISOLATED:
+        errors.append("validator requires python -I -S -B")
+    if unsafe_import_path:
+        errors.append("repository paths precede the isolated import boundary")
+    if not repository_import_root_isolated:
+        errors.append("repository import root is not isolated")
+    return errors
+
+
+def main(argv: list[str] | None = None) -> int:
+    isolation_errors = _runtime_isolation_errors()
+    if isolation_errors:
+        for item in isolation_errors:
+            error(item)
+        return 1
+    return _dispatch(argv)
 
 
 if __name__ == "__main__":

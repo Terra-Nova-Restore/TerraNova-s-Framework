@@ -89,15 +89,32 @@ A semantically valid dirty bundle remains `promotion_ready=false` and
 `VERIFIED_NOT_PROMOTION_READY` with a non-zero exit instead of exposing a false
 promotion gate.
 
-The dedicated `OAL Python 3.11` pull-request check runs the complete validator
-on the exact PR head in an ephemeral, read-only GitHub Actions job. It persists
-no checkout credentials, receives no secrets and publishes no evidence. Before
-repository Python is loaded, an exact workflow-bound standard-library preflight
-rejects import-shadowing files, cached bytecode for protected module slots and
+The dedicated `OAL Python 3.11` workflow is configured on `pull_request`
+without explicit path, branch or activity-type filters. Consequently,
+security-topology-only diffs are not excluded by those workflow filters. Its
+standard-library topology preflight runs before repository Python or the OAL
+branch gate. A fail-closed base-to-head classifier then runs the complete OAL
+validator only for governed OAL paths and requires those changes to originate
+from a `codex/observatory-selfmod-*` branch; unrelated pull requests finish
+after the topology preflight instead of failing the OAL branch rule.
+
+GitHub still controls whether a `pull_request` event is scheduled. For example,
+merge conflicts, workflow availability on the default branch and repository
+rules can affect execution. Independent enforcement therefore requires the
+check to be enabled and required by repository rules outside this PR-controlled
+workflow. The job persists no checkout credentials, receives no secrets and
+publishes no evidence.
+
+Before repository Python is loaded, the exact workflow-bound preflight rejects
+import-shadowing files, cached bytecode for protected module slots and
 unexpected package topology. The validator, its authorizing tests and its
 dry-run child all execute with isolated mode, site initialization disabled and
 bytecode writes disabled; the repository root is appended only after the
-standard-library import paths.
+standard-library import paths. Protected interpreter import state may not be
+aliased, rebound or mutated outside that exact bootstrap, and an imported
+validator entry point refuses execution instead of bypassing the CLI boundary.
+The static AST boundary is defense in depth and is not a Python sandbox; the
+isolated interpreter remains the execution trust boundary.
 
 All Git observations pass through a protected typed read-only adapter. It uses
 a fixed system Git executable, disables optional locks and filesystem monitors,
