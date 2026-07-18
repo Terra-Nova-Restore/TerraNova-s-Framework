@@ -1,0 +1,271 @@
+name: Validate OAL-001
+
+on:
+  pull_request: {}
+
+permissions:
+  contents: read
+
+jobs:
+  oal-python-311:
+    name: OAL Python 3.11
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OAL_BASE_REPOSITORY: ${{ github.event.pull_request.base.repo.full_name }}
+      OAL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      OAL_SOURCE_BRANCH: ${{ github.head_ref }}
+      OAL_SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+
+    steps:
+      - name: Checkout exact pull-request source
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ env.OAL_SOURCE_SHA }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Bind checkout to the exact pull-request source
+        shell: bash
+        run: |
+          if [[ ! "$OAL_SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Invalid pull-request source SHA" >&2
+            exit 1
+          fi
+          test "$(git rev-parse HEAD)" = "$OAL_SOURCE_SHA"
+
+      - name: Setup CPython 3.11
+        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: '3.11.14'
+
+      - name: Confirm isolated runtime and import topology
+        shell: bash
+        run: |
+          python -I -S -B - <<'PY'
+          from importlib.machinery import all_suffixes
+          from pathlib import Path
+          import sys
+
+          if sys.version_info[:3] != (3, 11, 14):
+              raise SystemExit(f"Unexpected Python runtime: {sys.version}")
+          if not (
+              sys.flags.isolated
+              and sys.flags.no_site
+              and sys.flags.safe_path
+              and sys.flags.dont_write_bytecode
+          ):
+              raise SystemExit("Isolated Python bootstrap is not active")
+
+          root = Path.cwd()
+          suffixes = tuple(
+              sorted(
+                  {suffix.casefold() for suffix in all_suffixes()}
+                  | {".py", ".pyc", ".pyd", ".pyw", ".so"},
+                  key=len,
+                  reverse=True,
+              )
+          )
+          blocked_modules = {
+              name.casefold() for name in sys.stdlib_module_names
+          } | {"sitecustomize", "usercustomize"}
+
+          def module_name(name):
+              lowered = name.casefold()
+              for suffix in suffixes:
+                  if lowered.endswith(suffix) and len(lowered) > len(suffix):
+                      return lowered[: -len(suffix)].split(".", 1)[0]
+              return None
+
+          def cached_module_name(name):
+              lowered = name.casefold()
+              if not lowered.endswith(".pyc") or len(lowered) <= len(".pyc"):
+                  return None
+              return lowered[: -len(".pyc")].split(".", 1)[0]
+
+          def has_package_initializer(path):
+              try:
+                  return path.is_dir() and any(
+                      module_name(child.name) == "__init__"
+                      for child in path.iterdir()
+                  )
+              except OSError:
+                  return True
+
+          expected_directories = ("scripts", "tests", "scripts/oal_001")
+          expected_files = (
+              "scripts/oal_001/__init__.py",
+              "scripts/oal_001/__main__.py",
+              "scripts/oal_001/git_read.py",
+              "scripts/oal_001/governor.py",
+              "scripts/oal_001/observatory.py",
+              "scripts/oal_001/runtime.py",
+              "scripts/validate_oal_001.py",
+              "tests/test_oal_001_governor.py",
+              "tests/test_oal_001_runtime.py",
+          )
+
+          errors = []
+          for relative in expected_directories:
+              path = root / relative
+              if not path.is_dir() or path.is_symlink():
+                  errors.append(f"Invalid Python import topology: {relative}")
+
+          for relative in expected_files:
+              path = root / relative
+              try:
+                  invalid_file = (
+                      not path.is_file()
+                      or path.is_symlink()
+                      or path.stat().st_nlink != 1
+                  )
+              except OSError:
+                  invalid_file = True
+              if invalid_file:
+                  errors.append(f"Invalid Python import topology: {relative}")
+
+          protected_slots = {}
+          for relative in expected_directories:
+              path = Path(relative)
+              parent = "" if path.parent.as_posix() == "." else path.parent.as_posix()
+              protected_slots.setdefault(parent, {})[
+                  path.name.casefold()
+              ] = relative
+          for relative in expected_files:
+              path = Path(relative)
+              parent = "" if path.parent.as_posix() == "." else path.parent.as_posix()
+              protected_slots.setdefault(parent, {})[
+                  path.stem.casefold()
+              ] = relative
+
+          problems = set()
+          for base_relative, expected_slots in protected_slots.items():
+              base = root / base_relative
+              if not base.is_dir() or base.is_symlink():
+                  continue
+              try:
+                  entries = tuple(base.iterdir())
+              except OSError:
+                  errors.append(
+                      f"Could not inspect Python import topology: {base_relative or '.'}"
+                  )
+                  continue
+              for entry in entries:
+                  candidate = module_name(entry.name)
+                  relative = entry.relative_to(root).as_posix()
+                  directory_name = entry.name.casefold()
+                  if base_relative in {"", "scripts"}:
+                      if candidate in blocked_modules:
+                          problems.add(relative)
+                      if directory_name in blocked_modules and (
+                          entry.is_symlink() or has_package_initializer(entry)
+                      ):
+                          problems.add(relative)
+
+                  slot_candidates = {candidate}
+                  if entry.is_dir() or entry.is_symlink():
+                      slot_candidates.add(directory_name)
+                  for slot in slot_candidates - {None}:
+                      expected_path = expected_slots.get(slot)
+                      if expected_path is not None and relative != expected_path:
+                          problems.add(relative)
+
+                  if directory_name != "__pycache__":
+                      continue
+                  if entry.is_symlink() or not entry.is_dir():
+                      problems.add(relative)
+                      continue
+                  try:
+                      cache_entries = tuple(entry.iterdir())
+                  except OSError:
+                      errors.append(
+                          f"Could not inspect Python bytecode cache: {relative}"
+                      )
+                      continue
+                  for cache_entry in cache_entries:
+                      if cached_module_name(cache_entry.name) in expected_slots:
+                          problems.add(cache_entry.relative_to(root).as_posix())
+
+          for namespace_relative in ("scripts", "tests"):
+              namespace = root / namespace_relative
+              if not namespace.is_dir() or namespace.is_symlink():
+                  continue
+              try:
+                  entries = tuple(namespace.iterdir())
+              except OSError:
+                  errors.append(
+                      f"Could not inspect Python namespace topology: {namespace_relative}"
+                  )
+                  continue
+              for entry in entries:
+                  if module_name(entry.name) == "__init__":
+                      problems.add(entry.relative_to(root).as_posix())
+
+          for problem in sorted(problems):
+              errors.append(f"Forbidden Python import-shadowing path: {problem}")
+          if errors:
+              raise SystemExit("\n".join(errors))
+          PY
+
+      - name: Classify governed OAL changes
+        id: oal_scope
+        shell: bash
+        run: |
+          if [[ ! "$OAL_BASE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Invalid pull-request base SHA" >&2
+            exit 1
+          fi
+          if [[ ! "$OAL_BASE_REPOSITORY" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
+            echo "Invalid pull-request base repository" >&2
+            exit 1
+          fi
+          git fetch --no-tags \
+            "https://github.com/${OAL_BASE_REPOSITORY}.git" "$OAL_BASE_SHA"
+          test "$(git rev-parse FETCH_HEAD)" = "$OAL_BASE_SHA"
+          merge_base="$(git merge-base --all "$OAL_BASE_SHA" "$OAL_SOURCE_SHA")"
+          if [[ ! "$merge_base" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Could not resolve exactly one pull-request merge base" >&2
+            exit 1
+          fi
+
+          changed_paths="$RUNNER_TEMP/oal-001-changed-paths"
+          git diff --no-renames --name-only -z \
+            "$merge_base" "$OAL_SOURCE_SHA" -- > "$changed_paths"
+          oal_changed=false
+          while IFS= read -r -d '' changed_path; do
+            case "$changed_path" in
+              .codex/safety_policy.yaml|.github/workflows/oal-001-validate.yml|.gitignore|config/oal_001.json)
+                oal_changed=true
+                ;;
+              docs/governance/oal_001_self_modification_policy.md|schemas/oal_001_mutation_trace.schema.json|scripts/validate_oal_001.py)
+                oal_changed=true
+                ;;
+              scripts/oal_001/*|tests/fixtures/observatory/*|tests/test_oal_001_governor.py|tests/test_oal_001_runtime.py)
+                oal_changed=true
+                ;;
+            esac
+          done < "$changed_paths"
+          echo "oal_changed=$oal_changed" >> "$GITHUB_OUTPUT"
+
+      - name: Bind governed changes to an OAL branch
+        if: steps.oal_scope.outputs.oal_changed == 'true'
+        shell: bash
+        run: |
+          if [[ ! "$OAL_SOURCE_BRANCH" =~ ^codex/observatory-selfmod-[A-Za-z0-9._/-]+$ ]]; then
+            echo "OAL changes require a codex/observatory-selfmod-* source branch" >&2
+            exit 1
+          fi
+          git switch --force-create "$OAL_SOURCE_BRANCH" "$OAL_SOURCE_SHA"
+          test "$(git rev-parse HEAD)" = "$OAL_SOURCE_SHA"
+
+      - name: Run complete OAL validator
+        if: steps.oal_scope.outputs.oal_changed == 'true'
+        run: python -I -S -B scripts/validate_oal_001.py
+
+      - name: Confirm no tracked or unignored mutation
+        shell: bash
+        run: |
+          git diff --exit-code
+          git diff --cached --exit-code
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"
