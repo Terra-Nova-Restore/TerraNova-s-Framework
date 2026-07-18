@@ -51,6 +51,7 @@ from scripts.validate_oal_001 import (
     _finalize_evidence,
     _finalized_snapshot,
     _import_path_boundary_errors,
+    _pull_request_merge_base_errors,
     _pull_request_trigger_errors,
     _runtime_isolation_errors,
     _replace_snapshot_bytes,
@@ -1094,7 +1095,10 @@ class Oal001RuntimeTests(unittest.TestCase):
         self.assertIn("scripts/oal_001/*", workflow)
         self.assertIn("scripts/validate_oal_001.py", workflow)
         self.assertIn("fetch-depth: 0", workflow)
-        self.assertIn('merge_base="$(git merge-base ', workflow)
+        self.assertIn(
+            'merge_base="$(git merge-base --all "$OAL_BASE_SHA" "$OAL_SOURCE_SHA")"',
+            workflow,
+        )
         self.assertIn('"$merge_base" "$OAL_SOURCE_SHA" --', workflow)
         self.assertNotIn('"$OAL_BASE_SHA" "$OAL_SOURCE_SHA" -- >', workflow)
         direct_imports = [
@@ -1169,6 +1173,45 @@ class Oal001RuntimeTests(unittest.TestCase):
         ).encode()
         self.assertEqual(_pull_request_trigger_errors(aliased_source), top_level_error)
 
+    def test_workflow_merge_base_contract_rejects_ambiguous_output(self) -> None:
+        workflow_source = (
+            REPO_ROOT / ".github/workflows/oal-001-validate.yml"
+        ).read_bytes()
+        workflow = workflow_source.decode("utf-8")
+        command = (
+            'merge_base="$(git merge-base --all "$OAL_BASE_SHA" "$OAL_SOURCE_SHA")"'
+        )
+        rejection = 'if [[ ! "$merge_base" =~ ^[0-9a-f]{40}$ ]]; then'
+
+        self.assertEqual(workflow.count(command), 1)
+        self.assertEqual(workflow.count(rejection), 1)
+        self.assertIn("Could not resolve exactly one pull-request merge base", workflow)
+        self.assertEqual(_pull_request_merge_base_errors(workflow_source), [])
+
+        weakened_sources = (
+            workflow.replace("git merge-base --all", "git merge-base", 1),
+            workflow.replace(
+                '"$OAL_BASE_SHA" "$OAL_SOURCE_SHA")"',
+                '"$OAL_BASE_SHA" "$OAL_SOURCE_SHA" | head -n 1)"',
+                1,
+            ),
+            workflow.replace(
+                'if [[ ! "$merge_base" =~ ^[0-9a-f]{40}$ ]]; then',
+                'if [[ -z "$merge_base" ]]; then',
+                1,
+            ),
+        )
+        expected_error = [
+            "OAL workflow must fail closed unless exactly one pull-request merge base exists"
+        ]
+        for weakened in weakened_sources:
+            with self.subTest(weakened=weakened):
+                self.assertNotEqual(weakened, workflow)
+                self.assertEqual(
+                    _pull_request_merge_base_errors(weakened.encode("utf-8")),
+                    expected_error,
+                )
+
     def test_imported_main_refuses_untrusted_import_state(self) -> None:
         self.assertTrue(_runtime_isolation_errors())
         with (
@@ -1182,6 +1225,47 @@ class Oal001RuntimeTests(unittest.TestCase):
         self.assertEqual(return_code, 1)
         dispatch.assert_not_called()
         emit_error.assert_called()
+
+    def test_direct_sys_attribute_mutations_are_rejected(self) -> None:
+        mutations = (
+            "sys.executable = 'python'",
+            "sys.executable: str = 'python'",
+            "sys.executable += ''",
+            "del sys.executable",
+        )
+        expected = "sys attribute 'executable' mutation is forbidden in synthetic.py"
+        for mutation in mutations:
+            with self.subTest(mutation=mutation):
+                tree = ast.parse(f"import sys\n{mutation}\n")
+                self.assertIn(
+                    expected, _import_path_boundary_errors("synthetic.py", tree)
+                )
+
+        read_tree = ast.parse("import sys\nexecutable = sys.executable\n")
+        self.assertEqual(_import_path_boundary_errors("synthetic.py", read_tree), [])
+
+    def test_reflective_getattr_allowlist_is_bound_to_fixed_call(self) -> None:
+        spoofed_tree = ast.parse(
+            "import os\n"
+            "policy = os\n"
+            "field = 'system'\n"
+            "operation = getattr(policy, field)\n"
+        )
+        self.assertIn(
+            "reflective attribute call is forbidden in synthetic.py",
+            _import_path_boundary_errors("synthetic.py", spoofed_tree),
+        )
+        self.assertIn(
+            "indirect process API access is forbidden in synthetic.py",
+            _subprocess_boundary_errors("synthetic.py", spoofed_tree),
+        )
+
+        governor_path = "scripts/oal_001/governor.py"
+        governor_tree = ast.parse(
+            (REPO_ROOT / governor_path).read_text(encoding="utf-8")
+        )
+        self.assertEqual(_import_path_boundary_errors(governor_path, governor_tree), [])
+        self.assertEqual(_subprocess_boundary_errors(governor_path, governor_tree), [])
 
     def test_import_state_aliases_and_mutations_are_rejected(self) -> None:
         validator_source = (REPO_ROOT / "scripts/validate_oal_001.py").read_text(

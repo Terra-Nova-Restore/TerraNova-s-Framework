@@ -223,9 +223,9 @@ jobs:
           git fetch --no-tags \
             "https://github.com/${OAL_BASE_REPOSITORY}.git" "$OAL_BASE_SHA"
           test "$(git rev-parse FETCH_HEAD)" = "$OAL_BASE_SHA"
-          merge_base="$(git merge-base "$OAL_BASE_SHA" "$OAL_SOURCE_SHA")"
+          merge_base="$(git merge-base --all "$OAL_BASE_SHA" "$OAL_SOURCE_SHA")"
           if [[ ! "$merge_base" =~ ^[0-9a-f]{40}$ ]]; then
-            echo "Could not resolve the pull-request merge base" >&2
+            echo "Could not resolve exactly one pull-request merge base" >&2
             exit 1
           fi
 

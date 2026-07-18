@@ -93,10 +93,12 @@ The dedicated `OAL Python 3.11` workflow is configured on `pull_request`
 without explicit path, branch or activity-type filters. Consequently,
 security-topology-only diffs are not excluded by those workflow filters. Its
 standard-library topology preflight runs before repository Python or the OAL
-branch gate. A fail-closed base-to-head classifier then runs the complete OAL
-validator only for governed OAL paths and requires those changes to originate
-from a `codex/observatory-selfmod-*` branch; unrelated pull requests finish
-after the topology preflight instead of failing the OAL branch rule.
+branch gate. A fail-closed base-to-head classifier requires exactly one best
+merge base; a missing or ambiguous merge base stops classification. It then
+runs the complete OAL validator only for governed OAL paths and requires those
+changes to originate from a `codex/observatory-selfmod-*` branch; unrelated pull
+requests finish after the topology preflight instead of failing the OAL branch
+rule.
 
 GitHub still controls whether a `pull_request` event is scheduled. For example,
 merge conflicts, workflow availability on the default branch and repository
@@ -111,10 +113,13 @@ unexpected package topology. The validator, its authorizing tests and its
 dry-run child all execute with isolated mode, site initialization disabled and
 bytecode writes disabled; the repository root is appended only after the
 standard-library import paths. Protected interpreter import state may not be
-aliased, rebound or mutated outside that exact bootstrap, and an imported
-validator entry point refuses execution instead of bypassing the CLI boundary.
-The static AST boundary is defense in depth and is not a Python sandbox; the
-isolated interpreter remains the execution trust boundary.
+aliased, rebound or mutated outside that exact bootstrap. Direct writes to
+`sys` attributes are refused, and dynamic attribute calls are limited to the
+fixed reparse-point compatibility lookup. Governor scalar checks use explicit
+attribute bindings. An imported validator entry point refuses execution instead
+of bypassing the CLI boundary. The static AST boundary is defense in depth and
+is not a Python sandbox; the isolated interpreter remains the execution trust
+boundary.
 
 All Git observations pass through a protected typed read-only adapter. It uses
 a fixed system Git executable, disables optional locks and filesystem monitors,

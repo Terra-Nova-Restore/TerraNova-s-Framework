@@ -177,17 +177,25 @@ def load_policy(repo_root: Path) -> GovernorPolicy:
         normalize_relative_path(candidate)
     if set(policy.mutable_paths) & set(policy.protected_paths):
         raise PolicyError("mutable_paths and protected_paths must not overlap exactly")
-    expected_scalars = {
-        "policy_id": "OAL-001-GOVERNOR",
-        "schema_version": "OAL-1.0",
-        "mode": "local_dry_run",
-        "branch_pattern": "codex/observatory-selfmod-*",
-        "fixture_path": "tests/fixtures/observatory/synthetic_harmless_cycle.json",
-        "output_root": "raw/exports/local-private/oal-001",
-        "historical_fixture_status": "unavailable",
-    }
-    for field, expected in expected_scalars.items():
-        if getattr(policy, field) != expected:
+    scalar_checks = (
+        ("policy_id", policy.policy_id, "OAL-001-GOVERNOR"),
+        ("schema_version", policy.schema_version, "OAL-1.0"),
+        ("mode", policy.mode, "local_dry_run"),
+        ("branch_pattern", policy.branch_pattern, "codex/observatory-selfmod-*"),
+        (
+            "fixture_path",
+            policy.fixture_path,
+            "tests/fixtures/observatory/synthetic_harmless_cycle.json",
+        ),
+        ("output_root", policy.output_root, "raw/exports/local-private/oal-001"),
+        (
+            "historical_fixture_status",
+            policy.historical_fixture_status,
+            "unavailable",
+        ),
+    )
+    for field, actual, expected in scalar_checks:
+        if actual != expected:
             raise PolicyError(f"{field} must remain {expected}")
     if policy.mutable_paths != EXPECTED_MUTABLE_PATHS:
         raise PolicyError("mutable_paths must remain the exact first-slice allowlist")

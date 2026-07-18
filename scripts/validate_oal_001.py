@@ -77,7 +77,7 @@ RUNTIME_ISOLATION_READY = (
 
 OAL_CI_WORKFLOW_PATH = ".github/workflows/oal-001-validate.yml"
 EXPECTED_OAL_CI_WORKFLOW_SHA256 = (
-    "FF6C9CFB8CA67235FF91FBEFD37B02876DE248131257450DEACAF0E8FF07F1E9"
+    "FE26F0AEBCE82D61126AF83A17193C6E8EBCDD34A80E9B33D1E4BB00887D9725"
 )
 ISOLATED_UNIT_TEST_COMMAND = (
     "python -I -S -B scripts/validate_oal_001.py --_internal-unit-tests"
@@ -283,7 +283,7 @@ FORBIDDEN_SOURCE_SNIPPETS = (
     "exec(",
 )
 RUN_ID_PATTERN = re.compile(r"^OAL-001-[A-F0-9]{16}$")
-MINIMUM_OAL_TEST_COUNT = 61
+MINIMUM_OAL_TEST_COUNT = 64
 TARGET_PYTHON = (3, 11)
 STATUS_PASS = "PASS"
 STATUS_RUNTIME_GAP = "PASS_WITH_RUNTIME_GAP"
@@ -565,6 +565,24 @@ def _pull_request_trigger_errors(workflow_source: bytes) -> list[str]:
     return []
 
 
+def _pull_request_merge_base_errors(workflow_source: bytes) -> list[str]:
+    try:
+        workflow = workflow_source.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        return [f"OAL workflow is not valid UTF-8: {exc}"]
+
+    exact_contract = """          merge_base="$(git merge-base --all "$OAL_BASE_SHA" "$OAL_SOURCE_SHA")"
+          if [[ ! "$merge_base" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Could not resolve exactly one pull-request merge base" >&2
+            exit 1
+          fi"""
+    if workflow.count(exact_contract) != 1:
+        return [
+            "OAL workflow must fail closed unless exactly one pull-request merge base exists"
+        ]
+    return []
+
+
 def _sys_import_state_attribute(node: ast.AST) -> str | None:
     if (
         isinstance(node, ast.Attribute)
@@ -611,26 +629,15 @@ def _module_statement(
 
 
 def _is_allowlisted_getattr_call(node: ast.Call) -> bool:
-    if not (
+    return (
         isinstance(node.func, ast.Name)
         and node.func.id == "getattr"
         and not node.keywords
-    ):
-        return False
-    if (
-        len(node.args) == 3
+        and len(node.args) == 3
         and isinstance(node.args[0], ast.Name)
         and node.args[0].id == "stat"
         and isinstance(node.args[1], ast.Constant)
         and node.args[1].value == "FILE_ATTRIBUTE_REPARSE_POINT"
-    ):
-        return True
-    return (
-        len(node.args) == 2
-        and isinstance(node.args[0], ast.Name)
-        and node.args[0].id == "policy"
-        and isinstance(node.args[1], ast.Name)
-        and node.args[1].id == "field"
     )
 
 
@@ -726,9 +733,13 @@ def _import_path_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
             isinstance(node, ast.Attribute)
             and isinstance(node.value, ast.Name)
             and node.value.id == "sys"
-            and node.attr not in ALLOWED_SYS_ATTRIBUTES
         ):
-            errors.append(f"sys attribute {node.attr!r} is forbidden in {rel_path}")
+            if not isinstance(node.ctx, ast.Load):
+                errors.append(
+                    f"sys attribute {node.attr!r} mutation is forbidden in {rel_path}"
+                )
+            elif node.attr not in ALLOWED_SYS_ATTRIBUTES:
+                errors.append(f"sys attribute {node.attr!r} is forbidden in {rel_path}")
         elif isinstance(node, ast.Attribute) and node.attr in {"sys", "_sys"}:
             errors.append(f"indirect sys attribute access is forbidden in {rel_path}")
         elif (
@@ -906,12 +917,7 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
                 errors.append(
                     f"dynamic execution or namespace access is forbidden in {rel_path}"
                 )
-            if (
-                node.func.id == "getattr"
-                and node.args
-                and isinstance(node.args[0], ast.Name)
-                and node.args[0].id in {"os", "subprocess", "sys"}
-            ):
+            if node.func.id == "getattr" and not _is_allowlisted_getattr_call(node):
                 errors.append(f"indirect process API access is forbidden in {rel_path}")
         elif isinstance(node, ast.Name) and node.id == "__builtins__":
             errors.append(f"__builtins__ access is forbidden in {rel_path}")
@@ -1109,6 +1115,7 @@ def static_errors() -> list[str]:
     workflow_source = _read_repo_file(OAL_CI_WORKFLOW_PATH)
     normalized_workflow = workflow_source.replace(b"\r\n", b"\n")
     errors.extend(_pull_request_trigger_errors(normalized_workflow))
+    errors.extend(_pull_request_merge_base_errors(normalized_workflow))
     if (
         b"\r" in normalized_workflow
         or hashlib.sha256(normalized_workflow).hexdigest().upper()
