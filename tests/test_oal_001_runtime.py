@@ -26,6 +26,7 @@ from scripts.oal_001.runtime import (
     _git_status,
     build_harmless_patch,
     execute_cycle,
+    git_status_is_clean,
     load_fixture,
     parse_strategy_source,
     read_managed_source,
@@ -34,6 +35,7 @@ from scripts.oal_001.runtime import (
     write_cycle_artifacts,
 )
 from scripts.validate_oal_001 import (
+    EXIT_NOT_PROMOTION_READY,
     EXIT_RUNTIME_GAP,
     MINIMUM_OAL_TEST_COUNT,
     STATUS_PASS,
@@ -45,6 +47,8 @@ from scripts.validate_oal_001 import (
     _capture_artifact_snapshot,
     _finalize_evidence,
     _finalized_snapshot,
+    _replace_snapshot_bytes,
+    _snapshot_promotion_eligible,
     _subprocess_boundary_errors,
     main as validator_main,
     run_unit_tests,
@@ -71,8 +75,8 @@ class Oal001RuntimeTests(unittest.TestCase):
             self.policy,
             BRANCH,
             BASE_SHA,
-            git_status_before="## synthetic-test",
-            git_status_after="## synthetic-test",
+            git_status_before="",
+            git_status_after="",
             temp_parent=temp_parent,
         )
 
@@ -137,6 +141,37 @@ class Oal001RuntimeTests(unittest.TestCase):
 
         self.assertIn("external_mutation_count must be zero", errors)
 
+    def test_legacy_branch_header_evidence_returns_controlled_errors(self) -> None:
+        local_private = REPO_ROOT / "raw" / "exports" / "local-private"
+        local_private.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(
+            prefix="oal-001-test-", dir=local_private
+        ) as temp_dir:
+            output_root = Path(temp_dir)
+            policy = replace(
+                self.policy,
+                output_root=output_root.relative_to(REPO_ROOT).as_posix(),
+            )
+            result = self.execute()
+            output_dir = write_cycle_artifacts(REPO_ROOT, policy, result)
+            snapshot = _capture_artifact_snapshot(output_dir)
+            legacy_trace = copy.deepcopy(result.trace)
+            legacy_trace["git_status"]["before"] = "## synthetic-test"
+            legacy_trace["git_status"]["after"] = "## synthetic-test"
+            legacy_snapshot = _replace_snapshot_bytes(
+                snapshot,
+                "mutation_trace.json",
+                (json.dumps(legacy_trace, sort_keys=True) + "\n").encode("utf-8"),
+            )
+
+            errors = validate_artifact_snapshot(
+                legacy_snapshot, output_dir, lifecycle="prepared"
+            )
+
+        self.assertTrue(
+            any("trace Git status cannot derive a run ID" in item for item in errors)
+        )
+
     def test_invented_evaluation_check_is_rejected(self) -> None:
         trace = copy.deepcopy(self.execute().trace)
         trace["evaluation"]["checks"] = {"invented_check": True}
@@ -194,8 +229,8 @@ class Oal001RuntimeTests(unittest.TestCase):
                         self.policy,
                         BRANCH,
                         BASE_SHA,
-                        git_status_before="## synthetic-test",
-                        git_status_after="## synthetic-test",
+                        git_status_before="",
+                        git_status_after="",
                         temp_parent=temp_parent,
                     )
 
@@ -343,6 +378,7 @@ class Oal001RuntimeTests(unittest.TestCase):
         run_id: str,
         python_version: str = "3.11.9",
         python_version_info: tuple[int, int] = (3, 11),
+        promotion_eligible: bool = True,
     ) -> dict[str, object]:
         return _build_test_result(
             run_id=run_id,
@@ -353,6 +389,7 @@ class Oal001RuntimeTests(unittest.TestCase):
             artifact_errors=[],
             python_version=python_version,
             python_version_info=python_version_info,
+            promotion_eligible=promotion_eligible,
         )
 
     def test_cross_artifact_replay_tampering_is_rejected(self) -> None:
@@ -416,6 +453,9 @@ class Oal001RuntimeTests(unittest.TestCase):
 
     def test_validation_status_requires_python_3_11_for_pass(self) -> None:
         passing = self._test_result("OAL-001-" + "A" * 16)
+        prepared = self._test_result(
+            "OAL-001-" + "A" * 16, promotion_eligible=False
+        )
         runtime_gap = self._test_result(
             "OAL-001-" + "A" * 16,
             python_version="3.12.10",
@@ -430,14 +470,172 @@ class Oal001RuntimeTests(unittest.TestCase):
             artifact_errors=["synthetic failure"],
             python_version="3.11.9",
             python_version_info=(3, 11),
+            promotion_eligible=True,
         )
 
         self.assertEqual(passing["status"], STATUS_PASS)
         self.assertTrue(passing["promotion_ready"])
+        self.assertEqual(prepared["status"], STATUS_PASS)
+        self.assertFalse(prepared["evidence_complete"])
+        self.assertFalse(prepared["promotion_ready"])
         self.assertEqual(runtime_gap["status"], STATUS_RUNTIME_GAP)
         self.assertFalse(runtime_gap["evidence_complete"])
         self.assertFalse(runtime_gap["promotion_ready"])
         self.assertEqual(failing["status"], "FAIL")
+
+    def test_dirty_final_bundle_is_not_promotion_ready_and_rejects_forgery(
+        self,
+    ) -> None:
+        dirty_status = " M scripts/oal_001/runtime.py"
+        local_private = REPO_ROOT / "raw" / "exports" / "local-private"
+        local_private.mkdir(parents=True, exist_ok=True)
+
+        def synthetic_git_read(command: list[str]) -> str:
+            mapping = {
+                ("git", "branch", "--show-current"): BRANCH,
+                ("git", "rev-parse", "HEAD"): BASE_SHA,
+                (
+                    "git",
+                    "status",
+                    "--porcelain=v1",
+                    "--untracked-files=all",
+                    "--ignore-submodules=none",
+                    "--no-renames",
+                ): dirty_status,
+            }
+            return mapping[tuple(command)]
+
+        with tempfile.TemporaryDirectory(
+            prefix="oal-001-test-", dir=local_private
+        ) as temp_dir:
+            output_root = Path(temp_dir)
+            policy = replace(
+                self.policy,
+                output_root=output_root.relative_to(REPO_ROOT).as_posix(),
+            )
+            result = execute_cycle(
+                REPO_ROOT,
+                policy,
+                BRANCH,
+                BASE_SHA,
+                git_status_before=dirty_status,
+                git_status_after=dirty_status,
+            )
+            output_dir = write_cycle_artifacts(REPO_ROOT, policy, result)
+            prepared_snapshot = _capture_artifact_snapshot(output_dir)
+            with mock_patch(
+                "scripts.validate_oal_001._git_read",
+                side_effect=synthetic_git_read,
+            ):
+                self.assertEqual(
+                    validate_artifact_snapshot(
+                        prepared_snapshot, output_dir, lifecycle="prepared"
+                    ),
+                    [],
+                )
+
+                promotion_eligible = _snapshot_promotion_eligible(
+                    prepared_snapshot
+                )
+                self.assertFalse(promotion_eligible)
+                test_result = self._test_result(
+                    result.run_id, promotion_eligible=promotion_eligible
+                )
+                finalized = _finalized_snapshot(prepared_snapshot, test_result)
+                self.assertEqual(
+                    validate_artifact_snapshot(
+                        finalized, output_dir, lifecycle="complete"
+                    ),
+                    [],
+                )
+                self.assertEqual(
+                    _finalize_evidence(
+                        output_dir, prepared_snapshot, test_result
+                    ),
+                    [],
+                )
+                with (
+                    mock_patch(
+                        "scripts.validate_oal_001.static_errors", return_value=[]
+                    ),
+                    mock_patch(
+                        "scripts.validate_oal_001._existing_output_dir",
+                        return_value=output_dir,
+                    ),
+                ):
+                    return_code = validator_main(
+                        ["--verify-existing", result.run_id]
+                    )
+                self.assertEqual(return_code, EXIT_NOT_PROMOTION_READY)
+
+                forged = copy.deepcopy(test_result)
+                forged["evidence_complete"] = True
+                forged["promotion_ready"] = True
+                forged_snapshot = _finalized_snapshot(prepared_snapshot, forged)
+                errors = validate_artifact_snapshot(
+                    forged_snapshot, output_dir, lifecycle="complete"
+                )
+
+            self.assertIn(
+                "final promotion readiness does not match validation status", errors
+            )
+            self.assertIn(
+                "final evidence completeness does not match validation status", errors
+            )
+
+    def test_clean_bundle_verifies_without_upstream_tracking_metadata(self) -> None:
+        local_private = REPO_ROOT / "raw" / "exports" / "local-private"
+        local_private.mkdir(parents=True, exist_ok=True)
+
+        def canonical_git_read(command: list[str]) -> str:
+            mapping = {
+                ("git", "branch", "--show-current"): BRANCH,
+                ("git", "rev-parse", "HEAD"): BASE_SHA,
+                (
+                    "git",
+                    "status",
+                    "--porcelain=v1",
+                    "--untracked-files=all",
+                    "--ignore-submodules=none",
+                    "--no-renames",
+                ): "",
+            }
+            return mapping[tuple(command)]
+
+        with tempfile.TemporaryDirectory(
+            prefix="oal-001-test-", dir=local_private
+        ) as temp_dir:
+            output_root = Path(temp_dir)
+            policy = replace(
+                self.policy,
+                output_root=output_root.relative_to(REPO_ROOT).as_posix(),
+            )
+            result = self.execute()
+            output_dir = write_cycle_artifacts(REPO_ROOT, policy, result)
+            prepared_snapshot = _capture_artifact_snapshot(output_dir)
+            test_result = self._test_result(
+                result.run_id,
+                promotion_eligible=_snapshot_promotion_eligible(
+                    prepared_snapshot
+                ),
+            )
+            with mock_patch(
+                "scripts.validate_oal_001._git_read",
+                side_effect=canonical_git_read,
+            ):
+                self.assertEqual(
+                    validate_artifact_snapshot(
+                        prepared_snapshot, output_dir, lifecycle="prepared"
+                    ),
+                    [],
+                )
+                self.assertEqual(
+                    _finalize_evidence(
+                        output_dir, prepared_snapshot, test_result
+                    ),
+                    [],
+                )
+                self.assertEqual(verify_existing_evidence(output_dir), [])
 
     def test_finalized_snapshot_records_runtime_gap_without_pass(self) -> None:
         local_private = REPO_ROOT / "raw" / "exports" / "local-private"
@@ -488,7 +686,12 @@ class Oal001RuntimeTests(unittest.TestCase):
                 side_effect=racing_writer,
             ):
                 errors = _finalize_evidence(
-                    output_dir, prepared, self._test_result(result.run_id)
+                    output_dir,
+                    prepared,
+                    self._test_result(
+                        result.run_id,
+                        promotion_eligible=_snapshot_promotion_eligible(prepared),
+                    ),
                 )
 
             self.assertTrue(any("candidate replay" in item for item in errors))
@@ -505,7 +708,12 @@ class Oal001RuntimeTests(unittest.TestCase):
             result, output_dir, prepared = self._prepared_evidence(temp_dir)
             self.assertEqual(
                 _finalize_evidence(
-                    output_dir, prepared, self._test_result(result.run_id)
+                    output_dir,
+                    prepared,
+                    self._test_result(
+                        result.run_id,
+                        promotion_eligible=_snapshot_promotion_eligible(prepared),
+                    ),
                 ),
                 [],
             )
@@ -620,7 +828,10 @@ class Oal001RuntimeTests(unittest.TestCase):
             prefix="oal-001-test-", dir=local_private
         ) as temp_dir:
             result, output_dir, prepared = self._prepared_evidence(temp_dir)
-            pass_test_result = self._test_result(result.run_id)
+            pass_test_result = self._test_result(
+                result.run_id,
+                promotion_eligible=_snapshot_promotion_eligible(prepared),
+            )
             self.assertEqual(
                 _finalize_evidence(output_dir, prepared, pass_test_result), []
             )
@@ -692,6 +903,84 @@ class Oal001RuntimeTests(unittest.TestCase):
         self.assertEqual(options["env"]["GIT_OPTIONAL_LOCKS"], "0")
         self.assertNotIn("OAL_TEST_SECRET", options["env"])
         self.assertNotIn("shell", options)
+
+    def test_worktree_status_preserves_porcelain_columns_without_tracking_data(
+        self,
+    ) -> None:
+        executable = Path(r"C:\Program Files\Git\cmd\git.exe")
+        completed = SimpleNamespace(
+            returncode=0,
+            stdout=" M scripts/oal_001/runtime.py\n?? untracked.txt\n",
+            stderr="",
+        )
+        with (
+            mock_patch.object(
+                git_read, "_resolve_git_executable", return_value=executable
+            ),
+            mock_patch.object(
+                git_read.subprocess, "run", return_value=completed
+            ) as mocked_run,
+        ):
+            status = git_read.worktree_status(REPO_ROOT)
+
+        self.assertEqual(
+            status, " M scripts/oal_001/runtime.py\n?? untracked.txt"
+        )
+        self.assertFalse(git_status_is_clean(status))
+        command = mocked_run.call_args.args[0]
+        self.assertIn("--porcelain=v1", command)
+        self.assertIn("--untracked-files=all", command)
+        self.assertIn("--ignore-submodules=none", command)
+        self.assertIn("--no-renames", command)
+        self.assertIn("status.branch=false", command)
+        self.assertNotIn("--branch", command)
+
+    def test_clean_status_is_empty_and_legacy_branch_header_is_rejected(self) -> None:
+        self.assertTrue(git_status_is_clean(""))
+        with self.assertRaisesRegex(RuntimeError, "invalid payload"):
+            git_read.validate_worktree_status(
+                "## codex/observatory-selfmod-001...origin/branch"
+            )
+        with self.assertRaisesRegex(RuntimeError, "invalid payload"):
+            git_read.validate_worktree_status(" M tracked.py\n")
+        with self.assertRaisesRegex(RuntimeError, "invalid payload"):
+            execute_cycle(
+                REPO_ROOT,
+                self.policy,
+                BRANCH,
+                BASE_SHA,
+                git_status_before="## synthetic-test",
+                git_status_after="## synthetic-test",
+            )
+
+    def test_dirty_porcelain_entries_are_prepared_not_clean(self) -> None:
+        for status in ("M  tracked.py", " M tracked.py", "?? untracked.py"):
+            with self.subTest(status=status):
+                result = execute_cycle(
+                    REPO_ROOT,
+                    self.policy,
+                    BRANCH,
+                    BASE_SHA,
+                    git_status_before=status,
+                    git_status_after=status,
+                )
+
+                self.assertFalse(result.trace["git_status"]["clean_worktree"])
+                self.assertEqual(result.trace["source_state"], "working_tree_manifest")
+                self.assertEqual(result.boundary_report["status"], "PASS_PREPARED")
+
+    def test_porcelain_submodule_worktree_states_are_canonical(self) -> None:
+        for status in (
+            " m submodule",
+            " ? submodule",
+            "Mm submodule",
+            "M? submodule",
+        ):
+            with self.subTest(status=status):
+                self.assertEqual(
+                    git_read.validate_worktree_status(status), status
+                )
+                self.assertFalse(git_status_is_clean(status))
 
     def test_git_read_api_rejects_mutation_and_path_traversal(self) -> None:
         with self.assertRaisesRegex(ValueError, "typed read-only API"):

@@ -9,6 +9,7 @@
   "protected_paths": [
     ".codex",
     ".git",
+    ".github/workflows/oal-001-validate.yml",
     ".gitignore",
     "config/oal_001.json",
     "docs/governance",

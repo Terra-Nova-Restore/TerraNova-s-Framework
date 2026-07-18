@@ -18,10 +18,18 @@ TRUSTED_GIT_CANDIDATES = (
 FIXED_GIT_READ_ARGUMENTS = {
     ("branch", "--show-current"),
     ("rev-parse", "HEAD"),
-    ("status", "--short", "--branch"),
+    (
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--ignore-submodules=none",
+        "--no-renames",
+    ),
 }
 GIT_SHA_PATTERN = re.compile(r"^[a-f0-9]{40}$")
 BRANCH_PATTERN = re.compile(r"^[A-Za-z0-9._/-]+$")
+PORCELAIN_INDEX_STATUS_CHARACTERS = frozenset(" MTADRCU?")
+PORCELAIN_WORKTREE_STATUS_CHARACTERS = frozenset(" MTADRCU?m")
 _PASSTHROUGH_ENVIRONMENT = (
     "SYSTEMROOT",
     "WINDIR",
@@ -92,6 +100,14 @@ def _sanitized_environment(git_executable: Path) -> dict[str, str]:
     return environment
 
 
+def _remove_terminal_newline(value: str) -> str:
+    if value.endswith("\r\n"):
+        return value[:-2]
+    if value.endswith("\n"):
+        return value[:-1]
+    return value
+
+
 def _validate_relative_path(relative_path: str) -> str:
     if (
         not relative_path
@@ -135,6 +151,12 @@ def _run_git(
         "-c",
         "core.fsmonitor=false",
         "-c",
+        "core.quotePath=true",
+        "-c",
+        "core.untrackedCache=false",
+        "-c",
+        "status.branch=false",
+        "-c",
         f"core.hooksPath={os.devnull}",
         *arguments,
     ]
@@ -152,7 +174,11 @@ def _run_git(
     if result.returncode not in allowed_return_codes:
         detail = result.stderr.strip() or "no diagnostic output"
         raise RuntimeError(f"read-only Git observation failed: {detail}")
-    return result.returncode, result.stdout.strip(), result.stderr.strip()
+    return (
+        result.returncode,
+        _remove_terminal_newline(result.stdout),
+        _remove_terminal_newline(result.stderr),
+    )
 
 
 def current_branch(repo_root: Path) -> str:
@@ -173,13 +199,41 @@ def head_sha(repo_root: Path) -> str:
     return output
 
 
-def worktree_status(repo_root: Path) -> str:
-    """Return porcelain status without optional index writes or fsmonitor hooks."""
+def validate_worktree_status(status: str) -> str:
+    """Validate branch-header-free Git porcelain v1 dirty-state entries."""
 
-    _, output, _ = _run_git(repo_root, ("status", "--short", "--branch"))
-    if not output.startswith("## ") or "\x00" in output:
+    if not isinstance(status, str):
+        raise RuntimeError("Git status observation returned a non-string payload")
+    if "\x00" in status or "\r" in status or status.endswith("\n"):
         raise RuntimeError("Git status observation returned an invalid payload")
-    return output
+    for line in status.split("\n") if status else ():
+        if (
+            len(line) < 4
+            or line.startswith("## ")
+            or line[2] != " "
+            or line[:2] == "  "
+            or line[0] not in PORCELAIN_INDEX_STATUS_CHARACTERS
+            or line[1] not in PORCELAIN_WORKTREE_STATUS_CHARACTERS
+            or (line[0] == "?" and line[1] != "?")
+        ):
+            raise RuntimeError("Git status observation returned an invalid payload")
+    return status
+
+
+def worktree_status(repo_root: Path) -> str:
+    """Return canonical dirty entries without branch or tracking metadata."""
+
+    _, output, _ = _run_git(
+        repo_root,
+        (
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all",
+            "--ignore-submodules=none",
+            "--no-renames",
+        ),
+    )
+    return validate_worktree_status(output)
 
 
 def is_ignored(repo_root: Path, relative_path: str) -> bool:

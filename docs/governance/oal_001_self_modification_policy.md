@@ -26,7 +26,7 @@ The same candidate cycle may not change:
 - human gates, branch or worktree boundaries;
 - secret handling or external-mutation defaults;
 - audit, trace, replay, determinism or rollback logic;
-- the Governor, runtime, validator, configuration or trace schema;
+- the Governor, runtime, validator, CI workflow, configuration or trace schema;
 - a control rule together with the test that authorizes that rule.
 
 Any proposed path outside the exact mutable allowlist is rejected before a
@@ -71,14 +71,27 @@ Run evidence is written only below the gitignored path
 `raw/exports/local-private/oal-001/`. It must record the trigger, hypothesis,
 expected effect, fallback criterion, hashes, diff identity, replay results,
 evaluator decision, rollback proof, Git status and zero external mutations.
+The Git snapshots contain only canonical `porcelain=v1` dirty entries with all
+untracked files expanded, submodule changes included and rename detection fixed
+off. Branch, HEAD and dirty state remain separate bindings;
+upstream names and ahead/behind counters never enter the trace or run identity.
 Evidence files are replaced atomically. A run remains `INCOMPLETE` until the
 validator has reconstructed the cross-artifact evidence and written a final
 completion marker that binds the SHA-256 digest of every other artifact.
 Semantic validation and digest binding use the same immutable in-memory byte
 snapshot. The write-free `--verify-existing <run-id>` path reconstructs the
 final bundle from one fresh snapshot and performs no test, dry-run or evidence
-write. Only a final `PASS` produced under Python 3.11 is promotion-ready;
+write. A final `PASS` produced under Python 3.11 is promotion-ready only when
+the canonical dirty-state snapshots are empty and the boundary status is `PASS`;
 `PASS_WITH_RUNTIME_GAP` is valid local evidence but blocks promotion.
+A semantically valid dirty bundle remains `promotion_ready=false` and
+`evidence_complete=false`; read-only verification reports
+`VERIFIED_NOT_PROMOTION_READY` with a non-zero exit instead of exposing a false
+promotion gate.
+
+The dedicated `OAL Python 3.11` pull-request check runs the complete validator
+on the exact PR head in an ephemeral, read-only GitHub Actions job. It persists
+no checkout credentials, receives no secrets and publishes no evidence.
 
 All Git observations pass through a protected typed read-only adapter. It uses
 a fixed system Git executable, disables optional locks and filesystem monitors,

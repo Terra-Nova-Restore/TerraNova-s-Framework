@@ -158,8 +158,16 @@
       "additionalProperties": false,
       "required": ["before", "after", "unchanged", "clean_worktree"],
       "properties": {
-        "before": {"type": "string"},
-        "after": {"type": "string"},
+        "before": {
+          "type": "string",
+          "description": "Branch-header-free Git porcelain v1 dirty entries before the cycle; empty means clean.",
+          "not": {"pattern": "(^|\\n)## "}
+        },
+        "after": {
+          "type": "string",
+          "description": "Branch-header-free Git porcelain v1 dirty entries after the cycle; empty means clean.",
+          "not": {"pattern": "(^|\\n)## "}
+        },
         "unchanged": {"type": "boolean"},
         "clean_worktree": {"type": "boolean"}
       }

@@ -23,6 +23,10 @@ sys.dont_write_bytecode = True
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+OAL_CI_WORKFLOW_PATH = ".github/workflows/oal-001-validate.yml"
+EXPECTED_OAL_CI_WORKFLOW_SHA256 = (
+    "6BE9AB1C40ADE2EEFA2949EEBEBEB064870905D0D842B5D0CC00F106628EB3DB"
+)
 PACKAGE_FILES = (
     "scripts/oal_001/__init__.py",
     "scripts/oal_001/__main__.py",
@@ -39,6 +43,7 @@ PYTHON_FILES = (
 )
 REQUIRED_FILES = (
     ".codex/safety_policy.yaml",
+    OAL_CI_WORKFLOW_PATH,
     ".gitignore",
     "config/oal_001.json",
     "docs/governance/oal_001_self_modification_policy.md",
@@ -64,6 +69,7 @@ EXPECTED_MUTABLE_PATHS = ["scripts/oal_001/observatory.py"]
 EXPECTED_PROTECTED_PATHS = [
     ".codex",
     ".git",
+    ".github/workflows/oal-001-validate.yml",
     ".gitignore",
     "config/oal_001.json",
     "docs/governance",
@@ -156,12 +162,13 @@ FORBIDDEN_SOURCE_SNIPPETS = (
     "exec(",
 )
 RUN_ID_PATTERN = re.compile(r"^OAL-001-[A-F0-9]{16}$")
-MINIMUM_OAL_TEST_COUNT = 47
+MINIMUM_OAL_TEST_COUNT = 54
 TARGET_PYTHON = (3, 11)
 STATUS_PASS = "PASS"
 STATUS_RUNTIME_GAP = "PASS_WITH_RUNTIME_GAP"
 STATUS_FAIL = "FAIL"
 EXIT_RUNTIME_GAP = 3
+EXIT_NOT_PROMOTION_READY = 4
 ArtifactSnapshot = tuple[tuple[str, bytes], ...]
 
 
@@ -425,7 +432,13 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
         if fixed_commands != {
             ("branch", "--show-current"),
             ("rev-parse", "HEAD"),
-            ("status", "--short", "--branch"),
+            (
+                "status",
+                "--porcelain=v1",
+                "--untracked-files=all",
+                "--ignore-submodules=none",
+                "--no-renames",
+            ),
         }:
             errors.append("typed Git reads do not match the exact fixed allowlist")
     return errors
@@ -489,7 +502,14 @@ def _git_read(command: list[str]) -> str:
     readers = {
         ("git", "branch", "--show-current"): current_branch,
         ("git", "rev-parse", "HEAD"): head_sha,
-        ("git", "status", "--short", "--branch"): worktree_status,
+        (
+            "git",
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all",
+            "--ignore-submodules=none",
+            "--no-renames",
+        ): worktree_status,
     }
     reader = readers.get(tuple(command))
     if reader is None:
@@ -506,6 +526,15 @@ def static_errors() -> list[str]:
             errors.append(str(exc))
     if errors:
         return errors
+
+    workflow_source = _read_repo_file(OAL_CI_WORKFLOW_PATH)
+    normalized_workflow = workflow_source.replace(b"\r\n", b"\n")
+    if (
+        b"\r" in normalized_workflow
+        or hashlib.sha256(normalized_workflow).hexdigest().upper()
+        != EXPECTED_OAL_CI_WORKFLOW_SHA256
+    ):
+        errors.append("OAL Python 3.11 workflow does not match the exact contract")
 
     try:
         policy = _load_repo_json("config/oal_001.json")
@@ -580,6 +609,30 @@ def static_errors() -> list[str]:
             or set(checks_schema.get("required", [])) != EXPECTED_EVALUATION_CHECKS
         ):
             errors.append("trace schema evaluation checks are not exact")
+        expected_git_status_snapshots = {
+            "before": {
+                "type": "string",
+                "description": (
+                    "Branch-header-free Git porcelain v1 dirty entries before "
+                    "the cycle; empty means clean."
+                ),
+                "not": {"pattern": "(^|\\n)## "},
+            },
+            "after": {
+                "type": "string",
+                "description": (
+                    "Branch-header-free Git porcelain v1 dirty entries after "
+                    "the cycle; empty means clean."
+                ),
+                "not": {"pattern": "(^|\\n)## "},
+            },
+        }
+        git_status_properties = schema["properties"]["git_status"]["properties"]
+        if any(
+            git_status_properties.get(name) != expected
+            for name, expected in expected_git_status_snapshots.items()
+        ):
+            errors.append("trace schema Git status snapshots are not canonical")
     except (KeyError, TypeError, OSError, ValueError, json.JSONDecodeError) as exc:
         errors.append(f"invalid trace schema structure: {exc}")
     return errors
@@ -775,6 +828,25 @@ def _load_snapshot_json(snapshot: ArtifactSnapshot, name: str) -> object:
     return strict_json_bytes(_snapshot_bytes(snapshot, name))
 
 
+def _snapshot_promotion_eligible(snapshot: ArtifactSnapshot) -> bool:
+    """Derive promotion eligibility only from one captured evidence snapshot."""
+
+    try:
+        trace = _load_snapshot_json(snapshot, "mutation_trace.json")
+        boundary = _load_snapshot_json(snapshot, "boundary_report.json")
+    except (UnicodeDecodeError, ValueError, json.JSONDecodeError):
+        return False
+    if not isinstance(trace, dict) or not isinstance(boundary, dict):
+        return False
+    git_status = trace.get("git_status")
+    return (
+        boundary.get("status") == STATUS_PASS
+        and trace.get("source_state") == "clean_commit"
+        and isinstance(git_status, dict)
+        and git_status.get("clean_worktree") is True
+    )
+
+
 def _validation_status(artifact_errors: list[str], runtime_status: str) -> str:
     if artifact_errors:
         return STATUS_FAIL
@@ -794,10 +866,11 @@ def _build_test_result(
     artifact_errors: list[str],
     python_version: str,
     python_version_info: tuple[int, int],
+    promotion_eligible: bool,
 ) -> dict[str, object]:
     runtime_status = STATUS_PASS if python_version_info == TARGET_PYTHON else "NOT_RUN"
     status = _validation_status(artifact_errors, runtime_status)
-    promotion_ready = status == STATUS_PASS
+    promotion_ready = status == STATUS_PASS and promotion_eligible is True
     return {
         "schema_version": "OAL-1.0",
         "run_id": run_id,
@@ -835,7 +908,9 @@ def _build_test_result(
     }
 
 
-def _final_test_result_errors(test_result: object, expected_run_id: str) -> list[str]:
+def _final_test_result_errors(
+    test_result: object, expected_run_id: str, promotion_eligible: bool
+) -> list[str]:
     if not isinstance(test_result, dict):
         return ["final test result must be a JSON object"]
     errors: list[str] = []
@@ -943,7 +1018,7 @@ def _final_test_result_errors(test_result: object, expected_run_id: str) -> list
     )
     if test_result.get("status") != expected_status:
         errors.append("final validation status does not match Python 3.11 execution")
-    promotion_ready = expected_status == STATUS_PASS
+    promotion_ready = expected_status == STATUS_PASS and promotion_eligible is True
     if test_result.get("promotion_ready") is not promotion_ready:
         errors.append("final promotion readiness does not match validation status")
     if test_result.get("evidence_complete") is not promotion_ready:
@@ -1039,7 +1114,16 @@ def validate_artifact_snapshot(
         policy = load_policy(REPO_ROOT)
         branch = _git_read(["git", "branch", "--show-current"])
         base_sha = _git_read(["git", "rev-parse", "HEAD"])
-        current_status = _git_read(["git", "status", "--short", "--branch"])
+        current_status = _git_read(
+            [
+                "git",
+                "status",
+                "--porcelain=v1",
+                "--untracked-files=all",
+                "--ignore-submodules=none",
+                "--no-renames",
+            ]
+        )
         baseline_bytes = read_managed_source(REPO_ROOT, TARGET_PATH)
         baseline_sha = sha256_bytes(baseline_bytes)
         patch = build_harmless_patch(baseline_bytes.decode("utf-8"), baseline_sha)
@@ -1072,18 +1156,22 @@ def validate_artifact_snapshot(
     ):
         errors.append("trace Git snapshots do not match the current worktree status")
 
-    expected_run_id = derive_run_id(
-        base_sha,
-        branch,
-        str(trace_git.get("before", "")),
-        str(trace_git.get("after", "")),
-        CYCLE_ID,
-        TARGET_PATH,
-        baseline_sha,
-        candidate_sha,
-        str(fixture["fixture_id"]),
-        expected_manifest,
-    )
+    try:
+        expected_run_id = derive_run_id(
+            base_sha,
+            branch,
+            str(trace_git.get("before", "")),
+            str(trace_git.get("after", "")),
+            CYCLE_ID,
+            TARGET_PATH,
+            baseline_sha,
+            candidate_sha,
+            str(fixture["fixture_id"]),
+            expected_manifest,
+        )
+    except RuntimeError as exc:
+        errors.append(f"trace Git status cannot derive a run ID: {exc}")
+        return errors
     run_ids = {
         trace.get("run_id"),
         comparison.get("run_id"),
@@ -1265,7 +1353,16 @@ def validate_artifact_snapshot(
                 "completion marker must remain INCOMPLETE until final validation"
             )
     else:
-        errors.extend(_final_test_result_errors(test_result, expected_run_id))
+        promotion_eligible = (
+            expected_boundary["status"] == STATUS_PASS
+            and clean_worktree
+            and trace.get("source_state") == "clean_commit"
+        )
+        errors.extend(
+            _final_test_result_errors(
+                test_result, expected_run_id, promotion_eligible
+            )
+        )
         final_status = (
             test_result.get("status") if isinstance(test_result, dict) else STATUS_FAIL
         )
@@ -1439,6 +1536,12 @@ def _verify_existing(run_id: str) -> int:
     if status != STATUS_PASS:
         error("final evidence status is not recognized")
         return 1
+    if test_result.get("promotion_ready") is not True:
+        print(
+            f"[validate-oal-001] VERIFIED_NOT_PROMOTION_READY run_id={run_id} "
+            f"status={status}"
+        )
+        return EXIT_NOT_PROMOTION_READY
     print(f"[validate-oal-001] VERIFIED run_id={run_id} status={status}")
     return 0
 
@@ -1485,20 +1588,22 @@ def _run_validation() -> int:
     errors = validate_artifact_snapshot(
         prepared_snapshot, output_dir, lifecycle="prepared"
     )
+    if errors:
+        for item in errors:
+            error(item)
+        return 1
+    promotion_eligible = _snapshot_promotion_eligible(prepared_snapshot)
     test_result = _build_test_result(
         run_id=str(summary["run_id"]),
         test_count=int(test_count),
         test_outcomes=test_outcomes or {},
         test_returncode=test_returncode,
         dry_run_returncode=dry_run_returncode,
-        artifact_errors=errors,
+        artifact_errors=[],
         python_version=sys.version.split()[0],
         python_version_info=sys.version_info[:2],
+        promotion_eligible=promotion_eligible,
     )
-    if errors:
-        for item in errors:
-            error(item)
-        return 1
     errors = _finalize_evidence(output_dir, prepared_snapshot, test_result)
 
     if errors:
@@ -1507,14 +1612,23 @@ def _run_validation() -> int:
         return 1
 
     status = str(test_result["status"])
-    label = "OK" if status == STATUS_PASS else "OK_WITH_RUNTIME_GAP"
+    if status == STATUS_RUNTIME_GAP:
+        label = "OK_WITH_RUNTIME_GAP"
+    elif test_result["promotion_ready"] is True:
+        label = "OK"
+    else:
+        label = "OK_NOT_PROMOTION_READY"
     print(
         f"[validate-oal-001] {label} run_id={summary['run_id']} status={status} "
         f"tests={test_count} skipped={(test_outcomes or {}).get('skipped', 0)}"
     )
     print(f"[validate-oal-001] output_dir={summary['output_dir']}")
     print("[validate-oal-001] external_mutation_count=0")
-    return 0 if status == STATUS_PASS else EXIT_RUNTIME_GAP
+    if status == STATUS_RUNTIME_GAP:
+        return EXIT_RUNTIME_GAP
+    if test_result["promotion_ready"] is not True:
+        return EXIT_NOT_PROMOTION_READY
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:

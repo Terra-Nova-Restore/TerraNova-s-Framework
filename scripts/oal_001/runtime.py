@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Mapping
 
 from .governor import Governor, GovernorDecision, GovernorPolicy, PatchSpec
-from .git_read import is_ignored, worktree_status
+from .git_read import is_ignored, validate_worktree_status, worktree_status
 
 
 TARGET_PATH = "scripts/oal_001/observatory.py"
@@ -45,6 +45,7 @@ NOT_ACTIONS = (
 )
 MANAGED_SOURCE_PATHS = (
     ".codex/safety_policy.yaml",
+    ".github/workflows/oal-001-validate.yml",
     ".gitignore",
     "config/oal_001.json",
     "docs/governance/oal_001_self_modification_policy.md",
@@ -527,6 +528,8 @@ def derive_run_id(
     fixture_id: str,
     source_manifest: list[dict[str, object]],
 ) -> str:
+    git_status_before = validate_worktree_status(git_status_before)
+    git_status_after = validate_worktree_status(git_status_after)
     material = {
         "base_sha": base_sha,
         "branch": branch,
@@ -557,6 +560,9 @@ def execute_cycle(
         raise ValueError("base_sha must be a lowercase 40-character Git SHA")
     if git_status_before is None:
         git_status_before = _git_status(repo_root)
+    git_status_before = validate_worktree_status(git_status_before)
+    if git_status_after is not None:
+        git_status_after = validate_worktree_status(git_status_after)
     source_manifest_before = source_manifest_for_repo(repo_root)
     managed_manifest_sha256_before = sha256_text(canonical_json(source_manifest_before))
     fixture = load_fixture(repo_root, policy.fixture_path)
@@ -599,6 +605,7 @@ def execute_cycle(
     )
     if git_status_after is None:
         git_status_after = _git_status(repo_root)
+    git_status_after = validate_worktree_status(git_status_after)
     rollback_proof = {
         "status": "verified"
         if rollback_partial["candidate_restored"]
@@ -1097,7 +1104,13 @@ def validate_trace_payload(trace: Mapping[str, object]) -> list[str]:
             errors.append("git status snapshots must be strings")
         else:
             expected_unchanged = before == after
-            expected_clean = git_status_is_clean(before) and git_status_is_clean(after)
+            try:
+                expected_clean = git_status_is_clean(before) and git_status_is_clean(
+                    after
+                )
+            except RuntimeError as exc:
+                errors.append(str(exc))
+                expected_clean = False
             if git_status.get("unchanged") is not expected_unchanged:
                 errors.append("git_status unchanged flag does not match snapshots")
             if git_status.get("clean_worktree") is not expected_clean:
@@ -1134,8 +1147,7 @@ def _git_status(repo_root: Path) -> str:
 
 
 def git_status_is_clean(status: str) -> bool:
-    lines = [line for line in status.splitlines() if line]
-    return len(lines) == 1 and lines[0].startswith("## ")
+    return validate_worktree_status(status) == ""
 
 
 def _prepare_output_dir(repo_root: Path, policy: GovernorPolicy, run_id: str) -> Path:

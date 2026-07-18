@@ -16,6 +16,7 @@ EXPECTED_MUTABLE_PATHS = ("scripts/oal_001/observatory.py",)
 EXPECTED_PROTECTED_PATHS = (
     ".codex",
     ".git",
+    ".github/workflows/oal-001-validate.yml",
     ".gitignore",
     "config/oal_001.json",
     "docs/governance",
