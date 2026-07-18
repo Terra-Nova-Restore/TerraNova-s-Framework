@@ -160,6 +160,170 @@ EXPECTED_SUBPROCESS_IMPORT_FILES = frozenset(
         "scripts/validate_oal_001.py",
     }
 )
+EXPECTED_OS_IMPORT_FILES = frozenset(
+    {
+        "scripts/oal_001/git_read.py",
+        "scripts/oal_001/runtime.py",
+        "scripts/validate_oal_001.py",
+        "tests/test_oal_001_runtime.py",
+    }
+)
+EXPECTED_OS_REFERENCE_CONTRACTS = {
+    "scripts/oal_001/git_read.py": (
+        (
+            "body[17].body[1].body[0].value.func.value",
+            "getenv",
+            "BDE0856D1FCF67C42E511223F97A6E1C797DBB02E2C4E55808C5EB2E2F5774CF",
+        ),
+        (
+            "body[17].body[2].value.args[0].values[2].value",
+            "devnull",
+            "DBB6DEE5EB1414768D5910DCF4D3F772A1D73AFB8A5812E51996AF5E73612867",
+        ),
+        (
+            "body[17].body[2].value.args[0].values[3].value",
+            "devnull",
+            "DBB6DEE5EB1414768D5910DCF4D3F772A1D73AFB8A5812E51996AF5E73612867",
+        ),
+        (
+            "body[20].body[5].value.elts[12].values[1].value.value",
+            "devnull",
+            "98035CF20A9746B0ECD5EC2CFE4642833C3B39F1D2EEF641E2DBA478672694F6",
+        ),
+    ),
+    "scripts/oal_001/runtime.py": (
+        (
+            "body[55].body[3].body[0].body[2].value.func.value",
+            "fsync",
+            "E34538123523C03C35D2BEFB4CE7BAC9F2592995F083A03145B4345A8B87DD28",
+        ),
+        (
+            "body[55].body[3].body[0].items[0].context_expr.func.value",
+            "fdopen",
+            "EE0F7D97282CF09062161ED7BDBC1005A5A3CF791D4995F55EC64261BC01235A",
+        ),
+        (
+            "body[55].body[3].body[1].value.func.value",
+            "replace",
+            "D4CCD80E02471EFBA4A3405B740F8FF21056A08B589BA528155D6790EB5335A4",
+        ),
+    ),
+    "scripts/validate_oal_001.py": (
+        (
+            "body[127].body[5].body[0].body[2].value.func.value",
+            "fsync",
+            "E34538123523C03C35D2BEFB4CE7BAC9F2592995F083A03145B4345A8B87DD28",
+        ),
+        (
+            "body[127].body[5].body[0].items[0].context_expr.func.value",
+            "fdopen",
+            "E91D009D3BB014DC1D837C8372BACF88591FC4984334ADB9A9CE48E98A69D1DD",
+        ),
+        (
+            "body[127].body[5].body[1].value.func.value",
+            "replace",
+            "125ED1C8D1D16A59A24A6D0E42939DAAA168BA6D472E0860AEB467A138EB661E",
+        ),
+    ),
+    "tests/test_oal_001_runtime.py": (
+        (
+            "body[20].value.test.left.value",
+            "name",
+            "94334B13C8E4543D8EA1059F2B8AEE2E0F49D5FEC73BAFCF2BFCC88213979348",
+        ),
+        (
+            "body[21].body[19].body[0].body[5].body[0].value.func.value",
+            "link",
+            "F2BB99267D5EDE9DD03602012488981C35715DB895F41F615D5B6E0C9362766E",
+        ),
+        (
+            "body[21].body[36].body[2].items[2].context_expr.args[0].value",
+            "environ",
+            "2593BAF1EFD4860291EEDFA5D2349EA22EF1B8F97353E23EBC6AB5C509A8F75E",
+        ),
+    ),
+}
+OS_REFERENCE_STATEMENT_HASH_ALGORITHM = "sha256"
+EXPECTED_SUBPROCESS_RUN_STATEMENTS = {
+    "scripts/oal_001/git_read.py": (
+        (
+            "_run_git",
+            6,
+            ast.dump(
+                ast.parse(
+                    """result = subprocess.run(
+    command,
+    cwd=resolved_repo,
+    env=_sanitized_environment(git_executable),
+    text=True,
+    encoding="utf-8",
+    errors="strict",
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    check=False,
+)
+""",
+                    feature_version=(3, 11),
+                ).body[0],
+                include_attributes=False,
+            ),
+        ),
+    ),
+    "scripts/validate_oal_001.py": (
+        (
+            "run_unit_tests",
+            0,
+            ast.dump(
+                ast.parse(
+                    """result = subprocess.run(
+    [
+        sys.executable,
+        "-I",
+        "-S",
+        "-B",
+        VALIDATOR_PATH,
+        "--_internal-unit-tests",
+    ],
+    cwd=REPO_ROOT,
+    text=True,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.STDOUT,
+    check=False,
+)
+""",
+                    feature_version=(3, 11),
+                ).body[0],
+                include_attributes=False,
+            ),
+        ),
+        (
+            "run_dry_run",
+            0,
+            ast.dump(
+                ast.parse(
+                    """result = subprocess.run(
+    [
+        sys.executable,
+        "-I",
+        "-S",
+        "-B",
+        VALIDATOR_PATH,
+        "--_internal-dry-run",
+    ],
+    cwd=REPO_ROOT,
+    text=True,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    check=False,
+)
+""",
+                    feature_version=(3, 11),
+                ).body[0],
+                include_attributes=False,
+            ),
+        ),
+    ),
+}
 EXPECTED_REPARSE_POINT_FUNCTION_AST = ast.dump(
     ast.parse(
         """def _is_reparse_point(path: Path) -> bool:
@@ -310,7 +474,7 @@ FORBIDDEN_SOURCE_SNIPPETS = (
     "exec(",
 )
 RUN_ID_PATTERN = re.compile(r"^OAL-001-[A-F0-9]{16}$")
-MINIMUM_OAL_TEST_COUNT = 68
+MINIMUM_OAL_TEST_COUNT = 70
 TARGET_PYTHON = (3, 11)
 STATUS_PASS = "PASS"
 STATUS_RUNTIME_GAP = "PASS_WITH_RUNTIME_GAP"
@@ -540,24 +704,6 @@ def _blocked_network_imports(tree: ast.AST) -> list[str]:
             ):
                 found.append(module)
     return sorted(set(found))
-
-
-def _call_signature(argument: ast.AST) -> tuple[str, ...] | None:
-    if isinstance(argument, ast.Name):
-        return (f"${argument.id}",)
-    if not isinstance(argument, (ast.List, ast.Tuple)):
-        return None
-    values: list[str] = []
-    for element in argument.elts:
-        if isinstance(element, ast.Constant) and isinstance(element.value, str):
-            values.append(element.value)
-        elif isinstance(element, ast.Name):
-            values.append(f"${element.id}")
-        elif isinstance(element, ast.Attribute) and isinstance(element.value, ast.Name):
-            values.append(f"${element.value.id}.{element.attr}")
-        else:
-            return None
-    return tuple(values)
 
 
 def _pull_request_trigger_errors(workflow_source: bytes) -> list[str]:
@@ -1030,9 +1176,125 @@ def _is_process_api_name(name: str) -> bool:
     )
 
 
+def _is_direct_subprocess_run_call(node: ast.AST) -> bool:
+    return (
+        isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Attribute)
+        and isinstance(node.func.value, ast.Name)
+        and node.func.value.id == "subprocess"
+        and node.func.attr == "run"
+    )
+
+
+def _canonical_os_reference_contract(
+    rel_path: str,
+    tree: ast.AST,
+    parents: Mapping[ast.AST, ast.AST],
+) -> list[str]:
+    contract_error = f"canonical os reference contract does not match in {rel_path}"
+    if not isinstance(tree, ast.Module):
+        return [contract_error]
+
+    node_paths: dict[ast.AST, tuple[str, ...]] = {}
+
+    def visit(node: ast.AST, path: tuple[str, ...]) -> None:
+        node_paths[node] = path
+        for field, value in ast.iter_fields(node):
+            if isinstance(value, ast.AST):
+                visit(value, (*path, field))
+            elif isinstance(value, list):
+                for index, child in enumerate(value):
+                    if isinstance(child, ast.AST):
+                        visit(child, (*path, f"{field}[{index}]"))
+
+    visit(tree, ())
+    actual_contract: list[tuple[str, str, str]] = []
+    for node in ast.walk(tree):
+        if not (
+            isinstance(node, ast.Name)
+            and node.id == "os"
+            and isinstance(node.ctx, ast.Load)
+        ):
+            continue
+        attribute = parents.get(node)
+        attribute_name = (
+            attribute.attr
+            if isinstance(attribute, ast.Attribute) and attribute.value is node
+            else "<bare>"
+        )
+        statement: ast.AST = node
+        while not isinstance(statement, ast.stmt):
+            parent = parents.get(statement)
+            if parent is None:
+                return [contract_error]
+            statement = parent
+        statement_ast = ast.dump(statement, include_attributes=False).encode("utf-8")
+        statement_digest = (
+            hashlib.new(OS_REFERENCE_STATEMENT_HASH_ALGORITHM, statement_ast)
+            .hexdigest()
+            .upper()
+        )
+        actual_contract.append(
+            (".".join(node_paths[node]), attribute_name, statement_digest)
+        )
+
+    if tuple(sorted(actual_contract)) != EXPECTED_OS_REFERENCE_CONTRACTS.get(
+        rel_path, ()
+    ):
+        return [contract_error]
+    return []
+
+
+def _canonical_subprocess_run_contract(
+    rel_path: str, tree: ast.AST
+) -> tuple[frozenset[ast.Call], list[str]]:
+    contract_error = f"canonical subprocess.run contract does not match in {rel_path}"
+    if not isinstance(tree, ast.Module):
+        return frozenset(), [contract_error]
+
+    expected_contract = EXPECTED_SUBPROCESS_RUN_STATEMENTS.get(rel_path, ())
+    allowed_calls: list[ast.Call] = []
+    for function_name, body_index, expected_statement_ast in expected_contract:
+        matching_functions = [
+            node
+            for node in ast.walk(tree)
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+            and node.name == function_name
+        ]
+        if (
+            len(matching_functions) != 1
+            or not isinstance(matching_functions[0], ast.FunctionDef)
+            or matching_functions[0] not in tree.body
+        ):
+            return frozenset(), [contract_error]
+        function = matching_functions[0]
+        if body_index >= len(function.body):
+            return frozenset(), [contract_error]
+        statement = function.body[body_index]
+        statement_calls = [
+            node for node in ast.walk(statement) if _is_direct_subprocess_run_call(node)
+        ]
+        if (
+            ast.dump(statement, include_attributes=False) != expected_statement_ast
+            or len(statement_calls) != 1
+            or not isinstance(statement, ast.Assign)
+            or statement.value is not statement_calls[0]
+        ):
+            return frozenset(), [contract_error]
+        allowed_calls.append(statement_calls[0])
+
+    all_calls = [
+        node for node in ast.walk(tree) if _is_direct_subprocess_run_call(node)
+    ]
+    if len(all_calls) != len(allowed_calls) or any(
+        node not in allowed_calls for node in all_calls
+    ):
+        return frozenset(), [contract_error]
+    return frozenset(allowed_calls), []
+
+
 def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
     errors: list[str] = []
-    signatures: list[tuple[str, ...] | None] = []
     canonical_imports = (
         [
             node
@@ -1059,11 +1321,38 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
         tree, "subprocess", allowed_import=allowed_subprocess_import
     ):
         errors.append(f"subprocess rebinding is forbidden in {rel_path}")
+    canonical_os_imports = (
+        [
+            node
+            for node in tree.body
+            if isinstance(node, ast.Import)
+            and len(node.names) == 1
+            and node.names[0].name == "os"
+            and node.names[0].asname is None
+        ]
+        if isinstance(tree, ast.Module)
+        else []
+    )
+    expected_os_import_count = int(rel_path in EXPECTED_OS_IMPORT_FILES)
+    if len(canonical_os_imports) != expected_os_import_count:
+        errors.append(f"canonical os import contract does not match in {rel_path}")
+    allowed_os_import = (
+        canonical_os_imports[0]
+        if expected_os_import_count == 1 and len(canonical_os_imports) == 1
+        else None
+    )
+    if _has_forbidden_name_binding(tree, "os", allowed_import=allowed_os_import):
+        errors.append(f"os rebinding is forbidden in {rel_path}")
     parents: dict[ast.AST, ast.AST] = {
         child: parent
         for parent in ast.walk(tree)
         for child in ast.iter_child_nodes(parent)
     }
+    errors.extend(_canonical_os_reference_contract(rel_path, tree, parents))
+    allowed_subprocess_calls, subprocess_contract_errors = (
+        _canonical_subprocess_run_contract(rel_path, tree)
+    )
+    errors.extend(subprocess_contract_errors)
     allowed_getattr_calls, _ = _canonical_reparse_getattr_contract(rel_path, tree)
     if _has_forbidden_name_binding(tree, "getattr"):
         errors.append(f"getattr rebinding is forbidden in {rel_path}")
@@ -1086,10 +1375,8 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
         elif isinstance(node, ast.ImportFrom):
             if node.module == "subprocess":
                 errors.append(f"from-subprocess imports are forbidden in {rel_path}")
-            if node.module == "os" and any(
-                _is_process_api_name(alias.name) for alias in node.names
-            ):
-                errors.append(f"process imports from os are forbidden in {rel_path}")
+            if node.module == "os":
+                errors.append(f"from-os imports are forbidden in {rel_path}")
             if node.module == "sys" and any(
                 alias.name in {"modules", "__dict__"} for alias in node.names
             ):
@@ -1183,10 +1470,8 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
             continue
         owner = node.func.value
         if isinstance(owner, ast.Name) and owner.id == "subprocess":
-            if node.func.attr != "run" or not node.args:
+            if node.func.attr != "run" or node not in allowed_subprocess_calls:
                 errors.append(f"non-allowlisted subprocess API in {rel_path}")
-            else:
-                signatures.append(_call_signature(node.args[0]))
         if (
             isinstance(owner, ast.Name)
             and owner.id == "os"
@@ -1194,33 +1479,6 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
         ):
             errors.append(f"process execution API is forbidden in {rel_path}")
 
-    expected: dict[str, list[tuple[str, ...]]] = {
-        "scripts/oal_001/__main__.py": [],
-        "scripts/oal_001/git_read.py": [("$command",)],
-        "scripts/oal_001/runtime.py": [],
-        "scripts/validate_oal_001.py": [
-            (
-                "$sys.executable",
-                "-I",
-                "-S",
-                "-B",
-                "$VALIDATOR_PATH",
-                "--_internal-unit-tests",
-            ),
-            (
-                "$sys.executable",
-                "-I",
-                "-S",
-                "-B",
-                "$VALIDATOR_PATH",
-                "--_internal-dry-run",
-            ),
-        ],
-    }
-    if signatures != expected.get(rel_path, []):
-        errors.append(
-            f"subprocess calls do not match the fixed read-only allowlist in {rel_path}"
-        )
     if rel_path == "scripts/oal_001/git_read.py":
         fixed_commands: object | None = None
         for node in tree.body:

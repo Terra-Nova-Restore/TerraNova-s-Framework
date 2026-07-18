@@ -1140,6 +1140,325 @@ class Oal001RuntimeTests(unittest.TestCase):
             ),
         )
 
+    def test_subprocess_calls_are_bound_to_exact_ast_and_call_sites(self) -> None:
+        expected_sites = {
+            "scripts/oal_001/git_read.py": {("_run_git", 6)},
+            "scripts/validate_oal_001.py": {
+                ("run_unit_tests", 0),
+                ("run_dry_run", 0),
+            },
+        }
+        for rel_path in PYTHON_FILES:
+            tree = ast.parse(
+                (REPO_ROOT / rel_path).read_text(encoding="utf-8"),
+                filename=rel_path,
+                feature_version=(3, 11),
+            )
+            actual_sites: set[tuple[str, int]] = set()
+            for function in (
+                node for node in tree.body if isinstance(node, ast.FunctionDef)
+            ):
+                for body_index, statement in enumerate(function.body):
+                    if any(
+                        isinstance(node, ast.Call)
+                        and isinstance(node.func, ast.Attribute)
+                        and isinstance(node.func.value, ast.Name)
+                        and node.func.value.id == "subprocess"
+                        and node.func.attr == "run"
+                        for node in ast.walk(statement)
+                    ):
+                        actual_sites.add((function.name, body_index))
+            with self.subTest(rel_path=rel_path):
+                self.assertEqual(actual_sites, expected_sites.get(rel_path, set()))
+                self.assertNotIn(
+                    f"canonical subprocess.run contract does not match in {rel_path}",
+                    _subprocess_boundary_errors(rel_path, tree),
+                )
+
+        validator_path = "scripts/validate_oal_001.py"
+        validator_source = (REPO_ROOT / validator_path).read_text(encoding="utf-8")
+
+        def validator_tree() -> ast.Module:
+            return ast.parse(
+                validator_source,
+                filename=validator_path,
+                feature_version=(3, 11),
+            )
+
+        def direct_run(
+            tree: ast.Module, function_name: str
+        ) -> tuple[ast.FunctionDef, ast.Call]:
+            functions = [
+                node
+                for node in tree.body
+                if isinstance(node, ast.FunctionDef) and node.name == function_name
+            ]
+            self.assertEqual(len(functions), 1)
+            calls = [
+                node
+                for node in ast.walk(functions[0])
+                if isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Attribute)
+                and isinstance(node.func.value, ast.Name)
+                and node.func.value.id == "subprocess"
+                and node.func.attr == "run"
+            ]
+            self.assertEqual(len(calls), 1)
+            return functions[0], calls[0]
+
+        mutants: list[tuple[str, str, ast.Module]] = []
+
+        tree = validator_tree()
+        _, call = direct_run(tree, "run_unit_tests")
+        next(
+            keyword for keyword in call.keywords if keyword.arg == "cwd"
+        ).value = ast.Call(
+            func=ast.Name(id="side_effect", ctx=ast.Load()),
+            args=[],
+            keywords=[],
+        )
+        mutants.append(("side effect in cwd", validator_path, tree))
+
+        tree = validator_tree()
+        _, call = direct_run(tree, "run_unit_tests")
+        call.keywords.append(ast.keyword(arg="shell", value=ast.Constant(value=True)))
+        mutants.append(("extra keyword", validator_path, tree))
+
+        tree = validator_tree()
+        _, call = direct_run(tree, "run_unit_tests")
+        call.keywords.append(
+            ast.keyword(arg=None, value=ast.Name(id="options", ctx=ast.Load()))
+        )
+        mutants.append(("keyword expansion", validator_path, tree))
+
+        tree = validator_tree()
+        _, call = direct_run(tree, "run_unit_tests")
+        call.args.append(ast.Constant(value="unexpected"))
+        mutants.append(("extra positional argument", validator_path, tree))
+
+        tree = validator_tree()
+        _, call = direct_run(tree, "run_unit_tests")
+        call.args[0] = ast.Starred(value=call.args[0], ctx=ast.Load())
+        mutants.append(("positional expansion", validator_path, tree))
+
+        tree = validator_tree()
+        _, call = direct_run(tree, "run_unit_tests")
+        call.keywords.reverse()
+        mutants.append(("keyword order", validator_path, tree))
+
+        tree = validator_tree()
+        _, call = direct_run(tree, "run_unit_tests")
+        call.keywords = [keyword for keyword in call.keywords if keyword.arg != "check"]
+        mutants.append(("missing keyword", validator_path, tree))
+
+        tree = validator_tree()
+        function, _ = direct_run(tree, "run_unit_tests")
+        function.name = "renamed_unit_tests"
+        mutants.append(("wrong function", validator_path, tree))
+
+        tree = validator_tree()
+        function, _ = direct_run(tree, "run_unit_tests")
+        function.body.insert(0, ast.Pass())
+        mutants.append(("wrong body index", validator_path, tree))
+
+        tree = validator_tree()
+        function, _ = direct_run(tree, "run_unit_tests")
+        function.body.append(copy.deepcopy(function.body[0]))
+        mutants.append(("duplicate call", validator_path, tree))
+
+        tree = validator_tree()
+        function, _ = direct_run(tree, "run_unit_tests")
+        statement = function.body[0]
+        self.assertIsInstance(statement, ast.Assign)
+        statement.targets = [ast.Name(id="other_result", ctx=ast.Store())]
+        mutants.append(("changed result target", validator_path, tree))
+
+        git_path = "scripts/oal_001/git_read.py"
+        git_tree = ast.parse(
+            (REPO_ROOT / git_path).read_text(encoding="utf-8"),
+            filename=git_path,
+            feature_version=(3, 11),
+        )
+        _, git_call = direct_run(git_tree, "_run_git")
+        next(
+            keyword for keyword in git_call.keywords if keyword.arg == "env"
+        ).value = ast.Call(
+            func=ast.Name(id="side_effect", ctx=ast.Load()),
+            args=[],
+            keywords=[],
+        )
+        mutants.append(("side effect in git environment", git_path, git_tree))
+
+        for name, rel_path, tree in mutants:
+            with self.subTest(name=name):
+                self.assertIn(
+                    f"canonical subprocess.run contract does not match in {rel_path}",
+                    _subprocess_boundary_errors(rel_path, tree),
+                )
+
+    def test_os_import_is_canonical_and_rebinding_is_rejected(self) -> None:
+        expected_paths = {
+            "scripts/oal_001/git_read.py",
+            "scripts/oal_001/runtime.py",
+            "scripts/validate_oal_001.py",
+            "tests/test_oal_001_runtime.py",
+        }
+        for rel_path in PYTHON_FILES:
+            tree = ast.parse(
+                (REPO_ROOT / rel_path).read_text(encoding="utf-8"),
+                filename=rel_path,
+                feature_version=(3, 11),
+            )
+            canonical_imports = [
+                node
+                for node in tree.body
+                if isinstance(node, ast.Import)
+                and len(node.names) == 1
+                and node.names[0].name == "os"
+                and node.names[0].asname is None
+            ]
+            errors = _subprocess_boundary_errors(rel_path, tree)
+            with self.subTest(rel_path=rel_path):
+                self.assertEqual(
+                    len(canonical_imports), int(rel_path in expected_paths)
+                )
+                self.assertNotIn(
+                    f"canonical os import contract does not match in {rel_path}",
+                    errors,
+                )
+                self.assertNotIn(f"os rebinding is forbidden in {rel_path}", errors)
+                self.assertNotIn(
+                    f"canonical os reference contract does not match in {rel_path}",
+                    errors,
+                )
+
+        canonical_path = "scripts/oal_001/runtime.py"
+        canonical_source = (REPO_ROOT / canonical_path).read_text(encoding="utf-8")
+        rebinding_mutants = {
+            "assignment": canonical_source.replace(
+                "import os\n", "import os\nos = helper\n", 1
+            ),
+            "argument": canonical_source + "\ndef synthetic(os):\n    pass\n",
+            "foreign import": canonical_source.replace(
+                "import os\n", "import os\nimport helper as os\n", 1
+            ),
+            "from import": canonical_source.replace(
+                "import os\n", "import os\nfrom helper import module as os\n", 1
+            ),
+            "mapping pattern": (
+                canonical_source + "\nmatch {}:\n    case {**os}:\n        pass\n"
+            ),
+            "loop target": canonical_source + "\nfor os in ():\n    pass\n",
+        }
+        expected_rebinding = f"os rebinding is forbidden in {canonical_path}"
+        for name, source in rebinding_mutants.items():
+            with self.subTest(name=name):
+                self.assertIn(
+                    expected_rebinding,
+                    _subprocess_boundary_errors(
+                        canonical_path,
+                        ast.parse(source, feature_version=(3, 11)),
+                    ),
+                )
+
+        canonical_mutants = {
+            "missing": canonical_source.replace("import os\n", "", 1),
+            "duplicate": canonical_source.replace(
+                "import os\n", "import os\nimport os\n", 1
+            ),
+            "nested": canonical_source.replace(
+                "import os\n", "if True:\n    import os\n", 1
+            ),
+            "self alias": canonical_source.replace(
+                "import os\n", "import os as os\n", 1
+            ),
+            "combined": canonical_source.replace(
+                "import os\n", "import os, colorsys\n", 1
+            ),
+        }
+        expected_contract = (
+            f"canonical os import contract does not match in {canonical_path}"
+        )
+        for name, source in canonical_mutants.items():
+            with self.subTest(name=name):
+                self.assertIn(
+                    expected_contract,
+                    _subprocess_boundary_errors(
+                        canonical_path,
+                        ast.parse(source, feature_version=(3, 11)),
+                    ),
+                )
+
+        reference_mutants = {
+            "module alias": canonical_source
+            + "\nalias = os\nalias.system('echo unsafe')\n",
+            "process alias": canonical_source
+            + "\nrunner = os.system\nrunner('echo unsafe')\n",
+            "allowed attribute alias": canonical_source
+            + "\nrunner = os.replace\nrunner('source', 'target')\n",
+            "attribute chain": canonical_source
+            + "\nos.path.os.system('echo unsafe')\n",
+            "callback argument": canonical_source + "\ncallback(os)\n",
+            "return module": canonical_source + "\ndef synthetic():\n    return os\n",
+        }
+        expected_reference_error = (
+            f"canonical os reference contract does not match in {canonical_path}"
+        )
+        for name, source in reference_mutants.items():
+            with self.subTest(name=name):
+                self.assertIn(
+                    expected_reference_error,
+                    _subprocess_boundary_errors(
+                        canonical_path,
+                        ast.parse(source, feature_version=(3, 11)),
+                    ),
+                )
+
+        test_path = "tests/test_oal_001_runtime.py"
+        test_source = (REPO_ROOT / test_path).read_text(encoding="utf-8")
+        exact_site_mutants = {
+            "extra replace call": (
+                canonical_path,
+                canonical_source + "\nos.replace('outside', 'target')\n",
+            ),
+            "fdopen result chain": (
+                canonical_path,
+                canonical_source + "\nos.fdopen(descriptor, 'wb').write(b'outside')\n",
+            ),
+            "extra link call": (
+                test_path,
+                test_source + "\nos.link('source', 'target')\n",
+            ),
+            "environment alias": (
+                test_path,
+                test_source + "\nenv_alias = os.environ\nenv_alias['OAL_X'] = '1'\n",
+            ),
+        }
+        for name, (rel_path, source) in exact_site_mutants.items():
+            with self.subTest(name=name):
+                self.assertIn(
+                    f"canonical os reference contract does not match in {rel_path}",
+                    _subprocess_boundary_errors(
+                        rel_path,
+                        ast.parse(source, feature_version=(3, 11)),
+                    ),
+                )
+
+        unexpected_path = "scripts/oal_001/__main__.py"
+        self.assertIn(
+            f"canonical os reference contract does not match in {unexpected_path}",
+            _subprocess_boundary_errors(
+                unexpected_path, ast.parse("os.devnull\n", feature_version=(3, 11))
+            ),
+        )
+        self.assertIn(
+            "from-os imports are forbidden in synthetic.py",
+            _subprocess_boundary_errors(
+                "synthetic.py",
+                ast.parse("from os import path\n", feature_version=(3, 11)),
+            ),
+        )
+
     def test_workflow_and_validator_use_isolated_import_bootstrap(self) -> None:
         workflow = (REPO_ROOT / ".github/workflows/oal-001-validate.yml").read_text(
             encoding="utf-8"
