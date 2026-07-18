@@ -91,7 +91,13 @@ promotion gate.
 
 The dedicated `OAL Python 3.11` pull-request check runs the complete validator
 on the exact PR head in an ephemeral, read-only GitHub Actions job. It persists
-no checkout credentials, receives no secrets and publishes no evidence.
+no checkout credentials, receives no secrets and publishes no evidence. Before
+repository Python is loaded, an exact workflow-bound standard-library preflight
+rejects import-shadowing files, cached bytecode for protected module slots and
+unexpected package topology. The validator, its authorizing tests and its
+dry-run child all execute with isolated mode, site initialization disabled and
+bytecode writes disabled; the repository root is appended only after the
+standard-library import paths.
 
 All Git observations pass through a protected typed read-only adapter. It uses
 a fixed system Git executable, disables optional locks and filesystem monitors,

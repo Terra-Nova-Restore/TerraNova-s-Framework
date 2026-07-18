@@ -38,8 +38,10 @@ from scripts.validate_oal_001 import (
     EXIT_NOT_PROMOTION_READY,
     EXIT_RUNTIME_GAP,
     MINIMUM_OAL_TEST_COUNT,
+    PROTECTED_IMPORT_FILES,
     STATUS_PASS,
     STATUS_RUNTIME_GAP,
+    VALIDATOR_PATH,
     _artifact_digest_map,
     _atomic_write_bytes,
     _atomic_write_json,
@@ -47,10 +49,13 @@ from scripts.validate_oal_001 import (
     _capture_artifact_snapshot,
     _finalize_evidence,
     _finalized_snapshot,
+    _import_path_boundary_errors,
     _replace_snapshot_bytes,
     _snapshot_promotion_eligible,
     _subprocess_boundary_errors,
     main as validator_main,
+    python_shadowing_errors,
+    run_dry_run,
     run_unit_tests,
     unit_test_gate_errors,
     validate_artifact_snapshot,
@@ -453,9 +458,7 @@ class Oal001RuntimeTests(unittest.TestCase):
 
     def test_validation_status_requires_python_3_11_for_pass(self) -> None:
         passing = self._test_result("OAL-001-" + "A" * 16)
-        prepared = self._test_result(
-            "OAL-001-" + "A" * 16, promotion_eligible=False
-        )
+        prepared = self._test_result("OAL-001-" + "A" * 16, promotion_eligible=False)
         runtime_gap = self._test_result(
             "OAL-001-" + "A" * 16,
             python_version="3.12.10",
@@ -534,9 +537,7 @@ class Oal001RuntimeTests(unittest.TestCase):
                     [],
                 )
 
-                promotion_eligible = _snapshot_promotion_eligible(
-                    prepared_snapshot
-                )
+                promotion_eligible = _snapshot_promotion_eligible(prepared_snapshot)
                 self.assertFalse(promotion_eligible)
                 test_result = self._test_result(
                     result.run_id, promotion_eligible=promotion_eligible
@@ -549,9 +550,7 @@ class Oal001RuntimeTests(unittest.TestCase):
                     [],
                 )
                 self.assertEqual(
-                    _finalize_evidence(
-                        output_dir, prepared_snapshot, test_result
-                    ),
+                    _finalize_evidence(output_dir, prepared_snapshot, test_result),
                     [],
                 )
                 with (
@@ -563,9 +562,7 @@ class Oal001RuntimeTests(unittest.TestCase):
                         return_value=output_dir,
                     ),
                 ):
-                    return_code = validator_main(
-                        ["--verify-existing", result.run_id]
-                    )
+                    return_code = validator_main(["--verify-existing", result.run_id])
                 self.assertEqual(return_code, EXIT_NOT_PROMOTION_READY)
 
                 forged = copy.deepcopy(test_result)
@@ -615,9 +612,7 @@ class Oal001RuntimeTests(unittest.TestCase):
             prepared_snapshot = _capture_artifact_snapshot(output_dir)
             test_result = self._test_result(
                 result.run_id,
-                promotion_eligible=_snapshot_promotion_eligible(
-                    prepared_snapshot
-                ),
+                promotion_eligible=_snapshot_promotion_eligible(prepared_snapshot),
             )
             with mock_patch(
                 "scripts.validate_oal_001._git_read",
@@ -630,9 +625,7 @@ class Oal001RuntimeTests(unittest.TestCase):
                     [],
                 )
                 self.assertEqual(
-                    _finalize_evidence(
-                        output_dir, prepared_snapshot, test_result
-                    ),
+                    _finalize_evidence(output_dir, prepared_snapshot, test_result),
                     [],
                 )
                 self.assertEqual(verify_existing_evidence(output_dir), [])
@@ -923,9 +916,7 @@ class Oal001RuntimeTests(unittest.TestCase):
         ):
             status = git_read.worktree_status(REPO_ROOT)
 
-        self.assertEqual(
-            status, " M scripts/oal_001/runtime.py\n?? untracked.txt"
-        )
+        self.assertEqual(status, " M scripts/oal_001/runtime.py\n?? untracked.txt")
         self.assertFalse(git_status_is_clean(status))
         command = mocked_run.call_args.args[0]
         self.assertIn("--porcelain=v1", command)
@@ -977,9 +968,7 @@ class Oal001RuntimeTests(unittest.TestCase):
             "M? submodule",
         ):
             with self.subTest(status=status):
-                self.assertEqual(
-                    git_read.validate_worktree_status(status), status
-                )
+                self.assertEqual(git_read.validate_worktree_status(status), status)
                 self.assertFalse(git_status_is_clean(status))
 
     def test_git_read_api_rejects_mutation_and_path_traversal(self) -> None:
@@ -1070,6 +1059,118 @@ class Oal001RuntimeTests(unittest.TestCase):
                 )
                 self.assertTrue(bypass_errors)
 
+    def test_workflow_and_validator_use_isolated_import_bootstrap(self) -> None:
+        workflow = (REPO_ROOT / ".github/workflows/oal-001-validate.yml").read_text(
+            encoding="utf-8"
+        )
+        validator_source = (REPO_ROOT / "scripts/validate_oal_001.py").read_text(
+            encoding="utf-8"
+        )
+        validator_tree = ast.parse(validator_source)
+
+        self.assertIn("python -I -S -B - <<'PY'", workflow)
+        self.assertIn("run: python -I -S -B scripts/validate_oal_001.py", workflow)
+        direct_imports = [
+            node for node in validator_tree.body if isinstance(node, ast.Import)
+        ]
+        self.assertEqual(direct_imports[0].names[0].name, "sys")
+        self.assertEqual(
+            _import_path_boundary_errors("scripts/validate_oal_001.py", validator_tree),
+            [],
+        )
+        unsafe_tree = ast.parse(
+            "import sys\n"
+            "REPO_ROOT = 'synthetic'\n"
+            "if str(REPO_ROOT) not in sys.path:\n"
+            "    sys.path.insert(0, str(REPO_ROOT))\n"
+        )
+        self.assertTrue(
+            _import_path_boundary_errors("scripts/validate_oal_001.py", unsafe_tree)
+        )
+
+    def test_python_shadowing_paths_are_rejected_before_repo_imports(self) -> None:
+        cases = (
+            "scripts/ArgParse.py",
+            "hashlib.py",
+            "json.pyc",
+            "fractions/__init__.py",
+            "scripts.py",
+            "tests.py",
+            "scripts/oal_001.py",
+            "scripts/oal_001/git_read/__init__.py",
+            "scripts/oal_001/runtime.pyc",
+            "scripts/oal_001/__pycache__/git_read.cpython-311.pyc",
+            "tests/test_oal_001_runtime/__init__.py",
+            "tests/__pycache__/test_oal_001_runtime.cpython-311.pyc",
+            "scripts/__init__.py",
+            "tests/__init__.py",
+        )
+        for relative_path in cases:
+            with self.subTest(relative_path=relative_path):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    root = Path(temp_dir)
+                    for protected_file in PROTECTED_IMPORT_FILES:
+                        path = root / protected_file
+                        path.parent.mkdir(parents=True, exist_ok=True)
+                        path.write_text("", encoding="utf-8")
+                    self.assertEqual(python_shadowing_errors(root), [])
+                    target = root / relative_path
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    if target.suffix == ".pyc":
+                        target.write_bytes(b"synthetic")
+                    else:
+                        target.write_text("raise SystemExit(0)\n", encoding="utf-8")
+
+                    errors = python_shadowing_errors(root)
+
+                expected = relative_path.replace("\\", "/").removesuffix("/__init__.py")
+                self.assertTrue(any(expected in item for item in errors), errors)
+
+    def test_internal_modes_recheck_shadowing_before_repo_imports(self) -> None:
+        for option, internal_target in (
+            ("--_internal-unit-tests", "_internal_unit_tests"),
+            ("--_internal-dry-run", "_internal_dry_run"),
+        ):
+            with self.subTest(option=option):
+                with (
+                    mock_patch(
+                        "scripts.validate_oal_001.python_shadowing_errors",
+                        return_value=["synthetic import shadow"],
+                    ),
+                    mock_patch(
+                        f"scripts.validate_oal_001.{internal_target}"
+                    ) as internal,
+                ):
+                    return_code = validator_main([option])
+
+                self.assertEqual(return_code, 1)
+                internal.assert_not_called()
+
+    def test_dry_run_uses_isolated_validator_child(self) -> None:
+        completed = SimpleNamespace(
+            returncode=0,
+            stdout='{"synthetic": true}\n',
+            stderr="",
+        )
+        with mock_patch(
+            "scripts.validate_oal_001.subprocess.run", return_value=completed
+        ) as mocked_run:
+            return_code, output = run_dry_run()
+
+        self.assertEqual(return_code, 0)
+        self.assertEqual(output, '{"synthetic": true}')
+        self.assertEqual(
+            mocked_run.call_args.args[0],
+            [
+                sys.executable,
+                "-I",
+                "-S",
+                "-B",
+                VALIDATOR_PATH,
+                "--_internal-dry-run",
+            ],
+        )
+
     def test_unit_test_gate_rejects_zero_tests(self) -> None:
         errors = unit_test_gate_errors(return_code=0, count=0, outcome_details={})
 
@@ -1088,13 +1189,24 @@ class Oal001RuntimeTests(unittest.TestCase):
         completed = SimpleNamespace(returncode=0, stdout=output)
         with mock_patch(
             "scripts.validate_oal_001.subprocess.run", return_value=completed
-        ):
+        ) as mocked_run:
             return_code, _, count, outcomes = run_unit_tests()
 
         self.assertEqual(return_code, 0)
         self.assertEqual(count, MINIMUM_OAL_TEST_COUNT)
         self.assertEqual(outcomes, {"skipped": 1})
         self.assertTrue(unit_test_gate_errors(return_code, count, outcomes))
+        self.assertEqual(
+            mocked_run.call_args.args[0],
+            [
+                sys.executable,
+                "-I",
+                "-S",
+                "-B",
+                VALIDATOR_PATH,
+                "--_internal-unit-tests",
+            ],
+        )
 
         expected_failure_output = output.replace(
             "OK (skipped=1)",

@@ -24,7 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      PYTHONDONTWRITEBYTECODE: '1'
       OAL_SOURCE_BRANCH: ${{ github.head_ref }}
       OAL_SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
 
@@ -56,11 +55,176 @@ jobs:
         with:
           python-version: '3.11.14'
 
-      - name: Confirm target runtime
-        run: python -c "import sys; assert sys.version_info[:2] == (3, 11), sys.version"
+      - name: Confirm isolated runtime and import topology
+        shell: bash
+        run: |
+          python -I -S -B - <<'PY'
+          from importlib.machinery import all_suffixes
+          from pathlib import Path
+          import sys
+
+          if sys.version_info[:3] != (3, 11, 14):
+              raise SystemExit(f"Unexpected Python runtime: {sys.version}")
+          if not (
+              sys.flags.isolated
+              and sys.flags.no_site
+              and sys.flags.safe_path
+              and sys.flags.dont_write_bytecode
+          ):
+              raise SystemExit("Isolated Python bootstrap is not active")
+
+          root = Path.cwd()
+          suffixes = tuple(
+              sorted(
+                  {suffix.casefold() for suffix in all_suffixes()}
+                  | {".py", ".pyc", ".pyd", ".pyw", ".so"},
+                  key=len,
+                  reverse=True,
+              )
+          )
+          blocked_modules = {
+              name.casefold() for name in sys.stdlib_module_names
+          } | {"sitecustomize", "usercustomize"}
+
+          def module_name(name):
+              lowered = name.casefold()
+              for suffix in suffixes:
+                  if lowered.endswith(suffix) and len(lowered) > len(suffix):
+                      return lowered[: -len(suffix)].split(".", 1)[0]
+              return None
+
+          def cached_module_name(name):
+              lowered = name.casefold()
+              if not lowered.endswith(".pyc") or len(lowered) <= len(".pyc"):
+                  return None
+              return lowered[: -len(".pyc")].split(".", 1)[0]
+
+          def has_package_initializer(path):
+              try:
+                  return path.is_dir() and any(
+                      module_name(child.name) == "__init__"
+                      for child in path.iterdir()
+                  )
+              except OSError:
+                  return True
+
+          expected_directories = ("scripts", "tests", "scripts/oal_001")
+          expected_files = (
+              "scripts/oal_001/__init__.py",
+              "scripts/oal_001/__main__.py",
+              "scripts/oal_001/git_read.py",
+              "scripts/oal_001/governor.py",
+              "scripts/oal_001/observatory.py",
+              "scripts/oal_001/runtime.py",
+              "scripts/validate_oal_001.py",
+              "tests/test_oal_001_governor.py",
+              "tests/test_oal_001_runtime.py",
+          )
+
+          errors = []
+          for relative in expected_directories:
+              path = root / relative
+              if not path.is_dir() or path.is_symlink():
+                  errors.append(f"Invalid Python import topology: {relative}")
+
+          for relative in expected_files:
+              path = root / relative
+              try:
+                  invalid_file = (
+                      not path.is_file()
+                      or path.is_symlink()
+                      or path.stat().st_nlink != 1
+                  )
+              except OSError:
+                  invalid_file = True
+              if invalid_file:
+                  errors.append(f"Invalid Python import topology: {relative}")
+
+          protected_slots = {}
+          for relative in expected_directories:
+              path = Path(relative)
+              parent = "" if path.parent.as_posix() == "." else path.parent.as_posix()
+              protected_slots.setdefault(parent, {})[
+                  path.name.casefold()
+              ] = relative
+          for relative in expected_files:
+              path = Path(relative)
+              parent = "" if path.parent.as_posix() == "." else path.parent.as_posix()
+              protected_slots.setdefault(parent, {})[
+                  path.stem.casefold()
+              ] = relative
+
+          problems = set()
+          for base_relative, expected_slots in protected_slots.items():
+              base = root / base_relative
+              if not base.is_dir() or base.is_symlink():
+                  continue
+              try:
+                  entries = tuple(base.iterdir())
+              except OSError:
+                  errors.append(
+                      f"Could not inspect Python import topology: {base_relative or '.'}"
+                  )
+                  continue
+              for entry in entries:
+                  candidate = module_name(entry.name)
+                  relative = entry.relative_to(root).as_posix()
+                  directory_name = entry.name.casefold()
+                  if base_relative in {"", "scripts"}:
+                      if candidate in blocked_modules:
+                          problems.add(relative)
+                      if directory_name in blocked_modules and (
+                          entry.is_symlink() or has_package_initializer(entry)
+                      ):
+                          problems.add(relative)
+
+                  slot_candidates = {candidate}
+                  if entry.is_dir() or entry.is_symlink():
+                      slot_candidates.add(directory_name)
+                  for slot in slot_candidates - {None}:
+                      expected_path = expected_slots.get(slot)
+                      if expected_path is not None and relative != expected_path:
+                          problems.add(relative)
+
+                  if directory_name != "__pycache__":
+                      continue
+                  if entry.is_symlink() or not entry.is_dir():
+                      problems.add(relative)
+                      continue
+                  try:
+                      cache_entries = tuple(entry.iterdir())
+                  except OSError:
+                      errors.append(
+                          f"Could not inspect Python bytecode cache: {relative}"
+                      )
+                      continue
+                  for cache_entry in cache_entries:
+                      if cached_module_name(cache_entry.name) in expected_slots:
+                          problems.add(cache_entry.relative_to(root).as_posix())
+
+          for namespace_relative in ("scripts", "tests"):
+              namespace = root / namespace_relative
+              if not namespace.is_dir() or namespace.is_symlink():
+                  continue
+              try:
+                  entries = tuple(namespace.iterdir())
+              except OSError:
+                  errors.append(
+                      f"Could not inspect Python namespace topology: {namespace_relative}"
+                  )
+                  continue
+              for entry in entries:
+                  if module_name(entry.name) == "__init__":
+                      problems.add(entry.relative_to(root).as_posix())
+
+          for problem in sorted(problems):
+              errors.append(f"Forbidden Python import-shadowing path: {problem}")
+          if errors:
+              raise SystemExit("\n".join(errors))
+          PY
 
       - name: Run complete OAL validator
-        run: python scripts/validate_oal_001.py
+        run: python -I -S -B scripts/validate_oal_001.py
 
       - name: Confirm no tracked or unignored mutation
         shell: bash

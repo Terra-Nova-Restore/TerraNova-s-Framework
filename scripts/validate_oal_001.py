@@ -3,6 +3,21 @@
 
 from __future__ import annotations
 
+import sys
+
+
+if __name__ == "__main__" and not (
+    sys.flags.isolated
+    and sys.flags.no_site
+    and sys.flags.safe_path
+    and sys.flags.dont_write_bytecode
+):
+    print(
+        "[validate-oal-001] ERROR: validator requires python -I -S -B",
+        file=sys.stderr,
+    )
+    raise SystemExit(1)
+
 import ast
 import argparse
 import difflib
@@ -12,20 +27,67 @@ import os
 import re
 import stat
 import subprocess
-import sys
 import tempfile
+from importlib.machinery import all_suffixes
 from pathlib import Path
 from typing import Literal, Mapping
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-sys.dont_write_bytecode = True
+VALIDATOR_PATH = Path(__file__).resolve(strict=True)
+REPO_ROOT = VALIDATOR_PATH.parents[1]
+if __name__ == "__main__":
+    forbidden_import_roots = {
+        REPO_ROOT,
+        VALIDATOR_PATH.parent,
+        Path.cwd().resolve(),
+    }
+    unsafe_import_path = False
+    for raw_path in sys.path:
+        if not raw_path:
+            unsafe_import_path = True
+            break
+        try:
+            if Path(raw_path).resolve() in forbidden_import_roots:
+                unsafe_import_path = True
+                break
+        except OSError:
+            unsafe_import_path = True
+            break
+    if unsafe_import_path:
+        print(
+            "[validate-oal-001] ERROR: repository paths precede the isolated import boundary",
+            file=sys.stderr,
+        )
+        raise SystemExit(1)
 if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
+    sys.path.append(str(REPO_ROOT))
+if __name__ == "__main__" and (
+    sys.path.count(str(REPO_ROOT)) != 1 or sys.path[-1] != str(REPO_ROOT)
+):
+    print(
+        "[validate-oal-001] ERROR: repository import root is not isolated",
+        file=sys.stderr,
+    )
+    raise SystemExit(1)
 
 OAL_CI_WORKFLOW_PATH = ".github/workflows/oal-001-validate.yml"
 EXPECTED_OAL_CI_WORKFLOW_SHA256 = (
-    "6BE9AB1C40ADE2EEFA2949EEBEBEB064870905D0D842B5D0CC00F106628EB3DB"
+    "719D551B6E2BBE58CFC9CA5581F2B94E518A8331E3923923FB77B6F0F52E2123"
+)
+ISOLATED_UNIT_TEST_COMMAND = (
+    "python -I -S -B scripts/validate_oal_001.py --_internal-unit-tests"
+)
+PYTHON_IMPORT_SUFFIXES = tuple(
+    sorted(
+        {suffix.casefold() for suffix in all_suffixes()}
+        | {".py", ".pyc", ".pyd", ".pyw", ".so"},
+        key=len,
+        reverse=True,
+    )
+)
+PYTHON_SHADOW_MODULES = frozenset(
+    {name.casefold() for name in sys.stdlib_module_names}
+    | {"sitecustomize", "usercustomize"}
 )
 PACKAGE_FILES = (
     "scripts/oal_001/__init__.py",
@@ -41,6 +103,8 @@ PYTHON_FILES = (
     "tests/test_oal_001_governor.py",
     "tests/test_oal_001_runtime.py",
 )
+PROTECTED_IMPORT_DIRECTORIES = ("scripts", "tests", "scripts/oal_001")
+PROTECTED_IMPORT_FILES = PYTHON_FILES
 REQUIRED_FILES = (
     ".codex/safety_policy.yaml",
     OAL_CI_WORKFLOW_PATH,
@@ -162,7 +226,7 @@ FORBIDDEN_SOURCE_SNIPPETS = (
     "exec(",
 )
 RUN_ID_PATTERN = re.compile(r"^OAL-001-[A-F0-9]{16}$")
-MINIMUM_OAL_TEST_COUNT = 54
+MINIMUM_OAL_TEST_COUNT = 58
 TARGET_PYTHON = (3, 11)
 STATUS_PASS = "PASS"
 STATUS_RUNTIME_GAP = "PASS_WITH_RUNTIME_GAP"
@@ -199,6 +263,147 @@ def _is_reparse_point(path: Path) -> bool:
     except (AttributeError, FileNotFoundError, OSError):
         return False
     return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
+
+
+def _module_name_from_import_path(name: str) -> str | None:
+    lowered = name.casefold()
+    for suffix in PYTHON_IMPORT_SUFFIXES:
+        if lowered.endswith(suffix) and len(lowered) > len(suffix):
+            return lowered[: -len(suffix)].split(".", 1)[0]
+    return None
+
+
+def _module_name_from_cached_bytecode(name: str) -> str | None:
+    lowered = name.casefold()
+    if not lowered.endswith(".pyc") or len(lowered) <= len(".pyc"):
+        return None
+    return lowered[: -len(".pyc")].split(".", 1)[0]
+
+
+def _has_package_initializer(path: Path) -> bool:
+    try:
+        return any(
+            _module_name_from_import_path(child.name) == "__init__"
+            for child in path.iterdir()
+            if child.is_file() or child.is_symlink() or _is_reparse_point(child)
+        )
+    except OSError:
+        return True
+
+
+def python_shadowing_errors(repo_root: Path) -> list[str]:
+    """Reject import-shadowing files before any repository module is imported."""
+
+    try:
+        root = repo_root.resolve(strict=True)
+    except OSError as exc:
+        return [f"could not resolve Python import root: {exc}"]
+    if not root.is_dir():
+        return ["Python import root is not a directory"]
+
+    layout_errors: list[str] = []
+    for rel_path in PROTECTED_IMPORT_DIRECTORIES:
+        path = root / rel_path
+        if not path.is_dir() or path.is_symlink() or _is_reparse_point(path):
+            layout_errors.append(f"invalid Python import topology: {rel_path}")
+
+    for rel_path in PROTECTED_IMPORT_FILES:
+        path = root / rel_path
+        try:
+            invalid_file = (
+                not path.is_file()
+                or path.is_symlink()
+                or _is_reparse_point(path)
+                or path.stat().st_nlink != 1
+            )
+        except OSError:
+            invalid_file = True
+        if invalid_file:
+            layout_errors.append(f"invalid Python import topology: {rel_path}")
+
+    protected_slots: dict[str, dict[str, str]] = {}
+    for rel_path in PROTECTED_IMPORT_DIRECTORIES:
+        path = Path(rel_path)
+        parent = "" if path.parent.as_posix() == "." else path.parent.as_posix()
+        protected_slots.setdefault(parent, {})[path.name.casefold()] = rel_path
+    for rel_path in PROTECTED_IMPORT_FILES:
+        path = Path(rel_path)
+        parent = "" if path.parent.as_posix() == "." else path.parent.as_posix()
+        protected_slots.setdefault(parent, {})[path.stem.casefold()] = rel_path
+
+    problems: set[str] = set()
+    for base_rel, expected_slots in protected_slots.items():
+        base = root / base_rel
+        if not base.is_dir() or base.is_symlink() or _is_reparse_point(base):
+            continue
+        try:
+            entries = tuple(base.iterdir())
+        except OSError:
+            layout_errors.append(
+                f"could not inspect Python import topology: {base_rel or '.'}"
+            )
+            continue
+        for entry in entries:
+            module_name = _module_name_from_import_path(entry.name)
+            relative = entry.relative_to(root).as_posix()
+            directory_name = entry.name.casefold()
+            if base_rel in {"", "scripts"}:
+                if module_name in PYTHON_SHADOW_MODULES:
+                    problems.add(relative)
+                if directory_name in PYTHON_SHADOW_MODULES and (
+                    entry.is_symlink()
+                    or _is_reparse_point(entry)
+                    or (entry.is_dir() and _has_package_initializer(entry))
+                ):
+                    problems.add(relative)
+
+            slot_candidates = {module_name}
+            if entry.is_dir() or entry.is_symlink() or _is_reparse_point(entry):
+                slot_candidates.add(directory_name)
+            for slot in slot_candidates - {None}:
+                expected_path = expected_slots.get(slot)
+                if expected_path is not None and relative != expected_path:
+                    problems.add(relative)
+
+            if directory_name != "__pycache__":
+                continue
+            if entry.is_symlink() or _is_reparse_point(entry) or not entry.is_dir():
+                problems.add(relative)
+                continue
+            try:
+                cache_entries = tuple(entry.iterdir())
+            except OSError:
+                layout_errors.append(
+                    f"could not inspect Python bytecode cache: {relative}"
+                )
+                continue
+            for cache_entry in cache_entries:
+                cached_module = _module_name_from_cached_bytecode(cache_entry.name)
+                if cached_module in expected_slots:
+                    problems.add(cache_entry.relative_to(root).as_posix())
+
+    for namespace_rel in ("scripts", "tests"):
+        namespace = root / namespace_rel
+        if (
+            not namespace.is_dir()
+            or namespace.is_symlink()
+            or _is_reparse_point(namespace)
+        ):
+            continue
+        try:
+            namespace_entries = tuple(namespace.iterdir())
+        except OSError:
+            layout_errors.append(
+                f"could not inspect Python namespace topology: {namespace_rel}"
+            )
+            continue
+        for entry in namespace_entries:
+            if _module_name_from_import_path(entry.name) == "__init__":
+                problems.add(entry.relative_to(root).as_posix())
+
+    return layout_errors + [
+        f"forbidden Python import-shadowing path: {path}" for path in sorted(problems)
+    ]
 
 
 def _reject_link_components(root: Path, path: Path, label: str) -> None:
@@ -269,6 +474,85 @@ def _call_signature(argument: ast.AST) -> tuple[str, ...] | None:
         else:
             return None
     return tuple(values)
+
+
+def _is_sys_path(node: ast.AST) -> bool:
+    return (
+        isinstance(node, ast.Attribute)
+        and isinstance(node.value, ast.Name)
+        and node.value.id == "sys"
+        and node.attr == "path"
+    )
+
+
+def _is_repo_root_string(node: ast.AST) -> bool:
+    return (
+        isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Name)
+        and node.func.id == "str"
+        and len(node.args) == 1
+        and isinstance(node.args[0], ast.Name)
+        and node.args[0].id == "REPO_ROOT"
+        and not node.keywords
+    )
+
+
+def _import_path_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
+    method_calls: list[ast.Call] = []
+    assigned = False
+    for node in ast.walk(tree):
+        if (
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Attribute)
+            and _is_sys_path(node.func.value)
+        ):
+            method_calls.append(node)
+        if isinstance(node, (ast.Assign, ast.AnnAssign, ast.AugAssign, ast.Delete)):
+            targets: list[ast.AST] = []
+            if isinstance(node, ast.Assign):
+                targets.extend(node.targets)
+            elif isinstance(node, ast.Delete):
+                targets.extend(node.targets)
+            else:
+                targets.append(node.target)
+            if any(
+                _is_sys_path(target)
+                or (isinstance(target, ast.Subscript) and _is_sys_path(target.value))
+                for target in targets
+            ):
+                assigned = True
+
+    if rel_path != "scripts/validate_oal_001.py":
+        if method_calls or assigned:
+            return [f"Python import-path mutation is forbidden in {rel_path}"]
+        return []
+
+    append_calls = [
+        node
+        for node in method_calls
+        if node.func.attr == "append"
+        and len(node.args) == 1
+        and _is_repo_root_string(node.args[0])
+        and not node.keywords
+    ]
+    count_calls = [
+        node
+        for node in method_calls
+        if node.func.attr == "count"
+        and len(node.args) == 1
+        and _is_repo_root_string(node.args[0])
+        and not node.keywords
+    ]
+    if (
+        assigned
+        or len(append_calls) != 1
+        or len(count_calls) != 1
+        or len(method_calls) != 2
+    ):
+        return [
+            "validator import path must append REPO_ROOT exactly once after interpreter paths"
+        ]
+    return []
 
 
 def _is_process_api_name(name: str) -> bool:
@@ -408,13 +692,20 @@ def _subprocess_boundary_errors(rel_path: str, tree: ast.AST) -> list[str]:
         "scripts/validate_oal_001.py": [
             (
                 "$sys.executable",
-                "-m",
-                "unittest",
-                "tests.test_oal_001_governor",
-                "tests.test_oal_001_runtime",
-                "-v",
+                "-I",
+                "-S",
+                "-B",
+                "$VALIDATOR_PATH",
+                "--_internal-unit-tests",
             ),
-            ("$sys.executable", "-m", "scripts.oal_001", "--json"),
+            (
+                "$sys.executable",
+                "-I",
+                "-S",
+                "-B",
+                "$VALIDATOR_PATH",
+                "--_internal-dry-run",
+            ),
         ],
     }
     if signatures != expected.get(rel_path, []):
@@ -518,7 +809,7 @@ def _git_read(command: list[str]) -> str:
 
 
 def static_errors() -> list[str]:
-    errors: list[str] = []
+    errors = python_shadowing_errors(REPO_ROOT)
     for rel_path in REQUIRED_FILES:
         try:
             _regular_file(REPO_ROOT / rel_path, REPO_ROOT, rel_path)
@@ -572,6 +863,7 @@ def static_errors() -> list[str]:
             for snippet in source_errors:
                 errors.append(f"forbidden source operation in {rel_path}: {snippet}")
         errors.extend(_subprocess_boundary_errors(rel_path, tree))
+        errors.extend(_import_path_boundary_errors(rel_path, tree))
 
     if not errors and not git_check_ignored(str(EXPECTED_POLICY["output_root"])):
         errors.append("configured local-private output root is not gitignored")
@@ -638,15 +930,34 @@ def static_errors() -> list[str]:
     return errors
 
 
+def _internal_unit_tests() -> int:
+    import unittest
+
+    suite = unittest.defaultTestLoader.loadTestsFromNames(
+        (
+            "tests.test_oal_001_governor",
+            "tests.test_oal_001_runtime",
+        )
+    )
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    return 0 if result.wasSuccessful() else 1
+
+
+def _internal_dry_run() -> int:
+    from scripts.oal_001.__main__ import main as oal_main
+
+    return oal_main(["--json"])
+
+
 def run_unit_tests() -> tuple[int, str, int | None, dict[str, int] | None]:
     result = subprocess.run(
         [
             sys.executable,
-            "-m",
-            "unittest",
-            "tests.test_oal_001_governor",
-            "tests.test_oal_001_runtime",
-            "-v",
+            "-I",
+            "-S",
+            "-B",
+            VALIDATOR_PATH,
+            "--_internal-unit-tests",
         ],
         cwd=REPO_ROOT,
         text=True,
@@ -705,7 +1016,14 @@ def unit_test_gate_errors(
 
 def run_dry_run() -> tuple[int, str]:
     result = subprocess.run(
-        [sys.executable, "-m", "scripts.oal_001", "--json"],
+        [
+            sys.executable,
+            "-I",
+            "-S",
+            "-B",
+            VALIDATOR_PATH,
+            "--_internal-dry-run",
+        ],
         cwd=REPO_ROOT,
         text=True,
         stdout=subprocess.PIPE,
@@ -880,7 +1198,7 @@ def _build_test_result(
         "static_checks": {"status": STATUS_PASS},
         "unit_tests": {
             "status": STATUS_PASS,
-            "command": "python -m unittest tests.test_oal_001_governor tests.test_oal_001_runtime -v",
+            "command": ISOLATED_UNIT_TEST_COMMAND,
             "count": test_count,
             "skipped": test_outcomes.get("skipped", 0),
             "outcome_details": dict(test_outcomes),
@@ -951,10 +1269,7 @@ def _final_test_result_errors(
     else:
         if unit_tests.get("status") != STATUS_PASS:
             errors.append("final unit-test status is not PASS")
-        if unit_tests.get("command") != (
-            "python -m unittest tests.test_oal_001_governor "
-            "tests.test_oal_001_runtime -v"
-        ):
+        if unit_tests.get("command") != ISOLATED_UNIT_TEST_COMMAND:
             errors.append("final unit-test command is invalid")
         count = unit_tests.get("count")
         if not isinstance(count, int) or count < MINIMUM_OAL_TEST_COUNT:
@@ -1359,9 +1674,7 @@ def validate_artifact_snapshot(
             and trace.get("source_state") == "clean_commit"
         )
         errors.extend(
-            _final_test_result_errors(
-                test_result, expected_run_id, promotion_eligible
-            )
+            _final_test_result_errors(test_result, expected_run_id, promotion_eligible)
         )
         final_status = (
             test_result.get("status") if isinstance(test_result, dict) else STATUS_FAIL
@@ -1635,16 +1948,36 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Validate or read-only verify OAL-001 local evidence."
     )
-    parser.add_argument(
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument(
         "--verify-existing",
         metavar="RUN_ID",
         type=_run_id_argument,
         help="Verify one finalized run without tests, dry-run or writes.",
     )
+    modes.add_argument(
+        "--_internal-unit-tests",
+        action="store_true",
+        help=argparse.SUPPRESS,
+    )
+    modes.add_argument(
+        "--_internal-dry-run",
+        action="store_true",
+        help=argparse.SUPPRESS,
+    )
     try:
         args = parser.parse_args(argv)
     except SystemExit as exc:
         return int(exc.code)
+    if args._internal_unit_tests or args._internal_dry_run:
+        import_errors = python_shadowing_errors(REPO_ROOT)
+        if import_errors:
+            for item in import_errors:
+                error(item)
+            return 1
+        if args._internal_unit_tests:
+            return _internal_unit_tests()
+        return _internal_dry_run()
     if args.verify_existing:
         return _verify_existing(args.verify_existing)
     return _run_validation()
