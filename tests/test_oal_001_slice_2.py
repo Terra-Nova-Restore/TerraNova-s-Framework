@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import json
 import unittest
+import unittest.mock as mock
 from dataclasses import replace
 from pathlib import Path
-from unittest import mock
 
 from scripts.oal_001.slice_2 import (
     ARTIFACT_NAMES,
