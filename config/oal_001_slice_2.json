@@ -1,0 +1,83 @@
+{
+  "contract_id": "OAL-001-SLICE-2-EXECUTION",
+  "schema_version": "OAL-1.0",
+  "slice_version": "2.0",
+  "mode": "historical_offline_replay",
+  "execution_mode": "combined",
+  "branch_pattern": "codex/observatory-selfmod-*",
+  "fixture_path": "tests/fixtures/observatory/oal_001_slice_2_historical_projections.json",
+  "fixture_sha256": "793007E26DE3D32B9E6627A6A1DA7497A5BDAEC1F5A03137393A43261B4B6577",
+  "output_root": "raw/exports/local-private/oal-001/slice-2",
+  "required_replay_count": 3,
+  "minimum_exploration_share": 0.25,
+  "external_mutation_count": 0,
+  "managed_paths": [
+    ".github/workflows/oal-001-validate.yml",
+    "config/oal_001.json",
+    "config/oal_001_slice_2.json",
+    "docs/governance/oal_001_slice_2_execution_contract.md",
+    "schemas/oal_001_slice_2_run.schema.json",
+    "scripts/oal_001/governor.py",
+    "scripts/oal_001/runtime.py",
+    "scripts/oal_001/slice_2.py",
+    "scripts/validate_oal_001.py",
+    "tests/fixtures/observatory/oal_001_slice_2_historical_projections.json",
+    "tests/test_oal_001_slice_2.py"
+  ],
+  "internal_gates": {
+    "mode": "autonomous_within_authorized_scope",
+    "findings_within_scope": "remediate_or_reject_then_controlled_close"
+  },
+  "stop_only_on": [
+    "material_finding_outside_authorized_remediation_scope",
+    "scope_drift",
+    "permission_gap",
+    "irreversible_human_decision"
+  ],
+  "on_reject": {
+    "candidate_action": "terminate",
+    "rollback": "required",
+    "evidence": "required",
+    "process_event": "required",
+    "final_report": "required",
+    "promotion_authorized": false
+  },
+  "process_events": {
+    "types": [
+      "interruption",
+      "restart"
+    ],
+    "required_fields": [
+      "type",
+      "reason",
+      "stage",
+      "timestamp"
+    ]
+  },
+  "process_observations": {
+    "interruption_count": "derived_exactly_from_events",
+    "restart_count": "derived_exactly_from_events"
+  },
+  "efficiency_score": {
+    "enabled": false,
+    "reason": "no_isolated_measurement_basis"
+  },
+  "final_human_gate": {
+    "mode": "at_most_once",
+    "trigger": "proposed_action_requires_human_authority"
+  },
+  "not_actions": [
+    "connector_access",
+    "notion_write",
+    "learning_ledger_write",
+    "git_push_from_runtime",
+    "pull_request_from_runtime",
+    "merge",
+    "main_write",
+    "workflow_execution",
+    "publication",
+    "payment_mutation",
+    "production_activation",
+    "zenodo_mutation"
+  ]
+}
