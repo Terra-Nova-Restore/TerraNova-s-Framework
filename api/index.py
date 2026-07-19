@@ -7,8 +7,9 @@ LANDING_HTML = """<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TerraNovaCIC — Products, workflows & AI systems</title>
-  <meta name="description" content="TerraNovaCIC builds AI workflow templates, artifact pipelines, databases and automation systems. A digital initiative by Terra'Nova'Restore.">
+  <title>TerraNova / FerrAI CIC — Products, workflows & AI systems</title>
+  <meta name="description" content="TerraNova / FerrAI CIC develops public-safe AI workflow templates, artifact pipelines, databases and automation systems.">
+  <meta name="citation_title" content="FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries">
   <style>
     :root { color-scheme: dark; --bg:#090b10; --card:#121722; --text:#f4f7fb; --muted:#aab4c3; --line:#263044; --accent:#8ee6c8; --accent2:#d8b4fe; }
     * { box-sizing: border-box; }
@@ -37,13 +38,14 @@ LANDING_HTML = """<!doctype html>
 <body>
 <main>
   <header>
-    <div class="brand">TerraNovaCIC</div>
+    <div class="brand">TerraNova / FerrAI CIC</div>
     <div class="pill">A digital initiative by Terra'Nova'Restore</div>
   </header>
 
   <section class="hero">
     <h1>AI workflows, artifact pipelines and automation systems.</h1>
-    <p>TerraNovaCIC turns AI chats, ideas and decisions into structured artifacts, source-aware records, publishable outputs and practical databases.</p>
+    <p>TerraNova / FerrAI CIC turns AI chats, ideas and decisions into structured artifacts, source-aware records, publishable outputs and practical databases.</p>
+    <p class="small">Current citable work: FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries · v16 · Version DOI: 10.5281/zenodo.20732376 · Concept DOI: 10.5281/zenodo.19774446</p>
     <div class="cta">
       <a class="button" href="#products">View products</a>
       <a class="button secondary" href="https://app.notion.com/p/de399ec6ae50416fb38fd82c3b08b461">Free Notion Starter</a>
@@ -92,19 +94,19 @@ LANDING_HTML = """<!doctype html>
       <p>Möbel, Handwerk, Restaurierung, Einzelanfertigungen und Massanfertigungen nach Kundenwunsch.</p>
     </div>
     <div class="card">
-      <h3>TerraNovaCIC</h3>
+      <h3>TerraNova / FerrAI CIC</h3>
       <p>Digitale Systeme, KI-Workflows, Templates, Automationen, Datenbanken und Governance-Strukturen.</p>
     </div>
   </section>
 
   <section class="card">
     <h2>Public-safe boundary</h2>
-    <p>No secrets. No raw Notion. No private page IDs. No investment, token, NFT, legal, medical or financial claim. Public means synthesized, not raw.</p>
-    <p class="small">Contact: terra.nova.restore@gmail.com · DOI: https://doi.org/10.5281/zenodo.20073579</p>
+    <p>No credentials or raw private workspace exports are intentionally published. Existing public identifiers and outbound reference URLs remain under public-safety review. No investment, token, NFT, legal, medical or financial claim. Public means synthesized, not raw.</p>
+    <p class="small">Contact: terra.nova.restore@gmail.com · DOI: https://doi.org/10.5281/zenodo.20732376</p>
   </section>
 
   <footer>
-    <p class="small">© Terra'Nova'Restore / TerraNovaCIC — Switzerland</p>
+    <p class="small">© Terra'Nova'Restore / TerraNova / FerrAI CIC — Switzerland</p>
   </footer>
 </main>
 </body>
@@ -120,7 +122,20 @@ class handler(BaseHTTPRequestHandler):
             payload = {
                 "service": "terra-nova-s-framework",
                 "status": "ok",
-                "boundary": "public-safe; no secrets, no raw Notion",
+                "title": "FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries",
+                "version": "v16",
+                "doi": "10.5281/zenodo.20732376",
+                "concept_doi": "10.5281/zenodo.19774446",
+                "creator": "Lenhard, Silvan",
+                "orcid": "0009-0007-8033-3508",
+                "publication_date": "2026-06-17",
+                "license": "CC-BY-4.0",
+                "primary_file": "main_v16_cq_ct_candidate (1).pdf",
+                "pages": 713,
+                "boundary": (
+                    "no credentials or raw private workspace exports are intentionally published; "
+                    "existing public identifiers are under review"
+                ),
             }
             body = json.dumps(payload).encode("utf-8")
             self.send_response(200)
