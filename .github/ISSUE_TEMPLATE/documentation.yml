@@ -1,0 +1,73 @@
+name: Documentation issue
+description: Report incorrect, unclear, outdated, broken, or missing public documentation.
+title: "[Docs]: "
+labels:
+  - documentation
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve the public documentation.
+
+        Do not include credentials, private evidence, or sensitive personal data. Report private security vulnerabilities through the [Security Policy](https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/security/policy), not in a public issue.
+  - type: checkboxes
+    id: existing_issues
+    attributes:
+      label: Existing issues
+      description: Help us avoid duplicate reports.
+      options:
+        - label: I searched the existing issues and did not find an equivalent report.
+          required: true
+  - type: input
+    id: documentation_location
+    attributes:
+      label: Documentation location
+      description: Provide the exact public page, URL, or repository path.
+      placeholder: docs/example.md or https://example.org/page
+    validations:
+      required: true
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: Issue type
+      options:
+        - Incorrect information
+        - Outdated information
+        - Unclear wording
+        - Broken link
+        - Missing documentation
+        - Citation or metadata issue
+    validations:
+      required: true
+  - type: textarea
+    id: problem_description
+    attributes:
+      label: Problem description
+      description: Explain what is incorrect, unclear, outdated, broken, or missing.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_correction
+    attributes:
+      label: Proposed correction
+      description: Describe the correction or improvement you recommend.
+    validations:
+      required: true
+  - type: textarea
+    id: supporting_evidence
+    attributes:
+      label: Supporting source or evidence
+      description: Link to public, verifiable support for the correction. Do not include private URLs or private evidence.
+      placeholder: Public source URL, citation, or repository reference
+    validations:
+      required: true
+  - type: checkboxes
+    id: public_boundary
+    attributes:
+      label: Public boundary
+      options:
+        - label: This report and its sources are public-safe and contain no credentials, private evidence, or sensitive personal data.
+          required: true
+        - label: This is not a private security vulnerability. I will use the Security Policy for private vulnerability reports.
+          required: true

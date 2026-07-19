@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private security vulnerability
+    url: https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/security/policy
+    about: Report private vulnerabilities according to the repository Security Policy.
+  - name: GitHub Discussions
+    url: https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/discussions
+    about: Ask public questions and discuss ideas that are not ready for an issue.

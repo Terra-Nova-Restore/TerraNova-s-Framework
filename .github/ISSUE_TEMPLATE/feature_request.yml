@@ -1,0 +1,75 @@
+name: Feature request
+description: Propose a bounded improvement to the public framework or repository.
+title: "[Feature]: "
+labels:
+  - enhancement
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for proposing a bounded improvement to the public project.
+
+        Do not include credentials, private evidence, or sensitive personal data. Report private security vulnerabilities through the [Security Policy](https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/security/policy), not in a public issue.
+  - type: checkboxes
+    id: existing_issues
+    attributes:
+      label: Existing issues
+      description: Help us avoid duplicate requests.
+      options:
+        - label: I searched the existing issues and did not find an equivalent request.
+          required: true
+  - type: textarea
+    id: problem_or_need
+    attributes:
+      label: Problem or user need
+      description: Describe the bounded public problem or need.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed solution
+      description: Explain the improvement you would like to see.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Considered alternatives
+      description: Describe alternatives or workarounds you considered.
+    validations:
+      required: true
+  - type: input
+    id: affected_surface
+    attributes:
+      label: Affected public surface or component
+      description: Identify the public page, repository area, tool, or component.
+      placeholder: README, docs/governance, website, or validator
+    validations:
+      required: true
+  - type: textarea
+    id: expected_benefit
+    attributes:
+      label: Expected benefit
+      description: Explain the practical benefit for public users or contributors.
+    validations:
+      required: true
+  - type: textarea
+    id: governance_impact
+    attributes:
+      label: Governance or public-boundary impact
+      description: Note any effect on public scope, governance, privacy, security, or state that there is none.
+    validations:
+      required: true
+  - type: checkboxes
+    id: submission_boundary
+    attributes:
+      label: Submission boundary
+      options:
+        - label: This request contains no credentials, private evidence, or sensitive personal data.
+          required: true
+        - label: This is not a private security vulnerability. I will use the Security Policy for private vulnerability reports.
+          required: true
+        - label: I understand that submission does not imply acceptance or a roadmap commitment.
+          required: true
