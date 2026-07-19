@@ -48,7 +48,7 @@ LANDING_HTML = """<!doctype html>
     <p class="small">Current citable work: FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries · v16 · Version DOI: 10.5281/zenodo.20732376 · Concept DOI: 10.5281/zenodo.19774446</p>
     <div class="cta">
       <a class="button" href="#products">View products</a>
-      <a class="button secondary" href="https://app.notion.com/p/de399ec6ae50416fb38fd82c3b08b461">Free Notion Starter</a>
+      <a class="button secondary" href="https://app.notion.com/p/de399ec6ae50416fb38fd82c3b08b461">AI Workflow Starter — Free Edition</a>
       <a class="button secondary" href="https://github.com/Terra-Nova-Restore/TerraNova-s-Framework">Open GitHub</a>
       <a class="button secondary" href="/api">API status</a>
     </div>
@@ -85,9 +85,9 @@ LANDING_HTML = """<!doctype html>
   <section class="grid">
     <div class="card">
       <div class="tag">Free funnel</div>
-      <h3>AI Workflow Starter — Entry Edition</h3>
+      <h3>AI Workflow Starter — Free Edition</h3>
       <p>Free Notion starter for turning scattered AI work into repeatable workflow structure.</p>
-      <a class="button secondary" href="https://app.notion.com/p/de399ec6ae50416fb38fd82c3b08b461">Open free starter</a>
+      <a class="button secondary" href="https://app.notion.com/p/de399ec6ae50416fb38fd82c3b08b461">AI Workflow Starter — Free Edition</a>
     </div>
     <div class="card">
       <h3>Terra'Nova'Restore</h3>
