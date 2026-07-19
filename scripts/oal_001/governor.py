@@ -19,21 +19,27 @@ EXPECTED_PROTECTED_PATHS = (
     ".github/workflows/oal-001-validate.yml",
     ".gitignore",
     "config/oal_001.json",
+    "config/oal_001_slice_2.json",
     "docs/governance",
     "raw/exports",
     "schemas/oal_001_mutation_trace.schema.json",
+    "schemas/oal_001_slice_2_run.schema.json",
     "scripts/oal_001/__init__.py",
     "scripts/oal_001/__main__.py",
     "scripts/oal_001/git_read.py",
     "scripts/oal_001/governor.py",
     "scripts/oal_001/runtime.py",
+    "scripts/oal_001/slice_2.py",
     "scripts/validate_oal_001.py",
+    "tests/fixtures/observatory/oal_001_slice_2_historical_projections.json",
     "tests/test_oal_001_governor.py",
     "tests/test_oal_001_runtime.py",
+    "tests/test_oal_001_slice_2.py",
 )
 EXPECTED_AUTHORIZING_TEST_PATHS = (
     "tests/test_oal_001_governor.py",
     "tests/test_oal_001_runtime.py",
+    "tests/test_oal_001_slice_2.py",
 )
 SECRET_PATTERNS = (
     re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
@@ -200,9 +206,7 @@ def load_policy(repo_root: Path) -> GovernorPolicy:
     if policy.mutable_paths != EXPECTED_MUTABLE_PATHS:
         raise PolicyError("mutable_paths must remain the exact first-slice allowlist")
     if policy.protected_paths != EXPECTED_PROTECTED_PATHS:
-        raise PolicyError(
-            "protected_paths must remain the exact first-slice protected surface"
-        )
+        raise PolicyError("protected_paths must remain the exact governed surface")
     if policy.authorizing_test_paths != EXPECTED_AUTHORIZING_TEST_PATHS:
         raise PolicyError("authorizing_test_paths must remain independently protected")
     if policy.minimum_exploration_share != 0.25:

@@ -1,0 +1,197 @@
+{
+  "schema_version": "OAL-1.0",
+  "fixture_set_id": "OAL-001-SLICE-2-HISTORICAL-PROJECTIONS-20260719",
+  "admission": {
+    "method": "direct_connector_read",
+    "admitted_on": "2026-07-19",
+    "source_system": "observatory_learning_ledger",
+    "projection_class": "connector_verified_at_admission",
+    "ci_claim_limit": "ci_verifies_committed_projection_bytes_only",
+    "raw_source_committed": false,
+    "source_locator_committed": false
+  },
+  "scenarios": [
+    {
+      "scenario_id": "complete_triad",
+      "cycle_id": "HDF-20260717-0600-Europe-Zurich",
+      "previous_comparable_cycle": null,
+      "event_timestamp": "2026-07-17T04:03:00Z",
+      "visibility": {
+        "alma_preflight": true,
+        "hubble_deep_field": true,
+        "alma_postflight": true
+      },
+      "expected_visibility_status": "COMPLETE_TRIANGULATION",
+      "expected_evidence_class": "confirmed",
+      "query_weights": {
+        "quality_drift": 1.4,
+        "provenance": 1.3,
+        "cross_system": 1.3,
+        "time_state": 1.2,
+        "relations": 1.1,
+        "semantics": 1.0,
+        "structure": 0.9,
+        "free_exploration": 0.8
+      },
+      "finding_codes": [
+        "authority_roles_object_specific",
+        "legacy_worker_route_blocked",
+        "publication_anchor_freshness_corrected",
+        "standalone_bridge_004_proof_not_visible"
+      ],
+      "records": [
+        {
+          "phase": "alma_preflight",
+          "status": "continuity_degraded",
+          "continuity_read": false,
+          "confidence": "probable",
+          "observed_at": "2026-07-17T03:59:00Z",
+          "unique_results": 6,
+          "fetched_sources": 6,
+          "new_clusters": 3,
+          "convergence_hits": 2,
+          "contradictions": 0,
+          "evidence_anchors": 6,
+          "novelty_score": 45,
+          "coverage_estimate": 40
+        },
+        {
+          "phase": "hubble_deep_field",
+          "status": "continuity_degraded",
+          "continuity_read": false,
+          "confidence": "probable",
+          "observed_at": "2026-07-17T04:03:00Z",
+          "unique_results": 18,
+          "fetched_sources": 4,
+          "new_clusters": 4,
+          "convergence_hits": 4,
+          "contradictions": 2,
+          "evidence_anchors": 9,
+          "novelty_score": 68,
+          "coverage_estimate": 52
+        },
+        {
+          "phase": "alma_postflight",
+          "status": "complete",
+          "continuity_read": true,
+          "confidence": "confirmed",
+          "observed_at": "2026-07-17T04:17:00Z",
+          "unique_results": 10,
+          "fetched_sources": 5,
+          "new_clusters": 2,
+          "convergence_hits": 3,
+          "contradictions": 2,
+          "evidence_anchors": 7,
+          "novelty_score": 62,
+          "coverage_estimate": 58
+        }
+      ]
+    },
+    {
+      "scenario_id": "preflight_not_visible",
+      "cycle_id": "HDF-20260717-1200-Europe-Zurich",
+      "previous_comparable_cycle": "HDF-20260717-0600-Europe-Zurich",
+      "event_timestamp": "2026-07-17T10:01:00Z",
+      "visibility": {
+        "alma_preflight": false,
+        "hubble_deep_field": true,
+        "alma_postflight": true
+      },
+      "expected_visibility_status": "PREFLIGHT_RESULT_NOT_VISIBLE",
+      "expected_evidence_class": "probable",
+      "query_weights": {
+        "quality_drift": 1.5,
+        "provenance": 1.5,
+        "time_state": 1.4,
+        "cross_system": 1.3,
+        "relations": 1.3,
+        "semantics": 1.2,
+        "free_exploration": 1.0,
+        "structure": 0.8
+      },
+      "finding_codes": [
+        "connector_observation_bias_conditional",
+        "source_authority_object_specific",
+        "standalone_bridge_004_proof_not_visible"
+      ],
+      "records": [
+        {
+          "phase": "hubble_deep_field",
+          "status": "partial",
+          "continuity_read": true,
+          "confidence": "unclear",
+          "observed_at": "2026-07-17T10:01:00Z",
+          "unique_results": 8,
+          "fetched_sources": 2,
+          "new_clusters": 1,
+          "convergence_hits": 2,
+          "contradictions": 1,
+          "evidence_anchors": 5,
+          "novelty_score": 28,
+          "coverage_estimate": 24
+        },
+        {
+          "phase": "alma_postflight",
+          "status": "partial",
+          "continuity_read": true,
+          "confidence": "probable",
+          "observed_at": "2026-07-17T10:16:00Z",
+          "unique_results": 9,
+          "fetched_sources": 3,
+          "new_clusters": 1,
+          "convergence_hits": 3,
+          "contradictions": 1,
+          "evidence_anchors": 7,
+          "novelty_score": 38,
+          "coverage_estimate": 42
+        }
+      ]
+    },
+    {
+      "scenario_id": "hubble_only",
+      "cycle_id": "HDF-20260717-1800-Europe-Zurich",
+      "previous_comparable_cycle": "HDF-20260717-1200-Europe-Zurich",
+      "event_timestamp": "2026-07-17T16:03:00Z",
+      "visibility": {
+        "alma_preflight": false,
+        "hubble_deep_field": true,
+        "alma_postflight": false
+      },
+      "expected_visibility_status": "ALMA_RESULTS_NOT_VISIBLE_AT_REPLAY",
+      "expected_evidence_class": "unclear",
+      "query_weights": {
+        "quality_drift": 1.5,
+        "provenance": 1.5,
+        "time_state": 1.5,
+        "relations": 1.5,
+        "semantics": 1.4,
+        "cross_system": 1.2,
+        "free_exploration": 1.0,
+        "structure": 0.7
+      },
+      "finding_codes": [
+        "connector_visibility_selective",
+        "authority_matrix_open",
+        "status_freshness_risk",
+        "standalone_bridge_004_proof_not_visible"
+      ],
+      "records": [
+        {
+          "phase": "hubble_deep_field",
+          "status": "partial",
+          "continuity_read": true,
+          "confidence": "probable",
+          "observed_at": "2026-07-17T16:03:00Z",
+          "unique_results": 20,
+          "fetched_sources": 0,
+          "new_clusters": 2,
+          "convergence_hits": 4,
+          "contradictions": 2,
+          "evidence_anchors": 14,
+          "novelty_score": 46,
+          "coverage_estimate": 38
+        }
+      ]
+    }
+  ]
+}

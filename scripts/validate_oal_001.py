@@ -77,7 +77,7 @@ RUNTIME_ISOLATION_READY = (
 
 OAL_CI_WORKFLOW_PATH = ".github/workflows/oal-001-validate.yml"
 EXPECTED_OAL_CI_WORKFLOW_SHA256 = (
-    "FE26F0AEBCE82D61126AF83A17193C6E8EBCDD34A80E9B33D1E4BB00887D9725"
+    "A7C82825300939977D0B926168A699DC4FFCBF6D931BF73FC6045F2F445070C0"
 )
 ISOLATED_UNIT_TEST_COMMAND = (
     "python -I -S -B scripts/validate_oal_001.py --_internal-unit-tests"
@@ -344,12 +344,14 @@ PACKAGE_FILES = (
     "scripts/oal_001/governor.py",
     "scripts/oal_001/observatory.py",
     "scripts/oal_001/runtime.py",
+    "scripts/oal_001/slice_2.py",
 )
 PYTHON_FILES = (
     *PACKAGE_FILES,
     "scripts/validate_oal_001.py",
     "tests/test_oal_001_governor.py",
     "tests/test_oal_001_runtime.py",
+    "tests/test_oal_001_slice_2.py",
 )
 PROTECTED_IMPORT_DIRECTORIES = ("scripts", "tests", "scripts/oal_001")
 PROTECTED_IMPORT_FILES = PYTHON_FILES
@@ -358,8 +360,12 @@ REQUIRED_FILES = (
     OAL_CI_WORKFLOW_PATH,
     ".gitignore",
     "config/oal_001.json",
+    "config/oal_001_slice_2.json",
     "docs/governance/oal_001_self_modification_policy.md",
+    "docs/governance/oal_001_slice_2_execution_contract.md",
     "schemas/oal_001_mutation_trace.schema.json",
+    "schemas/oal_001_slice_2_run.schema.json",
+    "tests/fixtures/observatory/oal_001_slice_2_historical_projections.json",
     "tests/fixtures/observatory/synthetic_harmless_cycle.json",
     *PYTHON_FILES,
 )
@@ -384,21 +390,27 @@ EXPECTED_PROTECTED_PATHS = [
     ".github/workflows/oal-001-validate.yml",
     ".gitignore",
     "config/oal_001.json",
+    "config/oal_001_slice_2.json",
     "docs/governance",
     "raw/exports",
     "schemas/oal_001_mutation_trace.schema.json",
+    "schemas/oal_001_slice_2_run.schema.json",
     "scripts/oal_001/__init__.py",
     "scripts/oal_001/__main__.py",
     "scripts/oal_001/git_read.py",
     "scripts/oal_001/governor.py",
     "scripts/oal_001/runtime.py",
+    "scripts/oal_001/slice_2.py",
     "scripts/validate_oal_001.py",
+    "tests/fixtures/observatory/oal_001_slice_2_historical_projections.json",
     "tests/test_oal_001_governor.py",
     "tests/test_oal_001_runtime.py",
+    "tests/test_oal_001_slice_2.py",
 ]
 EXPECTED_AUTHORIZING_TEST_PATHS = [
     "tests/test_oal_001_governor.py",
     "tests/test_oal_001_runtime.py",
+    "tests/test_oal_001_slice_2.py",
 ]
 EXPECTED_POLICY = {
     "policy_id": "OAL-001-GOVERNOR",
@@ -474,7 +486,7 @@ FORBIDDEN_SOURCE_SNIPPETS = (
     "exec(",
 )
 RUN_ID_PATTERN = re.compile(r"^OAL-001-[A-F0-9]{16}$")
-MINIMUM_OAL_TEST_COUNT = 70
+MINIMUM_OAL_TEST_COUNT = 87
 TARGET_PYTHON = (3, 11)
 STATUS_PASS = "PASS"
 STATUS_RUNTIME_GAP = "PASS_WITH_RUNTIME_GAP"
@@ -1643,7 +1655,10 @@ def static_errors() -> list[str]:
         errors.append(f"invalid baseline mutable Observatory: {exc}")
 
     for rel_path in (
+        "config/oal_001_slice_2.json",
         "schemas/oal_001_mutation_trace.schema.json",
+        "schemas/oal_001_slice_2_run.schema.json",
+        "tests/fixtures/observatory/oal_001_slice_2_historical_projections.json",
         "tests/fixtures/observatory/synthetic_harmless_cycle.json",
     ):
         try:
@@ -1696,6 +1711,21 @@ def static_errors() -> list[str]:
             errors.append("trace schema Git status snapshots are not canonical")
     except (KeyError, TypeError, OSError, ValueError, json.JSONDecodeError) as exc:
         errors.append(f"invalid trace schema structure: {exc}")
+
+    try:
+        slice_2_schema = _load_repo_json("schemas/oal_001_slice_2_run.schema.json")
+        if not isinstance(slice_2_schema, dict):
+            raise ValueError("Slice-2 schema root must be an object")
+        from scripts.oal_001.slice_2 import TRACE_FIELDS as SLICE_2_TRACE_FIELDS
+        from scripts.oal_001.slice_2 import load_slice_2_policy
+
+        if slice_2_schema.get("additionalProperties") is not False:
+            errors.append("Slice-2 trace schema must reject additional properties")
+        if set(slice_2_schema.get("required", [])) != SLICE_2_TRACE_FIELDS:
+            errors.append("Slice-2 trace schema required fields are not exact")
+        load_slice_2_policy(REPO_ROOT)
+    except (KeyError, TypeError, OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"invalid Slice-2 contract or schema: {exc}")
     return errors
 
 
@@ -1706,6 +1736,7 @@ def _internal_unit_tests() -> int:
         (
             "tests.test_oal_001_governor",
             "tests.test_oal_001_runtime",
+            "tests.test_oal_001_slice_2",
         )
     )
     result = unittest.TextTestRunner(verbosity=2).run(suite)
