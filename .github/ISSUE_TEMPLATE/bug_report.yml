@@ -1,0 +1,86 @@
+name: Bug report
+description: Report a reproducible technical defect.
+title: "[Bug]: "
+labels:
+  - bug
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve the project. Use this form for reproducible technical defects in public repository content or surfaces.
+
+        Do not include credentials, private evidence, or sensitive personal data. Report private security vulnerabilities through the [Security Policy](https://github.com/Terra-Nova-Restore/TerraNova-s-Framework/security/policy), not in a public issue.
+  - type: checkboxes
+    id: existing_issues
+    attributes:
+      label: Existing issues
+      description: Help us avoid duplicate reports.
+      options:
+        - label: I searched the existing issues and did not find an equivalent report.
+          required: true
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: Bug description
+      description: Concisely describe the technical defect.
+      placeholder: What is broken?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: Reproduction steps
+      description: Provide the smallest reliable sequence that reproduces the defect.
+      placeholder: |
+        1. Open ...
+        2. Run ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected_behaviour
+    attributes:
+      label: Expected behaviour
+      description: What should have happened?
+    validations:
+      required: true
+  - type: textarea
+    id: actual_behaviour
+    attributes:
+      label: Actual behaviour
+      description: What happened instead?
+    validations:
+      required: true
+  - type: input
+    id: affected_version
+    attributes:
+      label: Affected version, commit, or public surface
+      description: Provide a release, commit SHA, public URL, or repository path.
+      placeholder: v1.0.0, abc1234, or https://github.com/...
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Provide the operating system, browser, or runtime where relevant.
+      placeholder: Windows 11, Firefox 128, Python 3.11
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs, screenshots, or additional context
+      description: Optional public-safe evidence. Use fenced code blocks for logs. Remove secrets, credentials, private information, and sensitive personal data before submitting.
+    validations:
+      required: false
+  - type: checkboxes
+    id: security_boundary
+    attributes:
+      label: Security and privacy boundary
+      options:
+        - label: I removed credentials, private evidence, and sensitive personal data from this report.
+          required: true
+        - label: This is not a private security vulnerability. I will use the Security Policy for private vulnerability reports.
+          required: true
