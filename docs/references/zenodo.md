@@ -1,4 +1,118 @@
-# Zenodo Reference — TerraNova / FerrAI / CIC
+# Zenodo Reference — TerraNova / FerrAI CIC
+
+## Current citable target
+
+Citable work title:
+FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries
+
+Creator:
+Lenhard, Silvan
+
+Affiliation:
+Terra'Nova'Restore
+
+ORCID:
+https://orcid.org/0009-0007-8033-3508
+
+Version:
+v16
+
+Publication date:
+2026-06-17
+
+Version DOI:
+https://doi.org/10.5281/zenodo.20732376
+
+Record:
+https://zenodo.org/records/20732376
+
+Concept DOI (all versions):
+https://doi.org/10.5281/zenodo.19774446
+
+License:
+CC-BY-4.0
+
+Repository:
+https://github.com/Terra-Nova-Restore/TerraNova-s-Framework
+
+## Current file anchor
+
+Primary file:
+`main_v16_cq_ct_candidate (1).pdf`
+
+Extent:
+713 pages
+
+The canonical source available to this repository preparation did not supply a
+current file size or checksum. Those fields remain unresolved and are not inferred.
+
+## Version relationship
+
+```text
+Concept DOI: 10.5281/zenodo.19774446
+Current citable DOI: 10.5281/zenodo.20732376
+Version: v16
+Publication date: 2026-06-17
+```
+
+The Concept DOI identifies the work across versions. The version DOI identifies
+the v16 publication snapshot.
+
+## Role in this repository
+
+The Zenodo record represents the externally published, citable scientific snapshot.
+
+This GitHub repository represents:
+
+- evolving system architecture
+- structured, public-safe derivatives
+- LaTeX and Markdown working material
+- diagrams, specifications and tools
+- governance, source-status and review gates
+- provenance links to Zenodo and related publication artefacts
+
+## Relationship
+
+```text
+Notion / internal system → GitHub (structured, versioned) → Zenodo (published snapshot)
+```
+
+## AI assistance note
+
+Parts of structuring, drafting and repository integration were supported by
+GPT/Codex-style AI tools under human review and control.
+
+## Citation instruction
+
+When citing v16, use the version-specific Zenodo DOI:
+
+Lenhard, S. (2026). *FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries* (v16). Zenodo. https://doi.org/10.5281/zenodo.20732376
+
+For an all-version reference, use the Concept DOI:
+
+https://doi.org/10.5281/zenodo.19774446
+
+## Current title reconciliation
+
+The current-facing title above comes from the stored v16 API response retained
+in Notion and the explicitly locked public-surface decision:
+
+`FerrAI–Terra'Nova CIC Framework — System Architecture, State Logic and Governance Boundaries`
+
+A fresh live Zenodo read returned 503 during reconciliation. This local
+preparation does not claim that Zenodo metadata was changed. Historical titles
+below remain attached to the publication states they originally described.
+
+## Public boundary
+
+No credentials or raw private workspace exports are intentionally published.
+Existing public identifiers and outbound reference URLs remain under
+public-safety review.
+
+## Historical provenance — RC01-v12
+
+The complete RC01-v12 reference below is preserved verbatim from the exact base
+document. Statements using “current” describe that dated publication state.
 
 ## Primary Record
 
