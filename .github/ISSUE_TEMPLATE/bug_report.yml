@@ -71,9 +71,8 @@ body:
   - type: textarea
     id: logs
     attributes:
-      label: Logs or screenshots
-      description: Optional public-safe evidence. Remove secrets, credentials, private information, and sensitive personal data before submitting.
-      render: shell
+      label: Logs, screenshots, or additional context
+      description: Optional public-safe evidence. Use fenced code blocks for logs. Remove secrets, credentials, private information, and sensitive personal data before submitting.
     validations:
       required: false
   - type: checkboxes
