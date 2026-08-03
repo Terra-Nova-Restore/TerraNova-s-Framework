@@ -3,6 +3,7 @@
 
 The PDF remains the canonical binary publication artifact. Text files produced here
 are search derivatives only and preserve PDF page boundaries with explicit markers.
+The generated repository state is deterministic for an unchanged source artifact.
 """
 from __future__ import annotations
 
@@ -14,7 +15,6 @@ import re
 import shutil
 import subprocess
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 
 VERSION = "v16"
@@ -31,20 +31,22 @@ CHUNK_SIZE = 25
 
 
 def digest(path: Path, algorithm: str) -> str:
-    h = hashlib.new(algorithm)
+    hasher = hashlib.new(algorithm)
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
-            h.update(block)
-    return h.hexdigest()
+            hasher.update(block)
+    return hasher.hexdigest()
 
 
 def verify_pdf(pdf: Path) -> None:
     if not pdf.is_file():
         raise SystemExit(f"Missing PDF: {pdf}")
+
+    failures: list[str] = []
     size = pdf.stat().st_size
     md5 = digest(pdf, "md5")
     sha256 = digest(pdf, "sha256")
-    failures: list[str] = []
+
     if size != FILE_SIZE:
         failures.append(f"size {size} != {FILE_SIZE}")
     if md5 != MD5:
@@ -59,6 +61,7 @@ def verify_pdf(pdf: Path) -> None:
     page_count = int(match.group(1)) if match else None
     if page_count != PAGES:
         failures.append(f"pages {page_count} != {PAGES}")
+
     if failures:
         raise SystemExit("PDF verification failed: " + "; ".join(failures))
 
@@ -89,6 +92,7 @@ def clean_output(root: Path) -> None:
 def write_text_chunks(root: Path, pages: list[str]) -> list[dict[str, object]]:
     chunks: list[dict[str, object]] = []
     text_dir = root / "text"
+
     for start in range(1, PAGES + 1, CHUNK_SIZE):
         end = min(start + CHUNK_SIZE - 1, PAGES)
         filename = f"pages-{start:03d}-{end:03d}.md"
@@ -100,19 +104,20 @@ def write_text_chunks(root: Path, pages: list[str]) -> list[dict[str, object]]:
             "The PDF is authoritative; extraction artifacts are non-canonical.",
             "",
         ]
+
         for page_number in range(start, end + 1):
-            page_text = pages[page_number - 1].rstrip()
             lines.extend(
                 [
                     f"<!-- PDF_PAGE: {page_number} -->",
                     f"## PDF page {page_number}",
                     "",
                     "```text",
-                    page_text,
+                    pages[page_number - 1].rstrip(),
                     "```",
                     "",
                 ]
             )
+
         path.write_text("\n".join(lines), encoding="utf-8")
         chunks.append(
             {
@@ -124,6 +129,7 @@ def write_text_chunks(root: Path, pages: list[str]) -> list[dict[str, object]]:
                 "bytes": path.stat().st_size,
             }
         )
+
     return chunks
 
 
@@ -134,7 +140,9 @@ def write_indexes(root: Path, chunks: list[dict[str, object]], pages: list[str])
         writer = csv.writer(handle)
         writer.writerow(["pdf_page", "text_file", "anchor"])
         for chunk in chunks:
-            for page in range(int(chunk["start_pdf_page"]), int(chunk["end_pdf_page"]) + 1):
+            start = int(chunk["start_pdf_page"])
+            end = int(chunk["end_pdf_page"])
+            for page in range(start, end + 1):
                 writer.writerow([page, chunk["file"], f"pdf-page-{page}"])
 
     (index_dir / "chunk-map.json").write_text(
@@ -168,11 +176,9 @@ def write_indexes(root: Path, chunks: list[dict[str, object]], pages: list[str])
 
 
 def write_manifest(root: Path, chunks: list[dict[str, object]]) -> None:
-    generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     manifest = {
         "schema": "terranova.zenodo-github-mirror.v1",
         "status": "frozen-binary-mirror-with-search-derivative",
-        "generated_at_utc": generated_at,
         "work": {
             "title": "FerrAI / Terra'Nova'CIC - Werkmonographie und Evidenzapparat",
             "creator": "Silvan Lenhard",
@@ -227,7 +233,7 @@ def write_readme(root: Path, chunks: list[dict[str, object]]) -> None:
         "## Verified artifact",
         "",
         f"- Version: `{VERSION}`",
-        f"- Publication date: `2026-06-17`",
+        "- Publication date: `2026-06-17`",
         f"- Extent: `{PAGES} PDF pages`",
         f"- Version DOI: `{VERSION_DOI}`",
         f"- Concept DOI: `{CONCEPT_DOI}`",
@@ -262,6 +268,7 @@ def patch_zenodo_reference(repo_root: Path) -> None:
     path = repo_root / "docs" / "references" / "zenodo.md"
     if not path.exists():
         raise SystemExit(f"Missing repository reference file: {path}")
+
     text = path.read_text(encoding="utf-8")
     old = (
         "The canonical source available to this repository preparation did not supply a\n"
@@ -279,12 +286,14 @@ def patch_zenodo_reference(repo_root: Path) -> None:
         "Zenodo API payload and local verification. The adjacent text layer is a non-canonical\n"
         "search derivative and must not override the PDF or DOI record."
     )
+
     if old in text:
         text = text.replace(old, new, 1)
     elif MD5 in text and "publications/zenodo/v16" in text:
         return
     else:
         raise SystemExit("Expected unresolved checksum block not found in docs/references/zenodo.md")
+
     path.write_text(text, encoding="utf-8")
 
 
