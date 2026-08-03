@@ -1,0 +1,83 @@
+name: Build Zenodo v16 GitHub mirror
+
+on:
+  push:
+    branches:
+      - feature/zenodo-github-mirror-v16
+    paths:
+      - .github/workflows/build-zenodo-v16-mirror.yml
+      - scripts/build_zenodo_v16_mirror.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zenodo-github-mirror-v16-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-mirror:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out mirror branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Install deterministic PDF extraction tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends poppler-utils curl
+
+      - name: Download Zenodo v16 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .mirror-input
+          target=".mirror-input/main_v16_cq_ct_candidate (1).pdf"
+          urls=(
+            "https://zenodo.org/records/20732376/files/main_v16_cq_ct_candidate%20(1).pdf?download=1"
+            "https://zenodo.org/api/records/20732376/files/main_v16_cq_ct_candidate%20(1).pdf/content"
+          )
+          for url in "${urls[@]}"; do
+            if curl --fail --location --retry 4 --retry-all-errors --connect-timeout 30 \
+              --output "$target" "$url"; then
+              break
+            fi
+          done
+          test -s "$target"
+
+      - name: Build and verify mirror
+        run: |
+          python3 scripts/build_zenodo_v16_mirror.py \
+            --pdf ".mirror-input/main_v16_cq_ct_candidate (1).pdf" \
+            --repo-root .
+
+      - name: Verify repository artifact checksum
+        run: |
+          echo "c43cc558b8dfc715f8febeff6231e6be064ab9be50e65857cf2e42a305d96cfd  publications/zenodo/v16/artifact/FerrAI_TerraNovaCIC_v16_713.pdf" | sha256sum --check --strict
+          test "$(stat -c %s publications/zenodo/v16/artifact/FerrAI_TerraNovaCIC_v16_713.pdf)" = "2884898"
+          test "$(pdfinfo publications/zenodo/v16/artifact/FerrAI_TerraNovaCIC_v16_713.pdf | awk '/^Pages:/ {print $2}')" = "713"
+          test "$(find publications/zenodo/v16/text -maxdepth 1 -name 'pages-*.md' | wc -l)" = "29"
+
+      - name: Commit generated mirror to branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .mirror-input
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            publications/zenodo/v16 \
+            docs/references/zenodo.md
+          if git diff --cached --quiet; then
+            echo "Mirror is already current; nothing to commit."
+            exit 0
+          fi
+          git commit -m "docs(zenodo): mirror v16 artifact and searchable text"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
