@@ -43,8 +43,19 @@ Primary file:
 Extent:
 713 pages
 
-The canonical source available to this repository preparation did not supply a
-current file size or checksum. Those fields remain unresolved and are not inferred.
+Verified file size:
+`2884898 bytes`
+
+Verified checksums:
+- `md5:5fcb85593c0297512927491d933c2290`
+- `sha256:c43cc558b8dfc715f8febeff6231e6be064ab9be50e65857cf2e42a305d96cfd`
+
+Repository mirror:
+`publications/zenodo/v16/artifact/FerrAI_TerraNovaCIC_v16_713.pdf`
+
+The binary mirror is byte-identical to the published v16 artifact according to the stored
+Zenodo API payload and local verification. The adjacent text layer is a non-canonical
+search derivative and must not override the PDF or DOI record.
 
 ## Version relationship
 
