@@ -1,40 +1,52 @@
-name: Build Zenodo v16 GitHub mirror
+name: Verify Zenodo v16 GitHub mirror
 
 on:
-  push:
-    branches:
-      - feature/zenodo-github-mirror-v16
+  pull_request:
     paths:
       - .github/workflows/build-zenodo-v16-mirror.yml
       - scripts/build_zenodo_v16_mirror.py
+      - publications/zenodo/v16/**
+      - docs/references/zenodo.md
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/build-zenodo-v16-mirror.yml
+      - scripts/build_zenodo_v16_mirror.py
+      - publications/zenodo/v16/**
+      - docs/references/zenodo.md
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: zenodo-github-mirror-v16-${{ github.ref }}
-  cancel-in-progress: false
+  group: zenodo-v16-mirror-verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build-mirror:
-    if: github.actor != 'github-actions[bot]'
-    runs-on: ubuntu-latest
+  verify-mirror:
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
 
     steps:
-      - name: Check out mirror branch
+      - name: Check out repository without write credentials
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
-          fetch-depth: 0
+          fetch-depth: 1
+          persist-credentials: false
 
-      - name: Install deterministic PDF extraction tools
+      - name: Install extraction tools on fixed runner image
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends poppler-utils curl
 
-      - name: Download Zenodo v16 artifact
+      - name: Record extraction toolchain
+        run: |
+          pdftotext -v 2>&1
+          pdfinfo -v 2>&1
+
+      - name: Download and verify canonical Zenodo v16 artifact
         shell: bash
         run: |
           set -euo pipefail
@@ -50,34 +62,74 @@ jobs:
               break
             fi
           done
+
           test -s "$target"
+          echo "c43cc558b8dfc715f8febeff6231e6be064ab9be50e65857cf2e42a305d96cfd  $target" | sha256sum --check --strict
+          test "$(stat -c %s "$target")" = "2884898"
+          test "$(pdfinfo "$target" | awk '/^Pages:/ {print $2}')" = "713"
 
-      - name: Build and verify mirror
+      - name: Verify committed derivative against its manifest
         run: |
-          python3 scripts/build_zenodo_v16_mirror.py \
-            --pdf ".mirror-input/main_v16_cq_ct_candidate (1).pdf" \
-            --repo-root .
+          python3 - <<'PY'
+          from __future__ import annotations
 
-      - name: Verify repository artifact checksum
-        run: |
-          echo "c43cc558b8dfc715f8febeff6231e6be064ab9be50e65857cf2e42a305d96cfd  publications/zenodo/v16/artifact/FerrAI_TerraNovaCIC_v16_713.pdf" | sha256sum --check --strict
-          test "$(stat -c %s publications/zenodo/v16/artifact/FerrAI_TerraNovaCIC_v16_713.pdf)" = "2884898"
-          test "$(pdfinfo publications/zenodo/v16/artifact/FerrAI_TerraNovaCIC_v16_713.pdf | awk '/^Pages:/ {print $2}')" = "713"
-          test "$(find publications/zenodo/v16/text -maxdepth 1 -name 'pages-*.md' | wc -l)" = "29"
+          import hashlib
+          import json
+          from pathlib import Path
 
-      - name: Commit generated mirror to branch
+          root = Path("publications/zenodo/v16")
+          manifest = json.loads((root / "MANIFEST.json").read_text(encoding="utf-8"))
+          chunks = manifest["derivative"]["chunks"]
+
+          if len(chunks) != 29:
+              raise SystemExit(f"Expected 29 text chunks, found {len(chunks)}")
+
+          for chunk in chunks:
+              path = root / chunk["file"]
+              if not path.is_file():
+                  raise SystemExit(f"Missing derivative file: {path}")
+              payload = path.read_bytes()
+              actual_sha256 = hashlib.sha256(payload).hexdigest()
+              actual_bytes = len(payload)
+              if actual_sha256 != chunk["sha256"]:
+                  raise SystemExit(
+                      f"SHA-256 mismatch for {path}: {actual_sha256} != {chunk['sha256']}"
+                  )
+              if actual_bytes != chunk["bytes"]:
+                  raise SystemExit(
+                      f"Size mismatch for {path}: {actual_bytes} != {chunk['bytes']}"
+                  )
+
+          print("Committed v16 derivative matches all manifest hashes.")
+          PY
+
+      - name: Rebuild in isolation and fail closed on any difference
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf .mirror-input
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add \
+          temp_root="$(mktemp -d)"
+          trap 'rm -rf "$temp_root"' EXIT
+          rebuild_root="$temp_root/repository"
+
+          mkdir -p "$rebuild_root/docs/references"
+          cp docs/references/zenodo.md "$rebuild_root/docs/references/zenodo.md"
+
+          python3 scripts/build_zenodo_v16_mirror.py \
+            --pdf ".mirror-input/main_v16_cq_ct_candidate (1).pdf" \
+            --repo-root "$rebuild_root"
+
+          diff -ruN \
             publications/zenodo/v16 \
-            docs/references/zenodo.md
-          if git diff --cached --quiet; then
-            echo "Mirror is already current; nothing to commit."
-            exit 0
+            "$rebuild_root/publications/zenodo/v16"
+
+          if ! cmp --silent \
+            docs/references/zenodo.md \
+            "$rebuild_root/docs/references/zenodo.md"; then
+            diff -u \
+              docs/references/zenodo.md \
+              "$rebuild_root/docs/references/zenodo.md" || true
+            echo "docs/references/zenodo.md changed during isolated rebuild." >&2
+            exit 1
           fi
-          git commit -m "docs(zenodo): mirror v16 artifact and searchable text"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+          echo "PASS: isolated rebuild is byte-for-byte identical to the frozen v16 mirror."
