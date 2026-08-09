@@ -64,8 +64,23 @@ class ZenodoV16ReadStatsTests(unittest.TestCase):
         self.assertEqual(request.get_method(), "GET")
         self.assertEqual(request.headers.get("Authorization"), "Bearer secret-token")
 
-    def test_validates_current_v16_identity(self) -> None:
+    def test_validates_current_v16_identity_when_version_is_present(self) -> None:
         MODULE.validate_record(self.sample_record(), "20732376")
+
+    def test_allows_missing_optional_metadata_version_with_strong_identity_anchors(self) -> None:
+        record = self.sample_record()
+        record["metadata"].pop("version")
+        MODULE.validate_record(record, "20732376")
+        snapshot = MODULE.build_snapshot(record, authenticated=True)
+        self.assertIsNone(snapshot["metadata_version"])
+        self.assertEqual(snapshot["expected_version"], "v16")
+        self.assertEqual(snapshot["version_binding"], "record_id+doi+conceptdoi")
+
+    def test_rejects_conflicting_metadata_version_when_present(self) -> None:
+        record = self.sample_record()
+        record["metadata"]["version"] = "v15"
+        with self.assertRaises(RuntimeError):
+            MODULE.validate_record(record, "20732376")
 
     def test_extracts_exact_eight_statistics(self) -> None:
         stats = MODULE.extract_stats(self.sample_record())
@@ -85,6 +100,7 @@ class ZenodoV16ReadStatsTests(unittest.TestCase):
         self.assertTrue(snapshot["authenticated"])
         self.assertEqual(snapshot["remote_method"], "GET")
         self.assertEqual(snapshot["record_id"], "20732376")
+        self.assertEqual(snapshot["version_binding"], "metadata.version")
 
 
 if __name__ == "__main__":
