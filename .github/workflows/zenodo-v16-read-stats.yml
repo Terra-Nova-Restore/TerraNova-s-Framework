@@ -1,0 +1,63 @@
+name: Collect Zenodo v16 read-only stats
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/zenodo-v16-read-stats.yml"
+      - "scripts/zenodo_v16_read_stats.py"
+      - "tests/test_zenodo_v16_read_stats.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-read-only-collector:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Compile collector
+        run: python -m py_compile scripts/zenodo_v16_read_stats.py
+
+      - name: Verify read-only collector tests
+        run: python -m unittest tests.test_zenodo_v16_read_stats -v
+
+  collect-authenticated-stats:
+    if: github.event_name == 'workflow_dispatch'
+    needs: validate-read-only-collector
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    env:
+      ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_API }}
+      ZENODO_API_BASE: https://zenodo.org/api
+      ZENODO_RECORD_ID: "20732376"
+
+    steps:
+      - name: Check out repository without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Collect authenticated Zenodo v16 statistics
+        run: |
+          set -euo pipefail
+          python scripts/zenodo_v16_read_stats.py \
+            --require-auth \
+            --output zenodo-v16-stats.json
+
+      - name: Upload statistics evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenodo-v16-read-stats
+          path: zenodo-v16-stats.json
+          if-no-files-found: error
+          retention-days: 30
