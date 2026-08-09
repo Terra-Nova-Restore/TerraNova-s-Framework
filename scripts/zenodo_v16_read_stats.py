@@ -49,7 +49,7 @@ def request_json(url: str, token: str, attempts: int = 4) -> dict[str, Any]:
     assert_read_only_method("GET")
     headers = {
         "Accept": "application/json",
-        "User-Agent": "TerraNova-Zenodo-ReadStats/1.0",
+        "User-Agent": "TerraNova-Zenodo-ReadStats/1.1",
     }
     if token:
         headers["Authorization"] = f"Bearer {token}"
@@ -74,15 +74,31 @@ def request_json(url: str, token: str, attempts: int = 4) -> dict[str, Any]:
     raise RuntimeError("Zenodo GET failed after retries")
 
 
+def metadata_version(record: dict[str, Any]) -> str | None:
+    metadata = record.get("metadata")
+    if not isinstance(metadata, dict):
+        return None
+    value = metadata.get("version")
+    return value if isinstance(value, str) and value.strip() else None
+
+
 def validate_record(record: dict[str, Any], record_id: str) -> None:
+    """Validate immutable v16 identity anchors.
+
+    Zenodo publication records do not necessarily expose ``metadata.version``.
+    The record is therefore bound primarily by the exact record id, DOI and
+    concept DOI. If Zenodo does expose a version string, it must still match
+    the expected v16 label; a conflicting value fails closed.
+    """
     if str(record.get("id")) != record_id:
         raise RuntimeError(f"Unexpected record id: {record.get('id')!r}")
     if record.get("doi") != EXPECTED_DOI:
         raise RuntimeError(f"Unexpected DOI: {record.get('doi')!r}")
     if record.get("conceptdoi") != EXPECTED_CONCEPT_DOI:
         raise RuntimeError(f"Unexpected concept DOI: {record.get('conceptdoi')!r}")
-    version = record.get("metadata", {}).get("version")
-    if version != EXPECTED_VERSION:
+
+    version = metadata_version(record)
+    if version is not None and version != EXPECTED_VERSION:
         raise RuntimeError(f"Unexpected version: {version!r}")
 
 
@@ -107,8 +123,10 @@ def extract_stats(record: dict[str, Any]) -> dict[str, int]:
 
 def build_snapshot(record: dict[str, Any], authenticated: bool) -> dict[str, Any]:
     stats = extract_stats(record)
+    observed_version = metadata_version(record)
     return {
         "collector": "ZENODO-V16-READ-STATS-001",
+        "collector_schema": "1.1",
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "remote_method": "GET",
         "read_only": True,
@@ -116,7 +134,9 @@ def build_snapshot(record: dict[str, Any], authenticated: bool) -> dict[str, Any
         "record_id": str(record["id"]),
         "doi": record.get("doi"),
         "conceptdoi": record.get("conceptdoi"),
-        "version": record.get("metadata", {}).get("version"),
+        "expected_version": EXPECTED_VERSION,
+        "metadata_version": observed_version,
+        "version_binding": "metadata.version" if observed_version else "record_id+doi+conceptdoi",
         "updated": record.get("updated"),
         "stats": stats,
     }
