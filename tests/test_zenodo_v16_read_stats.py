@@ -51,15 +51,6 @@ class ZenodoV16ReadStatsTests(unittest.TestCase):
             },
         }
 
-    def sample_landing_html(self) -> str:
-        return """
-        <section>
-          <span>Data volume</span>
-          <div>All versions</div><strong>1.8 GB</strong>
-          <div>This version</div><strong>115.4 MB</strong>
-        </section>
-        """
-
     def test_rejects_every_non_get_method(self) -> None:
         for method in ("POST", "PUT", "PATCH", "DELETE"):
             with self.subTest(method=method):
@@ -71,15 +62,6 @@ class ZenodoV16ReadStatsTests(unittest.TestCase):
         with patch.object(MODULE.urllib.request, "urlopen", return_value=FakeResponse(record)) as mocked:
             result = MODULE.request_json("https://zenodo.org/api/records/20732376", "secret-token")
         self.assertEqual(result, record)
-        request = mocked.call_args.args[0]
-        self.assertEqual(request.get_method(), "GET")
-        self.assertEqual(request.headers.get("Authorization"), "Bearer secret-token")
-
-    def test_landing_request_is_also_get_only(self) -> None:
-        page = self.sample_landing_html()
-        with patch.object(MODULE.urllib.request, "urlopen", return_value=FakeResponse(page)) as mocked:
-            result = MODULE.request_text("https://zenodo.org/records/20732376", "secret-token")
-        self.assertIn("Data volume", result)
         request = mocked.call_args.args[0]
         self.assertEqual(request.get_method(), "GET")
         self.assertEqual(request.headers.get("Authorization"), "Bearer secret-token")
@@ -114,30 +96,25 @@ class ZenodoV16ReadStatsTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             MODULE.extract_stats(record)
 
-    def test_extracts_directly_displayed_data_volume_without_reconstruction(self) -> None:
-        volume = MODULE.extract_data_volume(self.sample_landing_html())
-        self.assertTrue(volume["available"])
-        self.assertEqual(volume["all_versions"], "1.8 GB")
-        self.assertEqual(volume["this_version"], "115.4 MB")
-        self.assertEqual(volume["source"], "zenodo_record_landing_page")
-
-    def test_data_volume_unavailable_is_explicit_not_invented(self) -> None:
-        volume = MODULE.extract_data_volume("<html><body>No usage block</body></html>")
+    def test_data_volume_is_explicitly_noncritical_and_not_collected(self) -> None:
+        volume = MODULE.unavailable_data_volume()
         self.assertFalse(volume["available"])
+        self.assertFalse(volume["critical"])
         self.assertIsNone(volume["all_versions"])
         self.assertIsNone(volume["this_version"])
+        self.assertEqual(volume["source"], "not_collected_get_only")
 
     def test_snapshot_marks_remote_path_read_only(self) -> None:
-        data_volume = MODULE.extract_data_volume(self.sample_landing_html())
-        snapshot = MODULE.build_snapshot(self.sample_record(), authenticated=True, data_volume=data_volume)
+        snapshot = MODULE.build_snapshot(self.sample_record(), authenticated=True)
         self.assertTrue(snapshot["read_only"])
         self.assertTrue(snapshot["authenticated"])
         self.assertEqual(snapshot["remote_method"], "GET")
         self.assertEqual(snapshot["record_id"], "20732376")
         self.assertEqual(snapshot["version_binding"], "metadata.version")
-        self.assertEqual(snapshot["collector_schema"], "1.2")
-        self.assertEqual(snapshot["data_volume"]["all_versions"], "1.8 GB")
-        self.assertEqual(snapshot["data_volume"]["this_version"], "115.4 MB")
+        self.assertEqual(snapshot["collector_schema"], "1.3")
+        self.assertFalse(snapshot["data_volume"]["available"])
+        self.assertFalse(snapshot["data_volume"]["critical"])
+        self.assertEqual(snapshot["data_volume"]["source"], "not_collected_get_only")
 
 
 if __name__ == "__main__":
