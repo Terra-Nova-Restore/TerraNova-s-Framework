@@ -4,10 +4,8 @@
 from __future__ import annotations
 
 import argparse
-import html
 import json
 import os
-import re
 import time
 import urllib.error
 import urllib.request
@@ -16,7 +14,6 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_API_BASE = "https://zenodo.org/api"
-DEFAULT_LANDING_BASE = "https://zenodo.org/records"
 DEFAULT_RECORD_ID = "20732376"
 EXPECTED_DOI = "10.5281/zenodo.20732376"
 EXPECTED_CONCEPT_DOI = "10.5281/zenodo.19774446"
@@ -31,10 +28,6 @@ STAT_KEYS = (
     "version_unique_downloads",
     "version_views",
     "version_unique_views",
-)
-DATA_VOLUME_PATTERN = re.compile(
-    r"Data\s+volume\s+All\s+versions\s+([0-9][0-9.,]*\s*[KMGTPE]?B)\s+This\s+version\s+([0-9][0-9.,]*\s*[KMGTPE]?B)",
-    re.IGNORECASE,
 )
 
 
@@ -56,7 +49,7 @@ def request_bytes(url: str, token: str, accept: str, attempts: int = 4) -> bytes
     assert_read_only_method("GET")
     headers = {
         "Accept": accept,
-        "User-Agent": "TerraNova-Zenodo-ReadStats/1.2",
+        "User-Agent": "TerraNova-Zenodo-ReadStats/1.3",
     }
     if token:
         headers["Authorization"] = f"Bearer {token}"
@@ -85,10 +78,6 @@ def request_json(url: str, token: str, attempts: int = 4) -> dict[str, Any]:
     return json.loads(request_bytes(url, token, "application/json", attempts).decode("utf-8"))
 
 
-def request_text(url: str, token: str, attempts: int = 4) -> str:
-    return request_bytes(url, token, "text/html", attempts).decode("utf-8", errors="replace")
-
-
 def metadata_version(record: dict[str, Any]) -> str | None:
     metadata = record.get("metadata")
     if not isinstance(metadata, dict):
@@ -98,13 +87,6 @@ def metadata_version(record: dict[str, Any]) -> str | None:
 
 
 def validate_record(record: dict[str, Any], record_id: str) -> None:
-    """Validate immutable v16 identity anchors.
-
-    Zenodo publication records do not necessarily expose ``metadata.version``.
-    The record is therefore bound primarily by the exact record id, DOI and
-    concept DOI. If Zenodo does expose a version string, it must still match
-    the expected v16 label; a conflicting value fails closed.
-    """
     if str(record.get("id")) != record_id:
         raise RuntimeError(f"Unexpected record id: {record.get('id')!r}")
     if record.get("doi") != EXPECTED_DOI:
@@ -136,39 +118,29 @@ def extract_stats(record: dict[str, Any]) -> dict[str, int]:
     return result
 
 
-def extract_data_volume(page_html: str) -> dict[str, Any]:
-    """Extract Zenodo's directly displayed data-volume metric.
+def unavailable_data_volume() -> dict[str, Any]:
+    """Keep data volume explicitly outside the critical automated path.
 
-    Zenodo's record JSON currently exposes view/download counters but not the
-    landing-page data-volume values used by the UI. Preserve the displayed
-    values verbatim instead of reconstructing them from file sizes/downloads.
+    Zenodo displays this metric in its UI, but it is not currently available
+    through the collector's stable GET-only API source. Do not reconstruct or
+    scrape it. It may be preserved separately as manually/visually verified
+    evidence and re-enabled if a reproducible GET source becomes available.
     """
-    text = html.unescape(re.sub(r"<[^>]+>", " ", page_html))
-    text = re.sub(r"\s+", " ", text).strip()
-    match = DATA_VOLUME_PATTERN.search(text)
-    if not match:
-        return {
-            "available": False,
-            "all_versions": None,
-            "this_version": None,
-            "source": "zenodo_record_landing_page",
-        }
     return {
-        "available": True,
-        "all_versions": match.group(1).strip(),
-        "this_version": match.group(2).strip(),
-        "source": "zenodo_record_landing_page",
+        "available": False,
+        "all_versions": None,
+        "this_version": None,
+        "source": "not_collected_get_only",
+        "critical": False,
     }
 
 
-def build_snapshot(
-    record: dict[str, Any], authenticated: bool, data_volume: dict[str, Any] | None = None
-) -> dict[str, Any]:
+def build_snapshot(record: dict[str, Any], authenticated: bool) -> dict[str, Any]:
     stats = extract_stats(record)
     observed_version = metadata_version(record)
     return {
         "collector": "ZENODO-V16-READ-STATS-001",
-        "collector_schema": "1.2",
+        "collector_schema": "1.3",
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "remote_method": "GET",
         "read_only": True,
@@ -181,13 +153,7 @@ def build_snapshot(
         "version_binding": "metadata.version" if observed_version else "record_id+doi+conceptdoi",
         "updated": record.get("updated"),
         "stats": stats,
-        "data_volume": data_volume
-        or {
-            "available": False,
-            "all_versions": None,
-            "this_version": None,
-            "source": "zenodo_record_landing_page",
-        },
+        "data_volume": unavailable_data_volume(),
     }
 
 
@@ -195,7 +161,6 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Collect authenticated read-only Zenodo v16 statistics.")
     parser.add_argument("--record-id", default=os.environ.get("ZENODO_RECORD_ID", DEFAULT_RECORD_ID))
     parser.add_argument("--api-base", default=os.environ.get("ZENODO_API_BASE", DEFAULT_API_BASE))
-    parser.add_argument("--landing-base", default=os.environ.get("ZENODO_LANDING_BASE", DEFAULT_LANDING_BASE))
     parser.add_argument("--output", type=Path)
     parser.add_argument("--require-auth", action="store_true")
     args = parser.parse_args()
@@ -208,18 +173,7 @@ def main() -> int:
     record = request_json(api_url, token)
     validate_record(record, args.record_id)
 
-    landing_url = f"{args.landing_base.rstrip('/')}/{args.record_id}"
-    try:
-        data_volume = extract_data_volume(request_text(landing_url, token))
-    except RuntimeError:
-        data_volume = {
-            "available": False,
-            "all_versions": None,
-            "this_version": None,
-            "source": "zenodo_record_landing_page",
-        }
-
-    snapshot = build_snapshot(record, authenticated=bool(token), data_volume=data_volume)
+    snapshot = build_snapshot(record, authenticated=bool(token))
     rendered = json.dumps(snapshot, ensure_ascii=False, indent=2) + "\n"
 
     if args.output:
