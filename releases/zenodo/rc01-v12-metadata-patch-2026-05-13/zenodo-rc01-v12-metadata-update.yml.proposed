@@ -14,6 +14,22 @@
 # into the payload, and do not remove the assembly step. Removing it while the
 # payload has no description would send a PUT without a description and could
 # blank the public landing page text.
+#
+# Review follow-up (Codex review on PR #110):
+#   P1 - Every field that is actually submitted is now compared against the
+#        authenticated deposition metadata, not only an allowlist of seven
+#        fields. creators, access_right, license, upload_type, publication_type
+#        and any other key present on either side must match, otherwise the run
+#        stops before the edit session is opened. Only description and notes are
+#        treated as intended changes. dates and alternate_identifiers are the
+#        documented accepted losses of the legacy deposit shape. custom is
+#        compared against the public record instead, because the legacy
+#        deposition endpoint does not reliably return it.
+#   P2 - Idempotence no longer depends on a byte-identical HTML substring.
+#        Zenodo may re-serialize the prefix (single-quoted href attributes can
+#        come back double-quoted). Detection now uses stable plain-text markers
+#        that survive HTML sanitization. The v16 DOI link is still verified, but
+#        reported instead of aborting after an already published update.
 
 name: Zenodo Metadata Update - RC01 v12
 
@@ -128,6 +144,13 @@ jobs:
           ]
           expected_v16_doi = "10.5281/zenodo.20732376"
 
+          # Plain-text markers, deliberately attribute-free so that they survive
+          # Zenodo's HTML sanitizer and any re-serialization of quotes.
+          description_prefix_markers = (
+              "es existiert eine neuere Version",
+              "a newer version is available",
+          )
+
           with open(patch_path, encoding="utf-8") as f:
               patch = json.load(f)
 
@@ -148,6 +171,9 @@ jobs:
               raise SystemExit("Description prefix does not contain RC01-v12.")
           if expected_v16_doi not in description_prefix:
               raise SystemExit("Description prefix does not contain the v16 DOI.")
+          for marker in description_prefix_markers:
+              if marker not in description_prefix:
+                  raise SystemExit(f"Description prefix is missing the idempotence marker: {marker}")
           if "description" in candidate:
               raise SystemExit(
                   "Candidate must not carry a hand-written description; "
@@ -183,6 +209,23 @@ jobs:
               if status not in ok:
                   return status, text, parsed
               return status, text, parsed
+
+          def normalize(value):
+              """Make public-API and legacy-deposit representations comparable."""
+              if isinstance(value, dict):
+                  if set(value) == {"id"}:
+                      return value["id"]
+                  return {
+                      k: normalize(v)
+                      for k, v in value.items()
+                      if v not in (None, "", [], {})
+                  }
+              if isinstance(value, list):
+                  return [normalize(v) for v in value]
+              return value
+
+          def is_blank(value):
+              return value in (None, "", [], {})
 
           def require_public_record_unchanged(record):
               if str(record.get("id")) != record_id:
@@ -231,19 +274,62 @@ jobs:
               if candidate.get(field) != live_metadata.get(field):
                   raise SystemExit(f"Candidate {field} does not match the live record.")
 
+          live_custom = normalize(live_metadata.get("custom"))
+          if not is_blank(live_custom) and normalize(candidate.get("custom")) != live_custom:
+              raise SystemExit("Candidate custom metadata does not match the live record.")
+
           live_description = live_metadata.get("description", "") or ""
           if not live_description.strip():
               raise SystemExit("Live record description is empty; refusing to assemble a new description.")
-          if description_prefix.strip() in live_description:
+          prefix_already_present = any(m in live_description for m in description_prefix_markers)
+          if prefix_already_present:
               candidate["description"] = live_description
-              prefix_already_present = True
           else:
               candidate["description"] = description_prefix + live_description
-              prefix_already_present = False
 
           status, text, deposition_before = request("GET", f"{base}/deposit/depositions/{record_id}", auth=True, ok=(200,))
           if status != 200:
               raise SystemExit(f"Could not read authenticated deposition before update: HTTP {status}\n{text}")
+
+          deposition_metadata = (deposition_before or {}).get("metadata", {}) or {}
+          if not deposition_metadata:
+              raise SystemExit("Authenticated deposition returned no metadata; refusing to continue.")
+
+          # The PUT below replaces the complete metadata object, so every key that
+          # is submitted has to be verified, not just the seven fields the public
+          # record exposes in a directly comparable shape.
+          intended_changes = ("description", "notes")
+          accepted_drops = ("dates", "alternate_identifiers")
+          bookkeeping_keys = ("doi", "doi_url", "prereserve_doi")
+          not_returned_by_deposition = ("custom",)
+          drifted = []
+          for key in sorted(set(deposition_metadata) | set(candidate)):
+              if key in intended_changes or key in accepted_drops:
+                  continue
+              if key in bookkeeping_keys or key in not_returned_by_deposition:
+                  continue
+              live_value = normalize(deposition_metadata.get(key))
+              candidate_value = normalize(candidate.get(key))
+              if is_blank(live_value) and is_blank(candidate_value):
+                  continue
+              if live_value != candidate_value:
+                  drifted.append(key)
+
+          if drifted:
+              print(json.dumps({
+                  "payload_vs_live_deposition_drift": {
+                      key: {
+                          "live_deposition": deposition_metadata.get(key),
+                          "candidate": candidate.get(key),
+                      }
+                      for key in drifted
+                  }
+              }, ensure_ascii=False, indent=2))
+              raise SystemExit(
+                  "Payload differs from the live deposition in fields that are not an intended "
+                  f"change: {', '.join(drifted)}. Re-sync the patch file against the live record "
+                  "before running this workflow. No edit session was opened."
+              )
 
           status, text, edit_body = request(
               "POST",
@@ -265,6 +351,7 @@ jobs:
                   "has_notes": "notes" in metadata_payload,
                   "description_assembled_from_live_record": True,
                   "description_prefix_already_present": prefix_already_present,
+                  "payload_verified_against_live_deposition": True,
                   "file_payload_included": False,
                   "new_version_requested": False,
               }
@@ -311,7 +398,9 @@ jobs:
               if status != 200:
                   continue
               polled_description = public_after.get("metadata", {}).get("description", "") or ""
-              if "notion-selectable" not in polled_description and expected_v16_doi in polled_description:
+              if "notion-selectable" not in polled_description and all(
+                  m in polled_description for m in description_prefix_markers
+              ):
                   break
           if status != 200:
               raise SystemExit(f"Could not read public record after update: HTTP {status}\n{text}")
@@ -322,8 +411,16 @@ jobs:
               raise SystemExit("Public description still contains Notion wrapper markup.")
           if "RC01-v12" not in description:
               raise SystemExit("Public description does not contain RC01-v12.")
-          if expected_v16_doi not in description:
-              raise SystemExit("Public description does not contain the v16 pointer.")
+          missing_markers = [m for m in description_prefix_markers if m not in description]
+          if missing_markers:
+              raise SystemExit(f"Public description does not contain the v16 pointer text: {missing_markers}")
+          v16_doi_link_present = expected_v16_doi in description
+          if not v16_doi_link_present:
+              print(
+                  "WARNING: the v16 pointer text is present but the DOI link "
+                  f"{expected_v16_doi} was not found in the public description. "
+                  "Zenodo may have stripped the href attribute. Check the landing page."
+              )
           if public_after.get("metadata", {}).get("title") != live_metadata.get("title"):
               raise SystemExit("Public title changed unexpectedly.")
           if public_after.get("metadata", {}).get("publication_date") != live_metadata.get("publication_date"):
@@ -346,8 +443,10 @@ jobs:
               "references": public_after.get("metadata", {}).get("references"),
               "description_contains_notion_wrapper": "notion-selectable" in description,
               "description_contains_rc01_v12": "RC01-v12" in description,
-              "description_contains_v16_pointer": expected_v16_doi in description,
+              "description_contains_v16_pointer": v16_doi_link_present,
+              "description_contains_v16_pointer_text": not missing_markers,
               "description_prefix_already_present_before_update": prefix_already_present,
+              "payload_verified_against_live_deposition": True,
           }
 
           with open("zenodo_rc01_v12_metadata_update_result.json", "w", encoding="utf-8") as f:
@@ -369,7 +468,9 @@ jobs:
               f.write("- DOI reservation: none\n")
               f.write("- GitHub release/tag: none\n")
               f.write("- Description source: live public description, prefixed with the v16 pointer\n")
-              f.write(f"- v16 pointer present: {summary['description_contains_v16_pointer']}\n")
+              f.write(f"- v16 pointer text present: {summary['description_contains_v16_pointer_text']}\n")
+              f.write(f"- v16 DOI link present: {summary['description_contains_v16_pointer']}\n")
+              f.write("- Every submitted field verified against the live deposition: yes\n")
               f.write("- Repository custom field preserved: yes\n")
 
           print(json.dumps(summary, ensure_ascii=False, indent=2))
