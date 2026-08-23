@@ -66,7 +66,7 @@ def request_bytes(url: str, token: str, accept: str, attempts: int = 4) -> bytes
                 body = exc.read().decode("utf-8", errors="replace")
                 raise RuntimeError(f"Zenodo GET failed: HTTP {exc.code}: {body[:500]}") from exc
             time.sleep(2 ** (attempt - 1))
-        except urllib.error.URLError as exc:
+        except (TimeoutError, urllib.error.URLError) as exc:
             if attempt == attempts:
                 raise RuntimeError(f"Zenodo GET failed: {exc}") from exc
             time.sleep(2 ** (attempt - 1))

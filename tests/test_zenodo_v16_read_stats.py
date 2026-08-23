@@ -66,6 +66,33 @@ class ZenodoV16ReadStatsTests(unittest.TestCase):
         self.assertEqual(request.get_method(), "GET")
         self.assertEqual(request.headers.get("Authorization"), "Bearer secret-token")
 
+    def test_retries_direct_timeout_error(self) -> None:
+        record = self.sample_record()
+        with patch.object(
+            MODULE.urllib.request,
+            "urlopen",
+            side_effect=[TimeoutError("read timed out"), FakeResponse(record)],
+        ) as mocked, patch.object(MODULE.time, "sleep") as sleep:
+            result = MODULE.request_json(
+                "https://zenodo.org/api/records/20732376", "secret-token", attempts=2
+            )
+        self.assertEqual(result, record)
+        self.assertEqual(mocked.call_count, 2)
+        sleep.assert_called_once_with(1)
+
+    def test_direct_timeout_error_fails_closed_after_retries(self) -> None:
+        with patch.object(
+            MODULE.urllib.request,
+            "urlopen",
+            side_effect=TimeoutError("read timed out"),
+        ) as mocked, patch.object(MODULE.time, "sleep") as sleep:
+            with self.assertRaisesRegex(RuntimeError, "Zenodo GET failed"):
+                MODULE.request_json(
+                    "https://zenodo.org/api/records/20732376", "secret-token", attempts=2
+                )
+        self.assertEqual(mocked.call_count, 2)
+        sleep.assert_called_once_with(1)
+
     def test_validates_current_v16_identity_when_version_is_present(self) -> None:
         MODULE.validate_record(self.sample_record(), "20732376")
 
