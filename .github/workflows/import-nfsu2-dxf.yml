@@ -1,0 +1,33 @@
+name: Temporary NFSU2 DXF import
+
+on:
+  push:
+    paths:
+      - '.github/workflows/import-nfsu2-dxf.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download verified DXF payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/nfsu2/bayview-laser-map
+          curl --fail --location 'https://sdmntprnortheu.oaiusercontent.com/files/00000000-7f28-81f4-bdb4-b2c7585c548b/raw?se=2026-09-01T17%3A46%3A19Z&sp=r&sv=2026-02-06&sr=b&scid=d2ebaf41-59af-57a6-9fdc-c4077c73d5ad&skoid=7b771594-2b4f-4e93-93be-fdeeeb59aaf9&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-01T07%3A45%3A01Z&ske=2026-09-02T07%3A45%3A01Z&sks=b&skv=2026-02-06&sig=04iTp1Yo4jc2hDRiM5AlfCTSe0fwjijtltT8L3MGhkw%3D' -o artifacts/nfsu2/bayview-laser-map/NFSU2_Bayview_centerline_R2000.dxf
+          test "$(wc -c < artifacts/nfsu2/bayview-laser-map/NFSU2_Bayview_centerline_R2000.dxf)" -eq 160694
+          grep -q 'AC1015' artifacts/nfsu2/bayview-laser-map/NFSU2_Bayview_centerline_R2000.dxf
+          grep -q 'MAP' artifacts/nfsu2/bayview-laser-map/NFSU2_Bayview_centerline_R2000.dxf
+      - name: Commit DXF
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add artifacts/nfsu2/bayview-laser-map/NFSU2_Bayview_centerline_R2000.dxf
+          git commit -m 'Add NFSU2 Bayview centerline DXF'
+          git push
