@@ -9,7 +9,7 @@ permissions:
 jobs:
   oal-python-311:
     name: OAL Python 3.11
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       OAL_BASE_REPOSITORY: ${{ github.event.pull_request.base.repo.full_name }}
