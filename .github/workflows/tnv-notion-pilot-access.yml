@@ -1,0 +1,97 @@
+name: TNV Notion pilot access preflight
+
+# Draft: transport/permission probe only, NOT the v0.2 scanner.
+# Configure the protected environment before merging or running.
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Authorize exactly two GET requests, no content output'
+        type: boolean
+        required: true
+        default: false
+
+permissions: {}
+
+concurrency:
+  group: tnv-notion-pilot-access
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    if: github.ref == 'refs/heads/main' && inputs.confirm == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    environment: notion-pilot-readonly
+    steps:
+      - name: Verify scoped API access (no raw content output)
+        shell: bash
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_PILOT_PAGE_ID: ${{ secrets.NOTION_PILOT_PAGE_ID }}
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          import sys
+          import uuid
+          from urllib.error import HTTPError
+          from urllib.request import HTTPRedirectHandler, Request, build_opener
+
+          EXPECTED_ID_HASH = '282ecbaf2f35dddd4019245cb1b1fd087b65c32df920968987f637657094a780'
+          BASE = 'https://api.notion.com/v1'
+          MAX_BYTES = 1024 * 1024
+
+          class NoRedirect(HTTPRedirectHandler):
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  return None
+
+          def probe(env, opener, emit=print):
+              requests = 0
+              token = env.get('NOTION_TOKEN', '')
+              try:
+                  page_id = uuid.UUID(env.get('NOTION_PILOT_PAGE_ID', ''))
+              except (ValueError, TypeError, AttributeError):
+                  emit('BLOCKED: missing or invalid pilot configuration; requests=0')
+                  return 1
+              if not token or hashlib.sha256(page_id.hex.encode()).hexdigest() != EXPECTED_ID_HASH:
+                  emit('BLOCKED: missing authorization or out-of-scope pilot; requests=0')
+                  return 1
+              headers = {'Authorization': 'Bearer ' + token,
+                         'Notion-Version': '2026-03-11', 'Accept': 'application/json'}
+              def read(path):
+                  nonlocal requests
+                  requests += 1
+                  with opener.open(Request(BASE + path, headers=headers, method='GET'), timeout=20) as resp:
+                      raw = resp.read(MAX_BYTES + 1)
+                  if len(raw) > MAX_BYTES:
+                      raise ValueError('response budget exceeded')
+                  data = json.loads(raw)
+                  if not isinstance(data, dict):
+                      raise ValueError('invalid response')
+                  return data
+              try:
+                  page = read('/pages/' + str(page_id))
+                  if page.get('object') != 'page' or uuid.UUID(page.get('id', '')) != page_id:
+                      raise ValueError('page identity mismatch')
+                  children = read('/blocks/' + str(page_id) + '/children?page_size=1')
+                  if (children.get('object') != 'list' or not isinstance(children.get('results'), list)
+                      or len(children['results']) > 1 or not isinstance(children.get('has_more'), bool)
+                      or 'next_cursor' not in children
+                      or (children['has_more'] and not (isinstance(children['next_cursor'], str) and children['next_cursor']))
+                      or (not children['has_more'] and children['next_cursor'] is not None)):
+                      raise ValueError('invalid children response')
+                  emit('PASS: page and first block-children response accessible; requests=2')
+                  emit('Scope: transport preflight only; no full scan, snapshot, or CURRENT claim.')
+                  return 0
+              except HTTPError as exc:
+                  emit(f'BLOCKED: HTTP {exc.code}; requests={requests}')
+                  return 1
+              except Exception:
+                  emit(f'BLOCKED: transport or response validation failed; requests={requests}')
+                  return 1
+
+          if __name__ == '__main__':
+              sys.exit(probe(os.environ, build_opener(NoRedirect())))
+          PY
